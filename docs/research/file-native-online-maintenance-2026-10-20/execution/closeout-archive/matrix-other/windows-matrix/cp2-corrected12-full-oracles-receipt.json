@@ -1,0 +1,96 @@
+{
+  "utc": "2026-10-20T23:58:28.642615+00:00",
+  "receipt_root": "C:\\file-native-online-matrix-20261020\\receipts",
+  "batch_directory": "cp2-full-v4-corrected12",
+  "artifact_sha256": {
+    "cp2-full-v4-corrected12-guard.json": "660c69951e5d03014b99ee02acb54a58a07b4f8e0924097993b53182649f38da",
+    "cp2-corrected12-artifact-manifest.json": "bc83386530a30ba04ddb0973ad7bb7545c39463c0226c6dabd2b74313d2ac38b",
+    "cp2-corrected12-postclose-census-v2.json": "c8ce3c9997545d0d3d2f99629463bbd09fbe87444440c33763ef62181997725f",
+    "cp2-corrected12-receipt-construction-refusal.txt": "3c0715deba4ebc0f96475a04690bd54287387bf0aa3e9218b8a5753a1833eb8a",
+    "budget-final-source-v3.json": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a"
+  },
+  "decoder_sha256": "a4eb1adb2dcc51c59977cf32a2dea5adbf97f51664aa4b3625f91dcce8e6464f",
+  "reporter_sha256": "b017890745a0914ffae072ea4323fef62708dc5c29141f9e3a372d34d3b9eece",
+  "helper_sha256": "1b2abbe3a3ac2590749e696b055778b68cccc25fed156dfb7efc1ea08c68994a",
+  "batch_result_sha256": "950abd64eca7cc249bcb6a5dce483bd66f8241a9e1f68d2b24cf800abd2c99b3",
+  "raw_observations_sha256": "bac6edf1d1c1cf818a3086bafc3db2c75e522b94114ad996c21912a8cfb98e51",
+  "raw_rows": 24,
+  "all12_a4_checks_and_provenance_pass": true,
+  "all12_file_names_sizes_hashes_and_directories_equal_original_before_after": true,
+  "original13_failed_batch_preserved": true,
+  "original_F2_H551_pass_retained_not_repeated": true,
+  "cases": [
+    {
+      "case": "smoke-A",
+      "H": 49,
+      "raw_records": 245
+    },
+    {
+      "case": "smoke-B",
+      "H": 49,
+      "raw_records": 245
+    },
+    {
+      "case": "partial",
+      "H": 7,
+      "raw_records": 35
+    },
+    {
+      "case": "capture",
+      "H": 3,
+      "raw_records": 15
+    },
+    {
+      "case": "late-eligible",
+      "H": 3,
+      "raw_records": 15
+    },
+    {
+      "case": "interval-crash",
+      "H": 7,
+      "raw_records": 35
+    },
+    {
+      "case": "cutoff-cross",
+      "H": 4,
+      "raw_records": 20
+    },
+    {
+      "case": "owners",
+      "H": 2,
+      "raw_records": 10
+    },
+    {
+      "case": "F1-retired",
+      "H": 263,
+      "raw_records": 795
+    },
+    {
+      "case": "F1-oversize",
+      "H": 2,
+      "raw_records": 9
+    },
+    {
+      "case": "F1-reservation",
+      "H": 3,
+      "raw_records": 15
+    },
+    {
+      "case": "stable-base",
+      "H": 49,
+      "raw_records": 245
+    }
+  ],
+  "actual_phase_bytes": 3101114,
+  "actual_phase_files": 79,
+  "phase_caps": {
+    "bytes": 4194304,
+    "files": 100
+  },
+  "planning_estimate_bytes": 2810822,
+  "planning_estimate_exceeded_by": 290292,
+  "first_source_receipt_refused_oversize_before_write": true,
+  "engine_calls": 0,
+  "fixture_copies": 0,
+  "reverse_selected_mapped_cohort_closure": "PENDING: separate v5 R1 contract repair; a4 checks are not relabelled as this proof"
+}

@@ -1,0 +1,832 @@
+{
+  "utc": "2026-10-20T21:44:50.779481+00:00",
+  "old_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "baseline_executable_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "cells": [
+    {
+      "target_history_requests": 1000,
+      "actual_H": 1002,
+      "documents": 128,
+      "selected": {
+        "publication": "publication-65612-1792527726684025700-8",
+        "digest": "1f5666bb1d087e422e727cc7e288d78e1c97d0547f11b3dfbc1d94be0e610c82"
+      },
+      "matched_baseline": {
+        "path": "C:\\file-native-online-matrix-20261020\\receipts\\H1000-baseline.json",
+        "bytes": 4358,
+        "sha256": "667208467b5672c6f600c73872f529b4578ee4a0a77879ede6bc31b7cd5b3e8e"
+      },
+      "PZ_baseline": {
+        "path": "C:\\file-native-online-matrix-20261020\\receipts\\H1000-retry1-PZ-baseline.json",
+        "bytes": 7751,
+        "sha256": "f469fca9fcc4cadf512608a32307067a9d0364bf64caab2240b897aec9d01e36"
+      },
+      "PZ_frozen_records": 5010,
+      "PZ_inventory": {
+        "path": "C:\\file-native-online-matrix-20261020\\history\\H1000-retry1-frozen-inventory.jsonl",
+        "bytes": 977923,
+        "sha256": "85b6737a2dcdda14de7c750b6a1f0f0dab3657a0b552022cdaa5b0fb4dd84069"
+      },
+      "request_intents": {
+        "profile": "independent-complete-exact-request-intent-and-accepted-result",
+        "selected": {
+          "publication": "publication-65612-1792527726684025700-8",
+          "digest": "1f5666bb1d087e422e727cc7e288d78e1c97d0547f11b3dfbc1d94be0e610c82"
+        },
+        "publications": 1002,
+        "actual_H": 1002,
+        "authentic_history_recipe_intents": 1000,
+        "retained_candidate_proofs": 1002,
+        "exact_loose_B_publication_controls": 0,
+        "evidence_sha256": "e951edd9e4492218a0479350f40ee389cc32b99c05e462d055a1649091b48113",
+        "engine_code_imported": false
+      },
+      "lookups": [
+        {
+          "representation": "L",
+          "source": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H1000-L-old-lookup\\samples.json",
+            "bytes": 762248,
+            "sha256": "24f62840d88b4f9fd493055ad0f8506e8ec204838298fa2cb6c7e841be858a9d"
+          },
+          "raw_events": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H1000-L-old-lookup\\events.jsonl",
+            "bytes": 664898,
+            "sha256": "925f0cec443359d8e72a643b0d28600c774f729401b5c21aa0779f75c10d18db"
+          },
+          "fresh": {
+            "early": {
+              "fresh_count": 50,
+              "engine_median_ns": 1357950.0,
+              "engine_max_ns": 1690000,
+              "spawn_median_ns": 6402800.0,
+              "spawn_max_ns": 7349700
+            },
+            "middle": {
+              "fresh_count": 50,
+              "engine_median_ns": 1405000.0,
+              "engine_max_ns": 1723400,
+              "spawn_median_ns": 6565100.0,
+              "spawn_max_ns": 14866900
+            },
+            "recent": {
+              "fresh_count": 50,
+              "engine_median_ns": 1313000.0,
+              "engine_max_ns": 1776000,
+              "spawn_median_ns": 6396950.0,
+              "spawn_max_ns": 10264900
+            },
+            "missing": {
+              "fresh_count": 50,
+              "engine_median_ns": 1052150.0,
+              "engine_max_ns": 1234000,
+              "spawn_median_ns": 6037450.0,
+              "spawn_max_ns": 6726800
+            },
+            "cancelled": {
+              "fresh_count": 50,
+              "engine_median_ns": 1117550.0,
+              "engine_max_ns": 1551100,
+              "spawn_median_ns": 6228900.0,
+              "spawn_max_ns": 7954500
+            },
+            "lost-reply": {
+              "fresh_count": 50,
+              "engine_median_ns": 966750.0,
+              "engine_max_ns": 1244500,
+              "spawn_median_ns": 6913600.0,
+              "spawn_max_ns": 12862300
+            }
+          },
+          "warm": [
+            {
+              "category": "early",
+              "first_lookup_ns": 1148000,
+              "warm_median_ns": 810900,
+              "warm_min_ns": 756100,
+              "warm_max_ns": 2813200
+            },
+            {
+              "category": "middle",
+              "first_lookup_ns": 958200,
+              "warm_median_ns": 806000,
+              "warm_min_ns": 767300,
+              "warm_max_ns": 2076200
+            },
+            {
+              "category": "recent",
+              "first_lookup_ns": 841200,
+              "warm_median_ns": 792200,
+              "warm_min_ns": 728700,
+              "warm_max_ns": 1337300
+            },
+            {
+              "category": "missing",
+              "first_lookup_ns": 596900,
+              "warm_median_ns": 564600,
+              "warm_min_ns": 526600,
+              "warm_max_ns": 1178200
+            },
+            {
+              "category": "cancelled",
+              "first_lookup_ns": 606600,
+              "warm_median_ns": 582300,
+              "warm_min_ns": 540800,
+              "warm_max_ns": 1327000
+            },
+            {
+              "category": "lost-reply",
+              "first_lookup_ns": 436300,
+              "warm_median_ns": 345400,
+              "warm_min_ns": 318200,
+              "warm_max_ns": 861900
+            }
+          ],
+          "qualification": "new process; OS/device cache uncontrolled; all raw samples/maxima; engine/spawn clocks separate; no fresh p99 qualification"
+        },
+        {
+          "representation": "PZ",
+          "source": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H1000-PZ-old-lookup\\samples.json",
+            "bytes": 767344,
+            "sha256": "cf894e5073a97c38beca5488a17ceceaf19aa6fbdf97f498ad25891b785b7972"
+          },
+          "raw_events": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H1000-PZ-old-lookup\\events.jsonl",
+            "bytes": 669992,
+            "sha256": "df0553f28d43d63da148e93d72190c0eb21cc1054265e9e5aa1b59da03174c93"
+          },
+          "fresh": {
+            "early": {
+              "fresh_count": 50,
+              "engine_median_ns": 2614300.0,
+              "engine_max_ns": 3249400,
+              "spawn_median_ns": 8091650.0,
+              "spawn_max_ns": 11217200
+            },
+            "middle": {
+              "fresh_count": 50,
+              "engine_median_ns": 2537500.0,
+              "engine_max_ns": 3653400,
+              "spawn_median_ns": 7822450.0,
+              "spawn_max_ns": 10018600
+            },
+            "recent": {
+              "fresh_count": 50,
+              "engine_median_ns": 2607150.0,
+              "engine_max_ns": 3086900,
+              "spawn_median_ns": 8056350.0,
+              "spawn_max_ns": 14442400
+            },
+            "missing": {
+              "fresh_count": 50,
+              "engine_median_ns": 1898100.0,
+              "engine_max_ns": 2252600,
+              "spawn_median_ns": 7379800.0,
+              "spawn_max_ns": 8750900
+            },
+            "cancelled": {
+              "fresh_count": 50,
+              "engine_median_ns": 1963750.0,
+              "engine_max_ns": 3407400,
+              "spawn_median_ns": 8019350.0,
+              "spawn_max_ns": 9715600
+            },
+            "lost-reply": {
+              "fresh_count": 50,
+              "engine_median_ns": 2190850.0,
+              "engine_max_ns": 2824700,
+              "spawn_median_ns": 8135450.0,
+              "spawn_max_ns": 12156300
+            }
+          },
+          "warm": [
+            {
+              "category": "early",
+              "first_lookup_ns": 2004900,
+              "warm_median_ns": 888500,
+              "warm_min_ns": 805900,
+              "warm_max_ns": 2207300
+            },
+            {
+              "category": "middle",
+              "first_lookup_ns": 998400,
+              "warm_median_ns": 852300,
+              "warm_min_ns": 771700,
+              "warm_max_ns": 3870500
+            },
+            {
+              "category": "recent",
+              "first_lookup_ns": 858400,
+              "warm_median_ns": 816400,
+              "warm_min_ns": 752900,
+              "warm_max_ns": 1400700
+            },
+            {
+              "category": "missing",
+              "first_lookup_ns": 621900,
+              "warm_median_ns": 562700,
+              "warm_min_ns": 526900,
+              "warm_max_ns": 1187100
+            },
+            {
+              "category": "cancelled",
+              "first_lookup_ns": 621500,
+              "warm_median_ns": 584100,
+              "warm_min_ns": 552900,
+              "warm_max_ns": 1450400
+            },
+            {
+              "category": "lost-reply",
+              "first_lookup_ns": 411700,
+              "warm_median_ns": 360800,
+              "warm_min_ns": 338400,
+              "warm_max_ns": 2140700
+            }
+          ],
+          "qualification": "new process; OS/device cache uncontrolled; all raw samples/maxima; engine/spawn clocks separate; no fresh p99 qualification"
+        }
+      ]
+    },
+    {
+      "target_history_requests": 10000,
+      "actual_H": 10002,
+      "documents": 128,
+      "selected": {
+        "publication": "publication-17880-1792532344703450100-10",
+        "digest": "7e2cd67a9447eff8f09cb622f3455259ea3d894b089e24707f639a47e32e00bf"
+      },
+      "matched_baseline": {
+        "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-baseline.json",
+        "bytes": 4630,
+        "sha256": "3f3b332df74bac8359f759ec900d91930d2e54ddfcc16d3ea5369c2d0d9182bc"
+      },
+      "PZ_baseline": {
+        "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-PZ-baseline.json",
+        "bytes": 29646,
+        "sha256": "1fc48f18c8dd1dd0c4830e73f15e26e3f6ef8d242a03513f3255180b3b6d0562"
+      },
+      "PZ_frozen_records": 50010,
+      "PZ_inventory": {
+        "path": "C:\\file-native-online-matrix-20261020\\history\\H10000-frozen-inventory.jsonl",
+        "bytes": 9763755,
+        "sha256": "28646d4011942319c0cbc7b6bc994086db560f93fc7da46a634c76e62da8992a"
+      },
+      "request_intents": {
+        "profile": "independent-complete-exact-request-intent-and-accepted-result",
+        "selected": {
+          "publication": "publication-17880-1792532344703450100-10",
+          "digest": "7e2cd67a9447eff8f09cb622f3455259ea3d894b089e24707f639a47e32e00bf"
+        },
+        "publications": 10002,
+        "actual_H": 10002,
+        "authentic_history_recipe_intents": 10000,
+        "retained_candidate_proofs": 10002,
+        "exact_loose_B_publication_controls": 0,
+        "evidence_sha256": "51a54341febc89fca9b27e09ce162e6701bfdfbe3a3b77962ab031d584c11ea1",
+        "engine_code_imported": false
+      },
+      "lookups": [
+        {
+          "representation": "L",
+          "source": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-L-old-lookup\\samples.json",
+            "bytes": 794783,
+            "sha256": "d5c1594b6462b8f3fc369ca4b65f0f5135b7dbc4587c0479f934193b850f0d3c"
+          },
+          "raw_events": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-L-old-lookup\\events.jsonl",
+            "bytes": 693366,
+            "sha256": "2fde41005881fff2e16ac95e53b2d1ab20852ac2f5ec3549ce1d2d10ec8549bb"
+          },
+          "fresh": {
+            "early": {
+              "fresh_count": 50,
+              "engine_median_ns": 1495750.0,
+              "engine_max_ns": 2192800,
+              "spawn_median_ns": 7129050.0,
+              "spawn_max_ns": 12080900
+            },
+            "middle": {
+              "fresh_count": 50,
+              "engine_median_ns": 1415400.0,
+              "engine_max_ns": 2421900,
+              "spawn_median_ns": 6597500.0,
+              "spawn_max_ns": 12005500
+            },
+            "recent": {
+              "fresh_count": 50,
+              "engine_median_ns": 1486550.0,
+              "engine_max_ns": 1956800,
+              "spawn_median_ns": 7408550.0,
+              "spawn_max_ns": 16124600
+            },
+            "missing": {
+              "fresh_count": 50,
+              "engine_median_ns": 1104050.0,
+              "engine_max_ns": 1867000,
+              "spawn_median_ns": 6605150.0,
+              "spawn_max_ns": 9249700
+            },
+            "cancelled": {
+              "fresh_count": 50,
+              "engine_median_ns": 1324100.0,
+              "engine_max_ns": 2434900,
+              "spawn_median_ns": 8978150.0,
+              "spawn_max_ns": 13825700
+            },
+            "lost-reply": {
+              "fresh_count": 50,
+              "engine_median_ns": 798100.0,
+              "engine_max_ns": 1057000,
+              "spawn_median_ns": 5984700.0,
+              "spawn_max_ns": 11976200
+            }
+          },
+          "warm": [
+            {
+              "category": "early",
+              "first_lookup_ns": 1196600,
+              "warm_median_ns": 828500,
+              "warm_min_ns": 776000,
+              "warm_max_ns": 1608600
+            },
+            {
+              "category": "middle",
+              "first_lookup_ns": 880600,
+              "warm_median_ns": 829000,
+              "warm_min_ns": 770200,
+              "warm_max_ns": 1252600
+            },
+            {
+              "category": "recent",
+              "first_lookup_ns": 928100,
+              "warm_median_ns": 811300,
+              "warm_min_ns": 747400,
+              "warm_max_ns": 1533500
+            },
+            {
+              "category": "missing",
+              "first_lookup_ns": 568400,
+              "warm_median_ns": 509300,
+              "warm_min_ns": 482400,
+              "warm_max_ns": 864500
+            },
+            {
+              "category": "cancelled",
+              "first_lookup_ns": 615800,
+              "warm_median_ns": 547500,
+              "warm_min_ns": 512100,
+              "warm_max_ns": 1033900
+            },
+            {
+              "category": "lost-reply",
+              "first_lookup_ns": 317300,
+              "warm_median_ns": 311200,
+              "warm_min_ns": 283800,
+              "warm_max_ns": 863500
+            }
+          ],
+          "qualification": "new process; OS/device cache uncontrolled; all raw samples/maxima; engine/spawn clocks separate; no fresh p99 qualification"
+        },
+        {
+          "representation": "PZ",
+          "source": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-PZ-old-lookup\\samples.json",
+            "bytes": 801088,
+            "sha256": "7fb3d08172a565ba2396a52b56b4d991ec0c9ef4fdabba2d8ff3993875684fd9"
+          },
+          "raw_events": {
+            "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-PZ-old-lookup\\events.jsonl",
+            "bytes": 699661,
+            "sha256": "34498675f0d00e986371420605fbab250d9ed8d94429c68f5d4dfe5369776931"
+          },
+          "fresh": {
+            "early": {
+              "fresh_count": 50,
+              "engine_median_ns": 9270300.0,
+              "engine_max_ns": 9930100,
+              "spawn_median_ns": 15043650.0,
+              "spawn_max_ns": 29491100
+            },
+            "middle": {
+              "fresh_count": 50,
+              "engine_median_ns": 9213050.0,
+              "engine_max_ns": 9728600,
+              "spawn_median_ns": 14902700.0,
+              "spawn_max_ns": 21841900
+            },
+            "recent": {
+              "fresh_count": 50,
+              "engine_median_ns": 8943850.0,
+              "engine_max_ns": 9401600,
+              "spawn_median_ns": 14404200.0,
+              "spawn_max_ns": 15323300
+            },
+            "missing": {
+              "fresh_count": 50,
+              "engine_median_ns": 4951400.0,
+              "engine_max_ns": 5394600,
+              "spawn_median_ns": 10487000.0,
+              "spawn_max_ns": 18568600
+            },
+            "cancelled": {
+              "fresh_count": 50,
+              "engine_median_ns": 5180350.0,
+              "engine_max_ns": 5639000,
+              "spawn_median_ns": 10669350.0,
+              "spawn_max_ns": 12152900
+            },
+            "lost-reply": {
+              "fresh_count": 50,
+              "engine_median_ns": 8914050.0,
+              "engine_max_ns": 10299200,
+              "spawn_median_ns": 15341850.0,
+              "spawn_max_ns": 285536500
+            }
+          },
+          "warm": [
+            {
+              "category": "early",
+              "first_lookup_ns": 9464400,
+              "warm_median_ns": 895000,
+              "warm_min_ns": 816600,
+              "warm_max_ns": 26948800
+            },
+            {
+              "category": "middle",
+              "first_lookup_ns": 1277200,
+              "warm_median_ns": 862500,
+              "warm_min_ns": 778200,
+              "warm_max_ns": 2697800
+            },
+            {
+              "category": "recent",
+              "first_lookup_ns": 971200,
+              "warm_median_ns": 818400,
+              "warm_min_ns": 739600,
+              "warm_max_ns": 1280600
+            },
+            {
+              "category": "missing",
+              "first_lookup_ns": 636900,
+              "warm_median_ns": 531200,
+              "warm_min_ns": 494500,
+              "warm_max_ns": 1368000
+            },
+            {
+              "category": "cancelled",
+              "first_lookup_ns": 582300,
+              "warm_median_ns": 561200,
+              "warm_min_ns": 509400,
+              "warm_max_ns": 989100
+            },
+            {
+              "category": "lost-reply",
+              "first_lookup_ns": 476300,
+              "warm_median_ns": 297000,
+              "warm_min_ns": 278700,
+              "warm_max_ns": 1048100
+            }
+          ],
+          "qualification": "new process; OS/device cache uncontrolled; all raw samples/maxima; engine/spawn clocks separate; no fresh p99 qualification"
+        }
+      ]
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\history-10000-summary.json",
+      "bytes": 1947,
+      "sha256": "020e4551bd6f49eb9f2ff4e86cbb2730e2d0e831c243025f2b3578c0123125f2"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\history-10000-intent-independent.json",
+      "bytes": 556,
+      "sha256": "79604ade02656f79e3c765a3f4d019b122add43b4011a7c7de361db6887bdff2"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-baseline-pipeline.json",
+      "bytes": 1385,
+      "sha256": "ea09979e8c97ae8315869078f5163f5ff8ff2d241edfb9513327cf006717cf63"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-ready-F05-census.json",
+      "bytes": 7915,
+      "sha256": "c34cbec11f475331fe90a4a06c83a4cb79e66e4a3ed271425a1734419f9ca6a5"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-native-allocation.json",
+      "bytes": 3137,
+      "sha256": "bbe20417512d59eb8929a9f4160b62231a52b02491f0533f686a829290b11a5c"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-ready-F05-census-guard.json",
+      "bytes": 28576,
+      "sha256": "06a247ec28fc0d5a9d05c303c6144e59ad693c7143b50ae10c4f91098dd04bae"
+    }
+  ],
+  "F05_ready_census": {
+    "actual_H": 10002,
+    "selected": {
+      "publication": "publication-17880-1792532344703450100-10",
+      "digest": "7e2cd67a9447eff8f09cb622f3455259ea3d894b089e24707f639a47e32e00bf"
+    },
+    "complete_accepted_cohort": true,
+    "history_area_current": {
+      "bytes": 552141207,
+      "files": 129768
+    },
+    "parts": {
+      "all_1200_required_rolling_publications": 78643200,
+      "future_physical_representation_coexistence": 67108864,
+      "full_frozen_inventories": 16777216,
+      "generation_deferred_and_journal_bookkeeping": 16777216,
+      "chunk_and_handoff_temporary_slack": 16777216
+    },
+    "future_additional_bytes": 196083712,
+    "future_additional_files": 52000,
+    "current_plus_future_bytes": 748224919,
+    "current_plus_future_files": 181768,
+    "native_operational_store": {
+      "api": "FileStandardInfo.AllocationSize",
+      "total": {
+        "files": 119494,
+        "logical_bytes": 492191634,
+        "allocation_bytes": 675943272
+      },
+      "engine_excluding_test_ledger": {
+        "files": 119493,
+        "logical_bytes": 463396381,
+        "allocation_bytes": 647144296
+      },
+      "roles": {
+        "DISPOSABLE.json": {
+          "files": 1,
+          "logical_bytes": 91,
+          "allocation_bytes": 96
+        },
+        "expected-ledger.jsonl": {
+          "files": 1,
+          "logical_bytes": 28795253,
+          "allocation_bytes": 28798976
+        },
+        "HISTORY-SOURCE.json": {
+          "files": 1,
+          "logical_bytes": 375,
+          "allocation_bytes": 376
+        },
+        "pack-maintenance.lock": {
+          "files": 1,
+          "logical_bytes": 0,
+          "allocation_bytes": 0
+        },
+        "pack-readers.lock": {
+          "files": 1,
+          "logical_bytes": 0,
+          "allocation_bytes": 0
+        },
+        "PACKING.json": {
+          "files": 1,
+          "logical_bytes": 376,
+          "allocation_bytes": 376
+        },
+        "preparation.lock": {
+          "files": 1,
+          "logical_bytes": 0,
+          "allocation_bytes": 0
+        },
+        "RESERVATIONS.json": {
+          "files": 1,
+          "logical_bytes": 2,
+          "allocation_bytes": 8
+        },
+        "SELECTED.json": {
+          "files": 1,
+          "logical_bytes": 143,
+          "allocation_bytes": 144
+        },
+        "STORE.json": {
+          "files": 1,
+          "logical_bytes": 238,
+          "allocation_bytes": 240
+        },
+        "VIEW.json": {
+          "files": 1,
+          "logical_bytes": 490,
+          "allocation_bytes": 496
+        },
+        "writer.lock": {
+          "files": 1,
+          "logical_bytes": 0,
+          "allocation_bytes": 0
+        },
+        "attempt-hints": {
+          "files": 10002,
+          "logical_bytes": 1442809,
+          "allocation_bytes": 1468400
+        },
+        "attempts": {
+          "files": 20004,
+          "logical_bytes": 37421082,
+          "allocation_bytes": 58845168
+        },
+        "derived": {
+          "files": 4,
+          "logical_bytes": 20198,
+          "allocation_bytes": 21048
+        },
+        "fences": {
+          "files": 1,
+          "logical_bytes": 11,
+          "allocation_bytes": 16
+        },
+        "objects": {
+          "files": 69194,
+          "logical_bytes": 378379842,
+          "allocation_bytes": 512940768
+        },
+        "originals": {
+          "files": 129,
+          "logical_bytes": 1572864,
+          "allocation_bytes": 1572864
+        },
+        "pack-catalogs": {
+          "files": 1,
+          "logical_bytes": 2499,
+          "allocation_bytes": 4096
+        },
+        "packing-owners": {
+          "files": 1,
+          "logical_bytes": 305,
+          "allocation_bytes": 312
+        },
+        "packs": {
+          "files": 10,
+          "logical_bytes": 27114407,
+          "allocation_bytes": 27136000
+        },
+        "publications": {
+          "files": 10002,
+          "logical_bytes": 13310766,
+          "allocation_bytes": 40968192
+        },
+        "results": {
+          "files": 10002,
+          "logical_bytes": 2540917,
+          "allocation_bytes": 2595880
+        },
+        "view": {
+          "files": 132,
+          "logical_bytes": 1588966,
+          "allocation_bytes": 1589816
+        }
+      },
+      "seconds": 22.25,
+      "directory_filesystem_metadata": null,
+      "physical_device_writes": null
+    },
+    "census": {
+      "categories": {
+        "source": {
+          "bytes": 397428,
+          "files": 46,
+          "absolute_actual": {
+            "bytes": 397428,
+            "files": 46
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "absolute",
+          "additive_charge": true,
+          "cap_bytes": 1048576,
+          "cap_files": 200
+        },
+        "source_admin": {
+          "bytes": 935773,
+          "files": 8,
+          "absolute_actual": {
+            "bytes": 935773,
+            "files": 8
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "absolute",
+          "additive_charge": false,
+          "cap_bytes": 1048576,
+          "cap_files": 100
+        },
+        "protocol": {
+          "bytes": 4260410,
+          "files": 873,
+          "absolute_actual": {
+            "bytes": 4260410,
+            "files": 873
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "absolute",
+          "additive_charge": true,
+          "cap_bytes": 33554432,
+          "cap_files": 25000
+        },
+        "document_controls": {
+          "bytes": 8435478,
+          "files": 820,
+          "absolute_actual": {
+            "bytes": 8435478,
+            "files": 820
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "absolute",
+          "additive_charge": true,
+          "cap_bytes": 67108864,
+          "cap_files": 30000
+        },
+        "receipts": {
+          "bytes": 13722008,
+          "files": 980,
+          "absolute_actual": {
+            "bytes": 13722008,
+            "files": 980
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "absolute",
+          "additive_charge": true,
+          "cap_bytes": 33554432,
+          "cap_files": 10000
+        },
+        "history": {
+          "bytes": 552141207,
+          "files": 129768,
+          "absolute_actual": {
+            "bytes": 552141207,
+            "files": 129768
+          },
+          "reserve_bytes": 196083712,
+          "reserve_files": 52000,
+          "charge_mode": "absolute",
+          "additive_charge": true,
+          "cap_bytes": 1073741824,
+          "cap_files": 400000
+        },
+        "shared_git": {
+          "bytes": 2688458,
+          "files": 395,
+          "absolute_actual": {
+            "bytes": 254866101,
+            "files": 2894
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "positive_delta",
+          "additive_charge": true,
+          "cap_bytes": 25165824,
+          "cap_files": 5000
+        },
+        "shared_cargo": {
+          "bytes": 0,
+          "files": 0,
+          "absolute_actual": {
+            "bytes": 893702027,
+            "files": 18188
+          },
+          "reserve_bytes": 0,
+          "reserve_files": 0,
+          "charge_mode": "positive_delta",
+          "additive_charge": true,
+          "cap_bytes": 25165824,
+          "cap_files": 5000
+        }
+      },
+      "shared_groups": {
+        "F13_windows_shared_support": {
+          "bytes": 2688458,
+          "files": 395,
+          "cap_bytes": 25165824,
+          "cap_files": 5000
+        }
+      },
+      "free_bytes": 200117026816,
+      "epoch": 1792532617.9266677,
+      "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+    },
+    "old_PZ_frozen_inventory_records": 50010,
+    "source_selected_unchanged": true,
+    "planned_deletion_credit": 0,
+    "no_second_H10_clone": true,
+    "qualification": "forecast retains all1200 rolling publications and future coexistence; actual stage/cap checks mandatory; native regular-file allocation does not measure directory/device allocation"
+  },
+  "producer_final_guard": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\history-9900-10000-guard.json",
+    "bytes": 32716,
+    "sha256": "5ee460cd87fac6a9d8f7c4d3fc7a319ad30cf19e1f629b844e49cb13dfcaa86c"
+  },
+  "history_request_pattern": "original API mixed content/metadata/no-op, fixed N128, actual accepted durable history,100-publication bounded resident chunks",
+  "all_final_H10_pipeline_stages_passed": true,
+  "second_H10_clone": false,
+  "deletion_credit": 0,
+  "qualification": "original loose and whole-index PZ controls only; exact same accepted cohorts reserved for final candidate comparisons; no device-cold/fresh-p99 or final optimized performance claim"
+}

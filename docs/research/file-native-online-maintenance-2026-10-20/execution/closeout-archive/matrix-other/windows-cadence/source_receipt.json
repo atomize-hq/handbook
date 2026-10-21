@@ -1,0 +1,99 @@
+{
+  "status": "SOURCE_ONLY_FROZEN_FOR_PARENT_STATIC_REVIEW__LIVE_CONTROLS_HOLD",
+  "source_budget_bytes": 65536,
+  "source_budget_files": 8,
+  "source_budget_nested_in": "Matrix F01 source1MiB",
+  "budget_sha256": "0b26efdba8af4ab41a939697244e02b1e7da1ec55ab857d05bd6d74de89ca781",
+  "claim017_sha256": "990a696b96b7dfbd589a5fd6d134cc900e65c1c61b1a614d10556019a803050d",
+  "frozen_reference": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\job_guard.py",
+    "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+    "bytes": 28324,
+    "actual_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+    "expected_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae"
+  },
+  "executable": "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "clock_info": {
+    "monotonic": {
+      "implementation": "GetTickCount64()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 0.015625
+    },
+    "perf_counter": {
+      "implementation": "QueryPerformanceCounter()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 1e-07
+    }
+  },
+  "ast_changed_top_level_symbols": [
+    "run"
+  ],
+  "unchanged_top_level_symbols": [
+    "Basic",
+    "IO",
+    "Limits",
+    "Memory",
+    "sha_file",
+    "write_json",
+    "census",
+    "Budget",
+    "rss",
+    "creation_time",
+    "control_json",
+    "registry_lock",
+    "registry_rows",
+    "supervisors",
+    "supervisor_rss",
+    "members"
+  ],
+  "run_signature_unchanged": true,
+  "original_frozen_unmodified": true,
+  "indexed_impact": "UNKNOWN exact Matrix repository unregistered; cached1.6.9 read-only list/impact only",
+  "manual_risk": "HIGH future opted-in native process guard sampling/launch coverage",
+  "tests": [
+    "ast.parse",
+    "compile from string; no execution",
+    "all top-level functions/classes except run AST-identical",
+    "run signature AST-identical",
+    "all module AST outside run identical",
+    "nested current_members/terminate/disk_watch/feed AST-identical",
+    "sampling coverage freshness at resume and root-wait return statically present",
+    "whole-Job post-drain sampling boundary before stop",
+    "all native finally closure/stop/join/token-release source bytes identical to frozen reference"
+  ],
+  "live_controls_executed": false,
+  "engine_executed": false,
+  "files": {
+    "job_guard_qpc.py": {
+      "bytes": 37051,
+      "sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378"
+    },
+    "job_guard_qpc.diff": {
+      "bytes": 13864,
+      "sha256": "01ca89f02b9b8c326a41cac6155db62d2313de32ea44363ed536367eedf59a20"
+    },
+    "README.md": {
+      "bytes": 5072,
+      "sha256": "01b74cd649e639a6229392c9389137ace965dc5ff285f8d952f9e6ed739e5c38"
+    }
+  },
+  "manifest_self_excluded": true,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "closeout": "2026-10-21T13:10:14Z",
+  "source_freeze": "2026-10-21T04:10:14Z",
+  "supersedes_source_sha256": "337c1bcb97c44d1d4fb479bb2cf511634f6aa914630cc7c889db2626e18a6a27",
+  "sampling_revision": "qpc-ns-v2-whole-Job-tail",
+  "static_starvation_corner": {
+    "last_recorded_ns": 999000000,
+    "root_exit_ns": 1000000000,
+    "first_empty_ns": 1060000000,
+    "root_gap_ns": 1000000,
+    "whole_job_gap_ns": 61000000,
+    "threshold_ns": 40000000,
+    "expected": "write raw job-drain-sampling-coverage then memory-sample-cadence-censor",
+    "live_control": false
+  }
+}

@@ -1,0 +1,856 @@
+{
+  "utc": "2026-10-20T21:57:36.627307+00:00",
+  "ENGINE_SOURCE_PIN": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+  "candidate_binary": {
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate10.exe",
+    "bytes": 2979328,
+    "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
+  },
+  "parser_schema_source_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+  "parser_module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+  "schema_equivalence": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-matrix\\bd6-schema-equivalence-binding.json",
+    "bytes": 8415,
+    "sha256": "87f176556e971add6c58b93c16e5711e8a9e5c16a141cc7c2601d56a69ac4292"
+  },
+  "source_binding": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-source-binding.json",
+    "bytes": 7891,
+    "sha256": "e8c63db777f06d9fc1978359e780658907958d8d8f0095ea880139983c0e41e7"
+  },
+  "cases": [
+    {
+      "label": "legacy10",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 5,
+        "raw_bytes": 5133,
+        "inventory_digest": "99ce450f4eed7a1f81ce19a407f35cf8d070999901641f3ec96ef1c6dbd99f6e",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-1-birth-56352-1792532364656246300-0",
+            "ordinal": 1,
+            "plan": "1a477d2645d8475048154448fe64ccb51193879b898cd0ef0c74d4a0c61f8890"
+          },
+          "physical_parent": "c741d1c3bac5054c227edbdeef7f7001fe78a62749cc8d69b8a84e854d4ae9a5",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "1084b0cdcd207746a71cab39244501091479539512ae98e7aa308afe61d7566f",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 8430,
+          "observed_removed_files": 11,
+          "observed_reconciled_absent": 6,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-1-birth-56352-1792532364656246300-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/ff8db3585b324f41349ac60a9d6ece20ac7c7fe9547dd0a9c149b729bffbdc0b.json",
+            "packs/physical-1-birth-56352-1792532364656246300-0/03bd235ff68ebdfa56d766c3d72b5ce5877d8e6c93ed0658275e13b4dfd26de7.pack",
+            "packs/physical-1-birth-56352-1792532364656246300-0/0792d1e2afff3644e1f60ece7492a6fbcda54fc085a4b4bdcb76e89f2b137107.idx",
+            "packs/physical-1-birth-56352-1792532364656246300-0/093405aa7801cfcc38888a50dd545f5ccda8c4f72fb4d65e4ca405385cc8377f.pack",
+            "packs/physical-1-birth-56352-1792532364656246300-0/21e916b3290f49d573ebc33bbd2bdf049030c2b5aa814130839303bbb8c3e443.pack",
+            "packs/physical-1-birth-56352-1792532364656246300-0/42a1246ef870ff1484e7f8c7c9a4e1209ac73012ade47e9552242e0abe0a72c0.pack",
+            "packs/physical-1-birth-56352-1792532364656246300-0/7498e1a1e05d5c064c7a151258b5c1eb092d311b8cf6eef1f5df4d11d9852a8b.idx",
+            "packs/physical-1-birth-56352-1792532364656246300-0/97583762641bec1dd467a3310816e24531ddef6e4f093ad624f949714ee6f76d.idx",
+            "packs/physical-1-birth-56352-1792532364656246300-0/9988301600254e14a0daa1899181c074d9d11c440368bb27d62324df4225ac32.pack",
+            "packs/physical-1-birth-56352-1792532364656246300-0/dfbb5de811cd7f0b05278de9c0f6d7bd3e32920ff2c25e01cfddd06704632385.idx",
+            "packs/physical-1-birth-56352-1792532364656246300-0/e1ccbeb69081b80bb57ba8517478685a3a0765b48c6cc66839ebaa2f3e97fd61.idx",
+            "physical-pins/physical-1-birth-56352-1792532364656246300-0.lock",
+            "physical-plans/1a477d2645d8475048154448fe64ccb51193879b898cd0ef0c74d4a0c61f8890.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-74464-1792532364385039600-21",
+            "digest": "093405aa7801cfcc38888a50dd545f5ccda8c4f72fb4d65e4ca405385cc8377f"
+          },
+          "publications": 1,
+          "ledger_rows": 0,
+          "permanent_digest": "d5d0613c379f8dbb99192d9c632aa18096ed7b30478d7e468d261fb1a2cb5c67",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 1,
+          "sources": 14,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 70108864,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.0
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-74464-1792532364385039600-21",
+            "digest": "093405aa7801cfcc38888a50dd545f5ccda8c4f72fb4d65e4ca405385cc8377f"
+          },
+          "publications": 1,
+          "actual_H": 1,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 1,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "4aa0b1383fdac22d4f1a70e3aac379bca7171769181878f78ff6587cb8b22d34",
+          "engine_code_imported": false
+        },
+        "independent_codec": null,
+        "seconds": 0.0470000000204891,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\legacy10\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 55,
+        "source_logical_bytes": 283576,
+        "source_directory_count": 46,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a",
+        "after_sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.json",
+          "bytes": 5330,
+          "sha256": "16ae943c7269c15a9735dfcf10dd9f20c42418da20c4648336b7dc6258e1b8f4"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.before.json",
+          "bytes": 11640,
+          "sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.after.json",
+          "bytes": 11640,
+          "sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.read-only.json",
+          "bytes": 778,
+          "sha256": "bf1c365362ecbee05e04db414102c4320179814e867e9084cc9ed8afd0ca601a"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.stdout",
+          "bytes": 123,
+          "sha256": "aa39cea375143e4448e95bd91780c60e944bd42bcbe74e9517a7af158e68da7b"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "sharing10",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 5,
+        "raw_bytes": 5124,
+        "inventory_digest": "901358f3090567dd78046c30dc7ff9eea83191a8ff011234a77831d9809fafe5",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-4-birth-24932-1792532365372125200-0",
+            "ordinal": 4,
+            "plan": "794ff0ce113083683934af5ff0c1396bae260e22572580590fb811269b9cc9fb"
+          },
+          "physical_parent": "b35a7d64b20594cad70275d313326014849aabce7a2e6fdce553661fe373bc62",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "b495b8c42fc58937efa73b9e046594dcd55ad585acec89cadda05e8c5e11d1c6",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 39643,
+          "observed_removed_files": 44,
+          "observed_reconciled_absent": 22,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-4-birth-24932-1792532365372125200-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/0cceac0ffc1c8c76d71f7db342c5d1e9859f4d56672ee38c03b180ee06cfb2c7.json",
+            "packs/physical-4-birth-24932-1792532365372125200-0/2765c27b8409128712820f514ce755a2f192d4e0cff89429a2adc78a4661f4dc.idx",
+            "packs/physical-4-birth-24932-1792532365372125200-0/3405bd68cb97768c070586ba5149425083ac20973beb4b1d53db21dedca2bd14.pack",
+            "packs/physical-4-birth-24932-1792532365372125200-0/35dfb483760694ed6b5a35a8d74acf86d37bd45ee2f5202a350b4332f6c2a3ba.pack",
+            "packs/physical-4-birth-24932-1792532365372125200-0/82d3844417cb9b42d6438f05bcc8c6269fff4344c9cbd0aa6ed22138effe264f.idx",
+            "packs/physical-4-birth-24932-1792532365372125200-0/9c2f07a6b2cb154144818a2728e6658e9c096f097ce039859cc4eb695dadc450.idx",
+            "packs/physical-4-birth-24932-1792532365372125200-0/a9fae696f3b9a4e7f1b54fa05d7b3e00df00a6c96189e2a98ad8ff62bb017482.pack",
+            "packs/physical-4-birth-24932-1792532365372125200-0/ac74cdeece7e4ca00e507816b0e3eb424473df71c8db71e9e0d5096a41920f20.idx",
+            "packs/physical-4-birth-24932-1792532365372125200-0/c2343a86a66e59263352c842064c854703b4bbcb9add7295477c4025c6ca15bd.idx",
+            "packs/physical-4-birth-24932-1792532365372125200-0/c7f0cc50cb3f7f6afc6dc1124c03b70d6c64c66eaa5825715fc8e1193a221afc.pack",
+            "packs/physical-4-birth-24932-1792532365372125200-0/c907754ca5c7057d871c9260b578bb526014aba62682deeca74498da7e3db7ec.pack",
+            "physical-pins/physical-4-birth-24932-1792532365372125200-0.lock",
+            "physical-plans/794ff0ce113083683934af5ff0c1396bae260e22572580590fb811269b9cc9fb.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-8136-1792532364935649300-21",
+            "digest": "35dfb483760694ed6b5a35a8d74acf86d37bd45ee2f5202a350b4332f6c2a3ba"
+          },
+          "publications": 1,
+          "ledger_rows": 0,
+          "permanent_digest": "6cfd7d7621f79c4cf0e08b3a6a23da9a35d3f71cd26cc81b1ae37e9fa3a57990",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 1,
+          "sources": 14,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 70108864,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.0
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-8136-1792532364935649300-21",
+            "digest": "35dfb483760694ed6b5a35a8d74acf86d37bd45ee2f5202a350b4332f6c2a3ba"
+          },
+          "publications": 1,
+          "actual_H": 1,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 1,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "e63577ff7456ffcc032cb7cffae0274ddeabcb734282df6c498e4157dfb0986d",
+          "engine_code_imported": false
+        },
+        "independent_codec": null,
+        "seconds": 0.0470000000204891,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\sharing10\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 54,
+        "source_logical_bytes": 283553,
+        "source_directory_count": 43,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554",
+        "after_sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.json",
+          "bytes": 5330,
+          "sha256": "549ee2edb2dd61f953f81372ea7ecb27b35cec06cdb897e9f8cdfa8812d2e44e"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.before.json",
+          "bytes": 11353,
+          "sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.after.json",
+          "bytes": 11353,
+          "sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.read-only.json",
+          "bytes": 779,
+          "sha256": "8d452e35a5954513356687ea63a098efc0cdf08cca702065d866958ee44dd58e"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.stdout",
+          "bytes": 123,
+          "sha256": "c493befc0c6fd59ac618e1c93751103555b37d58b54c2eb352543008154790b2"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "native10b",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 5,
+        "raw_bytes": 5133,
+        "inventory_digest": "4e5a75a40c88549a6ae615dbe63a1f0e5566c867433e5d8ef1682edec1a31736",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-3-birth-75368-1792532444778891100-0",
+            "ordinal": 3,
+            "plan": "6363dd189221df561ef9366fa70b081d70b4ee9a0b1e52b1b9527a7e5d78a80b"
+          },
+          "physical_parent": "9bfccde5b371376d2baa926e0c136cf70c596af2ca334da67b699d568481e21a",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "4fba4c6182e92361d649452926976f82cd6fab22aed4617e15b8a8ca7e98bf7f",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 30133,
+          "observed_removed_files": 31,
+          "observed_reconciled_absent": 15,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-3-birth-75368-1792532444778891100-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/5f8cb1792f1aec3938528380ce4890f47568b10001a915bda5b6f81ed8fe1753.json",
+            "packs/physical-3-birth-75368-1792532444778891100-0/0ac6e20e38366293f03bb3df1e198d2e34cb0d26aa30a4381e395de2c07934bd.idx",
+            "packs/physical-3-birth-75368-1792532444778891100-0/25c52203a4a618a9d3056b01336228cbdfcdc670de92bd39ec6385717b6df538.idx",
+            "packs/physical-3-birth-75368-1792532444778891100-0/444c51b3a4a39ba84cf3cf7303f7c3e9fa9e3f7faaea7d0ddfec23e0303b3574.idx",
+            "packs/physical-3-birth-75368-1792532444778891100-0/729ef32e39433a1288931f60d2df5fa284f09958b1a99cf4963a478fe296b291.idx",
+            "packs/physical-3-birth-75368-1792532444778891100-0/82bbe4a193ed07bab884dd52252979447f80803ad69dc3b596ab6e3b4b1e800a.pack",
+            "packs/physical-3-birth-75368-1792532444778891100-0/b006e5a2882cf44b8c142e7e147384ae3713b9ae7f1a9708e282f9f47b0533a6.pack",
+            "packs/physical-3-birth-75368-1792532444778891100-0/b411a7c6744265cbeaaa398d50d175cb82327652b8105d94f245636fb5c790b5.pack",
+            "packs/physical-3-birth-75368-1792532444778891100-0/b961b5be5f7bf2cf636b9130cc043b274197f979004a89181cc57c7753ddb8c5.pack",
+            "packs/physical-3-birth-75368-1792532444778891100-0/d03cc399956464cd1fa41ec16cfdec273b040e4fa9b137803689b28eefa77be6.idx",
+            "packs/physical-3-birth-75368-1792532444778891100-0/f897089afecff279183d6c05abbc3631f914214a4b1469bb12c3b88e1e63e911.pack",
+            "physical-pins/physical-3-birth-75368-1792532444778891100-0.lock",
+            "physical-plans/6363dd189221df561ef9366fa70b081d70b4ee9a0b1e52b1b9527a7e5d78a80b.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-13908-1792532444694862500-6",
+            "digest": "41081414b69daab3f0fac008e670b1201b850a2fb9980e3332734cfa3c01fb91"
+          },
+          "publications": 2,
+          "ledger_rows": 0,
+          "permanent_digest": "4a354422439cba103e456e20b4fb4cd8f4beedd3e94a460ae585090d2503e168",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 2,
+          "sources": 14,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 137217728,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.01600000006146729
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-13908-1792532444694862500-6",
+            "digest": "41081414b69daab3f0fac008e670b1201b850a2fb9980e3332734cfa3c01fb91"
+          },
+          "publications": 2,
+          "actual_H": 2,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 2,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "c0552e1ab3504f7ff2c14307b5f732cc111b734814ef409fb63a122b246d0407",
+          "engine_code_imported": false
+        },
+        "independent_codec": null,
+        "seconds": 0.0470000000204891,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\native10b\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 61,
+        "source_logical_bytes": 287394,
+        "source_directory_count": 47,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a",
+        "after_sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.json",
+          "bytes": 5347,
+          "sha256": "de2b3b3ad76692ee3cff4216901ed5986eda1b2a682bfc6751d41c008a94ec39"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.before.json",
+          "bytes": 12880,
+          "sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.after.json",
+          "bytes": 12880,
+          "sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.read-only.json",
+          "bytes": 779,
+          "sha256": "241d82f34fb6b5ed0de65d9442a51eeefbeeaeba0ba52bfa3a1a31fb096022c9"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.stdout",
+          "bytes": 123,
+          "sha256": "9469bc72953d29569c0631a6e4b94e0ee467f381b1077850fc025cab1104f652"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "faults10bA",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 10,
+        "raw_bytes": 8360,
+        "inventory_digest": "76a8c4f75075d12a57139b03ceace1b4fa2b3c43f851e69b54dfb11dd3bac79d",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-8-birth-41772-1792532571532478900-0",
+            "ordinal": 8,
+            "plan": "b1d5387e9ec0769890a52e08703227ee50710128631adb5389e9dec44a18e4e8"
+          },
+          "physical_parent": "6c71ae27b8df369851ee73f47efff62c406e91aefbb0dd157b15c7568935a9db",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "99a121e64c14a35fa913fda66cbfa86fb6ef6a90fa52aac35a0ee2c835d2103f",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 122954,
+          "observed_removed_files": 102,
+          "observed_reconciled_absent": 98,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-8-birth-41772-1792532571532478900-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/caddc1ee36abdaf65cd778e5daf3f49366b078f66e30be075e41e85a3ec364c2.json",
+            "packs/physical-8-birth-41772-1792532571532478900-0/444456e17b9e21843dfcd434b843c7249873ec9e67b73ea3109670f547026c4d.pack",
+            "packs/physical-8-birth-41772-1792532571532478900-0/49a6bc08c0205dcba01dee4cbde9ac69dfe80f2e8201c844a9d5cc5b68c0914a.pack",
+            "packs/physical-8-birth-41772-1792532571532478900-0/877e79f15ac747a67c9f7a1ccfcd5db3e37406f2b13d3b8a9714db5af0c74f55.pack",
+            "packs/physical-8-birth-41772-1792532571532478900-0/8d5d55b164916a314c5d54dae5b8eefcfa41ca99479a51403406233f3bb9ae5c.idx",
+            "packs/physical-8-birth-41772-1792532571532478900-0/8d6653bffc27190c99bcbed50619c39fdf32af2c1624e8e19552d6cb95c747ee.pack",
+            "packs/physical-8-birth-41772-1792532571532478900-0/8f8c05e830ea28edbb2d61fd2f6972a626529faaecc7399a49d9c6236b604d61.idx",
+            "packs/physical-8-birth-41772-1792532571532478900-0/9cd1559c4fb9e5b714e16c5835258a79a979b3fa3658f70ef5c3ab002416041b.idx",
+            "packs/physical-8-birth-41772-1792532571532478900-0/ba7e23d74144dc651b464c5958a945c5d87fe70dc0977f61ed16c642ca537558.idx",
+            "packs/physical-8-birth-41772-1792532571532478900-0/d496a3db81bf034f0f34331d5a4790008e6e6d4f04d379943c90b91edfdeb672.pack",
+            "packs/physical-8-birth-41772-1792532571532478900-0/f8e41df1028c72bbb053a5f082ceba2dca8c41cf717a402b8c7f3e1d7d925f71.idx",
+            "physical-pins/physical-8-birth-41772-1792532571532478900-0.lock",
+            "physical-plans/b1d5387e9ec0769890a52e08703227ee50710128631adb5389e9dec44a18e4e8.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-52208-1792532571811440000-3",
+            "digest": "2a46b6529cd926141c0aa8509c81aa14a7bd509fc40dbcbea4eb910cf691385b"
+          },
+          "publications": 15,
+          "ledger_rows": 0,
+          "permanent_digest": "4a2f7ace1cdbb168bac32f3cfea3ec3106eb2481c1929c41f29a439ada0917f8",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 2,
+          "root_visits": 15,
+          "sources": 16,
+          "pins": 1,
+          "reservations": 1,
+          "packets": 1,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 1009632960,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.01600000006146729
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-52208-1792532571811440000-3",
+            "digest": "2a46b6529cd926141c0aa8509c81aa14a7bd509fc40dbcbea4eb910cf691385b"
+          },
+          "publications": 15,
+          "actual_H": 15,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 15,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "8d02eae9fccfc2bd74e9116a7ce7e2a741ffae5f479465b763e5ad597cba758b",
+          "engine_code_imported": false
+        },
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "seconds": 0.06299999996554106,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\faults10b-A\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 164,
+        "source_logical_bytes": 598677,
+        "source_directory_count": 106,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7",
+        "after_sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.json",
+          "bytes": 5532,
+          "sha256": "2ee0820659f13a299c31663981c739245bd41fd8d846fd9d75bb57a704be1aa2"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.before.json",
+          "bytes": 35619,
+          "sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.after.json",
+          "bytes": 35619,
+          "sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.read-only.json",
+          "bytes": 783,
+          "sha256": "c8f0dcc3dada99cd7eabf0b30cb193ffae079ae5c0afc111838eaa7e036235f7"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.stdout",
+          "bytes": 127,
+          "sha256": "9b277f08a5769bbdab3588956c5bc81f84bb843c259cfbb6db83715cc7c15d8d"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "faults10bB",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 10,
+        "raw_bytes": 8608,
+        "inventory_digest": "cb168bb937671847ff641087c10d7902f51f503c0f3f9366669bc4798a6d3089",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-8-birth-40896-1792532574962666100-0",
+            "ordinal": 8,
+            "plan": "4d6c6492c63cde3a744b8a3baa6c9d56a256ec46576406d73e58ee5f2c90b358"
+          },
+          "physical_parent": "1b5cbd49b9fad0467b585c73528de1508ff71dc373a9f1ee9d4722a94b51e79f",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "d111b499d3b04200156c46f85641469eb32b4e10fa5e1a73272abc979d6812b1",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 122592,
+          "observed_removed_files": 100,
+          "observed_reconciled_absent": 84,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-8-birth-40896-1792532574962666100-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/dc44309fc660d0cfad048fdab8333d0426963c63d1ab847972931fa5afcbae89.json",
+            "packs/physical-8-birth-40896-1792532574962666100-0/06124478f7050da7bc639e2dac732781afaa396a191f2078597e5da83a6a2aeb.pack",
+            "packs/physical-8-birth-40896-1792532574962666100-0/0811c8744d27b689a91e245b97271aec695aefa1afb3015ef3e7988b288d7da9.pack",
+            "packs/physical-8-birth-40896-1792532574962666100-0/3f083ce2301646662d13f0176eb68026e15fd99462d6587a0d59ae07dd5d02cd.idx",
+            "packs/physical-8-birth-40896-1792532574962666100-0/62f507df47d3929ac978eb8686280b9321f50da83312338c5f2ca3e2a9c065e5.idx",
+            "packs/physical-8-birth-40896-1792532574962666100-0/7bbf6e0ba78c23bed194caccad26b72d79a081da4a247c62f1b03c455ba21685.idx",
+            "packs/physical-8-birth-40896-1792532574962666100-0/7d59ed02e191efe670178665fbc1d1f0aacd11a4f8816713286769ee723775ff.pack",
+            "packs/physical-8-birth-40896-1792532574962666100-0/a104b63bb5c1e77efcc3f1cf055af97be50d117ac579b45d79a1559aadcfb7d3.idx",
+            "packs/physical-8-birth-40896-1792532574962666100-0/c73b3ba8f01022d58edf63b651898145389b414e9f3094e0bbbaffada4858601.pack",
+            "packs/physical-8-birth-40896-1792532574962666100-0/e302a2debc376e7b67c9085647bdb2ba3c03a57b0a6b30ed184b626fac5e9f59.pack",
+            "packs/physical-8-birth-40896-1792532574962666100-0/f006a549d3b4b09aab2feb42251ca1925fd2a4870a0ba22626634046e4406dad.idx",
+            "physical-pins/physical-8-birth-40896-1792532574962666100-0.lock",
+            "physical-plans/4d6c6492c63cde3a744b8a3baa6c9d56a256ec46576406d73e58ee5f2c90b358.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-72848-1792532575218017600-3",
+            "digest": "ae439a20b9f8eda211311b8c54c79e6b47e99375267e65bcacb44b087d6ace47"
+          },
+          "publications": 15,
+          "ledger_rows": 0,
+          "permanent_digest": "ab6cdc9292cd66fc53425e20a79903403cd5268d59a7b1dbcd22a47c772c0586",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 2,
+          "root_visits": 15,
+          "sources": 16,
+          "pins": 1,
+          "reservations": 1,
+          "packets": 1,
+          "generations": 15,
+          "conservative_cumulative_owner_allowance_bytes": 1051632960,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.03200000000651926
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-72848-1792532575218017600-3",
+            "digest": "ae439a20b9f8eda211311b8c54c79e6b47e99375267e65bcacb44b087d6ace47"
+          },
+          "publications": 15,
+          "actual_H": 15,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 15,
+          "exact_loose_B_publication_controls": 15,
+          "evidence_sha256": "a78f2f1d273e0e851e1d26ddaf42d164791239b830cc09081eb8fc559985ecf6",
+          "engine_code_imported": false
+        },
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "seconds": 0.0779999999795109,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\faults10b-B\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 376,
+        "source_logical_bytes": 2461583,
+        "source_directory_count": 220,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f",
+        "after_sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.json",
+          "bytes": 5533,
+          "sha256": "9b86e03e98d377534e47ea00c0bfdf66aac1ece5ebce2aef572c30f661166146"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.before.json",
+          "bytes": 87229,
+          "sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.after.json",
+          "bytes": 87229,
+          "sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.read-only.json",
+          "bytes": 784,
+          "sha256": "a3ec430f951cd16e7ac6fa93b4b9772d640fa167c0792101cc0092cb8330ebcd"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.stdout",
+          "bytes": 127,
+          "sha256": "1bb6cfa733c5a86977c3119fbed0f651e827310025f2ca2deaed3368cbdc8ca4"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "guard": {
+    "raw": {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-guard.json",
+      "bytes": 8554,
+      "sha256": "ae9ef02cac8ed2d77c51d5a5b97ecb417c8a5ed209052949bd84a79c8ccabdbe"
+    },
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "closure_checks": [
+      {
+        "epoch": 1792533347.2146149,
+        "members": []
+      },
+      {
+        "epoch": 1792533347.235501,
+        "members": []
+      }
+    ],
+    "process_closure_verified": true,
+    "memory_sample_timing": {
+      "samples": 87,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 3
+    },
+    "job_aggregate_sampled_peak_rss": 43311104
+  },
+  "directory_counts_include_root": true,
+  "old_cd12_executions_rebound": false,
+  "qualification": "five supplied bd6/candidate10 quiescent roots fully independently verified; no engine execution, copies or repairs by checker; final CP2/CP3 source/matrix remains pending"
+}

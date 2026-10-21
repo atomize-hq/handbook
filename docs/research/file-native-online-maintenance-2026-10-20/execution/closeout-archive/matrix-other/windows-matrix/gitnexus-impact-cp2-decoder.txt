@@ -1,0 +1,20 @@
+
+  GitNexus Impact (1.6.12)
+{
+  "error": "Repository \"C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook\" not found. Available: handbook (C:\\Users\\spmcc\\.codex\\orchestration\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\Users\\spmcc\\.codex\\orchestration\\handbook-hcm-3-6-implementation), handbook (C:\\Users\\spmcc\\.codex\\orchestration\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\Users\\spmcc\\.codex\\worktrees\\hcm32r-adf08a6e\\handbook), handbook (C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook)",
+  "target": {
+    "name": "Decoder"
+  },
+  "direction": "upstream",
+  "suggestion": "Try reducing --depth or using gitnexus context <symbol> as a fallback"
+}
+
+  GitNexus Impact (1.6.12)
+{
+  "error": "Repository \"C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook\" not found. Available: handbook (C:\\Users\\spmcc\\.codex\\orchestration\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\Users\\spmcc\\.codex\\orchestration\\handbook-hcm-3-6-implementation), handbook (C:\\Users\\spmcc\\.codex\\orchestration\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\Users\\spmcc\\.codex\\worktrees\\hcm32r-adf08a6e\\handbook), handbook (C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook)",
+  "target": {
+    "name": "terminal_exclusion"
+  },
+  "direction": "upstream",
+  "suggestion": "Try reducing --depth or using gitnexus context <symbol> as a fallback"
+}

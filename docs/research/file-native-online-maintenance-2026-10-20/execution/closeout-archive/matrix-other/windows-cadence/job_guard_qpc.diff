@@ -1,0 +1,207 @@
+--- harness/job_guard.py (frozen 1e4a965)
++++ windows-cadence/job_guard_qpc.py
+@@ -350,6 +350,8 @@
+     stdout = stderr = None
+     timer = sampler = disk_thread = feeder = None
+     stop = threading.Event()
++    sampler_ready = threading.Event()
++    sample_write_lock = threading.Lock()
+     reason = []
+     errors = []
+     peaks = {}
+@@ -365,8 +367,23 @@
+     owner = None
+     initial_rss = None
+     closure_checks = []
+-    memory_timing = dict(samples=0, max_interval_seconds=0.0, intervals_over_40ms=0)
++    memory_timing = dict(samples=0, max_interval_seconds=0.0, intervals_over_40ms=0,
++        completed_samples=0, max_completion_interval_seconds=0.0,
++        max_collection_duration_seconds=0.0, max_sample_duration_seconds=0.0,
++        max_recorded_interval_seconds=0.0, slow_samples=0,
++        clock='perf_counter_ns', target_interval_ns=20_000_000,
++        censor_interval_ns=40_000_000,
++        clock_info={name: vars(time.get_clock_info(name))
++                    for name in ['perf_counter', 'monotonic']},
++        interval_seconds_clock='perf_counter_ns; monotonic fields are coarse diagnostics',
++        first_positive_full_sample_ns=None, last_recorded_sample_ns=None)
+     rss_stream = None
++    def record_sample(row, flush=False):
++        # Main-thread coverage-boundary rows cannot race the sampler's gzip writes.
++        with sample_write_lock:
++            rss_stream.write((json.dumps(row, separators=(',', ':'))+'\n').encode())
++            if flush:
++                rss_stream.flush()
+     def current_members():
+         with lock:
+             return members(job) if job is not None else []
+@@ -431,17 +448,27 @@
+         timer.start()
+         rss_stream = gzip.open(receipt.with_suffix('.rss.jsonl.gz'), 'xb', compresslevel=1)
+         def memory_watch():
+-            last_tick = None
+-            next_tick = time.monotonic()
++            last_tick = last_coarse = last_complete = last_recorded = None
++            next_tick = time.perf_counter_ns()
+             while not stop.is_set():
+                 try:
+-                    tick = time.monotonic()
+-                    interval = tick-last_tick if last_tick is not None else None
++                    tick = time.perf_counter_ns()
++                    coarse = time.monotonic()
++                    interval_ns = tick-last_tick if last_tick is not None else None
++                    interval = interval_ns/1e9 if interval_ns is not None else None
++                    coarse_interval = coarse-last_coarse if last_coarse is not None else None
+                     if interval is not None:
+                         memory_timing['max_interval_seconds'] = max(memory_timing['max_interval_seconds'], interval)
+-                        if interval > .04:
++                        if interval_ns > 40_000_000:
+                             memory_timing['intervals_over_40ms'] += 1
+-                    last_tick = tick
++                            # Preserve the actual late interval before terminating; this is NOT an RSS sample.
++                            record_sample(dict(event='cadence-gap-before-rss',
++                                epoch=time.time(), perf_counter_ns=tick, previous_perf_counter_ns=last_tick,
++                                monotonic=coarse, monotonic_interval_seconds=coarse_interval,
++                                interval_seconds=interval, sample_complete=False), flush=True)
++                            terminate('memory-sample-cadence-censor')
++                            return
++                    last_tick, last_coarse = tick, coarse
+                     memory_timing['samples'] += 1
+                     pids = current_members()
+                     current = 0
+@@ -463,21 +490,63 @@
+                     aggregate[0] = max(aggregate[0], current)
+                     sup_total, sup_rows = supervisor_rss()
+                     supervisor_peak[0] = max(supervisor_peak[0], sup_total)
+-                    rss_stream.write((json.dumps(dict(epoch=time.time(), monotonic=tick,
+-                        interval_seconds=interval, job_rss=current, processes=process_samples,
+-                        supervisor_rss=sup_total, supervisors=sup_rows), separators=(',', ':'))+'\n').encode())
++                    complete = time.perf_counter_ns()
++                    collection_ns = complete-tick
++                    completion_interval_ns = complete-last_complete if last_complete is not None else None
++                    memory_timing['max_collection_duration_seconds'] = max(
++                        memory_timing['max_collection_duration_seconds'], collection_ns/1e9)
++                    if completion_interval_ns is not None:
++                        memory_timing['max_completion_interval_seconds'] = max(
++                            memory_timing['max_completion_interval_seconds'], completion_interval_ns/1e9)
++                    record_sample(dict(event='rss-sample', epoch=time.time(),
++                        perf_counter_ns=tick, completed_perf_counter_ns=complete,
++                        collection_duration_seconds=collection_ns/1e9,
++                        completion_interval_seconds=completion_interval_ns/1e9 if completion_interval_ns is not None else None,
++                        monotonic=coarse, monotonic_interval_seconds=coarse_interval,
++                        interval_seconds=interval, sample_complete=True,
++                        job_rss=current, processes=process_samples,
++                        supervisor_rss=sup_total, supervisors=sup_rows))
++                    recorded = time.perf_counter_ns()
++                    duration_ns = recorded-tick
++                    recorded_interval_ns = recorded-last_recorded if last_recorded is not None else None
++                    memory_timing['completed_samples'] += 1
++                    memory_timing['max_sample_duration_seconds'] = max(
++                        memory_timing['max_sample_duration_seconds'], duration_ns/1e9)
++                    if recorded_interval_ns is not None:
++                        memory_timing['max_recorded_interval_seconds'] = max(
++                            memory_timing['max_recorded_interval_seconds'], recorded_interval_ns/1e9)
++                    if (duration_ns > 40_000_000 or
++                            (completion_interval_ns is not None and completion_interval_ns > 40_000_000) or
++                            (recorded_interval_ns is not None and recorded_interval_ns > 40_000_000)):
++                        memory_timing['slow_samples'] += 1
++                        # Includes the FIRST full sample and serialization/write latency.
++                        record_sample(dict(event='full-sample-cadence-late',
++                            epoch=time.time(), perf_counter_ns=tick, completed_perf_counter_ns=complete,
++                            recorded_perf_counter_ns=recorded, previous_recorded_perf_counter_ns=last_recorded,
++                            duration_seconds=duration_ns/1e9,
++                            completion_interval_seconds=completion_interval_ns/1e9 if completion_interval_ns is not None else None,
++                            recorded_interval_seconds=recorded_interval_ns/1e9 if recorded_interval_ns is not None else None,
++                            monotonic=coarse, monotonic_interval_seconds=coarse_interval), flush=True)
++                        terminate('memory-sample-cadence-censor')
++                        return
++                    last_complete, last_recorded = complete, recorded
++                    memory_timing['last_recorded_sample_ns'] = recorded
+                     if not supervisor_samples or time.time()-supervisor_samples[-1]['epoch'] >= 1:
+                         supervisor_samples.append(dict(epoch=time.time(), total=sup_total, processes=sup_rows))
+                     if current > 3 * GiB:
+                         terminate('stage-aggregate-rss-censor')
+                         return
++                    if not sampler_ready.is_set():
++                        assert any(x['pid'] == process.pid and x['rss'] > 0 for x in process_samples), 'first-full-root-rss-not-positive'
++                        memory_timing['first_positive_full_sample_ns'] = recorded
++                        sampler_ready.set()
+                 except BaseException as error:
+                     if not stop.is_set():
+                         errors.append(repr(error))
+                         terminate('memory-monitor-error')
+                     return
+-                next_tick = max(next_tick+.02, time.monotonic())
+-                stop.wait(max(0, next_tick-time.monotonic()))
++                next_tick = max(next_tick+20_000_000, time.perf_counter_ns())
++                stop.wait(max(0, (next_tick-time.perf_counter_ns())/1e9))
+         def disk_watch():
+             while not stop.is_set():
+                 try:
+@@ -494,6 +563,19 @@
+         disk_thread = threading.Thread(target=disk_watch, daemon=True)
+         sampler.start()
+         disk_thread.start()
++        # A started thread is not positive full-sample coverage of the suspended root.
++        while not sampler_ready.wait(min(.005, max(0, absolute_deadline-time.time()))):
++            if reason or errors or not sampler.is_alive() or time.time() >= absolute_deadline:
++                raise RuntimeError('memory-sampler-not-ready-before-resume')
++        resume_check_ns = time.perf_counter_ns()
++        last_sample_ns = memory_timing['last_recorded_sample_ns']
++        if last_sample_ns is None or resume_check_ns-last_sample_ns > 40_000_000:
++            record_sample(dict(event='stale-sample-before-resume', sample_complete=False,
++                perf_counter_ns=resume_check_ns, previous_recorded_perf_counter_ns=last_sample_ns,
++                interval_seconds=(resume_check_ns-last_sample_ns)/1e9 if last_sample_ns is not None else None), flush=True)
++            terminate('memory-sample-cadence-censor')
++        if reason or errors:
++            raise RuntimeError('memory-sampler-refused-before-resume')
+         if time.time() >= absolute_deadline or NT.NtResumeProcess(w.HANDLE(process._handle)) != 0:
+             raise RuntimeError('resume-failed')
+         owner.update(state='running', resumed_epoch=time.time())
+@@ -508,12 +590,37 @@
+             feeder = threading.Thread(target=feed, daemon=True)
+             feeder.start()
+         process.wait(timeout=max(.001, absolute_deadline-time.time()) + 10)
++        coverage_end_ns = time.perf_counter_ns()
++        last_sample_ns = memory_timing['last_recorded_sample_ns']
++        terminal_gap_ns = max(0, coverage_end_ns-last_sample_ns) if last_sample_ns is not None else None
++        memory_timing['root_wait_returned_ns'] = coverage_end_ns
++        memory_timing['root_end_coverage_gap_seconds'] = terminal_gap_ns/1e9 if terminal_gap_ns is not None else None
++        record_sample(dict(event='root-end-sampling-coverage', sample_complete=False,
++            perf_counter_ns=coverage_end_ns, previous_recorded_perf_counter_ns=last_sample_ns,
++            interval_seconds=terminal_gap_ns/1e9 if terminal_gap_ns is not None else None), flush=True)
++        if terminal_gap_ns is None or terminal_gap_ns > 40_000_000:
++            terminate('memory-sample-cadence-censor')
+         if current_members():
+             terminate('root-completed-descendant-cleanup')
+         until = time.monotonic() + 5
+         while current_members() and time.monotonic() < until:
+             time.sleep(.01)
+         remaining = current_members()
++        # Root exit is not the end of descendant lifetime. Observe the WHOLE Job
++        # after the drain, while the sampler/stream and heavy token remain live.
++        job_coverage_end_ns = time.perf_counter_ns()
++        last_sample_ns = memory_timing['last_recorded_sample_ns']
++        job_terminal_gap_ns = max(0, job_coverage_end_ns-last_sample_ns) if last_sample_ns is not None else None
++        memory_timing['job_empty_observed_ns'] = job_coverage_end_ns if remaining == [] else None
++        memory_timing['job_end_coverage_gap_seconds'] = job_terminal_gap_ns/1e9 if job_terminal_gap_ns is not None else None
++        record_sample(dict(event='job-drain-sampling-coverage', sample_complete=False,
++            perf_counter_ns=job_coverage_end_ns, previous_recorded_perf_counter_ns=last_sample_ns,
++            members=remaining, empty_observed=remaining == [],
++            interval_seconds=job_terminal_gap_ns/1e9 if job_terminal_gap_ns is not None else None), flush=True)
++        if remaining != [] or job_terminal_gap_ns is None or job_terminal_gap_ns > 40_000_000:
++            terminate('memory-sample-cadence-censor')
++        # Exception paths below retain errors and cannot qualify even if final
++        # emergency termination later proves the Job empty after sampler stop.
+     except BaseException as error:
+         errors.append(repr(error))
+         terminate('stage-deadline-before-launch' if process is None and time.time() >= absolute_deadline else 'guard-error')
+@@ -595,6 +702,9 @@
+                remaining_job_pids=remaining, process_closure_verified=remaining == [] and not errors,
+                terminations=terminations, disk_samples=samples, prospective=preflight,
+                guard_sha256=sha_file(__file__), budget_sha256=budget.raw_hash,
++               frozen_reference_guard_sha256=sha_file(Path(__file__).resolve().parent.parent/'harness'/'job_guard.py'),
++               frozen_reference_expected_sha256='1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae',
++               sampling_revision='qpc-ns-v2; whole-Job tail coverage; strict >40ms; coarse monotonic retained; no retrospective requalification',
+                qualification='one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency')
+     write_json(receipt, row)
+     return row

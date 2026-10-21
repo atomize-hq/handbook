@@ -1,0 +1,141 @@
+{
+  "utc": "2026-10-20T23:45:16.393786+00:00",
+  "source_pin": "f9b762a1a0d352564542bb4850ad77ee14a7c6e4",
+  "source_binding_git_blob_sha256": "0b4e3ad991c3b5e453ec9a0443fe427376cdbdcb51f00a3ad93fc2507b652293",
+  "source_binding25_exact_blobs_checked": true,
+  "modules": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index.py",
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v5.py",
+      "bytes": 37720,
+      "sha256": "f317601646d0ba267cede9d09e750e36e84f3d47e919ede880295547b850edc5"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index_controls.py",
+      "bytes": 15650,
+      "sha256": "7d5dc2ae47359c17dce6f363bfc8f6d9e3f7a24603944e50258cb9b059c36e85"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\matrix_budget.py",
+      "bytes": 4656,
+      "sha256": "1b2abbe3a3ac2590749e696b055778b68cccc25fed156dfb7efc1ea08c68994a"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\matrix_receipt_controls.py",
+      "bytes": 3985,
+      "sha256": "8fb561dfc05570c7519edf6bea92446aa1fffd4d6dae999c898b38f2dd28b2a5"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1.json",
+      "bytes": 29787,
+      "sha256": "e6cc75394a2147bbdfe625fc075c1d486e805d75d2da15c88b305f46ca244e65"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1-guard.json",
+      "bytes": 31532,
+      "sha256": "3f971ef247517e6a375d1285a730bae690f5527a75c5438f478a17017975a924"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1-guard.stdout",
+      "bytes": 65,
+      "sha256": "2df7650634347d9231d1da723c028a1d5a1e4a5209a098266f1f290171d0ddce"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1-guard.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1-guard.rss.jsonl.gz",
+      "bytes": 20436,
+      "sha256": "2d6e4a06464340e0c7143f17ba77886b6d716dbe4b46c67004cf7a2a7ae05e1a"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\matrix-receipt-reservations-controls.json",
+      "bytes": 8138,
+      "sha256": "f4a1ff48bbaa6a82ab647b1ae2d17c98887cf68381f72ce52653863b5302131c"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\matrix-receipt-reservations-guard.json",
+      "bytes": 23288,
+      "sha256": "fa9851f5bedd98732289c5be4946ca9868850683fc3b5fa0f56c3dee0156ba2f"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-synthetic-postclose-census.json",
+      "bytes": 6301,
+      "sha256": "2da5f6e1f5e36f9531374ba4de440982254144b177714665b5d6d9bc518e6d74"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-synthetic-protocol-file-manifest.json",
+      "bytes": 15942,
+      "sha256": "e778d3d470ff9ab5f9c08b1de8d89613c88f14bbda148c69d1d38ab204fe3779"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\budget-final-source-v3.json",
+      "bytes": 6064,
+      "sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a"
+    }
+  ],
+  "positives": [
+    {
+      "records": 1,
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 359
+    },
+    {
+      "records": 48,
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 6328
+    },
+    {
+      "records": 49,
+      "height": 1,
+      "pages": 3,
+      "index_bytes": 7205
+    },
+    {
+      "records": 2400,
+      "height": 2,
+      "pages": 53,
+      "index_bytes": 324532
+    }
+  ],
+  "negative_cases": 53,
+  "actual_four_height2_route_pages": 12,
+  "actual_four_height2_route_index_bytes": 55768,
+  "protocol_actual": {
+    "bytes": 469262,
+    "files": 103
+  },
+  "native_job": {
+    "aggregate_peak_rss": 25849856,
+    "seconds": 37.52843379974365,
+    "censor": null,
+    "errors": [],
+    "twice_empty": [
+      {
+        "epoch": 1792539744.5345263,
+        "members": []
+      },
+      {
+        "epoch": 1792539744.5546944,
+        "members": []
+      }
+    ]
+  },
+  "synthetic_only": true,
+  "no_engine_calls": true,
+  "no_real_store_reads": true,
+  "no_clones": true,
+  "Driver_and_native_guard_unchanged": true,
+  "final_engine_source_pin_still_pending": true,
+  "qualification": "Independent synthetic complete-index/tree/route/duplicate/metadata parser checks only; no engine allocation, performance, native lifetime, final representation or long cohort qualification"
+}

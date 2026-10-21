@@ -1,0 +1,257 @@
+{
+  "kind": "native-guard-v20",
+  "nonce": "687170b4bcd7a6131f53ed3c3b0694e3",
+  "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+  "source_sha256": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+  "adapter_source_bindings": {
+    "admission_v20.py": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3",
+    "keeper_v20.py": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978",
+    "monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "guard_v20.py": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+    "role_driver_v20.py": "ecc1ac2af4849a1a826b5019ec9cadb0e0f7da52d412ef6222c84661534de6e0"
+  },
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "claims": {
+    "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+    "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+    "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+    "F12": "initial-native-worker-functional-evidence24MiB",
+    "F13": "initial-native-worker-combined-positive-shared-growth4MiB",
+    "C1": "CLAIM007:8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35:seal:e29fce55d34c685b2579e3cc2c277ed731cb72606985ccf425ca2742b006812a"
+  },
+  "limits": {
+    "F01": {
+      "bytes": 4194304,
+      "files": 1000,
+      "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+    },
+    "F04": {
+      "bytes": 268435456,
+      "files": 5000,
+      "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+    },
+    "F08": {
+      "bytes": 100663296,
+      "files": 30000,
+      "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+    },
+    "F12": {
+      "bytes": 25165824,
+      "files": 10000,
+      "claim": "initial-native-worker-functional-evidence24MiB"
+    },
+    "F13": {
+      "bytes": 4194304,
+      "files": 1500,
+      "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "C1": {
+      "bytes": 67108864,
+      "files": 5000,
+      "claim": "CLAIM007:8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35:seal:e29fce55d34c685b2579e3cc2c277ed731cb72606985ccf425ca2742b006812a"
+    }
+  },
+  "prospective": {
+    "F01": {
+      "bytes": 131072,
+      "files": 8
+    },
+    "F04": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F08": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F12": {
+      "bytes": 1835008,
+      "files": 9
+    },
+    "F13": {
+      "bytes": 0,
+      "files": 0
+    },
+    "C1": {
+      "bytes": 39974570,
+      "files": 1808
+    }
+  },
+  "identity_budget": 1024,
+  "live_process_cap": 64,
+  "started_epoch": 1792580370.6930041,
+  "functional_cutoff_epoch": 1792581014.0,
+  "effective_fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3269000.665101875,
+  "global_enumeration": false,
+  "censor": "RuntimeError('control-message-cap')",
+  "closure": "NO_WORKLOAD_CREATED",
+  "token_released": true,
+  "worker_exit": null,
+  "supervisor": {
+    "pid_requested": 18877,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 18877,
+    "ppid": 18846,
+    "uid": 501,
+    "pgid": 18846,
+    "state": 2,
+    "start": [
+      1792580370,
+      646646
+    ]
+  },
+  "before_setup_positive_RSS": {
+    "return": 0,
+    "errno": 0,
+    "rss_bytes": 26542080,
+    "start_abstime": 78451694849857
+  },
+  "observed_output_bytes": 0,
+  "workload_GO": false,
+  "closure_proofs": [],
+  "termination": [],
+  "keeper_identity": {
+    "pid_requested": 18878,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 18878,
+    "ppid": 18877,
+    "uid": 501,
+    "pgid": 18878,
+    "state": 2,
+    "start": [
+      1792580370,
+      718264
+    ]
+  },
+  "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-687170b4bcd7a6131f53ed3c3b0694e3.release.json",
+  "token_acquired_epoch": 1792580370.7210581,
+  "admission_snapshot": {
+    "categories": {
+      "F01": {
+        "logical_bytes": 3075505,
+        "allocated_bytes": 3473408,
+        "files": 174,
+        "directories": 22,
+        "symlinks": 0
+      },
+      "F04": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F08": {
+        "logical_bytes": 864971,
+        "allocated_bytes": 1130496,
+        "files": 77,
+        "directories": 46,
+        "symlinks": 0
+      },
+      "F12": {
+        "logical_bytes": 8884104,
+        "allocated_bytes": 11390976,
+        "files": 1296,
+        "directories": 284,
+        "symlinks": 0
+      },
+      "C1": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F13": {
+        "logical_bytes": 82,
+        "files": 2,
+        "allocated_bytes": null,
+        "shared_components": {
+          "Git": {
+            "logical_bytes": 187972974,
+            "allocated_bytes": 205033472,
+            "files": 5494,
+            "directories": 371,
+            "symlinks": 0,
+            "baseline_logical_bytes": 187972892,
+            "baseline_files": 5492,
+            "positive_bytes": 82,
+            "positive_files": 2
+          },
+          "Cargo": {
+            "logical_bytes": 1859795101,
+            "allocated_bytes": 2063294464,
+            "files": 81747,
+            "directories": 15833,
+            "symlinks": 13,
+            "baseline_logical_bytes": 1859800817,
+            "baseline_files": 81747,
+            "positive_bytes": 0,
+            "positive_files": 0
+          }
+        }
+      }
+    },
+    "free_bytes": 175834968064
+  },
+  "admitted_growth_ceiling": {
+    "F01": {
+      "bytes": 3206577,
+      "files": 182
+    },
+    "F04": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F08": {
+      "bytes": 864971,
+      "files": 77
+    },
+    "F12": {
+      "bytes": 10719112,
+      "files": 1305
+    },
+    "C1": {
+      "bytes": 39974570,
+      "files": 1808
+    },
+    "F13": {
+      "bytes": 82,
+      "files": 2
+    }
+  },
+  "launcher": {
+    "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+    "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+    "argv": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+      "-I",
+      "-S",
+      "-B",
+      "-c",
+      "import ast,hashlib,json,pathlib,struct,sys,time,types\nP=pathlib.Path\nraw=P(sys.argv[1]).read_bytes()\nassert hashlib.sha256(raw).hexdigest()==sys.argv[2]\ndata=json.loads(raw);r=data['cache_release']\nassert r['parent_released'] is True and r['cache_copy_go'] is True\nfor path,row in r['source_files'].items():\n b=P(path).read_bytes();assert len(b)==row['bytes'] and hashlib.sha256(b).hexdigest()==row['sha256']\ndef load(name):\n p=P(r['root'])/'execution/native-macos'/(name+'.py');b=p.read_bytes();row=r['source_files'][str(p)]\n assert len(b)==row['bytes'] and hashlib.sha256(b).hexdigest()==row['sha256']\n tree=ast.parse(b)\n for node in tree.body:\n  names=[x.name for x in node.names] if isinstance(node,ast.Import) else [node.module] if isinstance(node,ast.ImportFrom) and node.module else []\n  assert all(n.split('.')[0] in sys.stdlib_module_names for n in names)\n m=types.ModuleType(name);m.__file__=str(p);exec(compile(tree,str(p),'exec'),m.__dict__);m.__phase_source_sha256__=row['sha256'];return m\npacket=P(data['runtime_input']['path']).read_bytes()\nassert len(packet)==data['runtime_input']['bytes'] and hashlib.sha256(packet).hexdigest()==data['runtime_input']['sha256']\nn=struct.unpack('<I',packet[:4])[0];header=json.loads(packet[4:4+n]);payload=packet[4+n:];blobs={}\nfor f in header['members']:\n b=payload[f['offset']:f['offset']+f['bytes']]\n assert len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'];blobs[f['id']]=b\nassert len(blobs)==8\ntoken=json.loads((P(r['root'])/'mac-heavy.lock').read_bytes())\nr.update(guard_nonce=token['nonce'],guard_parent=token['parent'],guard_keeper=token['keeper'])\nnow=time.monotonic();r.update(issued_monotonic=now,deadline_monotonic=min(now+r['stage_seconds'],now+r['fixed_cutoff']-time.time()))\nrraw=json.dumps(r,sort_keys=True,separators=(',',':')).encode();sha=hashlib.sha256(rraw).hexdigest()\ncases=load('native_cases_v36');cache=load('native_cache_activate_v36')\nfactory=cases.make_phase_runtime_factory(rraw,sha)\nanswer=cache.activate(rraw,sha,factory,blobs)\nprint(json.dumps({'template_sha256':sys.argv[2],'materialized_release_sha256':sha,'copy':answer},sort_keys=True))\n",
+      "/private/tmp/file-native-online-macos-20261020/source/direct-c1-v38-phase-data.json",
+      "7140cae919afb006da3a035b1978abf0556363940653b7b26fa6a113fddb2614"
+    ],
+    "cwd": "/private/tmp/file-native-online-macos-20261020",
+    "contract": "foreground, no daemonization or session escape; all subprocesses sampled"
+  },
+  "sample_count": 146,
+  "sample_gap_max_s": 0.01487400010228157,
+  "sample_failure": null,
+  "peak_group_rss": 0,
+  "peak_all_helpers_rss": 37109760,
+  "disk_monitor": {
+    "latest": null,
+    "failure": null
+  },
+  "keeper_reaped": true,
+  "raw_rows_written": 146,
+  "finished_epoch": 1792580372.1989608,
+  "test_fault": null
+}

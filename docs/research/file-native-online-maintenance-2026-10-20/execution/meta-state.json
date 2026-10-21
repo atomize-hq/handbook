@@ -1,12 +1,12 @@
 {
-  "status": "BOUNDED_HARNESS_REPAIRS_ACTIVE_ENGINE_062_FIXED_FULL_QUALIFICATION_INCOMPLETE",
+  "status": "FUNCTIONAL_WINDOW_CLOSED_EXPERIMENT_INCOMPLETE_ADJUST",
   "human_byte_ceiling": 47244640256,
   "file_cap": 5000000,
   "inside_closeout_bytes": 1073741824,
   "inside_closeout_files": 100000,
-  "whole_conservative_prospective_with_earmarks": 47010692766,
-  "central_unassigned_bytes": 233947490,
-  "remaining_files": 182868,
+  "whole_conservative_prospective_with_earmarks": 47156051614,
+  "central_unassigned_bytes": 88588642,
+  "remaining_files": 172836,
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
   "t0": "2026-10-20T19:10:14Z",
   "functional_cutoff": "2026-10-21T11:10:14Z",
@@ -139,7 +139,7 @@
   },
   "shared_harness_pin": "01ff272a98fe2cddf01f8ebfc399192f234051af",
   "CP1_open_source_review_findings": [],
-  "as_of": "2026-10-21T09:30:59.601238+00:00",
+  "as_of": "2026-10-21T11:29:43.520Z",
   "landing_head": "543e7482ca374339c1658148850110be07b8bd3f",
   "latest_harness_source_pin": "5bb4d800",
   "CP1_provisional_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
@@ -476,7 +476,7 @@
     "all_scope_preserved": true
   },
   "source_cutoff": "2026-10-21T04:10:14Z",
-  "source_edits_closed": false,
+  "source_edits_closed": true,
   "frozen_source_state": {
     "source_cutoff": "2026-10-21T04:10:14Z",
     "source_ledger": "execution/source-cutoff-20261021T041014Z.json",
@@ -616,5 +616,40 @@
   "pending_resource_changes": {
     "F07": "Parent authorized prospective192MiB/40000 allocation; not effective until068sealed. Currentlive64MiB/30000; D not admitted.",
     "Windows31": "Need actual fixture category/root binding,8MiBraw evidence and fixedCargo phase operator; no launch."
+  },
+  "final_closeout": {
+    "authoritative_current_status": true,
+    "disposition": "ADJUST",
+    "operating_envelope_demonstrated": false,
+    "source_archive_base_commit": "9de962120e99c1b8dd32f8f2f3e13c4383b1d795",
+    "historical_precloseout_fields_preserved_in_that_commit": true,
+    "report": "docs/research/file-native-online-maintenance-2026-10-20/final-closeout.md",
+    "machine_record": "docs/research/file-native-online-maintenance-2026-10-20/final-closeout.json",
+    "source_manifest": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/final-source-hashes.json",
+    "source_manifest_sha256": "f0aeb17a0e3c37deca5fe32b9c9069031dad23ee864645d3111e6d19a99824f1",
+    "clock_reset": false,
+    "functional_closed": "2026-10-21T11:10:14Z",
+    "closeout_deadline": "2026-10-21T13:10:14Z",
+    "all_final31": "UNRUN_ALL_THREE_HOSTS",
+    "runtime_go": false,
+    "WindowsGuard": "R43_AND_R44_UNQUALIFIED_R45_UNRUN",
+    "Mac": "CLOSED_PREWORKER_NEGATIVE_C1ABSENT_RETRYUNRUN",
+    "Linux": "FINAL_SOURCE_TRANSFER_BUILD_LIST31_FINITE8_FULL158_UNRUN",
+    "matrix_LONG_HISTORY_D_quota70_native166_retirement38": "UNRUN",
+    "remaining_source_P1": "LinuxfixedcopySIGALRM disposition not restored; sourceNO_GO",
+    "late_reviews": "GuardR45andWindowsW1W3 closeoutsourceonly; no backdating",
+    "claim79": "dd81832ae10bff18804c746dbbbaea543241a3b7fd04387ba74aeb12cd04f60a",
+    "mandatory_reserve_addendum": "cd41880edf94b3f2f06504bc70027aa0d4f713d5ba621f5cbccda3b9e57aa63b",
+    "actual_deletion_credit": 0,
+    "bootstrap_violation_retained": true,
+    "graph_analysis": "UNKNOWN_MANUAL_HIGH_ISOLATED_CHECKOUT_NOT_REGISTERED",
+    "publication": {
+      "cap": 65536,
+      "positive_growth": 45104,
+      "unused_future": 20432,
+      "meaning": "publication snapshot; see terminal conditional closure archive"
+    },
+    "terminal_resource_closure_archive": "docs/research/file-native-online-maintenance-2026-10-20/execution/closeout-archive/resource-final-closure.json",
+    "resource_closure_condition": "AFTERindependentaffectedacceptance/finalhashfreeze:closeonlyunusedlegacy104425+pubremainder;actualprotected/globalceilingsheld"
   }
 }

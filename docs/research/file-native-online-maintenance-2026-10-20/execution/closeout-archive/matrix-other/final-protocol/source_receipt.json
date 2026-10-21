@@ -1,0 +1,218 @@
+{
+  "status": "SOURCE_V3_1_F5_REMEDIATION_FROZEN_FOR_REREVIEW__REAL_EXECUTION_NO_GO",
+  "owner_chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+  "source_budget_sha256": "998cf09ec140a8d452bf7bb8ac46c500d93c2d41015cbbcd158b4c7651d3b9ea",
+  "source_cap_bytes": 229376,
+  "source_cap_regular_files": 16,
+  "global_budget_changed": false,
+  "clock_reset": false,
+  "v2_preserved": {
+    "receipt": "source_receipt_v2.json",
+    "receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+    "receipt_bytes": 26169,
+    "full_archive_parent_reported": "transfers/focused-v2-native-source.tar.gz",
+    "full_archive_bytes": 51034,
+    "full_archive_sha256": "9ce3ded9aa01724c25074cf3b83505826f8d140c63311e383b99b409ac671ebe",
+    "full_archive_nine_members_verified_by": "parent",
+    "Landing_commit_parent_reported": "90216ef1",
+    "archive_duplicated_in_focus": false
+  },
+  "impact": {
+    "GitNexus_tool_available": false,
+    "risk": "UNKNOWN / manual HIGH reported before edit",
+    "no_index_bootstrap": true,
+    "changed_symbols": [
+      "Harness.call",
+      "Harness.concurrent_cycle",
+      "Harness.collect_failed_round"
+    ],
+    "new_symbol": "Harness.single_publisher_round",
+    "direct_callers": [
+      "Harness.small",
+      "injected guarded Driver adapters",
+      "memory-only controls"
+    ],
+    "affected_processes": [
+      "single publisher physical-activation overlap",
+      "four-publisher terminal-conflict dependency"
+    ],
+    "engine_symbols_edited": false
+  },
+  "changes": {
+    "transport": "Explicit on_started keyword in Harness.call; requires explicit Driver parameter before forwarding, never JSON/env; existing env/raw-row conflict binding retained",
+    "single_publisher": "one seed within required16,15 coupled rounds; four native readers held; native physical-before-selection ready then native publisher start/candidate-ready before release",
+    "eligible_tail": "independent unmapped publication; installed distinct next mapping, exact parent/Work generation/hash and completed tail cutoff; after joins require positive eligible/visited/activation metrics and independent exact raw-tail mapping",
+    "interval": "perf_counter_ns observations and raw positive PID/RSS pre-stdin callback events; two distinct live identities before all releases; no concurrent constructor-CPU claim",
+    "exceptions": "same finally cleanup observes every returned actor, attempts every release/wait, retains primary/secondary errors; outer case native+Python closure unchanged",
+    "terminal_v2": "source-plan placeholder only; Unsupported before any lifecycle dispatch; legacy abandon+collect implementation removed; exact new handler/schema/binary pin still pending",
+    "geometry": "1/4/1,16 accepted/cycle,4 readers,48 losing preparations each A/B; no retries/deep clones/accepted B retirement or deletion credit",
+    "postjoin_candidate_identity": "Exact complete STORE target and hash-bound Work equality, no arbitrary plan normalization; successful evidence includes selected target and captured Work hash"
+  },
+  "validation": {
+    "syntax_compiled_in_memory": [
+      "case_ledger.py",
+      "fake_controls.py",
+      "focused_protocol.py",
+      "focused_schedules.py",
+      "overlap_controls.py",
+      "remediation_controls.py"
+    ],
+    "original": {
+      "controls": 36,
+      "status": "passed-memory-only",
+      "peak_python_traced_bytes": 883797
+    },
+    "remediation": {
+      "checks": 33,
+      "exception_scenarios": 53,
+      "status": "passed-memory-only",
+      "peak_python_traced_bytes": 1172824
+    },
+    "overlap": {
+      "checks": 50,
+      "status": "passed-memory-only",
+      "peak_python_traced_bytes": 1892102,
+      "negative_cases": [
+        "missing start",
+        "same PID",
+        "zero RSS",
+        "wrong cutoff",
+        "uninstalled journal",
+        "zero activation",
+        "zero eligible records",
+        "missing mapping",
+        "publisher callback error",
+        "same mapping",
+        "wrong ordinal",
+        "unbound Work",
+        "unfinished interval",
+        "deferred tail",
+        "wrong parent config",
+        "unsupported physical barrier",
+        "spawn5/6",
+        "ready5/6",
+        "release1/2",
+        "release-before1/2",
+        "wait1/2",
+        "wait-before1/2",
+        "wait-clock",
+        "unbound terminal interface",
+        "implicit driver transport",
+        "postselected id/catalog/plan/ordinal/Work/cutoff x two commit orderings; refuse before successful joined row"
+      ],
+      "new_exact_target_checks": 14
+    },
+    "all_required_cases_still_pending": {
+      "Windows": 166,
+      "Linux": 158,
+      "Mac": 158
+    },
+    "initial_failed_checks_retained_in_tool_history": [
+      "coarse Windows monotonic clock gave equal observations; replaced by perf_counter_ns",
+      "final summary initially used lowercase host labels; corrected to existing Windows/Linux/Mac API"
+    ],
+    "native_processes": 0,
+    "engine_calls": 0,
+    "real_fixture_writes": 0,
+    "bytecode_writes": false,
+    "native_RSS_proven": false
+  },
+  "remaining": [
+    "exact terminal-v2 source/schema adapter and fresh review",
+    "final engine/schema/adapter/guard/binary binding",
+    "native full oracle/interval/sharing/death/pathreuse evidence",
+    "complete per-platform byte/file/RAM/evidence topology and runtime GO"
+  ],
+  "whole_case_a3_dossier_parent_owned": {
+    "F1_bytes": 25703478,
+    "F1_files": 3633,
+    "F2_bytes": 48988533,
+    "F2_files": 6531,
+    "native_partial_aggregate_bytes": 553840496,
+    "native_partial_aggregate_files": 58260,
+    "status": "512MiB not proved; conservative sufficient bound, not physical lower bound; final source must rebind"
+  },
+  "files": {
+    "case_ledger.py": {
+      "bytes": 14462,
+      "sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b"
+    },
+    "fake_controls.py": {
+      "bytes": 21062,
+      "sha256": "e4c49ca9cb6afb409b88eca0c6a60742b373d72f93252219af3130ca4e2cd398"
+    },
+    "focused_protocol.py": {
+      "bytes": 50073,
+      "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+    },
+    "focused_schedules.py": {
+      "bytes": 27562,
+      "sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756"
+    },
+    "forecast.json": {
+      "bytes": 15238,
+      "sha256": "26e6bf402c9a9670dd419af44adb1cae6c235f218d0b8736db63fc56d0cc2ce1"
+    },
+    "overlap_controls.py": {
+      "bytes": 14281,
+      "sha256": "ed1374d0ebde93ff4e064fd0cfeb4ce87810178ff08862e8bbb1bebd3c370bd8"
+    },
+    "README.md": {
+      "bytes": 20453,
+      "sha256": "5b5e96e3764b7617d8ba1b0a9399dc0533492888db6e0117bab9bde302cb79e8"
+    },
+    "remediation.md": {
+      "bytes": 6081,
+      "sha256": "a2be84efeacf85d40dbb054bcd0d3ae3daa914c0cd2a13f2925a89e6ded27e6c"
+    },
+    "remediation_controls.py": {
+      "bytes": 19858,
+      "sha256": "2d41785a24b9671594fdc61131f672ea63fac5c0b37ddf9116ef2b54204e349d"
+    },
+    "source_receipt_v2.json": {
+      "bytes": 26169,
+      "sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a"
+    }
+  },
+  "manifest_self_exclusion": "source_receipt.json only; source_receipt_v2.json is historical receipt for archived v2 files",
+  "manifest_sha256": "06194b44624ff43a9f9f966016fa4799875b04e1d8fdededb6b002ce6c1e5a2f",
+  "total_source_bytes": 225383,
+  "total_regular_files": 11,
+  "prior_v3": {
+    "receipt_sha256": "478f4696ca4543dee1ac1f4badeca8130021354ffdf108d8ce71a6f307fd9a17",
+    "receipt_bytes": 7061,
+    "source_bytes": 217213,
+    "source_regular_files": 11,
+    "manifest_sha256": "3760948e2440b5b2d37eeaef21d7538174bef7611316f3c64f94005b1405cff8",
+    "archive": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\focused-v3-negative-source.tar.gz",
+    "archive_bytes": 59042,
+    "archive_sha256": "11b134c1ca04cb17925fbeaccdbf1aeb4239ec0a1ff030f3e23f45332d0c6b15",
+    "archive_members": 11,
+    "all_member_sizes_and_SHA_verified_before_edit": true,
+    "strict_single_gzip_EOF_verified": true,
+    "strict_tar_zero_EOF_verified": true,
+    "source_pre_post_archive_unchanged": true,
+    "source_archive_written_before_any_source_edit": true,
+    "archive_owner_pool": "parent META8 reserved64KiB/1file outside focus",
+    "review_disposition": "STATICCOMPLETE / REMEDIATE F5 P2",
+    "review_read_before_edit": {
+      "review-v3.md": "dcaf00001c04e89602e8eb4cbb5a7ef93c7fa05fd1c07b1effd100d9a2672913",
+      "evidence-v3.json": "7c443d2f3c504a34fa6e6d94e5f0aa2faa6a7f1bc2960e757a2c685f6697e0f3"
+    },
+    "review_outputs_unchanged": true
+  },
+  "F5_remediation": {
+    "problem": "Generic changed mapping/tail hit did not bind actual selection to captured installed candidate",
+    "fix": "After both joins require complete selected STORE equals captured target (catalog,id,ordinal,plan included), and selected Work equals captured hash-bound candidate Work, before transition/mapping/successful joined row",
+    "normalization_allowance": "None: no second maintainer or cleanup in pair; ordinary no-op cannot normalize plan",
+    "shared_symbol_changed": "Harness.single_publisher_round",
+    "manual_impact": "UNKNOWN/HIGH reported before edit; GitNexus unavailable; no index bootstrap",
+    "callers": "Harness.concurrent_cycle single-publisher branch and Harness.small",
+    "cleanup_changed": false,
+    "terminal_placeholder_changed": false,
+    "engine_schema_changed": false,
+    "red_proof": "Five post-release selected-id/catalog/plan/Work/cutoff mutations x two commit orders passed old assertions:17 accepted including genesis,15 successful joined pairs,all threads closed",
+    "red_probe_adjustment": "Initial constant wrong-id was caught on next round after one incorrect success; changed to distinct wrong-id per round to isolate missing candidate correspondence",
+    "green_proof": "Two exact-target positives plus12 independent negative cases across maintenance-first/publisher-first commit orders; no successful joined or schedule-complete row for mismatch; all callbacks/readers positively closed"
+  }
+}

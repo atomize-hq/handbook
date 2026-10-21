@@ -1,0 +1,577 @@
+{
+  "kind": "final-source-closeout-manifest-v1",
+  "as_of": "2026-10-21T11:29:43.520Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "no_post_cutoff_executable_changes": true,
+  "qualification": "INCOMPLETE_NO_OPERATING_ENVELOPE",
+  "engine_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "engine_final31": "UNRUN_ON_ALL_THREE_HOSTS",
+  "source_archive_commit": "9de962120e99c1b8dd32f8f2f3e13c4383b1d795",
+  "groups": [
+    {
+      "name": "Windows platform",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-final-platform",
+      "files": 27,
+      "bytes": 456481,
+      "review": "W1-W3 resolved by inline source review 11:14:16Z after functional cutoff; all166UNRUN",
+      "inventory_sha256": "540b7164288c5f341dfe11eceaf5da67969125b3d26643d8bdf58b9c58db732f",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 7346,
+          "sha256": "0a2e470f0ba67c415cd28d233aefb10f4a69d210b4603b97f3dfeaf4d36e48f4"
+        },
+        {
+          "path": "controls-forecast.json",
+          "bytes": 3880,
+          "sha256": "3c517535d0722a965d5b56dcc50cce215e5d87286849dbd64c108ba43c6cca4c"
+        },
+        {
+          "path": "final-engine-bindings.json",
+          "bytes": 3867,
+          "sha256": "eb2202db53b0a9dfbc4fbf7d3478457d23a1ee17b875b1cea2ed0b4c8dbff102"
+        },
+        {
+          "path": "focused_windows.json",
+          "bytes": 5911,
+          "sha256": "a97436967b3d347dfaf113ea0836e00c3700e819328e917933629a22e2f3adcc"
+        },
+        {
+          "path": "growth_actions.json",
+          "bytes": 5174,
+          "sha256": "6da0792356501f630559e85b5b3fbb82d34fece28d7f36a3e62c2468d77f2027"
+        },
+        {
+          "path": "interface.md",
+          "bytes": 7411,
+          "sha256": "2d019e5ae26d5148070f1245a889f37f19ecc637bd189125a296b7231f2f37ef"
+        },
+        {
+          "path": "packing52.json",
+          "bytes": 18765,
+          "sha256": "4aab2363e44a21f990090a11ca1a065b43c98c716cc08c5dbc0a3b1557583463"
+        },
+        {
+          "path": "platform-source-review-notes.md",
+          "bytes": 4536,
+          "sha256": "f90b527c9b1a48b74fd83dfd94f0f7a8d2d6b33a98555fe534e6ba4e199790cd"
+        },
+        {
+          "path": "protocol.json",
+          "bytes": 20773,
+          "sha256": "2f51dc75cdddf395dfa63a1ba5076cf3713b500bd65f720dbdbe2c300ff5dbeb"
+        },
+        {
+          "path": "recovery24.json",
+          "bytes": 10203,
+          "sha256": "47f4e7e1235cb6c7b589101458ff22e5d19b80fe035d0eeb1dc13ae7e1b29ce1"
+        },
+        {
+          "path": "source-bindings.json",
+          "bytes": 7983,
+          "sha256": "20c9302b66a3ed734570c41224ca09308ce7c4acb399f542d1ac2c92ffaf68bb"
+        },
+        {
+          "path": "source-receipt.json",
+          "bytes": 6089,
+          "sha256": "b1337c1ae0d950b53ff7c40b67fc91143d485ff724de8e279b7429108984d3c4"
+        },
+        {
+          "path": "source_constructors.json",
+          "bytes": 15329,
+          "sha256": "156644891dcdccb9f96b0a1385500833bde4274b7b3c6995929d5cecc9d6efbf"
+        },
+        {
+          "path": "source_controls.py",
+          "bytes": 30841,
+          "sha256": "b961ad0f9c4b0a4f3b7270c10eeef2033d7aff954b57b097844a39d5d0d89170"
+        },
+        {
+          "path": "static-controls-result.json",
+          "bytes": 4970,
+          "sha256": "930f860cb8b6ee6e6444c84928645c4198e274cf6d274f454d44af1f4c4d83a8"
+        },
+        {
+          "path": "strict24.json",
+          "bytes": 9077,
+          "sha256": "4f307533692a2bb5d807dfe888b4519f0929dddd6fdd3396d2c1ae1a40c58477"
+        },
+        {
+          "path": "windows_adapter.py",
+          "bytes": 28568,
+          "sha256": "e1d5e0b2842d5dab95146d50ffe7f98817cb3bee7c3346ac603c3cb45cdb8753"
+        },
+        {
+          "path": "windows_bootstrap.py",
+          "bytes": 8187,
+          "sha256": "51c198cda0074d77a73e08a72c756dd22038ad650db5a81f74f6ea65a3abc1e4"
+        },
+        {
+          "path": "windows_capsule.py",
+          "bytes": 43338,
+          "sha256": "3121791d406b730ac141011f05eb5d1c98d0992dbcf121d2409dad14966546b9"
+        },
+        {
+          "path": "windows_deadlines.py",
+          "bytes": 3749,
+          "sha256": "da4309d25abeac4ddcd20fe8f92ca8bf3e539313d8d3df72b805a7e41fb68b1d"
+        },
+        {
+          "path": "windows_driver.py",
+          "bytes": 41803,
+          "sha256": "62da0ea348f133e9870ffc9939d16a1aeeb0fb45e54d17f509f22c4f9afc8aa5"
+        },
+        {
+          "path": "windows_evidence.py",
+          "bytes": 32652,
+          "sha256": "0846a72ad8e2c01910949616ef2add6c2ea69fa97ea280dc83aa3c590f01a06c"
+        },
+        {
+          "path": "windows_growth.py",
+          "bytes": 19899,
+          "sha256": "811e5ffc67274a583db6689a67fc3c955c1abf5ebf735bb9f5c1e463f4653b32"
+        },
+        {
+          "path": "windows_hooks.py",
+          "bytes": 53471,
+          "sha256": "0f80af339e40055f6bfb5e7f87ea67011d935460fa770e16a4f0a501d4e38ac0"
+        },
+        {
+          "path": "windows_native.py",
+          "bytes": 38610,
+          "sha256": "d2432e9e4b9abf6b11cd13a704927a7e7822f1cc80215809fe4b4c657da71c0c"
+        },
+        {
+          "path": "windows_oracle_bridge.py",
+          "bytes": 20183,
+          "sha256": "6a69098d878a66f68e1dcc83045e5e4c52879168cf9b01bccac7237f9ae2a192"
+        },
+        {
+          "path": "workspace_ordinary.json",
+          "bytes": 3866,
+          "sha256": "5c120964483f2cb83f8739601118a525b07040f3dc78c555e50a93008127645a"
+        }
+      ]
+    },
+    {
+      "name": "Linux V5.4 subset",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/native-linux/final-suite",
+      "files": 13,
+      "bytes": 277747,
+      "review": "SCOPED_SOURCE_ACCEPTED; runtime UNRUN/full158 not admitted",
+      "inventory_sha256": "7ab8307c8333bb7f7b8fbf7ca77d95c7194aa87b0071236ee41fd43579f68b81",
+      "members": [
+        {
+          "path": "source_receipt.json",
+          "bytes": 8060,
+          "sha256": "6bf84197f543105903b6cee202d4335bae99cc8ed2028759c234521617d803f3"
+        },
+        {
+          "path": "suite_adapter.py",
+          "bytes": 48263,
+          "sha256": "930c650e08de9f13cc905831239f53a5f5155b9252d0bdf1f41ace10eabed4c3"
+        },
+        {
+          "path": "suite_bootstrap.py",
+          "bytes": 16104,
+          "sha256": "8ce97085723d2657f9148bfa81bf3d70e67759c86872e30bd87b09805562a135"
+        },
+        {
+          "path": "suite_driver.py",
+          "bytes": 34471,
+          "sha256": "55a7e4cd85f303f43dc9e3ba824195810b378bb49811c56a12d83c94bf1d698a"
+        },
+        {
+          "path": "suite_extensions.py",
+          "bytes": 48268,
+          "sha256": "71189d39ef28328563aaf1d26404ca89fa9c8b50cd2335f2b58bf1791a901f78"
+        },
+        {
+          "path": "suite_growth.json",
+          "bytes": 10743,
+          "sha256": "10cafcf77caef864e07b8dec0c7d35af27c8638e87cbd9069f500ba4aab66e93"
+        },
+        {
+          "path": "suite_main.py",
+          "bytes": 16195,
+          "sha256": "3dcf6cbdeb8928947c483f6b169049d6487acf92b341369f60dc7a482eeef5ea"
+        },
+        {
+          "path": "suite_manifest.json",
+          "bytes": 16073,
+          "sha256": "d7f7f31a860f2e8072aaafed4efee86216bcf90ab58daf846d16839e651d35e8"
+        },
+        {
+          "path": "suite_oracle.py",
+          "bytes": 11460,
+          "sha256": "59ac7c58f399230419edbc82ecd52c1585c7f15e65420d001353baaf3f3a915a"
+        },
+        {
+          "path": "suite_ordinary.py",
+          "bytes": 6561,
+          "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942"
+        },
+        {
+          "path": "suite_packing.py",
+          "bytes": 33671,
+          "sha256": "a965daddeac898d091753d152460c5734b1e5b90d4fe482d3a8b5f04cdd0487f"
+        },
+        {
+          "path": "suite_recovery.py",
+          "bytes": 21458,
+          "sha256": "cafc96fee600c22a8962343cf227d70f09fdb45cc76605eeaee75c0e27bd0caa"
+        },
+        {
+          "path": "suite_units.py",
+          "bytes": 6420,
+          "sha256": "91f27074874d33da185861ecfd6659a4ca76ad65ad97ae955a85a592d5e9a85f"
+        }
+      ]
+    },
+    {
+      "name": "Qualification Q076",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/qualification-lanes",
+      "files": 10,
+      "bytes": 309462,
+      "review": "INTEGRATE_SOURCE_ONLY inline after cutoff; live17file hold repaired; runtime UNRUN",
+      "inventory_sha256": "2f72da408073f2b973fc455c0918a5cb83f030d139d5f99d99596440c4e0d160",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 1193,
+          "sha256": "fa3b42fcd7d6b30873c02d7d4cfe0889ca0f442e577688be28eb1370fbf50100"
+        },
+        {
+          "path": "fake_cases.json",
+          "bytes": 1107,
+          "sha256": "4e93259732c562923a8421d70cf378409bafb703c9a82e223a6a386315aa13f6"
+        },
+        {
+          "path": "fake_controls.py",
+          "bytes": 9108,
+          "sha256": "85bfb5d159dcc105889e1997289d70d3cfc9b0edb3e6129e20d0b73c710a06cc"
+        },
+        {
+          "path": "history_lane.py",
+          "bytes": 56996,
+          "sha256": "db1541a81e35932a5cd1edb5a5c38d1b12b7cac50c0424e2954182f98cf7922a"
+        },
+        {
+          "path": "lane_config.example.json",
+          "bytes": 2783,
+          "sha256": "58d07f98214b1c1db28232c39a986d008550fffb0b03440c67c4d769ca838058"
+        },
+        {
+          "path": "legacy_archive_restore.py",
+          "bytes": 14204,
+          "sha256": "79e7ccac897d4c38aa53bbecbb049c7e6d327e834cf806b77c1a22c4d7f826bc"
+        },
+        {
+          "path": "long_lane.py",
+          "bytes": 32413,
+          "sha256": "33ebdba457002c2b1e2b5b3d9ff6e64985e570b1621769179f4e59fa1106fa60"
+        },
+        {
+          "path": "long_source_profiles.py",
+          "bytes": 85114,
+          "sha256": "6380b32226aa7913aedd4a9899716e2d7cbb91f065aa08af37a4742a7a624d8e"
+        },
+        {
+          "path": "phase_finalizer.py",
+          "bytes": 104749,
+          "sha256": "3fd82367193bbe9e5849e2ada66e70ed42797827e1ad7125e2eef405b10dabc2"
+        },
+        {
+          "path": "source-manifest.json",
+          "bytes": 1795,
+          "sha256": "b85da070763300f9ba63b8a775b78ea6904b7f7b6a8e2fabcbdec4c6820e9fcc"
+        }
+      ]
+    },
+    {
+      "name": "Guard R4.5",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-bounded-guard",
+      "files": 5,
+      "bytes": 163628,
+      "review": "Late diagnostic-only closeout source review; third27UNRUN",
+      "inventory_sha256": "0115810f99f2139529382b746df92c454fcf4b5f3a244b6902a0ee543c101319",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 3919,
+          "sha256": "dfa0c35a88d5a19cf8ceb635ee36d52d5112ac4a27c96aa9ba0b05fe009f26c1"
+        },
+        {
+          "path": "controls.py",
+          "bytes": 15022,
+          "sha256": "29de5e8d71b5cd7f14e9c5573f86b6bf4f1f23588665a81686545e766e6e7b85"
+        },
+        {
+          "path": "job_guard_bounded.py",
+          "bytes": 77669,
+          "sha256": "3a8cf04020b3402186ec0a30c0b21bf57512aa43b1b459a18d92a13a0186e430"
+        },
+        {
+          "path": "source-receipt.json",
+          "bytes": 3413,
+          "sha256": "1d8ca9a9ff17e4408b7b6525a8489dd7043fedab59278a78dfe86813cf1ae79b"
+        },
+        {
+          "path": "unlocked_capture.py",
+          "bytes": 63605,
+          "sha256": "b1f50b262b8538b6b65ebe7970d9cf3ddf0b0e9a48827a9aee835665b6fb5638"
+        }
+      ]
+    },
+    {
+      "name": "Runtime R3+069",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/shared-runtime-contracts",
+      "files": 1,
+      "bytes": 90716,
+      "review": "Full plus exact-delta INTEGRATE_SOURCE_ONLY; runtime UNRUN",
+      "inventory_sha256": "d132de0c7caf321edd85a144f9b601fb5015b1c16b48f808814872fcf45335f2",
+      "members": [
+        {
+          "path": "runtime_contracts.py",
+          "bytes": 90716,
+          "sha256": "9a64752efacb6ae2912e5f3cce81f746868618971d637fca04acb47e0d059924"
+        }
+      ]
+    },
+    {
+      "name": "Archive R3",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/fixture-retirement",
+      "files": 4,
+      "bytes": 77732,
+      "review": "Source accepted; all38actual UNRUN",
+      "inventory_sha256": "0069cf0557efb224c48b42ac9c4a26619db2ee5c9d393b0d30b5f4f9ee54ea6a",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 4050,
+          "sha256": "9d4732d404720f2e8ef13995f0055ea541251988d638bb437863e4f6e0941b67"
+        },
+        {
+          "path": "archive.py",
+          "bytes": 51047,
+          "sha256": "e99cf2aceeca406c36f8b809869e9aba5e26c1eb70a5157b8bf3d4842baf3f4b"
+        },
+        {
+          "path": "controls.py",
+          "bytes": 21121,
+          "sha256": "76e5a487264f95cc0e1be506ee83b6650223b1f97c2ba5002fdd650643e54b66"
+        },
+        {
+          "path": "source-receipt.json",
+          "bytes": 1514,
+          "sha256": "5139a6bef4afd124667ba56939a90917266523e39d77d3a8ed341d77d8b50949"
+        }
+      ]
+    },
+    {
+      "name": "Context repair",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/fixture-retirement-native-context",
+      "files": 1,
+      "bytes": 96861,
+      "review": "CONTROL source accepted; native38 UNRUN/retirement NO_GO",
+      "inventory_sha256": "4c18e16660becf6b16ee2ac44ba157382ba424e2255cbd67b4d6d358746cb412",
+      "members": [
+        {
+          "path": "windows_context.py",
+          "bytes": 96861,
+          "sha256": "52e44f8d41c2e1d8c574766d60783653e9a749d0ef97dcbc707e06c12625e507"
+        }
+      ]
+    },
+    {
+      "name": "Mac V38 returned source",
+      "root": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/native-macos-v38-source/files",
+      "files": 8,
+      "bytes": 146957,
+      "review": "Scoped direct C1 source accepted; first attempt refused before worker; retry UNRUN",
+      "inventory_sha256": "51bd258a35a04bc4dbca3d7e2f007d0cc1c56e2304709880e177fde99b5eabcb",
+      "members": [
+        {
+          "path": "evidence/control/native-source-review-v36.json",
+          "bytes": 3903,
+          "sha256": "6538be8940f268ea0390d8b838cd6101e0d6a5e93a9745cc7ef3bb7b47b12657"
+        },
+        {
+          "path": "execution/native-macos/native_cache_activate_v36.py",
+          "bytes": 12287,
+          "sha256": "d941ba6dbd2b04cae872d8828fd50b74f11c0af0869555f6a430fc7d5b2908e3"
+        },
+        {
+          "path": "execution/native-macos/native_case_map_v36.py",
+          "bytes": 10666,
+          "sha256": "5bbb2a0d2e67b217b50fc39fc2abd1061c57b9dfc5bbd0a91414a05e70bfb7f2"
+        },
+        {
+          "path": "execution/native-macos/native_cases_v36.py",
+          "bytes": 39569,
+          "sha256": "d944dbb438e25fc9e44b9877f6ca3504373fa740b09529117716d43e927a569b"
+        },
+        {
+          "path": "execution/native-macos/native_facade_v36.py",
+          "bytes": 27850,
+          "sha256": "bc52a421c0b2511a2ce1f32d63959f7708289ca1e8bf2f2750ea3fbecaf2a5bd"
+        },
+        {
+          "path": "execution/native-macos/native_lifecycle_v36.py",
+          "bytes": 10547,
+          "sha256": "9aad6f5a80797ce1042b90729977e15f17b644bc36cb5a9c0a2694d0d514f30e"
+        },
+        {
+          "path": "execution/native-macos/native_role_v36.py",
+          "bytes": 32156,
+          "sha256": "f93bf5f3d4fc02b3e2de8f9d6785b2df0cf4bfd094c7447626f5fb77353443e4"
+        },
+        {
+          "path": "execution/native-macos/native_suite_v36.py",
+          "bytes": 9979,
+          "sha256": "9285236be78c922e6fe2672d402917d0f848c4916485ba438006dc540281b1b5"
+        }
+      ]
+    },
+    {
+      "name": "Matrix harness",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness",
+      "files": 49,
+      "bytes": 489473,
+      "review": "Checker and D source accepted; full matrix/D8stores/quota70 UNRUN",
+      "inventory_sha256": "a1c322b42c6bf1451b88201045688b042591f8a78ef86c8aa0185f9ee9b2d9db"
+    },
+    {
+      "name": "Linux copy operator",
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/native-linux/source-copy",
+      "files": 1,
+      "bytes": 8188,
+      "review": "P1 SIGALRM disposition defect; NO_GO; never executed",
+      "inventory_sha256": "fbf50674c5807143a8317cc9f215c4ff47a3c139c9aa391c632225355fb6ce3b",
+      "members": [
+        {
+          "path": "fixed_source_copy.py",
+          "bytes": 8188,
+          "sha256": "a90d63d412eda6f1cca2820b0c7fc42829bad9646e6ca4fb12e50e2a3da41f3b"
+        }
+      ]
+    }
+  ],
+  "preserved_source_refs": [
+    {
+      "ref": "refs/codex/file-native-online/checker-057-rejected",
+      "oid": "d6921d7d12d9c87545abee9e3417013bf7c7797d",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/checker-066-and-old-document",
+      "oid": "02f59266856853778066b4cafb35b3943aa65f6e",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/context-051-first-repair",
+      "oid": "eac06ff6fbbd2eb468154d215ebc6f62c76df581",
+      "type": "blob"
+    },
+    {
+      "ref": "refs/codex/file-native-online/document-070-rejected-overlap",
+      "oid": "23fb6906cde75fef03c306cfa4cdbde00c2f04f1",
+      "type": "blob"
+    },
+    {
+      "ref": "refs/codex/file-native-online/finalizer-r3-rejected",
+      "oid": "76951c105dce389bf9e01ac2d4d5b93ab41ed215",
+      "type": "blob"
+    },
+    {
+      "ref": "refs/codex/file-native-online/guard-r41-rejected",
+      "oid": "d017a998a828969f69678a0e92986292c4518646",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/guard-r42-rejected-hyst",
+      "oid": "6fbfb13206fa63e7295cacb1438a5e01f822495e",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/guard-r43-negative-native27",
+      "oid": "27725048354049d99326234ef37434ac56e07fb5",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/guard-r44-negative-native27",
+      "oid": "8963104f9dfeca47df3c9c6a41265a7465fb0d19",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/linux-v53-rejected-full158",
+      "oid": "999f858a253411a1cdee6bfef1c17de4562cbde5",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/qualification-069-rejected-filehold",
+      "oid": "c9033d806fc397a2befba181e9d0b4a72addbc10",
+      "type": "tree"
+    },
+    {
+      "ref": "refs/codex/file-native-online/runtime-r3-reviewed-before069",
+      "oid": "4bca5fcab890c5546d8dd07b64343d5f12f90a03",
+      "type": "blob"
+    },
+    {
+      "ref": "refs/codex/file-native-online/windows-1034-rejected-full-review",
+      "oid": "1f1a31f586372849eba2b8491ee8da1ce09dd4bf",
+      "type": "tree"
+    }
+  ],
+  "gitnexus": {
+    "detect_changes": "ATTEMPTED_UNAVAILABLE_ISOLATED_REPO_NOT_REGISTERED",
+    "risk": "UNKNOWN_MANUAL_HIGH",
+    "bootstrap": false,
+    "manual_scope": "1445staged records only under private experiment research subtree; each exactOID reread matched"
+  },
+  "archive_binding": {
+    "candidate_files": 1366,
+    "candidate_raw_bytes": 17376278,
+    "sorted_destination_sha256_inventory_digest": "cd4c10610c5c84d980138189714cc4c9965f5fd31294f30dc43871b92df70865",
+    "storage": "index-only files absent in worktree are intentionally skip-worktree; use git show or separate funded checkout to inspect",
+    "commit": "9de962120e99c1b8dd32f8f2f3e13c4383b1d795"
+  },
+  "supplemental_matrix_members": {
+    "files": 54,
+    "bytes": 627115,
+    "meaning": "Historical source/protocol/cadence/receipts of mixed ownership; preservation is not fresh acceptance",
+    "sha256_inventory": "0647dbe76140015bb9ae0bf9b2f61a08281e2759053fde400feafcdc5ec8c12e",
+    "archive_path": "docs/research/file-native-online-maintenance-2026-10-20/execution/closeout-archive/matrix-other",
+    "checkout_git_pointer_excluded": true
+  },
+  "inventory_digest_encoding": "SHA256 over UTF8 JSON.stringify array of path,bytes,sha256 objects; ordinal relative-path sort; private audit only",
+  "mac_negative_audit": {
+    "verdict": "ACCEPT_CLOSED_PREWORKER_NEGATIVE_NO_CACHE_OR_ENGINE_QUALIFICATION",
+    "result_bytes": 9286,
+    "result_sha256": "b1e463aa83aecda30482cddef58e584542b0ced20df7fd508ad4d9010b6487af",
+    "reviewer": "01a15b81-b70d-79b1-b72e-96d5fe982d06",
+    "limits": "FreshPID/census raw separate from hashedreceipt; keeperJSON/rawRSS/materializedtemplate notprovided;146samples/gap summaries not reconstructed; no-retry/postcutoffactions ownerreports"
+  },
+  "audit_metadata_corrections": "Matrix inventory digest and aggregate inventory digests recomputed with documented ordinal path sort; underlying source byte hashes unchanged. Prior factual-review draft retained in execution/closeout-archive/report-review.",
+  "engine_source": {
+    "commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+    "branch": "codex/file-native-online-cp3-20261020",
+    "filtered25_cargo_rust_tree": "84e7e301e4ed5272b00b9593ad350c5fbb2f02d2",
+    "all_source_files": 30,
+    "all_source_bytes": 478740,
+    "final31": "UNRUN_ON_ALL_THREE_HOSTS",
+    "retained_source_refs": [
+      {
+        "archive_path": "docs/research/file-native-online-maintenance-2026-10-20/execution/reviews/cp4-final31-source/cp4-final31-source-freeze-final-v3.json",
+        "bytes": 9252,
+        "sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3"
+      },
+      {
+        "archive_path": "docs/research/file-native-online-maintenance-2026-10-20/execution/reviews/cp4-final31-source/cp4-final31-unit-catalog-final-v3.json",
+        "bytes": 2608,
+        "sha256": "9306071c419670e5d50049d217978e67361a5167c3cdbace1116f908c7c08e6b"
+      }
+    ]
+  }
+}

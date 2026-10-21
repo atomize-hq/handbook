@@ -1,0 +1,299 @@
+{
+  "status": "SOURCE_ONLY__REAL_EXECUTION_NO_GO",
+  "authority": "Meta source registration only; no change to any runtime/global budget",
+  "source_budget_sha256": "998cf09ec140a8d452bf7bb8ac46c500d93c2d41015cbbcd158b4c7651d3b9ea",
+  "source_bytes_cap": 229376,
+  "source_files_cap": 16,
+  "v3_source_only": {
+    "single_publisher_seed_within_required16": 1,
+    "single_publisher_coupled_rounds": 15,
+    "additional_publications_beyond_required16": 0,
+    "ready_phases": ["physical-before-selection", "candidate-ready"],
+    "on_started": "Explicit native transport only; never engine JSON",
+    "observation_clock": "time.perf_counter_ns",
+    "construction_overlap_claimed": false,
+    "postjoin_selected_identity": "Exact complete STORE target and hash-bound Work captured before release; no arbitrary plan normalization",
+    "terminal_v2_interface": "PENDING exact source/schema; failclosed; legacy abandon+collect disabled",
+    "small_primary_losing_attempts_each_A_B_root": 48,
+    "terminal_receipt_actual_bound_each_pending": 8192,
+    "terminal_receipt_new_bytes_each_root_upper_pending": 393216,
+    "terminal_registry_atomic_bytes_upper_pending": 65536,
+    "terminal_gc_removal_credit": 0,
+    "terminal4096_is_count_cap_not_fixture_preallocation": true,
+    "a3_whole_F1_bound_bytes": 25703478,
+    "a3_whole_F1_bound_files": 3633,
+    "a3_whole_F2_bound_bytes": 48988533,
+    "a3_whole_F2_bound_files": 6531,
+    "a3_replaced_provisional_native_total_bytes": 553840496,
+    "a3_replaced_provisional_native_total_files": 58260,
+    "a3_status": "Supersedes16/32MiB proposals below for a3 only; final engine change needs rebinding; overall NO_GO"
+  },
+  "clock": {
+    "t0": "2026-10-20T19:10:14Z",
+    "final_source_freeze_target": "2026-10-21T04:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "protected_closeout": "2026-10-21T13:10:14Z",
+    "reset": false
+  },
+  "current_admission": {
+    "native_current_total_bytes": 100663296,
+    "native_proposed_total_bytes_HOLD": 469762048,
+    "Windows_proposed_total_bytes_HOLD": 503316480,
+    "native_proposed_stack": {
+      "donor_layout_bytes": 261739670,
+      "donor_layout_files": 15596,
+      "new_focused_bytes": 134217728,
+      "coexistence_bytes": 33554432,
+      "new_metadata_bytes": 16777216,
+      "existing_fake_selector_bytes": 109,
+      "whole_previous_forecast_bytes": 446289155,
+      "whole_previous_forecast_files": 47597,
+      "previous_slack_bytes": 23472893,
+      "whole_file_cap": 50000
+    }
+  },
+  "primary_small_shape": {
+    "documents": 64,
+    "initial_actual_H_including_genesis": 64,
+    "new_accepted_per_cycle": 16,
+    "publisher_counts_by_cycle": [
+      1,
+      4,
+      1
+    ],
+    "independent_native_readers": 4,
+    "single_publisher_cycle_attempts": 16,
+    "single_publisher_cycle_ceiling": 32,
+    "four_publisher_cycle_rounds": 16,
+    "four_publisher_cycle_total_attempts": 64,
+    "four_publisher_same_base_overlap": "all4 candidate-ready native processes live before any release; maintenance and4 native readers overlap",
+    "implicit_retries": 0,
+    "four_publisher_failed_preparations_upper": 48,
+    "final_H_after_coupled_capture": 114,
+    "extra_deep_B_clones_or_restores": 0,
+    "request_profile": "explicit authentic durable no-op publications; default source payloads and profile4 preserved",
+    "failed_prefix_policy_default": "retain all outputs plus all raw inputs/events; no planned collection credit",
+    "optional_frozen_collection_policy": "engine-abandon-collect-each-round; disabled until source-bound adapter/full-oracle/actual-removal proof and prospective peak admission"
+  },
+  "B_source_geometry": {
+    "source": "fake_controls.default_geometry(), inspected CP2 baseline_model.rs, projection.rs, navigation.rs, store.rs, objects.rs, disk.rs",
+    "source_payload_bytes_per_generation": 778240,
+    "profile4_group_bytes": 9904,
+    "navigation_description_bytes": 336,
+    "packet_provenance_bytes": 228,
+    "generation_manifest_bytes": 17453,
+    "generation_regular_files": 69,
+    "generation_supplement_bytes": 27921,
+    "per_generation_bytes": 806161,
+    "successful_generations": 114,
+    "failed_prepared_generations": 48,
+    "retained_original_payload_sets": 1,
+    "payload_only_floor": 126853120,
+    "failed_noop_external_metadata_upper_per_attempt": 17408,
+    "accepted_external_metadata_upper_per_publication": 131072,
+    "generation_plus_external_upper": 147154114,
+    "additional_initial_graph_projection_object_upper": 2097152,
+    "B_root_conditional_upper_before_physical_metadata": 149251266,
+    "derivation_notes": [
+      "N64 fixture sizes are six complete10-doc groups plus4x4096:6*(7*4096+2*16384+65536)+16384=778240.",
+      "Profile4 N64 has one9904-byte root group,336-byte descriptor,228-byte provenance,0-byte context and17453-byte FileSpec manifest. Fixed-length hashes do not change this length.",
+      "All162 generation copies are complete successful/failed preparations. Their payload and manifest bytes remain charged; no sparse/link/compression credit.",
+      "A failed NO-OP candidate retains unchanged graph/projection/change roots, no new graph/projection COW pages, two static replay-file paths. Safe IDs<100 and request<=256 bound its candidate below16KiB;1KiB extra reservation per failed attempt is separately charged.",
+      "Accepted upper128KiB includes candidate/permanent publication/result/hint/allocation and at most two compact COW tree leaf-split+height1 branch rewrites atH<=114 (leaf64,fanout32). No-op graph/projection do not change. This bound is conditional on the inspected source and must be re-established for the final pin.",
+      "Initial graph/projection object2MiB is a separate conservative source allowance, not an observed fixture census. Physical pages/plans/pins/stages and raw receipts are outside this B root subtotal.",
+      "No final-schema, native allocated-space or completed runtime measurement is asserted. Changed final layout/ID bounds/profile/ops invalidate this calculation before writes."
+    ]
+  },
+  "per_root_case_register": [
+    {
+      "root_key": "primary-A/disposable/store",
+      "cases": [
+        "S-A-zstd",
+        "coupled-capture-A",
+        "Final-two-pass-drain"
+      ],
+      "N": 64,
+      "initial_H": 64,
+      "final_H": 114,
+      "attempts_upper_after_genesis": 161,
+      "regular_files_proposal": 2000,
+      "bytes_proposal": 4194304,
+      "qualification": "provisional envelope; final-source COW/per-command growth proof required"
+    },
+    {
+      "root_key": "primary-B/disposable/store",
+      "cases": [
+        "S-B-zstd",
+        "coupled-capture-B",
+        "Final-two-pass-drain"
+      ],
+      "N": 64,
+      "initial_H": 64,
+      "final_H": 114,
+      "attempts_upper_after_genesis": 161,
+      "regular_files_proposal": 14000,
+      "bytes_conditional_upper_before_physical_metadata": 149251266,
+      "qualification": "one deep B lineage only; all48 failed generations included; no96MiB B-root permission exists"
+    },
+    {
+      "root_key": "interval-A/disposable/store",
+      "cases": [
+        "D-partial-fixed-cutoff"
+      ],
+      "N": 10,
+      "final_H": 7,
+      "regular_files_proposal": 300,
+      "bytes_proposal": 1048576,
+      "qualification": "provisional; all cancelled/unselected physical prefixes retained"
+    },
+    {
+      "root_key": "reservation-A/disposable/store",
+      "cases": [
+        "D-reservation-late-eligible"
+      ],
+      "N": 10,
+      "final_H": 3,
+      "regular_files_proposal": 300,
+      "bytes_proposal": 1048576,
+      "qualification": "genuine selected lost-reply reservation; no extra B generation"
+    },
+    {
+      "root_key": "cutoff-A/disposable/store",
+      "cases": [
+        "D-cutoff-Q-stale-CAS"
+      ],
+      "N": 10,
+      "final_H": 5,
+      "regular_files_proposal": 500,
+      "bytes_proposal": 2097152,
+      "qualification": "physical unselected candidate/stale prefix/quota refusal included"
+    },
+    {
+      "root_key": "retired-A/disposable/store",
+      "cases": [
+        "F1-terminal-retired-bootstrap-delta"
+      ],
+      "N": 10,
+      "final_H": 263,
+      "retired_selections": 262,
+      "regular_files_proposal": 4000,
+      "bytes_proposal": 16777216,
+      "qualification": "PROVISIONAL16MiB replacement; original6MiB is below observed retained size. Exact final-source whole-root/phase upper required; no execution grant.",
+      "observed_lower_size_reported": "approximately7.70MB parent observation; exact census bytes pending",
+      "compact_COW_partial_upper_reported": "approximately13.53MB; partial only, excludes other topology; not complete admission"
+    },
+    {
+      "root_key": "auto-A/disposable/store",
+      "cases": [
+        "F2-auto-decline-later-admit"
+      ],
+      "N": 10,
+      "regular_files_proposal": 6000,
+      "bytes_proposal": 33554432,
+      "qualification": "PROVISIONAL32MiB replacement; oldH151/5MiB expectation disproved. H151 decline retained; final-source admission byH551 must be proved or explicitly incomplete. All declined owners coexist until actual engine removal. Bootstrap cleanup<=160 calls is not a two-call small-tail pass.",
+      "final_H_upper": 551,
+      "automatic_history_ceiling": 551,
+      "automatic_cleanup_max_calls": 160,
+      "offered_publication_attempts_upper_after_genesis": 550,
+      "automatic_build_history_points": [
+        1,
+        31,
+        151,
+        551
+      ],
+      "automatic_build_attempts_upper": 4,
+      "owned_declines_upper_before_final_candidate": 2,
+      "engine_calls_upper_excluding_independent_oracle": 1268,
+      "observed_lower_size_reported": "approximately16.54MB parent observation atH551; exact census bytes pending",
+      "compact_COW_partial_upper_reported": "approximately30.34MB; partial only, excludes other topology; not complete admission"
+    },
+    {
+      "root_key": "stable-A/disposable/store",
+      "cases": [
+        "D-stable-base-segment-pressure"
+      ],
+      "N": 10,
+      "final_H": 49,
+      "regular_files_proposal": 900,
+      "bytes_proposal": 2097152,
+      "qualification": "all3x16 accepted; stable base +delta consolidation coexistence included subject final-page forecast"
+    },
+    {
+      "root_key": "native-pressure-A/disposable/store",
+      "cases": [
+        "X-native-pressure"
+      ],
+      "N": 10,
+      "final_H_upper": 65,
+      "regular_files_proposal": 1000,
+      "bytes_proposal": 2097152,
+      "qualification": "<=64 mapping activations; native modest pressure, notWindows1000"
+    },
+    {
+      "root_key": "Windows-stress-A/disposable/store",
+      "cases": [
+        "X-Windows1000"
+      ],
+      "N": 10,
+      "final_H": 1001,
+      "regular_files_proposal": 12000,
+      "bytes_proposal": 33554432,
+      "qualification": "Windows proposal only; current source has1000 actual new mappings/requests; final COW/stage peak forecast required"
+    },
+    {
+      "root_key": "EXISTING-shallow-donor-roots",
+      "cases": [
+        "C-P0-small",
+        "S-persistent-owners",
+        "S-two-maintainers-semantic-crossing",
+        "S-reader-error",
+        "S-reader-cancel",
+        "S-reader-death",
+        "S-maintainer-death",
+        "S-path-reuse-fresh-birth",
+        "all-S-crash-phases",
+        "all-CP3-cases",
+        "all-compatibility-cases",
+        "all-backup-cases",
+        "all-limit-constructors"
+      ],
+      "regular_files_positive_growth_proposal": 1500,
+      "bytes_positive_growth_proposal": 5242880,
+      "qualification": "NOT a fresh deep clone. Donor seed/version/reset/full-oracle map required.5MiB growth proposal does not admit extra two candidate cohorts, raw boundary or unknown paged constructors. Exact phase peaks remain FORECAST_REQUIRED.",
+      "cleanup_crash_max_calls": 8,
+      "deletion_setup_max_builds": 2,
+      "deletion_constructor_status": "PENDING final-source binding/donor validation; old-retired-instance and owned-aborted-file constructors sourcecoded, no native/runtime claim"
+    }
+  ],
+  "aggregate_diagnostic_using_provisional_other_roots": {
+    "B_conditional_upper": 149251266,
+    "other_native_root_proposals": 68157440,
+    "focused_subtotal": 217408706,
+    "donor_plus_focused_plus32MiB_coexistence_plus16MiB_metadata_plus109": 529480133,
+    "exceeds_proposed448MiB_by": 59718085,
+    "regular_file_proposals_new_roots_plus_extensions": 30500,
+    "donor_plus_new_plus4000coexistence_plus8000metadata_files": 58096,
+    "exceeds_proposed50000files_by": 8096,
+    "verdict": "NO_GO. This is an upper-envelope diagnostic, not a proof of a fundamental byte lower bound or permission to increase budget. Repartitioning valid unused coexistence/metadata forecasts and tighter final-source per-root bounds may fit; parent must prove whole topology first. Some other-root proposals remain unproven, so this is not complete admission arithmetic."
+  },
+  "every_case_prewrite_requirements": [
+    "Exact final engine/schema/adapter/guard/binary/source manifest; all source hashes before/after",
+    "Meta runtimeGO plus fresh global/root actual census and prospective next-command peak, including ALL failed preparations and stages",
+    "No protected source mutation; one deep B; donor case identity and reset proof for every reuse; no unknown residual corruption",
+    "All files/directories/durable physical-pins/*.lock/journals/plans/cursors/deferred/cache/coexistence/raw receipts counted",
+    "Positive native process identity/RSS, per-action256MiB reader/2GiB checker, aggregate host cap/exclusive heavy token/deadline/closure",
+    "Raw8MiB/pack64MiB/index16MiB/65536-record/64pack/Work128KiB/deferred32KiB-and128/cache64MiB cases need their exact source-bound constructor peaks before writes",
+    "No planned deletion credit, accepted B retirement, compact payload profile, hidden retry or automatic matrix reduction",
+    "Missing/unsupported/deferred/time-censored cases remain incomplete. Full long backup/restore is separately Matrix owned."
+  ],
+  "source_replacement_note": "Original7/128761 archived by parent;192KiB replacement remains within same MatrixF01 total1MiB. Real execution still HOLD.",
+  "bootstrap_vs_small_tail": "Initial bootstrap/structural reclamation is bounded<=160 calls with each actual batch retained. Frozen final small-tail gate remains exactly TWO cleanup calls after producers/blockers end; no relabelled batch loop.",
+  "source_review_remediation": {
+    "review": "parent focused-review/review.md/evidence.json",
+    "F1": "env explicit separate transport; exact real Driver fakes",
+    "F2": "omitted optional target accepted via get",
+    "F3": "bounded maxH551; H151 and ceiling declines explicit",
+    "F4": "always observe every spawned callback; preserve primary/secondary; native+Python closure mandatory",
+    "crash_dependency": "real pending retired/owned work +source binding before max8 cleanup continuations; actual removal proof still pending"
+  }
+}
