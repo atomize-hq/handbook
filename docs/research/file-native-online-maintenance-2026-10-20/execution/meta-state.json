@@ -371,9 +371,10 @@
     "controls_sha256": "fc6f0ac9e569d240faad977dfef247aec645b8f2b4df00c6901a866c08d307e3",
     "byte_core_sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea",
     "pure_memory_controls": "4 positives/18 negatives; parent raw hashes/base64/gzip EOF9rows/two numeric empty/max31.133ms verified",
-    "independent_remediation_review": "PENDING",
+    "independent_remediation_review": "INTEGRATE_SCOPED_SOURCE_AND_MEMORY_CONTROLS",
     "real_stores_and_quota_v2": "NOT_QUALIFIED",
-    "runtime_final_sha256": "3e9e5e94b134dcda5db7655c862d945610432553b4686ae493adc6c66da834a3"
+    "runtime_final_sha256": "3e9e5e94b134dcda5db7655c862d945610432553b4686ae493adc6c66da834a3",
+    "review_path": "execution/reviews/independent-v5/review-R1.md"
   },
   "qualification_helpers": {
     "long_owner": "01a15b51-a50b-7930-8633-b42694240252",
@@ -409,5 +410,23 @@
     "new_six_control_docs_max_bytes": 17408,
     "compile_control_engine_go": false
   },
-  "historical_nested_forecasts": "Older values nested above are retained historical proposals, not current admission; latest025/current fields and immutable claim chain control."
+  "historical_nested_forecasts": "Older values nested above are retained historical proposals, not current admission; latest025/current fields and immutable claim chain control.",
+  "META_membership": {
+    "cap_bytes": 8388608,
+    "actual_parent_bytes": 5417671,
+    "actual_landing_closed_bytes": 2130237,
+    "promoted_harness_files": 18,
+    "promoted_harness_bytes": 179468,
+    "actual_total_bytes": 7727376,
+    "slack_bytes": 661232,
+    "old_F01_reservation_retained": true
+  },
+  "Linux_peer_compile": {
+    "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+    "peer_sha256": "f8347099548f27d354179f4dd7a68fd08e4f8e70dc635c4e61871e50058db8af",
+    "claim": "LINUX-V3-PEER-COMPILE-20261021",
+    "go": "COPY_AND_COMPILE_ONLY_30S",
+    "peer_execution": false,
+    "engine_execution": false
+  }
 }
