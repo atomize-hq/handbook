@@ -1,0 +1,62 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 3,
+  "max_start_gap_s": 0.011572082992643118,
+  "peak_RSS_bytes": 18022400,
+  "closure": [
+    {
+      "monotonic": 3237792.83217375,
+      "identities": [
+        {
+          "pid_requested": 87369,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3237792.856030041,
+      "identities": [
+        {
+          "pid_requested": 87369,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "active_candidate_source_pin": "CONTROL_ONLY",
+  "producer_binding": {
+    "source_pin": "CONTROL_ONLY",
+    "producer_source_pin": "CONTROL_ONLY",
+    "active_candidate_source_pin": "CONTROL_ONLY",
+    "producer_kind": "control",
+    "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf"
+  },
+  "exit": 0,
+  "seconds": 0.0275777499191463,
+  "guarded_seconds": 0.07582666724920273,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/semantic-native-v34-3/stdout.bin",
+      "bytes": 189,
+      "sha256": "4d015ca47b7caa8365e482c7e5b78490e1e9d8a21f53ab512f229a23c525f253"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/semantic-native-v34-3/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "start_mode": "json-stdin",
+  "input_bytes_delivered": 112
+}

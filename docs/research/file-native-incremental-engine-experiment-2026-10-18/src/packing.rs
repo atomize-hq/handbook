@@ -135,6 +135,7 @@ pub(crate) fn exists(path:&Path,m:&mut Metrics)->Result<bool> {
     let result=physical.locate(&key,lookup_bound(&key),m).and_then(|v|if v.is_some(){Ok(true)}else{present(path,m)});m.physical=Some(physical);result
 }
 pub(crate) fn probe(store:&Store,v:&Value,m:&mut Metrics)->Result<Value> {
+    if v.get("concurrent_pacing").is_some(){return paced_probe(store,v,m);}
     let count=v["count"].as_u64().unwrap_or(500);let requests=v["requests"].as_array().ok_or("requests")?;
     if count==0||count>5000||requests.len()>64{return Err("refused:lookup-sample-bound".into());}
     let mut rows=vec![];
@@ -143,11 +144,158 @@ pub(crate) fn probe(store:&Store,v:&Value,m:&mut Metrics)->Result<Value> {
         let first=Instant::now();let expected=store.resolve(id,None,m)?;let first_ns=first.elapsed().as_nanos();let mut times=Vec::with_capacity(count as usize);
         let (opens,storage,decoded,hits)=(m.opens,m.pack_storage_bytes,m.pack_decoded_bytes,m.pack_cache_hits);
         for _ in 0..count {let t=Instant::now();let result=store.resolve(id,None,m)?;times.push(t.elapsed().as_nanos());if result!=expected{return Err("integrity:lookup-outcome-changed".into());}}
-        let mut sorted=times.clone();sorted.sort_unstable();
-        rows.push(json!({"category":category,"id":id,"first_lookup_ns":first_ns,"warm_ns":times,"warm_median_ns":sorted[sorted.len()/2],"warm_p95_ns":sorted[(sorted.len()*95/100).min(sorted.len()-1)],"warm_min_ns":sorted[0],"warm_max_ns":sorted.last(),"result_digest":io::digest(&serde_json::to_vec(&expected)?),"opens":m.opens-opens,"pack_storage_bytes":m.pack_storage_bytes-storage,"decoded_record_bytes":m.pack_decoded_bytes-decoded,"index_cache_hits":m.pack_cache_hits-hits}));
+        rows.push(probe_row(id,category,first_ns,times,(m.opens-opens,m.pack_storage_bytes-storage,m.pack_decoded_bytes-decoded,m.pack_cache_hits-hits),&expected)?);
     }
-    Ok(json!({"rows":rows,"cache_qualification":"same-process warm after separately timed first lookup; device/OS cache eviction unmeasured"}))
+    Ok(json!({"rows":rows,"cache_qualification":LOOKUP_CACHE}))
 }
+
+const LOOKUP_CACHE:&str="same-process warm after separately timed first lookup; device/OS cache eviction unmeasured";
+
+fn probe_row(id:&str,cat:&str,ns:u128,times:Vec<u128>,d:(u64,u64,u64,u64),v:&Value)->Result<Value>{
+let mut s=times.clone();s.sort_unstable();Ok(json!({"category":cat,"id":id,"first_lookup_ns":ns,"warm_ns":times,"warm_median_ns":s[s.len()/2],"warm_p95_ns":s[(s.len()*95/100).min(s.len()-1)],"warm_min_ns":s[0],"warm_max_ns":s.last(),"result_digest":io::digest(&serde_json::to_vec(v)?),"opens":d.0,"pack_storage_bytes":d.1,"decoded_record_bytes":d.2,"index_cache_hits":d.3}))
+}
+
+#[derive(Clone,Copy,Serialize,Deserialize,PartialEq,Eq)]
+#[serde(rename_all="kebab-case")]
+enum PaceFamily {Cp4Control,F05Selected}
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Pace {version:u8,phase_id:String,family:PaceFamily,reader:u8,batch:u8,control_dir:PathBuf,anchor_sha256:Option<String>,ready_sha256:Option<String>}
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PaceAnchor {clock_kind:String,version:u8,phase_id:String,frequency:u64,origin:u64}
+fn pace_in(v:&Value)->Result<Pace>{let p:Pace=serde_json::from_value(v["concurrent_pacing"].clone())?;let hashes=[&p.anchor_sha256,&p.ready_sha256];if p.version!=1||!crate::model::safe_id(&p.phase_id)||p.reader>3||p.batch>9||v["count"].as_u64()!=Some(1000)||v["requests"].as_array().is_none_or(|a|a.len()!=1)||hashes.iter().any(|h|if p.batch==0{h.is_some()}else{h.as_ref().is_none_or(|s|!crate::objects::valid_hash(s))}){return Err("pace:input".into());}Ok(p)
+}
+fn pace_due(origin:u64,f:u64,reader:u8,batch:u8,j:u64)->Result<u64>{if f==0||reader>3||batch>9||j>=1000{return Err("pace:schedule".into());}let us=if reader==0{16000000+(batch as u128*1000+j as u128)*2900}else{(batch as u128*1000+j as u128)*4500};
+u64::try_from(origin as u128+us*f as u128/1000000).map_err(|_|"pace:overflow".into())
+}
+
+fn pace_kind()->&'static str {
+    #[cfg(windows)] {return "windows-qpc";}
+    #[cfg(all(target_os="linux",target_pointer_width="64"))] {return "linux-clock-monotonic";}
+    #[cfg(all(target_os="macos",target_pointer_width="64"))] {return "macos-clock-monotonic";}
+    #[allow(unreachable_code)] "unsupported"
+}
+fn pace_nanos(sec:i64,nsec:i64)->Result<u64>{
+    if sec<0||!(0..1_000_000_000).contains(&nsec){return Err("pace:timespec".into());}
+    (sec as u64).checked_mul(1_000_000_000).and_then(|v|v.checked_add(nsec as u64)).ok_or_else(||"pace:clock-overflow".into())
+}
+fn pace_qpc()->Result<(u64,u64)>{
+#[cfg(windows)] {
+    #[link(name="kernel32")] extern "system"{fn QueryPerformanceCounter(p:*mut i64)->i32;fn QueryPerformanceFrequency(p:*mut i64)->i32;}
+    let(mut c,mut f)=(0,0);
+    if unsafe{QueryPerformanceCounter(&mut c)}==0||unsafe{QueryPerformanceFrequency(&mut f)}==0||c<0||f<=0{return Err("pace:QPC".into());}return Ok((c as u64,f as u64));
+}
+
+#[cfg(all(any(target_os="linux",target_os="macos"),target_pointer_width="64"))] {
+    use std::os::raw::c_long;
+    #[repr(C)] struct Timespec {sec:c_long,nsec:c_long}
+    #[cfg(target_os="linux")] type ClockId=std::os::raw::c_int;
+    #[cfg(target_os="macos")] type ClockId=std::os::raw::c_uint;
+    extern "C" {fn clock_gettime(id:ClockId,value:*mut Timespec)->std::os::raw::c_int;}
+    #[cfg(target_os="linux")] let id:ClockId=1;
+    #[cfg(target_os="macos")] let id:ClockId=6;
+    let mut t=Timespec{sec:0,nsec:0};
+    if unsafe{clock_gettime(id,&mut t)}!=0{return Err(std::io::Error::last_os_error().into());}
+    return Ok((pace_nanos(t.sec as i64,t.nsec as i64)?,1_000_000_000));
+}
+#[cfg(not(any(windows,all(any(target_os="linux",target_os="macos"),target_pointer_width="64"))))] {Err("pace:clock".into())}
+
+}
+fn pace_plain(path:&Path)->Result<()>{let m=std::fs::symlink_metadata(path)?;
+#[cfg(windows)] {use std::os::windows::fs::MetadataExt;if m.file_attributes()&0x400!=0{return Err("pace:reparse".into());}}if m.file_type().is_symlink(){return Err("pace:link".into());}Ok(())
+}
+fn pace_open(path:&Path,new:bool)->Result<File>{
+pace_plain(path.parent().ok_or("pace:invalid")?)?;if !new{pace_plain(path)?;}let mut o=OpenOptions::new();o.read(true).write(new).create_new(new);
+#[cfg(windows)] {use std::os::windows::fs::OpenOptionsExt;o.share_mode(1);}let f=o.open(path)?;if !f.metadata()?.is_file(){return Err("pace:file".into());}Ok(f)
+}
+fn pace_bytes(f:&File)->Result<Vec<u8>>{
+use std::io::Read;let mut b=vec![];f.take(4097).read_to_end(&mut b)?;if b.len()>4096{return Err("pace:size".into());}Ok(b)
+}
+
+fn pace_allowed(root:&Path,family:PaceFamily)->bool {
+    // Source-owned closed namespaces. A request/env cannot add an allowed root.
+    #[cfg(windows)]
+    let (prefix,selected)=(
+        r"\\?\C:\file-native-online-cp1-20261020\fixtures\cp3",
+        &[
+            r"\\?\C:\file-native-online-matrix-20261020\history\H1000-baseline\disposable\store",
+            r"\\?\C:\file-native-online-matrix-20261020\history\authentic-N128\disposable\store",
+        ][..]);
+    #[cfg(target_os="macos")]
+    let (prefix,selected):(&str,&[&str])=("/private/tmp/file-native-online-macos-20261020/fixtures",&[]);
+    #[cfg(target_os="linux")]
+    let (prefix,selected):(&str,&[&str])=("/home/spenser/file-native-online-linux-20261020/fixtures",&[]);
+    #[cfg(not(any(windows,target_os="macos",target_os="linux")))]
+    let (prefix,selected):(&str,&[&str])=("",&[]);
+    match family {
+        PaceFamily::F05Selected=>selected.iter().any(|p|root==Path::new(p)),
+        PaceFamily::Cp4Control=>{
+            if prefix.is_empty(){return false;}
+            let Ok(tail)=root.strip_prefix(Path::new(prefix)) else{return false};
+            let Some(parts)=tail.iter().map(|s|s.to_str()).collect::<Option<Vec<_>>>() else{return false};
+            if cfg!(windows){return parts.len()==3&&parts[0].starts_with("cp4-")&&crate::model::safe_id(parts[0])&&parts[1]=="disposable"&&parts[2]=="store";}
+            if parts.len()!=5||!parts[1..3].iter().all(|s|crate::model::safe_id(s))||parts[3]!="disposable"||parts[4]!="store"{return false;}
+            let Some(pin)=parts[0].strip_prefix("native-paced-cp4-").or_else(||parts[0].strip_prefix("native-final-")) else{return false};
+            pin.len()==40&&pin.bytes().all(|b|matches!(b,b'0'..=b'9'|b'a'..=b'f'))
+        }
+    }
+}
+fn pace_dir(store:&Store,p:&Pace,m:&mut Metrics)->Result<PathBuf>{if !store.root.is_absolute()||[store.root.as_path(),p.control_dir.as_path()].iter().any(|p|p.components().any(|c|matches!(c,std::path::Component::ParentDir))){return Err("pace:path-components".into());}let root=store.root.canonicalize()?;let permit=PathBuf::from(std::env::var("FILE_NATIVE_PACED_ROOT")?);if std::env::var("FILE_NATIVE_STAGE_JOB").ok().as_deref()!=Some("1")||permit!=root||!pace_allowed(&root,p.family){return Err("pace:root".into());}let family=root.parent().ok_or("pace:family")?;let dir=family.join("lookup-pace").join(&p.phase_id);for path in dir.ancestors().chain(store.root.ancestors()){pace_plain(path)?;}if family.file_name().is_none_or(|n|n!="disposable")||p.control_dir!=dir||dir.canonicalize()?!=dir||!dir.is_dir(){return Err("pace:dir".into());}
+authorized(&root,m)?;Ok(dir)
+}
+fn pace_fit(h:&Value)->bool{serde_json::to_vec(h).is_ok_and(|b|b.len()<=2048)&&h["milestones"].as_array().is_some_and(|a|a.len()<=10)}
+
+// PhysicalRead is not Clone; capture moves its sole noninheritable File.
+// Cache Rcs contain Index/page bytes, never the generation lease. No lease
+// accessor/try_clone exists; all resolve-local files/Rcs are gone on return.
+fn pace_drop(m:&mut Metrics)->Result<(u64,u64)>{
+    m.finish();
+    let p=m.physical.as_ref().ok_or("pace:physical")?;
+    let current=p.cache.values().try_fold(0usize,|n,i|n.checked_add(i.memory()).ok_or("pace:cache-overflow"))?;
+    if current!=p.cache_bytes||p.borrowed_index_bytes!=0||p.constructor_index_bytes!=0||p.construction_aux_bytes!=0||p.cache.values().any(|i|Rc::strong_count(i)!=1)||current>pack::MAX_CACHE{return Err("pace:live-cache-alias-or-accounting".into());}
+    m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max(current as u64);
+    let peak=m.pack_cache_peak_bytes;
+    let PhysicalRead{_lease:lease,cache,..}=m.physical.take().ok_or("pace:physical")?;
+    drop(cache);drop(lease);Ok((current as u64,peak))
+}
+fn paced_probe(store:&Store,v:&Value,m:&mut Metrics)->Result<Value>{
+use std::io::Write;let p=pace_in(v)?;let dir=pace_dir(store,&p,m)?;let (_,f)=pace_qpc()?;let r=&v["requests"][0];let id=r["id"].as_str().ok_or("pace:invalid")?;let cat=r["category"].as_str().ok_or("pace:invalid")?;if id.is_empty()||id.len()>256||cat.is_empty()||cat.len()>64||!cat.is_ascii(){return Err("pace:row".into());}let snap=store.snapshot(m)?;let c=captured_config(m)?;let g=c.physical.as_ref().ok_or("pace:v3")?;let cap=pace_qpc()?.0;let first=Instant::now();let want=store.resolve(id,None,m)?;let ns=first.elapsed().as_nanos();let fd=pace_qpc()?.0;let rp=dir.join(format!("reader-{}.ready.json",p.reader));let ready=if p.batch==0{
+    let v=json!({"clock_kind":pace_kind(),"family":p.family,"version":1,"phase_id":p.phase_id,"reader":p.reader,"batch":0,"pid":std::process::id(),"request":id,"category":cat,"selector":snap.selected,"physical":g,"catalog":c.catalog,"capture_qpc":cap,"first_done_qpc":fd,"ready_qpc":pace_qpc()?.0,"frequency":f});
+    let b=serde_json::to_vec(&v)?;if b.len()>4096{return Err("pace:size".into());}
+    let mut file=pace_open(&rp,true)?;file.write_all(&b)?;file.sync_all()?;file
+}else{pace_open(&rp,false)?};
+use std::io::{Seek,SeekFrom};let mut ready=&ready;ready.seek(SeekFrom::Start(0))?;let rh=io::digest(&pace_bytes(ready)?);if p.ready_sha256.as_ref().is_some_and(|h|*h!=rh){return Err("pace:rebound".into());}let wait=Instant::now();let af=loop{
+    match pace_open(&dir.join("anchor.json"),false){
+        Ok(file)=>break file,
+        Err(e) if e.downcast_ref::<std::io::Error>().is_some_and(|e|e.kind()==std::io::ErrorKind::NotFound)=>{},
+        Err(e)=>return Err(e)
+    }
+    if wait.elapsed()>=Duration::from_secs(5){return Err("pace:anchor-timeout".into());}std::thread::sleep(Duration::from_millis(1));
+};let b=pace_bytes(&af)?;let ah=io::digest(&b);let a:PaceAnchor=strict(&b)?;let now=pace_qpc()?.0;if a.clock_kind!=pace_kind()||a.version!=1||a.phase_id!=p.phase_id||a.frequency!=f||a.origin==0||p.anchor_sha256.as_ref().is_some_and(|h|*h!=ah)||p.batch==0&&(a.origin<=now||a.origin-now>f.checked_mul(2).ok_or("pace:invalid")?){return Err("pace:anchor".into());}
+let(opens,storage,decoded,hits)=(m.opens,m.pack_storage_bytes,m.pack_decoded_bytes,m.pack_cache_hits);
+let(mut times,mut marks)=(Vec::with_capacity(1000),vec![]);let(mut waits,mut lag,mut late,mut catch)=(0u64,0u64,0u64,0u64);for j in 0..1000 {
+    let due=pace_due(a.origin,f,p.reader,p.batch,j)?;let pre=pace_qpc()?.0;if pre>due{catch+=1;}
+    if pre<due{std::thread::sleep(Duration::from_secs_f64((due-pre) as f64/f as f64));}
+    let start=pace_qpc()?.0;waits=waits.checked_add(start.checked_sub(pre).ok_or("pace:invalid")?).ok_or("pace:invalid")?;
+    let d=start.saturating_sub(due);if d>0{late+=1;}lag=lag.max(d);
+    let t=Instant::now();let result=store.resolve(id,None,m)?;times.push(t.elapsed().as_nanos());let end=pace_qpc()?.0;
+    if result!=want{return Err("integrity:lookup-outcome-changed".into());}
+    if j%111==0{marks.push([p.batch as u64*1000+j,start,end]);}
+}let out=probe_row(id,cat,ns,times,(m.opens-opens,m.pack_storage_bytes-storage,m.pack_decoded_bytes-decoded,m.pack_cache_hits-hits),&want)?;let succ=config(&store.root,m)?.physical.ok_or("pace:invalid")?.ordinal.checked_sub(g.ordinal).ok_or("pace:invalid")?;let selected=snap.selected.clone();let io_done=pace_qpc()?.0;drop(snap);let (cache_current,cache_peak)=pace_drop(m)?;let dropped=pace_qpc()?.0;let h=json!({"clock_kind":pace_kind(),"family":p.family,"version":1,"phase_id":p.phase_id,"pid":std::process::id(),"reader":p.reader,"batch":p.batch,"frequency":f,"origin":a.origin,"period_us":if p.reader==0{2900}else{4500},"hold_us":if p.reader==0{16000000}else{0},"completed":1000,"first_read":marks[0][1],"last_read":marks[9][2],"io_done":io_done,"pins_dropped":dropped,"reply_ready":pace_qpc()?.0,"wait_ticks":waits,"max_lag_ticks":lag,"late":late,"catchup":catch,"deadline_ok":lag<=f/10&&succ<=60,"successors":succ,"physical":g,"catalog":c.catalog,"selector":selected,"cache_current_bytes":cache_current,"cache_peak_bytes":cache_peak,"cache_after_drop_bytes":0,"anchor_sha256":ah,"ready_sha256":rh,"milestones":marks});if !pace_fit(&h){return Err("pace:size".into());}
+Ok(json!({"rows":[out],"concurrent_pacing":h,"cache_qualification":LOOKUP_CACHE}))
+}
+
+#[cfg(test)]mod pace_tests{use super::*;
+#[test]fn closed(){let mut v=json!({"count":1000,"requests":[{}],"concurrent_pacing":{"version":1,"phase_id":"p","family":"cp4-control","reader":0,"batch":0,"control_dir":"x"}});assert!(pace_in(&v).is_ok());v["concurrent_pacing"]["reader"]=json!(4);assert!(pace_in(&v).is_err());v["concurrent_pacing"]["reader"]=json!(0);v["concurrent_pacing"]["extra"]=json!(0);assert!(pace_in(&v).is_err());
+assert!(!pace_allowed(Path::new("/protected/disposable/store"),PaceFamily::F05Selected));
+#[cfg(windows)] assert!(pace_allowed(Path::new(r"\\?\C:\file-native-online-matrix-20261020\history\H1000-baseline\disposable\store"),PaceFamily::F05Selected));
+#[cfg(target_os="macos")] assert!(pace_allowed(Path::new("/private/tmp/file-native-online-macos-20261020/fixtures/native-final-0000000000000000000000000000000000000000/A/attempt/disposable/store"),PaceFamily::Cp4Control));
+}
+#[test]fn schedule(){for(r,b,j,us)in[(0,0,0,16000000),(0,0,999,18897100),(0,9,999,44997100),(1,9,999,44995500)]{assert_eq!(pace_due(7,1000000,r,b,j).unwrap(),us+7);}assert!(pace_due(u64::MAX,u64::MAX,0,0,0).is_err());assert_eq!(pace_nanos(2,3).unwrap(),2000000003);assert!(pace_nanos(-1,0).is_err());assert!(pace_nanos(i64::MAX,0).is_err());assert!(pace_nanos(1,1000000000).is_err());}
+#[test]fn header(){assert!(!pace_fit(&json!({"milestones":vec![[0;3];11]})));assert!(!pace_fit(&json!({"milestones":[],"x":"x".repeat(2048)})));}
+}
+
 fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
     let mut physical=m.physical.take().ok_or("integrity:physical-capture")?;
     let result=(||->Result<Vec<Key>>{
@@ -228,7 +376,7 @@ fn install(root:&Path,stage:&Path,bytes:&[u8],name:&str,hash:&str,m:&mut Metrics
     if owner.created.len()>=128{return Err("quota:owned-output-count".into());}
     io::write_new(&destination,bytes,m)?;owner.created.insert(name.into(),(hash.into(),bytes.len()));m.pack_output_created_files+=1;Ok(())
 }
-fn identity(hash:&mut Sha256,e:&pack::Entry){hash.update((e.key.0.len() as u64).to_le_bytes());hash.update(e.key.0.as_bytes());hash.update((e.raw as u64).to_le_bytes());hash.update(e.hash.as_bytes());}
+fn identity(hash:&mut Sha256,e:&pack::Entry){io::forbidden();hash.update((e.key.0.len() as u64).to_le_bytes());hash.update(e.key.0.as_bytes());hash.update((e.raw as u64).to_le_bytes());hash.update(e.hash.as_bytes());}
 fn flush(root:&Path,stage:&Path,builder:pack::Builder,m:&mut Metrics,expected_identity:Option<String>,owner:&mut OutputOwner)->Result<Descriptor> {
     let approved=builder.finish_bound()?;reserve_constructor(approved,m)?;
     let (mut d,pack,index)=builder.finish_reserved(approved)?;
@@ -260,6 +408,20 @@ mod tests {
     use super::*;
     fn empty_reader(root:&Path)->PhysicalRead{std::fs::create_dir_all(root).unwrap();PhysicalRead{_lease:physical::lock_file(&root.join("lease"),true).unwrap(),root:root.into(),config:crate::store::StoreConfig{version:1,store_id:"test".into(),mode:"A".into(),consumer:"project".into(),fallback:false,navigation_version:4,catalog:None,physical:None},catalog:None,cache:BTreeMap::new(),cache_bytes:0,borrowed_index_bytes:0,constructor_index_bytes:0,construction_aux_bytes:0}}
     fn write_pair(root:&Path,d:&Descriptor,p:&[u8],i:&[u8]){std::fs::create_dir_all(root.join(d.path("idx").unwrap()).parent().unwrap()).unwrap();std::fs::write(root.join(d.path("idx").unwrap()),i).unwrap();std::fs::write(root.join(d.path("pack").unwrap()),p).unwrap();}
+    #[test]fn production_builder_preserves_near_limit_index_bytes(){
+        let root=PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").expect("explicit fixture root required")).join(io::unique("constructor-near-index-limit"));
+        let mut m=Metrics::default();m.physical=Some(empty_reader(&root));let mut builder=new_builder("allocation",0,&mut m).unwrap();
+        fn key(n:usize)->Key{Key::new(&format!("attempts/{}/allocations/{}{:06}.json","a".repeat(99),"b".repeat(93),n)).unwrap()}
+        for n in 0..55366{let k=key(n);assert_eq!(k.0.len(),225);push_builder(&mut builder,k,b"",&mut m).unwrap();}
+        assert!(!builder.fits(&key(55366),0));let approved=builder.finish_bound().unwrap();reserve_constructor(approved,&mut m).unwrap();
+        assert!(m.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);assert!(m.pack_constructor_metadata_peak_bytes>16*1024*1024);
+        let (descriptor,body,index)=builder.finish_reserved(approved).unwrap();assert!(body.is_empty());assert_eq!(descriptor.records,55366);assert_eq!(index.len(),16191779);
+        reserve_constructor(index.capacity(),&mut m).unwrap();let expected=io::digest(&index);drop(index);drop(body);reserve_constructor(0,&mut m).unwrap();
+        // A separate direct builder must serialize identically; cached accounting
+        // and production reservations have no effect on descriptor/index bytes.
+        let mut reference=pack::Builder::new("allocation",0);for n in 0..55366{reference.push(key(n),b"").unwrap();}
+        let (other,body,index)=reference.finish().unwrap();assert_eq!(descriptor,other);assert!(body.is_empty());assert_eq!(io::digest(&index),expected);
+    }
     #[test]fn caller_limit_precedes_raw_and_zstd_bodies_after_all_routes(){
         for codec in [0,1]{let root=PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(io::unique("caller-limit"));let mut p=empty_reader(&root);let key=Key::new(&format!("results/{}.json","a".repeat(64))).unwrap();let mut builder=pack::Builder::new("result",codec);builder.push(key.clone(),&[42;256]).unwrap();let (mut d,pack,bytes)=builder.finish().unwrap();d.instance=Some("first".into());d.segment=1;write_pair(&root,&d,&pack,&bytes);p.catalog=Some(Catalog{version:4,store_id:"test".into(),packs:vec![d.clone()]});let mut m=Metrics::default();
             assert!(p.locate(&key,1,&mut m).err().unwrap().to_string().contains("packed-read-bound"));assert_eq!(m.pack_records_read,0);assert_eq!(m.pack_decoded_bytes,0);assert_eq!(p.locate(&key,256,&mut m).unwrap().unwrap().2,vec![42;256]);
@@ -328,7 +490,19 @@ mod tests {
         let before=physical.cache_bytes;
         let error=match physical.index(&changed,&mut metrics){Ok(_)=>panic!("changed oversized index accepted"),Err(error)=>error};
         assert!(error.to_string().contains("pack-file-bound"));assert!(physical.cache_bytes<=before);assert!(metrics.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);
-        eprintln!("cache-boundary-receipt root={} total_index_charge={} transient_charged_peak={} remaining_cache_entries={} changed_index_refused_before_allocation=true",root.display(),total,metrics.pack_cache_peak_bytes,physical.cache.len());
+        // Reuse the SAME actual source files. Reserve an independent source
+        // allocation before loading it, while the existing real cache is live.
+        let source_charge=Index::allocation_bound(&descriptors[0]).unwrap();physical.borrowed_index_bytes=source_charge;physical.make_room(0,&mut metrics).unwrap();
+        let source=Index::load(&root,&descriptors[0],&mut metrics).unwrap();assert!(source.memory()<=source_charge);metrics.physical=Some(physical);
+        let mut builder=new_builder("allocation",0,&mut metrics).unwrap();for n in 0..descriptors[0].records as usize{let e=source.entry(n,&mut metrics).unwrap();push_builder(&mut builder,e.key,b"",&mut metrics).unwrap();}
+        let approved=builder.finish_bound().unwrap();let live=metrics.physical.as_ref().unwrap();let cache_before=live.cache.len();let before_finish=live.cache_bytes+source_charge+approved;
+        assert!(before_finish>pack::MAX_CACHE);assert!(source_charge+approved<=pack::MAX_CACHE);
+        reserve_constructor(approved,&mut metrics).unwrap();assert!(metrics.physical.as_ref().unwrap().cache.len()<cache_before);
+        let (out,body,index)=builder.finish_reserved(approved).unwrap();assert_eq!(out.records,descriptors[0].records);assert!(body.is_empty());assert!(index.capacity()<=pack::MAX_INDEX);reserve_constructor(index.capacity(),&mut metrics).unwrap();
+        assert!(metrics.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);let output_capacity=index.capacity();drop(index);drop(body);reserve_constructor(0,&mut metrics).unwrap();
+        let peak=metrics.pack_cache_peak_bytes;assert!(reserve_constructor(usize::MAX,&mut metrics).err().unwrap().to_string().contains("index-memory-overflow"));assert_eq!(metrics.pack_cache_peak_bytes,peak);reserve_constructor(0,&mut metrics).unwrap();
+        drop(source);metrics.physical.as_mut().unwrap().borrowed_index_bytes=0;
+        eprintln!("cache-boundary-receipt root={} total_index_charge={} transient_charged_peak={} remaining_cache_entries={} source_charge={} before_finish={} approved_constructor={} actual_output_capacity={} changed_index_refused_before_allocation=true constructor_eviction_before_output=true overflow_refused_before_allocation=true extra_fixture_bytes=0",root.display(),total,metrics.pack_cache_peak_bytes,metrics.physical.as_ref().unwrap().cache.len(),source_charge,before_finish,approved,output_capacity);
     }
 }
 
@@ -412,7 +586,7 @@ fn inherit_aborted(root:&Path,owners:&[BirthOwner],w:&mut physical::Work,m:&mut 
         let directory=root.join(format!("packs/{}",owner.id));
         w.garbage.push(format!("packs/{}",owner.id));
         if pack::path_exists(&directory,m){
-            m.cleanup_step()?;for (n,e) in std::fs::read_dir(&directory)?.enumerate(){
+            m.cleanup_step()?;for (n,e) in io::read_dir(&directory)?.enumerate(){
                 m.cleanup_step()?;
                 if n>=128{return Err("quota:orphan-container-bound".into());}
                 let e=e?;m.pack_metadata_stats+=1;if !e.file_type()?.is_file(){return Err("integrity:orphan-container-type".into());}
@@ -498,7 +672,7 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
     let wait=Instant::now();let cap=std::env::var("EXP_WAIT_MS").ok().and_then(|s|s.parse().ok()).unwrap_or(15000);
     loop {
         if physical::cancelled(){return Err("cancelled:pack-barrier".into());}
-        let q=physical::wait_lock(root,"physical-capture.lock",true)?;
+        let q=io::GlobalGate::new(physical::wait_lock(root,"physical-capture.lock",true)?,false);
         let hold=Instant::now();
         let current_bytes=pack::native(&root.join("STORE.json"),physical::BINDING_LIMIT,m)?;
         let c:crate::store::StoreConfig=strict(&current_bytes)?;
@@ -526,14 +700,14 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
         if upgrade{m.physical_upgrade_holds_ns.push(hold.elapsed().as_nanos().min(u64::MAX as u128) as u64);m.physical_upgrade_wait_ns=wait.elapsed().as_nanos().min(u64::MAX as u128) as u64;}
         drop(writer);drop(legacy);drop(q);record_activation_hold(m,hold)?;m.elapsed("physical-activation-hold",hold);m.elapsed("physical-activation-wait-inclusive",wait);
         // No injected barrier or journal I/O runs under Q/W.
-        result?;io::checkpoint("physical-after-store-replace")?;std::fs::remove_dir(stage.parent().ok_or("integrity:stage-parent")?)?;io::checkpoint("pack-catalog")?;io::checkpoint("physical-after-selection")?;return Ok(());
+        result?;io::checkpoint("physical-after-store-replace")?;io::remove_dir(stage.parent().ok_or("integrity:stage-parent")?)?;io::checkpoint("pack-catalog")?;io::checkpoint("physical-after-selection")?;return Ok(());
     }
 }
 fn try_remove(root:&Path,name:&str,w:&mut physical::Work,m:&mut Metrics)->Result<bool>{
     m.cleanup_step()?;let path=root.join(name);if !present(&path,m)?{w.reconciled_absent+=1;return Ok(true);}
     io::checkpoint("physical-before-delete")?;m.cleanup_step()?;let started=Instant::now();
     if name.strip_prefix("packs/").is_some_and(crate::model::safe_id){
-        let removed=std::fs::remove_dir(&path);m.elapsed("physical-directory-remove-native",started);
+        let removed=io::remove_dir(&path);m.elapsed("physical-directory-remove-native",started);
         return match removed{Ok(())=>{m.namespace_ops+=1;io::checkpoint("physical-owned-directory-delete")?;Ok(true)},Err(e) if e.kind()==std::io::ErrorKind::NotFound=>Ok(true),Err(e) if e.kind()==std::io::ErrorKind::DirectoryNotEmpty||matches!(e.raw_os_error(),Some(32|33))=>Ok(false),Err(e)=>Err(e.into())};
     }
     let removed=lifetime::remove_checked(root,&path,m);
@@ -616,7 +790,7 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
             }else{blocked+=1;}
         }
         if w.retired[n].pack_done&&w.retired[n].index_done{
-            if let Some(id)=&d.instance{let dir=root.join(format!("packs/{id}"));match std::fs::remove_dir(&dir){Ok(())=>{},Err(e) if matches!(e.kind(),std::io::ErrorKind::DirectoryNotEmpty|std::io::ErrorKind::NotFound)=>{},Err(e)=>return Err(e.into())}}
+            if let Some(id)=&d.instance{let dir=root.join(format!("packs/{id}"));match io::remove_dir(&dir){Ok(())=>{},Err(e) if matches!(e.kind(),std::io::ErrorKind::DirectoryNotEmpty|std::io::ErrorKind::NotFound)=>{},Err(e)=>return Err(e.into())}}
             w.retired.remove(n);
         }else{n+=1;}
     }
@@ -629,7 +803,7 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
             if name.starts_with("packs/")&&name.split('/').count()==3&&w.removed_files>before_delete{io::checkpoint("physical-after-owned-file-delete")?;}
             if name.split('/').count()==3&&(name.starts_with("packs/")||name.starts_with("physical-stages/")){
                 let dir=root.join(&name).parent().ok_or("integrity:garbage-parent")?.to_path_buf();
-                m.cleanup_step()?;match std::fs::remove_dir(dir){Ok(())=>{},Err(e) if e.kind()==std::io::ErrorKind::NotFound=>{},Err(e) if name.starts_with("physical-stages/")&&e.kind()==std::io::ErrorKind::DirectoryNotEmpty=>{blocked+=1;n+=1;continue;},Err(e) if e.kind()==std::io::ErrorKind::DirectoryNotEmpty=>{},Err(e)=>return Err(e.into())}
+                m.cleanup_step()?;match io::remove_dir(dir){Ok(())=>{},Err(e) if e.kind()==std::io::ErrorKind::NotFound=>{},Err(e) if name.starts_with("physical-stages/")&&e.kind()==std::io::ErrorKind::DirectoryNotEmpty=>{blocked+=1;n+=1;continue;},Err(e) if e.kind()==std::io::ErrorKind::DirectoryNotEmpty=>{},Err(e)=>return Err(e.into())}
             }
             w.garbage.remove(n);
         }else{blocked+=1;n+=1;}
@@ -789,4 +963,28 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     j.status="registered".into();save(root,&j,m)?;io::checkpoint("pack-accounting")?;drop(protection);
     if v["cleanup"].as_bool()==Some(true){return cleanup(root,&selected,m);}
     Ok(json!({"status":"registered","catalog":selected.catalog,"generation":selected.physical,"discovery":physical::load(root,&selected,m)?.discovery,"forced_correctness":v["force"].as_bool()==Some(true),"reserved_bytes":j.reserved_bytes,"used_bytes":j.used_bytes,"successfully_deleted_bytes_recorded":0,"historical_allocation_owners_unchanged":true}))
+}
+
+#[cfg(test)]
+mod boundary_tests {
+use super::*;
+#[test]fn catalog_count_bound(){
+    let root=PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(io::unique("catalog-bound"));let mut m=Metrics::default();let mut ds=vec![];
+    for i in 0..65 {let mut b=pack::Builder::new("result",0);b.push(Key::new(&format!("results/{i:064x}.json")).unwrap(),&[i as u8]).unwrap();let n=b.finish_bound().unwrap();let(mut d,body,index)=b.finish_reserved(n).unwrap();d.instance=Some("catalog-unit".into());d.segment=1;
+        if i<64{io::write_new(&root.join(d.path("pack").unwrap()),&body,&mut m).unwrap();io::write_new(&root.join(d.path("idx").unwrap()),&index,&mut m).unwrap();}ds.push(d);
+    }
+    let mut c=crate::store::StoreConfig{version:3,store_id:"unit".into(),mode:"A".into(),consumer:"project".into(),fallback:false,navigation_version:4,catalog:None,physical:Some(physical::Binding{id:"catalog-unit".into(),ordinal:1,plan:"0".repeat(64)})};
+    for count in [64,65]{let cat=Catalog{version:4,store_id:c.store_id.clone(),packs:ds[..count].to_vec()};let bytes=io::json(&cat).unwrap();assert!(bytes.len()<=physical::CATALOG_LIMIT);let hash=io::digest(&bytes);io::write_new(&root.join(format!("pack-catalogs/{hash}.json")),&bytes,&mut m).unwrap();c.catalog=Some(hash);
+        let result=catalog(&root,&c,&mut m);if count==64{assert_eq!(result.unwrap().unwrap().packs.len(),64);}else{assert_eq!(result.err().unwrap().to_string(),"integrity:catalog-version-count");}
+    }
+    eprintln!("boundary production-catalog descriptors64=accepted descriptors65=count-refusal real-pairs=64");
+}
+#[test]fn install_birth_no_adoption(){
+    let root=PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(io::unique("birth-bound"));let mut m=Metrics::default();let bytes=b"owned-canary";let h=io::digest(bytes);let name=format!("{h}.pack");
+    let mut old=OutputOwner{id:"old".into(),created:BTreeMap::new()};let oldstage=root.join("physical-stages/old");install(&root,&oldstage,bytes,&name,&h,&mut m,&mut old).unwrap();
+    let oldpath=root.join(format!("packs/old/{name}"));let before=std::fs::read(&oldpath).unwrap();
+    let mut restarted=OutputOwner{id:"old".into(),created:BTreeMap::new()};assert!(install(&root,&oldstage,bytes,&name,&h,&mut m,&mut restarted).is_err());assert!(restarted.created.is_empty());assert_eq!(std::fs::read(&oldpath).unwrap(),before);
+    let stage=root.join("physical-stages/fresh");let mut fresh=OutputOwner{id:"fresh".into(),created:BTreeMap::new()};install(&root,&stage,bytes,&name,&h,&mut m,&mut fresh).unwrap();install(&root,&stage,bytes,&name,&h,&mut m,&mut fresh).unwrap();assert_eq!(m.pack_output_same_owner_reuses,1);assert_eq!(std::fs::read(oldpath).unwrap(),before);
+    eprintln!("boundary production-install stale-owner=refused fresh-birth=created same-live-owner=verified-reuse");
+}
 }

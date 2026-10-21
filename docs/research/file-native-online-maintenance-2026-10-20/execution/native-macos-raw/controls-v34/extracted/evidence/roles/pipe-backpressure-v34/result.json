@@ -1,0 +1,62 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 13,
+  "max_start_gap_s": 0.012766290921717882,
+  "peak_RSS_bytes": 18284544,
+  "closure": [
+    {
+      "monotonic": 3237792.196945125,
+      "identities": [
+        {
+          "pid_requested": 87362,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3237792.22197325,
+      "identities": [
+        {
+          "pid_requested": 87362,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "active_candidate_source_pin": "CONTROL_ONLY",
+  "producer_binding": {
+    "source_pin": "CONTROL_ONLY",
+    "producer_source_pin": "CONTROL_ONLY",
+    "active_candidate_source_pin": "CONTROL_ONLY",
+    "producer_kind": "control",
+    "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf"
+  },
+  "exit": 0,
+  "seconds": 0.15000791661441326,
+  "guarded_seconds": 0.19735537469387054,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/pipe-backpressure-v34/stdout.bin",
+      "bytes": 192,
+      "sha256": "25e4623d1d61ba79b1a267637dde745d44475dac23054e7b297aedd894923e74"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/pipe-backpressure-v34/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "start_mode": "json-stdin",
+  "input_bytes_delivered": 196733
+}

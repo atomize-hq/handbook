@@ -1,0 +1,163 @@
+{
+  "kind": "INDEPENDENT_MAC_V35_FULL_SOURCE_REVIEW",
+  "verdict": "NO-INTEGRATE_AS_FULL_NATIVE_FACADE",
+  "qualification": "INCOMPLETE_NO_RUNTIME_GO",
+  "source_folder": "P/mac-native-source-v35",
+  "files": {
+    "native_facade_v35.py": {
+      "bytes": 23494,
+      "sha256": "0a5f8a833cbb446a512d759b8bcc6495c2e0193d9c44cacbc3493c1e912d545e"
+    },
+    "native_lifecycle_v35.py": {
+      "bytes": 10545,
+      "sha256": "4ef7a9e7956d1e82532643a6840385430b6cf2848e94ab2dfd7c9def1eb91512"
+    },
+    "native_case_extensions_v35.py": {
+      "bytes": 20137,
+      "sha256": "1494474f03d2b348c6e4f1547f1b49385b45eab24508d640fc46897ab5310532"
+    },
+    "native_case_crosswalk_v35.py": {
+      "bytes": 10683,
+      "sha256": "3b416b7e12be29db9736b52509da93545fabd7117c21a4a42f03622c8fd2ed05"
+    },
+    "native-facade-source-review-v35.json": {
+      "bytes": 4081,
+      "sha256": "449aa564cfb3f73eb9d41af2880c3576d3009ab753ff52fd6def50cc441302cb"
+    }
+  },
+  "total_bytes": 68940,
+  "independent_initial_and_final_hash_checks": "5/5 exact both times",
+  "transport": {
+    "gzip_bytes": 21568,
+    "gzip_sha256": "19d9dbacc8954273c8a7e35697a599df606c3ec608ffaa1e0ecebcbcab78b0db",
+    "decoded_bytes": 71006,
+    "decoded_sha256": "dbea3c319fba33d78d830e0d7fbacfa02653a92b7ba09f3f271f64c778995a2c",
+    "method": "bounded in-memory gzip decode/hash only; no extraction/import/exec"
+  },
+  "scope": {
+    "v35": "all4codefiles+reviewJSON fullyread",
+    "old_v34": "all4oldcodefiles fullyread for comparison",
+    "common_closure": {
+      "expected": 17,
+      "independently_matched": 17,
+      "mismatches": [],
+      "manifest": "P/mac-native-source-control-v34/native-source-review-manifest-v34.json",
+      "locations": "retained P v34/v33/v31/v30 and Landing/execution/native-macos",
+      "relevant_paths_read": [
+        "OwnedCall/invoke",
+        "producer candidate/historical/interrupt binding",
+        "native actual-exec proof",
+        "guard Events",
+        "admission census/receipt",
+        "identity definitions",
+        "ordinary Bash helper/extraction/manifest"
+      ]
+    },
+    "shared_barrier": {
+      "path": "Landing/execution/final-protocol/focused_protocol.py",
+      "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8",
+      "lines": "493-509"
+    },
+    "source_read_release": "afterfinal5hashcheck; no source rereads afterward"
+  },
+  "findings": [
+    {
+      "priority": "P1",
+      "file": "native_facade_v35.py",
+      "start": 254,
+      "end": 257,
+      "title": "Constrain file-bearing control environment before native dispatch",
+      "chain": "EXP_* string map -> candidateproducer.bind(noenvrestriction) -> ownednativeengine -> Rustcheckpoint fs::write(EXP_READY)",
+      "regression": "v34NativeAdapter.start111-112 checked EXP_READY/EXP_RELEASE/EXP_PACK_CANCEL; v35omits checks",
+      "counterexample": "validadmittedroot/binary/action and actualbarrier but EXP_READY outsideownedcaseprefix. Childwrite bypasses Pythonlease androotcensus.",
+      "required": "exactdeclaredcasecontrolpath/checkpointvalidation beforeinputallocation/launch; sourcemap allfilebearingcontrols",
+      "test_performed": false
+    },
+    {
+      "priority": "P1",
+      "file": "native_lifecycle_v35.py",
+      "start": 61,
+      "end": 68,
+      "also": "native_case_extensions_v35.py:55",
+      "title": "Align actual shared barrier variable",
+      "actual_caller": "Harness.barrier497-499 sends EXP_BARRIER, EXP_READY, EXP_RELEASE",
+      "callee": "reads EXP_PAUSE; phaseNone fails source-bound-ready-phase; quiesce also misclassifies heldreader",
+      "engine": "finalRustcheckpoint recognizes EXP_BARRIER",
+      "required": "reconcile actualexisting source-mapped contract, not addunboundlabel",
+      "test_performed": false
+    },
+    {
+      "priority": "P1",
+      "file": "native_case_extensions_v35.py",
+      "start": 125,
+      "end": 159,
+      "title": "Bind distinct unit/route evidence to distinct owned invocations",
+      "counterexample": "samegenuine /bin/bash receipt reused17times withdistinct route_id labels; sharedCargo testbinary singleunitreceipt relabeledoverexpectedunitnames",
+      "missing_checks": "no uniquereceipt/identity/invocation; no rawtestfilter/unitname/routeparameters comparison; ordinarysource_sha onlytruthy",
+      "existing_checks": "rawSHA/currentnonce/binarySHA/numericclosure authenticates a receipt, noteachclaimedtest/route",
+      "required": "expectedunit/route source+parameters boundrawactualresults, rejectreceipt/identityreuse, validate actualtest/routeoutput",
+      "test_performed": false
+    }
+  ],
+  "acknowledged_gaps": [
+    "158recipe bodies/selectors missing; crosswalk isobligationmap",
+    "workspace_owned/ordinary_owned providers missing",
+    "latestsharedfocused/decoder/quota/CP4 interface reconciliation absent",
+    "finalpin/binary/exhaustiveactualunit/route manifests unbound",
+    "exactruntime release/forecast/nativeproof absent"
+  ],
+  "other_limits": [
+    "Eventsrowlimit262144bytes andcumulativein-memoryeventretention needfullrecipe sizing/RSSproof",
+    "v34finite-control raw results do notqualifyengine/fullv35",
+    "structuredstandard remainsPROPOSED; no migration/defaultauthority",
+    "sourceclockclosed; reportauthorizesno repairs"
+  ],
+  "review_axes": {
+    "correctness": "3P1blockers",
+    "architecture": "sourceboundary incomplete; actualrecipes/providers absent",
+    "security": "unownednativecontrolwrite path",
+    "readability": "crosswalk obligations are clear butnotimplementations",
+    "performance": "fullcasebudget/cadence/RSS unproved"
+  },
+  "actions": {
+    "code_changes": 0,
+    "imports": 0,
+    "native_probes": 0,
+    "native_controls": 0,
+    "engine_runs": 0,
+    "builds": 0,
+    "tests": 0,
+    "fixture_writes": 0,
+    "subagents": 0,
+    "git": 0
+  },
+  "resource": {
+    "allocated_pair_cap_bytes": 12288,
+    "allocated_files": 2,
+    "META_cap_bytes": 10485760,
+    "closed_membership": "META10v5 allPcopies/archives/extracts+fullclosedLanding+20promotedharness",
+    "before_review": {
+      "actual_bytes": 9999698,
+      "actual_regular_files": 1165,
+      "maximum_pair_allowance": 12288,
+      "future_reserve": 256000,
+      "projection": 10267986,
+      "cap_bytes": 10485760
+    },
+    "before_evidence": {
+      "actual_bytes": 10010798,
+      "actual_regular_files": 1167,
+      "maximum_pair_allowance": 12288,
+      "future_reserve": 256000,
+      "projection": 10279086,
+      "cap_bytes": 10485760
+    },
+    "future_reserve_bytes": 256000,
+    "no_deletion_relabel_expiry_credit": true,
+    "only_report_outputs": [
+      "review.md",
+      "evidence.json"
+    ],
+    "prior_packets_and_negative_evidence_retained": true
+  }
+}

@@ -87,7 +87,8 @@
     "F11_expiry": "after-destination-successor-full-oracle"
   },
   "stream": null,
-  "note": "027 source-only; exact profile calculator/native CLI/gate/cohort proof remain null and refuse before restore. Five full oracles; quarantines release only after root-bound full oracle. No controls or engine RUN GO.",
-  "cohort_digest": null
+  "note": "035 SOURCE ONLY. False/null intentionally refuse. Exact v2 source-owned capture schema, coalescing producer, source bindings, embedded prior-admitted geometry, all retained sinks and sealed allocation required before long admission. No imports/controls/engine RUN GO.",
+  "cohort_digest": null,
+  "profile_inputs": null
 }
 

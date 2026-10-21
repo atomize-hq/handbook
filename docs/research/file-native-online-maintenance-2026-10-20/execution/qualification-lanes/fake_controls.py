@@ -117,17 +117,8 @@ def expected_samples(long):
     return rows, dict(rows=warm), expected
 
 
-def forecast_fixture():
-    limits = dict(cleanup_batches=128, sample_bytes=1024**2, cleanup_receipt_bytes=131072,
-                  result_bytes=131072, evidence_bytes=52*1024**2, evidence_files=4096)
-    profiles = {k:dict(input=4096, stdout=16384, stderr=2001, receipt=4096,
-                      output=524288 if k == 'oracle' else 0)
-                for k in ('resolve','lookup-bench','setup','convert','publish','cleanup','oracle')}
-    profiles['support'] = dict(bytes=1024**2, files=32)
-    return dict(limits=limits), profiles
 
-
-def execute_pure(core, legacy, long, history=None, history_fixtures=None):
+def execute_pure(core, legacy, long, profiles, history=None, history_fixtures=None):
     """Returns raw case outcomes; caller must persist a bound receipt via LaneHost."""
     outcomes = []
     def case(name, call, expect_rejection=False):
@@ -210,15 +201,17 @@ def execute_pure(core, legacy, long, history=None, history_fixtures=None):
     case('incomplete-independent-oracle', lambda: long.oracle_summary(dict(status='passed'), 101007), True)
     case('wrong-exact-long-H', lambda: long.oracle_summary(dict(status='passed', actual_H=101006), 101007), True)
     case('bare-pass-no-raw-reference', lambda: long.reference(dict(status='passed'), 'fake'), True)
-    fc, profiles = forecast_fixture()
-    case('source-schedule-five-oracles-606plusK', lambda:
-         legacy.forecast_long(fc, profiles)['engine_calls'] == 734 and
-         legacy.forecast_long(fc, profiles)['full_oracles'] == 5)
-    bad = copy.deepcopy(fc); bad['limits']['evidence_bytes'] = 1
-    case('whole-evidence-underallocated', lambda: legacy.forecast_long(bad, profiles), True)
-    badp = copy.deepcopy(profiles); badp['oracle']['output'] = 2*1024**2
-    case('five-oracles-over-M8-before-restore', lambda: legacy.forecast_long(fc, badp), True)
-    case('pending-profiles-before-restore', lambda: legacy.forecast_long(fc, None), True)
+    wire=profiles.capture_v2_schema({},128,8192,256)
+    case('literal-capture-schema',lambda: profiles.literal_capture_shape(wire)==wire)
+    wrong=copy.deepcopy(wire);wrong['raw_frame_schema']={'literal':0}
+    case('understated-wire-schema-refuses',lambda:profiles.literal_capture_shape(wrong),True)
+    case('C1-redistributed-split-bound',lambda:
+         profiles.cow_insert_bound(2,99,66)['bytes']==
+         14+65*(2+99+4+66)+2*(16+33*(32+2+99+2+99))+8+2*(32+2+99+2+99))
+    capacity=profiles.fixed_reader_capacity('a'*40,'b'*64,'c'*64,'d'*64)
+    case('fixed-reader-complete-capacity',lambda:
+         sum(x['batches']*x['queries_per_batch'] for x in capacity['streams'])==40000 and
+         capacity['reader_deadline_ns']==48000000000)
     if history is not None:
         case('history-negative-GO-with-valid-receipt', lambda:
              history.validate_host_authorization(dict(go=False, final_pin='a'*40,
@@ -245,9 +238,9 @@ def run_controls(host, config):
     need(permit.get('go') is True and len(permit.get('receipt_sha256', '')) == 64,
          'positive-finite-control-admission')
     modules = {name: source(config['bindings'][name], 'controls_' + name)
-               for name in ('stream', 'legacy_adapter', 'long_source', 'history_source')}
+               for name in ('stream', 'legacy_adapter', 'long_source', 'history_source', 'profile_calculator')}
     outcomes = execute_pure(modules['stream'], modules['legacy_adapter'], modules['long_source'],
-                            modules['history_source'], config.get('history_fixtures', {}))
+                            modules['profile_calculator'], modules['history_source'], config.get('history_fixtures', {}))
     need(len(outcomes) <= config['max_cases'] <= 48, 'finite-case-cap')
     raw = (json.dumps(dict(status='passed' if all(x['status'] == 'passed' for x in outcomes) else 'FAILED',
             cases=outcomes, source_bindings=config['bindings'], real_engine_calls=0,

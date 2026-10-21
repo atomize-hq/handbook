@@ -1,0 +1,164 @@
+{
+  "Git_mutations": 0,
+  "Jobs": 0,
+  "actual_total_bytes": 362547,
+  "all_case_status": "PENDING",
+  "builds": 0,
+  "case_IDs": 166,
+  "case_source_entries_named": 165,
+  "claim045_sha256": "55d9c973bbb9d488db37b7861038d638c7982744eacfebd1128e512b4c228c89",
+  "clock_reset": false,
+  "closeout": "2026-10-21T13:10:14Z",
+  "controls_executed": 0,
+  "engines": 0,
+  "frozen_utc": "2026-10-21T04:09:55.824302+00:00",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "groups_excluding_receipt": {
+    "bindings": {
+      "bytes": 41541,
+      "cap_bytes": 65536,
+      "files": 7
+    },
+    "case_data": {
+      "bytes": 102129,
+      "cap_bytes": 237568,
+      "files": 8
+    },
+    "source": {
+      "bytes": 213103,
+      "cap_bytes": 221184,
+      "files": 11
+    }
+  },
+  "known_remaining": [
+    "045 full review and concrete controls source validation",
+    "035 exact schemas/profile/membership reconciliation",
+    "direct checker scope and launch error paths",
+    "036 final scope/sealer/index/rolling-prefix contract",
+    "Windows historical/unit/ordinary/backup/oracle constructor dependencies and D document matrix",
+    "final engine/build/actualunit/nativeCLI/fulloracle bindings",
+    "full Windows all-sink admission"
+  ],
+  "manifest": {
+    "README.md": {
+      "bytes": 5396,
+      "sha256": "c7ed92578e1de5e21073006b48ae967566b3a4bbbeb831db3066ab1e23a8b793"
+    },
+    "controls-forecast.json": {
+      "bytes": 3897,
+      "sha256": "2ba00e9374ed800dfd7c71394a78813ba537dc0db37e5ea74c5b119c7e5e00d1"
+    },
+    "final-engine-bindings.json": {
+      "bytes": 4160,
+      "sha256": "130853968cf83cd69a0327563b3dd7a7490e460d25788f7597380e5f69841b0c"
+    },
+    "focused_windows.json": {
+      "bytes": 6538,
+      "sha256": "182fd6a3b7c307d84445ea9fb8a85dc9343c6aa2103e4c40afb24c26ee54e25b"
+    },
+    "growth_actions.json": {
+      "bytes": 6603,
+      "sha256": "b071f7d17fa0ee3bf195959fe983d7d1d70b106d87bf368c64799ca430d57b5a"
+    },
+    "interface.md": {
+      "bytes": 7715,
+      "sha256": "e72424417f2f0b779a3c7c54bb31be237831e34f417612da5f490342a706a11f"
+    },
+    "packing52.json": {
+      "bytes": 21122,
+      "sha256": "6028f8fc4a01ae4d0303d7f92f91db28a3c417b5aeaa4695ddbd3fd1a190b506"
+    },
+    "platform-source-review-notes.md": {
+      "bytes": 7681,
+      "sha256": "03d1d0e53bb371fdfb246499b9123c58e0df906f4e769925ccf2a7471d52c812"
+    },
+    "protocol.json": {
+      "bytes": 24128,
+      "sha256": "c4d390f0354ca0e689ab0602f1291fc98a6fe3ca07f76bc84e663a3ca5417711"
+    },
+    "recovery24.json": {
+      "bytes": 11328,
+      "sha256": "dc164a0f0fda3e1935f78d2944fe0328b3970a86dff1c78e34a634fac5dad746"
+    },
+    "source-bindings.json": {
+      "bytes": 7177,
+      "sha256": "76abda6db9467ad779c03ee72c56b14c32b9f50d616572b63d237394bb1da8a6"
+    },
+    "source_constructors.json": {
+      "bytes": 17755,
+      "sha256": "7ecf0fc058b8515a606ebf30acf7779e6cb89d3f4aac20842d88c29406824497"
+    },
+    "source_controls.py": {
+      "bytes": 30719,
+      "sha256": "fb12679d89f1f2b37e02688c1498554ac32399d8828a2cfc4a777e7000005a86"
+    },
+    "static-controls-result.json": {
+      "bytes": 5515,
+      "sha256": "0a9432af479a872202f3dbc52db1a04dfd58a594a1d719504cb6712b35fbb1a8"
+    },
+    "strict24.json": {
+      "bytes": 10194,
+      "sha256": "407eb436cb4b28b0b7695e9ab6ea4f3063ea4242a91f2a66cc67220ab116d8e7"
+    },
+    "windows_adapter.py": {
+      "bytes": 23367,
+      "sha256": "518d10d6e91e615db85121178a8257c14fb309bc9d02ecd6882e1aae9658114c"
+    },
+    "windows_bootstrap.py": {
+      "bytes": 8151,
+      "sha256": "32f01f6ffcf58f0d3914e447b7ddd2cd864c3c80d2c4ec5ad8b2d112f39765f7"
+    },
+    "windows_capsule.py": {
+      "bytes": 21659,
+      "sha256": "7944c5711b8bf7d77bd53d52d4a98f181f8290bb6da7c2c8de731e81a82168f2"
+    },
+    "windows_deadlines.py": {
+      "bytes": 3749,
+      "sha256": "da4309d25abeac4ddcd20fe8f92ca8bf3e539313d8d3df72b805a7e41fb68b1d"
+    },
+    "windows_driver.py": {
+      "bytes": 24343,
+      "sha256": "84216d84601e6e6e2178462c0bf372dde0d1860883f9992ae722dce4d70bb12b"
+    },
+    "windows_evidence.py": {
+      "bytes": 22056,
+      "sha256": "bf8ee356ca7cb196a1383feeaa1189d4b731779fa82d03cc502aa2dec633e4bf"
+    },
+    "windows_growth.py": {
+      "bytes": 14804,
+      "sha256": "1315c8383689736f88e6067e47cd5608569dfedfd73a75375b4ac1f109c24e8e"
+    },
+    "windows_hooks.py": {
+      "bytes": 26555,
+      "sha256": "4fb796cab36cea1e8cf037bdf66555fa23bde1a6214354f4acd05c551b8056e9"
+    },
+    "windows_native.py": {
+      "bytes": 25843,
+      "sha256": "a4c02bebadf58c99e902b45479daea676dcc39c195abc2d1d6692cebae89be1c"
+    },
+    "windows_oracle_bridge.py": {
+      "bytes": 11857,
+      "sha256": "e7970124dc02fabac9cca8aac573ba351936c1a7dea589073104c70606eb7512"
+    },
+    "workspace_ordinary.json": {
+      "bytes": 4461,
+      "sha256": "4989441f99816c0a8be029d8137736494859beb284121d27cb57b7d6d932dc59"
+    }
+  },
+  "manifest_domain": "SHA256 sorted compact UTF8 JSON manifest excluding this receipt",
+  "native_calls": 0,
+  "owner": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "preserved_1e0_archive_sha256": "c1add25f71315aeff4a563fc53ab0cfc227adb92bd68bcb17782c27f67775f26",
+  "previous_1e0_receipt_sha256": "1e023ecd0156cad2e2165c83b4e1120f1158b2988bd5d7f5d8180dcb515b73cf",
+  "private_imports": 0,
+  "regular_files": 27,
+  "runtime_go": false,
+  "schema": "private-windows-source045-final-freeze-v1",
+  "source_budget_sha256": "1e32a7be51fcef6520ce2785e66292ce115c585ffc6062575b12cb04c98a3800",
+  "source_bytes": 213103,
+  "source_cutoff": "2026-10-21T04:10:14Z",
+  "source_manifest_sha256": "de21c589a22fa24906b86b21e0eeef60f5a43207689d95af39edcb636a5006a7",
+  "source_only": true,
+  "status": "INCOMPLETE_SOURCE_FROZEN_NO_RUNTIME_GO",
+  "syntax_compiled_in_memory": 11
+}

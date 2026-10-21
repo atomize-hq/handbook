@@ -1,0 +1,64 @@
+{
+  "kind": "parent-independent-targeted-v3-raw-verification",
+  "status": "ACCEPT_EXACT_INTERFACE_CONTROLS_ONLY",
+  "guard_source_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+  "guard_receipt_sha256": "2a09cb615c21016565255f15b21f30dbef5b7da98718b783fe1552032879ed86",
+  "report_sha256": "7926e1a619719d243d750c0a356c0d95d8b022e3572994a693fa393c50450502",
+  "raw_sha256": "da1c7c162accee05ba059d40d92dc800c356ed016d74a8976ae5c48b301f511a",
+  "strict_gzip_single_member_rows": 50,
+  "raw_events": 14,
+  "real_native_calls": 5,
+  "positive_start_pid_creation_binary_verified": true,
+  "all_input_wire_and_partial_prefix_hashes_verified": true,
+  "all_base64_stdout_stderr_chunks_reconstructed": true,
+  "joined_callback_monitor_handle_ownership": true,
+  "two_numeric_empty_observations": true,
+  "max_recorded_monotonic_interval_seconds": 0.02025300497189164,
+  "intervals_over_40ms": 0,
+  "engine_qualified": false,
+  "cancel_death_coverage_claimed": false,
+  "all9returned_files": {
+    "claim-2f47f774c127476fb2f8360ace6b12be.json": {
+      "bytes": 835,
+      "sha256": "4a02202cfef0ec48d42f75f52ae2e1aafd6199a16ff16c0cc766d192e703b235"
+    },
+    "native-v3-targeted-controls-closeout.json": {
+      "bytes": 2874,
+      "sha256": "b59eb5d0fa4ff7a99f43603f42f44d4c316837fa6636a0f9d2ee0125e58ac208"
+    },
+    "native-v3-targeted-controls-phase.json": {
+      "bytes": 2420,
+      "sha256": "12b17dee6221966770692d3cbe52ed5852dd371dc61c774f768dd25c6fd61afe"
+    },
+    "native-v3-targeted-controls.json": {
+      "bytes": 5855,
+      "sha256": "2a09cb615c21016565255f15b21f30dbef5b7da98718b783fe1552032879ed86"
+    },
+    "native-v3-targeted-controls.memory.jsonl.gz": {
+      "bytes": 982,
+      "sha256": "c0dbe7991052b0768f072cd1c31c0cbf26884c34681586fc8ebca5833a246c1c"
+    },
+    "native-v3-targeted-controls.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v3-targeted-controls.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "v3-control-events-e361a15b3e85437bb09601061ea80a58-report.json": {
+      "bytes": 5510,
+      "sha256": "7926e1a619719d243d750c0a356c0d95d8b022e3572994a693fa393c50450502"
+    },
+    "v3-control-events-e361a15b3e85437bb09601061ea80a58.jsonl": {
+      "bytes": 279682,
+      "sha256": "da1c7c162accee05ba059d40d92dc800c356ed016d74a8976ae5c48b301f511a"
+    }
+  },
+  "cumulative_F12_before_parent_record": {
+    "bytes": 688700,
+    "files": 61,
+    "cap_bytes": 4194304,
+    "cap_files": 96
+  }
+}

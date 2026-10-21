@@ -1,0 +1,128 @@
+{
+  "schema": "parent-independent-macos-v34-raw-audit-v1",
+  "status": "FINITE_NATIVE_CONTROL_RAW_VERIFIED_NO_ENGINE_QUALIFICATION",
+  "engine_qualified": false,
+  "full_158_qualified": false,
+  "manifest_sha256": "fe9b1ab5c3da06ecd2e2938c05cfccd160c54c87804921ccc0da98ba5a65f52b",
+  "files_verified": 61,
+  "strict_single_member_gzip_streams": 12,
+  "roles": [
+    {
+      "case": "actual-Bash-gate-v34",
+      "exit": 0,
+      "failures": [],
+      "input_bytes_delivered": 19,
+      "rss_rows": 6,
+      "two_native_absences": true,
+      "result_sha256": "2ff60fd685b00a03a6e3e8ac972fd25439780297baf42129e064d73cc42f9102"
+    },
+    {
+      "case": "callback-failure-v34",
+      "exit": -9,
+      "failures": [
+        "RuntimeError('CONTROL_CALLBACK_FAILURE')"
+      ],
+      "input_bytes_delivered": 0,
+      "rss_rows": 1,
+      "two_native_absences": true,
+      "result_sha256": "ff14bc2579195665aa8eb58edc9a2ab70a1699e04339388e56e6381f7d9e7dd6"
+    },
+    {
+      "case": "fast-native-v34",
+      "exit": 0,
+      "failures": [],
+      "input_bytes_delivered": 112,
+      "rss_rows": 3,
+      "two_native_absences": true,
+      "result_sha256": "712db37a2f8ac56e8d5ccf71e3fd4af9c8d23ea67badd83f24ed46d35e766066"
+    },
+    {
+      "case": "native-path-mismatch-v34",
+      "exit": -9,
+      "failures": [
+        "RuntimeError('startgate-actual-executable-mismatch')"
+      ],
+      "input_bytes_delivered": 0,
+      "rss_rows": 1,
+      "two_native_absences": true,
+      "result_sha256": "4d1f6489421b4abb7db112138d9bdfca463fdeb07cf34a7aa2dcd9e890edeb80"
+    },
+    {
+      "case": "owned-interrupt-v34",
+      "exit": -15,
+      "failures": [],
+      "input_bytes_delivered": 246,
+      "rss_rows": 3,
+      "two_native_absences": true,
+      "result_sha256": "98af46454135439c734a4f81d23a4d6c3be2ee63a95fb7766e1d194653ce1bd0"
+    },
+    {
+      "case": "pipe-backpressure-v34",
+      "exit": 0,
+      "failures": [],
+      "input_bytes_delivered": 196733,
+      "rss_rows": 13,
+      "two_native_absences": true,
+      "result_sha256": "9ace08f8ce7f0e6f4ff7d5bfe4ce18416eb2834abfec853b30b50a1d0959accb"
+    },
+    {
+      "case": "semantic-native-v34-1",
+      "exit": 2,
+      "failures": [],
+      "input_bytes_delivered": 147,
+      "rss_rows": 2,
+      "two_native_absences": true,
+      "result_sha256": "993348394e4c14d1f71b7482ad73a9824791f6f754c4d0302c27a6cedc79b0df"
+    },
+    {
+      "case": "semantic-native-v34-2",
+      "exit": 2,
+      "failures": [],
+      "input_bytes_delivered": 147,
+      "rss_rows": 2,
+      "two_native_absences": true,
+      "result_sha256": "ed8e9160960509413480efa7f24cad9896e2c87e63e18c77aa6528229aec2747"
+    },
+    {
+      "case": "semantic-native-v34-3",
+      "exit": 0,
+      "failures": [],
+      "input_bytes_delivered": 112,
+      "rss_rows": 3,
+      "two_native_absences": true,
+      "result_sha256": "cf279a362df4f98f698865e25a14141149201335e83d8807b13eb9381705eb32"
+    },
+    {
+      "case": "semantic-native-v34-4",
+      "exit": 86,
+      "failures": [],
+      "input_bytes_delivered": 112,
+      "rss_rows": 3,
+      "two_native_absences": true,
+      "result_sha256": "bc0a90339baff8afa06f64cb4ce67ad70c65a7ce2a86c7e4da76b302df0a70d8"
+    }
+  ],
+  "outer_raw_rows": 355,
+  "outer_rss_rows": 333,
+  "outer_receipt_early_sample_count": 329,
+  "raw_max_start_gap_seconds": 0.012618540786206722,
+  "native_two_absences_verified": true,
+  "outer_censor": null,
+  "outer_exit": 0,
+  "outer_token_released": true,
+  "keeper_closed": true,
+  "semantic_call_exits": [
+    0,
+    2,
+    2,
+    86
+  ],
+  "terminal_empty_role_rss_rows": [
+    "pipe-backpressure-v34"
+  ],
+  "notes": [
+    "One terminal pipe-backpressure RSS row has no live members and zero aggregate, followed within40ms by native absence; no unreadable LIVE process is treated as zero.",
+    "Early outer receipt329 and final raw333 RSS counts preserved separately.",
+    "This verifies the finite v34 controls, not final v35 facade or final Rust. No rerun/source edits."
+  ]
+}

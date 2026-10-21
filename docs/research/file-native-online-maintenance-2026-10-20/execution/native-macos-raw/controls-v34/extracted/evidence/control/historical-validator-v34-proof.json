@@ -1,0 +1,39 @@
+{
+  "kind": "synthetic-historical-binding-validator-only",
+  "positive_actual_old_labels": true,
+  "negative_controls": [
+    {
+      "case": "wrong-case",
+      "refused": "historical-exact-case-run"
+    },
+    {
+      "case": "wrong-request",
+      "refused": "historical-exact-request"
+    },
+    {
+      "case": "wrong-binary",
+      "refused": "historical-exact-binary"
+    },
+    {
+      "case": "unknown-field",
+      "refused": "historical-grant-closed-shape"
+    },
+    {
+      "case": "wrong-active-pin",
+      "refused": "historical-active-binding"
+    },
+    {
+      "case": "expired",
+      "refused": "historical-fixed-expiry"
+    },
+    {
+      "case": "historical-source-byte-drift",
+      "refused": "historical-source-member-mismatch",
+      "observed_source_hex": "686973746f726963616c2073796e74686574696320736f757263650a6368616e676564",
+      "observed_source_sha256": "9f5f2d9f5990d88b63a792f7c939839947819d5517bba05e1561f60f69d06360"
+    }
+  ],
+  "old_binary_launched": false,
+  "candidate_or_historical_engine_qualified": false,
+  "ROOT_restored": true
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "private-cp4-final-source-amendment-v1",
+  "source_only": true,
+  "runtime_go": false,
+  "owner": "01a15b15-3362-7133-b789-1ff556b75d04",
+  "worktree": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook",
+  "source_max_bytes": 1048576,
+  "source_admin_existing_C3_bytes": 3145728,
+  "prior_30file_freeze_sha256": "4434afbb3b5a4725f3d609001da93d9a4b55978bde3f7ce5cc148ab47caf2c4c",
+  "prior_engine_pacing_source_review": "INTEGRATE_SOURCE_ONLY; pace_control_NO_INTEGRATE_WORK_OVERFLOW",
+  "existing_checkpoint_paths_caps": {
+    "control.py": 6144,
+    "forecast.json": 10240,
+    "pace_controls.py": 16384,
+    "protocol.py": 24576,
+    "README.md": 24576
+  },
+  "checkpoint_whole_max_bytes": 81920,
+  "checkpoint_files": 5,
+  "test_only_rust_additions_max_bytes": 8192,
+  "test_only_existing_source_files": [
+    "src/rolling.rs",
+    "src/pack.rs",
+    "src/physical_lifetime.rs",
+    "src/packing.rs"
+  ],
+  "scope": [
+    "Repairactualpaceproof10buildWorkgrowth withboundedcleanup betweenbuilds; preserve128KiBWork/64catalogcaps/actualoldpin15s+2successors/nativeclock/immutableorigin",
+    "Minimalproductionvalidator/builderboundaryunits:128vs129Deferred(countvsbyteshonest),exact32768/32769Discoverybytes,freshbirthstalejournalpathreuse,8MiBraw,64catalog/128KiBWork",
+    "No productionbehavior change outsidealreadyreviewedpacingunlessconcretebug separatelyreported/reviewed; no Cargo/deps/features/default/publicformat/newfilenames",
+    "RealNativeOwnedDriverfactory bindsactualNative+retainedownedregistrybeforecallbacks; absentadapterprefixtureinitrefusal; no arbitraryPIDfallback",
+    "Allactualunitcount/sourcefunctionbindingsupdated; unfilteredactualnativeworkspacePASSrequirementnotfixed23; heavy80MfixtureONLYONCEonfinalRustsource"
+  ],
+  "rules": [
+    "Individualandwhole5checkpointcapscheckedBEFOREeverywrite; source1MiB/admin3MiB unchanged insidecurrentC3; no extra globaldraw",
+    "No new source paths/temp/archives/bytecode; failedsourcefreezes retained asparenthashes/receipts beforemutation",
+    "CachedGitNexusimpact beforeeverynew/modifiedsymbol; UNKNOWNmanualHIGH explicit; exactfrozenfullsource re-reviewbeforetypecheck/build/test/runtime/Git",
+    "Sourcefreeze2026-10-21T04:10:14Z,functional11:10:14Z,closeout13:10:14Z unchanged"
+  ]
+}

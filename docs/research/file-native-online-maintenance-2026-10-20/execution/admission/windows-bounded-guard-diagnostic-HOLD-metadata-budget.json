@@ -1,0 +1,21 @@
+{
+  "kind": "private-diagnostic-HOLD-metadata-only-admission",
+  "runtime_go": false,
+  "controls_go": false,
+  "engine_go": false,
+  "target": "C:\\file-native-online-matrix-20261020\\protocol\\windows-bounded-guard-r2-controls\\diagnostic-plan-HOLD.json",
+  "max_bytes": 16384,
+  "max_files": 1,
+  "expected_bytes": 14149,
+  "expected_sha256": "85447deeabbbbf79eadab2b6fbc52877b92b2813f6cc9b7b686476ca7cf0e4f3",
+  "existing_category": "F06_MATRIX_protocol",
+  "category_cap_bytes": 33554432,
+  "category_cap_files": 25000,
+  "prewrite_actual_bytes": 6808462,
+  "prewrite_actual_files": 1242,
+  "selected_subgroup_max_bytes": 262144,
+  "selected_subgroup_max_files": 32,
+  "permission": "Create only the data HOLD record; no27 budgets/GOmanifest/launcher/native/fixture/engine/code edits. Recheck whole category and subgroup before write. No source clock reset.",
+  "source_cutoff": "2026-10-21T04:10:14Z",
+  "time": "2026-10-21T04:25:23.291691+00:00"
+}

@@ -1,4 +1,4 @@
-# Private SOURCE ONLY. RUNTIME_CONTRACTS=None: paced probe, quantitative capsule and post-exit finalizer are NOT implemented here. Config hashes/flags cannot grant RUN.
+# SOURCE ONLY: direct frozen036 API +035 formulas; runtime and post-exit qualification require independent review/GO. No module/control/native execution in source preparation.
 import copy
 import hashlib
 import json
@@ -9,8 +9,7 @@ MIB = 1024 * 1024
 F05_BYTES = 1073741824
 F05_FILES = 400000
 QPC_SHA256 = '50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378'
-SOURCE_BUDGET_SHA256 = 'a0e29d9185e654df462eb5895fffdb3809b5ef190d8db71bf316a217093bb63f'
-RUNTIME_CONTRACTS = None
+SOURCE_BUDGET_SHA256 = 'dd1b8ebfb2b35e32fde2873da2d8e5a4becb77c49e1f27a9649ac63ffa97c785'
 FUNCTIONAL_UTC = '2026-10-21T11:10:14Z'
 SOURCE_FREEZE_UTC = '2026-10-21T04:10:14Z'
 CATEGORIES = ('early', 'middle', 'recent', 'missing', 'cancelled', 'lostreply')
@@ -112,7 +111,7 @@ def validate_release(bindings):
     for key in HASH_FIELDS:
         _need(_digest(bindings[key]), 'final-binding-unreleased:' + key)
     _need(bindings['api'] == 'history-native-v1', 'unreleased-runner-interface')
-    _need(bindings['qpc_sha256'] == QPC_SHA256 and bindings['source_budget_sha256'] == SOURCE_BUDGET_SHA256, 'exact-QPC-and-source-budget')
+    _need(bindings['qpc_sha256'] != QPC_SHA256 and bindings['source_budget_sha256'] == SOURCE_BUDGET_SHA256, 'exact-QPC-and-source-budget')
     _need(all((bindings[key] is True for key in ('source_review', 'oracle_review', 'terminal_review', 'runtime_go', 'default_payloads', 'strict_25Hz', 'same_final_pin_native'))), 'final-review-or-separate-runtime-GO-required')
     _need(type(bindings['profile']) is int and bindings['profile'] == 4, 'default-profile4')
     _need(bindings['phase_go_scope'] == 'all1600-plus-initial-exact-lookups' and bindings['cutoff'] == FUNCTIONAL_UTC and (bindings['source_freeze'] == SOURCE_FREEZE_UTC), 'bounded-phase-GO-and-shared-clock')
@@ -261,9 +260,10 @@ def validate_phase_evidence(phase, evidence):
     maintenance = evidence['maintenance']
     _closed(maintenance, ('calls', 'builds', 'positive_publisher_overlap', 'actual_mapping_changes', 'zero_forbidden_under_global_exclusion', 'unchanged_historical_body_opens', 'metrics', 'activation_holds_ns', 'online_cleanup_calls', 'boundary_cleanup_calls', 'final_unprotected_backlog', 'raw_sha256'), 'maintenance')
     _need(maintenance['zero_forbidden_under_global_exclusion'] is True and type(maintenance['unchanged_historical_body_opens']) is int and (maintenance['unchanged_historical_body_opens'] == 0) and _digest(maintenance['raw_sha256']), 'no-global-or-hidden-history-scan')
-    for key in ('calls', 'builds', 'actual_mapping_changes', 'online_cleanup_calls', 'boundary_cleanup_calls', 'final_unprotected_backlog'):
+    for key in ('calls', 'builds', 'actual_mapping_changes', 'online_cleanup_calls', 'boundary_cleanup_calls'):
         _integer(maintenance[key], 0, 1000, 'maintenance:' + key)
     if phase['online']:
+        _integer(maintenance['final_unprotected_backlog'], 0, 1000, 'measured-boundary-backlog')
         _need(maintenance['positive_publisher_overlap'] is True and 2 <= maintenance['actual_mapping_changes'] <= 100 and (maintenance['builds'] == 100) and (maintenance['online_cleanup_calls'] == 99) and (maintenance['boundary_cleanup_calls'] == 2) and (maintenance['final_unprotected_backlog'] == 0), 'real-online-work-and-two-call-drainage')
         _need(type(maintenance['metrics']) is list and len(maintenance['metrics']) == 100, 'all-online-build-metrics')
         work = _metric_totals(maintenance['metrics'])
@@ -410,25 +410,9 @@ def validate_reader_capacity(plan, profile):
     _need(plan['finite_command_bounds']['reader_calls'] == 640 and plan['finite_command_bounds']['reader_warm_queries'] == 640000, 'whole-reader-counts')
     return dict(status='capacity-arithmetic-only-PROVISIONAL_UNQUALIFIED', profile_sha256=_same(profile))
 
-def _runtime_preflight(plan, bindings, arithmetic, components):
-    contract = RUNTIME_CONTRACTS
-    _need(type(contract) is dict, 'PENDING-concrete-reader-growth-postexit-implementations')
-    _closed(contract, ('source_pin', 'probe_sha256', 'capsule_sha256', 'finalizer_sha256', 'clock_handshake_sha256', 'reader_capacity', 'derive_whole_forecast'), 'reviewed-source-contract')
-    _need(contract['source_pin'] == bindings['source_pin'] and contract['probe_sha256'] == bindings['reader_probe_sha256'] and (contract['capsule_sha256'] == bindings['growth_capsule_sha256']) and (contract['finalizer_sha256'] == bindings['postexit_finalizer_sha256']) and (contract['clock_handshake_sha256'] == bindings['clock_handshake_sha256']), 'implemented-contract-bindings')
-    capacity = contract['reader_capacity']
-    _need(type(capacity) is dict and capacity.get('source_pin') == contract['source_pin'] and (capacity.get('probe_sha256') == contract['probe_sha256']) and (capacity.get('clock_handshake_sha256') == contract['clock_handshake_sha256']), 'exact-implemented-reader-capacity-binding')
-    validate_reader_capacity(plan, capacity)
-    _need(callable(contract['derive_whole_forecast']), 'PENDING-concrete-transitive-growth-capsule')
-    model = contract['derive_whole_forecast'](plan, components)
-    _closed(model, ('source_pin', 'capsule_sha256', 'counts', 'F05_bytes', 'F05_files', 'protocol_bytes', 'protocol_files', 'evidence_bytes', 'evidence_files', 'expanded_trace_sha256', 'all_sink_membership_sha256', 'profile_sha256'), 'derived-whole-forecast')
-    _need(model['source_pin'] == bindings['source_pin'] and model['capsule_sha256'] == contract['capsule_sha256'] and (model['counts'] == plan['finite_command_bounds']) and all((_digest(model[k]) for k in ('expanded_trace_sha256', 'all_sink_membership_sha256', 'profile_sha256'))), 'source-derived-expanded-all-sink-schedule')
-    expected = dict(F05_bytes=arithmetic['bytes'], F05_files=arithmetic['files'], protocol_bytes=arithmetic['protocol']['additional_bytes'], protocol_files=arithmetic['protocol']['additional_files'], evidence_bytes=arithmetic['evidence']['additional_bytes'], evidence_files=arithmetic['evidence']['additional_files'])
-    _need(all((type(model[k]) is int and model[k] == v for k, v in expected.items())), 'quantitative-model-reservations-match')
-    return dict(whole_profile=model, reader_capacity_sha256=_same(capacity))
-
 def _guard_observation(guard, slots):
     _closed(guard, ('status', 'guard_sha256', 'outer_run_id', 'host_pid', 'host_creation_id', 'clock_domain', 'phase_start_ns', 'phase_end_ns', 'observed_prefix_sha256', 'owned_drain_sha256', 'finalizer_sha256', 'final_receipt', 'source_pin', 'binary_sha256', 'budget_sha256'), 'provisional-phase-guard')
-    _need(guard['status'] == 'PROVISIONAL_UNQUALIFIED' and guard['guard_sha256'] == QPC_SHA256 and (guard['final_receipt'] is None), 'no-final-outer-PASS-inside-host')
+    _need(guard['status'] == 'PROVISIONAL_UNQUALIFIED' and _digest(guard['guard_sha256']) and (guard['guard_sha256'] != QPC_SHA256) and (guard['final_receipt'] is None), 'no-final-outer-PASS-inside-host')
     for key in ('outer_run_id', 'host_creation_id', 'clock_domain'):
         _need(type(guard[key]) is str and 1 <= len(guard[key]) <= 128, 'authentic-native-identity:' + key)
     _integer(guard['host_pid'], 1, 2 ** 32 - 1, 'native-host-pid')
@@ -459,24 +443,39 @@ def validate_reader_origin(value, phase, selected, bindings):
     return value['origin_perf_ns']
 
 def run_history(host, config):
-    _closed(config, ('go', 'plan', 'bindings', 'forecast', 'phase_forecasts'), 'run-history')
+    _closed(config, ('go', 'plan', 'bindings', 'forecast', 'phase_forecasts', 'runtime_bindings'), 'run-history')
     _need(config['go'] is True, 'default-go-false-separate-runtime-release')
     bindings = validate_release(config['bindings'])
     plan = history_plan(config['plan'])
     forecast = forecast_history(config['forecast'])
-    source_admission = _runtime_preflight(plan, bindings, forecast, config['forecast'])
+    from pathlib import Path
+    import runtime_contracts as shared
+    rb = config['runtime_bindings']
+    _need(type(rb) is dict and rb.get('history') == bindings and (rb.get('runtime_go') is True), 'supplemental-source-bindings')
+    spec = rb['runtime_source']
+    _need(_digest(spec['sha256']) and spec['sha256'] == bindings['runner_sha256'] and type(spec['bytes']) is int and 0 < spec['bytes'] <= 81920 and (Path(shared.__file__).resolve() == Path(spec['path']).resolve()), 'exact-frozen036-module')
+    raw = Path(shared.__file__).read_bytes()
+    _need(len(raw) == spec['bytes'] and hashlib.sha256(raw).hexdigest() == spec['sha256'] and (shared.API == 'shared-runtime-contracts-v1'), 'actual036-source-bytes')
+    _need(rb['profile_config']['components'] == config['forecast'], 'same-source-profile-components')
+    capacity = shared.reader_capacity(rb)
+    validate_reader_capacity(plan, capacity)
+    model = shared.derive_whole_forecast(plan, rb, config['forecast']['current'])
+    expected = dict(F05_bytes=forecast['bytes'], F05_files=forecast['files'], protocol_bytes=forecast['protocol']['additional_bytes'], protocol_files=forecast['protocol']['additional_files'], evidence_bytes=forecast['evidence']['additional_bytes'], evidence_files=forecast['evidence']['additional_files'])
+    _need(all((type(model[k]) is int and model[k] == v for k, v in expected.items())) and model['counts'] == plan['finite_command_bounds'], 'concrete035-model-equals-all-reservations')
+    source_admission = dict(whole_profile=model, reader_capacity_sha256=_same(capacity))
     authorization = validate_host_authorization(host.authorize(config, 'history'), bindings['source_pin'])
     h = host.harness
     _need(bindings['source_pin'] == forecast['source_pin'] == h.final_pin, 'same-final-source-in-all-inputs')
     _need(type(config['phase_forecasts']) is dict and set(config['phase_forecasts']) == {phase['id'] for phase in plan['phases']} | {'lookup-H1', 'lookup-H10', 'bootstrap-H1-p1', 'bootstrap-H1-p4', 'bootstrap-H10-p1', 'bootstrap-H10-p4'}, 'all-lookup-bootstrap-reader-phase-oracle-finalization-forecasts-required')
-    runner = getattr(host, 'history', None)
+    runner = shared.make_runner(host, rb)
+    host.history = runner
     _need(runner is not None and getattr(runner, 'api', None) == 'history-native-v1', 'released-native-runner-required')
     _need(runner.bindings() == bindings, 'runner-exact-release-match')
     permit = runner.preflight(plan, forecast, bindings)
     _need(permit.get('go') is True and permit.get('plan_sha256') == plan['plan_sha256'] and (permit.get('fresh_whole_census') is True) and (permit.get('no_other_semantic_writer') is True) and (permit.get('no_clone') is True) and (permit.get('F05_bytes') == F05_BYTES) and (permit.get('F05_files') == F05_FILES), 'fresh-whole-phase-admission-required')
     _need(permit.get('reader_capacity_sha256') == source_admission['reader_capacity_sha256'] and permit.get('quantitative_profile_sha256') == source_admission['whole_profile']['profile_sha256'], 'runner-must-admit-exact-reader-capacity-and-quantitative-profile')
     h.note('history-plan-admitted', plan=plan, forecast=forecast, bindings=bindings, permit=permit, source_admission=source_admission)
-    lookup_results, summaries = ([], [])
+    lookup_results, summaries, phase_seals = ([], [], [])
     for lookup in plan['lookups']:
         donor = plan['donors'][lookup['donor']]
         adopted = runner.adopt(h, donor)
@@ -486,7 +485,7 @@ def run_history(host, config):
             evidence = runner.lookup(h, donor, lookup)
             _need(evidence.get('source_pin') == h.final_pin and evidence.get('binary_sha256') == bindings['binary_sha256'], 'new-finalcandidate-not-old-baseline')
             lookup_results.append(validate_lookup_evidence(plan, evidence))
-            h.note('history-initial-lookups-complete', evidence=evidence)
+            h.note('history-initial-lookups-complete', receipt_sha256=evidence['receipt_sha256'], donor=donor['id'])
             _boundary(h, runner, donor['root'], 'lookup-' + donor['id'] + '-full', donor['actual_H'])
     for identity, donor in plan['donors'].items():
         root = donor['root']
@@ -528,9 +527,13 @@ def run_history(host, config):
                     drainage = h.drain_two_passes(root)
                     evidence['maintenance']['boundary_cleanup_calls'] = len(drainage)
                     evidence['maintenance']['final_unprotected_backlog'] = drainage[-1]['backlog']['unprotected']
+                else:
+                    evidence['maintenance']['boundary_cleanup_calls'] = 0
                 evidence['oracle'] = _boundary(h, runner, root, phase['id'] + '-full', phase['H_end'])
                 closure = host.drain(phase['id'])
                 _need(type(closure) is dict and closure.get('children_empty') is True and _digest(closure.get('receipt_sha256')), 'owned-native-IO-handle-drain')
+                evidence['closure'] = closure.get('closure')
+                _need(evidence['closure'] == dict(processes_closed=True, handles_closed=True, callbacks_joined=True, empty_observations=2, post_close_census=True, scope='owned-children-IO-handles'), 'actual-normalized-owned-closure-required')
                 guard = evidence['guard_observation']
                 _need(guard.get('owned_drain_sha256') in (None, closure['receipt_sha256']), 'actual-owned-drain-receipt-match')
                 guard['owned_drain_sha256'] = closure['receipt_sha256']
@@ -538,9 +541,12 @@ def run_history(host, config):
                 checkpoint = host.checkpoint(phase['id'] + '-closed', config['phase_forecasts'][phase['id']])
                 _need(type(checkpoint) is dict and checkpoint.get('go') is True and _digest(checkpoint.get('receipt_sha256')), 'positive-whole-phase-checkpoint')
                 _need(evidence.get('source_pin') == h.final_pin and evidence.get('binary_sha256') == bindings['binary_sha256'], 'phase-finalsource-binding')
-                summary = validate_phase_evidence(phase, evidence)
-                summaries.append(summary)
-                host.record('history-phase-complete', dict(phase=phase, summary=summary, evidence_sha256=evidence['receipt_sha256'], closure=closure), category='evidence', max_bytes=65536)
+            sealed = shared.seal_final_provisional(host, phase, evidence, rb)
+            actual = shared.sealed_phase_evidence(host, sealed, rb)
+            summary = validate_phase_evidence(phase, actual)
+            _need(summary['receipt_sha256'] == sealed['body']['sha256'], 'actual-sealed-body-SHA-not-prefix')
+            summaries.append(summary)
+            phase_seals.append(sealed)
     comparison = compare_history(plan, summaries)
     h.note('history-all1600-provisional', comparison=comparison, initial_lookup_receipts=lookup_results, semantic_write_freeze=True, future_forecast_expiry_requires_actual_quiescent_census=True)
-    return dict(comparison=comparison, lookups=lookup_results, phases=summaries, qualification='PROVISIONAL_UNQUALIFIED: post-exit receipt join and all other mandatory cells remain required')
+    return dict(comparison=comparison, lookups=lookup_results, phases=summaries, phase_seals=phase_seals, qualification='PROVISIONAL_UNQUALIFIED: post-exit receipt join and all other mandatory cells remain required')

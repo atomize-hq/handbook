@@ -1,0 +1,40 @@
+{
+  "kind": "private-native-macos-facade-source-only-v35",
+  "owner": "01a15af8-2912-7262-b618-6b3682739acd",
+  "host": "remote-control:env_e_6a072968060483238ea07b05891b8c9c",
+  "root": "/private/tmp/file-native-online-macos-20261020",
+  "source_only": true,
+  "runtime_engine_cache_build_copy_go": false,
+  "bytes": 73728,
+  "files": 5,
+  "paths": {
+    "execution/native-macos/native_facade_v35.py": 24576,
+    "execution/native-macos/native_lifecycle_v35.py": 12288,
+    "execution/native-macos/native_case_extensions_v35.py": 20480,
+    "execution/native-macos/native_case_crosswalk_v35.py": 12288,
+    "evidence/control/native-facade-source-review-v35.json": 4096
+  },
+  "semantic_source_and_review": {
+    "prior_actual_bytes": 708282,
+    "prior_actual_files": 35,
+    "after_all_maxima_bytes": 782010,
+    "after_all_maxima_files": 40,
+    "cap_bytes": 786432,
+    "cap_files": 40
+  },
+  "whole_source_hard_cap_bytes": 4194304,
+  "allocation": "ExistingnativeF01/F12 inside44GiB; ALLsemanticF12source-reviewdocs countconservativeF01closure too. No extra globalbytes; prior chargesretained; no incomingfullsourcecopyyet",
+  "required": [
+    "All158inventoryentries actualconstructor/sourcehookmaps; all23+futureactualworkspaceunits withinfivelegacyidentityslots, all17ordinaryroutes",
+    "Exactreviewedfocusv3.1latestsource225383/11 andfinalbyteoracle/v6 release, originalstrict24/packing52/recovery24 assertions preserved",
+    "Concretecurrent_case/per-actionforecasts/nativebarriers/cancel/error/death/workintervals/overlap/ownedclosure/independentoracle/backup/corruption/lifetime/compatibility constructors",
+    "No permanentUnsupported/PENDING masqueradingasimplementedcase; missingexternalfrozenbindingsprelaunchrefuseuntilsourceprovided",
+    "AuthorfreshwholeF01actual+allsemanticF12docs+ALLnewmaximaprecheckBEFOREeverywrite; each5individualcap/exactclosedpathset/whole73728 fits",
+    "Fullincomingtransitivecopyclosure needs separatelyreviewed exactmanifest beforefetch/copy/build; current386762engine25/65460checkpoint5 areSOURCEONLYfrozenreviewpending, notqualifiedsourcepin"
+  ],
+  "rules": [
+    "No sixthpath/temp/pycache/newarchive; oldv20-v34filesandreceiptsimmutable",
+    "PureAST/inmemorycompile only; no privateimports/newcontrols/native/Job/engine/Cargo/Git/cache/corpus/fixture/restore/delete",
+    "Sourcefreeze2026-10-21T04:10:14Z,functional11:10:14Z,closeout13:10:14Z fixed"
+  ]
+}

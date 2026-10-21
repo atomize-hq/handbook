@@ -1,12 +1,12 @@
 {
-  "status": "CP4_STAGE_SOURCE_ACCEPTED_COMPILE_ONLY_PASS_PACING_SOURCE_REVIEW_PENDING_FULL_QUALIFICATION_INCOMPLETE",
+  "status": "SOURCE_FROZEN_ENGINE_SOURCE_ACCEPTED_PLATFORM_INTEGRATION_BLOCKED_FULL_QUALIFICATION_INCOMPLETE",
   "human_byte_ceiling": 47244640256,
   "file_cap": 5000000,
   "inside_closeout_bytes": 1073741824,
   "inside_closeout_files": 100000,
   "whole_conservative_prospective_with_earmarks": 46924310901,
   "central_unassigned_bytes": 320329355,
-  "remaining_files": 207348,
+  "remaining_files": 207284,
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
   "t0": "2026-10-20T19:10:14Z",
   "functional_cutoff": "2026-10-21T11:10:14Z",
@@ -67,7 +67,7 @@
     }
   ],
   "Mac_readiness_chat": "01a15aba-14a9-7ff0-a81a-3c15f7b4fc8d",
-  "Mac_qualification": "Connected; v34 eight files94621 fully hash/cap/strictgzip verified; parent adapter plus full delta source review accepted finite control preparation; no run yet",
+  "Mac_qualification": "v34 finite10 transport controls independently raw-verified:61 files,12 strict gzip streams,333 outerRSS rows/max12.61854ms, native two-absence closure. No engine/full158 credit. v35 facade source review NO-INTEGRATE.",
   "central_claims_used": [
     {
       "id": "44GiB-CENTRAL-001-F08-FINAL-NATIVE",
@@ -96,17 +96,18 @@
     "C2_build_topups": 402653184,
     "C3_source_review_control": 16777216,
     "C2_unclaimed_Windows_topup": 134217728,
-    "C3_unsubclaimed_bytes": 2195456,
-    "C3_META_REVIEW_bytes": 9437184,
+    "C3_unsubclaimed_bytes": 901120,
+    "C3_META_REVIEW_bytes": 10485760,
     "C1_Mac_private_cache_active_bytes": 67108864,
     "C3_CP2_CP3_SOURCE_ADMIN_bytes": 3145728,
     "C3_Matrix_admin_topup_bytes": 1048576,
-    "C3_qualification_lanes_bytes": 131072,
+    "C3_qualification_lanes_bytes": 262144,
     "C3_Windows_final_platform_bytes": 524288,
     "C3_stream_source_bytes": 131072,
     "C1_Windows_and_Linux_unused_expired": true,
-    "C3_fixture_retirement_bytes": 65536,
-    "C3_bounded_guard_bytes": 65536
+    "C3_fixture_retirement_bytes": 81920,
+    "C3_bounded_guard_bytes": 81920,
+    "C3_shared_runtime_bytes": 81920
   },
   "Windows_guard": {
     "owner": "matrix worker",
@@ -125,13 +126,10 @@
   },
   "source_protocol_candidate": "Reviewed a3 STORE3/Work2/catalog4/FNPIDX02 normal-pair conversion; no split-location fallback. Full qualification pending.",
   "next_required": [
-    "Final paced30file source freeze/fresh review then23actualunits/heavy/protocol/nativeproof",
-    "Bounded guard031 source review/finite nativecontrols and explicit calleroptin",
-    "Quota Q1/Q2 re-freeze/review then finite67+ controls under boundedguard",
-    "Native fullplatform source/constructors and boundedcontrols; samefinalpin bodies",
-    "RuntimeContracts/quantitativeprofiles/postexitfinalizer implementation and purecontrols",
-    "Full mandatoryF05history/LONG conversion5oracles/restoreaccepted successor; no plannedexpiry credit",
-    "Source-proven sequential fullbody admissions after actuallong/target/census proofs; fullfinalnative/Windows1000/performance gates"
+    "Verify exact frozen source25 copy receipts on native hosts; no old source/cache/target mutation",
+    "Assess only existing frozen controllers and complete private-cache/all-sink/clock/closure data for any separate build or31-unit attempt; no runtime launches while their gates remain unqualified",
+    "Preserve all final reviews and original failures; keep every missing mandatory cell INCOMPLETE",
+    "Continue admitted read-only qualification and evidence closeout to fixed functional/closeout cutoffs; no source repairs, clock reset, reduced workload or unearned expiry"
   ],
   "native_Linux_guard": {
     "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
@@ -139,7 +137,7 @@
   },
   "shared_harness_pin": "01ff272a98fe2cddf01f8ebfc399192f234051af",
   "CP1_open_source_review_findings": [],
-  "as_of": "2026-10-21T02:17:43.995185+00:00",
+  "as_of": "2026-10-21T04:41:06.321464+00:00",
   "landing_head": "b76958c1",
   "latest_harness_source_pin": "5bb4d800",
   "CP1_provisional_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
@@ -363,10 +361,10 @@
     "base": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
     "exclusive_F02": "C:/file-native-online-cp1-20261020/build"
   },
-  "landing_head_before_metadata": "2b651e05aa265c76e0c8d8254ff1d34035573f52",
-  "latest_claim": "034_INTERNAL_WINDOWS_CAPS",
-  "claim_family_cap_files": 128,
-  "claim_family_cap_bytes": 524288,
+  "landing_head_before_metadata": "9ee0d66e",
+  "latest_claim": "045_WINDOWS_SOURCE221184_CASE237568_BIND65536",
+  "claim_family_cap_files": 192,
+  "claim_family_cap_bytes": 786432,
   "claim_family_internal_extension_files": 48,
   "independent_v5_R1": {
     "source_sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9",
@@ -414,16 +412,14 @@
     "new_six_control_docs_max_bytes": 17408,
     "compile_control_engine_go": false
   },
-  "historical_nested_forecasts": "Older values nested above are retained historical proposals, not current admission; latest025/current fields and immutable claim chain control.",
+  "historical_nested_forecasts": "Older nested implementation plans, source hashes, compile evidence and allocations are preserved history. frozen_source_state and current_runtime_admissions below control the current candidate. No source remediation after cutoff.",
   "META_membership": {
-    "cap_bytes": 9437184,
-    "manifest_sha256": "024a23d8304de4dec44332b1c6d686031ffc1dbc9f5a30e678f2bae03d5dfe0e",
-    "promoted_harness_files": 20,
-    "promoted_harness_bytes": 203215,
-    "actual_before_copy_bytes": 8229200,
-    "added_metadata_copy_bytes": 332397,
-    "future_reserve_bytes": 400000,
-    "old_F01_reservations_retained": true
+    "cap_bytes": 10485760,
+    "manifest_sha256": "c7ed56acf1e46aec557642fae700a456e1e8a2a013b48eb54a8c84e36137d713",
+    "promoted_harness_files": 24,
+    "promoted_harness_bytes": 245974,
+    "path": "execution/admission/meta-membership-v6.json",
+    "all_physical_copies_counted_once_per_pathname": true
   },
   "Linux_peer_compile": {
     "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
@@ -451,13 +447,15 @@
     "prior_v1_census_selfsize_failure_preserved": true
   },
   "quota_v2": {
-    "status": "SOURCE_REMEDIATE_Q1_EMITTED_CONTROL_LABELS_Q2_IMPOSSIBLE_ORIGINAL_ALLOWANCE",
-    "frozen_negative_receipt_sha256": "80ceaace78e0a6afd6143f3eba03ce46dd7f13c21fe8801b1cf7824eb5c4d6ee",
-    "source_only_fix_go": true,
-    "runtime_go": false
+    "status": "FROZEN_SOURCE_INTEGRATE_70_CONTROLS_UNRUN",
+    "files_promoted": 5,
+    "source_bytes": 44806,
+    "runtime_go": false,
+    "final_v6_engine_pin": "None; verifier refuses until exact authorized data binding",
+    "no_post_cutoff_algorithm_edits": true
   },
   "sequential_host_route": {
-    "selected": "Verified complete backups plus exact new disposable prefix retirement AFTER full host success/quiescence/fresh actual census; source029/033 only",
+    "selected": "NO_GO: no qualified native Context/retirement and no source-proven retain-all44GiB whole-body route",
     "actual_fixture_deletion_authorized": false,
     "F14_expiry_applied": false,
     "F05_shrink_applied": false,
@@ -465,5 +463,110 @@
     "F05_actual_bytes": 552141207,
     "F05_current_cap_bytes": 1073741824,
     "all_scope_preserved": true
+  },
+  "source_cutoff": "2026-10-21T04:10:14Z",
+  "source_edits_closed": true,
+  "frozen_source_state": {
+    "source_cutoff": "2026-10-21T04:10:14Z",
+    "source_ledger": "execution/source-cutoff-20261021T041014Z.json",
+    "source_ledger_sha256": "839f63c861eafe10abb00425f9e153b8716131a3a62ff39112ada495c63c6c0f",
+    "engine_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+    "engine_branch_pushed": "codex/file-native-online-cp3-20261020",
+    "engine_30_files_bytes": 478740,
+    "engine_manifest_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+    "engine_source_review": "INTEGRATE_SOURCE_ONLY",
+    "actual_Rust_tests_in_final_source": 31,
+    "final_source_tests_executed": 0,
+    "final_source_typecheck": "UNRUN",
+    "source_docs_limitation": "Two pace-controls cap declarations remain8192; actual11490 fits approved14336. They are not executed launcher bounds.",
+    "qualification_helpers": {
+      "bytes": 252175,
+      "files": 10,
+      "manifest_sha256": "86038660021a1c7aea298569026b0aefdd3a7701e0db5f51a19fb84a3543d42b",
+      "review": "REMEDIATE_NO_RUNTIME",
+      "hard_blockers": [
+        "history_phase_profile omits case_index_scope required by runtime preflight",
+        "Frozen history helper never calls seal_case or seal_trace, so six initial case indices and complete22-case trace are absent",
+        "Runtime/finalizer require contradictory parent-case versus phase-case attachment IDs; further capture/proof/clock/guard-schema joins refuse"
+      ]
+    },
+    "runtime042": {
+      "bytes": 81001,
+      "sha256": "de7702855dbb17b5cd00832aff457215ddcc4419bd77c3490faa1764c3eb932d",
+      "review": "REMEDIATE_NO_RUNTIME"
+    },
+    "Windows045": {
+      "bytes": 362547,
+      "files": 27,
+      "receipt_sha256": "580d7098ea13db2d52748a5d2f80d1705e4c60f0d54e4784476596cd23a16f9c",
+      "review": "REMEDIATE_NO_RUNTIME",
+      "cases_pending": 166,
+      "hard_blockers": [
+        "Unimplemented/incompatible donor and NativeCase providers, nested mapping case and expected-interruption drain handling",
+        "Missing time import on abort_pending",
+        "Transport/profile/native-meta/seal-context/index interfaces differ from frozen helper/finalizer contracts"
+      ]
+    },
+    "Linux_final_suite": {
+      "bytes": 217032,
+      "files": 13,
+      "receipt_sha256": "1c7a4abaa49c7040122597a9e3655391006d7f377f8bcc9769104806e0dcf493",
+      "review": "READ_COMPLETE_EXECUTION_NO_GO",
+      "hard_blockers": [
+        "Stage deadline excludes admission and stops before gzip/final census/receipt",
+        "Final census not checked against caps/reservations and excludes its own receipt",
+        "Complete158-case closure cardinality/SDK metadata mismatch; no external finite8 launcher or finalizer binding"
+      ]
+    },
+    "Mac_v35": {
+      "bytes": 68940,
+      "files": 5,
+      "review": "NO_INTEGRATE_FULL_FACADE",
+      "hard_blockers": [
+        "Control environment paths lack owned-case confinement",
+        "EXP_PAUSE expected instead of actual shared/Rust EXP_BARRIER",
+        "Unit/route labels can reuse one genuine receipt without invocation binding",
+        "158 case recipes and native workspace/ordinary providers missing"
+      ]
+    },
+    "bounded_Windows_guard": {
+      "sha256": "c6dc7a797af9cc4288f29740818c224de7da6b2215084efd8224c138559feb78",
+      "source_mechanisms": "R2_NARROW_SOURCE_REPAIRS_REVIEWED",
+      "control_contract": "REMEDIATE_ACCEPTANCE_WITHDRAWN",
+      "native_controls_executed": 0,
+      "blocker": "Required intended monitor-error negatives export process_closure_verified=false; frozen suite asserts true. Unlocked bounded caller capture absent. No error-cap masking, skipped cells or qualification reinterpretation permitted.",
+      "diagnostic_plan": "C:/file-native-online-matrix-20261020/protocol/windows-bounded-guard-r2-controls/diagnostic-plan-HOLD.json",
+      "diagnostic_plan_sha256": "85447deeabbbbf79eadab2b6fbc52877b92b2813f6cc9b7b686476ca7cf0e4f3"
+    },
+    "archive037": {
+      "bytes": 75283,
+      "files": 4,
+      "review": "INTEGRATE_SOURCE_ONLY",
+      "Context": "ABSENT_UNALLOCATED",
+      "native_controls_executed": 0,
+      "real_retirement_go": false
+    }
+  },
+  "Mac_raw_audit": {
+    "path": "execution/native-macos-raw/controls-v34/parent-raw-audit.json",
+    "bytes": 4011,
+    "sha256": "6d7650be42711933ea5470c564c536d8c88439a48516b9ba3163c03e9f2ac330",
+    "early_receipt_RSS_rows": 329,
+    "final_raw_RSS_rows": 333,
+    "qualification_scope": "FINITE_V34_TRANSPORT_CONTROLS_ONLY"
+  },
+  "current_runtime_admissions": {
+    "full_history": false,
+    "full_LONG": false,
+    "Windows166": false,
+    "Linux158": false,
+    "Mac158": false,
+    "final_Rust_builds": false,
+    "final31_units": false,
+    "Windows27_diagnostics": false,
+    "native_source25_exact_copy": true,
+    "copy_budget": "execution/admission/native-final-engine-source-copy-budget-v1.json",
+    "source_copy_is_not_runtime_qualification": true,
+    "no_actual_fixture_retirement_or_expiry_credit": true
   }
 }

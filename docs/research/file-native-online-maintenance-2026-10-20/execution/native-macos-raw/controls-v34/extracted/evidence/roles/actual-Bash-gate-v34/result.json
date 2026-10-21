@@ -1,0 +1,98 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 6,
+  "max_start_gap_s": 0.012970790732651949,
+  "peak_RSS_bytes": 20168704,
+  "closure": [
+    {
+      "monotonic": 3237793.130121416,
+      "identities": [
+        {
+          "pid_requested": 87371,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 87372,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 87373,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 87374,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3237793.154426333,
+      "identities": [
+        {
+          "pid_requested": 87371,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 87372,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 87373,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 87374,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "a4c638ae036d92d55661de7d50896ec630145acaa3afeb1818ef4fc4e0ee45a7",
+  "source_pin": "CONTROL_ONLY",
+  "active_candidate_source_pin": "CONTROL_ONLY",
+  "producer_binding": {
+    "source_pin": "CONTROL_ONLY",
+    "producer_source_pin": "CONTROL_ONLY",
+    "active_candidate_source_pin": "CONTROL_ONLY",
+    "producer_kind": "control",
+    "binary_sha256": "a4c638ae036d92d55661de7d50896ec630145acaa3afeb1818ef4fc4e0ee45a7"
+  },
+  "exit": 0,
+  "seconds": 0.06624941620975733,
+  "guarded_seconds": 0.11608883319422603,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/actual-Bash-gate-v34/stdout.bin",
+      "bytes": 712,
+      "sha256": "435fc0eba6240e21936bfcf98a6ee6d36a16cb194cb31895cb1c97164df683f6"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/actual-Bash-gate-v34/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "start_mode": "bash-line",
+  "input_bytes_delivered": 19
+}

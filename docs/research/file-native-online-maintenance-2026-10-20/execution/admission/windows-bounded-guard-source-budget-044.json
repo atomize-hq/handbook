@@ -1,0 +1,41 @@
+{
+  "kind": "private-bounded-guard-remediation-source-only-044",
+  "source_only": true,
+  "runtime_go": false,
+  "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "claim031_sha256": "d0dea4565c6287aaf6459f070e4956a5e8ee2b31f532c04c97c2d3507c5ca19c",
+  "max_bytes": 81920,
+  "max_files": 4,
+  "paths": {
+    "job_guard_bounded.py": 60416,
+    "controls.py": 14336,
+    "README.md": 4096,
+    "source-receipt.json": 3072
+  },
+  "donor_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "rules": [
+    "New private version only; preserve donor and all prior raw receipts/callers",
+    "Closed finite evidence_bounds required before heavy token; no inferred runtime defaults",
+    "Pre-admit every encoded collection, row, gzip stored-block byte, stdio capture/tail, final JSON and shared-control temporary coexistence",
+    "Cap produces durable labelled CENSOR, freezes ordinary evidence growth, terminates only owned Job and retains closure uncertainty",
+    "Preserve positive suspended sample, actual handle creation+Job membership, full QPC completed coverage, unreadable LIVE failclosed, aggregate RSS/free floors, two numeric empty observations",
+    "Pure in-memory AST/compile allowed; no imports/native Jobs/controls/engine/build/cache/corpus/Git mutation",
+    "All four caps and 81920/4 checked before every write; original C3 allocation excluded META, separate review copies included META10",
+    "Source freeze2026-10-21T04:10:14Z,functional11:10:14Z,closeout13:10:14Z unchanged",
+    "037newsourcebyteceiling solelyreadableformatting/sourceaudit; originalcap49152actual49129fits, no retroactivecompliance"
+  ],
+  "claim037_sha256": "efc97e0b8192bfa9c78020102879e7fa6250027428f5323c67d23d62d330c6be",
+  "supersedes_unused_budget_sha256": "c6d47a8da1dfb01663437e3dfb6caeb477ec9c905a69b524d00095c723a475f1",
+  "claim040_sha256": "13452d906ce2a25f76af800f3a194934896b3e70db18ff1a4f4c424f09dd4a06",
+  "negative_source_archive_sha256": "35d435d6f27cb75465247719750e04e7bf6d7cd219ce0a63f3637c09ca57c399",
+  "required_fixes": [
+    "BG1uncertain233notEOF",
+    "BG2alltemporarynativeCloseHandlefailuresretained/fenced/raised",
+    "BG3persistentpercaseactualreturnedcompletion/receiptSHA/postwritecensus",
+    "BG4genuineunjoinedIOfence+subsequentadmissionrefusal+actualrelease/join/closure",
+    "BG5failclosedos.walkonerrorallpathscompletecensus",
+    "Source-backedactualcreatoroutsideexactoriginalJob,noninheritableJobhandle,2emptyandcheckedlastJobcloseQPCforpostexitgrant"
+  ],
+  "claim044_sha256": "8d2f99dd441cefe7b04ec43a828a6de3e205ee56077e6bda65b2581f2266e291"
+}

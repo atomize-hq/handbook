@@ -1,0 +1,43 @@
+{
+  "kind": "private-native-macos-v34-raw-return-budget",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-macos-raw\\controls-v34",
+  "category": "MacF12JOINTnativeandALLlocalcopies",
+  "native_entire_F12_bytes": 7640453,
+  "source_original_packet_META_unchanged": true,
+  "local_max_bytes": 2097152,
+  "local_max_files": 100,
+  "sinks": {
+    "encoded.b64": {
+      "bytes": 524288,
+      "files": 1
+    },
+    "raw-envelope.json.gz": {
+      "bytes": 524288,
+      "files": 1
+    },
+    "extracted": {
+      "bytes": 1048576,
+      "files": 96
+    },
+    "parent_metadata": {
+      "bytes": 65536,
+      "files": 2
+    }
+  },
+  "actual_return": {
+    "encoded_bytes": 80900,
+    "gzip_bytes": 60675,
+    "extracted_bytes": 309623,
+    "extracted_files": 61
+  },
+  "expected_gzip_sha256": "7ca171ad829ce3406087723ee542e5a02745fffa02f0830236852d3374979e2c",
+  "expected_raw_json_sha256": "b6763c3a4c5cbf6fabfd79c1ee930711fb539bf862fd2babae049019c9679dc7",
+  "joint_cap_bytes": 25165824,
+  "admission": "CheckACTUALcombinedtemporarycoexistencesize<=local2MiB BEFOREeverywrite; independentindividualsinks cannot allhitmaxsimultaneously; nativeactual+localTOTAL<=24MiB; no compressratio credit",
+  "rules": [
+    "Onlynewrawruntimeartifacts; sourcepacketsremainMETA andoldcopiescharged",
+    "StrictsinglemembergzipEOF+rawJSON+perfileSHA/len+exactrelativeevidencepaths; no links/reparse/traversal/duplicates",
+    "No nativepersistedtransfer/rerun/engine/cache/build/fixtures/oldmutation authorized",
+    "Originalscope10rolefinitev34controls45s only; fullnative qualification remainsincomplete"
+  ]
+}

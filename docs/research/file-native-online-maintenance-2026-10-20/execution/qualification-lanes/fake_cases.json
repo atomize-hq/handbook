@@ -16,8 +16,8 @@
     "exact 300 fresh and 3000 warm samples per representation",
     "sample index/outcome/digest/clock failures",
     "incomplete oracle and bare-pass refusal",
-    "five-oracle/606+K source schedule arithmetic; underallocated E and M refuse",
-    "missing/wrong warm query IDs with identical outcomes refuse"
+    "missing/wrong warm query IDs with identical outcomes refuse",
+    "literal v2 schema rejects width substitution; exact C1 split arithmetic; complete fixed reader capacity"
   ],
   "optional_history_pure_hooks": [
     "history_plan",
@@ -56,6 +56,6 @@
       "validhash receipt live:false"
     ]
   },
-  "remediation": "027 source-only R1-R6. Negative f6 archive retained. Concrete profile widths/native pace/post-exit finalizer remain pending; no flags/hash-only forecast authority."
+  "remediation": "035 source-only. Pure primitive controls do not validate full forecasts or finalizer joins; these require separate finite admission. Negative f6 and027 snapshots retained; no flags/hash-only authority."
 }
 

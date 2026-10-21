@@ -1,0 +1,27 @@
+{
+  "kind": "private-shared-runtime-contracts-source-only-036",
+  "source_only": true,
+  "runtime_go": false,
+  "claim036_sha256": "9ef60fba14531d5d43e68f7bd3641ee63a789f9632e495180c18fa1a72538f57",
+  "owner": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts",
+  "bytes": 65536,
+  "files": 1,
+  "paths": {
+    "runtime_contracts.py": 65536
+  },
+  "allocation": "C3existing16MiB; unassigned2064384→1998848, globalunchanged; originalexcludedMETA, copies/reviewsMETA9",
+  "required": [
+    "ConcreteRunner bindings/preflight/adopt/lookup/phase/release_definitive_conflicts and direct ownedreader_capacity/derive_whole_forecast APIs",
+    "Same16phases/1600accept/4000offers/2400terminal/640reader640000warm+640first/1200fresh+24warm initialcalls; countallactualadditionalassertion/state/oracle/controlcalls",
+    "Singleactualrawcapture with reconstructible refs; phasefinalprovisionalbodysealed AFTERdrainage/oracle/owneddrain/checkpoint; ownref excludedbody",
+    "ExactnativePIDcreation/image/readymarker/clock_kind/frequency/anchor/pacing/nativeownedclosure; no logicaldummyholds orsyntheticPASS",
+    "Pure closeddata/sourceprofiles; no arbitrary formula callbacks, semanticdecoderfork, Rust fork oracceptedfocusedcore edits",
+    "Source-ownedconcreteplatform optin only after hash/ABI/review/runtime GO; missingunimplementeddependencies refuse before corpus writes"
+  ],
+  "rules": [
+    "ONLYruntime_contracts.py; no README/manifest/pycache/temp/secondfile or implicit directory namespace",
+    "Beforeeverywrite individual65536 and exactroot1filecap checked; AST/inmemorycompile permitted, NO private imports/control/native/Job/engine/build/corpus/Git",
+    "Sourcefreeze2026-10-21T04:10:14Z,functional11:10:14Z,closeout13:10:14Z fixed"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "private-archive-source-only-037-binding-v2",
+  "claim029_sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4",
+  "owner": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+  "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/fixture-retirement",
+  "source_only": true,
+  "runtime_control_archive_copy_delete_go": false,
+  "bytes": 81920,
+  "files": 4,
+  "paths": {
+    "archive.py": 57344,
+    "controls.py": 18432,
+    "README.md": 4096,
+    "source-receipt.json": 2048
+  },
+  "allocation": "C3ARCHIVE81920/4 insideexisting16MiB;037adds16384fromunclaimed,globalunchanged;originalsnotMETA,separatecopiesMETA10/GitF13",
+  "rules": [
+    "Exactly four flat registered names; no fifth file, cache, subdir, bytecode or implicit test artifact",
+    "Before every write enforce individual/whole bounds and reserve all other files full remaining caps",
+    "Source/AST in-memory only; no reviewed-module import, control or native execution, archive writes, fixture copies, restore or deletion",
+    "No old protected roots, CP4, baselines, source/builds, rejected targets, LONG S/D or sole backup disposal",
+    "Any future archive/control/retirement requires separately reviewed source, concrete exact roots/allowlist/source/case/oracle/backup/native quiescence proofs and explicit parent phase GO",
+    "Retirement defaults NO_GO; no future deletion/compression/unused-forecast credit",
+    "Functional cutoff2026-10-21T11:10:14Z/sourcefreeze04:10:14Z unchanged"
+  ],
+  "future_archive_proposal": {
+    "compressed_max_bytes": 67108864,
+    "sidecar_and_finalization_max_bytes": 1048576,
+    "sidecar_regular_files": 4,
+    "admitted": false,
+    "coexistence": "Source + archive + all partials + retained previous host archives count inside each eventual F06/F08 fixture-body admission; no assumed compression ratio"
+  },
+  "claim033_sha256": "9ec7ba7517d15e10945a4ce2dcee46d5e1e1d5782efd79f1d2c9c5a4ce9841be",
+  "claim037_sha256": "efc97e0b8192bfa9c78020102879e7fa6250027428f5323c67d23d62d330c6be",
+  "negative_033_source_archive_sha256": "4b812d6bd07a79fed4f82f5ff8a17a56d45ff3d793f9bc0324f1ad3981e5ef79",
+  "required_fixes": "F1mount/protectedidentity;F2SPECIALaliases;F3positiveadmission;F4same-bufferhash/decode;F5foreignrawnamecodec",
+  "supersedes_unused_budget_sha256": "3f0572fb7cc9286f0faa14404afcc0f78255a9cb434973a68dfb261256cee1e0"
+}

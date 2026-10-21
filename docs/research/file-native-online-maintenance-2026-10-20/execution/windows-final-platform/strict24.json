@@ -1,0 +1,286 @@
+{
+  "schema": "private-windows-case-map-v1",
+  "runtime_go": false,
+  "final_engine_pin": null,
+  "case_source_review_sha256": null,
+  "rule": "All null bindings refuse before mutation. Existing case IDs and assertions remain obligations; historical counts are not final events.",
+  "group": "strict",
+  "cases": [
+    {
+      "case_id": "I/independent-missing-catalog",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-missing-catalog"
+    },
+    {
+      "case_id": "I/independent-corrupt-catalog",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-corrupt-catalog"
+    },
+    {
+      "case_id": "I/independent-missing-index",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-missing-index"
+    },
+    {
+      "case_id": "I/independent-corrupt-index",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-corrupt-index"
+    },
+    {
+      "case_id": "I/independent-missing-pack",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-missing-pack"
+    },
+    {
+      "case_id": "I/independent-truncated-pack",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-truncated-pack"
+    },
+    {
+      "case_id": "I/independent-corrupt-record",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-corrupt-record"
+    },
+    {
+      "case_id": "I/independent-offset-overflow",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-offset-overflow"
+    },
+    {
+      "case_id": "I/independent-raw-length-bound",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-raw-length-bound"
+    },
+    {
+      "case_id": "I/independent-duplicate-key",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-duplicate-key"
+    },
+    {
+      "case_id": "I/independent-omitted-entry",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-omitted-entry"
+    },
+    {
+      "case_id": "I/independent-wrong-pack-binding",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-wrong-pack-binding"
+    },
+    {
+      "case_id": "I/independent-raw-hash-mismatch",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-raw-hash-mismatch"
+    },
+    {
+      "case_id": "I/independent-bad-codec",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-bad-codec"
+    },
+    {
+      "case_id": "I/independent-too-many-packs",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-too-many-packs"
+    },
+    {
+      "case_id": "I/independent-duplicate-json-key",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-duplicate-json-key"
+    },
+    {
+      "case_id": "I/strict-numeric-type-version",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "strict-numeric-type-version"
+    },
+    {
+      "case_id": "I/strict-numeric-type-records",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "strict-numeric-type-records"
+    },
+    {
+      "case_id": "I/strict-numeric-type-pack_bytes",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "strict-numeric-type-pack_bytes"
+    },
+    {
+      "case_id": "I/strict-numeric-type-index_bytes",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "strict-numeric-type-index_bytes"
+    },
+    {
+      "case_id": "I/strict-numeric-type-codec",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "strict-numeric-type-codec"
+    },
+    {
+      "case_id": "I/independent-oversize-catalog",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-oversize-catalog"
+    },
+    {
+      "case_id": "I/independent-oversize-index",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "independent-oversize-index"
+    },
+    {
+      "case_id": "I/physical-catalog-and-hint-cannot-grant-membership",
+      "status": "PENDING",
+      "entry": "suite_packing.py:strict_case",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "physical-catalog-and-hint-cannot-grant-membership"
+    }
+  ],
+  "template_sources": {
+    "suite_packing.py": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_packing.py",
+      "bytes": 21362,
+      "sha256": "a551bdec0dc38aff58a7db9014019c130d5ea38eda8275508f1d562fc154d029",
+      "reviewed": false
+    }
+  },
+  "template_functions": {
+    "suite_packing.py:strict_case": "b0351225d54ec1962480ed744ba9d99720bd1b9a799348c978c3010ab8455059"
+  },
+  "source_only_dispatch_status": "Actual donor function bodies bound; Windows IO/helper closure and native extra constructors remain unreleased. No execution or qualification."
+}

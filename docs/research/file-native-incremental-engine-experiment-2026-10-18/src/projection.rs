@@ -354,7 +354,7 @@ fn execute_plan(store:&Store,plan:&Plan,m:&mut Metrics)->Result<()>{
         let mut parent=if action.prior.is_some()||action.desired.is_some(){dest.parent()}else{None};
         while let Some(p)=parent{
             if p==view||!p.starts_with(&view){break;}
-            match fs::remove_dir(p){Ok(())=>{io::sync_dir(p.parent().unwrap(),m)?;m.namespace_ops+=1;},Err(_)=>break}
+            match io::remove_dir(p){Ok(())=>{io::sync_dir(p.parent().unwrap(),m)?;m.namespace_ops+=1;},Err(_)=>break}
             parent=p.parent();
         }
         io::checkpoint("refresh-namespace")?;

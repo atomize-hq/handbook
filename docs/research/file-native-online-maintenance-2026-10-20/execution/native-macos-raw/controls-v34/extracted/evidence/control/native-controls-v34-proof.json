@@ -1,0 +1,61 @@
+{
+  "kind": "native-v34-proposed-controls",
+  "engine_or_Cargo_executed": false,
+  "real_C1_created": false,
+  "cases": [
+    {
+      "case": "finite-deadline-front-gates",
+      "native_calls": 0,
+      "stream_files_created": 0
+    },
+    {
+      "case": "fast-native-immediate-EOF-exit",
+      "positive_actual_exec_before_first_byte": true
+    },
+    {
+      "case": "nonblocking-input-and-output-under-backpressure",
+      "bytes": 196733
+    },
+    {
+      "case": "callback-failure-before-stdin",
+      "expected_censor": true
+    },
+    {
+      "case": "wrong-actual-native-path",
+      "expected_censor": true,
+      "fault_scope": "new module function injection only, restored"
+    },
+    {
+      "case": "owned-native-interrupt-after-genuine-child-barrier",
+      "exit": -15,
+      "two_positive_closure_observations": true
+    },
+    {
+      "case": "Driver-invalid-timeout-before-min-or-dispatch",
+      "invalid_values": 7,
+      "serial_calls_allocations_unchanged": true
+    },
+    {
+      "case": "two-concurrent-semantic-conflicts",
+      "exact_distinct_rows": true,
+      "env_outside_payload": true,
+      "absent_env_preserved_as_None": true,
+      "raw_exit86_is_not_crash_pass": true
+    },
+    {
+      "case": "actual-native-Bash-before-SELECTED-read",
+      "selected_once": true,
+      "exact_copy": true
+    },
+    {
+      "case": "streaming-synthetic-and-source-FD-close",
+      "real_C1_created": false,
+      "source_FD_EBADF_after_destination_refusal": true
+    },
+    {
+      "case": "synthetic-historical-validator",
+      "negative_controls": 7,
+      "old_binary_launched": false
+    }
+  ]
+}

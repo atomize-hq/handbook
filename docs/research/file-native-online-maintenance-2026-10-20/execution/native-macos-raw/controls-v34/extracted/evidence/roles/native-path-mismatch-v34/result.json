@@ -1,0 +1,64 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [
+    "RuntimeError('startgate-actual-executable-mismatch')"
+  ],
+  "samples": 1,
+  "max_start_gap_s": 0,
+  "peak_RSS_bytes": 131072,
+  "closure": [
+    {
+      "monotonic": 3237792.401894041,
+      "identities": [
+        {
+          "pid_requested": 87364,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3237792.426195708,
+      "identities": [
+        {
+          "pid_requested": 87364,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "active_candidate_source_pin": "CONTROL_ONLY",
+  "producer_binding": {
+    "source_pin": "CONTROL_ONLY",
+    "producer_source_pin": "CONTROL_ONLY",
+    "active_candidate_source_pin": "CONTROL_ONLY",
+    "producer_kind": "control",
+    "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf"
+  },
+  "exit": -9,
+  "seconds": null,
+  "guarded_seconds": 0.05315124988555908,
+  "output_complete": false,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/native-path-mismatch-v34/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/native-path-mismatch-v34/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "start_mode": "json-stdin",
+  "input_bytes_delivered": 0
+}

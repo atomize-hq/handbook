@@ -1,0 +1,45 @@
+{
+  "kind": "private-cp4-actual-telemetry-source-amendment-v2",
+  "source_only": true,
+  "runtime_go": false,
+  "owner": "01a15b15-3362-7133-b789-1ff556b75d04",
+  "source_max_bytes": 1048576,
+  "source_admin_existing_C3_bytes": 3145728,
+  "prior_boundary29_manifest_sha256": "cd0ab92cd0c8818cfae2aeffa8a0ea76d63ecc6488eb3ebbb1501c23f01db3b6",
+  "additional_telemetry_and_two_positive_unit_max_bytes": 8192,
+  "cumulative_delta_ceiling_vs_original_cp4_base": 98304,
+  "existing_rust_paths": [
+    "src/io.rs",
+    "src/store.rs",
+    "src/rolling.rs",
+    "src/pack.rs",
+    "src/paged.rs",
+    "src/disk.rs",
+    "src/packing.rs",
+    "src/lifetime.rs"
+  ],
+  "checkpoint_whole_max_bytes": 81920,
+  "checkpoint_paths_caps": {
+    "control.py": 5120,
+    "forecast.json": 11264,
+    "pace_controls.py": 14336,
+    "protocol.py": 24576,
+    "README.md": 26624
+  },
+  "definitions": [
+    "rolling_publication_body_opens counts actual logical publication body returned by bounded packed/loose read, including second eligible read; context distinguishes head/suffix/deferred",
+    "unchanged_historical_body_opens counts oldcompletedeligible suffixbody access; explicitdeferredrechecks trackedseparately, never claimedzero frommissingfield",
+    "rolling_discovery_metadata_bytes exactWHOLEWork-containing-Discovery envelope nativeIOread+writtenbytes, conservativeenvelope notfalseexactsubfieldspan; read/write/serializedDiscovery breakdown separate",
+    "forbidden_global_operations process-global ACTUALnativeWorQexclusive uniondepth includingnestedMetrics; siblingreaderprocessIOpermitted; realeventhooks forbulk/history/read_dir/fullindex/audit/cohorthash/copy/delete",
+    "Boundedselected-head/controlCAS/pagedpoint operations allowed; genericdigest>64KiB supplemental requires explicitnarrowauditedboundedcontrolhash exemption if needed, notfalseflag128KiBWorkCASorblanketsuppression",
+    "EveryScope/error/drop restorescontext; nativeFile guard droppedbeforedepthdecrement; no unsafe/rawpointer scope state",
+    "Two positive productionIO tests realtinyWlock+actualenumeration/fullindex increments andafterdropdoesnot, nestedMetricscannotbypass; realoldbodycontext vsdeferred distinction, nozero-onlywitness"
+  ],
+  "rules": [
+    "NoCargo/dependency/features/publicformat/default/semanticbehaviorchanges; actualprivateMetricsadditive fields/source-profilewidths updatedonfreeze",
+    "Allnew/modifiedsymbols cachedimpactfirst, UNKNOWNmanualHIGH report; rawstdfs call audit coversnoncentralpaths and smallfullindex independentofgenerichashthreshold",
+    "Freshfullfrozen source/telemetrydefs/unitcatalog review before typecheck/build/tests/native/runtime/Git; finalactualunitcount exhaustive",
+    "Beforeeverywrite individualcheckpointcaps/group80KiB/fullsource1MiB/admin3MiB unchanged; additional8192source bound includespositivecontrols, no newglobaldraw",
+    "Sourcefreeze2026-10-21T04:10:14Z,functional11:10:14Z,closeout13:10:14Z unchanged"
+  ]
+}

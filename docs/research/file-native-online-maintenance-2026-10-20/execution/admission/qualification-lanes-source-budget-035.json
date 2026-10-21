@@ -1,0 +1,87 @@
+{
+  "kind": "private-qualification-lanes-source-only-budget-035",
+  "source_only": true,
+  "engine_control_build_runtime_go": false,
+  "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/qualification-lanes",
+  "bytes": 262144,
+  "files": 10,
+  "claim022_sha256": "905543e536ad5b7fd8db19c252a99d5e4fd432401f556bced4e236fea4358b36",
+  "claim023_sha256": "ff6a60ef8d5bff5d0d34fec2d35c84802be27f8f05f5414719bf8e3cc0de71b5",
+  "allocation": "C3_HELPER_SOURCE inside existing16MiB; distinct from META8, Matrix F01 and stream C3 source; no new global allowance",
+  "groups": {
+    "long": {
+      "bytes": 49152,
+      "files": 2,
+      "owner": "01a15b51-a50b-7930-8633-b42694240252",
+      "paths": {
+        "legacy_archive_restore.py": 16384,
+        "long_lane.py": 32768
+      }
+    },
+    "history": {
+      "bytes": 55296,
+      "files": 1,
+      "owner": "01a15bcc-6fb9-7e63-b935-a60d25d9390a",
+      "paths": {
+        "history_lane.py": 55296
+      }
+    },
+    "control": {
+      "bytes": 26624,
+      "files": 5,
+      "owner": "01a15b51-a50b-7930-8633-b42694240252",
+      "paths": {
+        "fake_controls.py": 18432,
+        "fake_cases.json": 4096,
+        "lane_config.example.json": 4096,
+        "README.md": 4096,
+        "source-manifest.json": 2048
+      }
+    },
+    "profiles": {
+      "bytes": 65536,
+      "files": 1,
+      "owner": "01a15b51-a50b-7930-8633-b42694240252",
+      "paths": {
+        "long_source_profiles.py": 65536
+      }
+    },
+    "finalizer": {
+      "bytes": 65536,
+      "files": 1,
+      "owner": "01a15b51-a50b-7930-8633-b42694240252",
+      "paths": {
+        "phase_finalizer.py": 65536
+      }
+    }
+  },
+  "rules": [
+    "Exactly ten flat names; no directories/symlinks/reparse or bytecode within source root",
+    "Before every write check full root plus individual/group/whole projected bytes and files; source owner touches only its paths",
+    "No implicit eleventh file; temporary source versions/failure snapshots require separately charged approved location",
+    "Pure compile in memory permitted; no control execution or engine/native/build/corpus/restore until parent source review and separate finite run GO",
+    "Final source/CLI/terminal API/oracle/QPC/budget hashes must be frozen before runtime; pending means refusal",
+    "Parent alone stages/commits; global sourcefreeze2026-10-21T04:10:14Z and functional11:10:14Z unchanged"
+  ],
+  "claim023_addendum_sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+  "claim024_sha256": "011825b6a11c267bb2cba5582faa5f835d44f9779003d19659ea01e44d371a1d",
+  "report_family_max_files": 128,
+  "report_family_max_bytes": 524288,
+  "allocation_note": "035 adds128KiB/2fromexistingC3unassigned; oldLONG/HISTORY/CONTROLcapsandownersunchanged; newpure source-derivedprofiles pluspostexitfinalizer, no runtime",
+  "claim027_sha256": "6f6cb79f053b3c1578883bfeda76358ce9306f55bdfd880d7b433cc6f3ea43ae",
+  "negative_freeze": {
+    "source_manifest_sha256": "f6c57e9a6f07becc21069338ea4c541a73c95ff150096c1971a83983a796f03d",
+    "archive_sha256": "9ede89a320a6d62edd371909e8d6a213d4ca894fad380d9511f2b6a421bfd5b7",
+    "archive_bytes": 31484,
+    "required_fixes": "R1 positivehostauth/polls;R2 finitepacedreadcoverage;R3 provisionalphase/postexitjoin;R4 quantitativewholeprofiles;R5 warmexactid;R6 fulllegacyoraclebeforeengine"
+  },
+  "claim035_sha256": "83c72145f5545e17f67b33c96cd612ab998d7c86f8c0b05477b3792ba43f86fd",
+  "prior_027_source_commit": "9ee0d66e",
+  "prior_027_source_manifest_sha256": "e45c8b91cbc8c06a5c77ac60d8eaed876678232bae2b8bbbc1ba008a649fea86",
+  "required_implementation": [
+    "Closed engine serializer/geometry/operation schedule/all sink source-derived formulas; complete source pins before runtime",
+    "One raw capture plus reconstructible offset/len/SHA references, success/failure/live potential accounting explicit",
+    "Outside original Job streaming strict complete QPC/identity/phase-window/twoempty/census finalizer, refuse unsupported oldshape",
+    "No import/private module execution, controls, native, engine, build, restore, corpus or Git mutation before separate source review and finite GO"
+  ]
+}

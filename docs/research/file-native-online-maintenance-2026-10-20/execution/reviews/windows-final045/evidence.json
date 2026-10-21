@@ -1,0 +1,204 @@
+{
+  "kind": "independent-final-Windows045-review",
+  "disposition": "SOURCE_NO_GO_REMEDIATE",
+  "runtime_GO": false,
+  "controls_GO": false,
+  "source": {
+    "files": 27,
+    "bytes": 362547,
+    "receipt_bytes": 5774,
+    "receipt_sha256": "580d7098ea13db2d52748a5d2f80d1705e4c60f0d54e4784476596cd23a16f9c",
+    "manifest26_sha256": "de21c589a22fa24906b86b21e0eeef60f5a43207689d95af39edcb636a5006a7",
+    "all_entry_hashes_sizes_and_caps_verified": true,
+    "groups": {
+      "bindings": {
+        "bytes": 47315,
+        "cap_bytes": 65536,
+        "files": 8
+      },
+      "case_data": {
+        "bytes": 102129,
+        "cap_bytes": 237568,
+        "files": 8
+      },
+      "source": {
+        "bytes": 213103,
+        "cap_bytes": 221184,
+        "files": 11
+      }
+    },
+    "budget_bytes": 3435,
+    "budget_sha256": "1e32a7be51fcef6520ce2785e66292ce115c585ffc6062575b12cb04c98a3800"
+  },
+  "findings": [
+    {
+      "id": "WF1",
+      "priority": "P1",
+      "file": "windows_growth.py",
+      "start": 278,
+      "end": 291,
+      "issue": "abort_pending references unimported time; prelaunch closure/reference/settlement bypassed"
+    },
+    {
+      "id": "WF2",
+      "priority": "P1",
+      "file": "windows_evidence.py",
+      "start": 66,
+      "end": 69,
+      "issue": "035 action profiles lack launch/metadata width fields and differ from stream-global digest"
+    },
+    {
+      "id": "WF3",
+      "priority": "P1",
+      "file": "windows_hooks.py",
+      "start": 94,
+      "end": 100,
+      "issue": "036 port/sealer/index/initial/global trace and035 profile geometry mismatch"
+    },
+    {
+      "id": "WF4",
+      "priority": "P1",
+      "file": "qualification-lanes/long_lane.py",
+      "start": 283,
+      "end": 294,
+      "issue": "Oracle uses lane-invoke-v1; host requiresv2; quarantine authorize return differs"
+    },
+    {
+      "id": "WF5",
+      "priority": "P2",
+      "file": "windows_capsule.py",
+      "start": 281,
+      "end": 293,
+      "issue": "Nested case and donor ABI plus stale exact dependency bindings"
+    },
+    {
+      "id": "WF6",
+      "priority": "P2",
+      "file": "windows_capsule.py",
+      "start": 313,
+      "end": 314,
+      "issue": "Validated expected cancel/death error recounted as host drain failure"
+    },
+    {
+      "id": "WF7",
+      "priority": "P2",
+      "file": "source_controls.py",
+      "start": 292,
+      "end": 297,
+      "issue": "__new__ fake Driver lacks phase_limits needed by new sampling path"
+    }
+  ],
+  "initial_reassessment": {
+    "frame_membership": "SOURCE_ADDRESSED",
+    "append_fenced_scoped_settlement": "SOURCE_ADDRESSED",
+    "strict_import": "SOURCE_ADDRESSED",
+    "pending_input_handshake": "PRESENT_BUT_ABORT_PROFILE_CHAIN_BLOCKED",
+    "expected_interrupt_drain": "REMAINS",
+    "nested_case_and_donor_ABI": "REMAIN"
+  },
+  "bounded_source_observations": [
+    "unchanged034native_lock_retirement_QPC",
+    "W5unstarted_join_isolation",
+    "explicitframe_membership",
+    "16KiBcoalescing_offsets",
+    "append_lock_close_pending_poison_refusal",
+    "no_actual_byte_credit"
+  ],
+  "cases": {
+    "unique": 166,
+    "named_entries": 165,
+    "all_status": "PENDING",
+    "constructor_obligations_pending": 20,
+    "missing_body": "D-N64-N1k-AandB-payload-title",
+    "complete_transitive_acceptance": false
+  },
+  "current_frozen_dependencies_observed": {
+    "final-protocol/focused_protocol.py": {
+      "bytes": 50073,
+      "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+    },
+    "native-linux/final-suite/suite_extensions.py": {
+      "bytes": 32947,
+      "sha256": "4ad6ad44d3e39251087c353780c1020ed538d3142068059132bb7dcc6a3c6978"
+    },
+    "native-linux/final-suite/suite_ordinary.py": {
+      "bytes": 6561,
+      "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942"
+    },
+    "native-linux/final-suite/suite_packing.py": {
+      "bytes": 21996,
+      "sha256": "c455908bdff907ef35cf424e1cd2d84804fd1577a39de31646513b96551a2ee1"
+    },
+    "native-linux/final-suite/suite_recovery.py": {
+      "bytes": 8089,
+      "sha256": "da30aececf9ae58b48322dfcdb91f33d83928b874236b2c34e600104353d6f2e"
+    },
+    "native-linux/final-suite/suite_units.py": {
+      "bytes": 3189,
+      "sha256": "05b49bb269b404eedc433f598328be6217a99823a9ef90ae3d09dcaf1daa10f9"
+    },
+    "qualification-lanes/history_lane.py": {
+      "bytes": 54727,
+      "sha256": "100fe59f34524b15c1033e5f1a93849a69766f36362ff37da3ef090278e02c3e"
+    },
+    "qualification-lanes/long_lane.py": {
+      "bytes": 29946,
+      "sha256": "bc018fecaed9a9c691506e1c2406eeb51f2c9a37181d89fb10059b6bc32bd433"
+    },
+    "qualification-lanes/long_source_profiles.py": {
+      "bytes": 64788,
+      "sha256": "c3a99f696786483989a5e170110eb483dd82953a5e0ec04867caaf3bf6b05797"
+    },
+    "shared-runtime-contracts/runtime_contracts.py": {
+      "bytes": 81001,
+      "sha256": "de7702855dbb17b5cd00832aff457215ddcc4419bd77c3490faa1764c3eb932d"
+    },
+    "windows-bounded-guard/job_guard_bounded.py": {
+      "bytes": 60355,
+      "sha256": "c6dc7a797af9cc4288f29740818c224de7da6b2215084efd8224c138559feb78"
+    }
+  },
+  "stale_map_pins_not_replaced": true,
+  "scope_limit": "All27 platform files and actual caller/callee boundary review; current donor case bodies and full LONG inspected. Null/missing/stale dependencies prevent full executable closure; unrelated runtime/profile/guard functions not separately certified.",
+  "reviewer_operations": {
+    "supplied_module_import_AST_compile_controls_native_calls": 0,
+    "engine_build_Job_calls": 0,
+    "source_Git_index_bootstrap_edits": 0,
+    "source_copies": 0,
+    "subagents_chats_worktrees": 0,
+    "only_report_files": [
+      "review.md",
+      "evidence.json"
+    ]
+  },
+  "corrected_pending_accounting": {
+    "snapshot": "meta-pending-20261021T041910Z.json",
+    "bytes": 3119,
+    "sha256": "167eb2be9df2224654332076ce9992708a937401dfa14ad3f2ad05246335b81c",
+    "remaining_total_at_snapshot": 435863,
+    "Windows_pair_matching_allowance": 20480,
+    "consume_once": "remaining435863 minus this pair actual bytes; other snapshot obligations conservatively held",
+    "generic_future_and_extra_runtime_are_not_additive": true,
+    "fresh_full_census_projection_checked_before_amendment": true
+  },
+  "META": {
+    "membership": "META10v5",
+    "seal_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "prewrite": {
+      "utc": "2026-10-21T04:19:16.453182+00:00",
+      "bytes": 9837450,
+      "files": 1148,
+      "cap": 10485760,
+      "projected": 10120074,
+      "headroom": 365686
+    },
+    "report_pair_cap_bytes": 20480,
+    "future_reserved_bytes": 262144,
+    "all_P_closed_Landing_exact_promoted20_counted": true
+  },
+  "source_cutoff": "2026-10-21T04:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "protected_closeout": "2026-10-21T13:10:14Z",
+  "clock_reset": false
+}
+

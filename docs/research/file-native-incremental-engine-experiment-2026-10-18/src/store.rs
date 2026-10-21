@@ -9,7 +9,7 @@ use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf}
 pub struct StoreConfig{pub version:u32,pub store_id:String,pub mode:String,pub consumer:String,pub fallback:bool,#[serde(default="legacy_navigation")] pub navigation_version:u32,#[serde(default,skip_serializing_if="Option::is_none")] pub catalog:Option<Id>,#[serde(default,skip_serializing_if="Option::is_none")] pub physical:Option<crate::physical_lifetime::Binding>}
 fn legacy_navigation()->u32{1}
 pub struct Store{pub root:PathBuf,pub config:StoreConfig}
-pub struct LockGuard{_file:File,started:Instant,counter:std::sync::Arc<std::sync::atomic::AtomicU64>}
+pub struct LockGuard{_file:io::GlobalGate,started:Instant,counter:std::sync::Arc<std::sync::atomic::AtomicU64>}
 impl Drop for LockGuard{
     fn drop(&mut self){self.counter.fetch_add(self.started.elapsed().as_nanos().min(u64::MAX as u128) as u64,std::sync::atomic::Ordering::Relaxed);}
 }
@@ -91,14 +91,14 @@ impl Store{
                 std::thread::sleep(Duration::from_millis(2));
             }
         }}
-        m.elapsed("lock-wait",t);io::checkpoint("lock-acquired")?;
+        let f=io::GlobalGate::new(f,true);m.elapsed("lock-wait",t);io::checkpoint("lock-acquired")?;
         Ok(LockGuard{_file:f,started:Instant::now(),counter:m.lock_hold_counter.clone()})
     }
     // Activation calls this only once under Q; contention must release Q.
     pub(crate) fn try_writer(&self,m:&mut Metrics)->Result<Option<LockGuard>>{
         let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("writer.lock"))?;
         match FileExt::try_lock_exclusive(&f) {
-            Ok(())=>Ok(Some(LockGuard{_file:f,started:Instant::now(),counter:m.lock_hold_counter.clone()})),
+            Ok(())=>Ok(Some(LockGuard{_file:io::GlobalGate::new(f,true),started:Instant::now(),counter:m.lock_hold_counter.clone()})),
             Err(e) if e.kind()==fs2::lock_contended_error().kind()=>Ok(None),
             Err(e)=>Err(e.into()),
         }
@@ -327,8 +327,8 @@ impl Store{
     fn check_candidate(&self,c:&Candidate,m:&mut Metrics)->Result<()>{
         if c.purpose!="publication"||c.version!=2||c.store_id!=self.config.store_id||!model::safe_id(&c.attempt)||io::digest(&io::json(&c.request)?)!=c.intent{return Err("integrity:candidate-version-intent".into());}
         if self.root.join(format!("abandoned/{}",c.attempt)).exists(){return Err("refused:abandoned".into());}
-        let all=lifetime::reservations(&self.root,m)?;let r=all.get(&c.attempt).ok_or("refused:unreserved")?;
-        if r.request!=c.request.request||r.intent!=c.intent||r.base!=c.expected||r.state!="sealed"||r.candidate_digest.as_deref()!=Some(io::digest(&io::read(&self.root.join(format!("attempts/{}/candidate.json",c.attempt)),m)?).as_str()){return Err("integrity:reservation-binding-or-unsealed".into());}
+        let r=lifetime::selection_owner(&self.root,&c.attempt,m)?;
+        if r.request!=c.request.request||r.intent!=c.intent||r.base!=c.expected||r.candidate_digest.as_deref()!=Some(io::digest(&io::read(&self.root.join(format!("attempts/{}/candidate.json",c.attempt)),m)?).as_str()){return Err("integrity:reservation-binding-or-unsealed".into());}
         m.quota_limit=Some(r.bytes);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();self.refuse_cancel(&c.request.request,m)
     }
     pub fn select_prepared(&self,p:Prepared,m:&mut Metrics)->Result<Value>{
@@ -437,7 +437,7 @@ impl Store{
         lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:id.into(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
         m.quota_limit=Some(allowance);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();
         let mut members=BTreeMap::new();let mut outcomes=BTreeMap::new();let mut next=head.publication.predecessor.clone();let mut count=0;
-        while let Some(s)=next{
+        while let Some(s)=next{io::forbidden();
             count+=1;if count>200_000{return Err("refused:reference-walker-cap".into());}
             let p=self.publication(&s,m)?;next=p.predecessor.clone();
             if members.insert(p.id.clone(),serde_json::to_vec(&s.digest)?).is_some(){return Err("integrity:history-cycle".into());}
