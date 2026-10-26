@@ -222,3 +222,6 @@ fn cleanup_resumes_durable_checkpoint_without_persistence_replay(){
     assert!(selected.jobs.is_empty());assert_eq!(selected.reconciled_absent,1);
     eprintln!("durable checkpoint resumed: selected jobs1->0 reconciled0->1; original candidate inode/bytes retained; checkpoint bytes_written=0 file_syncs=0");
 }
+
+#[path="physical_stage_recovery_tests.rs"]
+pub(super) mod stage_recovery_tests;

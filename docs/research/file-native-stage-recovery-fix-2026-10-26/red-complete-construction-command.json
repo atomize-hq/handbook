@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "physical_lifetime::checkpoint_tests::stage_recovery_tests::complete_uninstalled_stage_resumes_same_progress_without_payload_rewrite",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/target",
+    "--",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env_selected": {
+    "EXP_PACK_TEST_ROOT": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/red-complete-construction",
+    "TMPDIR": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

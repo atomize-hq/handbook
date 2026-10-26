@@ -3,7 +3,7 @@
 use crate::{io::{self,Metrics,Result},pack::{self,Descriptor},store::{Store,StoreConfig}};
 use fs2::FileExt;
 use serde::{Serialize,Deserialize};
-use std::{fs::{File,OpenOptions},io::{Read,Seek,SeekFrom},path::Path,time::{Duration,Instant}};
+use std::{fs::{File,OpenOptions},io::{Read,Seek,SeekFrom},path::{Path,PathBuf},time::{Duration,Instant}};
 
 pub(crate) const BINDING_LIMIT:usize=4096;
 pub(crate) const CATALOG_LIMIT:usize=59*1024;
@@ -208,6 +208,100 @@ fn native_present(path:&Path,m:&mut Metrics)->Result<bool>{
     m.pack_metadata_stats+=1;
     match std::fs::symlink_metadata(path){Ok(_)=>Ok(true),Err(e) if e.kind()==std::io::ErrorKind::NotFound=>Ok(false),Err(e)=>Err(e.into())}
 }
+fn native_identity(f:&File,m:&mut Metrics)->Result<((u64,u64),u64)>{
+    m.cleanup_step()?;m.pack_metadata_stats+=1;
+    #[cfg(unix)] {
+        use std::os::unix::fs::MetadataExt;
+        let s=f.metadata()?;Ok(((s.dev(),s.ino()),s.nlink()))
+    }
+    #[cfg(windows)] {
+        use std::os::windows::io::AsRawHandle;
+        use windows_sys::Win32::Storage::FileSystem::{GetFileInformationByHandle,BY_HANDLE_FILE_INFORMATION};
+        let mut s:BY_HANDLE_FILE_INFORMATION=unsafe{std::mem::zeroed()};
+        if unsafe{GetFileInformationByHandle(f.as_raw_handle(),&mut s)}==0{return Err(std::io::Error::last_os_error().into());}
+        Ok(((s.dwVolumeSerialNumber as u64,((s.nFileIndexHigh as u64)<<32)|s.nFileIndexLow as u64),s.nNumberOfLinks as u64))
+    }
+    #[cfg(not(any(unix,windows)))] {let _=f;Err("unsupported:construction-file-identity".into())}
+}
+fn plain_metadata(path:&Path,directory:bool,m:&mut Metrics)->Result<std::fs::Metadata>{
+    m.cleanup_step()?;m.pack_metadata_stats+=1;let s=std::fs::symlink_metadata(path)?;
+    #[cfg(windows)] {
+        use std::os::windows::fs::MetadataExt;
+        if s.file_attributes()&windows_sys::Win32::Storage::FileSystem::FILE_ATTRIBUTE_REPARSE_POINT!=0{return Err("integrity:construction-path-type".into());}
+    }
+    if s.file_type().is_symlink()||if directory{!s.is_dir()}else{!s.is_file()}{return Err("integrity:construction-path-type".into());}
+    Ok(s)
+}
+fn construction_file(path:&Path,write:bool,limit:usize,m:&mut Metrics)->Result<File>{
+    if plain_metadata(path,false,m)?.len()>limit as u64{return Err("integrity:construction-file-bound".into());}
+    let f=OpenOptions::new().read(true).write(write).open(path)?;m.opens+=1;
+    m.cleanup_step()?;m.pack_metadata_stats+=1;let actual=f.metadata()?;
+    if !actual.is_file()||actual.len()>limit as u64||native_identity(&f,m)?.1!=1{return Err("integrity:construction-file-identity".into());}
+    plain_metadata(path,false,m)?;Ok(f)
+}
+fn construction_directory(path:&Path,m:&mut Metrics)->Result<File>{
+    plain_metadata(path,true,m)?;let mut options=OpenOptions::new();options.read(true);
+    #[cfg(windows)] {
+        use std::os::windows::fs::OpenOptionsExt;
+        options.custom_flags(windows_sys::Win32::Storage::FileSystem::FILE_FLAG_BACKUP_SEMANTICS);
+    }
+    let f=options.open(path)?;m.opens+=1;plain_metadata(path,true,m)?;Ok(f)
+}
+// A call-local proof for the existing fixed construction names. It is never a
+// selection authority and never changes general I/O or namespace semantics.
+struct Construction {
+    base:PathBuf,dirs:Vec<(PathBuf,File)>,selector:File,payload:File,selector_path:PathBuf,payload_path:PathBuf,
+}
+impl Construction {
+    fn open(root:&Path,selector:&Path,payload:&Path,m:&mut Metrics)->Result<Self>{
+        m.cleanup_step()?;m.pack_path_canonicalizations+=1;let base=root.canonicalize()?;
+        let mut dirs=vec![];
+        for suffix in ["","physical-progress","physical-plans"]{
+            let path=root.join(suffix);let f=construction_directory(&path,m)?;
+            m.pack_path_canonicalizations+=1;if path.canonicalize()?!=base.join(suffix){return Err("integrity:construction-directory-identity".into());}
+            if let Some((_,prior))=dirs.first(){if native_identity(prior,m)?.0.0!=native_identity(&f,m)?.0.0{return Err("integrity:construction-directory-volume".into());}}
+            dirs.push((path,f));
+        }
+        let selector_file=construction_file(selector,false,BINDING_LIMIT,m)?;let payload_file=construction_file(payload,true,WORK_LIMIT,m)?;
+        let proof=Self{base,dirs,selector:selector_file,payload:payload_file,selector_path:selector.into(),payload_path:payload.into()};proof.paths(m)?;Ok(proof)
+    }
+    fn paths(&self,m:&mut Metrics)->Result<()>{
+        for (n,(path,held)) in self.dirs.iter().enumerate(){
+            let actual=construction_directory(path,m)?;m.pack_path_canonicalizations+=1;
+            let suffix=["","physical-progress","physical-plans"][n];
+            if path.canonicalize()?!=self.base.join(suffix)||native_identity(held,m)?.0!=native_identity(&actual,m)?.0{return Err("integrity:construction-directory-identity".into());}
+        }
+        for (path,held,limit) in [(&self.selector_path,&self.selector,BINDING_LIMIT),(&self.payload_path,&self.payload,WORK_LIMIT)]{
+            let actual=construction_file(path,false,limit,m)?;
+            if native_identity(held,m)?!=native_identity(&actual,m)?{return Err("integrity:construction-file-identity".into());}
+        }Ok(())
+    }
+    fn read(f:&mut File,path:&Path,limit:usize,m:&mut Metrics)->Result<Vec<u8>>{
+        m.cleanup_step()?;f.seek(SeekFrom::Start(0))?;let mut bytes=vec![];f.take(limit as u64+1).read_to_end(&mut bytes)?;
+        if bytes.len()>limit{return Err("integrity:construction-file-bound".into());}
+        m.bytes_read+=bytes.len() as u64;m.pack_storage_bytes+=bytes.len() as u64;io::record_envelope(path,bytes.len(),false);Ok(bytes)
+    }
+    fn unchanged(&mut self,selector:&[u8],payload:&[u8],m:&mut Metrics)->Result<()>{
+        self.paths(m)?;
+        if Self::read(&mut self.selector,&self.selector_path,BINDING_LIMIT,m)?!=selector||Self::read(&mut self.payload,&self.payload_path,WORK_LIMIT,m)?!=payload{return Err("integrity:construction-bytes-changed".into());}Ok(())
+    }
+}
+fn validate_checkpoint(root:&Path,c:&StoreConfig,w:&Work,candidate:&StoreConfig,planned:&Work,m:&mut Metrics)->Result<()>{
+    let b=c.physical.as_ref().ok_or("integrity:work-binding")?;validate_work(planned)?;
+    if planned.transition_parent.as_ref()!=Some(&b.plan)||planned.store_id!=c.store_id||planned.generation.id!=b.id||planned.generation.ordinal!=b.ordinal||Some(&planned.generation.catalog)!=c.catalog.as_ref(){return Err("integrity:work-stage-plan-owner".into());}
+    if m.cleanup_budget.is_some(){
+        let mut expected=c.clone();expected.physical.as_mut().unwrap().plan=candidate.physical.as_ref().ok_or("integrity:work-binding")?.plan.clone();
+        // Birth claims are mutable cleanup progress: aborted-owner adoption
+        // adds them before saving its checkpoint. validate_work bounds them.
+        if io::json(candidate)?!=io::json(&expected)?||planned.generation!=w.generation||planned.physical_parent!=w.physical_parent||io::json(&planned.discovery)?!=io::json(&w.discovery)?||planned.older.iter().any(|g|!w.older.contains(g)){return Err("integrity:work-stage-frozen-generation".into());}
+        for g in &w.older{if !planned.older.contains(g)&&!drained(root,g,&c.store_id,m)?{return Err("deferred:work-readers".into());}}
+    }Ok(())
+}
+fn stage_boundary(phase:&str)->Result<()>{
+    io::checkpoint(phase)?;
+    #[cfg(test)] checkpoint_tests::stage_recovery_tests::boundary(phase);
+    Ok(())
+}
 // One deterministic stage per generation. It owns the candidate plan hash before
 // that plan can be created. No random 4MiB progress stages or directory scan.
 fn recover_stage(root:&Path,c:&StoreConfig,w:&Work,m:&mut Metrics)->Result<Option<Work>>{
@@ -224,25 +318,34 @@ fn recover_stage(root:&Path,c:&StoreConfig,w:&Work,m:&mut Metrics)->Result<Optio
         let next=candidate.physical.as_ref().unwrap();
         if next.plan!=b.plan&&!w.older.iter().any(|g|g.plan.as_ref()==Some(&next.plan)){
             let orphan=root.join(plan_name(&next.plan)?);
-            if budget_present(&orphan,m)?{
+            let mut installed=budget_present(&orphan,m)?;
+            if !installed&&m.cleanup_budget.is_some()&&budget_present(&work_stage,m)?{
+                let mut proof=Construction::open(root,&stage,&work_stage,m)?;
+                let data=Construction::read(&mut proof.payload,&work_stage,WORK_LIMIT,m)?;
+                // A partial owned write is disposable; only the exact intended
+                // complete payload is eligible to finish normal persistence.
+                if io::digest(&data)==next.plan{
+                    let planned:Work=strict(&data)?;validate_checkpoint(root,c,w,&candidate,&planned,m)?;
+                    stage_boundary("physical-stage-before-sync")?;proof.unchanged(&bytes,&data,m)?;
+                    m.cleanup_step()?;let t=Instant::now();proof.payload.sync_all()?;m.file_syncs+=1;m.elapsed("sync",t);
+                    stage_boundary("physical-stage-after-sync")?;
+                    stage_boundary("physical-stage-before-install")?;proof.unchanged(&bytes,&data,m)?;m.cleanup_step()?;
+                    io::install_original(&work_stage,&orphan,&next.plan,m)?;
+                    stage_boundary("physical-stage-install-durable")?;m.cleanup_step()?;installed=true;
+                }
+            }
+            if installed{
                 m.cleanup_step()?;let data=pack::native(&orphan,WORK_LIMIT,m)?;
                 if io::digest(&data)!=next.plan{return Err("integrity:work-stage-plan-digest".into());}
-                m.cleanup_step()?;let mut planned:Work=strict(&data)?;validate_work(&planned)?;
-                if planned.transition_parent.as_ref()!=Some(&b.plan)||planned.store_id!=c.store_id||planned.generation.id!=b.id||planned.generation.ordinal!=b.ordinal||Some(&planned.generation.catalog)!=c.catalog.as_ref(){return Err("integrity:work-stage-plan-owner".into());}
+                m.cleanup_step()?;let mut planned:Work=strict(&data)?;validate_checkpoint(root,c,w,&candidate,&planned,m)?;
                 if m.cleanup_budget.is_some(){
-                    let mut expected=c.clone();expected.physical.as_mut().unwrap().plan=next.plan.clone();
-                    if io::json(&candidate)?!=io::json(&expected)?||planned.generation!=w.generation||planned.physical_parent!=w.physical_parent||io::json(&planned.discovery)?!=io::json(&w.discovery)?||planned.older.iter().any(|g|!w.older.contains(g)){
-                        return Err("integrity:work-stage-frozen-generation".into());
-                    }
                     // A resumed checkpoint may retire only generations whose
                     // native reader pins are still drained. No new work or
                     // checkpoint payload is written on this path.
-                    for g in &w.older {
-                        if !planned.older.contains(g)&&!drained(root,g,&c.store_id,m)?{return Err("deferred:work-readers".into());}
-                    }
                     // A previous process may have stopped immediately after
                     // linking the complete, synced file into this directory.
                     m.cleanup_step()?;io::sync_dir(orphan.parent().ok_or("integrity:work-plan-parent")?,m)?;
+                    stage_boundary("physical-stage-before-selection")?;
                     commit_checkpoint(root,c,&candidate,&mut planned,m)?;
                     return Ok(Some(planned));
                 }

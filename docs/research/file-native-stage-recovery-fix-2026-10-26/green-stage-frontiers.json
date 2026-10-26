@@ -1,0 +1,43 @@
+{
+  "name": "green-stage-frontiers",
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "physical_lifetime::checkpoint_tests::stage_recovery_tests",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/target",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/green-stage-frontiers.stdout",
+  "stderr": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/green-stage-frontiers.stderr",
+  "pid": 1072729,
+  "process_group": 1072729,
+  "exit": 0,
+  "seconds": 21.351319849025458,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 603303936,
+  "sampled_tree_plus_supervisor_peak_rss": 621015040,
+  "sampled_process_peak_rss": 572043264,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 100888576,
+    "files": 1122
+  },
+  "native_free_after": 38660493312
+}

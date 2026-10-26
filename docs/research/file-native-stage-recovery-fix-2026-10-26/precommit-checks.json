@@ -1,0 +1,22 @@
+{
+  "source_manifest_sha256": "28b1e7b10e21d256c0c278270845343c82fff08be270f164c2b4c21aff1d5746",
+  "stage_binding": "All27source files match current working bytes and Git index",
+  "scope": "Only physical_lifetime.rs, physical_checkpoint_tests.rs, physical_stage_recovery_tests.rs plus new research directory",
+  "historical_freezes": "Both reconstruct exactly; first3 changed source files from review01-source; historical README from README-first-freeze.md",
+  "gitnexus_detect_changes": {
+    "attempted_scopes": [
+      "all",
+      "staged"
+    ],
+    "result": "UNKNOWN",
+    "reason": "Exact repository not found in registered index",
+    "manual_scope": "Direct callers recovery load/save/packing cleanup and aborted adoption checked; no other product path staged"
+  },
+  "diff_check": {
+    "product_and_documents": "PASS",
+    "whole_staged_result": "Seven raw native child stdout files preserve the test harness trailing space at interrupted test name; this intentional raw output is not stripped",
+    "exceptions": "repair-native-cuts/*/native-cut.stdout line3 only"
+  },
+  "old_evidence_preservation": "All375priorpilotbytebindings and standaloneaccepted26source match before commit",
+  "no_source_edit_after_final_proof_or_review": true
+}

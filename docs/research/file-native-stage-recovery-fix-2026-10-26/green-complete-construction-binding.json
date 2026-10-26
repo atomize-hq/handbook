@@ -1,0 +1,143 @@
+{
+  "source_files": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74"
+    },
+    {
+      "path": "consumers/project/Cargo.toml",
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e"
+    },
+    {
+      "path": "consumers/project/src/main.rs",
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173"
+    },
+    {
+      "path": "consumers/research/Cargo.toml",
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed"
+    },
+    {
+      "path": "consumers/research/src/main.rs",
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac"
+    },
+    {
+      "path": "src/api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851"
+    },
+    {
+      "path": "src/baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    {
+      "path": "src/bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+    },
+    {
+      "path": "src/differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+    },
+    {
+      "path": "src/disk.rs",
+      "bytes": 31206,
+      "sha256": "2ea695569eba8a5631be5b1708273b2796c7c5573149a304b9e695e531b9208b"
+    },
+    {
+      "path": "src/graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
+    },
+    {
+      "path": "src/io.rs",
+      "bytes": 21980,
+      "sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d"
+    },
+    {
+      "path": "src/lib.rs",
+      "bytes": 476,
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea"
+    },
+    {
+      "path": "src/lifetime.rs",
+      "bytes": 47780,
+      "sha256": "6e788c5b66d8baddd3344e3332415a6e0b15d26c911d67bdc58421c5113160eb"
+    },
+    {
+      "path": "src/main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+    },
+    {
+      "path": "src/navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6"
+    },
+    {
+      "path": "src/objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6"
+    },
+    {
+      "path": "src/pack.rs",
+      "bytes": 20837,
+      "sha256": "993dfc29a6647c50e55c3751f68f6b36d8ee79fecd957cb0f6229031d43ab288"
+    },
+    {
+      "path": "src/packing.rs",
+      "bytes": 93086,
+      "sha256": "188c9f32796fc50003cb32f57f3d8c9b13af66ff0025b7a49247fd0120c13c1f"
+    },
+    {
+      "path": "src/paged.rs",
+      "bytes": 21434,
+      "sha256": "16515455ea11552fc566cce11a3069a14c3a68c04b540c92d0773076e2fd8aa0"
+    },
+    {
+      "path": "src/physical_checkpoint_tests.rs",
+      "bytes": 15444,
+      "sha256": "b7791d9fccc4e75b044fb55794fff5b8b97e222d2e340955a2b429beba492af3"
+    },
+    {
+      "path": "src/physical_lifetime.rs",
+      "bytes": 34359,
+      "sha256": "f0714f82d52f0f88d7fe16990f3f987a5fa80fdfe441933a6f0735836c0800b1"
+    },
+    {
+      "path": "src/physical_stage_recovery_tests.rs",
+      "bytes": 1716,
+      "sha256": "4a5505acf4a28a53a73e3eebdcedcadc27c32cfd409b3d267b8ad14dd69a53e8"
+    },
+    {
+      "path": "src/projection.rs",
+      "bytes": 27876,
+      "sha256": "6c4eb7de16dd3b75507e6ba4016a0ad65e714519990c148df3856b43018d32eb"
+    },
+    {
+      "path": "src/rolling.rs",
+      "bytes": 11249,
+      "sha256": "35fc900eeba0f0abd1200bac092eb90c291bca00dc53c1e315e2edeae36c53d4"
+    },
+    {
+      "path": "src/store.rs",
+      "bytes": 36102,
+      "sha256": "0caee89818eb36c2dba092e9ffd44645613cedb8583f15d34fcd0a85498e92cc"
+    }
+  ],
+  "binary": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+  "binary_sha256": "afbf1e7db39f126ea3f4e97e8394c6e90b6d6a87b09aace2404126ad81973dc6",
+  "source_unchanged_during_stage": true,
+  "exit": 0
+}

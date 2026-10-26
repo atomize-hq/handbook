@@ -1,0 +1,216 @@
+{
+  "status": "FOCUSED_FIX_PROOF_PASS_PENDING_FRESH_REVIEW",
+  "base": "528de30ffdca065e024f5c7de142d24f6755ec55",
+  "source_manifest_sha256": "081af3911043dba998a122c4709861a2bef00bb4250b21b71436d415ae2b26cf",
+  "source_files": 27,
+  "changed_product_paths": [
+    "src/physical_lifetime.rs",
+    "src/physical_checkpoint_tests.rs",
+    "src/physical_stage_recovery_tests.rs"
+  ],
+  "red_exit": 101,
+  "red_failure": "complete owned construction progress must survive recovery",
+  "final_checkpoint_tests": {
+    "exit": 0,
+    "passed": 20,
+    "failed": 0,
+    "ignored": 0,
+    "filtered_unrelated_baseline": 31,
+    "existing_checkpoint_regressions": 9,
+    "new_Rust_entries": 11,
+    "new_child_dispatcher_entries": 1,
+    "native_process_cut_cases": 7
+  },
+  "work_bound": {
+    "exit": 0,
+    "passed": 1,
+    "accepted_bytes": 131072,
+    "refused_bytes": 131073
+  },
+  "construction_bound": {
+    "accepted_bytes": 131072,
+    "refused_bytes": 131073,
+    "pre_sync_oversize_refusal": true
+  },
+  "production_cfg_check": "cargo check --lib PASS",
+  "source_unchanged_during_final_proof": true,
+  "no_payload_rewrite_proof": "Same intended candidate is installed/selected; bytes_written0, exactly1held-stagefile resync for construction recovery; installed retry0file resync",
+  "clock_scope": "Existing unit fake clock with explicit expiration injection; NO costed/nativebatch performance proof, no production clock resets",
+  "safety_scope": "Namespace and actual file identities/bytes rechecked before writes/install; full existing candidate validation and reader recheck after installation; normal no-replace install + all current namespace barriers + gated actual-parent CAS preserved",
+  "frozen_birth_claims": "Cleanup validator additionally preserves birth_claims unchanged; cleanup has no legitimate birth-claim update",
+  "native_API_reference": "Existing cached windows-sys0.59 bindings verified for GetFileInformationByHandle,BY_HANDLE_FILE_INFORMATION,FILE_FLAG_BACKUP_SEMANTICS,FILE_ATTRIBUTE_REPARSE_POINT; no dependency change",
+  "platform_proof": "Linux x86_64 only. Windows/macOS builds/native validation NOT run in this assignment",
+  "review": "PENDING",
+  "no_pilot": true,
+  "no_full_workspace_run": true,
+  "no_engine_CLI_workload": true,
+  "no_format_global_io_caller_oracle_budget_change": true,
+  "toolchain": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)",
+  "native_child_receipts": [
+    {
+      "exit": 86,
+      "installed_at_cut": false,
+      "original_wait": true,
+      "phase": "physical-stage-before-sync",
+      "pid": 1138722,
+      "recovery_file_syncs": 1,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    },
+    {
+      "exit": 86,
+      "installed_at_cut": false,
+      "original_wait": true,
+      "phase": "physical-stage-after-sync",
+      "pid": 1138798,
+      "recovery_file_syncs": 1,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    },
+    {
+      "exit": 86,
+      "installed_at_cut": false,
+      "original_wait": true,
+      "phase": "physical-stage-before-install",
+      "pid": 1138840,
+      "recovery_file_syncs": 1,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    },
+    {
+      "exit": 86,
+      "installed_at_cut": true,
+      "original_wait": true,
+      "phase": "physical-stage-install-durable",
+      "pid": 1138890,
+      "recovery_file_syncs": 0,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    },
+    {
+      "exit": 86,
+      "installed_at_cut": true,
+      "original_wait": true,
+      "phase": "physical-stage-before-selection",
+      "pid": 1138928,
+      "recovery_file_syncs": 0,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    },
+    {
+      "exit": 86,
+      "installed_at_cut": true,
+      "original_wait": true,
+      "phase": "physical-progress-selected",
+      "pid": 1138984,
+      "recovery_file_syncs": 0,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    },
+    {
+      "exit": 86,
+      "installed_at_cut": true,
+      "original_wait": true,
+      "phase": "immutable-name-installed",
+      "pid": 1139028,
+      "recovery_file_syncs": 0,
+      "recovery_payload_bytes_written": 0,
+      "selected_before_recovery": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+      },
+      "stderr_bytes": 0,
+      "stderr_eof": true,
+      "stdout_bytes": 106,
+      "stdout_eof": true,
+      "target": {
+        "id": "checkpoint-g1",
+        "ordinal": 2,
+        "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+      }
+    }
+  ],
+  "gitnexus": "UNKNOWN exact repo unregistered; upstream recover_stage attempted; manual callers mapped",
+  "binaries_not_exported": true,
+  "old_source_and_evidence_roots_preserved": true
+}

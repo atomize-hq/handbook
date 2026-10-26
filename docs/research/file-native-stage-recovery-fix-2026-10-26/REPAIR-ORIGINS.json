@@ -1,0 +1,415 @@
+[
+  {
+    "stored": "sr01-final-checkpoints-binding.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-checkpoints-binding.json",
+    "bytes": 4429,
+    "sha256": "aa151c545f70a8c487697be8435e05275b383ff3b2fad67a0ee993ef1218e28a",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-checkpoints-command.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-checkpoints-command.json",
+    "bytes": 747,
+    "sha256": "90b85437c7f994d050511384d84c894c378f00da4bf303ff28faf3dd382069c6",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-checkpoints.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-checkpoints.json",
+    "bytes": 1479,
+    "sha256": "b8316f7ecd435455742de06e68acd976e7e6c7a506ca17aaa843d353c3fb31c5",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-checkpoints.resources.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-checkpoints.resources.json",
+    "bytes": 11965,
+    "sha256": "f1324fe98cdadc700e196c11acef1e42f92e2f94d6379a35602167c798fa0554",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-production-check-binding.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-production-check-binding.json",
+    "bytes": 4208,
+    "sha256": "24d9a36ee36fe7685d856da2efc8eb8d760663413821274ca9ab345ce389aed8",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-production-check-command.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-production-check-command.json",
+    "bytes": 533,
+    "sha256": "fbd4d0a5d011d1989e4b6a4c627e26393fc42c4f0583e00be6078976929a1a66",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-production-check.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-production-check.json",
+    "bytes": 1401,
+    "sha256": "5ffecabb0e142fa940170f82d552a04c17ca0566613519f2714b6555e0a8f067",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-production-check.resources.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-production-check.resources.json",
+    "bytes": 1238,
+    "sha256": "40670b0497d76eee83fe9ad8414318ea3321f73873b70f01fe3687c4f643f8e4",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-work-bound-binding.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-work-bound-binding.json",
+    "bytes": 4429,
+    "sha256": "aa151c545f70a8c487697be8435e05275b383ff3b2fad67a0ee993ef1218e28a",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-work-bound-command.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-work-bound-command.json",
+    "bytes": 761,
+    "sha256": "6a61f00b7d97563d86789d3238bab0cb256c4a475ebedfcb38e2a5ba160dde82",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-work-bound.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-work-bound.json",
+    "bytes": 1491,
+    "sha256": "01949ce338ece57ca7e8ce453b2ccd0a457eb810c1bac66ad3566078fee2324e",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-final-work-bound.resources.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-final-work-bound.resources.json",
+    "bytes": 300,
+    "sha256": "5ca9282fe69198947b51ffd6eb5cabb1e9de767dbb316fd43a65d9c775d25b81",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-green-aborted-owner-binding.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-green-aborted-owner-binding.json",
+    "bytes": 4429,
+    "sha256": "aa151c545f70a8c487697be8435e05275b383ff3b2fad67a0ee993ef1218e28a",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-green-aborted-owner-command.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-green-aborted-owner-command.json",
+    "bytes": 736,
+    "sha256": "460e8e09478bbe47d0ad0b07cfc1b6c41c1fe56bff9e5e0a4bd1f9f4f93ded63",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-green-aborted-owner.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-green-aborted-owner.json",
+    "bytes": 1475,
+    "sha256": "5b56d03be43f863430e48118be9488ac4a44d1cbb685a72e43229f623fbb1bc0",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-green-aborted-owner.resources.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-green-aborted-owner.resources.json",
+    "bytes": 9462,
+    "sha256": "4f6c32a181f5bb9585788ca71cfc7cd24ca2b9258c0f0d272423423d496b000f",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-aborted-owner-binding.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-aborted-owner-binding.json",
+    "bytes": 4431,
+    "sha256": "04b2b433f4fc5f20d016b50e79cc4fd023678720a8874d2d1055186ecb2430b9",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-aborted-owner-command.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-aborted-owner-command.json",
+    "bytes": 734,
+    "sha256": "c678d9c336c30fd0f106285c8a4a42544fc52664717b89506b858bfb4e5a0f97",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-aborted-owner.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-aborted-owner.json",
+    "bytes": 1471,
+    "sha256": "0e77f188e4388933c1e074640f2ab86b186eabd2439e4c3080b04ea0c1d018df",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-aborted-owner.resources.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-aborted-owner.resources.json",
+    "bytes": 9154,
+    "sha256": "d7ce10245cca13111e332e7adc94da0c99fddfb9ffb63a97a2f264020ae2b367",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-binary.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-binary.json",
+    "bytes": 212,
+    "sha256": "a15e1b7760f5b8ba3d060a6d43294e4cd1bab42d1d6c02d9c938261f4b04f0f8",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-valid-aborted-owner-binding.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-valid-aborted-owner-binding.json",
+    "bytes": 4431,
+    "sha256": "cb525a330f8804d4b442ea693a34c922e748fcc4f4a0232d3692ab9cebdd7387",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-valid-aborted-owner-command.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-valid-aborted-owner-command.json",
+    "bytes": 740,
+    "sha256": "c213e65a4dc597ff65e2a6aa7e2671ea760857650cc8cc0570d8606e4e837ac1",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-valid-aborted-owner.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-valid-aborted-owner.json",
+    "bytes": 1489,
+    "sha256": "47701f4e6d121510b262fce918cd09548281535017828175c5e10b15142c2925",
+    "gzip_original": false
+  },
+  {
+    "stored": "sr01-red-valid-aborted-owner.resources.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-valid-aborted-owner.resources.json",
+    "bytes": 9310,
+    "sha256": "8794fa3993ad5d9d8a651e189de83064efde6edc7ecae49854629fbcc5107017",
+    "gzip_original": false
+  },
+  {
+    "stored": "logs/sr01-final-checkpoints.stderr.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-final-checkpoints.stderr",
+    "bytes": 4220,
+    "sha256": "a5110cc3c8b79a95cc5504afeba0fc5d6022fc3954492793f5950ff40ca27cb5",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-final-checkpoints.stdout.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-final-checkpoints.stdout",
+    "bytes": 2789,
+    "sha256": "3265f762962ef2540355bd155d408aa5290ed01595f637d37c3cabe1fddf5276",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-final-production-check.stderr.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-final-production-check.stderr",
+    "bytes": 1703,
+    "sha256": "59c5d4c79cc8f71d2df8225b231d84c35687656fb7464fc7190a784398536f9c",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-final-production-check.stdout.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-final-production-check.stdout",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-final-work-bound.stderr.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-final-work-bound.stderr",
+    "bytes": 1636,
+    "sha256": "eab269cd8187928e2061a045f7c4e28b39781aaf45f37a736b1dae4f6e7f60b9",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-final-work-bound.stdout.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-final-work-bound.stdout",
+    "bytes": 176,
+    "sha256": "fc196da986b98430d2ab74204ae7895ac99a809ecd0374a60b54b1f07692c93a",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-green-aborted-owner.stderr.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-green-aborted-owner.stderr",
+    "bytes": 1732,
+    "sha256": "919bc53615d0fb0bbb05a17744e4616393930ce6d40ae2acc5425ed2b68c5bd5",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-green-aborted-owner.stdout.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-green-aborted-owner.stdout",
+    "bytes": 361,
+    "sha256": "61bee5e35f125acb0dcd2004e603578b9b75a4ad671df6dc5803b93bb35b9f9c",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-red-aborted-owner.stderr.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-red-aborted-owner.stderr",
+    "bytes": 2359,
+    "sha256": "b404eb9796e9c3a827da678946a74c7a5d211e31d849deacbfe2de0c17d1075b",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-red-aborted-owner.stdout.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-red-aborted-owner.stdout",
+    "bytes": 626,
+    "sha256": "8bf9f9504d22766a59517a70221b997119aa8b6866cf9e9b03ccb163ecb86902",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-red-valid-aborted-owner.stderr.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-red-valid-aborted-owner.stderr",
+    "bytes": 2379,
+    "sha256": "52a13f50e0479b46b98f54aba38ac09fadad4808b9c04d37400c6fe320b102cb",
+    "gzip_original": true
+  },
+  {
+    "stored": "logs/sr01-red-valid-aborted-owner.stdout.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/sr01-red-valid-aborted-owner.stdout",
+    "bytes": 626,
+    "sha256": "145f7b71409c7f33ca8486778f8c58a8aea5a5b553f35b6c910033663caeba2d",
+    "gzip_original": true
+  },
+  {
+    "stored": "sr01-red-valid-test-module.rs.gz",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/sr01-red-valid-test-module.rs",
+    "bytes": 21046,
+    "sha256": "10f86658962001b290611287b54dc8c132c5bf7e2c0814645f1540e197c463dd",
+    "gzip_original": true
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-sync/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332260774505-77/disposable/store/native-cut-receipt.json",
+    "bytes": 588,
+    "sha256": "6065bc5756df17b4552d49c8e2abd3dd1b4f2db8d52cbb7a7aaacfa2a6878182",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-sync/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332260774505-77/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-sync/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332260774505-77/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-after-sync/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332496193297-78/disposable/store/native-cut-receipt.json",
+    "bytes": 587,
+    "sha256": "15aab28970847f0edc1767665cf1963e1260f9a5b83027267332269b1c94ce84",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-after-sync/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332496193297-78/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-after-sync/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332496193297-78/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-install/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332732048517-79/disposable/store/native-cut-receipt.json",
+    "bytes": 591,
+    "sha256": "bb562404f1c784b4285b008433da946deb9c61e617356577a4d9e8e8c0c1a7d2",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-install/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332732048517-79/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-install/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332732048517-79/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-install-durable/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332968108784-80/disposable/store/native-cut-receipt.json",
+    "bytes": 591,
+    "sha256": "3488c370cbab051ee3baa26952535703b7c7e4b83b78fccd8434f6ce311b49b6",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-install-durable/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332968108784-80/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-install-durable/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048332968108784-80/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-selection/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333211887721-81/disposable/store/native-cut-receipt.json",
+    "bytes": 592,
+    "sha256": "354306778a5550a8a69ced7a17f93e0eaf0ccd681c84479783e337e7b5631df7",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-selection/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333211887721-81/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-stage-before-selection/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333211887721-81/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-progress-selected/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333473324680-82/disposable/store/native-cut-receipt.json",
+    "bytes": 587,
+    "sha256": "50452ce7de2fb458285889156d244644e992f2d51b176701ee6bbc3adbdc5f25",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-progress-selected/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333473324680-82/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/physical-progress-selected/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333473324680-82/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/immutable-name-installed/native-cut-receipt.json",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333699701467-83/disposable/store/native-cut-receipt.json",
+    "bytes": 585,
+    "sha256": "448381ad7de08ba4e40f5f095473dba4f3a0968248061ede31a11b2c90eedf78",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/immutable-name-installed/native-cut.stdout",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333699701467-83/disposable/store/native-cut.stdout",
+    "bytes": 106,
+    "sha256": "cf70fe980e859d2909aade33498b301cd675996b7e6d2835a50229cb92ba5b97",
+    "gzip_original": false
+  },
+  {
+    "stored": "repair-native-cuts/immutable-name-installed/native-cut.stderr",
+    "origin": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-final-checkpoints/checkpoint-resume-1962812-1793048333699701467-83/disposable/store/native-cut.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_original": false
+  }
+]

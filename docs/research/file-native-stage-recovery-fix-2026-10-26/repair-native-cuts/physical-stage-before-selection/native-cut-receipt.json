@@ -1,0 +1,23 @@
+{
+  "exit": 86,
+  "installed_at_cut": true,
+  "original_wait": true,
+  "phase": "physical-stage-before-selection",
+  "pid": 1963172,
+  "recovery_file_syncs": 0,
+  "recovery_payload_bytes_written": 0,
+  "selected_before_recovery": {
+    "id": "checkpoint-g1",
+    "ordinal": 2,
+    "plan": "26686bcf012e11c53d0c11c95bae6a951829b1714c81694ec36a717eeda138bd"
+  },
+  "stderr_bytes": 0,
+  "stderr_eof": true,
+  "stdout_bytes": 106,
+  "stdout_eof": true,
+  "target": {
+    "id": "checkpoint-g1",
+    "ordinal": 2,
+    "plan": "805388b6e7ea5db9374d6195e6884b216bdff9f1bcf62a05830d444bb7f964c6"
+  }
+}

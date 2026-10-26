@@ -1,0 +1,43 @@
+{
+  "name": "final-checkpoint-regressions",
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "physical_lifetime::checkpoint_tests",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/target",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/final-checkpoint-regressions.stdout",
+  "stderr": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/logs/final-checkpoint-regressions.stderr",
+  "pid": 1103767,
+  "process_group": 1103767,
+  "exit": 0,
+  "seconds": 27.65704633295536,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 552140800,
+  "sampled_tree_plus_supervisor_peak_rss": 570560512,
+  "sampled_process_peak_rss": 521355264,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 103428096,
+    "files": 1795
+  },
+  "native_free_after": 38405529600
+}

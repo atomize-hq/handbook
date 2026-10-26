@@ -1,0 +1,20 @@
+{
+  "graph": "UNKNOWN exact repository unregistered; upstream recover_stage attempted",
+  "direct_path": [
+    "packing::cleanup -> physical_lifetime::load -> load_checkpoint/load_inner -> recover_stage",
+    "save_inner -> load_checkpoint -> recover_stage"
+  ],
+  "changes_expected": [
+    "cleanup-only complete construction-stage recovery",
+    "private ownership/validation helper",
+    "checkpoint tests"
+  ],
+  "unchanged": [
+    "non-cleanup load behavior",
+    "ordinary capture format/catalog",
+    "35/50ms and800/1000limits",
+    "native gated CAS and pins",
+    "globalio/caller/oracle/formats"
+  ],
+  "scope_risk": "correctness-sensitive recovery frontier; native identity and interruption proof required"
+}

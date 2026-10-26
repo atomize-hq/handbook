@@ -1,0 +1,23 @@
+[
+  {
+    "seconds": 0.0004740380682051182,
+    "tree_rss": 13979648,
+    "supervisor_rss": 17559552,
+    "max_process_rss": 13979648,
+    "processes": 1
+  },
+  {
+    "seconds": 0.20687562506645918,
+    "tree_rss": 33411072,
+    "supervisor_rss": 17723392,
+    "max_process_rss": 29233152,
+    "processes": 2
+  },
+  {
+    "seconds": 0.41337062790989876,
+    "tree_rss": 0,
+    "supervisor_rss": 17887232,
+    "max_process_rss": 0,
+    "processes": 0
+  }
+]

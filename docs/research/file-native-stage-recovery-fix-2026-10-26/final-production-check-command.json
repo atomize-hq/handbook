@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "cargo",
+    "check",
+    "--lib",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/target"
+  ],
+  "env_selected": {
+    "TMPDIR": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

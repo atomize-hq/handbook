@@ -1,0 +1,28 @@
+{
+  "status": "ACCEPTED_NARROW_FIX_AND_FOCUSED_PROOF_ONLY",
+  "base": "528de30ffdca065e024f5c7de142d24f6755ec55",
+  "source_manifest": "source-manifest-final.json",
+  "source_manifest_sha256": "28b1e7b10e21d256c0c278270845343c82fff08be270f164c2b4c21aff1d5746",
+  "source_files": 27,
+  "review01": "P2 SR-01 validated; first candidate rejected",
+  "review02": "SR-01 resolved; no qualifying P1/P2 or applicable proof gap",
+  "current_proof": "repair-result.json",
+  "final_checkpoint_entries_passed": 22,
+  "native_cuts": 7,
+  "work_boundary_passed": 1,
+  "production_cfg_check": "Linux non-test lib PASS",
+  "gitnexus_impact": "UNKNOWN exact checkout unregistered; manual callers/scope checked",
+  "not_claimed": [
+    "pilot",
+    "full workspace suite",
+    "engine CLI workload",
+    "native performance",
+    "other-host compilation/native qualification"
+  ],
+  "preservation": "375 prior pilot artifact bindings and original standalone accepted26 source verified unchanged",
+  "historical_readme_mapping": {
+    "frozen_path": "README.md",
+    "retained_original": "README-first-freeze.md"
+  },
+  "owner_acceptance_scope": "Code/tests and focused proof only; commit on current branch, no origin push/main merge or propagation"
+}

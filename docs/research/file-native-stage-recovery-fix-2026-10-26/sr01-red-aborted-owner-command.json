@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "aborted_owner_adoption",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/target",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env_selected": {
+    "EXP_PACK_TEST_ROOT": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/fixtures/sr01-red-aborted-owner",
+    "TMPDIR": "/var/tmp/file-native-stage-recovery-fix-20261026-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

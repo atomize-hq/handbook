@@ -1,0 +1,39 @@
+{
+  "status": "FOCUSED_REPAIR_PROOF_PASS_PENDING_FRESH_REVIEW",
+  "base": "528de30ffdca065e024f5c7de142d24f6755ec55",
+  "source_manifest": "source-manifest-final.json",
+  "source_manifest_sha256": "28b1e7b10e21d256c0c278270845343c82fff08be270f164c2b4c21aff1d5746",
+  "original_finding": "SR-01 P2 VALIDATED",
+  "red_valid_adoption_tests": {
+    "exit": 101,
+    "failed": 2,
+    "error": "integrity:work-stage-frozen-generation"
+  },
+  "initial_sr01_red_fixture_error": "sr01-red-aborted-owner failed earlier on invalid owned.pack metadata path; retained, not counted as discriminator",
+  "green_adoption_tests": {
+    "exit": 0,
+    "passed": 2
+  },
+  "final_checkpoint_tests": {
+    "exit": 0,
+    "passed": 22,
+    "existing": 9,
+    "new_entries": 13,
+    "child_dispatcher": 1,
+    "native_cuts": 7,
+    "unrelated_filtered": 31
+  },
+  "work_bound": {
+    "exit": 0,
+    "passed": 1,
+    "accept": 131072,
+    "refuse": 131073
+  },
+  "production_check": {
+    "exit": 0,
+    "cfg": "non-test lib"
+  },
+  "birth_claims": "Restores baseline mutable progress semantics; validate_work identifier/count bounds preserved; not a new journal authorization mechanism",
+  "platform": "Linux x86_64; other-host build/native and performance unproved",
+  "no_pilot_fullsuite_CLIworkload": true
+}
