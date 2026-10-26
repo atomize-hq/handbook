@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "/Users/spensermcconnell/.cargo/bin/cargo",
+    "test",
+    "--manifest-path",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "--workspace",
+    "-j2",
+    "--target-dir",
+    "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target",
+    "--no-fail-fast",
+    "--",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "cwd": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026",
+  "source": "38e246500ff60e0d45821ec4de1ed11d886b3091",
+  "env": {
+    "CARGO_HOME": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/cargo-home",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_INCREMENTAL": "0",
+    "EXP_PACK_TEST_ROOT": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/fixtures",
+    "TMPDIR": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "TMP": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "TEMP": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "timeout_seconds": 1800,
+  "fixture_root": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/fixtures",
+  "filters": [],
+  "qualification": "ordinary native correctness only; not pilot or monitoring qualification"
+}

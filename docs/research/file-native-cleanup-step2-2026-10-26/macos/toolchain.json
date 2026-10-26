@@ -1,0 +1,42 @@
+{
+  "cargo": {
+    "argv": [
+      "/Users/spensermcconnell/.cargo/bin/cargo",
+      "--version"
+    ],
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+    "stderr": ""
+  },
+  "rustc": {
+    "argv": [
+      "/Users/spensermcconnell/.cargo/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+    "stderr": ""
+  },
+  "cc": {
+    "argv": [
+      "/usr/bin/cc",
+      "--version"
+    ],
+    "stdout": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+    "stderr": ""
+  },
+  "macos": {
+    "argv": [
+      "/usr/bin/sw_vers"
+    ],
+    "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.1\nBuildVersion:\t\t25G76\n",
+    "stderr": ""
+  },
+  "arch": {
+    "argv": [
+      "/usr/bin/uname",
+      "-m"
+    ],
+    "stdout": "arm64\n",
+    "stderr": ""
+  }
+}

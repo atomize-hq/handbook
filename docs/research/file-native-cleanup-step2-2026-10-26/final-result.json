@@ -1,0 +1,63 @@
+{
+  "status": "REVIEWED_NEGATIVE_RESEARCH_ACCEPTED26_CORRECTNESS_ALL_HOSTS_STEP2_NOT_COMPLETE",
+  "utc": "2026-10-26T16:43:33.076019+00:00",
+  "parent": "38e246500ff60e0d45821ec4de1ed11d886b3091",
+  "engine_source_changes": 0,
+  "source_manifest": "accepted26-manifest.json",
+  "source_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "source_file_count": 26,
+  "review": "NO_QUALIFYING_P1_P2_FOR_BOUNDED_NEGATIVE_RESEARCH",
+  "advisory": "S2R-01_P3_RECORDED",
+  "all_host_unfiltered_workspace": {
+    "Linux": {
+      "passed": 40,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "actual_boundary_fixture_bytes": 80976318
+    },
+    "Mac": {
+      "passed": 40,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "actual_boundary_fixture_bytes": 80976318
+    },
+    "Windows": {
+      "passed": 40,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "actual_boundary_fixture_bytes": 80976318
+    }
+  },
+  "Linux_diagnostic": {
+    "first_exit": 101,
+    "bound_repeat_exit": 101,
+    "modeled_ms_both_repetitions": [
+      56.25,
+      56.2
+    ],
+    "paths_remaining_after_two": 4,
+    "H2_publication_deleted": true,
+    "new_pilot": false,
+    "not_CLI_performance_qualification": true
+  },
+  "cost_lower_bound": {
+    "ms": 119,
+    "conditioning": "Current post-release serial immutable protocol under frozen model; NOT every future schedule/native device; see COST-BOUND.json and README"
+  },
+  "product_choice": "Retain accepted26 and frozen-targetFAIL; owner selects measured negative experiment outcome or a concrete separately bounded dependency-reducing design, potentially speculative checkpoint preparation while held with full safety/two-call proof.",
+  "step2_complete": false,
+  "cleanup_repair_accepted": false,
+  "native_full_oracle_after_new_repair": "NOT_RUN_NO_NEW_REPAIR",
+  "prior_latest_Linux_pilot": "FAIL_7_OF_8_BATCHES_OVER50MS_FINAL_H3_ORACLE_UNRUN",
+  "rejected_optimization": "NOT_PROMOTED_CWR01_CWR02_P2_OPEN",
+  "new_format_or_target_change": false,
+  "original_evidence_or_standalone_source_modified": false,
+  "origin_push": false,
+  "main_merge": false,
+  "disk_cleanup": false,
+  "gitnexus": "UNKNOWN_UNREGISTERED_EXACT_CHECKOUT_QUERY_IMPACT_DETECT_CHANGES_ATTEMPTED",
+  "host_evidence_verification": "HOST-IMPORTS.json; all65stored/original bindings including receipt;62manifest payloads+2manifests+1receipt"
+}

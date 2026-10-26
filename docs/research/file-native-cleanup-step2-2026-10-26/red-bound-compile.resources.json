@@ -1,0 +1,443 @@
+[
+  {
+    "seconds": 0.0002773711457848549,
+    "tree_rss": 12263424,
+    "supervisor_rss": 17580032,
+    "max_process_rss": 12263424,
+    "processes": 1
+  },
+  {
+    "seconds": 0.20867531280964613,
+    "tree_rss": 190279680,
+    "supervisor_rss": 17743872,
+    "max_process_rss": 158449664,
+    "processes": 2
+  },
+  {
+    "seconds": 0.41558886179700494,
+    "tree_rss": 276795392,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 244965376,
+    "processes": 2
+  },
+  {
+    "seconds": 0.6223408519290388,
+    "tree_rss": 306900992,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 275070976,
+    "processes": 2
+  },
+  {
+    "seconds": 0.8291426110081375,
+    "tree_rss": 339349504,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 307519488,
+    "processes": 2
+  },
+  {
+    "seconds": 1.0358896311372519,
+    "tree_rss": 364498944,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 332668928,
+    "processes": 2
+  },
+  {
+    "seconds": 1.2426452320069075,
+    "tree_rss": 398315520,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 366485504,
+    "processes": 2
+  },
+  {
+    "seconds": 1.4493361730128527,
+    "tree_rss": 432869376,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 401039360,
+    "processes": 2
+  },
+  {
+    "seconds": 1.6559821227565408,
+    "tree_rss": 451276800,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 419446784,
+    "processes": 2
+  },
+  {
+    "seconds": 1.8626179210841656,
+    "tree_rss": 475140096,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 443310080,
+    "processes": 2
+  },
+  {
+    "seconds": 2.0693683470599353,
+    "tree_rss": 490041344,
+    "supervisor_rss": 17907712,
+    "max_process_rss": 458211328,
+    "processes": 2
+  },
+  {
+    "seconds": 2.285540835931897,
+    "tree_rss": 545947648,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 514117632,
+    "processes": 2
+  },
+  {
+    "seconds": 2.4928013528697193,
+    "tree_rss": 588705792,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 556875776,
+    "processes": 2
+  },
+  {
+    "seconds": 2.6994376149959862,
+    "tree_rss": 591679488,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 559849472,
+    "processes": 2
+  },
+  {
+    "seconds": 2.9061449649743736,
+    "tree_rss": 592707584,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 560877568,
+    "processes": 2
+  },
+  {
+    "seconds": 3.1127747297286987,
+    "tree_rss": 583827456,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 551997440,
+    "processes": 2
+  },
+  {
+    "seconds": 3.3194839381612837,
+    "tree_rss": 587071488,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 555241472,
+    "processes": 2
+  },
+  {
+    "seconds": 3.5262287417426705,
+    "tree_rss": 582922240,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 551092224,
+    "processes": 2
+  },
+  {
+    "seconds": 3.7328118490986526,
+    "tree_rss": 575492096,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 543662080,
+    "processes": 2
+  },
+  {
+    "seconds": 3.9423221237957478,
+    "tree_rss": 590827520,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 558997504,
+    "processes": 2
+  },
+  {
+    "seconds": 4.148907415103167,
+    "tree_rss": 596590592,
+    "supervisor_rss": 18071552,
+    "max_process_rss": 564760576,
+    "processes": 2
+  },
+  {
+    "seconds": 4.365192780736834,
+    "tree_rss": 595345408,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 563515392,
+    "processes": 2
+  },
+  {
+    "seconds": 4.571854603942484,
+    "tree_rss": 578744320,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 546914304,
+    "processes": 2
+  },
+  {
+    "seconds": 4.780396263115108,
+    "tree_rss": 593051648,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 561221632,
+    "processes": 2
+  },
+  {
+    "seconds": 4.987053149845451,
+    "tree_rss": 586399744,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 554569728,
+    "processes": 2
+  },
+  {
+    "seconds": 5.193667619954795,
+    "tree_rss": 593391616,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 561561600,
+    "processes": 2
+  },
+  {
+    "seconds": 5.400294682011008,
+    "tree_rss": 593375232,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 561545216,
+    "processes": 2
+  },
+  {
+    "seconds": 5.606959979049861,
+    "tree_rss": 586354688,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 554524672,
+    "processes": 2
+  },
+  {
+    "seconds": 5.813730233814567,
+    "tree_rss": 506011648,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 474181632,
+    "processes": 2
+  },
+  {
+    "seconds": 6.020329052116722,
+    "tree_rss": 519856128,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 488026112,
+    "processes": 2
+  },
+  {
+    "seconds": 6.22687850613147,
+    "tree_rss": 532471808,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 500641792,
+    "processes": 2
+  },
+  {
+    "seconds": 6.44287677295506,
+    "tree_rss": 534175744,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 502345728,
+    "processes": 2
+  },
+  {
+    "seconds": 6.649314319714904,
+    "tree_rss": 535347200,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 503517184,
+    "processes": 2
+  },
+  {
+    "seconds": 6.855792988091707,
+    "tree_rss": 539123712,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 507293696,
+    "processes": 2
+  },
+  {
+    "seconds": 7.062311555724591,
+    "tree_rss": 547782656,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 515952640,
+    "processes": 2
+  },
+  {
+    "seconds": 7.268755725119263,
+    "tree_rss": 540303360,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 508473344,
+    "processes": 2
+  },
+  {
+    "seconds": 7.475239621009678,
+    "tree_rss": 544768000,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 512937984,
+    "processes": 2
+  },
+  {
+    "seconds": 7.681720886845142,
+    "tree_rss": 546897920,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 515067904,
+    "processes": 2
+  },
+  {
+    "seconds": 7.888174952939153,
+    "tree_rss": 555597824,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 523767808,
+    "processes": 2
+  },
+  {
+    "seconds": 8.094790347851813,
+    "tree_rss": 501727232,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 469897216,
+    "processes": 2
+  },
+  {
+    "seconds": 8.301312873139977,
+    "tree_rss": 534319104,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 502489088,
+    "processes": 2
+  },
+  {
+    "seconds": 8.517230182886124,
+    "tree_rss": 535302144,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 503472128,
+    "processes": 2
+  },
+  {
+    "seconds": 8.723813246935606,
+    "tree_rss": 535662592,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 503832576,
+    "processes": 2
+  },
+  {
+    "seconds": 8.930298415012658,
+    "tree_rss": 534159360,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 502329344,
+    "processes": 2
+  },
+  {
+    "seconds": 9.136807145085186,
+    "tree_rss": 548470784,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 516640768,
+    "processes": 2
+  },
+  {
+    "seconds": 9.343276610132307,
+    "tree_rss": 541028352,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 509198336,
+    "processes": 2
+  },
+  {
+    "seconds": 9.549778536893427,
+    "tree_rss": 544178176,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 512348160,
+    "processes": 2
+  },
+  {
+    "seconds": 9.756369952112436,
+    "tree_rss": 552030208,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 520200192,
+    "processes": 2
+  },
+  {
+    "seconds": 9.96291190199554,
+    "tree_rss": 548855808,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 517025792,
+    "processes": 2
+  },
+  {
+    "seconds": 10.16940338211134,
+    "tree_rss": 540729344,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 508899328,
+    "processes": 2
+  },
+  {
+    "seconds": 10.37592188315466,
+    "tree_rss": 540893184,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 509063168,
+    "processes": 2
+  },
+  {
+    "seconds": 10.592324241995811,
+    "tree_rss": 534020096,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 502190080,
+    "processes": 2
+  },
+  {
+    "seconds": 10.798891523852944,
+    "tree_rss": 538599424,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 506769408,
+    "processes": 2
+  },
+  {
+    "seconds": 11.005318734794855,
+    "tree_rss": 529383424,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 497553408,
+    "processes": 2
+  },
+  {
+    "seconds": 11.211846014950424,
+    "tree_rss": 538284032,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 506454016,
+    "processes": 2
+  },
+  {
+    "seconds": 11.418320710770786,
+    "tree_rss": 531066880,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 499236864,
+    "processes": 2
+  },
+  {
+    "seconds": 11.624898770824075,
+    "tree_rss": 528244736,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 496414720,
+    "processes": 2
+  },
+  {
+    "seconds": 11.831313419155777,
+    "tree_rss": 528408576,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 496578560,
+    "processes": 2
+  },
+  {
+    "seconds": 12.037750837858766,
+    "tree_rss": 524537856,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 492707840,
+    "processes": 2
+  },
+  {
+    "seconds": 12.24417202314362,
+    "tree_rss": 521838592,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 490008576,
+    "processes": 2
+  },
+  {
+    "seconds": 12.450589646119624,
+    "tree_rss": 521170944,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 489340928,
+    "processes": 2
+  },
+  {
+    "seconds": 12.666562180034816,
+    "tree_rss": 291098624,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 203939840,
+    "processes": 5
+  },
+  {
+    "seconds": 12.873381725978106,
+    "tree_rss": 0,
+    "supervisor_rss": 18378752,
+    "max_process_rss": 0,
+    "processes": 0
+  }
+]

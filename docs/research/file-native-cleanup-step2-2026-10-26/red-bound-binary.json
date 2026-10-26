@@ -1,0 +1,16 @@
+{
+  "before": {
+    "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+    "bytes": 5137784,
+    "sha256": "3de36103acd1131ad8b59624ff25687457bc21a89aa5430abb24d0c995d2b7ee"
+  },
+  "after": {
+    "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+    "bytes": 5137784,
+    "sha256": "3de36103acd1131ad8b59624ff25687457bc21a89aa5430abb24d0c995d2b7ee"
+  },
+  "source_manifest_sha256": "0b8ce3efec5477c29110748e40a66b0e77fa2bd6b1c89bc435790a2790649d09",
+  "compiled_with": "red-bound-compile-command.json",
+  "run": "red-bound-repeat-command.json",
+  "source_unchanged_during_build_and_run": true
+}

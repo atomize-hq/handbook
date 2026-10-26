@@ -1,0 +1,33 @@
+{
+  "name": "red-bound-repeat",
+  "argv": [
+    "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+    "physical_lifetime::checkpoint_tests::cleanup_tests::released_reader_five_h2_jobs_drain_in_exactly_two_costed_calls",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "timeout_seconds": 120,
+  "stdout": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/logs/red-bound-repeat.stdout",
+  "stderr": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/logs/red-bound-repeat.stderr",
+  "pid": 825812,
+  "process_group": 825812,
+  "exit": 101,
+  "seconds": 3.2048875861801207,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 5804032,
+  "sampled_tree_plus_supervisor_peak_rss": 23986176,
+  "sampled_process_peak_rss": 5804032,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 196599808,
+    "files": 1087
+  },
+  "native_free_after": 54384095232
+}

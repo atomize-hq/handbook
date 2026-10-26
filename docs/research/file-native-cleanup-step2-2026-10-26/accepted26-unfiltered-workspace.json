@@ -1,0 +1,43 @@
+{
+  "name": "accepted26-unfiltered-workspace",
+  "argv": [
+    "cargo",
+    "test",
+    "--workspace",
+    "--no-fail-fast",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/target",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/logs/accepted26-unfiltered-workspace.stdout",
+  "stderr": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/logs/accepted26-unfiltered-workspace.stderr",
+  "pid": 438555,
+  "process_group": 438555,
+  "exit": 0,
+  "seconds": 32.80964002618566,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 979435520,
+  "sampled_tree_plus_supervisor_peak_rss": 996814848,
+  "sampled_process_peak_rss": 484904960,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 195555328,
+    "files": 997
+  },
+  "native_free_after": 54830620672
+}

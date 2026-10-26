@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "apply",
+    "--check",
+    "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/reproduction.patch"
+  ],
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "applied": false,
+  "decoded_patch_bytes": 12544,
+  "decoded_patch_sha256": "ac6321f60f0714d17612c0dddeba94889383abebb99f33f9863fddfe76637558"
+}

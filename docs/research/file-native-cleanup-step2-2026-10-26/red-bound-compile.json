@@ -1,0 +1,40 @@
+{
+  "name": "red-bound-compile",
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "--no-run",
+    "--manifest-path",
+    "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/target"
+  ],
+  "cwd": "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/logs/red-bound-compile.stdout",
+  "stderr": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/logs/red-bound-compile.stderr",
+  "pid": 821614,
+  "process_group": 821614,
+  "exit": 0,
+  "seconds": 13.116153670009226,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 596590592,
+  "sampled_tree_plus_supervisor_peak_rss": 614662144,
+  "sampled_process_peak_rss": 564760576,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 196038656,
+    "files": 1003
+  },
+  "native_free_after": 54526922752
+}

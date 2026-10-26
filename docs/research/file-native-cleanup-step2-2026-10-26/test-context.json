@@ -1,0 +1,13 @@
+{
+  "baseline": "38e246500ff60e0d45821ec4de1ed11d886b3091",
+  "source": "/home/spenser/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "test_seam": "api::run packing cleanup with real reader held then dropped, exactly two calls; independent existing-path and selected-root backlog",
+  "profile": "UNCHANGED from retained failed optimization:10ms/file9ms/dirty namespace50us/clean namespace",
+  "new_product_behavior": false,
+  "gitnexus": "UNKNOWN exact repo unregistered; query + impact attempted",
+  "reused_test_origins": [
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate/src/physical_checkpoint_tests.rs",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate/src/physical_checkpoint_write_tests.rs"
+  ],
+  "utc": "2026-10-26T16:23:44.606650+00:00"
+}

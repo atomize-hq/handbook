@@ -1,0 +1,45 @@
+{
+  "conditioning": "Current immutable selector+Work checkpoint protocol, serial per-name directory barriers, unchanged frozen10ms/file9ms/dirty-directory50us/clean-directory profile; not universal native/device lower bound",
+  "lower_bound_ms": 119,
+  "terms": [
+    {
+      "name": "selector_and_Work_file_sync",
+      "count": 2,
+      "unit_ms": 10
+    },
+    {
+      "name": "immutable_install_namespace",
+      "count": 1,
+      "unit_ms": 9
+    },
+    {
+      "name": "separate_Work_stage_unlink_namespace",
+      "count": 1,
+      "unit_ms": 9
+    },
+    {
+      "name": "STORE_selection_namespace",
+      "count": 1,
+      "unit_ms": 9
+    },
+    {
+      "name": "distinct_H2_loose_parent_namespaces",
+      "count": 5,
+      "unit_ms": 9
+    },
+    {
+      "name": "distinct_G1_catalog_pin_Work_namespaces",
+      "count": 3,
+      "unit_ms": 9
+    }
+  ],
+  "optimistic_same_directory_stage_variant_ms": 110,
+  "not_counted": [
+    "clean namespace barriers",
+    "CPU/read/validation",
+    "old_current_root_deletion",
+    "additional_cursor_garbage_checkpoint_publication"
+  ],
+  "target_combined_two_calls_ms": 100,
+  "native_performance_qualification": false
+}

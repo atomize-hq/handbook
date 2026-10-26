@@ -1,0 +1,78 @@
+{
+  "pid": 45016,
+  "parent": 44929,
+  "pgid": 45016,
+  "argv": [
+    "/Users/spensermcconnell/.cargo/bin/cargo",
+    "build",
+    "--manifest-path",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-accepted-checkpoint-20261026/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "--workspace",
+    "-j2",
+    "--target-dir",
+    "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target"
+  ],
+  "role": "cargo-build",
+  "root": null,
+  "env_overrides": {
+    "CARGO_HOME": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/cargo-home",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_INCREMENTAL": "0",
+    "EXP_PACK_TEST_ROOT": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/fixtures",
+    "TMPDIR": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "TMP": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "TEMP": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_ns": 3720954741696250,
+  "birth": {
+    "pid": 45016,
+    "ppid": 44929,
+    "pgid": 45016,
+    "rss_bytes": 147456,
+    "birth": "Mon Oct 26 12:35:06 2026",
+    "state": "Us"
+  },
+  "before_input": {
+    "pid": 45016,
+    "positive_rss": 147456,
+    "before_stdin_delivery": true,
+    "observed_ns": 3720954745223708,
+    "birth": {
+      "pid": 45016,
+      "ppid": 44929,
+      "pgid": 45016,
+      "rss_bytes": 147456,
+      "birth": "Mon Oct 26 12:35:06 2026",
+      "state": "Us"
+    }
+  },
+  "exit": 0,
+  "seconds": 26.217220792081207,
+  "stdout_eof": true,
+  "stderr_eof": true,
+  "stdin_closed": true,
+  "original_handle_waited": true,
+  "stdout_bytes": 0,
+  "stderr_bytes": 3051,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "9724e11a4bdc93a41bbb4499059517387c15422da5931f06dfc775af81405b64",
+  "exception": null,
+  "closure": [
+    {
+      "valid": true,
+      "members": []
+    },
+    {
+      "valid": true,
+      "members": []
+    }
+  ],
+  "sampled_peak_process_rss": 42156032,
+  "observation_scope": "direct children and owned process group; no escaped-tree or hard-peak qualification",
+  "owned_tree_closed": true,
+  "scope": "original native child wait/EOF and owned process group"
+}

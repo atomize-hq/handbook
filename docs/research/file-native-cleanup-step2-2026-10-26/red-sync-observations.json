@@ -1,0 +1,230 @@
+{
+  "source": "logs/red-accepted-two-calls.stderr",
+  "frozen_cost_profile_unchanged": true,
+  "actual_sync_rows": [
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store",
+      "file": false,
+      "ns": 8544816
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress/physical-2-birth-48585-1793031875024997681-51.selector-stage",
+      "file": true,
+      "ns": 8493438
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress",
+      "file": false,
+      "ns": 8380778
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store",
+      "file": false,
+      "ns": 8452800
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress/physical-2-birth-48585-1793031875024997681-51.work-stage",
+      "file": true,
+      "ns": 8575854
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress",
+      "file": false,
+      "ns": 1147
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store",
+      "file": false,
+      "ns": 1083
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-plans",
+      "file": false,
+      "ns": 8468978
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress",
+      "file": false,
+      "ns": 8495914
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store",
+      "file": false,
+      "ns": 8514517
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-plans",
+      "file": false,
+      "ns": 8459958
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/attempts/attempt-48585-1793031874623996696-37/allocations",
+      "file": false,
+      "ns": 8633697
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/attempts/attempt-48585-1793031874623996696-37",
+      "file": false,
+      "ns": 8820102
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/attempt-hints",
+      "file": false,
+      "ns": 8449137
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/publications",
+      "file": false,
+      "ns": 8391741
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store",
+      "file": false,
+      "ns": 8298571
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress/physical-2-birth-48585-1793031875024997681-51.selector-stage",
+      "file": true,
+      "ns": 8330116
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress",
+      "file": false,
+      "ns": 8374661
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store",
+      "file": false,
+      "ns": 8373826
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress/physical-2-birth-48585-1793031875024997681-51.work-stage",
+      "file": true,
+      "ns": 8644068
+    },
+    {
+      "path": "/var/tmp/file-native-cleanup-step2-20261026-01a16fd3/fixtures/red-accepted-two-calls/five-h2-jobs-48585-1793031871835241230-0/disposable/store/physical-progress",
+      "file": false,
+      "ns": 3557
+    }
+  ],
+  "actual_sync_total_ns": 152708759,
+  "final_calls": [
+    {
+      "clock_ms": 56.25,
+      "jobs": [
+        {
+          "key": "attempts/attempt-48585-1793031874623996696-37/allocations/publication-48585-1793031874849145277-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempts/attempt-48585-1793031874623996696-37/candidate.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempt-hints/attempt-48585-1793031874623996696-37.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "publications/publication-48585-1793031874849145277-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "results/4bfe5975319805ea421bde748bb20a08504a3a93b6d79f7bb460bbe52ee2905d.json",
+          "position": 0,
+          "records": 1
+        }
+      ],
+      "older": 0,
+      "pass": 1,
+      "pending": [
+        "attempt-hints/attempt-48585-1793031874623996696-37.json",
+        "attempts/attempt-48585-1793031874623996696-37/allocations/publication-48585-1793031874849145277-43.json",
+        "attempts/attempt-48585-1793031874623996696-37/candidate.json",
+        "pack-catalogs/716193be1ec3caae97810d403418de101782631318bfd1e1d5bb016b97503705.json",
+        "physical-pins/physical-1-birth-48585-1793031873839025824-31.lock",
+        "physical-plans/07b970dce9a5af61365c35135161fa281de3c8b0f29771f75c10f4c5add23979.json",
+        "publications/publication-48585-1793031874849145277-43.json",
+        "results/4bfe5975319805ea421bde748bb20a08504a3a93b6d79f7bb460bbe52ee2905d.json"
+      ],
+      "result": {
+        "batch_ns": 77165292,
+        "candidate_limit": 1000,
+        "candidates": 78,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      },
+      "selected": {
+        "id": "physical-2-birth-48585-1793031875024997681-51",
+        "ordinal": 2,
+        "plan": "6541e21b503d2ea7f1271d70fd723661dbe191545e6cc2ed30e68b8e64dcf863"
+      },
+      "tail_exists": true
+    },
+    {
+      "clock_ms": 56.2,
+      "jobs": [
+        {
+          "key": "attempts/attempt-48585-1793031874623996696-37/allocations/publication-48585-1793031874849145277-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempts/attempt-48585-1793031874623996696-37/candidate.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempt-hints/attempt-48585-1793031874623996696-37.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "publications/publication-48585-1793031874849145277-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "results/4bfe5975319805ea421bde748bb20a08504a3a93b6d79f7bb460bbe52ee2905d.json",
+          "position": 0,
+          "records": 1
+        }
+      ],
+      "older": 0,
+      "pass": 2,
+      "pending": [
+        "pack-catalogs/716193be1ec3caae97810d403418de101782631318bfd1e1d5bb016b97503705.json",
+        "physical-pins/physical-1-birth-48585-1793031873839025824-31.lock",
+        "physical-plans/07b970dce9a5af61365c35135161fa281de3c8b0f29771f75c10f4c5add23979.json",
+        "results/4bfe5975319805ea421bde748bb20a08504a3a93b6d79f7bb460bbe52ee2905d.json"
+      ],
+      "result": {
+        "batch_ns": 78010771,
+        "candidate_limit": 1000,
+        "candidates": 106,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      },
+      "selected": {
+        "id": "physical-2-birth-48585-1793031875024997681-51",
+        "ordinal": 2,
+        "plan": "6541e21b503d2ea7f1271d70fd723661dbe191545e6cc2ed30e68b8e64dcf863"
+      },
+      "tail_exists": false
+    }
+  ]
+}

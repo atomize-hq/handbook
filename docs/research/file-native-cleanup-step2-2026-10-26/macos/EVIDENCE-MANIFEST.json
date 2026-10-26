@@ -1,0 +1,140 @@
+{
+  "scope": "Small correctness evidence only; excludes target binaries and real fixtures retained at origin",
+  "files": [
+    {
+      "path": "actual-tests.json",
+      "bytes": 3288,
+      "sha256": "4733330802fd513b4de909af7be5d09702f8033080ac7949852be761ba246e88"
+    },
+    {
+      "path": "binary-bindings.json",
+      "bytes": 9780,
+      "sha256": "95f723174f28f43b4f313e6735b48b0f24a084978f1008e459ab2c9de942cc0e"
+    },
+    {
+      "path": "boundary-evidence.json",
+      "bytes": 2944,
+      "sha256": "eb23767cf848638ca85cef86beca3f0acdd3bfa4425447de34d9ee690f3371c6"
+    },
+    {
+      "path": "build-command.json",
+      "bytes": 1824,
+      "sha256": "7eb1be598426ae6afa807bc7b0549d3a38ceec3fa0091f7e1a71fd3460bd0e3c"
+    },
+    {
+      "path": "build-result.json",
+      "bytes": 2710,
+      "sha256": "19165f96e4008a05e76512bb761fe7141eb39a20b28a048c12c532cfe88c86eb"
+    },
+    {
+      "path": "build_test.py",
+      "bytes": 7003,
+      "sha256": "e1331ff7ff97ef04d8ce0b95efe3ad200bdb6321f947936a35a6f455b8cc195c"
+    },
+    {
+      "path": "dependencies.json",
+      "bytes": 14493,
+      "sha256": "fe766f3cc25c93abdc8207ed0bd7cb7f9ce8c4b34642a79f8651e550e2f5fa15"
+    },
+    {
+      "path": "environment.json",
+      "bytes": 2579,
+      "sha256": "92c1ed33eb1be76396ba40680a2cda60be920fa9ece89dee8f7c959a555a4944"
+    },
+    {
+      "path": "logs/build.child.json",
+      "bytes": 1630,
+      "sha256": "851c778c29d76133f01c0949ef89e9ced0421bafdfedbbc2c91ddb46b3648b4d"
+    },
+    {
+      "path": "logs/build.input",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/build.result.json",
+      "bytes": 2611,
+      "sha256": "cd7425525bccefaf99c9b56c0305b129b708d06313d8b1a4dcafa617f7a9d6c4"
+    },
+    {
+      "path": "logs/build.stderr",
+      "bytes": 3051,
+      "sha256": "9724e11a4bdc93a41bbb4499059517387c15422da5931f06dfc775af81405b64"
+    },
+    {
+      "path": "logs/build.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/lifecycle-events.jsonl",
+      "bytes": 103262,
+      "sha256": "b58f6efe63fcd3145195cad782245949b6a478b4b349501e2b4456a0ed271c28"
+    },
+    {
+      "path": "logs/test.child.json",
+      "bytes": 1703,
+      "sha256": "2b4073def65b1b9ae429d7aaedbcf06817b3ec995904b8b712b33a536a1e18e3"
+    },
+    {
+      "path": "logs/test.input",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/test.result.json",
+      "bytes": 2688,
+      "sha256": "c9fdbee25e9190aa7b199e80b748836f156503370e0fa6e5282763971d7ed8ab"
+    },
+    {
+      "path": "logs/test.stderr",
+      "bytes": 10804,
+      "sha256": "317c146b1e8744ae4292b52fd15de41d87ca9790bfb7ef396fbf16d25455c0aa"
+    },
+    {
+      "path": "logs/test.stdout",
+      "bytes": 3661,
+      "sha256": "86db985fdd8d261d12a1512fb867ec5bf7e6caab8117bf5d30002049866acfb0"
+    },
+    {
+      "path": "native-launch-used.py",
+      "bytes": 7694,
+      "sha256": "6f3a07bea9109737a20cbef0e3c8ce47b1a97e6ff4d148c2166b36e91838f5d1"
+    },
+    {
+      "path": "report.md",
+      "bytes": 2341,
+      "sha256": "df697b5aa48ffdd308b0c307fa5b66176d27869369968aa5effc254b65009306"
+    },
+    {
+      "path": "result.json",
+      "bytes": 1174,
+      "sha256": "d38a449a4b0976a711d0a4f07f822672152a29758eb160c73416b6396b5b18aa"
+    },
+    {
+      "path": "source-after.json",
+      "bytes": 4172,
+      "sha256": "09d302bbbd3fe809010207d4bfcac2ce5f370109c02d07d9205540591ff88cb2"
+    },
+    {
+      "path": "source-before.json",
+      "bytes": 4172,
+      "sha256": "09d302bbbd3fe809010207d4bfcac2ce5f370109c02d07d9205540591ff88cb2"
+    },
+    {
+      "path": "test-command.json",
+      "bytes": 1898,
+      "sha256": "edcfa90ff756caa646511640fa83036af34fc1fe60d727066df33e367b5338b8"
+    },
+    {
+      "path": "test-result.json",
+      "bytes": 2787,
+      "sha256": "beb66cad70d7adc125b7b8997fb0b755cbe1b21cc157a20bb35f2ff94a26acaa"
+    },
+    {
+      "path": "toolchain.json",
+      "bytes": 1146,
+      "sha256": "0a6e5f9a6283e8a0d16db9e8249c4afb0cb8818653de3bb5ad0ea18795dce6eb"
+    }
+  ]
+}

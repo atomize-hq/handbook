@@ -1,0 +1,25 @@
+{
+  "overrides": {
+    "CARGO_HOME": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/cargo-home",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_INCREMENTAL": "0",
+    "EXP_PACK_TEST_ROOT": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/fixtures",
+    "TMPDIR": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "TMP": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "TEMP": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "inherited_names_used": [
+    "PATH",
+    "HOME",
+    "RUSTUP_HOME",
+    "DEVELOPER_DIR",
+    "SDKROOT"
+  ],
+  "inherited_values": {
+    "PATH": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin:/opt/homebrew/Cellar/pyenv/2.6.27/libexec:/opt/homebrew/Cellar/pyenv/2.6.27/plugins/python-build/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/spensermcconnell/.local/bin:/Users/spensermcconnell/.cargo/bin:/Users/spensermcconnell/.pyenv/shims:/Users/spensermcconnell/.bun/bin:/Users/spensermcconnell/.browser-use-env/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/Users/spensermcconnell/.codex/tmp/arg0-macos/codex-arg0Idc6pJ:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/spensermcconnell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/spensermcconnell/Library/pnpm:/Users/spensermcconnell/.local/bin:/Users/spensermcconnell/.cargo/bin:/Users/spensermcconnell/.bun/bin:/Users/spensermcconnell/.browser-use-env/bin:/Users/spensermcconnell/.rover/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/spensermcconnell/.lmstudio/bin:/Users/spensermcconnell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/spensermcconnell/.lmstudio/bin",
+    "RUSTUP_HOME": null,
+    "DEVELOPER_DIR": null,
+    "SDKROOT": null
+  }
+}

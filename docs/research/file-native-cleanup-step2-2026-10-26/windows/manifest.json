@@ -1,0 +1,217 @@
+{
+  "scope": "Evidence-only Windows accepted38e full40 correctness validation. Every payload member except this manifest; original exact bytes. Build targets, executables, fixture/corpus data, caches and engine sources excluded.",
+  "head": "38e246500ff60e0d45821ec4de1ed11d886b3091",
+  "source_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "files": [
+    {
+      "path": "adapter-binding.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\adapter-binding.json",
+      "bytes": 979,
+      "sha256": "a70426507ac27d2309ef479c5d7228815bf58c02c64b2f0176893a2ae9e031dc"
+    },
+    {
+      "path": "boundary-fixture.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\boundary-fixture.json",
+      "bytes": 4015,
+      "sha256": "a6acf6a0494632d0cbced3144770301d550f3ae672d536ee87e6483fe22f0ef8"
+    },
+    {
+      "path": "catalog-reconciliation.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\catalog-reconciliation.json",
+      "bytes": 3033,
+      "sha256": "5ba98d798679a80b8a13f3d49d1ee11f8759dddb997edf892e81742237a62f7b"
+    },
+    {
+      "path": "compile-after-source.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\compile-after-source.json",
+      "bytes": 5076,
+      "sha256": "00292406b011dba2ba606fd3929913025bad4e00458e652375ec297b0ebac51e"
+    },
+    {
+      "path": "compile-before-source.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\compile-before-source.json",
+      "bytes": 5076,
+      "sha256": "382b5f8134a32c49bfde8d7cc008f071c71f65a9af09a4ab4f3583c25a2b5da6"
+    },
+    {
+      "path": "compile-command.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\compile-command.json",
+      "bytes": 1539,
+      "sha256": "518c4e15074e904b9ea9250b4323795f415706acb6729e18b75f5656b4115468"
+    },
+    {
+      "path": "compile-compiler-helper-closure.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\compile-compiler-helper-closure.json",
+      "bytes": 319,
+      "sha256": "7c86af47582760c820b88a510fb82f04683c80d46f2614561b3580cfde574162"
+    },
+    {
+      "path": "compile-result.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\compile-result.json",
+      "bytes": 1767,
+      "sha256": "c64663e2e41fca3417f932f8e9b90adba775cc0387fb9cdba3b7e9ce1e7ef61e"
+    },
+    {
+      "path": "list-after-source.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\list-after-source.json",
+      "bytes": 5076,
+      "sha256": "63e6ef2128a20ccb5917b19729d763e7884f3f88ebaea7bd7d167830280c1705"
+    },
+    {
+      "path": "list-before-source.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\list-before-source.json",
+      "bytes": 5076,
+      "sha256": "e3213579c5d387f54f2fa57ff4cd1fc3e2f6482117f0081abb7fe221afe21789"
+    },
+    {
+      "path": "list-command.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\list-command.json",
+      "bytes": 1548,
+      "sha256": "f9446a9ba36439370e9ecc79147e3dca69f2e7dd8b6cb61ecf093da891a54e12"
+    },
+    {
+      "path": "list-result.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\list-result.json",
+      "bytes": 877,
+      "sha256": "59452711b01485e8768d5886a2265c284174c922b18a4756bf6bc3b111b56eb4"
+    },
+    {
+      "path": "log-bindings.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\log-bindings.json",
+      "bytes": 4258,
+      "sha256": "a81ee1035e20d4648e9d507788f24eb6e0ce3abbb7c2fdc04a02039bae28eb88"
+    },
+    {
+      "path": "native_supervisor.py",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\native_supervisor.py",
+      "bytes": 15540,
+      "sha256": "9c5b6d715a15f4d55c7df17e91888d9db900ccc57974222ee99b5d6a21e112d4"
+    },
+    {
+      "path": "report.md",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\report.md",
+      "bytes": 3407,
+      "sha256": "2e611c474960a47809643deb9a8206f7c805e8d2ade9beeb8c2ccf69f5d674c6"
+    },
+    {
+      "path": "run_accepted.py",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\run_accepted.py",
+      "bytes": 3891,
+      "sha256": "7caf5a4c97a4220d466201469c0030d618be4693987724963b3b4d2e86778149"
+    },
+    {
+      "path": "summarize.py",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\summarize.py",
+      "bytes": 8104,
+      "sha256": "0d7ef67e9da3c45d8d24780447e11cf6d78b2a92cf3e85d006c1c2eaaee4e85a"
+    },
+    {
+      "path": "test-after-source.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\test-after-source.json",
+      "bytes": 5076,
+      "sha256": "4fb70965e18910e25cd23580d3d9eab7b0c1ada49cae50d2ffc3205aa5783c82"
+    },
+    {
+      "path": "test-before-source.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\test-before-source.json",
+      "bytes": 5076,
+      "sha256": "46fb370a431bf01736c65982697cf0949ea3f2fdaa6ed88deec9781b2fbd9250"
+    },
+    {
+      "path": "test-binaries-after.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\test-binaries-after.json",
+      "bytes": 1281,
+      "sha256": "9f8458f27085e63064687509ac3228652b8078e7c7932b74b30f0accd9487138"
+    },
+    {
+      "path": "test-binaries-before.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\test-binaries-before.json",
+      "bytes": 1281,
+      "sha256": "9f8458f27085e63064687509ac3228652b8078e7c7932b74b30f0accd9487138"
+    },
+    {
+      "path": "test-command.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\test-command.json",
+      "bytes": 1607,
+      "sha256": "ac2fefd53d8967106bb5cb395ade640162809ede8626b4c1bc070f3d956e5c5e"
+    },
+    {
+      "path": "test-result.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\test-result.json",
+      "bytes": 883,
+      "sha256": "404b4964f36fdb7f29481b0f13b75cdd56558b8da8629079e1fae1d9eab3d7da"
+    },
+    {
+      "path": "toolchain.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\toolchain.json",
+      "bytes": 559,
+      "sha256": "9cebe6f067a9bc38b1a70f518e9732c049e6b26cec4d4b22c27bc21407fee7ee"
+    },
+    {
+      "path": "verification-receipt.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\verification-receipt.json",
+      "bytes": 14650,
+      "sha256": "836f7b176e9c3b29eb480bf208984dd2283f3ad4330db4c8a017a60e835c25cd"
+    },
+    {
+      "path": "logs/compile.samples.jsonl",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\compile.samples.jsonl",
+      "bytes": 46332,
+      "sha256": "82d50149ed05fccd598aaf696e5e124e9d4d575722b2fe5df65a9ba10af6eaf4"
+    },
+    {
+      "path": "logs/compile.stderr.log",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\compile.stderr.log",
+      "bytes": 4454,
+      "sha256": "545f8e04e80ea67fd165bbd5e773abf5a9638d3e68c49fbd475e649db16cbc9e"
+    },
+    {
+      "path": "logs/compile.stdout.log",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\compile.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/list.samples.jsonl",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\list.samples.jsonl",
+      "bytes": 631,
+      "sha256": "473d53ae1a720979f85e2a18d0ea4ed18a72b85eaccb6edf793b47be0c8ff627"
+    },
+    {
+      "path": "logs/list.stderr.log",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\list.stderr.log",
+      "bytes": 2835,
+      "sha256": "03e0e215bf0188316ea68a95f679965ea2df79fc8b492813c208ceee40b7ca37"
+    },
+    {
+      "path": "logs/list.stdout.log",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\list.stdout.log",
+      "bytes": 2966,
+      "sha256": "9e34c8c2696526debac47661feed412d0493c5bf513921b7a0d4c63607982978"
+    },
+    {
+      "path": "logs/test.samples.jsonl",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\test.samples.jsonl",
+      "bytes": 3102,
+      "sha256": "ae4b9522f9281fb805375ff7d12afe645e1997acbf13963dccf111da9ec3240b"
+    },
+    {
+      "path": "logs/test.stderr.log",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\test.stderr.log",
+      "bytes": 10776,
+      "sha256": "7bc46acf123704a427335929d740924af7ac2611659706ea3ea81e890388b757"
+    },
+    {
+      "path": "logs/test.stdout.log",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\accepted38e-full40-20261026\\logs\\test.stdout.log",
+      "bytes": 3661,
+      "sha256": "28ff7b4c53899f33e46d4c290adeb0cdd5794697734be4b1bb5445ecf60b413f"
+    },
+    {
+      "path": "accepted-source-manifest.json",
+      "source_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\24\\01a16fd3-b2c6-7af1-b036-fd72bdba257d\\step1-research-export-20261026\\canonical-c2-import\\reviewed26-manifest.json",
+      "bytes": 3698,
+      "sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb"
+    }
+  ]
+}

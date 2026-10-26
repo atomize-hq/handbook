@@ -1,0 +1,49 @@
+{
+  "root": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/fixtures/packing-cache-boundary-46110-1793032549370247000-55",
+  "actual_bytes": 80976318,
+  "files": [
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/lease",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "bytes": 13496053,
+      "sha256": "14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "bytes": 13496053,
+      "sha256": "2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "bytes": 13496053,
+      "sha256": "317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "bytes": 13496053,
+      "sha256": "8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "bytes": 13496053,
+      "sha256": "9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixtures/packing-cache-boundary-46110-1793032549370247000-55/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "bytes": 13496053,
+      "sha256": "317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3"
+    }
+  ],
+  "receipt_lines": [
+    "cache-boundary-receipt root=/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/fixtures/packing-cache-boundary-46110-1793032549370247000-55 total_index_charge=69740745 transient_charged_peak=66505838 remaining_cache_entries=1 source_charge=13948149 before_finish=79524497 approved_constructor=37684082 actual_output_capacity=14351124 changed_index_refused_before_allocation=true constructor_eviction_before_output=true overflow_refused_before_allocation=true extra_fixture_bytes=0"
+  ]
+}

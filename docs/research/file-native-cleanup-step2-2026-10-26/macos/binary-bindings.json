@@ -1,0 +1,153 @@
+{
+  "source_commit": "38e246500ff60e0d45821ec4de1ed11d886b3091",
+  "manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "cargo_lock_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+  "fresh_target": true,
+  "binaries": [
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/generic-array-fa1cca6138b89ffa/build-script-build",
+      "bytes": 549008,
+      "sha256": "d306c22d898fd741f590fd0057822db6eb07bf1dc0c9fc92a3fb9250784e7986"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/generic-array-fa1cca6138b89ffa/build_script_build-fa1cca6138b89ffa",
+      "bytes": 549008,
+      "sha256": "d306c22d898fd741f590fd0057822db6eb07bf1dc0c9fc92a3fb9250784e7986"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/libc-b99eaf82b69b31c0/build-script-build",
+      "bytes": 595456,
+      "sha256": "8874c76ea67c8a50c1eeb7f0a65153626efab028d5142299feb9f49c9ad37d15"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/libc-b99eaf82b69b31c0/build_script_build-b99eaf82b69b31c0",
+      "bytes": 595456,
+      "sha256": "8874c76ea67c8a50c1eeb7f0a65153626efab028d5142299feb9f49c9ad37d15"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/proc-macro2-d6c1227dfeb8f4bd/build-script-build",
+      "bytes": 549424,
+      "sha256": "5d2f1f00a92698fd1736359bebae307b348a86216bfc4079b24ca6f2bfcdb616"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/proc-macro2-d6c1227dfeb8f4bd/build_script_build-d6c1227dfeb8f4bd",
+      "bytes": 549424,
+      "sha256": "5d2f1f00a92698fd1736359bebae307b348a86216bfc4079b24ca6f2bfcdb616"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/quote-0102c2e2292e3b86/build-script-build",
+      "bytes": 499872,
+      "sha256": "a4b0a74c31505675f4271d3214300173afdd37c3e2542b0be9ce0b0e25c7359f"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/quote-0102c2e2292e3b86/build_script_build-0102c2e2292e3b86",
+      "bytes": 499872,
+      "sha256": "a4b0a74c31505675f4271d3214300173afdd37c3e2542b0be9ce0b0e25c7359f"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/serde-eaf4a4bcf1975260/build-script-build",
+      "bytes": 525488,
+      "sha256": "089c4b8e01d950782b81a1e53dc38afbee28e837d3129f9198403e6528616842"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/serde-eaf4a4bcf1975260/build_script_build-eaf4a4bcf1975260",
+      "bytes": 525488,
+      "sha256": "089c4b8e01d950782b81a1e53dc38afbee28e837d3129f9198403e6528616842"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/serde_core-e33a5cb1004bd06b/build-script-build",
+      "bytes": 525968,
+      "sha256": "cc59780184eb814fd6c0ea333467de754fef90704f123da59ff2d9675b428d82"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/serde_core-e33a5cb1004bd06b/build_script_build-e33a5cb1004bd06b",
+      "bytes": 525968,
+      "sha256": "cc59780184eb814fd6c0ea333467de754fef90704f123da59ff2d9675b428d82"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/serde_json-ca0358c2e5cd6cfc/build-script-build",
+      "bytes": 407568,
+      "sha256": "65119ff645d85b257a125986b085a37eaba6165dd8504ff10492b9d37e039c0a"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/serde_json-ca0358c2e5cd6cfc/build_script_build-ca0358c2e5cd6cfc",
+      "bytes": 407568,
+      "sha256": "65119ff645d85b257a125986b085a37eaba6165dd8504ff10492b9d37e039c0a"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/zstd-safe-b5e6c3af833af206/build-script-build",
+      "bytes": 408256,
+      "sha256": "4640dce3c133d7ece87e641f8e842e9b0fb7fb69b3d3522b74b1c1aab582b87d"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/zstd-safe-b5e6c3af833af206/build_script_build-b5e6c3af833af206",
+      "bytes": 408256,
+      "sha256": "4640dce3c133d7ece87e641f8e842e9b0fb7fb69b3d3522b74b1c1aab582b87d"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/zstd-sys-e1380afcdb70fb6b/build-script-build",
+      "bytes": 2356960,
+      "sha256": "555fd948abb1d66aa6ef1a181e2d33742a18e9d4a6b2f880dd28c9050c197531"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/build/zstd-sys-e1380afcdb70fb6b/build_script_build-e1380afcdb70fb6b",
+      "bytes": 2356960,
+      "sha256": "555fd948abb1d66aa6ef1a181e2d33742a18e9d4a6b2f880dd28c9050c197531"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/file_native_incremental-0af3934fad45e678",
+      "bytes": 937456,
+      "sha256": "df2941946267e1726036ff4c5405daa5b2a43b3fefa61eccf0d85150f4708b22"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/file_native_incremental-81f920b62cb9ba76",
+      "bytes": 3320912,
+      "sha256": "c4c40071e094309595bb31dea74278272e0de39b4984c2b78d6f77671f8155f4"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/file_native_incremental-e34927de26675ca1",
+      "bytes": 3837024,
+      "sha256": "919778ed385d168745fffa52cefa5a572bea6e19c7b19b70c21563c0d9971414"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/libserde_derive-51f1fe8e78d47497.dylib",
+      "bytes": 3269392,
+      "sha256": "74dd9a4a352606470a390f30809f409064dabea335d922bbe1265fa638d41c58"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/project_consumer-185eefe826719af5",
+      "bytes": 937456,
+      "sha256": "47ef7c4c5e18f3838a9f7d043ab022d51c055b191a08c5e2866991f9abeffe00"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/project_consumer-81401cf76af90263",
+      "bytes": 3320912,
+      "sha256": "d8d8ed2c9e4a181507233a32900045bf3ed5c1151069562988db7060ce822d99"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/research_consumer-b548f959cf1d2ead",
+      "bytes": 3320912,
+      "sha256": "1c1d4f22054ca97c78e6d4611294062a6794e5802a5242486612dad14d100003"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/deps/research_consumer-daa897f3e2d792c0",
+      "bytes": 937456,
+      "sha256": "aaf859dde8328155291be5fbc88322467e55d5e3124cd555cb7621bf170e846f"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/file-native-incremental",
+      "bytes": 3320912,
+      "sha256": "c4c40071e094309595bb31dea74278272e0de39b4984c2b78d6f77671f8155f4"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/project-consumer",
+      "bytes": 3320912,
+      "sha256": "d8d8ed2c9e4a181507233a32900045bf3ed5c1151069562988db7060ce822d99"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/visualizations/2026/10/24/01a16fd3-4723-7f62-828a-265fa095e28a/accepted38e-workspace-20261026/target/release/research-consumer",
+      "bytes": 3320912,
+      "sha256": "1c1d4f22054ca97c78e6d4611294062a6794e5802a5242486612dad14d100003"
+    }
+  ]
+}

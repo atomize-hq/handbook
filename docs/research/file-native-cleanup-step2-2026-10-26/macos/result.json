@@ -1,0 +1,34 @@
+{
+  "build": {
+    "exit": 0,
+    "seconds": 26.217220792081207,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "9724e11a4bdc93a41bbb4499059517387c15422da5931f06dfc775af81405b64"
+  },
+  "test": {
+    "exit": 0,
+    "seconds": 22.768120457883924,
+    "stdout_sha256": "86db985fdd8d261d12a1512fb867ec5bf7e6caab8117bf5d30002049866acfb0",
+    "stderr_sha256": "317c146b1e8744ae4292b52fd15de41d87ca9790bfb7ef396fbf16d25455c0aa"
+  },
+  "status": "PASS",
+  "source_head": "38e246500ff60e0d45821ec4de1ed11d886b3091",
+  "source_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "passed": 40,
+  "failed": 0,
+  "ignored": 0,
+  "filtered": 0,
+  "real_boundary_bytes": 80976318,
+  "free_bytes_after": 132739387392,
+  "native_closure": {
+    "processes_closed": true,
+    "handles_closed": true,
+    "native_commands": 2,
+    "peak_sampled_aggregate_rss": 72613888,
+    "missing_rss": [],
+    "monitor_failures": [],
+    "observation_scope": "direct native children and owned groups; no full monitoring qualification"
+  },
+  "elapsed_seconds": 50.550755583681166,
+  "pilot_run": false
+}
