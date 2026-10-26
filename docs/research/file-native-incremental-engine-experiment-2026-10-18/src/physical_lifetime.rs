@@ -13,8 +13,12 @@ const MAX_JOBS:usize=4096;
 pub(crate) struct CleanupBudget {pub started:Instant,pub candidates:usize}
 impl CleanupBudget {
     pub fn new()->Self{Self{started:Instant::now(),candidates:0}}
-    pub fn available(&self)->bool{self.candidates<1000&&self.started.elapsed()<Duration::from_millis(50)}
-    pub fn work_available(&self)->bool{self.candidates<800&&self.started.elapsed()<Duration::from_millis(35)}
+    fn elapsed(&self)->Duration{
+        #[cfg(test)] if let Some(elapsed)=checkpoint_tests::elapsed(){return elapsed;}
+        self.started.elapsed()
+    }
+    pub fn available(&self)->bool{self.candidates<1000&&self.elapsed()<Duration::from_millis(50)}
+    pub fn work_available(&self)->bool{self.candidates<800&&self.elapsed()<Duration::from_millis(35)}
     pub fn step(&mut self)->Result<()>{
         if !self.available(){return Err("deferred:cleanup-entry-budget".into());}
         self.candidates+=1;Ok(())
@@ -206,12 +210,12 @@ fn native_present(path:&Path,m:&mut Metrics)->Result<bool>{
 }
 // One deterministic stage per generation. It owns the candidate plan hash before
 // that plan can be created. No random 4MiB progress stages or directory scan.
-fn recover_stage(root:&Path,c:&StoreConfig,w:&Work,m:&mut Metrics)->Result<()>{
+fn recover_stage(root:&Path,c:&StoreConfig,w:&Work,m:&mut Metrics)->Result<Option<Work>>{
     let b=c.physical.as_ref().ok_or("integrity:work-binding")?;let stage=root.join(selector_stage(&b.id)?);
     let work_stage=root.join(work_stage(&b.id)?);
     if !budget_present(&stage,m)?{
         if budget_present(&work_stage,m)?{m.cleanup_step()?;crate::lifetime::remove_checked(root,&work_stage,m)?;}
-        return Ok(());
+        return Ok(None);
     }
     m.cleanup_step()?;let bytes=pack::native(&stage,BINDING_LIMIT,m)?;m.cleanup_step()?;
     {
@@ -223,8 +227,25 @@ fn recover_stage(root:&Path,c:&StoreConfig,w:&Work,m:&mut Metrics)->Result<()>{
             if budget_present(&orphan,m)?{
                 m.cleanup_step()?;let data=pack::native(&orphan,WORK_LIMIT,m)?;
                 if io::digest(&data)!=next.plan{return Err("integrity:work-stage-plan-digest".into());}
-                m.cleanup_step()?;let planned:Work=strict(&data)?;validate_work(&planned)?;
+                m.cleanup_step()?;let mut planned:Work=strict(&data)?;validate_work(&planned)?;
                 if planned.transition_parent.as_ref()!=Some(&b.plan)||planned.store_id!=c.store_id||planned.generation.id!=b.id||planned.generation.ordinal!=b.ordinal||Some(&planned.generation.catalog)!=c.catalog.as_ref(){return Err("integrity:work-stage-plan-owner".into());}
+                if m.cleanup_budget.is_some(){
+                    let mut expected=c.clone();expected.physical.as_mut().unwrap().plan=next.plan.clone();
+                    if io::json(&candidate)?!=io::json(&expected)?||planned.generation!=w.generation||planned.physical_parent!=w.physical_parent||io::json(&planned.discovery)?!=io::json(&w.discovery)?||planned.older.iter().any(|g|!w.older.contains(g)){
+                        return Err("integrity:work-stage-frozen-generation".into());
+                    }
+                    // A resumed checkpoint may retire only generations whose
+                    // native reader pins are still drained. No new work or
+                    // checkpoint payload is written on this path.
+                    for g in &w.older {
+                        if !planned.older.contains(g)&&!drained(root,g,&c.store_id,m)?{return Err("deferred:work-readers".into());}
+                    }
+                    // A previous process may have stopped immediately after
+                    // linking the complete, synced file into this directory.
+                    m.cleanup_step()?;io::sync_dir(orphan.parent().ok_or("integrity:work-plan-parent")?,m)?;
+                    commit_checkpoint(root,c,&candidate,&mut planned,m)?;
+                    return Ok(Some(planned));
+                }
                 m.cleanup_step()?;crate::lifetime::remove_checked(root,&orphan,m)?;
             }
         }
@@ -233,7 +254,7 @@ fn recover_stage(root:&Path,c:&StoreConfig,w:&Work,m:&mut Metrics)->Result<()>{
     // verified same-birth transition root identify only disposable checkpoints;
     // ordinary readers never acquire work-root ownership.
     if budget_present(&work_stage,m)?{m.cleanup_step()?;crate::lifetime::remove_checked(root,&work_stage,m)?;}
-    m.cleanup_step()?;crate::lifetime::remove_checked(root,&stage,m)?;Ok(())
+    m.cleanup_step()?;crate::lifetime::remove_checked(root,&stage,m)?;Ok(None)
 }
 fn record_work_hold(m:&mut Metrics,hold:Instant)->Result<()>{
     if m.physical_work_holds_ns.len()>=10000{return Err("quota:work-attempt-bound".into());}
@@ -248,8 +269,10 @@ fn save_inner(root:&Path,b:&Binding,w:&mut Work,m:&mut Metrics)->Result<()>{
     m.cleanup_step()?;
     let c=config(root,m)?;let current=c.physical.as_ref().ok_or("integrity:work-binding")?;
     if current.id!=b.id||current.ordinal!=b.ordinal||Some(&w.generation.catalog)!=c.catalog.as_ref(){return Err("conflict:work-generation".into());}
-    recover_stage(root,&c,w,m)?;
-    let canonical=load(root,&c,m)?;
+    let (canonical,resumed)=load_checkpoint(root,&c,m)?;
+    // Recovery can select a pending root. Never overwrite that progress with
+    // a caller's work from the previously selected parent.
+    if resumed{*w=canonical;return Ok(());}
     // Absent immutable-instance names are native completion facts. Do not make
     // an idle cleanup publish another root merely to remove an absent tombstone.
     m.cleanup_step()?;let canonical_bytes=io::json(&canonical)?;m.cleanup_step()?;let current_bytes=io::json(w)?;m.cleanup_step()?;
@@ -262,9 +285,16 @@ fn save_inner(root:&Path,b:&Binding,w:&mut Work,m:&mut Metrics)->Result<()>{
     let stage=root.join(selector_stage(&b.id)?);m.cleanup_step()?;io::write_new(&stage,&io::json(&target)?,m)?;
     if persist_plan(root,w,m)?!=hash{return Err("integrity:work-plan-correspondence".into());}
     io::checkpoint("physical-progress-plan-installed")?;
+    #[cfg(test)] checkpoint_tests::after_plan_durable();
+    commit_checkpoint(root,&c,&target,w,m)
+}
+fn commit_checkpoint(root:&Path,c:&StoreConfig,target:&StoreConfig,w:&mut Work,m:&mut Metrics)->Result<()>{
     m.cleanup_step()?;
-    let expected=io::digest(&io::json(&c)?);let store=Store{root:root.into(),config:c};
+    let b=c.physical.as_ref().ok_or("integrity:work-binding")?;let old_name=plan_name(&b.plan)?;
+    let stage=root.join(selector_stage(&b.id)?);
+    let expected=io::digest(&io::json(c)?);let store=Store{root:root.into(),config:c.clone()};
     if cancelled(){return Err("cancelled:physical-cleanup".into());}
+    #[cfg(test)] checkpoint_tests::before_selection(root,m)?;
     let q=lock_file(&root.join("physical-capture.lock"),true)?;
     FileExt::try_lock_exclusive(&q).map_err(|e|if contended(&e){"deferred:work-capture".to_owned()}else{format!("integrity:work-capture:{e}")})?;
     let q=io::GlobalGate::new(q,false);let hold=Instant::now();
@@ -274,13 +304,15 @@ fn save_inner(root:&Path,b:&Binding,w:&mut Work,m:&mut Metrics)->Result<()>{
         m.cleanup_step()?;
         let Some(_writer)=store.try_writer(m)? else{return Err("deferred:work-writer".into());};
         m.cleanup_step()?;
+        if pack::native(&stage,BINDING_LIMIT,m)?!=io::json(target)?{return Err("integrity:work-stage-selector-changed".into());}
+        m.cleanup_step()?;
         io::replace(&stage,&root.join("STORE.json"),m)?;io::sync_dir(root,m)
     })();
     drop(q);record_work_hold(m,hold)?;m.elapsed("physical-work-selection-hold",hold);selected?;
     io::checkpoint("physical-progress-selected")?;
     // The new immutable root owns this exact obsolete plan. No ordinary reader
     // reads a work root. Retained generations/build owners remain explicit.
-    if !w.older.iter().any(|g|g.plan.as_ref()==Some(&old))&&budget_present(&root.join(&old_name),m)?{
+    if !w.older.iter().any(|g|g.plan.as_ref()==Some(&b.plan))&&budget_present(&root.join(&old_name),m)?{
         m.cleanup_step()?;match crate::lifetime::remove_checked(root,&root.join(&old_name),m){
             Ok(_)=>{w.garbage.retain(|p|p!=&old_name);io::checkpoint("physical-work-old-root-delete")?;},
             Err(e) if e.downcast_ref::<std::io::Error>().is_some_and(|e|matches!(e.raw_os_error(),Some(32|33)))=>{},
@@ -289,10 +321,17 @@ fn save_inner(root:&Path,b:&Binding,w:&mut Work,m:&mut Metrics)->Result<()>{
     }
     Ok(())
 }
+
+#[cfg(test)]
+#[path="physical_checkpoint_tests.rs"]
+mod checkpoint_tests;
 pub(crate) fn load(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<Work>{
+    Ok(load_checkpoint(root,c,m)?.0)
+}
+fn load_checkpoint(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<(Work,bool)>{
     let t=Instant::now();let result=load_inner(root,c,m);m.elapsed("cleanup-recovery-inclusive",t);result
 }
-fn load_inner(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<Work>{
+fn load_inner(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<(Work,bool)>{
     m.cleanup_step()?;
     let b=c.physical.as_ref().ok_or("integrity:work-binding")?;
     if budget_present(&root.join(progress_name(&b.id)?),m)?{return Err("integrity:unexpected-mutable-progress".into());}
@@ -301,7 +340,8 @@ fn load_inner(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<Work>{
     if io::digest(&bytes)!=b.plan{return Err("integrity:work-plan-digest".into());}
     m.cleanup_step()?;let mut work:Work=strict(&bytes)?;m.cleanup_step()?;validate_work(&work)?;
     if work.store_id!=c.store_id||work.generation.id!=b.id||work.generation.ordinal!=b.ordinal||Some(&work.generation.catalog)!=c.catalog.as_ref(){return Err("integrity:work-selection-binding".into());}
-    recover_stage(root,c,&work,m)?;
+    let recovered=recover_stage(root,c,&work,m)?;let resumed=recovered.is_some();
+    if let Some(selected)=recovered{work=selected;}
     let mut pending=vec![];
     for name in &work.garbage{
         let own_parent=work.transition_parent.as_ref().is_some_and(|h|name==&format!("physical-plans/{h}.json"));
@@ -316,7 +356,7 @@ fn load_inner(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<Work>{
         let name=format!("physical-stages/{id}/STORE.json");
         if task_present(root,&name,m)?&&!pending.contains(&name){pending.push(name);}
     }
-    work.garbage=pending;Ok(work)
+    work.garbage=pending;Ok((work,resumed))
 }
 pub(crate) fn generation(c:&StoreConfig,packs:Vec<Descriptor>)->Result<Generation>{
     let b=c.physical.as_ref().ok_or("integrity:generation-binding")?;
