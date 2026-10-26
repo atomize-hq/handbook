@@ -1,0 +1,18 @@
+{
+  "pilot_worker.py": {
+    "bytes": 16364,
+    "sha256": "c863bb202b46a3a395ea92610558bf10db28a65666e421addd612fe32b746045"
+  },
+  "checker.py": {
+    "bytes": 718,
+    "sha256": "73d57eb1e01c384d4c501094966b3ee5b16217f6017162402219a36bc20e158d"
+  },
+  "pilot_recipe_native.py": {
+    "bytes": 9935,
+    "sha256": "cceb198a5a9f6e6d3715a171886768db5bcda8ab71f1a4be05cd8c8826d52616"
+  },
+  "oracle_mapping_bridge.py": {
+    "bytes": 5668,
+    "sha256": "7cb8b9edcedb61bef463ad919a64d90e4e5e88591cf140b81b407e86156020c0"
+  }
+}

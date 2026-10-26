@@ -1,0 +1,77 @@
+[
+  {
+    "stage": "red-ancestor",
+    "exit": 101,
+    "seconds": 24.836697536055,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 601657344,
+    "summaries": [
+      "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.24s"
+    ]
+  },
+  {
+    "stage": "green-ancestor",
+    "exit": 0,
+    "seconds": 12.220352905336767,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 553115648,
+    "summaries": [
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.23s"
+    ]
+  },
+  {
+    "stage": "focused-new",
+    "exit": 101,
+    "seconds": 14.30728067504242,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 578875392,
+    "summaries": [
+      "test result: FAILED. 4 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.85s"
+    ]
+  },
+  {
+    "stage": "focused-two-call",
+    "exit": 101,
+    "seconds": 16.434105803258717,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 577777664,
+    "summaries": [
+      "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 44 filtered out; finished in 2.96s"
+    ]
+  },
+  {
+    "stage": "existing-checkpoints",
+    "exit": 0,
+    "seconds": 6.146381468977779,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 53284864,
+    "summaries": [
+      "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 36 filtered out; finished in 5.63s"
+    ]
+  },
+  {
+    "stage": "affected-work-bound",
+    "exit": 0,
+    "seconds": 0.4387090620584786,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 32169984,
+    "summaries": [
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 44 filtered out; finished in 0.07s"
+    ]
+  },
+  {
+    "stage": "non-test-check",
+    "exit": 0,
+    "seconds": 2.938068339135498,
+    "termination_reason": null,
+    "closure": true,
+    "rss_sampled_peak": 403230720,
+    "summaries": []
+  }
+]

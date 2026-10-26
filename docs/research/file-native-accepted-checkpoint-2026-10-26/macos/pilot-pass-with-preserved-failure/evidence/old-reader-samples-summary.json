@@ -1,0 +1,9 @@
+{
+  "pid": 44186,
+  "observations": 294,
+  "first_elapsed": 5.533635958563536,
+  "last_elapsed": 21.660986583679914,
+  "observed_span_seconds": 16.127350625116378,
+  "barrier_hold_seconds": 16.103821917,
+  "sampled_peak_process_rss": 3162112
+}

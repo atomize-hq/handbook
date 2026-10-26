@@ -1,0 +1,26 @@
+[
+  {
+    "root": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3",
+    "manifest_files": 48,
+    "all_unchanged": true,
+    "manifest_sha256": "93ae6dfa9818420b1df9061e5b8621cf0436ead62e6f64b4db9cc52caaf5c0f1"
+  },
+  {
+    "root": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3",
+    "manifest_files": 857,
+    "all_unchanged": true,
+    "manifest_sha256": "a3d48bf7334c1f276158319e6240e78d6874a6d996f8201dc9b44980ffed904f"
+  },
+  {
+    "root": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+    "manifest_files": 657,
+    "all_unchanged": true,
+    "manifest_sha256": "6110b528ef6dd08c94dbb29153cec9ed48e63bb09bb003b85926cfb1c990753f"
+  },
+  {
+    "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+    "manifest_files": 277,
+    "all_unchanged": true,
+    "manifest_sha256": "4da3d669312a8391aa88c3ed4b2e41a1e7898acd3b33692d668c4c667567fefe"
+  }
+]

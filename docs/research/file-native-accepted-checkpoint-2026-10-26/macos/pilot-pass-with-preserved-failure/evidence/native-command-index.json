@@ -1,0 +1,162 @@
+[
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-01-init.result.json",
+    "pid": 44141,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 4.486833166796714,
+    "peak": 5603328
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-02-lifecycle.result.json",
+    "pid": 44169,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.09640720812603831,
+    "peak": 868352
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-03-resolve.result.json",
+    "pid": 44170,
+    "role": "old-reader",
+    "exit": 0,
+    "seconds": 0.07541970908641815,
+    "peak": 0
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-04-packing.result.json",
+    "pid": 44171,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.2848137919791043,
+    "peak": 5013504
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-05-packing.result.json",
+    "pid": 44172,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.12799645774066448,
+    "peak": 4063232
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-06-packing.result.json",
+    "pid": 44173,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.10710362484678626,
+    "peak": 1081344
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-07-publish.result.json",
+    "pid": 44174,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.26781662506982684,
+    "peak": 4308992
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-08-resolve.result.json",
+    "pid": 44186,
+    "role": "old-reader",
+    "exit": 0,
+    "seconds": 16.18947708280757,
+    "peak": 3162112
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-09-packing.result.json",
+    "pid": 44187,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.5134335407055914,
+    "peak": 5046272
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-10-publish.result.json",
+    "pid": 44188,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.27427454106509686,
+    "peak": 4145152
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-11-resolve.result.json",
+    "pid": 44189,
+    "role": "old-reader",
+    "exit": 0,
+    "seconds": 0.06849850015714765,
+    "peak": 0
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-12-packing.result.json",
+    "pid": 44191,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.10256149992346764,
+    "peak": 3670016
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-13-packing.result.json",
+    "pid": 44251,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.13003450026735663,
+    "peak": 3948544
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-14-packing.result.json",
+    "pid": 44260,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.12356354109942913,
+    "peak": 4276224
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-15-packing.result.json",
+    "pid": 44261,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.11644870927557349,
+    "peak": 3768320
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/logs/engine-16-packing.result.json",
+    "pid": 44265,
+    "role": "engine",
+    "exit": 0,
+    "seconds": 0.0650577088817954,
+    "peak": 720896
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/logs/engine-17-resolve.result.json",
+    "pid": 45177,
+    "role": "old-reader",
+    "exit": 0,
+    "seconds": 0.07180562475696206,
+    "peak": 0
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/logs/engine-18-resolve.result.json",
+    "pid": 45178,
+    "role": "old-reader",
+    "exit": 0,
+    "seconds": 0.06713329069316387,
+    "peak": 0
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/logs/engine-19-resolve.result.json",
+    "pid": 45179,
+    "role": "old-reader",
+    "exit": 0,
+    "seconds": 0.06949683278799057,
+    "peak": 655360
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/logs/independent-complete-oracle.result.json",
+    "pid": 45181,
+    "role": "checker",
+    "exit": 0,
+    "seconds": 0.1690637501887977,
+    "peak": 35586048
+  }
+]

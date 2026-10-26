@@ -1,0 +1,2014 @@
+[
+  {
+    "label": "engine-05-packing",
+    "status": {
+      "batch_ns": 52632670,
+      "candidate_limit": 1000,
+      "candidates": 94,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 8,
+      "file_syncs": 2,
+      "replacements": 0,
+      "namespace_ops": 6,
+      "ns": {
+        "cleanup-adoption-inclusive": 151,
+        "cleanup-budget-candidates": 94,
+        "cleanup-entry-inclusive": 52632670,
+        "cleanup-legacy-location-indivisible": 361421,
+        "cleanup-legacy-record-indivisible": 142542,
+        "cleanup-metadata-inclusive": 17607492,
+        "cleanup-paged-open": 120837,
+        "cleanup-recovery-inclusive": 309677,
+        "lock-hold": 0,
+        "pack-page-hash": 6737,
+        "pack-page-parse": 207906,
+        "pack-page-read": 66777,
+        "physical-capture-gate-hold": 21948,
+        "physical-delete-native-max": 8546813,
+        "physical-delete-native-total": 33871772,
+        "read": 204648,
+        "sync": 50665964,
+        "write": 93918
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-7c261cf08cc646f1974998129a73f27f.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          }
+        ],
+        "selectors": []
+      },
+      {
+        "phase": "after",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          },
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.work-stage",
+            "sha256": "c045263a01cd04e6ece02dd4ca4c90c25b1f05e558fd375505d51b626dd8700c",
+            "hashed_immutable_name": false,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 4,
+            "removed_bytes": 16074,
+            "reconciled_absent": 0
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "805bf45ce4bcafdc7247e322347067ce91f52d6a2f427a111b576dae8cd43997",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "c045263a01cd04e6ece02dd4ca4c90c25b1f05e558fd375505d51b626dd8700c"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "engine-06-packing",
+    "status": {
+      "batch_ns": 51747186,
+      "candidate_limit": 1000,
+      "candidates": 78,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 7,
+      "file_syncs": 2,
+      "replacements": 0,
+      "namespace_ops": 5,
+      "ns": {
+        "cleanup-adoption-inclusive": 113,
+        "cleanup-budget-candidates": 78,
+        "cleanup-entry-inclusive": 51747186,
+        "cleanup-legacy-location-indivisible": 197937,
+        "cleanup-legacy-record-indivisible": 54623,
+        "cleanup-metadata-inclusive": 25497558,
+        "cleanup-paged-open": 200689,
+        "cleanup-recovery-inclusive": 17141318,
+        "lock-hold": 0,
+        "pack-page-hash": 8517,
+        "pack-page-parse": 192520,
+        "pack-page-read": 72444,
+        "physical-capture-gate-hold": 26290,
+        "physical-delete-native-max": 8489942,
+        "physical-delete-native-total": 8493762,
+        "read": 75727,
+        "sync": 50220516,
+        "write": 66990
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-90420f7ebc9143afa106ff62799f6dc0.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          },
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.work-stage",
+            "sha256": "c045263a01cd04e6ece02dd4ca4c90c25b1f05e558fd375505d51b626dd8700c",
+            "hashed_immutable_name": false,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 4,
+            "removed_bytes": 16074,
+            "reconciled_absent": 0
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "805bf45ce4bcafdc7247e322347067ce91f52d6a2f427a111b576dae8cd43997",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "c045263a01cd04e6ece02dd4ca4c90c25b1f05e558fd375505d51b626dd8700c"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "phase": "after",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          },
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.work-stage",
+            "sha256": "e0f9dd832d39e644b629d6b1bd83529cc1c0b84154275928e49a9dfdab2dea72",
+            "hashed_immutable_name": false,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 1,
+            "removed_bytes": 1196,
+            "reconciled_absent": 4
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "9356bce6d1153d83338935f0b77fe6a6db0fe0a9579cc45cc4cd03b83c5cd2c2",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "e0f9dd832d39e644b629d6b1bd83529cc1c0b84154275928e49a9dfdab2dea72"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "engine-07-packing",
+    "status": {
+      "batch_ns": 51538870,
+      "candidate_limit": 1000,
+      "candidates": 72,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 9,
+      "file_syncs": 2,
+      "replacements": 1,
+      "namespace_ops": 4,
+      "ns": {
+        "cleanup-adoption-inclusive": 110,
+        "cleanup-budget-candidates": 72,
+        "cleanup-entry-inclusive": 51538870,
+        "cleanup-metadata-inclusive": 34058374,
+        "cleanup-paged-open": 176633,
+        "cleanup-recovery-inclusive": 17268199,
+        "lock-hold": 0,
+        "pack-page-hash": 6296,
+        "pack-page-parse": 142978,
+        "pack-page-read": 51905,
+        "physical-capture-gate-hold": 33809,
+        "sync": 50366333,
+        "write": 87712
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-9eaa69fedb68476c944ccd315239147a.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          },
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.work-stage",
+            "sha256": "e0f9dd832d39e644b629d6b1bd83529cc1c0b84154275928e49a9dfdab2dea72",
+            "hashed_immutable_name": false,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 1,
+            "removed_bytes": 1196,
+            "reconciled_absent": 4
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "9356bce6d1153d83338935f0b77fe6a6db0fe0a9579cc45cc4cd03b83c5cd2c2",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "e0f9dd832d39e644b629d6b1bd83529cc1c0b84154275928e49a9dfdab2dea72"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "phase": "after",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          },
+          {
+            "path": "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json",
+            "sha256": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 5
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "3b5cfb091d6be190107cb9e1e87ea6389ae6c78e03223d21836e24af0b250f2e",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "engine-08-packing",
+    "status": {
+      "batch_ns": 60965041,
+      "candidate_limit": 1000,
+      "candidates": 85,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 10,
+      "file_syncs": 2,
+      "replacements": 2,
+      "namespace_ops": 3,
+      "ns": {
+        "cleanup-adoption-inclusive": 186,
+        "cleanup-budget-candidates": 85,
+        "cleanup-entry-inclusive": 60965041,
+        "cleanup-metadata-inclusive": 35112681,
+        "cleanup-recovery-inclusive": 25916390,
+        "lock-hold": 8403162,
+        "physical-capture-gate-hold": 50514,
+        "physical-work-selection-hold": 8442181,
+        "replace": 71726,
+        "sync": 59088021,
+        "write": 168709
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-9e8d70a2b67f4bdca26ade03fc2d45e3.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "0b547be924472278387381701070f50fc1f57eebfd7c788263405deb1364f3ce",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+            "sha256": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/allocations/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "last": "attempts/attempt-2296034-1792981356689972805-1/candidate.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "last": "attempt-hints/attempt-2296034-1792981356689972805-1.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296034-1792981359474104084-80.json",
+                "last": "publications/publication-2296034-1792981359474104084-80.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "last": "results/1428d1aac967a69ebda111e11123d9b0d818546f01dfea99f6a6045417f25898.json",
+                "records": 1,
+                "frontier": 1,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 0
+          },
+          {
+            "path": "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json",
+            "sha256": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 5
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "3b5cfb091d6be190107cb9e1e87ea6389ae6c78e03223d21836e24af0b250f2e",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "phase": "after",
+        "store_sha256": "3b5cfb091d6be190107cb9e1e87ea6389ae6c78e03223d21836e24af0b250f2e",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json",
+            "sha256": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 5
+          },
+          {
+            "path": "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+            "sha256": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 6
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "engine-09-packing",
+    "status": {
+      "aborted_owner_adoption_backpressure": false,
+      "batch_ns": 31741210,
+      "blocked_checks": 0,
+      "candidate_limit": 1000,
+      "candidates": 75,
+      "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+      "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+      "cooperative_limit_ms": 50,
+      "deleted_this_batch_bytes": 0,
+      "deleted_this_batch_files": 0,
+      "generation": {
+        "id": "physical-1-birth-2296226-1792981361085532167-0",
+        "ordinal": 1,
+        "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+      },
+      "historical_allocation_owners_unchanged": true,
+      "native_allocation_credit": 0,
+      "pending_aborted_owners": 0,
+      "pending_loose_jobs": 0,
+      "pending_metadata": 0,
+      "pending_old_containers": 0,
+      "protected_metadata_until_successor": 0,
+      "reconciled_absent_without_credit": 6,
+      "retained_generations": 1,
+      "retained_loose_control_bytes": 0,
+      "retained_loose_control_records": 0,
+      "status": "complete",
+      "successfully_deleted_bytes_recorded": 0
+    },
+    "metrics": {
+      "directory_syncs": 3,
+      "file_syncs": 0,
+      "replacements": 1,
+      "namespace_ops": 1,
+      "ns": {
+        "cleanup-adoption-inclusive": 76,
+        "cleanup-budget-candidates": 75,
+        "cleanup-entry-inclusive": 31770607,
+        "cleanup-metadata-inclusive": 892546,
+        "cleanup-recovery-inclusive": 31019170,
+        "lock-hold": 8822193,
+        "pack-deletion-inclusive": 31558945,
+        "physical-capture-gate-hold": 36149,
+        "physical-work-selection-hold": 8890260,
+        "replace": 119799,
+        "sync": 29770579
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-63cf5eaf9eb14f738782b1b555147dcb.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "3b5cfb091d6be190107cb9e1e87ea6389ae6c78e03223d21836e24af0b250f2e",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json",
+            "sha256": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/0ae895e9720ce96f73207c5a5b90bce75db3a6b0f561c36a04a3c8487c1d3030.json",
+              "physical-stages/physical-1-birth-2296226-1792981361085532167-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 5
+          },
+          {
+            "path": "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+            "sha256": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 6
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-1-birth-2296226-1792981361085532167-0.selector-stage",
+            "sha256": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+              "physical": {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "phase": "after",
+        "store_sha256": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+        "store_physical": {
+          "id": "physical-1-birth-2296226-1792981361085532167-0",
+          "ordinal": 1,
+          "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+            "sha256": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-1-birth-2296226-1792981361085532167-0",
+            "generation_ordinal": 1,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "c46c19240b8346011c9874ed2b6e1b8508001a2438658ba464683c34e796ada6",
+            "transition_parent": "43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a",
+            "jobs": [],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/43f0cdaaec13ebeccbdfd7184829df2ba632014a8b55817649efb698d882569a.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 6
+          }
+        ],
+        "selectors": []
+      }
+    ]
+  },
+  {
+    "label": "engine-15-packing",
+    "status": {
+      "batch_ns": 52690431,
+      "candidate_limit": 1000,
+      "candidates": 94,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 8,
+      "file_syncs": 2,
+      "replacements": 2,
+      "namespace_ops": 2,
+      "ns": {
+        "cleanup-adoption-inclusive": 179,
+        "cleanup-budget-candidates": 94,
+        "cleanup-entry-inclusive": 52690431,
+        "cleanup-metadata-inclusive": 52308198,
+        "cleanup-recovery-inclusive": 360860,
+        "lock-hold": 8433521,
+        "physical-capture-gate-hold": 29509,
+        "physical-work-selection-hold": 8460998,
+        "replace": 39734,
+        "sync": 51261281,
+        "write": 162975
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-dae8feff7ae34e46989351af18c4d36f.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "c6bcf67ea8a1cc6116a6af8ca0d240a0ca25571c8636768cb99e7ecf2b5438c9",
+        "store_physical": {
+          "id": "physical-2-birth-2296288-1792981362250480625-0",
+          "ordinal": 2,
+          "plan": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+            "sha256": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": null,
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [
+              {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            ],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-stages/physical-2-birth-2296288-1792981362250480625-0/STORE.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 6
+          }
+        ],
+        "selectors": []
+      },
+      {
+        "phase": "after",
+        "store_sha256": "7e4d7589d605f84aed33bf040c97553fc6101f5560a10630045a1efbf195708a",
+        "store_physical": {
+          "id": "physical-2-birth-2296288-1792981362250480625-0",
+          "ordinal": 2,
+          "plan": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+            "sha256": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [
+              {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            ],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          }
+        ],
+        "selectors": []
+      }
+    ]
+  },
+  {
+    "label": "engine-16-packing",
+    "status": {
+      "batch_ns": 52793996,
+      "candidate_limit": 1000,
+      "candidates": 70,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 7,
+      "file_syncs": 2,
+      "replacements": 1,
+      "namespace_ops": 2,
+      "ns": {
+        "cleanup-adoption-inclusive": 143,
+        "cleanup-budget-candidates": 70,
+        "cleanup-entry-inclusive": 52793996,
+        "cleanup-metadata-inclusive": 52345945,
+        "cleanup-recovery-inclusive": 382133,
+        "lock-hold": 0,
+        "physical-capture-gate-hold": 38818,
+        "sync": 51588164,
+        "write": 119089
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-a016eadf94d749eda69759b915c6e005.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "7e4d7589d605f84aed33bf040c97553fc6101f5560a10630045a1efbf195708a",
+        "store_physical": {
+          "id": "physical-2-birth-2296288-1792981362250480625-0",
+          "ordinal": 2,
+          "plan": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+            "sha256": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [
+              {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            ],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          }
+        ],
+        "selectors": []
+      },
+      {
+        "phase": "after",
+        "store_sha256": "7e4d7589d605f84aed33bf040c97553fc6101f5560a10630045a1efbf195708a",
+        "store_physical": {
+          "id": "physical-2-birth-2296288-1792981362250480625-0",
+          "ordinal": 2,
+          "plan": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+            "sha256": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [
+              {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            ],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          },
+          {
+            "path": "physical-plans/47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac.json",
+            "sha256": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+              "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+              "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+              "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+              "physical-progress/physical-1-birth-2296226-1792981361085532167-0.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-2-birth-2296288-1792981362250480625-0.selector-stage",
+            "sha256": "fa39fc9bbe2bbe452e6f08a7312df7097e5db81e6f1bffc454c086cf575b0a27",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "4a39a2a814c6e1bb6e289ca407fe5f223ccf17fa275c3d4433c6a39aba8ba366",
+              "physical": {
+                "id": "physical-2-birth-2296288-1792981362250480625-0",
+                "ordinal": 2,
+                "plan": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "engine-17-packing",
+    "status": {
+      "batch_ns": 55035779,
+      "candidate_limit": 1000,
+      "candidates": 85,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    "metrics": {
+      "directory_syncs": 8,
+      "file_syncs": 2,
+      "replacements": 1,
+      "namespace_ops": 4,
+      "ns": {
+        "cleanup-adoption-inclusive": 115,
+        "cleanup-budget-candidates": 85,
+        "cleanup-entry-inclusive": 55035779,
+        "cleanup-legacy-location-indivisible": 197951,
+        "cleanup-legacy-record-indivisible": 47251,
+        "cleanup-metadata-inclusive": 18739957,
+        "cleanup-paged-open": 89111,
+        "cleanup-recovery-inclusive": 27127095,
+        "lock-hold": 8831118,
+        "pack-page-hash": 5097,
+        "pack-page-parse": 93444,
+        "pack-page-read": 46109,
+        "physical-capture-gate-hold": 30320,
+        "physical-delete-native-max": 8824089,
+        "physical-delete-native-total": 8826154,
+        "physical-work-selection-hold": 8845343,
+        "read": 75172,
+        "replace": 43828,
+        "sync": 52678054,
+        "write": 135924
+      }
+    },
+    "source_observation": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/observations/cleanup-e1072bc08b8b4797982e9fa18008c55d.json",
+    "snapshots": [
+      {
+        "phase": "before",
+        "store_sha256": "7e4d7589d605f84aed33bf040c97553fc6101f5560a10630045a1efbf195708a",
+        "store_physical": {
+          "id": "physical-2-birth-2296288-1792981362250480625-0",
+          "ordinal": 2,
+          "plan": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+            "sha256": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [
+              {
+                "id": "physical-1-birth-2296226-1792981361085532167-0",
+                "ordinal": 1,
+                "catalog": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+                "plan": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+              }
+            ],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          },
+          {
+            "path": "physical-plans/47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac.json",
+            "sha256": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+              "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+              "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+              "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+              "physical-progress/physical-1-birth-2296226-1792981361085532167-0.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-2-birth-2296288-1792981362250480625-0.selector-stage",
+            "sha256": "fa39fc9bbe2bbe452e6f08a7312df7097e5db81e6f1bffc454c086cf575b0a27",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "4a39a2a814c6e1bb6e289ca407fe5f223ccf17fa275c3d4433c6a39aba8ba366",
+              "physical": {
+                "id": "physical-2-birth-2296288-1792981362250480625-0",
+                "ordinal": 2,
+                "plan": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "phase": "after",
+        "store_sha256": "fa39fc9bbe2bbe452e6f08a7312df7097e5db81e6f1bffc454c086cf575b0a27",
+        "store_physical": {
+          "id": "physical-2-birth-2296288-1792981362250480625-0",
+          "ordinal": 2,
+          "plan": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac"
+        },
+        "store_stable_during_snapshot": true,
+        "errors": [],
+        "plans": [
+          {
+            "path": "physical-plans/47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac.json",
+            "sha256": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac",
+            "hashed_immutable_name": true,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c",
+            "jobs": [
+              {
+                "role": "allocation",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+              "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+              "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+              "physical-plans/e2496e0368834fc6a58fc19c4baa4b5f2f4f70041e216667d5ae6aba501e433c.json",
+              "physical-progress/physical-1-birth-2296226-1792981361085532167-0.json"
+            ],
+            "removed_files": 0,
+            "removed_bytes": 0,
+            "reconciled_absent": 7
+          },
+          {
+            "path": "physical-progress/physical-2-birth-2296288-1792981362250480625-0.work-stage",
+            "sha256": "b6bebaf3e52518815b89b1a61bd0b31f4e00211b10768f95ef306ffa830eb09d",
+            "hashed_immutable_name": false,
+            "generation_id": "physical-2-birth-2296288-1792981362250480625-0",
+            "generation_ordinal": 2,
+            "store_id": "store-2296034-1792981356681155899-0",
+            "physical_parent": "a5ae001c3a55542c9f979ec48a13628223c00c7acb22259afa03ee936fb4e7f7",
+            "transition_parent": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac",
+            "jobs": [
+              {
+                "role": "candidate",
+                "first": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "last": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "hint",
+                "first": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "last": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "publication",
+                "first": "publications/publication-2296278-1792981362041846089-6.json",
+                "last": "publications/publication-2296278-1792981362041846089-6.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              },
+              {
+                "role": "result",
+                "first": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "last": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+                "records": 1,
+                "frontier": 2,
+                "position": 0
+              }
+            ],
+            "older": [],
+            "retired_container_jobs": 0,
+            "garbage": [
+              "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+              "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+              "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+              "physical-plans/47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac.json",
+              "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+              "physical-progress/physical-1-birth-2296226-1792981361085532167-0.json"
+            ],
+            "removed_files": 1,
+            "removed_bytes": 144,
+            "reconciled_absent": 7
+          }
+        ],
+        "selectors": [
+          {
+            "path": "physical-progress/physical-2-birth-2296288-1792981362250480625-0.selector-stage",
+            "sha256": "421da0df8df2fc5379d6a0bb0561790ba5ca2e08ec6b5affa7942544466b77c1",
+            "target": {
+              "version": 3,
+              "store_id": "store-2296034-1792981356681155899-0",
+              "mode": "A",
+              "consumer": "project",
+              "fallback": false,
+              "navigation_version": 4,
+              "catalog": "4a39a2a814c6e1bb6e289ca407fe5f223ccf17fa275c3d4433c6a39aba8ba366",
+              "physical": {
+                "id": "physical-2-birth-2296288-1792981362250480625-0",
+                "ordinal": 2,
+                "plan": "b6bebaf3e52518815b89b1a61bd0b31f4e00211b10768f95ef306ffa830eb09d"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

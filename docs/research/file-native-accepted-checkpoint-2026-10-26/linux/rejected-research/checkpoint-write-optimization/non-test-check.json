@@ -1,0 +1,41 @@
+{
+  "name": "non-test-check",
+  "argv": [
+    "cargo",
+    "check",
+    "--lib",
+    "--bin",
+    "file-native-incremental",
+    "--manifest-path",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/target"
+  ],
+  "cwd": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/logs/non-test-check.stdout",
+  "stderr": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/logs/non-test-check.stderr",
+  "pid": 3705086,
+  "process_group": 3705086,
+  "exit": 0,
+  "seconds": 2.938068339135498,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 384819200,
+  "sampled_tree_plus_supervisor_peak_rss": 403230720,
+  "sampled_process_peak_rss": 352927744,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 112623616,
+    "files": 1004
+  },
+  "native_free_after": 63040212992
+}

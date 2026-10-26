@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "physical_lifetime::checkpoint_tests::write_tests::checkpoint_avoids_repeated_ancestor_syncs",
+    "--manifest-path",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/target",
+    "--",
+    "--exact",
+    "--nocapture"
+  ],
+  "env_selected": {
+    "EXP_PACK_TEST_ROOT": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/green-ancestor",
+    "TMPDIR": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

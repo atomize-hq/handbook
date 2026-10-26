@@ -1,0 +1,205 @@
+{
+  "freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "records": [
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.lock",
+      "exists": true,
+      "bytes": 10547,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+      "exists": true,
+      "bytes": 561,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/project/Cargo.toml",
+      "exists": true,
+      "bytes": 147,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/project/src/main.rs",
+      "exists": true,
+      "bytes": 68,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/research/Cargo.toml",
+      "exists": true,
+      "bytes": 148,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/research/src/main.rs",
+      "exists": true,
+      "bytes": 69,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/api.rs",
+      "exists": true,
+      "bytes": 12161,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/baseline_model.rs",
+      "exists": true,
+      "bytes": 8570,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/bounds_tests.rs",
+      "exists": true,
+      "bytes": 1001,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/differential.rs",
+      "exists": true,
+      "bytes": 2661,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/disk.rs",
+      "exists": true,
+      "bytes": 31206,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/graph.rs",
+      "exists": true,
+      "bytes": 14324,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/io.rs",
+      "exists": true,
+      "bytes": 21979,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/lib.rs",
+      "exists": true,
+      "bytes": 476,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/lifetime.rs",
+      "exists": true,
+      "bytes": 47780,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/main.rs",
+      "exists": true,
+      "bytes": 57,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/navigation.rs",
+      "exists": true,
+      "bytes": 10576,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/objects.rs",
+      "exists": true,
+      "bytes": 3551,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/pack.rs",
+      "exists": true,
+      "bytes": 20837,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/packing.rs",
+      "exists": true,
+      "bytes": 93086,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/paged.rs",
+      "exists": true,
+      "bytes": 21434,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/physical_lifetime.rs",
+      "exists": true,
+      "bytes": 25113,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/projection.rs",
+      "exists": true,
+      "bytes": 27876,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/rolling.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/rolling.rs",
+      "exists": true,
+      "bytes": 11249,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/store.rs",
+      "exists": true,
+      "bytes": 36102,
+      "matches": true
+    },
+    {
+      "manifest_path": "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/README.md",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/README.md",
+      "exists": false
+    },
+    {
+      "manifest_path": "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/control.py",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/control.py",
+      "exists": false
+    },
+    {
+      "manifest_path": "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/forecast.json",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/forecast.json",
+      "exists": false
+    },
+    {
+      "manifest_path": "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/pace_controls.py",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/pace_controls.py",
+      "exists": false
+    },
+    {
+      "manifest_path": "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/protocol.py",
+      "local_path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/protocol.py",
+      "exists": false
+    }
+  ]
+}

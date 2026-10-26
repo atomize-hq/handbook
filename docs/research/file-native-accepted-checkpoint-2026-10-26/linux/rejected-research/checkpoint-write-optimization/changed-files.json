@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/io.rs",
+    "before_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+    "after_sha256": "88c305a237744c4da480cf3f28129c1bb06a714988b5d97ef6c729d93422d8fe",
+    "bytes": 22649
+  },
+  {
+    "path": "src/physical_checkpoint_tests.rs",
+    "before_sha256": "52edbe54705cea456b55d9b14f32b63582b2d3d0017ad392b7eb95954ebe4824",
+    "after_sha256": "4da2488dd5da1a8c6e9c3ba98c64a86a53a81b3002726f183c61aa7179453731",
+    "bytes": 17087
+  },
+  {
+    "path": "src/physical_checkpoint_write_tests.rs",
+    "before_sha256": null,
+    "after_sha256": "8f57e354dfb48acd4a0dc02f725733043ac0fbb351ff03029af0f6cd83dfc605",
+    "bytes": 9164
+  },
+  {
+    "path": "src/physical_lifetime.rs",
+    "before_sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0",
+    "after_sha256": "1b1ba74c86605863d3c2c7d95de4aa89d2c2bdaf7bdfa2264e6ad4e92f69aad9",
+    "bytes": 32883
+  }
+]

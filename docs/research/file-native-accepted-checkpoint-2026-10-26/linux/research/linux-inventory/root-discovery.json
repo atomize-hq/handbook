@@ -1,0 +1,239 @@
+{
+  "/home/spenser": {
+    "entries": 441,
+    "selected": [
+      {
+        "path": "/home/spenser/file-native-incremental-source-7e00d22",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-online-linux-20261020",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-audit-export",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-q-linux-20261019-final",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-capsule-fb73e75.tar",
+        "directory": false,
+        "size": 419840
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-source-5a65a21",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-prerequisite-linux-20261018",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-rootfix-evidence",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/capsule-7ac70f9.tar",
+        "directory": false,
+        "size": 7127040
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-recipe",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/capsule-recipe-precommit.tar",
+        "directory": false,
+        "size": 471040
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-accounting-evidence",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/capsule-5a65a21.tar",
+        "directory": false,
+        "size": 27965440
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-rootfix-evidence.tar.gz",
+        "directory": false,
+        "size": 939385
+      },
+      {
+        "path": "/home/spenser/native-linux-audit-evidence.tar.gz",
+        "directory": false,
+        "size": 315929
+      },
+      {
+        "path": "/home/spenser/file-native-recovery-20261019",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/native-linux-accounting-evidence.tar.gz",
+        "directory": false,
+        "size": 1186463
+      },
+      {
+        "path": "/home/spenser/capsule-7e00d22.tar",
+        "directory": false,
+        "size": 9369600
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-accounting-final",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/incremental-extra-evidence.tar.gz",
+        "directory": false,
+        "size": 610419
+      },
+      {
+        "path": "/home/spenser/incremental-recipe-proof.tar.gz",
+        "directory": false,
+        "size": 214376
+      },
+      {
+        "path": "/home/spenser/file-native-p-linux-20261020",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-replay-final",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/incremental-extra-evidence",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-final-20261018",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/incremental-replay-evidence.tar.gz",
+        "directory": false,
+        "size": 1708580
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-source-rootfix",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-source-f3e942f",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-source-recipe",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-audit-final",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-evidence-20261018",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-source-7ac70f9",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-capsule-f3e942f.tar",
+        "directory": false,
+        "size": 440320
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-evidence-20261018.tar.gz",
+        "directory": false,
+        "size": 1930575
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-replay-probe",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-n-linux-20261019",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/incremental-replay-evidence",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-recovery-20261019-source.tar",
+        "directory": false,
+        "size": 573440
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-linux-rootfix",
+        "directory": true,
+        "size": 4096
+      },
+      {
+        "path": "/home/spenser/file-native-incremental-capsule-rootfix-precommit.tar",
+        "directory": false,
+        "size": 460800
+      }
+    ]
+  },
+  "/home/spenser/__Active_code": {
+    "entries": 31,
+    "selected": [
+      {
+        "path": "/home/spenser/__Active_code/project-handbook",
+        "directory": true,
+        "size": 4096
+      }
+    ]
+  },
+  "/home/spenser/__Active_code/.worktrees": {
+    "entries": 55,
+    "selected": []
+  },
+  "/home/spenser/.codex/worktrees": {
+    "entries": 45,
+    "selected": []
+  },
+  "/tmp": {
+    "entries": 19350,
+    "selected": [
+      {
+        "path": "/tmp/file-native-host-inventory-linux-20261024-01a16fd3",
+        "directory": true,
+        "size": 40
+      }
+    ]
+  },
+  "/var/tmp": {
+    "entries": 255,
+    "selected": []
+  }
+}

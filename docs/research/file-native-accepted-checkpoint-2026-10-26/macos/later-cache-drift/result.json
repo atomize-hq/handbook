@@ -1,0 +1,55 @@
+{
+  "status": "BLOCKED_DEPENDENCY_INPUT_UNAVAILABLE",
+  "host": "Mac",
+  "date": "2026-10-25",
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "source_files_unchanged": 25,
+  "compiled": false,
+  "build_exit": 101,
+  "build_seconds": 0.43888329109176993,
+  "workspace_catalog_expected": 31,
+  "catalog_produced": false,
+  "tests_executed": 0,
+  "tests_passed": 0,
+  "tests_failed": 0,
+  "ignored": "UNKNOWN_UNLISTED",
+  "filtered": "UNKNOWN_UNLISTED",
+  "heavy_boundary_fixture_executed": false,
+  "cache_boundary_receipt": null,
+  "owned_current_run_closed": true,
+  "attempt1_late_groups_empty": true,
+  "original_20261024_exit_closure": "UNVERIFIED; unchanged",
+  "missing_archives": [
+    "cc-1.9.0.crate",
+    "find-msvc-tools-0.1.15.crate",
+    "zstd-0.14.3.crate",
+    "zstd-safe-8.2.0.crate",
+    "zstd-sys-2.1.2+zstd.1.5.7.crate"
+  ],
+  "provisioned_archives": 40,
+  "provisioned_exact_index_records": 42,
+  "census": {
+    "cargo-home": {
+      "files": 85,
+      "logical_bytes": 20230272
+    },
+    "target": {
+      "files": 1,
+      "logical_bytes": 1699
+    },
+    "fixtures": {
+      "files": 0,
+      "logical_bytes": 0
+    },
+    "tmp": {
+      "files": 0,
+      "logical_bytes": 0
+    },
+    "logs": {
+      "files": 13,
+      "logical_bytes": 14442
+    }
+  },
+  "free_bytes": 123261206528
+}

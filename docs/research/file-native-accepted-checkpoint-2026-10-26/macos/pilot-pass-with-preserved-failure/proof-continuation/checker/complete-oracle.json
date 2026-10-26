@@ -1,0 +1,272 @@
+{
+  "schema_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "quota_format_sha256": "3172ba1b1e78d048c2eb168b02ca524b4d3979abaa6528aaebb149a8a2c3b824",
+  "companion_sha256": {
+    "physical_decoder_v5.py": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9",
+    "quota_v2_oracle.py": "bf4e892298760c79ce5a164c3294e069e5188b8c2c260c8477e9c93e64c468d3",
+    "verify_operational_v2.py": "e517d07c5f345e9fb3a90535d5185828147b45a27896e658dbf4164ea7a76caf",
+    "physical_decoder.py": "eb00a0b49ce4754b23bb4e4a340ec99070805cf43b6f2e1c1125d029f5453001",
+    "paged_index.py": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea",
+    "outcome_oracle.py": "a5721ab4102ab742efe66f546c9016b051cd3914e07700cc3de7c0f55a3ced02"
+  },
+  "quota": {
+    "version": 1,
+    "new_terminal_claim": false,
+    "final_source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8"
+  },
+  "mapped_cohort_closure": {
+    "profile": "every-mapped-key-to-authenticated-accepted-role-owner-v1",
+    "accepted_publications": 3,
+    "mapped_keys": 10,
+    "bindings": {
+      "accepted-hint": 2,
+      "accepted-allocation": 2,
+      "accepted-candidate": 2,
+      "accepted-publication": 2,
+      "accepted-result": 2
+    },
+    "candidate_context": false,
+    "captured_selected_authority": true,
+    "legacy_retry_allocations": 0,
+    "legacy_retry_evidence_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "legacy_retry_policy": "d70 cohort accepted attempt + typed allocation; preserved by full conversion; no publication/result acceptance inferred"
+  },
+  "paged_source_pin": "f9b762a1a0d352564542bb4850ad77ee14a7c6e4",
+  "paged_full_audits": [
+    {
+      "path": "packs/physical-1-birth-44171-1792959534862337000-0/e4f50cbebd5f1ab36e0f01a5a47508075286537c550ef0f1f92b287b5ec861da.idx",
+      "index_sha256": "e4f50cbebd5f1ab36e0f01a5a47508075286537c550ef0f1f92b287b5ec861da",
+      "root_page_sha256": "e4f50cbebd5f1ab36e0f01a5a47508075286537c550ef0f1f92b287b5ec861da",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 434,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-1-birth-44171-1792959534862337000-0/d69efc72b655d8aa936ccba02a3913313b73cd1dfb5d368c491613b4f6dd2013.idx",
+      "index_sha256": "d69efc72b655d8aa936ccba02a3913313b73cd1dfb5d368c491613b4f6dd2013",
+      "root_page_sha256": "d69efc72b655d8aa936ccba02a3913313b73cd1dfb5d368c491613b4f6dd2013",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 305,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-1-birth-44171-1792959534862337000-0/fc79f380c118448114da4a2db3a06a9871ac7602d6fafb59eca1fd1b99cd388d.idx",
+      "index_sha256": "fc79f380c118448114da4a2db3a06a9871ac7602d6fafb59eca1fd1b99cd388d",
+      "root_page_sha256": "fc79f380c118448114da4a2db3a06a9871ac7602d6fafb59eca1fd1b99cd388d",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 290,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-1-birth-44171-1792959534862337000-0/01b7d94a51fd141d5f1803f0597aaee8e80bb111777aa2295d5021e0d9b7184d.idx",
+      "index_sha256": "01b7d94a51fd141d5f1803f0597aaee8e80bb111777aa2295d5021e0d9b7184d",
+      "root_page_sha256": "01b7d94a51fd141d5f1803f0597aaee8e80bb111777aa2295d5021e0d9b7184d",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 302,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-1-birth-44171-1792959534862337000-0/e25777f535f14b11d17c4f8f63cebf313a0eb0b6a2e49ed65bd0e6686beb7637.idx",
+      "index_sha256": "e25777f535f14b11d17c4f8f63cebf313a0eb0b6a2e49ed65bd0e6686beb7637",
+      "root_page_sha256": "e25777f535f14b11d17c4f8f63cebf313a0eb0b6a2e49ed65bd0e6686beb7637",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 359,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-2-birth-44187-1792959535741410000-0/925a4fedc04ddf22c8fc8f6d374c0c6d5a85e031910c666031e7764c26fa3858.idx",
+      "index_sha256": "925a4fedc04ddf22c8fc8f6d374c0c6d5a85e031910c666031e7764c26fa3858",
+      "root_page_sha256": "925a4fedc04ddf22c8fc8f6d374c0c6d5a85e031910c666031e7764c26fa3858",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 431,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-2-birth-44187-1792959535741410000-0/dc1bd505a16c4402c873c5b31cbb0870ed10ce743c30566f8784165d6ce0c41c.idx",
+      "index_sha256": "dc1bd505a16c4402c873c5b31cbb0870ed10ce743c30566f8784165d6ce0c41c",
+      "root_page_sha256": "dc1bd505a16c4402c873c5b31cbb0870ed10ce743c30566f8784165d6ce0c41c",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 305,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-2-birth-44187-1792959535741410000-0/971182193999358a2270cad65abe24cf5fbf01f0f34de3802379cbdd28981cc0.idx",
+      "index_sha256": "971182193999358a2270cad65abe24cf5fbf01f0f34de3802379cbdd28981cc0",
+      "root_page_sha256": "971182193999358a2270cad65abe24cf5fbf01f0f34de3802379cbdd28981cc0",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 290,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-2-birth-44187-1792959535741410000-0/766571d8254f036778487e21a46ce3edc9a41ad53798b38155e6250d3ec7ee0f.idx",
+      "index_sha256": "766571d8254f036778487e21a46ce3edc9a41ad53798b38155e6250d3ec7ee0f",
+      "root_page_sha256": "766571d8254f036778487e21a46ce3edc9a41ad53798b38155e6250d3ec7ee0f",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 299,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    },
+    {
+      "path": "packs/physical-2-birth-44187-1792959535741410000-0/6115f9f554ca7f765b8f6fe80e5da9c6f77a137dfde645bde5fd7a0dad397b7c.idx",
+      "index_sha256": "6115f9f554ca7f765b8f6fe80e5da9c6f77a137dfde645bde5fd7a0dad397b7c",
+      "root_page_sha256": "6115f9f554ca7f765b8f6fe80e5da9c6f77a137dfde645bde5fd7a0dad397b7c",
+      "height": 0,
+      "pages": 1,
+      "index_bytes": 359,
+      "records": 1,
+      "exact_whole_index_preorder_tree_authenticated": true
+    }
+  ],
+  "raw_records": 10,
+  "raw_bytes": 20461,
+  "inventory_digest": "7cd60b0886003ce26a7fa21a1a6cfe771893c3867d94b60dd9af7702c30fddb8",
+  "physical_metadata": {
+    "schema_pin": "f9b762a1a0d352564542bb4850ad77ee14a7c6e4",
+    "work_version": 2,
+    "selected_generation": {
+      "id": "physical-2-birth-44187-1792959535741410000-0",
+      "ordinal": 2,
+      "plan": "317e43fa40223b6a084a31ee1bbb5f1e4aa6b93ec4eafa6bf1a64c47db0f2640"
+    },
+    "rolling_discovery": {
+      "rolling_adopted": true,
+      "version": 1,
+      "include_attempts": true,
+      "completed_sequence": 1,
+      "fixed_target_sequence": 1,
+      "next_sequence": null,
+      "checked_processed_publications": 2,
+      "checked_mapped_keys": 10,
+      "explicit_unmapped_roles": 0,
+      "deferred": [],
+      "terminal_exclusions": [],
+      "publications_after_fixed_target": 1,
+      "semantic_acceptance_authority": false,
+      "proof": "selected accepted predecessor lineage plus per-role mapping or explicit deferred hole; full audit only"
+    },
+    "physical_parent": "f8de7a9e784ecfba91a75964515d558a38dbcb041fc9c6c5cabc483e540ccf23",
+    "physical_parent_is_initial_physical_CAS_token": true,
+    "transition_parent": "f90e5f0b4523833f0d48f561c5dff47ebac0f69b5080507938485632f05a6327",
+    "transition_parent_is_comparison_token_not_retained_chain": true,
+    "birth_claims": [],
+    "birth_claim_count": 0,
+    "retained_generations": 0,
+    "pending_loose_jobs": 0,
+    "retired_container_jobs": 0,
+    "garbage_entries": 1,
+    "pending_garbage": 0,
+    "absent_garbage_tombstones": 1,
+    "owned_aborted_pack_directories": [],
+    "observed_removed_bytes": 51499,
+    "observed_removed_files": 15,
+    "observed_reconciled_absent": 3,
+    "counters_are_not_admission_credit": true,
+    "metadata_work_root_selection_is_not_physical_activation": true,
+    "mutable_progress_accepted": false,
+    "pending_selector_stage": null,
+    "journal": {
+      "version": 2,
+      "id": "physical-2-birth-44187-1792959535741410000-0",
+      "status": "registered",
+      "abandoned_owner_count": 0,
+      "ownership_transferred": false,
+      "selected_by_STORE": true,
+      "pending_owned_refs": [],
+      "establishes_acceptance": false
+    },
+    "owned_work_stage": null,
+    "required_paths": [
+      "PACKING.json",
+      "STORE.json",
+      "pack-catalogs/c245a898e88cf8788fa43369240c5b172789b390e2ba97433a3d7dbfa9e0a8ee.json",
+      "packs/physical-1-birth-44171-1792959534862337000-0/01b7d94a51fd141d5f1803f0597aaee8e80bb111777aa2295d5021e0d9b7184d.idx",
+      "packs/physical-1-birth-44171-1792959534862337000-0/1a21524c82f481c0aae6d4250c486f50b418a045d8ec22ba6f30ae8641af68b3.pack",
+      "packs/physical-1-birth-44171-1792959534862337000-0/a0b16433fd3bcd12448698ed2bc2b78ce313fabc59a52739954a2bd0d92d0e2c.pack",
+      "packs/physical-1-birth-44171-1792959534862337000-0/b67b0f4856649f9a5041017631748c228288db3004bd72bec24503926e41ae88.pack",
+      "packs/physical-1-birth-44171-1792959534862337000-0/bc7fd3bcd9f23765fa25e3cc4a4cd7cbcd2c83252642881af2897d725d9bd6e9.pack",
+      "packs/physical-1-birth-44171-1792959534862337000-0/c2ac35849cc23ac1141bda18c96029fd8d42db2ef33907d42a52581998ffa7f3.pack",
+      "packs/physical-1-birth-44171-1792959534862337000-0/d69efc72b655d8aa936ccba02a3913313b73cd1dfb5d368c491613b4f6dd2013.idx",
+      "packs/physical-1-birth-44171-1792959534862337000-0/e25777f535f14b11d17c4f8f63cebf313a0eb0b6a2e49ed65bd0e6686beb7637.idx",
+      "packs/physical-1-birth-44171-1792959534862337000-0/e4f50cbebd5f1ab36e0f01a5a47508075286537c550ef0f1f92b287b5ec861da.idx",
+      "packs/physical-1-birth-44171-1792959534862337000-0/fc79f380c118448114da4a2db3a06a9871ac7602d6fafb59eca1fd1b99cd388d.idx",
+      "packs/physical-2-birth-44187-1792959535741410000-0/5822386480ccc8bf80b19182d5c3bc1304e9d9866c5d5761722b73eb53708c32.pack",
+      "packs/physical-2-birth-44187-1792959535741410000-0/6115f9f554ca7f765b8f6fe80e5da9c6f77a137dfde645bde5fd7a0dad397b7c.idx",
+      "packs/physical-2-birth-44187-1792959535741410000-0/667428d8bb1671c6eba0fb6246a1b4d3c44a3b14a8bfee8a32bf180faa67b829.pack",
+      "packs/physical-2-birth-44187-1792959535741410000-0/766571d8254f036778487e21a46ce3edc9a41ad53798b38155e6250d3ec7ee0f.idx",
+      "packs/physical-2-birth-44187-1792959535741410000-0/925a4fedc04ddf22c8fc8f6d374c0c6d5a85e031910c666031e7764c26fa3858.idx",
+      "packs/physical-2-birth-44187-1792959535741410000-0/932f8ee2a1f30af4b168d85410453dd6391a7916688dfae2432624208e68bde6.pack",
+      "packs/physical-2-birth-44187-1792959535741410000-0/971182193999358a2270cad65abe24cf5fbf01f0f34de3802379cbdd28981cc0.idx",
+      "packs/physical-2-birth-44187-1792959535741410000-0/cc51506e0e67d193afdfaaea9dd2347eb88272a1494d2d9835971e53ffd8349d.pack",
+      "packs/physical-2-birth-44187-1792959535741410000-0/dc1bd505a16c4402c873c5b31cbb0870ed10ce743c30566f8784165d6ce0c41c.idx",
+      "packs/physical-2-birth-44187-1792959535741410000-0/f4fb8f3b6f82f902997d96998a6a3b941426a58f937e49af96bf47642e98b941.pack",
+      "physical-pins/physical-2-birth-44187-1792959535741410000-0.lock",
+      "physical-plans/317e43fa40223b6a084a31ee1bbb5f1e4aa6b93ec4eafa6bf1a64c47db0f2640.json"
+    ],
+    "quiescent_native_lock_state_unmeasured": true
+  },
+  "semantic": {
+    "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+    "selected": {
+      "publication": "publication-44188-1792959536022309000-6",
+      "digest": "b640ccdd3cde61354e2711e77652387b8bef5e010c1f45dc4073642252130f3f"
+    },
+    "publications": 3,
+    "ledger_rows": 0,
+    "permanent_digest": "f39f29f52c0c6a268070739079e11b88783377cc82fc4aa2e5db15ea255bdad3",
+    "retired_publications": 0,
+    "retired_content": "none",
+    "unique_content_roots": 1,
+    "root_visits": 3,
+    "sources": 68,
+    "pins": 0,
+    "reservations": 0,
+    "packets": 0,
+    "generations": 0,
+    "conservative_cumulative_owner_allowance_bytes": 220526592,
+    "actual_physical_owner_bytes": false,
+    "seconds": 0.006187542341649532
+  },
+  "navigation": {
+    "documents": 64,
+    "supplemented_documents": 64,
+    "projection_files": 68,
+    "immutable_discovery_semantics_verified": true,
+    "readable_declared_current": true,
+    "discovery_relationships_and_extraction": true
+  },
+  "request_intents": {
+    "profile": "independent-complete-exact-request-intent-and-accepted-result",
+    "selected": {
+      "publication": "publication-44188-1792959536022309000-6",
+      "digest": "b640ccdd3cde61354e2711e77652387b8bef5e010c1f45dc4073642252130f3f"
+    },
+    "publications": 3,
+    "actual_H": 3,
+    "authentic_history_recipe_intents": 0,
+    "retained_candidate_proofs": 3,
+    "exact_loose_B_publication_controls": 0,
+    "evidence_sha256": "ecaa7f90e85bff8adbb2dc38df3c86d44508471c2c3cde275b8100f9766b72f0",
+    "engine_code_imported": false
+  },
+  "mapped_occurrences": 10,
+  "seconds": 0.03160574985668063,
+  "quota_identity_manifest": null,
+  "qualification": "full state audit"
+}

@@ -1,0 +1,59 @@
+{
+  "host": "Mac",
+  "date": "2026-10-25",
+  "status": "PASS_FUNCTIONAL_BUILD_AND_COMPLETE_WORKSPACE_TESTS",
+  "identity": "baseline0628322e4b48e0efad19cdc32238a622d4aaa7a8 PLUS telemetry fixture n1\u2192n10",
+  "baseline_freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "new_io_rs_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "io_rs_bytes": 21980,
+  "unchanged_other_admitted_files": 24,
+  "source_unchanged_after_patch": true,
+  "build_exit": 0,
+  "list_exit": 0,
+  "workspace_test_exit": 0,
+  "engine_tests": 31,
+  "passed": 31,
+  "failed": 0,
+  "ignored": 0,
+  "filtered": 0,
+  "measured": 0,
+  "consumer_targets": 2,
+  "consumer_tests": 0,
+  "engine_main_tests": 0,
+  "doc_test_targets": 1,
+  "doc_tests": 0,
+  "catalog_exact": true,
+  "complete_unfiltered_test_runs": 1,
+  "real_boundary_fixture_bytes": 80976318,
+  "real_boundary_test_passed": true,
+  "cache_boundary_receipt": "cache-boundary-receipt root=/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/fixtures/packing-cache-boundary-28490-1792949306460418000-55 total_index_charge=69740745 transient_charged_peak=66505838 remaining_cache_entries=1 source_charge=13948149 before_finish=79524497 approved_constructor=37684082 actual_output_capacity=14351124 changed_index_refused_before_allocation=true constructor_eviction_before_output=true overflow_refused_before_allocation=true extra_fixture_bytes=0",
+  "all_owned_groups_closed": true,
+  "resource_claim": "Functional result with native sampled RSS; not40ms or hard peak qualification; one build child-exit missingRSS retained",
+  "stages": {
+    "build": {
+      "duration_seconds": 37.21362712467089,
+      "sampled_aggregate_peak_bytes": 977371136,
+      "sampled_max_process_bytes": 470712320,
+      "sample_count": 641,
+      "owned_tree_closed": true
+    },
+    "list": {
+      "duration_seconds": 1.2766796252690256,
+      "sampled_aggregate_peak_bytes": 166133760,
+      "sampled_max_process_bytes": 110870528,
+      "sample_count": 20,
+      "owned_tree_closed": true
+    },
+    "test": {
+      "duration_seconds": 4.456996541004628,
+      "sampled_aggregate_peak_bytes": 204636160,
+      "sampled_max_process_bytes": 149323776,
+      "sample_count": 75,
+      "owned_tree_closed": true
+    }
+  },
+  "build_missing_rss_observations": 1,
+  "test_missing_rss_observations": 0,
+  "pilot_run": false,
+  "matrix_run": false
+}

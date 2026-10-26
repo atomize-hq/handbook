@@ -1,0 +1,43 @@
+{
+  "name": "affected-work-bound",
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "physical_lifetime::boundary_tests::work_byte_bound",
+    "--manifest-path",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/target",
+    "--",
+    "--exact",
+    "--nocapture"
+  ],
+  "cwd": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/logs/affected-work-bound.stdout",
+  "stderr": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/logs/affected-work-bound.stderr",
+  "pid": 3703782,
+  "process_group": 3703782,
+  "exit": 0,
+  "seconds": 0.4387090620584786,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 13783040,
+  "sampled_tree_plus_supervisor_peak_rss": 32169984,
+  "sampled_process_peak_rss": 13783040,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 97193984,
+    "files": 872
+  },
+  "native_free_after": 63055794176
+}

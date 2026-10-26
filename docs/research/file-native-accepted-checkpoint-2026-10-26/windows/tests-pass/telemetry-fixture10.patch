@@ -1,0 +1,13 @@
+diff --git a/docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs b/docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs
+index fd140bbe..9cbda171 100644
+--- a/docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs
++++ b/docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs
+@@ -287,7 +287,7 @@ use super::*;
+ }
+ #[test]fn telemetry_old_suffix_vs_deferred(){
+     let root=std::path::PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(unique("telemetry-body")).join("disposable").join("store");let mut setup=Metrics::default();
+-    crate::store::Store::init(&root,"A","project",1,false,&mut setup).unwrap();
++    crate::store::Store::init(&root,"A","project",10,false,&mut setup).unwrap();
+     let store=crate::store::Store::open(&root,&mut setup).unwrap();
+     crate::lifetime::run(&store,&serde_json::json!({"operation":"setup"}),&mut setup).unwrap();
+     let old:crate::model::Selector=serde_json::from_slice(&fs::read(root.join("SELECTED.json")).unwrap()).unwrap();

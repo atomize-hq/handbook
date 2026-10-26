@@ -1,0 +1,15 @@
+{
+  "threadId": "01a16f73-5070-7431-868e-b9e0e174b06e",
+  "items": [
+    {
+      "type": "userMessage",
+      "id": "01a17594-4513-7fc3-b574-f1b9840e47f0",
+      "content": [
+        {
+          "type": "text",
+          "text": "Have the existing Linux session rebuild the pilot CLI and rerun the small pilot with the checkpoint fix. Tell it to report cleanup progress and timing when done, confirm it\u2019s started, then end your turn without watching.\n"
+        }
+      ]
+    }
+  ]
+}

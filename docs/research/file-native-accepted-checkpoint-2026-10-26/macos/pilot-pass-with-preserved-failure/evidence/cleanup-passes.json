@@ -1,0 +1,191 @@
+{
+  "passes": [
+    [
+      {
+        "batch_ns": 51227250,
+        "candidate_limit": 1000,
+        "candidates": 114,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      },
+      {
+        "aborted_owner_adoption_backpressure": false,
+        "batch_ns": 33771875,
+        "blocked_checks": 0,
+        "candidate_limit": 1000,
+        "candidates": 89,
+        "catalog": "04f3a78be3026ad85919b37468dab2d5c352af358586739d653e8e9c967a8657",
+        "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+        "cooperative_limit_ms": 50,
+        "deleted_this_batch_bytes": 8985,
+        "deleted_this_batch_files": 1,
+        "generation": {
+          "id": "physical-1-birth-44171-1792959534862337000-0",
+          "ordinal": 1,
+          "plan": "4af7f396c8afd667b3a30ac6a8f9024aab61b1b9d86bd2b474614e8418c06671"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "native_allocation_credit": 0,
+        "pending_aborted_owners": 0,
+        "pending_loose_jobs": 0,
+        "pending_metadata": 0,
+        "pending_old_containers": 0,
+        "protected_metadata_until_successor": 0,
+        "reconciled_absent_without_credit": 1,
+        "retained_generations": 1,
+        "retained_loose_control_bytes": 0,
+        "retained_loose_control_records": 0,
+        "status": "complete",
+        "successfully_deleted_bytes_recorded": 26237
+      }
+    ],
+    [
+      {
+        "aborted_owner_adoption_backpressure": false,
+        "batch_ns": 34535041,
+        "blocked_checks": 6,
+        "candidate_limit": 1000,
+        "candidates": 100,
+        "catalog": "c245a898e88cf8788fa43369240c5b172789b390e2ba97433a3d7dbfa9e0a8ee",
+        "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+        "cooperative_limit_ms": 50,
+        "deleted_this_batch_bytes": 0,
+        "deleted_this_batch_files": 0,
+        "generation": {
+          "id": "physical-2-birth-44187-1792959535741410000-0",
+          "ordinal": 2,
+          "plan": "9fe3ab1ce982f0138fa7d3af3fbb72c5154e60ffe72335c143579137a3f0dc5a"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "native_allocation_credit": 0,
+        "pending_aborted_owners": 0,
+        "pending_loose_jobs": 5,
+        "pending_metadata": 0,
+        "pending_old_containers": 0,
+        "protected_metadata_until_successor": 0,
+        "reconciled_absent_without_credit": 2,
+        "retained_generations": 2,
+        "retained_loose_control_bytes": 0,
+        "retained_loose_control_records": 0,
+        "status": "cleaning",
+        "successfully_deleted_bytes_recorded": 26237
+      }
+    ],
+    [
+      {
+        "aborted_owner_adoption_backpressure": false,
+        "batch_ns": 44023708,
+        "blocked_checks": 0,
+        "candidate_limit": 1000,
+        "candidates": 117,
+        "catalog": "c245a898e88cf8788fa43369240c5b172789b390e2ba97433a3d7dbfa9e0a8ee",
+        "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+        "cooperative_limit_ms": 50,
+        "deleted_this_batch_bytes": 0,
+        "deleted_this_batch_files": 0,
+        "generation": {
+          "id": "physical-2-birth-44187-1792959535741410000-0",
+          "ordinal": 2,
+          "plan": "98c65186a501e04e2b8e61c1db185c068530465709031ec2c86d9c77e2514265"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "native_allocation_credit": 0,
+        "pending_aborted_owners": 0,
+        "pending_loose_jobs": 5,
+        "pending_metadata": 4,
+        "pending_old_containers": 0,
+        "protected_metadata_until_successor": 0,
+        "reconciled_absent_without_credit": 2,
+        "retained_generations": 1,
+        "retained_loose_control_bytes": 0,
+        "retained_loose_control_records": 0,
+        "status": "cleaning",
+        "successfully_deleted_bytes_recorded": 26237
+      },
+      {
+        "batch_ns": 52667042,
+        "candidate_limit": 1000,
+        "candidates": 126,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      },
+      {
+        "aborted_owner_adoption_backpressure": false,
+        "batch_ns": 47293125,
+        "blocked_checks": 0,
+        "candidate_limit": 1000,
+        "candidates": 107,
+        "catalog": "c245a898e88cf8788fa43369240c5b172789b390e2ba97433a3d7dbfa9e0a8ee",
+        "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+        "cooperative_limit_ms": 50,
+        "deleted_this_batch_bytes": 22053,
+        "deleted_this_batch_files": 4,
+        "generation": {
+          "id": "physical-2-birth-44187-1792959535741410000-0",
+          "ordinal": 2,
+          "plan": "317e43fa40223b6a084a31ee1bbb5f1e4aa6b93ec4eafa6bf1a64c47db0f2640"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "native_allocation_credit": 0,
+        "pending_aborted_owners": 0,
+        "pending_loose_jobs": 0,
+        "pending_metadata": 0,
+        "pending_old_containers": 0,
+        "protected_metadata_until_successor": 0,
+        "reconciled_absent_without_credit": 3,
+        "retained_generations": 1,
+        "retained_loose_control_bytes": 0,
+        "retained_loose_control_records": 0,
+        "status": "complete",
+        "successfully_deleted_bytes_recorded": 51499
+      }
+    ],
+    [
+      {
+        "aborted_owner_adoption_backpressure": false,
+        "batch_ns": 812458,
+        "blocked_checks": 0,
+        "candidate_limit": 1000,
+        "candidates": 78,
+        "catalog": "c245a898e88cf8788fa43369240c5b172789b390e2ba97433a3d7dbfa9e0a8ee",
+        "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+        "cooperative_limit_ms": 50,
+        "deleted_this_batch_bytes": 0,
+        "deleted_this_batch_files": 0,
+        "generation": {
+          "id": "physical-2-birth-44187-1792959535741410000-0",
+          "ordinal": 2,
+          "plan": "317e43fa40223b6a084a31ee1bbb5f1e4aa6b93ec4eafa6bf1a64c47db0f2640"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "native_allocation_credit": 0,
+        "pending_aborted_owners": 0,
+        "pending_loose_jobs": 0,
+        "pending_metadata": 0,
+        "pending_old_containers": 0,
+        "protected_metadata_until_successor": 0,
+        "reconciled_absent_without_credit": 3,
+        "retained_generations": 1,
+        "retained_loose_control_bytes": 0,
+        "retained_loose_control_records": 0,
+        "status": "complete",
+        "successfully_deleted_bytes_recorded": 51499
+      }
+    ]
+  ],
+  "overruns_ns": [
+    51227250,
+    52667042
+  ],
+  "qualification": "Indivisible legacy index work may exceed cooperative target; actual misses retained, not passed."
+}

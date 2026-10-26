@@ -1,0 +1,64 @@
+[
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/capsule-result.json.gz",
+    "status": "passed",
+    "cases": 52,
+    "events": 267,
+    "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "windows_only_skips": [
+      "windows-loose-no-delete-sharing-A",
+      "windows-loose-no-delete-sharing-B"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/focus-result.json.gz",
+    "status": "passed",
+    "cases": 8,
+    "events": 25,
+    "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "windows_only_skips": [
+      "B-control-no-delete-sharing-remains-retained"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/strict-result.json.gz",
+    "status": "passed",
+    "cases": 24,
+    "events": 4,
+    "exe_sha256": null,
+    "windows_only_skips": null
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/immediate-result.json.gz",
+    "status": "passed",
+    "cases": 4,
+    "events": 12,
+    "exe_sha256": null,
+    "windows_only_skips": null
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/result-complete.json",
+    "status": "FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS",
+    "cases": 24,
+    "events": 282,
+    "resource_rows": 282,
+    "recorded_exit_counts": {
+      "0": 252,
+      "86": 19,
+      "2": 11
+    },
+    "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "oracle": {
+      "path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-navigation-2026-10-19/oracle.py",
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/v3-control-events-e361a15b3e85437bb09601061ea80a58-report.json",
+    "kind": "INTERFACE CONTROLS ONLY; NO ENGINE CASE QUALIFIED",
+    "failure": null,
+    "result_rows": 16,
+    "raw_event_bytes": 279682,
+    "raw_sha256_matches": true
+  }
+]

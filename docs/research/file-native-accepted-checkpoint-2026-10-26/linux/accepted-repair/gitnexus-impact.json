@@ -1,0 +1,15 @@
+{
+  "request": {
+    "repo": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+    "target": "recover_stage",
+    "file_path": "src/physical_lifetime.rs",
+    "direction": "upstream",
+    "includeTests": true,
+    "maxDepth": 3,
+    "timeoutMs": 10000
+  },
+  "observed_error": "Repository /home/spenser/file-native-online-linux-20261020/source/final-engine not found",
+  "impact": "UNKNOWN_UNINDEXED_COPY",
+  "indexing_bootstrap_attempted": false,
+  "manual_analysis": "load/save/recovery and immediate packing callers inspected; see contract.md and independent-review.md"
+}

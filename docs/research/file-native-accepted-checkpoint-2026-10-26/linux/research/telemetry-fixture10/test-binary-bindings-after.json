@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+    "bytes": 4149184,
+    "sha256": "bc90a7eaf47eb246ea2c26a07f7a6db0fc8bbd7659f782a981d9be31ac70b790",
+    "after_sha256": "bc90a7eaf47eb246ea2c26a07f7a6db0fc8bbd7659f782a981d9be31ac70b790",
+    "unchanged_after_execution": true
+  },
+  {
+    "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/file_native_incremental-aa2c821bde1b3abd",
+    "bytes": 1080888,
+    "sha256": "caa0b8b498ba775d225e2e620748fda69038a3e85e483544d77b068c42793d72",
+    "after_sha256": "caa0b8b498ba775d225e2e620748fda69038a3e85e483544d77b068c42793d72",
+    "unchanged_after_execution": true
+  },
+  {
+    "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/project_consumer-79daabc3bcb76399",
+    "bytes": 1080872,
+    "sha256": "d9b54f1cb7dbbffd42a5320d80ca4498de0979532b1a2ffb60343052ceb3107e",
+    "after_sha256": "d9b54f1cb7dbbffd42a5320d80ca4498de0979532b1a2ffb60343052ceb3107e",
+    "unchanged_after_execution": true
+  },
+  {
+    "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/research_consumer-82c16566f263e0c1",
+    "bytes": 1080880,
+    "sha256": "1b2f58f8929470b575def8b69c49d4185f89cffebefa95bb012231fda60a8980",
+    "after_sha256": "1b2f58f8929470b575def8b69c49d4185f89cffebefa95bb012231fda60a8980",
+    "unchanged_after_execution": true
+  }
+]

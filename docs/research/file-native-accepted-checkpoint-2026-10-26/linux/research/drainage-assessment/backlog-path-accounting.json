@@ -1,0 +1,280 @@
+{
+  "before_unprotected": 6,
+  "after_unprotected": 8,
+  "added_existing_g1_metadata": [
+    "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+    "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+    "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json"
+  ],
+  "deleted_loose_allocation": [
+    "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json"
+  ],
+  "equation": "6 - 1 + 3 = 8",
+  "backlog_is_live_selected_work_candidate_count_not_total_namespace_or_net_allocated_bytes": true,
+  "paths": [
+    {
+      "path": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+      "kind": "loose-hint",
+      "counted_after16": true,
+      "counted_after17": true,
+      "delta": "retained-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 144,
+        "allocated_bytes": 4096,
+        "sha256": "59a7b0d645713bb754ba2416dfb49b4a6323f0b7877815b61125f4896d71ece9",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+        "bytes": 144,
+        "allocated_bytes": 4096,
+        "sha256": "59a7b0d645713bb754ba2416dfb49b4a6323f0b7877815b61125f4896d71ece9"
+      }
+    },
+    {
+      "path": "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+      "kind": "loose-allocation",
+      "counted_after16": true,
+      "counted_after17": false,
+      "delta": "removed-from-backlog",
+      "current": {
+        "exists": false,
+        "kind": "absent"
+      },
+      "retained_inventory": null
+    },
+    {
+      "path": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+      "kind": "loose-candidate",
+      "counted_after16": true,
+      "counted_after17": true,
+      "delta": "retained-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 1438,
+        "allocated_bytes": 4096,
+        "sha256": "63da12ed49a968fc6612879fd7ced56f24bc29a3311297aac7813e646203503a",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+        "bytes": 1438,
+        "allocated_bytes": 4096,
+        "sha256": "63da12ed49a968fc6612879fd7ced56f24bc29a3311297aac7813e646203503a"
+      }
+    },
+    {
+      "path": "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+      "kind": "immutable-catalog",
+      "counted_after16": false,
+      "counted_after17": true,
+      "delta": "added-to-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 3759,
+        "allocated_bytes": 4096,
+        "sha256": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+        "bytes": 3759,
+        "allocated_bytes": 4096,
+        "sha256": "a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7"
+      }
+    },
+    {
+      "path": "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+      "kind": "generation-pin-identity-file",
+      "counted_after16": false,
+      "counted_after17": true,
+      "delta": "added-to-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 226,
+        "allocated_bytes": 4096,
+        "sha256": "68a5b2b6e73ba67b94872172090e4f3ac8182e96e71462d981bbbc0dced031d5",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+        "bytes": 226,
+        "allocated_bytes": 4096,
+        "sha256": "68a5b2b6e73ba67b94872172090e4f3ac8182e96e71462d981bbbc0dced031d5"
+      }
+    },
+    {
+      "path": "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+      "kind": "immutable-work-plan",
+      "counted_after16": true,
+      "counted_after17": true,
+      "delta": "retained-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 17242,
+        "allocated_bytes": 20480,
+        "sha256": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+        "bytes": 17242,
+        "allocated_bytes": 20480,
+        "sha256": "368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404"
+      }
+    },
+    {
+      "path": "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+      "kind": "immutable-work-plan",
+      "counted_after16": false,
+      "counted_after17": true,
+      "delta": "added-to-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 4923,
+        "allocated_bytes": 8192,
+        "sha256": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+        "bytes": 4923,
+        "allocated_bytes": 8192,
+        "sha256": "ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6"
+      }
+    },
+    {
+      "path": "publications/publication-2296278-1792981362041846089-6.json",
+      "kind": "loose-publication",
+      "counted_after16": true,
+      "counted_after17": true,
+      "delta": "retained-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 1267,
+        "allocated_bytes": 4096,
+        "sha256": "5f4fd20931bd772650573791d7069b59fcbe01bd0a403bbfd60baaf48a9faaf6",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "publications/publication-2296278-1792981362041846089-6.json",
+        "bytes": 1267,
+        "allocated_bytes": 4096,
+        "sha256": "5f4fd20931bd772650573791d7069b59fcbe01bd0a403bbfd60baaf48a9faaf6"
+      }
+    },
+    {
+      "path": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+      "kind": "loose-result",
+      "counted_after16": true,
+      "counted_after17": true,
+      "delta": "retained-backlog",
+      "current": {
+        "exists": true,
+        "kind": "regular-file",
+        "bytes": 240,
+        "allocated_bytes": 4096,
+        "sha256": "7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70",
+        "is_symlink": false
+      },
+      "retained_inventory": {
+        "path": "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json",
+        "bytes": 240,
+        "allocated_bytes": 4096,
+        "sha256": "7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70"
+      }
+    }
+  ],
+  "backlog_observations": {
+    "excluded": 0,
+    "excluded_facts": [],
+    "independent": true,
+    "kind": "independent-backlog",
+    "monotonic_ns": 3811537550833903,
+    "protected": 20,
+    "protected_paths": [
+      "packs/physical-1-birth-2296226-1792981361085532167-0/079da166918e631a6cea43980c76e1a66b0d29950fec07423ddf719222fc3470.idx",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/23adfcc42f9736be2453729c10cc92eaf971b1769ed3133eaeb0620a14fe38b6.pack",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/3b83bdd46e17522347dd4e3ad9d8e9be43e8e727a07c1cd14eaa280679804bb2.pack",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/3eff37fad65d38eae67f66b0a512a291c4fa999f554edf489a4cc8393e2d9713.idx",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/56babad251ed74f63782436aa7c2ed9c7fd95d0b6a6bec87d770e7f324094fb0.idx",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/6b4902cd5ec86949909985a90651ff14bbea07eff78a25cf295417c6f0607c93.idx",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/70297bbf1d42f72a7c7fefbf78542d567166bb95721210fd1536be28ceb95139.pack",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/7e79b120513af463ac9e7031c61f3eede9554b31df287db90c17e16975c3f4b0.idx",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/a2c7ac77c253f837779c625473b1cc6ee15659c3cfdc0077dc09d964bba1fd21.pack",
+      "packs/physical-1-birth-2296226-1792981361085532167-0/fe0d45f532ca18805b7d2056f0a92882b0ce3e2734ad0f0602639dc3adb1b099.pack",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/05c82417f037507da39a0b3bdf5adfe10a66c8cb52699867b199e43a097145f2.pack",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/2137930ae10242d36ebff9c9d0daef528cdda7a8ef1dd0fa22124cbd0b3e6a7b.idx",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/279a204f762c247dba68091eb5fdea747e4b3a85c878f30ec2fd65e0f614d98b.pack",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/33269bcac19c738f1d1bfb2ab4be242ca0b181be23f82d139c36764df1475185.idx",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/6adc044bfd255608602c9dca37639f6af886e648bba5f2c43567df6dc6a975ea.idx",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/6b92bcfba4a7ba95e0877f692f2853ee3fa8c596eb9b770c2f21422a777f624c.idx",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/72b1f78f898a359313858a8020bdcd007cd0677590c185c256b13d399638f655.pack",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/96145080278f45585987377b728c60b6f886d7141b2be0c799890c6693e77f1f.pack",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/9f1808130c461fe87dd5347510e12ff9dc30fe7d2203b8d31f8f172083259a18.pack",
+      "packs/physical-2-birth-2296288-1792981362250480625-0/a95a6867ca2b42e0d6b9dfcd7b22f872a472c4154dea3044bfd5af1eb115a477.idx"
+    ],
+    "root": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/disposable/store",
+    "unprotected": 6,
+    "unprotected_paths": [
+      "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+      "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+      "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+      "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+      "publications/publication-2296278-1792981362041846089-6.json",
+      "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json"
+    ],
+    "wall_ns": 1792981378549659002,
+    "comparison_after17": {
+      "excluded": 0,
+      "excluded_facts": [],
+      "independent": true,
+      "kind": "independent-backlog",
+      "monotonic_ns": 3811537649642982,
+      "protected": 20,
+      "protected_paths": [
+        "packs/physical-1-birth-2296226-1792981361085532167-0/079da166918e631a6cea43980c76e1a66b0d29950fec07423ddf719222fc3470.idx",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/23adfcc42f9736be2453729c10cc92eaf971b1769ed3133eaeb0620a14fe38b6.pack",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/3b83bdd46e17522347dd4e3ad9d8e9be43e8e727a07c1cd14eaa280679804bb2.pack",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/3eff37fad65d38eae67f66b0a512a291c4fa999f554edf489a4cc8393e2d9713.idx",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/56babad251ed74f63782436aa7c2ed9c7fd95d0b6a6bec87d770e7f324094fb0.idx",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/6b4902cd5ec86949909985a90651ff14bbea07eff78a25cf295417c6f0607c93.idx",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/70297bbf1d42f72a7c7fefbf78542d567166bb95721210fd1536be28ceb95139.pack",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/7e79b120513af463ac9e7031c61f3eede9554b31df287db90c17e16975c3f4b0.idx",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/a2c7ac77c253f837779c625473b1cc6ee15659c3cfdc0077dc09d964bba1fd21.pack",
+        "packs/physical-1-birth-2296226-1792981361085532167-0/fe0d45f532ca18805b7d2056f0a92882b0ce3e2734ad0f0602639dc3adb1b099.pack",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/05c82417f037507da39a0b3bdf5adfe10a66c8cb52699867b199e43a097145f2.pack",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/2137930ae10242d36ebff9c9d0daef528cdda7a8ef1dd0fa22124cbd0b3e6a7b.idx",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/279a204f762c247dba68091eb5fdea747e4b3a85c878f30ec2fd65e0f614d98b.pack",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/33269bcac19c738f1d1bfb2ab4be242ca0b181be23f82d139c36764df1475185.idx",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/6adc044bfd255608602c9dca37639f6af886e648bba5f2c43567df6dc6a975ea.idx",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/6b92bcfba4a7ba95e0877f692f2853ee3fa8c596eb9b770c2f21422a777f624c.idx",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/72b1f78f898a359313858a8020bdcd007cd0677590c185c256b13d399638f655.pack",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/96145080278f45585987377b728c60b6f886d7141b2be0c799890c6693e77f1f.pack",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/9f1808130c461fe87dd5347510e12ff9dc30fe7d2203b8d31f8f172083259a18.pack",
+        "packs/physical-2-birth-2296288-1792981362250480625-0/a95a6867ca2b42e0d6b9dfcd7b22f872a472c4154dea3044bfd5af1eb115a477.idx"
+      ],
+      "root": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/disposable/store",
+      "unprotected": 8,
+      "unprotected_paths": [
+        "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+        "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+        "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+        "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+        "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+        "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+        "publications/publication-2296278-1792981362041846089-6.json",
+        "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json"
+      ],
+      "wall_ns": 1792981378648468098
+    }
+  }
+}

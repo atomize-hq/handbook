@@ -1,0 +1,221 @@
+{
+  "started_utc": "2026-10-26T02:21:12.814719+00:00",
+  "source": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 + telemetry fixture10 + reviewed checkpoint-resume repair",
+  "reviewed_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "actual_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "matches": true
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "actual_sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "matches": true
+    },
+    {
+      "path": "consumers/project/Cargo.toml",
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "actual_sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "matches": true
+    },
+    {
+      "path": "consumers/project/src/main.rs",
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "actual_sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "matches": true
+    },
+    {
+      "path": "consumers/research/Cargo.toml",
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "actual_sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "matches": true
+    },
+    {
+      "path": "consumers/research/src/main.rs",
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "actual_sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "matches": true
+    },
+    {
+      "path": "src/api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "actual_sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "matches": true
+    },
+    {
+      "path": "src/baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "actual_sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "matches": true
+    },
+    {
+      "path": "src/bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "actual_sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "matches": true
+    },
+    {
+      "path": "src/differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "actual_sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "matches": true
+    },
+    {
+      "path": "src/disk.rs",
+      "bytes": 31206,
+      "sha256": "2ea695569eba8a5631be5b1708273b2796c7c5573149a304b9e695e531b9208b",
+      "actual_sha256": "2ea695569eba8a5631be5b1708273b2796c7c5573149a304b9e695e531b9208b",
+      "matches": true
+    },
+    {
+      "path": "src/graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "actual_sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "matches": true
+    },
+    {
+      "path": "src/io.rs",
+      "bytes": 21980,
+      "sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+      "actual_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+      "matches": true
+    },
+    {
+      "path": "src/lib.rs",
+      "bytes": 476,
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea",
+      "actual_sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea",
+      "matches": true
+    },
+    {
+      "path": "src/lifetime.rs",
+      "bytes": 47780,
+      "sha256": "6e788c5b66d8baddd3344e3332415a6e0b15d26c911d67bdc58421c5113160eb",
+      "actual_sha256": "6e788c5b66d8baddd3344e3332415a6e0b15d26c911d67bdc58421c5113160eb",
+      "matches": true
+    },
+    {
+      "path": "src/main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "actual_sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "matches": true
+    },
+    {
+      "path": "src/navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "actual_sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "matches": true
+    },
+    {
+      "path": "src/objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "actual_sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "matches": true
+    },
+    {
+      "path": "src/pack.rs",
+      "bytes": 20837,
+      "sha256": "993dfc29a6647c50e55c3751f68f6b36d8ee79fecd957cb0f6229031d43ab288",
+      "actual_sha256": "993dfc29a6647c50e55c3751f68f6b36d8ee79fecd957cb0f6229031d43ab288",
+      "matches": true
+    },
+    {
+      "path": "src/packing.rs",
+      "bytes": 93086,
+      "sha256": "188c9f32796fc50003cb32f57f3d8c9b13af66ff0025b7a49247fd0120c13c1f",
+      "actual_sha256": "188c9f32796fc50003cb32f57f3d8c9b13af66ff0025b7a49247fd0120c13c1f",
+      "matches": true
+    },
+    {
+      "path": "src/paged.rs",
+      "bytes": 21434,
+      "sha256": "16515455ea11552fc566cce11a3069a14c3a68c04b540c92d0773076e2fd8aa0",
+      "actual_sha256": "16515455ea11552fc566cce11a3069a14c3a68c04b540c92d0773076e2fd8aa0",
+      "matches": true
+    },
+    {
+      "path": "src/physical_checkpoint_tests.rs",
+      "bytes": 15374,
+      "sha256": "52edbe54705cea456b55d9b14f32b63582b2d3d0017ad392b7eb95954ebe4824",
+      "actual_sha256": "52edbe54705cea456b55d9b14f32b63582b2d3d0017ad392b7eb95954ebe4824",
+      "matches": true
+    },
+    {
+      "path": "src/physical_lifetime.rs",
+      "bytes": 27669,
+      "sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0",
+      "actual_sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0",
+      "matches": true
+    },
+    {
+      "path": "src/projection.rs",
+      "bytes": 27876,
+      "sha256": "6c4eb7de16dd3b75507e6ba4016a0ad65e714519990c148df3856b43018d32eb",
+      "actual_sha256": "6c4eb7de16dd3b75507e6ba4016a0ad65e714519990c148df3856b43018d32eb",
+      "matches": true
+    },
+    {
+      "path": "src/rolling.rs",
+      "bytes": 11249,
+      "sha256": "35fc900eeba0f0abd1200bac092eb90c291bca00dc53c1e315e2edeae36c53d4",
+      "actual_sha256": "35fc900eeba0f0abd1200bac092eb90c291bca00dc53c1e315e2edeae36c53d4",
+      "matches": true
+    },
+    {
+      "path": "src/store.rs",
+      "bytes": 36102,
+      "sha256": "0caee89818eb36c2dba092e9ffd44645613cedb8583f15d34fcd0a85498e92cc",
+      "actual_sha256": "0caee89818eb36c2dba092e9ffd44645613cedb8583f15d34fcd0a85498e92cc",
+      "matches": true
+    }
+  ],
+  "native_available_bytes": 99887357952,
+  "free_floor_bytes": 21474836480,
+  "practical_margin_bytes": 1073741824,
+  "protected_before": {
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/EVIDENCE-SHA256.json": "93ae6dfa9818420b1df9061e5b8621cf0436ead62e6f64b4db9cc52caaf5c0f1",
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/REPORT.md": "668d37b644a78776acf20438be2341778b58bff85342cad42d933f851b5acfef",
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/result.json": "f0147929df2015417544bfe2e8b1a304c00bf2fcc22516c029a496cb231024b9",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/EVIDENCE-SHA256.json": "a3d48bf7334c1f276158319e6240e78d6874a6d996f8201dc9b44980ffed904f",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/REPORT.md": "9d9d59323892279f1bf53bc5cbbf4312e2840cfa4e4e971fabdb8880725483d4",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/result.json": "27042560a8df5c74e264940d84e020d5e941e9daaee8ff91e1ff3c75a890f54d",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/EVIDENCE-SHA256.json": "6110b528ef6dd08c94dbb29153cec9ed48e63bb09bb003b85926cfb1c990753f",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/REPORT.md": "655946fa58860a72311be5b895379b2b336cb3818430b8998d5a0650f5f6cc3c",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/result.json": "217e8ed8c1da2d14c9266a20d70ca8017de4ba45799a68036db2b02f7776528f",
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/EVIDENCE-SHA256.json": "4da3d669312a8391aa88c3ed4b2e41a1e7898acd3b33692d668c4c667567fefe",
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/REPORT.md": "622c6f0acbdb50f7eb3a9ef4dd6eb304ec6989574de5c363e26ff87892994eac",
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/result.json": "c55acdbce3ab5257558918aa4e2308dc73ec2a7198f68a63e756b1c9ca38c2a1",
+    "/tmp/file-native-disk-assessment-20261025-01a16fd3/REPORT-SHA256.json": "4f201f9394098dff97e68e0312610533b1f2049919b44f50a54f66d0e3ec4ea4",
+    "/tmp/file-native-disk-assessment-20261025-01a16fd3/REPORT.md": "a287740aeb6f1bfadd1c02af7be4de40c6dbb3c130b42e5071856e2dff3a84e5",
+    "/tmp/file-native-disk-assessment-20261025-01a16fd3/result.json": "2af78c0386e495a772e4e271c11a3e18233f10ca7fdcd5d0cf9989ba88fc8de4",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/SOURCE_FREEZE.json": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+    "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5"
+  },
+  "adapter_copy_sha256": {
+    "pilot_worker.py": "513d575a3278bf3fb388f1e844697e1f921077f618e8419ffd8e22139e7b184c",
+    "pilot_recipe_native.py": "cceb198a5a9f6e6d3715a171886768db5bcda8ab71f1a4be05cd8c8826d52616",
+    "oracle_mapping_bridge.py": "7cb8b9edcedb61bef463ad919a64d90e4e5e88591cf140b81b407e86156020c0",
+    "checker.py": "73d57eb1e01c384d4c501094966b3ee5b16217f6017162402219a36bc20e158d"
+  },
+  "no_cleanup": true,
+  "attempts_allowed": 1
+}

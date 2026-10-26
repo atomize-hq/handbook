@@ -1,0 +1,83 @@
+{
+  "pid": 44188,
+  "parent": 44080,
+  "pgid": 44188,
+  "argv": [
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/target/release/file-native-incremental"
+  ],
+  "role": "engine",
+  "root": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/store/disposable/store",
+  "env_overrides": {
+    "EXP_BARRIER": "candidate-ready",
+    "EXP_READY": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/controls/3-readiness-publisher.ready",
+    "EXP_RELEASE": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/controls/3-readiness-publisher.release"
+  },
+  "start_ns": 3647984278620000,
+  "birth": {
+    "pid_requested": 44188,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 44188,
+    "ppid": 44080,
+    "uid": 501,
+    "pgid": 44188,
+    "state": 2,
+    "start": [
+      1792959535,
+      864644
+    ]
+  },
+  "before_input": {
+    "pid": 44188,
+    "positive_rss": 638976,
+    "before_stdin_delivery": true,
+    "observed_ns": 3647984279148750,
+    "birth": {
+      "pid_requested": 44188,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 44188,
+      "ppid": 44080,
+      "uid": 501,
+      "pgid": 44188,
+      "state": 2,
+      "start": [
+        1792959535,
+        864644
+      ]
+    }
+  },
+  "exit": 0,
+  "seconds": 0.27427454106509686,
+  "stdout_eof": true,
+  "stderr_eof": true,
+  "stdin_closed": true,
+  "original_handle_waited": true,
+  "stdout_bytes": 3842,
+  "stderr_bytes": 0,
+  "stdout_sha256": "1b10417e09d38e4317cf07c71d8a1877c58a766f811fd7b309e6e83384b3efab",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "exception": null,
+  "closure": [
+    {
+      "pgid_requested": 44188,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3647984515750458
+    },
+    {
+      "pgid_requested": 44188,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3647984534616916
+    }
+  ],
+  "escaped_survivors": [],
+  "sampled_peak_process_rss": 4145152
+}

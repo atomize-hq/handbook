@@ -1,0 +1,136 @@
+{
+  "initial": {
+    "intent": "fe06921997473964517c26de4d630594ed32727e9de1eab1d9c28ac74ce9e398",
+    "request": {
+      "request": "initial",
+      "base": null,
+      "ops": [],
+      "packet": false
+    },
+    "result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-44141-1792959533305382000-80",
+      "removed": [],
+      "request": "initial",
+      "state_digest": "cff1532d086ea45d9634e88a058351bcb12e2066bc710eb75926bfa2dd3feb74"
+    },
+    "selected": {
+      "digest": "48ac258b7bc588efa6eb9c6939ec1dad5c3e3c6b0efffc9e19049fef641685ff",
+      "publication": "publication-44141-1792959533305382000-80"
+    }
+  },
+  "readiness-tail": {
+    "intent": "d24d0fcc2e76169d32fa0e27d47e6b52b0f9a25563b04ed6c957a10906904fa8",
+    "request": {
+      "request": "readiness-tail",
+      "base": {
+        "publication": "publication-44141-1792959533305382000-80",
+        "digest": "48ac258b7bc588efa6eb9c6939ec1dad5c3e3c6b0efffc9e19049fef641685ff"
+      },
+      "ops": [],
+      "packet": false
+    },
+    "result": {
+      "changed": [],
+      "outcome": "accepted",
+      "publication": "publication-44174-1792959535503206000-6",
+      "removed": [],
+      "request": "readiness-tail",
+      "state_digest": "cff1532d086ea45d9634e88a058351bcb12e2066bc710eb75926bfa2dd3feb74"
+    },
+    "selected": {
+      "digest": "e3f635222aa8e0dbc2e2ce9c80e2f319ef09f8ff523bbe124125e89636755da4",
+      "publication": "publication-44174-1792959535503206000-6"
+    }
+  },
+  "readiness-after-capture": {
+    "intent": "89adafad5d78655f4a60e5cf9522f2d4875242bf01ac7a0b77532bd72b70973b",
+    "request": {
+      "request": "readiness-after-capture",
+      "base": {
+        "publication": "publication-44174-1792959535503206000-6",
+        "digest": "e3f635222aa8e0dbc2e2ce9c80e2f319ef09f8ff523bbe124125e89636755da4"
+      },
+      "ops": [],
+      "packet": false
+    },
+    "result": {
+      "changed": [],
+      "outcome": "accepted",
+      "publication": "publication-44188-1792959536022309000-6",
+      "removed": [],
+      "request": "readiness-after-capture",
+      "state_digest": "cff1532d086ea45d9634e88a058351bcb12e2066bc710eb75926bfa2dd3feb74"
+    },
+    "selected": {
+      "digest": "b640ccdd3cde61354e2711e77652387b8bef5e010c1f45dc4073642252130f3f",
+      "publication": "publication-44188-1792959536022309000-6"
+    }
+  }
+}

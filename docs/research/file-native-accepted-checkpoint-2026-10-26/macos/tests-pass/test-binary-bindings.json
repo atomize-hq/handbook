@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/target/release/deps/file_native_incremental-e34927de26675ca1",
+    "bytes": 3340448,
+    "sha256": "93a75efeac9016f084ae50b353f4d122cb39938046ab2958ff5c032190a3cc09"
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/target/release/deps/file_native_incremental-0af3934fad45e678",
+    "bytes": 937456,
+    "sha256": "df2941946267e1726036ff4c5405daa5b2a43b3fefa61eccf0d85150f4708b22"
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/target/release/deps/project_consumer-185eefe826719af5",
+    "bytes": 937456,
+    "sha256": "47ef7c4c5e18f3838a9f7d043ab022d51c055b191a08c5e2866991f9abeffe00"
+  },
+  {
+    "path": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/target/release/deps/research_consumer-daa897f3e2d792c0",
+    "bytes": 937456,
+    "sha256": "aaf859dde8328155291be5fbc88322467e55d5e3124cd555cb7621bf170e846f"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "observations": [
+    {
+      "pgid_requested": 36232,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3590934159307125
+    },
+    {
+      "pgid_requested": 36232,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3590934214258208
+    }
+  ],
+  "qualification": "Later numeric group absence only; original attempt1 returned actual SIGKILL exit-9; earlier October24 missing-exit attempt remains UNVERIFIED."
+}

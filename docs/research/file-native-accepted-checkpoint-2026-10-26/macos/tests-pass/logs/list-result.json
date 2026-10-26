@@ -1,0 +1,93 @@
+{
+  "mode": "list",
+  "argv": [
+    "/Users/spensermcconnell/.cargo/bin/cargo",
+    "test",
+    "--manifest-path",
+    "/private/tmp/file-native-online-macos-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--workspace",
+    "--no-fail-fast",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/target",
+    "--",
+    "--list"
+  ],
+  "cwd": "/private/tmp/file-native-online-macos-20261020/source/final-engine",
+  "environment_overrides": {
+    "CARGO_HOME": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/cargo-home",
+    "CARGO_NET_OFFLINE": "false",
+    "CARGO_INCREMENTAL": "0",
+    "EXP_PACK_TEST_ROOT": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/fixtures",
+    "TMPDIR": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/tmp",
+    "TMP": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/tmp",
+    "TEMP": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_epoch": 1792949286.8591309,
+  "timeout_seconds": 1800,
+  "aggregate_rss_limit_bytes": 3221225472,
+  "test_process_rss_limit_bytes": 2147483648,
+  "free_floor_bytes": 21474836480,
+  "resource_claim": "native sampled functional supervision; not hard peak/40ms qualification",
+  "dependency_mode": "All45 locked archives checksum-verified; ordinary registry retrieval allowed for missing exact index records. No dependency substitution.",
+  "child_pid": 28331,
+  "pgid": 28331,
+  "original_identity": {
+    "pid_requested": 28331,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 28331,
+    "ppid": 28301,
+    "uid": 501,
+    "pgid": 28331,
+    "state": 2,
+    "start": [
+      1792949286,
+      859624
+    ]
+  },
+  "group_before_reap": {
+    "pgid_requested": 28331,
+    "returned_bytes": 0,
+    "errno": 0,
+    "valid": true,
+    "members": [],
+    "monotonic_ns": 3637736522374458
+  },
+  "escaped_survivors": [],
+  "exit": 0,
+  "duration_seconds": 1.2766796252690256,
+  "exception": null,
+  "sampled_aggregate_peak_bytes": 166133760,
+  "sampled_max_process_bytes": 110870528,
+  "sample_count": 20,
+  "missing_rss": [],
+  "signals": [],
+  "closure_observations": [
+    {
+      "pgid_requested": 28331,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3637736522499166
+    },
+    {
+      "pgid_requested": 28331,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3637736578229833
+    }
+  ],
+  "owned_tree_closed": true,
+  "helper_source_hashes": {
+    "/private/tmp/file-native-online-macos-20261020/execution/readiness-20261021/native_probe.py": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90",
+    "/private/tmp/file-native-online-macos-20261020/execution/readiness-20261021/monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7"
+  }
+}

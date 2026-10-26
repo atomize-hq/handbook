@@ -1,0 +1,21 @@
+{
+  "self": {
+    "pid": 31130,
+    "proc_pid_rusage_return": 0,
+    "errno": 0,
+    "nonzero_buffer": true,
+    "proc_pidinfo_return": 136,
+    "proc_pidinfo_errno": 0
+  },
+  "current_probe_parent": {
+    "pid": 72980,
+    "proc_pid_rusage_return": 0,
+    "errno": 0,
+    "nonzero_buffer": true,
+    "proc_pidinfo_return": 136,
+    "proc_pidinfo_errno": 0
+  },
+  "self_signal_zero": "success (existence/permission only; no stop issued)",
+  "wait4_available": true,
+  "rusage_self_maxrss": 21839872
+}

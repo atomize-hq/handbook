@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/usr/sbin/lsof",
+    "-F",
+    "pcfn",
+    "--",
+    "/private/tmp/file-native-macos-inventory-20261024/build-test-20261024/logs/build.stdout",
+    "/private/tmp/file-native-macos-inventory-20261024/build-test-20261024/logs/build.stderr"
+  ],
+  "exit": 1,
+  "stdout": "",
+  "stderr": ""
+}

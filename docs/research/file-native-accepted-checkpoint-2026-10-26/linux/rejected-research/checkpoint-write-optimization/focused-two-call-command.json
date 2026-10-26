@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--lib",
+    "physical_lifetime::checkpoint_tests::write_tests::released_reader_five_h2_jobs_drain_in_exactly_two_costed_calls",
+    "--manifest-path",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/candidate/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/target",
+    "--",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env_selected": {
+    "EXP_PACK_TEST_ROOT": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/focused-two-call",
+    "TMPDIR": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "prior_families": [
+    {
+      "root": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+      "manifest_files_unchanged": 657
+    },
+    {
+      "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+      "manifest_files_unchanged": 277
+    },
+    {
+      "root": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3",
+      "manifest_files_unchanged": 857
+    }
+  ],
+  "engine_calls": 0,
+  "pilot_store_absent": true,
+  "new_cli_absent": true,
+  "delivery": "DELIVERED"
+}

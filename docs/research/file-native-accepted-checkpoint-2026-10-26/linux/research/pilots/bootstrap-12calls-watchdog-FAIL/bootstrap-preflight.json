@@ -1,0 +1,37 @@
+{
+  "prior_attempt": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+  "prior_retained_artifact_hashes": {
+    "REPORT.md": "655946fa58860a72311be5b895379b2b336cb3818430b8998d5a0650f5f6cc3c",
+    "result.json": "217e8ed8c1da2d14c9266a20d70ca8017de4ba45799a68036db2b02f7776528f",
+    "pilot-result.json": "feecaf6bf925a34cd9246b8231920276373665fd3c61ee7feaca7b2c225ad44c",
+    "EVIDENCE-SHA256.json": "6110b528ef6dd08c94dbb29153cec9ed48e63bb09bb003b85926cfb1c990753f",
+    "retained-store-inventory.json": "9eac8c58b6439d3e8724f5f60a341866b068babd11044e0d7cee383dae71f48c"
+  },
+  "new_root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+  "store": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+  "engine_calls_started": 0,
+  "delta": "Only initial task-owned recipe h.pack(root) -> h.pack(root, bootstrap=True)",
+  "recipe_ast_identical_after_removing_added_bootstrap_keyword": true,
+  "other_three_adapter_files_byte_identical": true,
+  "sdk_members_verified": 26,
+  "binary_origin": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/cli-build-binding.json",
+  "binary_sha256": "b46977f9440b5dea662c0ce547a7ca9b9b581358bf7755abf0a54b6c4df5873b",
+  "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 + telemetry test fixture n1-to-n10",
+  "corrected_io_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "rolling_requirement": "src/rolling.rs:76-77 prior.is_none() requires JSON bootstrap true",
+  "free_bytes": 36507254784,
+  "footprint": {
+    "logical_bytes": 4741604,
+    "allocated_bytes": 4816896,
+    "files": 37
+  },
+  "limits": {
+    "engine_invocations": 37,
+    "free_floor": 21474836480,
+    "aggregate_rss": 3221225472,
+    "old_reader_rss": 268435456,
+    "checker_rss": 2147483648,
+    "finite_supervisor_seconds": 480
+  },
+  "functional_proof_separate_from_performance_qualification": true
+}

@@ -1,0 +1,91 @@
+{
+  "mode": "build",
+  "argv": [
+    "/Users/spensermcconnell/.cargo/bin/cargo",
+    "test",
+    "--manifest-path",
+    "/private/tmp/file-native-online-macos-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--workspace",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/target",
+    "--no-run"
+  ],
+  "cwd": "/private/tmp/file-native-online-macos-20261020/source/final-engine",
+  "environment_overrides": {
+    "CARGO_HOME": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_INCREMENTAL": "0",
+    "EXP_PACK_TEST_ROOT": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/fixtures",
+    "TMPDIR": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/tmp",
+    "TMP": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/tmp",
+    "TEMP": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_epoch": 1792902408.2322161,
+  "timeout_seconds": 1800,
+  "aggregate_rss_limit_bytes": 3221225472,
+  "test_process_rss_limit_bytes": 2147483648,
+  "free_floor_bytes": 21474836480,
+  "resource_claim": "native sampled functional supervision; not hard peak/40ms qualification",
+  "offline_reason": "Both registry/static HTTP probes failed DNS in confined runtime; exact local cache provision attempted. No alternative dependency selected.",
+  "child_pid": 36391,
+  "pgid": 36391,
+  "original_identity": {
+    "pid_requested": 36391,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 36391,
+    "ppid": 36330,
+    "uid": 501,
+    "pgid": 36391,
+    "state": 2,
+    "start": [
+      1792902408,
+      232721
+    ]
+  },
+  "group_before_reap": {
+    "pgid_requested": 36391,
+    "returned_bytes": 0,
+    "errno": 0,
+    "valid": true,
+    "members": [],
+    "monotonic_ns": 3590857242841750
+  },
+  "escaped_survivors": [],
+  "exit": 101,
+  "duration_seconds": 0.43888329109176993,
+  "exception": null,
+  "sampled_aggregate_peak_bytes": 58228736,
+  "sampled_max_process_bytes": 23822336,
+  "sample_count": 6,
+  "missing_rss": [],
+  "signals": [],
+  "closure_observations": [
+    {
+      "pgid_requested": 36391,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3590857242959291
+    },
+    {
+      "pgid_requested": 36391,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3590857293966416
+    }
+  ],
+  "owned_tree_closed": true,
+  "helper_source_hashes": {
+    "/private/tmp/file-native-online-macos-20261020/execution/readiness-20261021/native_probe.py": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90",
+    "/private/tmp/file-native-online-macos-20261020/execution/readiness-20261021/monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7"
+  }
+}

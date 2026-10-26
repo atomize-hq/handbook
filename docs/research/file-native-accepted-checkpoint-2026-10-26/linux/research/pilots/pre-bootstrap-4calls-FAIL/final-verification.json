@@ -1,0 +1,67 @@
+{
+  "source_files_verified": 25,
+  "corrected_source_manifest_sha256": "1076b20ec662bc01a90119f15504789599fc3057f9014e9d5016c0d663fb646b",
+  "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 plus telemetry n1-to-n10 test fixture patch",
+  "binary_sha256": "b46977f9440b5dea662c0ce547a7ca9b9b581358bf7755abf0a54b6c4df5873b",
+  "sdk_members_verified": 26,
+  "sdk_manifest_sha256": "3b807fc118c830d6f8d623880ac4955563ef5e844c6f02acac25ff4ce1103bc7",
+  "role_processes": [
+    {
+      "pid": 674919,
+      "birth": 379029794,
+      "same_process_remains": false
+    },
+    {
+      "pid": 675230,
+      "birth": 379030243,
+      "same_process_remains": false
+    },
+    {
+      "pid": 675233,
+      "birth": 379030249,
+      "same_process_remains": false
+    },
+    {
+      "pid": 675236,
+      "birth": 379030250,
+      "same_process_remains": false
+    }
+  ],
+  "engine_calls_remain": 4,
+  "aggregate_sampled_peak": 31379456,
+  "supervision": {
+    "name": "pilot-native-run",
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/pilot_worker.py"
+    ],
+    "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+    "timeout_seconds": 480,
+    "stdout": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/logs/pilot-native-run.stdout",
+    "stderr": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/logs/pilot-native-run.stderr",
+    "pid": 674917,
+    "process_group": 674917,
+    "exit": 0,
+    "seconds": 4.9043067609891295,
+    "termination_reason": null,
+    "process_closure_observations": [
+      [],
+      []
+    ],
+    "process_closure_verified": true,
+    "sampled_tree_peak_rss": 31379456,
+    "sampled_tree_plus_supervisor_peak_rss": 49922048,
+    "sampled_process_peak_rss": 26980352,
+    "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+    "owned_after": {
+      "allocated_bytes": 112668672,
+      "files": 648
+    },
+    "native_free_after": 41620799488
+  },
+  "store_files": 158,
+  "store_bytes": 1641515,
+  "minimum_free_floor_bytes": 21474836480,
+  "native_free_final": 41619992576
+}

@@ -1,0 +1,21 @@
+{
+  "hostname": "spenser-linux",
+  "kernel": "Linux spenser-linux 6.16.8-1-MANJARO #1 SMP PREEMPT_DYNAMIC Fri, 19 Sep 2025 16:09:36 +0000 x86_64 GNU/Linux",
+  "filesystem": "TARGET SOURCE         FSTYPE OPTIONS\n/      /dev/nvme0n1p2 ext4   ro,nosuid,nodev,noatime",
+  "date": "2026-10-24T21:36:20Z",
+  "os_release": "NAME=\"Manjaro Linux\"\nPRETTY_NAME=\"Manjaro Linux\"\nID=manjaro\nID_LIKE=arch\nBUILD_ID=rolling\nANSI_COLOR=\"32;1;24;144;200\"\nHOME_URL=\"https://manjaro.org/\"\nDOCUMENTATION_URL=\"https://wiki.manjaro.org/\"\nSUPPORT_URL=\"https://forum.manjaro.org/\"\nBUG_REPORT_URL=\"https://manjaro.org/help/\"\nPRIVACY_POLICY_URL=\"https://manjaro.org/privacy-policy/\"\nLOGO=manjarolinux\n",
+  "inventory_python": "3.10.11 (main, Nov 26 2024, 22:41:02) [GCC 14.2.1 20240910]",
+  "cargo_env": {
+    "CARGO_HOME": "UNSET",
+    "CARGO_TARGET_DIR": "UNSET",
+    "RUSTUP_HOME": "UNSET"
+  },
+  "paths_missing": [
+    "/home/spenser/__Active_Code",
+    "/home/spenser/__Active_code/atomize-hq/handbook",
+    "/home/spenser/.cargo-private",
+    "/home/spenser/file-native-p-linux-20261020/target-final",
+    "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target"
+  ],
+  "experiment_processes": []
+}

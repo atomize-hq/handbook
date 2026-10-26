@@ -1,0 +1,16 @@
+{
+  "baseline_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "baseline_freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "baseline_imported_files_verified": 25,
+  "source": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "only_authorized_path": "src/io.rs",
+  "symbol": "io::telemetry_tests::telemetry_old_suffix_vs_deferred",
+  "old_io_sha256": "1e401ad489b78e10845dac65ccc1b36ee9f99753c0870aa5a41c4da6661aa02c",
+  "new_io_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "patch_sha256": "2dc0263e4ead79cdee5c9aa7af2839ec4495d2cfcb02a6e818dad776e41b1d61",
+  "patch_path": "/tmp/file-native-host-inventory-linux-20261024-01a16fd3/telemetry-n10-correction-20261025/telemetry-n10.patch",
+  "change": "Only init n=1 to n=10; engine minimum and all assertions remain exact",
+  "prior_failed_run": "/var/tmp/file-native-final062-buildtest-20261025-01a16fd3",
+  "modified_yet": false,
+  "utc": "2026-10-25T17:27:29.096213+00:00"
+}

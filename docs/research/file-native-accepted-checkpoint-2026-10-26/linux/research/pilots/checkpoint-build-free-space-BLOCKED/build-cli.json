@@ -1,0 +1,40 @@
+{
+  "name": "build-cli",
+  "argv": [
+    "cargo",
+    "build",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--bin",
+    "file-native-incremental",
+    "--target-dir",
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/target"
+  ],
+  "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/logs/build-cli.stdout",
+  "stderr": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/logs/build-cli.stderr",
+  "pid": 1189992,
+  "process_group": 1189992,
+  "exit": -15,
+  "seconds": 0.5417522387579083,
+  "termination_reason": "native-free-space-floor",
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 14438400,
+  "sampled_tree_plus_supervisor_peak_rss": 32559104,
+  "sampled_process_peak_rss": 14438400,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 745472,
+    "files": 39
+  },
+  "native_free_after": 14960295936
+}

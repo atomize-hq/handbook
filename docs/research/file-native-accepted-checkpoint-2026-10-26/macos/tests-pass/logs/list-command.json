@@ -1,0 +1,36 @@
+{
+  "mode": "list",
+  "argv": [
+    "/Users/spensermcconnell/.cargo/bin/cargo",
+    "test",
+    "--manifest-path",
+    "/private/tmp/file-native-online-macos-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--workspace",
+    "--no-fail-fast",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/target",
+    "--",
+    "--list"
+  ],
+  "cwd": "/private/tmp/file-native-online-macos-20261020/source/final-engine",
+  "environment_overrides": {
+    "CARGO_HOME": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/cargo-home",
+    "CARGO_NET_OFFLINE": "false",
+    "CARGO_INCREMENTAL": "0",
+    "EXP_PACK_TEST_ROOT": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/fixtures",
+    "TMPDIR": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/tmp",
+    "TMP": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/tmp",
+    "TEMP": "/private/tmp/file-native-macos-inventory-20261024/final062-fixture10-20261025/tmp",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_epoch": 1792949286.8591309,
+  "timeout_seconds": 1800,
+  "aggregate_rss_limit_bytes": 3221225472,
+  "test_process_rss_limit_bytes": 2147483648,
+  "free_floor_bytes": 21474836480,
+  "resource_claim": "native sampled functional supervision; not hard peak/40ms qualification",
+  "dependency_mode": "All45 locked archives checksum-verified; ordinary registry retrieval allowed for missing exact index records. No dependency substitution."
+}

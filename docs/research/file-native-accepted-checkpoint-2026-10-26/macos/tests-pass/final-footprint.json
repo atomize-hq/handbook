@@ -1,0 +1,25 @@
+{
+  "categories": {
+    "cargo-home": {
+      "logical_bytes": 38799183,
+      "files": 1538
+    },
+    "target": {
+      "logical_bytes": 89973362,
+      "files": 406
+    },
+    "fixtures": {
+      "logical_bytes": 83575018,
+      "files": 255
+    },
+    "tmp": {
+      "logical_bytes": 1090,
+      "files": 2
+    },
+    "logs": {
+      "logical_bytes": 768344,
+      "files": 18
+    }
+  },
+  "free_bytes": 122196365312
+}

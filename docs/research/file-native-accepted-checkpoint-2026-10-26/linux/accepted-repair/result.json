@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETE_BOUNDED_REPAIR",
+  "review": "CLEAN_NO_BLOCKERS_REQUIRED_PROOF_SATISFIED",
+  "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 + telemetry fixture10 + reviewed checkpoint resume repair (file manifest; no Git commit)",
+  "source_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "runtime_sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0",
+  "test_sha256": "52edbe54705cea456b55d9b14f32b63582b2d3d0017ad392b7eb95954ebe4824",
+  "patch_sha256": "4ee1eceb2416a9c3d1124e453079992c46be6882e886693d8a56f93939909571",
+  "changed_files": [
+    "src/physical_lifetime.rs",
+    "src/physical_checkpoint_tests.rs"
+  ],
+  "focused_passed": 9,
+  "focused_failed": 0,
+  "focused_filtered": 31,
+  "existing_work_bound_passed": 1,
+  "production_check_exit": 0,
+  "red_proof": "original recovery rewrites1782 checkpoint bytes; unchanged test final passes with0",
+  "test_binary": {
+    "path": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+    "bytes": 4709416,
+    "sha256": "7b9a81d23692c60febc12f285eadde92a3fa6fa331c55a48549201f16198ab52"
+  },
+  "pilot_rerun": false,
+  "full_matrix_run": false,
+  "original_pilot_status": "FAIL/PENDING",
+  "device_50ms_claim": false,
+  "report": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/REPORT.md",
+  "review_report": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/independent-review.md"
+}

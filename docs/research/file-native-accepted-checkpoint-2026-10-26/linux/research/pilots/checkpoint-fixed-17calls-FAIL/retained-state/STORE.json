@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "store_id": "store-2296034-1792981356681155899-0",
+  "mode": "A",
+  "consumer": "project",
+  "fallback": false,
+  "navigation_version": 4,
+  "catalog": "4a39a2a814c6e1bb6e289ca407fe5f223ccf17fa275c3d4433c6a39aba8ba366",
+  "physical": {
+    "id": "physical-2-birth-2296288-1792981362250480625-0",
+    "ordinal": 2,
+    "plan": "47d919ab3dc184d35d3d7a3daeefa32e4c7abd34849b4e5587b4e5d00152b4ac"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "purpose": "Continue remaining proof at missing strict parser binding; no native prefix rerun, no packing/publication/cleanup calls",
+  "original_error_preserved": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/pilot-result.json",
+  "strict_binding": "focused_protocol.strict (existing duplicate-key/nonfinite/bounds parser)",
+  "code_sha256": "50a2e6e179387b08e4befeac658c632395b7e59694407938e68210f0c514ad44",
+  "store": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/store/disposable/store",
+  "prior_calls": 16,
+  "remaining_engine_calls": 3,
+  "total_cap": 37
+}

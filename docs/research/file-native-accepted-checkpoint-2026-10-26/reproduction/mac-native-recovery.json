@@ -1,0 +1,16 @@
+[
+  {
+    "name": "native_probe.py",
+    "status": "SOURCE_MISSING_RECORDED_HASH_ONLY",
+    "sha256": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90",
+    "original_path": "/private/tmp/file-native-online-macos-20261020/execution/readiness-20261021/native_probe.py",
+    "scope": "No new source investigation; existing exported SDK closure retained separately."
+  },
+  {
+    "name": "monitor_v20.py",
+    "status": "SOURCE_MISSING_RECORDED_HASH_ONLY",
+    "sha256": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "original_path": "/private/tmp/file-native-online-macos-20261020/execution/readiness-20261021/monitor_v20.py",
+    "scope": "No new source investigation; existing exported SDK closure retained separately."
+  }
+]

@@ -1,0 +1,527 @@
+{
+  "host": "spenser-linux",
+  "started_utc": "2026-10-25T17:28:15.494387+00:00",
+  "baseline_source_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "source_identity": "baseline-plus-patch",
+  "patch_sha256": "2dc0263e4ead79cdee5c9aa7af2839ec4495d2cfcb02a6e818dad776e41b1d61",
+  "corrected_io_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "corrected_code_manifest_sha256": "1076b20ec662bc01a90119f15504789599fc3057f9014e9d5016c0d663fb646b",
+  "freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "source": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "output": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3",
+  "status": "PASS",
+  "stages": [
+    {
+      "name": "toolchain",
+      "argv": [
+        "rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 30,
+      "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/toolchain.stdout",
+      "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/toolchain.stderr",
+      "pid": 3616292,
+      "process_group": 3616292,
+      "exit": 0,
+      "seconds": 0.4408449223265052,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 14241792,
+      "sampled_tree_plus_supervisor_peak_rss": 33300480,
+      "sampled_process_peak_rss": 14241792,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 12288,
+        "files": 3
+      },
+      "native_free_after": 63991107584
+    },
+    {
+      "name": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 30,
+      "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/cargo-version.stdout",
+      "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/cargo-version.stderr",
+      "pid": 3616314,
+      "process_group": 3616314,
+      "exit": 0,
+      "seconds": 0.4542115000076592,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 15843328,
+      "sampled_tree_plus_supervisor_peak_rss": 35352576,
+      "sampled_process_peak_rss": 15843328,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 24576,
+        "files": 7
+      },
+      "native_free_after": 63991091200
+    },
+    {
+      "name": "filesystem",
+      "argv": [
+        "findmnt",
+        "-T",
+        "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3",
+        "-o",
+        "TARGET,SOURCE,FSTYPE,OPTIONS"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 30,
+      "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/filesystem.stdout",
+      "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/filesystem.stderr",
+      "pid": 3616335,
+      "process_group": 3616335,
+      "exit": 0,
+      "seconds": 0.2414802028797567,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 0,
+      "sampled_tree_plus_supervisor_peak_rss": 19509248,
+      "sampled_process_peak_rss": 0,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 36864,
+        "files": 11
+      },
+      "native_free_after": 63990992896
+    },
+    {
+      "name": "compile",
+      "argv": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--workspace",
+        "--release",
+        "-j2",
+        "--target-dir",
+        "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target",
+        "--no-run"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 900,
+      "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/compile.stdout",
+      "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/compile.stderr",
+      "pid": 3616342,
+      "process_group": 3616342,
+      "exit": 0,
+      "seconds": 31.504379235208035,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 1007681536,
+      "sampled_tree_plus_supervisor_peak_rss": 1027518464,
+      "sampled_process_peak_rss": 492556288,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 109109248,
+        "files": 422
+      },
+      "native_free_after": 63888265216
+    },
+    {
+      "name": "catalog",
+      "argv": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--workspace",
+        "--release",
+        "-j2",
+        "--target-dir",
+        "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target",
+        "--",
+        "--list"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 120,
+      "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/catalog.stdout",
+      "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/catalog.stderr",
+      "pid": 3617465,
+      "process_group": 3617465,
+      "exit": 0,
+      "seconds": 0.6470021973364055,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 200220672,
+      "sampled_tree_plus_supervisor_peak_rss": 220168192,
+      "sampled_process_peak_rss": 170389504,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 109150208,
+        "files": 427
+      },
+      "native_free_after": 63888224256
+    },
+    {
+      "name": "workspace-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--workspace",
+        "--release",
+        "-j2",
+        "--target-dir",
+        "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 600,
+      "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/workspace-tests.stdout",
+      "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/workspace-tests.stderr",
+      "pid": 3617494,
+      "process_group": 3617494,
+      "exit": 0,
+      "seconds": 4.678942044265568,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 97714176,
+      "sampled_tree_plus_supervisor_peak_rss": 117825536,
+      "sampled_process_peak_rss": 67981312,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 193527808,
+        "files": 689
+      },
+      "native_free_after": 63803371520
+    }
+  ],
+  "authorized_test_fixture_correction": "src/io.rs init n=1 to n=10 only",
+  "engine_source_repaired": false,
+  "pilot_or_matrix_run": false,
+  "protected_CP1_before": {
+    "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5"
+  },
+  "environment": {
+    "EXP_PACK_TEST_ROOT": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures",
+    "TMPDIR": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/tmp",
+    "TMP": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/tmp",
+    "TEMP": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/tmp",
+    "CARGO_TERM_COLOR": "never"
+  },
+  "removed_ambient_environment_names": [],
+  "cargo_home": "/home/spenser/.cargo (installed default)",
+  "limits": {
+    "native_free_floor_bytes": 21474836480,
+    "aggregate_new_work_rss_bytes": 3221225472,
+    "per_process_rss_bytes": 2147483648,
+    "task_allocated_bytes": 2147483648,
+    "task_files": 100000,
+    "combined_experiment_ceiling_bytes": 47244640256,
+    "combined_experiment_ceiling_files": 5000000,
+    "combined_scope_note": "No new all-host census/qualification claimed; conservative new-work cap only. Prior Linux records bind4988631852B protected roots plus243892097B native stage. Existing other-host allocations unchanged."
+  },
+  "native_free_before": 63991111680,
+  "ordinary_invocation_note": "Added --offline to use installed caches first and avoid index retrieval; no lockfile change allowed.",
+  "compiled_test_binaries": [
+    {
+      "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/file_native_incremental-f5485a3108d76dc6",
+      "bytes": 4149184,
+      "sha256": "bc90a7eaf47eb246ea2c26a07f7a6db0fc8bbd7659f782a981d9be31ac70b790"
+    },
+    {
+      "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/file_native_incremental-aa2c821bde1b3abd",
+      "bytes": 1080888,
+      "sha256": "caa0b8b498ba775d225e2e620748fda69038a3e85e483544d77b068c42793d72"
+    },
+    {
+      "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/project_consumer-79daabc3bcb76399",
+      "bytes": 1080872,
+      "sha256": "d9b54f1cb7dbbffd42a5320d80ca4498de0979532b1a2ffb60343052ceb3107e"
+    },
+    {
+      "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target/release/deps/research_consumer-82c16566f263e0c1",
+      "bytes": 1080880,
+      "sha256": "1b2f58f8929470b575def8b69c49d4185f89cffebefa95bb012231fda60a8980"
+    }
+  ],
+  "catalog": {
+    "expected_count": 31,
+    "actual_count": 31,
+    "actual_names": [
+      "bounds_tests::bounded_file_and_indirection_routes_refuse",
+      "disk::codec_tests::compact_refuses_damage_before_allocating",
+      "io::telemetry_tests::telemetry_old_suffix_vs_deferred",
+      "io::telemetry_tests::telemetry_writer_observes_nested_io",
+      "lifetime::tests::legacy_owner_cannot_acquire_new_preselection_proof",
+      "lifetime::tests::stage_handle_aliases_refuse_before_truncation",
+      "lifetime::tests::terminal_caps_and_charge_are_independent_of_live_slots",
+      "lifetime::tests::v1_bytes_and_old_parser_boundary_are_preserved",
+      "pack::boundary_tests::raw_record_builder_bound",
+      "pack::tests::cached_metadata_matches_owned_allocations_on_growth_and_failure",
+      "pack::tests::decoder_never_uses_advertised_size",
+      "pack::tests::typed_keys_exclude_controls_and_active_payloads",
+      "packing::boundary_tests::catalog_count_bound",
+      "packing::boundary_tests::install_birth_no_adoption",
+      "packing::pace_tests::closed",
+      "packing::pace_tests::header",
+      "packing::pace_tests::schedule",
+      "packing::tests::caller_limit_precedes_raw_and_zstd_bodies_after_all_routes",
+      "packing::tests::constructor_reservation_evicts_before_allocating_output",
+      "packing::tests::loading_indexes_evicts_before_transient_allocation",
+      "packing::tests::mixed_capture_and_cold_warm_measurements_reconcile",
+      "packing::tests::paged_cache_identity_preserves_physical_instance",
+      "packing::tests::paged_four_routes_negative_duplicates_and_conflict",
+      "packing::tests::production_builder_preserves_near_limit_index_bytes",
+      "paged::tests::paged_exact_geometry_and_closed_keys",
+      "paged::tests::paged_maximum_keys_split_before_total_index_bound",
+      "paged::tests::paged_positive_negative_boundary_and_cache",
+      "paged::tests::paged_touched_untouched_and_malformed_refusal",
+      "physical_lifetime::boundary_tests::work_byte_bound",
+      "rolling::boundary_tests::discovery_byte_bound",
+      "rolling::boundary_tests::discovery_count_bound"
+    ],
+    "missing": [],
+    "unexpected": [],
+    "matches": true
+  },
+  "complete_workspace_note": "Added --no-fail-fast so a failing engine test does not prevent other workspace targets or doctests from executing; no filtering or retry.",
+  "test_outcomes": [
+    {
+      "test": "bounds_tests::bounded_file_and_indirection_routes_refuse",
+      "outcome": "ok"
+    },
+    {
+      "test": "disk::codec_tests::compact_refuses_damage_before_allocating",
+      "outcome": "ok"
+    },
+    {
+      "test": "io::telemetry_tests::telemetry_old_suffix_vs_deferred",
+      "outcome": "ok"
+    },
+    {
+      "test": "io::telemetry_tests::telemetry_writer_observes_nested_io",
+      "outcome": "ok"
+    },
+    {
+      "test": "lifetime::tests::legacy_owner_cannot_acquire_new_preselection_proof",
+      "outcome": "ok"
+    },
+    {
+      "test": "lifetime::tests::stage_handle_aliases_refuse_before_truncation",
+      "outcome": "ok"
+    },
+    {
+      "test": "lifetime::tests::terminal_caps_and_charge_are_independent_of_live_slots",
+      "outcome": "ok"
+    },
+    {
+      "test": "lifetime::tests::v1_bytes_and_old_parser_boundary_are_preserved",
+      "outcome": "ok"
+    },
+    {
+      "test": "pack::boundary_tests::raw_record_builder_bound",
+      "outcome": "ok"
+    },
+    {
+      "test": "pack::tests::cached_metadata_matches_owned_allocations_on_growth_and_failure",
+      "outcome": "ok"
+    },
+    {
+      "test": "pack::tests::decoder_never_uses_advertised_size",
+      "outcome": "ok"
+    },
+    {
+      "test": "pack::tests::typed_keys_exclude_controls_and_active_payloads",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::boundary_tests::catalog_count_bound",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::boundary_tests::install_birth_no_adoption",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::pace_tests::closed",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::pace_tests::header",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::pace_tests::schedule",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::caller_limit_precedes_raw_and_zstd_bodies_after_all_routes",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::constructor_reservation_evicts_before_allocating_output",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::loading_indexes_evicts_before_transient_allocation",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::mixed_capture_and_cold_warm_measurements_reconcile",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::paged_cache_identity_preserves_physical_instance",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::paged_four_routes_negative_duplicates_and_conflict",
+      "outcome": "ok"
+    },
+    {
+      "test": "packing::tests::production_builder_preserves_near_limit_index_bytes",
+      "outcome": "ok"
+    },
+    {
+      "test": "paged::tests::paged_exact_geometry_and_closed_keys",
+      "outcome": "ok"
+    },
+    {
+      "test": "paged::tests::paged_maximum_keys_split_before_total_index_bound",
+      "outcome": "ok"
+    },
+    {
+      "test": "paged::tests::paged_positive_negative_boundary_and_cache",
+      "outcome": "ok"
+    },
+    {
+      "test": "paged::tests::paged_touched_untouched_and_malformed_refusal",
+      "outcome": "ok"
+    },
+    {
+      "test": "physical_lifetime::boundary_tests::work_byte_bound",
+      "outcome": "ok"
+    },
+    {
+      "test": "rolling::boundary_tests::discovery_byte_bound",
+      "outcome": "ok"
+    },
+    {
+      "test": "rolling::boundary_tests::discovery_count_bound",
+      "outcome": "ok"
+    }
+  ],
+  "test_summaries": [
+    "test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.15s",
+    "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+    "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+    "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+    "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+  ],
+  "passed": 31,
+  "failed": 0,
+  "ignored": 0,
+  "filtered": 0,
+  "cache_boundary_receipts": [
+    "cache-boundary-receipt root=/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55 total_index_charge=69740745 transient_charged_peak=66505838 remaining_cache_entries=1 source_charge=13948149 before_finish=79524497 approved_constructor=37684082 actual_output_capacity=14351124 changed_index_refused_before_allocation=true constructor_eviction_before_output=true overflow_refused_before_allocation=true extra_fixture_bytes=0"
+  ],
+  "boundary": [
+    {
+      "root": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55",
+      "files": [
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/lease",
+          "bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+          "bytes": 13496053,
+          "allocated_bytes": 13496320
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+          "bytes": 13496053,
+          "allocated_bytes": 13496320
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+          "bytes": 13496053,
+          "allocated_bytes": 13496320
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+          "bytes": 13496053,
+          "allocated_bytes": 13496320
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+          "bytes": 0,
+          "allocated_bytes": 0
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+          "bytes": 13496053,
+          "allocated_bytes": 13496320
+        },
+        {
+          "path": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+          "bytes": 13496053,
+          "allocated_bytes": 13496320
+        }
+      ],
+      "logical_bytes": 80976318,
+      "receipt": "cache-boundary-receipt root=/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/fixtures/packing-cache-boundary-3617516-1792949331918498481-55 total_index_charge=69740745 transient_charged_peak=66505838 remaining_cache_entries=1 source_charge=13948149 before_finish=79524497 approved_constructor=37684082 actual_output_capacity=14351124 changed_index_refused_before_allocation=true constructor_eviction_before_output=true overflow_refused_before_allocation=true extra_fixture_bytes=0"
+    }
+  ],
+  "source_before_after_equal": true,
+  "source_after_all_match": true,
+  "protected_CP1_after": {
+    "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5"
+  },
+  "protected_CP1_unchanged": true,
+  "owned_after": {
+    "allocated_bytes": 193548288,
+    "files": 693
+  },
+  "native_free_after": 63803351040,
+  "owned_process_closure_verified": true,
+  "finished_utc": "2026-10-25T17:28:53.543240+00:00"
+}

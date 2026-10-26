@@ -1,0 +1,72 @@
+{
+  "target_thread": "01a16f73-5070-7431-868e-b9e0e174b06e",
+  "delivery": "NOT_SENT_TOOL_UNAVAILABLE",
+  "message": "Linux real A/N64/H3 pilot FAILED on call 4 (initial packing), exit2 refused:explicit-discovery-bootstrap-required. Recipe h.pack(root) omits bootstrap=True on new store; SDK forwards no bootstrap and rolling.rs:77 requires it. Calls1-3 passed; no H2/H3 or concurrent actors, no two-pass drainage/deletion or complete oracle reached. Exactly4 engine invocations, all waits/stdin/EOF/readers/process closure verified; resource limits held. Source25 + SDK26 verified unchanged relative to corrected baseline+telemetry fixture patch, CLI b46977f9440b5dea662c0ce547a7ca9b9b581358bf7755abf0a54b6c4df5873b. Stopped at first real failure, retained store/logs and two zero-engine startup prefixes. Linux PENDING/full matrix unreleased. No engine repair or second pilot. Report: /var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/REPORT.md",
+  "result": {
+    "status": "FAIL",
+    "classification": "pilot-fixture-precondition-omission",
+    "host": "Linux",
+    "requested": {
+      "mode": "A",
+      "N": 64,
+      "H": 3,
+      "max_engine_calls": 37
+    },
+    "engine_calls": 4,
+    "engine_exit_codes": [
+      0,
+      0,
+      0,
+      2
+    ],
+    "failure_call": 4,
+    "failure_action": "initial packing build",
+    "engine_error": "refused:explicit-discovery-bootstrap-required",
+    "cause": "Retained pilot recipe calls h.pack(root) without bootstrap=True on a new store; SDK forwards no bootstrap field; rolling.rs:77 explicitly refuses this first discovery.",
+    "observed": {
+      "initial_count": 64,
+      "accepted_initial_publication": true,
+      "physical_activation": false,
+      "online_actors_started": false
+    },
+    "not_reached": [
+      "H2 and H3",
+      "three-actor overlap",
+      "old reader held >15s",
+      "old loose fallback and fresh H3 comparison",
+      "two final drainage calls",
+      "actual loose deletion",
+      "complete independent oracle"
+    ],
+    "independent_checker_processes": 0,
+    "closure": {
+      "processes_closed": true,
+      "handles_closed": true,
+      "python_callbacks_joined": true,
+      "secondary": []
+    },
+    "all_native_stdin_complete": true,
+    "all_output_eof": true,
+    "all_native_waits_observed": true,
+    "all_original_process_identities_gone": true,
+    "resource_error": null,
+    "resource_sampled_tree_plus_supervisor_peak_bytes": 49922048,
+    "resource_floor_bytes": 21474836480,
+    "native_free_final": 41619992576,
+    "pilot_allocated_bytes": 112668672,
+    "pilot_files": 648,
+    "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 plus telemetry n1-to-n10 test fixture patch",
+    "corrected_source_manifest_sha256": "1076b20ec662bc01a90119f15504789599fc3057f9014e9d5016c0d663fb646b",
+    "binary_sha256": "b46977f9440b5dea662c0ce547a7ca9b9b581358bf7755abf0a54b6c4df5873b",
+    "sdk_members_unchanged": 26,
+    "preengine_startup_failures_preserved": 2,
+    "engine_attempts": 1,
+    "subsequent_engine_calls": 0,
+    "full_matrix_released": false,
+    "Linux_matrix_status": "PENDING",
+    "store_retained": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/disposable/store",
+    "evidence_root": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+    "prior_corrected_full_test_result": "31 passed, 0 failed, 0 filtered; not rerun for pilot",
+    "source_freeze_original_unchanged": true
+  }
+}

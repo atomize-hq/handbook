@@ -1,0 +1,43 @@
+{
+  "name": "workspace-tests",
+  "argv": [
+    "cargo",
+    "test",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--workspace",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target",
+    "--no-fail-fast",
+    "--",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "timeout_seconds": 600,
+  "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/workspace-tests.stdout",
+  "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/workspace-tests.stderr",
+  "pid": 3617494,
+  "process_group": 3617494,
+  "exit": 0,
+  "seconds": 4.678942044265568,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 97714176,
+  "sampled_tree_plus_supervisor_peak_rss": 117825536,
+  "sampled_process_peak_rss": 67981312,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 193527808,
+    "files": 689
+  },
+  "native_free_after": 63803371520
+}

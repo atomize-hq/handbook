@@ -1,0 +1,30 @@
+{
+  "native_identity_observations": [
+    {
+      "utc": "2026-10-26T02:25:43.355541+00:00",
+      "remaining_original_native_identities": []
+    },
+    {
+      "utc": "2026-10-26T02:25:43.456380+00:00",
+      "remaining_original_native_identities": []
+    }
+  ],
+  "all_17_native_identities_gone": true,
+  "visible_store_lock_records": [],
+  "lock_coverage": "Read-only /proc/locks in this namespace; no lock acquired; live sample only",
+  "old_barrier_held_seconds": 16.11350796,
+  "tail_key": "publications/publication-2296278-1792981362041846089-6.json",
+  "obsolete_loose_tail_still_exists": true,
+  "native_free_bytes": 99760525312,
+  "store_files": 196,
+  "store_logical_bytes": 1707648,
+  "store_allocated_bytes": 1916928,
+  "source_files_match_reviewed": true,
+  "protected_records_unchanged": true,
+  "adapter_original_copies_unchanged": {
+    "pilot_worker.py": true,
+    "pilot_recipe_native.py": true,
+    "oracle_mapping_bridge.py": true,
+    "checker.py": true
+  }
+}

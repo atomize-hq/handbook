@@ -1,0 +1,317 @@
+[
+  {
+    "package": "block-buffer",
+    "version": "0.10.4",
+    "sha256": "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71",
+    "bytes": 10538,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/block-buffer-0.10.4.crate"
+  },
+  {
+    "package": "cc",
+    "version": "1.9.0",
+    "sha256": "877bf67ac8e52449eb2f9e98a344ea163beb70dd1f9eebe3cc5357dcfeaee4df",
+    "bytes": 147091,
+    "source": "https://static.crates.io/crates/cc/cc-1.9.0.crate"
+  },
+  {
+    "package": "cfg-if",
+    "version": "1.0.5",
+    "sha256": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600",
+    "bytes": 9578,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/cfg-if-1.0.5.crate"
+  },
+  {
+    "package": "cpufeatures",
+    "version": "0.2.17",
+    "sha256": "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280",
+    "bytes": 13466,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.2.17.crate"
+  },
+  {
+    "package": "crypto-common",
+    "version": "0.1.7",
+    "sha256": "78c8292055d1c1df0cce5d180393dc8cce0abec0a7102adb6c7b1eef6016d60a",
+    "bytes": 9619,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/crypto-common-0.1.7.crate"
+  },
+  {
+    "package": "digest",
+    "version": "0.10.7",
+    "sha256": "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292",
+    "bytes": 19557,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/digest-0.10.7.crate"
+  },
+  {
+    "package": "find-msvc-tools",
+    "version": "0.1.15",
+    "sha256": "1c66915cc5391097de7a2b0b972e8505aa33c0df401fd3a6811dbdb32881ba48",
+    "bytes": 31634,
+    "source": "https://static.crates.io/crates/find-msvc-tools/find-msvc-tools-0.1.15.crate"
+  },
+  {
+    "package": "fs2",
+    "version": "0.4.3",
+    "sha256": "9564fc758e15025b46aa6643b1b77d047d1a56a1aea6e01002ac0c7026876213",
+    "bytes": 13138,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/fs2-0.4.3.crate"
+  },
+  {
+    "package": "generic-array",
+    "version": "0.14.7",
+    "sha256": "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a",
+    "bytes": 15950,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/generic-array-0.14.7.crate"
+  },
+  {
+    "package": "getrandom",
+    "version": "0.4.3",
+    "sha256": "300e883d756b2e4ec94e02791f39b04b522276138852cfc41d9fb7e904106099",
+    "bytes": 52437,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/getrandom-0.4.3.crate"
+  },
+  {
+    "package": "itoa",
+    "version": "1.0.18",
+    "sha256": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682",
+    "bytes": 15935,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18.crate"
+  },
+  {
+    "package": "jobserver",
+    "version": "0.1.35",
+    "sha256": "1c00acbd29eabad4a2392fa0e921c874934dbbf4194312ad20f04a0ed67a3cb3",
+    "bytes": 28890,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/jobserver-0.1.35.crate"
+  },
+  {
+    "package": "libc",
+    "version": "0.2.191",
+    "sha256": "65cd87c9a6d60536580b316ad985726104730a5151c99845f2490428ef91240a",
+    "bytes": 855401,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/libc-0.2.191.crate"
+  },
+  {
+    "package": "memchr",
+    "version": "2.8.3",
+    "sha256": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98",
+    "bytes": 99165,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3.crate"
+  },
+  {
+    "package": "pkg-config",
+    "version": "0.3.34",
+    "sha256": "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548",
+    "bytes": 21370,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/pkg-config-0.3.34.crate"
+  },
+  {
+    "package": "proc-macro2",
+    "version": "1.0.107",
+    "sha256": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9",
+    "bytes": 59588,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107.crate"
+  },
+  {
+    "package": "quote",
+    "version": "1.0.47",
+    "sha256": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
+    "bytes": 31622,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/quote-1.0.47.crate"
+  },
+  {
+    "package": "r-efi",
+    "version": "6.0.0",
+    "sha256": "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf",
+    "bytes": 65303,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/r-efi-6.0.0.crate"
+  },
+  {
+    "package": "ryu",
+    "version": "1.0.23",
+    "sha256": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f",
+    "bytes": 52823,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23.crate"
+  },
+  {
+    "package": "serde",
+    "version": "1.0.228",
+    "sha256": "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e",
+    "bytes": 83652,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/serde-1.0.228.crate"
+  },
+  {
+    "package": "serde_core",
+    "version": "1.0.228",
+    "sha256": "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad",
+    "bytes": 63111,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.228.crate"
+  },
+  {
+    "package": "serde_derive",
+    "version": "1.0.228",
+    "sha256": "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79",
+    "bytes": 59605,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.228.crate"
+  },
+  {
+    "package": "serde_json",
+    "version": "1.0.145",
+    "sha256": "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c",
+    "bytes": 155748,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.145.crate"
+  },
+  {
+    "package": "sha2",
+    "version": "0.10.9",
+    "sha256": "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283",
+    "bytes": 29271,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/sha2-0.10.9.crate"
+  },
+  {
+    "package": "shlex",
+    "version": "2.0.1",
+    "sha256": "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba",
+    "bytes": 19332,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/shlex-2.0.1.crate"
+  },
+  {
+    "package": "syn",
+    "version": "2.0.119",
+    "sha256": "872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297",
+    "bytes": 307407,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/syn-2.0.119.crate"
+  },
+  {
+    "package": "typenum",
+    "version": "1.20.1",
+    "sha256": "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20",
+    "bytes": 105479,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/typenum-1.20.1.crate"
+  },
+  {
+    "package": "unicode-ident",
+    "version": "1.0.27",
+    "sha256": "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563",
+    "bytes": 48807,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.27.crate"
+  },
+  {
+    "package": "version_check",
+    "version": "0.9.5",
+    "sha256": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a",
+    "bytes": 15554,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/version_check-0.9.5.crate"
+  },
+  {
+    "package": "winapi",
+    "version": "0.3.9",
+    "sha256": "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419",
+    "bytes": 1200382,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-0.3.9.crate"
+  },
+  {
+    "package": "winapi-i686-pc-windows-gnu",
+    "version": "0.4.0",
+    "sha256": "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6",
+    "bytes": 2918815,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-i686-pc-windows-gnu-0.4.0.crate"
+  },
+  {
+    "package": "winapi-x86_64-pc-windows-gnu",
+    "version": "0.4.0",
+    "sha256": "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f",
+    "bytes": 2947998,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-x86_64-pc-windows-gnu-0.4.0.crate"
+  },
+  {
+    "package": "windows-sys",
+    "version": "0.59.0",
+    "sha256": "1e38bc4d79ed67fd075bcc251a1c39b32a1776bbe92e5bef1f0bf1f8c531853b",
+    "bytes": 2387323,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows-sys-0.59.0.crate"
+  },
+  {
+    "package": "windows-targets",
+    "version": "0.52.6",
+    "sha256": "9b724f72796e036ab90c1021d4780d4d3d648aca59e491e6b98e725b84e99973",
+    "bytes": 6403,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows-targets-0.52.6.crate"
+  },
+  {
+    "package": "windows_aarch64_gnullvm",
+    "version": "0.52.6",
+    "sha256": "32a4622180e7a0ec044bb555404c800bc9fd9ec262ec147edd5989ccd0c02cd3",
+    "bytes": 435718,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_aarch64_gnullvm-0.52.6.crate"
+  },
+  {
+    "package": "windows_aarch64_msvc",
+    "version": "0.52.6",
+    "sha256": "09ec2a7bb152e2252b53fa7803150007879548bc709c039df7627cabbd05d469",
+    "bytes": 832615,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_aarch64_msvc-0.52.6.crate"
+  },
+  {
+    "package": "windows_i686_gnu",
+    "version": "0.52.6",
+    "sha256": "8e9b5ad5ab802e97eb8e295ac6720e509ee4c243f69d781394014ebfe8bbfa0b",
+    "bytes": 880402,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_i686_gnu-0.52.6.crate"
+  },
+  {
+    "package": "windows_i686_gnullvm",
+    "version": "0.52.6",
+    "sha256": "0eee52d38c090b3caa76c563b86c3a4bd71ef1a819287c19d586d7334ae8ed66",
+    "bytes": 475940,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_i686_gnullvm-0.52.6.crate"
+  },
+  {
+    "package": "windows_i686_msvc",
+    "version": "0.52.6",
+    "sha256": "240948bc05c5e7c6dabba28bf89d89ffce3e303022809e73deaefe4f6ec56c66",
+    "bytes": 901163,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_i686_msvc-0.52.6.crate"
+  },
+  {
+    "package": "windows_x86_64_gnu",
+    "version": "0.52.6",
+    "sha256": "147a5c80aabfbf0c7d901cb5895d1de30ef2907eb21fbbab29ca94c5b08b1a78",
+    "bytes": 836363,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_x86_64_gnu-0.52.6.crate"
+  },
+  {
+    "package": "windows_x86_64_gnullvm",
+    "version": "0.52.6",
+    "sha256": "24d5b23dc417412679681396f2b49f3de8c1473deb516bd34410872eff51ed0d",
+    "bytes": 435707,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_x86_64_gnullvm-0.52.6.crate"
+  },
+  {
+    "package": "windows_x86_64_msvc",
+    "version": "0.52.6",
+    "sha256": "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec",
+    "bytes": 832564,
+    "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/cargo-home/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_x86_64_msvc-0.52.6.crate"
+  },
+  {
+    "package": "zstd",
+    "version": "0.14.3",
+    "sha256": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70",
+    "bytes": 52615,
+    "source": "https://static.crates.io/crates/zstd/zstd-0.14.3.crate"
+  },
+  {
+    "package": "zstd-safe",
+    "version": "8.2.0",
+    "sha256": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b",
+    "bytes": 46799,
+    "source": "https://static.crates.io/crates/zstd-safe/zstd-safe-8.2.0.crate"
+  },
+  {
+    "package": "zstd-sys",
+    "version": "2.1.2+zstd.1.5.7",
+    "sha256": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3",
+    "bytes": 785774,
+    "source": "https://static.crates.io/crates/zstd-sys/zstd-sys-2.1.2+zstd.1.5.7.crate"
+  }
+]

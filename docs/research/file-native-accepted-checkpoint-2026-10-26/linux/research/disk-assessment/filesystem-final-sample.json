@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-10-26T01:35:49.463888+00:00",
+  "filesystems": [
+    {
+      "path": "/",
+      "device": 66306,
+      "total_bytes": 983038173184,
+      "used_bytes": 919647707136,
+      "free_all_bytes": 63390466048,
+      "available_bytes": 13379411968,
+      "reserved_bytes": 50011054080
+    },
+    {
+      "path": "/tmp",
+      "device": 37,
+      "total_bytes": 33598603264,
+      "used_bytes": 27529793536,
+      "free_all_bytes": 6068809728,
+      "available_bytes": 6068809728,
+      "reserved_bytes": 0
+    }
+  ]
+}

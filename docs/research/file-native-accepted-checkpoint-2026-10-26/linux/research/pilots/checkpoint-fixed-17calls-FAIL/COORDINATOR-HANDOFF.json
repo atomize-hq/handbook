@@ -1,0 +1,206 @@
+{
+  "target_thread": "01a16f73-5070-7431-868e-b9e0e174b06e",
+  "hostId": "local",
+  "result": {
+    "status": "FAIL_PILOT_TWO_PASS_BACKLOG",
+    "runtime_source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 + telemetry fixture10 + reviewed checkpoint-resume repair",
+    "reviewed26_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+    "cli_sha256": "058c306ea04c6b06057aa51a0197eead832363482c1c9559b1de6431a5dedf40",
+    "runtime_physical_lifetime_sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0",
+    "telemetry_io_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+    "original_freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+    "source_unchanged": true,
+    "pilot_attempts": 1,
+    "engine_invocations": 17,
+    "all_engine_exit_zero": true,
+    "build_exit": 0,
+    "functional_pilot": "FAIL: unprotected-backlog-after-two-passes",
+    "cleanup_progress": "OBSERVED_SELECTED_CHECKPOINT_AND_PENDING_RESUME; final drainage FAILED",
+    "cleanup_timing": "FAIL: seven of eight batches >50ms",
+    "cleanup_batches": 8,
+    "cleanup_50ms_misses": 7,
+    "initial_cleanup_batches_to_complete": 5,
+    "real_H2_capture_and_H3_acceptance_before_activation": "PASS_REACHED_ASSERTIONS",
+    "three_distinct_actors": {
+      "maintenance": {
+        "before_stdin_delivery": true,
+        "birth": 381152124,
+        "observed_ns": 3811521250336805,
+        "pid": 2296288,
+        "positive_rss": 192512
+      },
+      "old": {
+        "before_stdin_delivery": true,
+        "birth": 381152124,
+        "observed_ns": 3811521244068953,
+        "pid": 2296284,
+        "positive_rss": 397312
+      },
+      "publisher": {
+        "before_stdin_delivery": true,
+        "birth": 381152148,
+        "observed_ns": 3811521491244015,
+        "pid": 2296292,
+        "positive_rss": 2478080
+      }
+    },
+    "old_barrier_hold_seconds": 16.11350796,
+    "old_and_current_exact_reader_assertions": "PASS_REACHED_ASSERTIONS",
+    "requested_N": 64,
+    "requested_H": 3,
+    "initial_accepted_changed_document_count": 64,
+    "observed_accepted_publications": 3,
+    "two_final_drainage_engine_calls": 2,
+    "final_drainage_backlogs": [
+      {
+        "excluded": 0,
+        "excluded_facts": [],
+        "independent": true,
+        "protected": 20,
+        "protected_paths": [
+          "packs/physical-1-birth-2296226-1792981361085532167-0/079da166918e631a6cea43980c76e1a66b0d29950fec07423ddf719222fc3470.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/23adfcc42f9736be2453729c10cc92eaf971b1769ed3133eaeb0620a14fe38b6.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/3b83bdd46e17522347dd4e3ad9d8e9be43e8e727a07c1cd14eaa280679804bb2.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/3eff37fad65d38eae67f66b0a512a291c4fa999f554edf489a4cc8393e2d9713.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/56babad251ed74f63782436aa7c2ed9c7fd95d0b6a6bec87d770e7f324094fb0.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/6b4902cd5ec86949909985a90651ff14bbea07eff78a25cf295417c6f0607c93.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/70297bbf1d42f72a7c7fefbf78542d567166bb95721210fd1536be28ceb95139.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/7e79b120513af463ac9e7031c61f3eede9554b31df287db90c17e16975c3f4b0.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/a2c7ac77c253f837779c625473b1cc6ee15659c3cfdc0077dc09d964bba1fd21.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/fe0d45f532ca18805b7d2056f0a92882b0ce3e2734ad0f0602639dc3adb1b099.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/05c82417f037507da39a0b3bdf5adfe10a66c8cb52699867b199e43a097145f2.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/2137930ae10242d36ebff9c9d0daef528cdda7a8ef1dd0fa22124cbd0b3e6a7b.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/279a204f762c247dba68091eb5fdea747e4b3a85c878f30ec2fd65e0f614d98b.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/33269bcac19c738f1d1bfb2ab4be242ca0b181be23f82d139c36764df1475185.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/6adc044bfd255608602c9dca37639f6af886e648bba5f2c43567df6dc6a975ea.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/6b92bcfba4a7ba95e0877f692f2853ee3fa8c596eb9b770c2f21422a777f624c.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/72b1f78f898a359313858a8020bdcd007cd0677590c185c256b13d399638f655.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/96145080278f45585987377b728c60b6f886d7141b2be0c799890c6693e77f1f.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/9f1808130c461fe87dd5347510e12ff9dc30fe7d2203b8d31f8f172083259a18.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/a95a6867ca2b42e0d6b9dfcd7b22f872a472c4154dea3044bfd5af1eb115a477.idx"
+        ],
+        "unprotected": 6,
+        "unprotected_paths": [
+          "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+          "attempts/attempt-2296278-1792981361903954335-0/allocations/publication-2296278-1792981362041846089-6.json",
+          "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+          "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+          "publications/publication-2296278-1792981362041846089-6.json",
+          "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json"
+        ]
+      },
+      {
+        "excluded": 0,
+        "excluded_facts": [],
+        "independent": true,
+        "protected": 20,
+        "protected_paths": [
+          "packs/physical-1-birth-2296226-1792981361085532167-0/079da166918e631a6cea43980c76e1a66b0d29950fec07423ddf719222fc3470.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/23adfcc42f9736be2453729c10cc92eaf971b1769ed3133eaeb0620a14fe38b6.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/3b83bdd46e17522347dd4e3ad9d8e9be43e8e727a07c1cd14eaa280679804bb2.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/3eff37fad65d38eae67f66b0a512a291c4fa999f554edf489a4cc8393e2d9713.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/56babad251ed74f63782436aa7c2ed9c7fd95d0b6a6bec87d770e7f324094fb0.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/6b4902cd5ec86949909985a90651ff14bbea07eff78a25cf295417c6f0607c93.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/70297bbf1d42f72a7c7fefbf78542d567166bb95721210fd1536be28ceb95139.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/7e79b120513af463ac9e7031c61f3eede9554b31df287db90c17e16975c3f4b0.idx",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/a2c7ac77c253f837779c625473b1cc6ee15659c3cfdc0077dc09d964bba1fd21.pack",
+          "packs/physical-1-birth-2296226-1792981361085532167-0/fe0d45f532ca18805b7d2056f0a92882b0ce3e2734ad0f0602639dc3adb1b099.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/05c82417f037507da39a0b3bdf5adfe10a66c8cb52699867b199e43a097145f2.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/2137930ae10242d36ebff9c9d0daef528cdda7a8ef1dd0fa22124cbd0b3e6a7b.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/279a204f762c247dba68091eb5fdea747e4b3a85c878f30ec2fd65e0f614d98b.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/33269bcac19c738f1d1bfb2ab4be242ca0b181be23f82d139c36764df1475185.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/6adc044bfd255608602c9dca37639f6af886e648bba5f2c43567df6dc6a975ea.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/6b92bcfba4a7ba95e0877f692f2853ee3fa8c596eb9b770c2f21422a777f624c.idx",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/72b1f78f898a359313858a8020bdcd007cd0677590c185c256b13d399638f655.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/96145080278f45585987377b728c60b6f886d7141b2be0c799890c6693e77f1f.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/9f1808130c461fe87dd5347510e12ff9dc30fe7d2203b8d31f8f172083259a18.pack",
+          "packs/physical-2-birth-2296288-1792981362250480625-0/a95a6867ca2b42e0d6b9dfcd7b22f872a472c4154dea3044bfd5af1eb115a477.idx"
+        ],
+        "unprotected": 8,
+        "unprotected_paths": [
+          "attempt-hints/attempt-2296278-1792981361903954335-0.json",
+          "attempts/attempt-2296278-1792981361903954335-0/candidate.json",
+          "pack-catalogs/a026d5348bbb5139abebeedd7c4c9a55179fdaa96c1a4d8b90a7dee3cb8b4bc7.json",
+          "physical-pins/physical-1-birth-2296226-1792981361085532167-0.lock",
+          "physical-plans/368cdb2e90036e8c6d8616223d54d24199ee0b110616121f1f7fb46bd4b17404.json",
+          "physical-plans/ca360a7aef5aff29add92900942bf46094980ca0b8483ee354549f734ae056e6.json",
+          "publications/publication-2296278-1792981362041846089-6.json",
+          "results/7c6659802e9ffc263e3cf2b971494509a06f137320294a6f742e2628bfc2df70.json"
+        ]
+      }
+    ],
+    "obsolete_loose_tail": "publications/publication-2296278-1792981362041846089-6.json",
+    "obsolete_loose_tail_still_present": true,
+    "actual_required_loose_tail_deletion": "FAIL: tail remains",
+    "independent_complete_final_H3_oracle": "UNRUN: stopped at earlier assertion",
+    "independent_complete_checker_processes": 0,
+    "final_all_accepted_outcomes_check": "UNRUN: earlier assertion",
+    "selected_plan_changed_calls": [
+      "engine-08-packing",
+      "engine-09-packing",
+      "engine-15-packing",
+      "engine-17-packing"
+    ],
+    "verified_pending_immutable_plan_selected_calls": [
+      "engine-08-packing",
+      "engine-09-packing",
+      "engine-17-packing"
+    ],
+    "missing_intermediates": "UNKNOWN; no inference from immutable install or rename counters",
+    "closure": {
+      "processes_closed": true,
+      "handles_closed": true,
+      "python_callbacks_joined": true,
+      "secondary": []
+    },
+    "all_17_identities_gone_twice": true,
+    "native_build_and_pilot_supervisor_closure": true,
+    "resource_error": null,
+    "sampling_claim": "Approximately200ms sampled containment; no hard peak or40ms/full experiment qualification",
+    "build_sampled_tree_plus_supervisor_peak_rss": 561836032,
+    "pilot_sampled_tree_plus_supervisor_peak_rss": 58986496,
+    "native_free_at_preflight": 99887357952,
+    "native_free_after_verification": 99760525312,
+    "old_attempt_manifest_preservation": [
+      {
+        "root": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3",
+        "manifest_files": 48,
+        "all_unchanged": true,
+        "manifest_sha256": "93ae6dfa9818420b1df9061e5b8621cf0436ead62e6f64b4db9cc52caaf5c0f1"
+      },
+      {
+        "root": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3",
+        "manifest_files": 857,
+        "all_unchanged": true,
+        "manifest_sha256": "a3d48bf7334c1f276158319e6240e78d6874a6d996f8201dc9b44980ffed904f"
+      },
+      {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+        "manifest_files": 657,
+        "all_unchanged": true,
+        "manifest_sha256": "6110b528ef6dd08c94dbb29153cec9ed48e63bb09bb003b85926cfb1c990753f"
+      },
+      {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+        "manifest_files": 277,
+        "all_unchanged": true,
+        "manifest_sha256": "4da3d669312a8391aa88c3ed4b2e41a1e7898acd3b33692d668c4c667567fefe"
+      }
+    ],
+    "original_adapters_unchanged": {
+      "pilot_worker.py": true,
+      "pilot_recipe_native.py": true,
+      "oracle_mapping_bridge.py": true,
+      "checker.py": true
+    },
+    "full_matrix_released": false,
+    "new_source_or_harness_redesign": false,
+    "observation_only_wrapper_sha256": "7816545082736f398a63bfac7ab40c236969ff2a1bd23483d8dfb7b800c9ae25",
+    "no_new_failure_repair_or_retry": true,
+    "prior_blocked_status_preserved": true,
+    "source_or_unrelated_project_cleanup": false,
+    "report_root": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3"
+  },
+  "report": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/REPORT.md",
+  "delivery": "PENDING_SUPPORTED_TRANSPORT"
+}

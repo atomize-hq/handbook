@@ -1,0 +1,44 @@
+{
+  "host": "Mac",
+  "status": "BLOCKED",
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "source_files_checked": 25,
+  "source_unchanged": true,
+  "catalog_expected_engine_tests": 31,
+  "compiled": false,
+  "listed": false,
+  "executed_tests": 0,
+  "passed": 0,
+  "failed": 0,
+  "ignored": "UNKNOWN_NOT_LISTED",
+  "filtered": "UNKNOWN_NOT_LISTED",
+  "real_boundary_fixture_executed": false,
+  "boundary_receipt": null,
+  "supervisor_exit": 1,
+  "cargo_wait_exit": "UNKNOWN: supervisor failed before wait; Cargo stderr records dependency resolution failure",
+  "owned_tree_closure": "UNVERIFIED: ps forbidden; no compilation announced, resolver failure retained; supervisor exited without original Cargo wait receipt",
+  "blockers": [
+    "native ps denied by enforced environment",
+    "offline installed index cannot resolve locked zstd=0.14.3; only0.11.2+zstd.1.5.2 offered"
+  ],
+  "network_retrieval": "Not attempted: aggregate RSS supervision unavailable; no unmonitored follow-up launched",
+  "census": {
+    "target": {
+      "files": 1,
+      "bytes": 1699
+    },
+    "fixtures": {
+      "files": 0,
+      "bytes": 0
+    },
+    "tmp": {
+      "files": 0,
+      "bytes": 0
+    },
+    "logs": {
+      "files": 4,
+      "bytes": 2171
+    }
+  },
+  "free_bytes_after": 126671441920
+}

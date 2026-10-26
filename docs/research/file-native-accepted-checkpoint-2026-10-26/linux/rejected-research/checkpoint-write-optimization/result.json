@@ -1,0 +1,163 @@
+{
+  "status": "NOT_ACCEPTED_STRICT_GATE_FAILED",
+  "current_runtime_unchanged": true,
+  "candidate_promoted": false,
+  "candidate_manifest_sha256": "01bc6bc93a827c0490e45b712647d70eebd35cc1facbb5f76dbb64ee57c804c3",
+  "candidate_changes": [
+    {
+      "path": "src/io.rs",
+      "before_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+      "after_sha256": "88c305a237744c4da480cf3f28129c1bb06a714988b5d97ef6c729d93422d8fe",
+      "bytes": 22649
+    },
+    {
+      "path": "src/physical_checkpoint_tests.rs",
+      "before_sha256": "52edbe54705cea456b55d9b14f32b63582b2d3d0017ad392b7eb95954ebe4824",
+      "after_sha256": "4da2488dd5da1a8c6e9c3ba98c64a86a53a81b3002726f183c61aa7179453731",
+      "bytes": 17087
+    },
+    {
+      "path": "src/physical_checkpoint_write_tests.rs",
+      "before_sha256": null,
+      "after_sha256": "8f57e354dfb48acd4a0dc02f725733043ac0fbb351ff03029af0f6cd83dfc605",
+      "bytes": 9164
+    },
+    {
+      "path": "src/physical_lifetime.rs",
+      "before_sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0",
+      "after_sha256": "1b1ba74c86605863d3c2c7d95de4aa89d2c2bdaf7bdfa2264e6ad4e92f69aad9",
+      "bytes": 32883
+    }
+  ],
+  "root_sync_count_red": 4,
+  "root_sync_count_green": 2,
+  "strict_discriminator": "FAIL",
+  "modeled_call_ms": [
+    56.15,
+    56.15
+  ],
+  "final_pending_count": 4,
+  "h2_tail_deleted": true,
+  "tests": [
+    {
+      "stage": "red-ancestor",
+      "exit": 101,
+      "seconds": 24.836697536055,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 601657344,
+      "summaries": [
+        "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.24s"
+      ]
+    },
+    {
+      "stage": "green-ancestor",
+      "exit": 0,
+      "seconds": 12.220352905336767,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 553115648,
+      "summaries": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.23s"
+      ]
+    },
+    {
+      "stage": "focused-new",
+      "exit": 101,
+      "seconds": 14.30728067504242,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 578875392,
+      "summaries": [
+        "test result: FAILED. 4 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.85s"
+      ]
+    },
+    {
+      "stage": "focused-two-call",
+      "exit": 101,
+      "seconds": 16.434105803258717,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 577777664,
+      "summaries": [
+        "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 44 filtered out; finished in 2.96s"
+      ]
+    },
+    {
+      "stage": "existing-checkpoints",
+      "exit": 0,
+      "seconds": 6.146381468977779,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 53284864,
+      "summaries": [
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 36 filtered out; finished in 5.63s"
+      ]
+    },
+    {
+      "stage": "affected-work-bound",
+      "exit": 0,
+      "seconds": 0.4387090620584786,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 32169984,
+      "summaries": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 44 filtered out; finished in 0.07s"
+      ]
+    },
+    {
+      "stage": "non-test-check",
+      "exit": 0,
+      "seconds": 2.938068339135498,
+      "termination_reason": null,
+      "closure": true,
+      "rss_sampled_peak": 403230720,
+      "summaries": []
+    }
+  ],
+  "independent_review": {
+    "reviewer": "/root/checkpoint_write_review",
+    "model": "gpt-6.1-sol",
+    "reasoning": "high",
+    "speed": "standard/default",
+    "requested_model_unavailable": "gpt-5.4/Extra High unavailable; surfaced before authorized available local reviewer dispatch",
+    "observation": "one fresh independent read-only focused observation, candidate frozen",
+    "candidate_manifest_sha256": "01bc6bc93a827c0490e45b712647d70eebd35cc1facbb5f76dbb64ee57c804c3",
+    "findings": [
+      {
+        "id": "CWR-01",
+        "priority": "P2",
+        "owner_disposition": "ACCEPTED_OPEN_BLOCKER",
+        "reason": "Exact two-call/zero-backlog and modeled50ms gates failed. No promotion or further attempt; human stop-on-failure instruction controls."
+      },
+      {
+        "id": "CWR-02",
+        "priority": "P2",
+        "owner_disposition": "ACCEPTED_OPEN_PROOF_BLOCKER",
+        "reason": "Immediate before/after immutable installation interruption coverage absent; final fresh-reader assertion not reached. Not claiming crash-safety completion. No additional tests after authorized stop-on-strict-failure endpoint."
+      },
+      {
+        "id": "CWR-03",
+        "priority": "P3",
+        "owner_disposition": "RECORDED_ADVISORY_NO_AUTOMATIC_CLEANUP",
+        "reason": "Original unexecuted9/1 placeholder contract preserved. Actual per-site measurement led to cost-model.md and executed10/9/0.05ms profile before strict discriminator; neither profile changed after its substantive verdict."
+      }
+    ],
+    "acceptance": "NOT_CLEAN_NOT_ACCEPTED",
+    "candidate_promoted": false,
+    "further_pilot_recommended": false,
+    "independent_dismissals": []
+  },
+  "review_acceptance": "NOT_CLEAN",
+  "remaining_P2": [
+    "CWR-01",
+    "CWR-02"
+  ],
+  "P3": [
+    "CWR-03"
+  ],
+  "new_pilot": false,
+  "later_pilot_recommended": false,
+  "recommendation": "Do not promote candidate or run another pilot; narrow optimization does not meet unchanged drainage/timing gate. Broader durability-cost approach is not implemented.",
+  "report": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/REPORT.md"
+}

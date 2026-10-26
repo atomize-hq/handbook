@@ -1,0 +1,29 @@
+--- previous/pilot_worker.py
++++ new/pilot_worker.py
+@@ -4,7 +4,7 @@
+ ROOT=Path(__file__).resolve().parent
+ PACKET=ROOT/'source/mac-sdk-20261025';SDK=PACKET/'sdk'
+ SOURCE=Path('/home/spenser/file-native-online-linux-20261020/source/final-engine')
+-IDENTITY=Path('/tmp/file-native-host-inventory-linux-20261024-01a16fd3/telemetry-n10-correction-20261025/corrected-code-manifest.json')
++IDENTITY=ROOT/'reviewed-source-binding.json'
+ PIN='0628322e4b48e0efad19cdc32238a622d4aaa7a8'
+ os.environ['FILE_NATIVE_ORACLE_RESEARCH']=str(PACKET/'research')
+ sys.dont_write_bytecode=True
+@@ -217,7 +217,7 @@
+     def case(self,case,root,forecast):
+         self.a.verify_sources();assert not root.exists() and root==ROOT/'disposable/store'
+         assert time.time()<fp.FUNCTIONAL_CUTOFF;self.active.add(root);self.ledgers[root]=fp.Inputs()
+-        self.note('case-start-native-task',case_id=case,source_identity='baseline-plus-telemetry-n10-patch',source_manifest_sha256=sha(IDENTITY),binary_sha256=self.driver.binary_sha256)
++        self.note('case-start-native-task',case_id=case,source_identity='baseline-plus-telemetry10-plus-reviewed-checkpoint-resume-repair',source_manifest_sha256=sha(IDENTITY),binary_sha256=self.driver.binary_sha256)
+         failure=None
+         try:yield
+         except BaseException as e:failure=repr(e);self.note('case-failure',error=failure);raise
+@@ -228,7 +228,7 @@
+ def main():
+     with (ROOT/'pilot.started.json').open('x') as f:json.dump(dict(start_ns=time.monotonic_ns()),f)
+     host=Host();h=Harness(host,host,host.full_oracle,host.emit,final_pin=PIN);host.h=h
+-    result=dict(status='STARTED',baseline_pin=PIN,source_identity='baseline-plus-telemetry-n10-patch',root=str(ROOT/'disposable/store'))
++    result=dict(status='STARTED',baseline_pin=PIN,source_identity='baseline-plus-telemetry10-plus-reviewed-checkpoint-resume-repair',root=str(ROOT/'disposable/store'))
+     ledger=case_ledger.CaseLedger('Linux',PIN)
+     try:
+         answer=recipe.run(h,ROOT/'disposable/store',dict(N=64,H=3,engine_calls_max=37))

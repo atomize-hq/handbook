@@ -1,0 +1,16 @@
+{
+  "source_identity": "baseline062+telemetry fixture n1-to10",
+  "files": {
+    "runner.py": "780dd392e569a0a8c170b548e76cbe4ff5535587782d2eaaabe09dfd9192af63",
+    "checker.py": "2bd5953e4007cfee466b5dbedd5eb01130d40ffd1a4f85c2f5c95b447527e2f7",
+    "pilot_behavior.py": "35128756dab4d5cdffab04e0a758ff5c8aa165240fe80b4b4f51c5374076b491",
+    "recipe-adaptation.json": "8ffd63edfc532fdbb095ba9d3e3709ed2c749c0f127773ce777a4c38ae1c42bf",
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/target/release/file-native-incremental": "d07adb431f4f6c5fd570e6ce8e30965bf443abd2dfd6b1b5bb3d08368b6f242e",
+    "/opt/homebrew/Cellar/zstd/1.5.7_1/lib/libzstd.1.5.7.dylib": "69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189"
+  },
+  "native_filesystem": "local APFS observed in inventory",
+  "free_bytes_before": 113111670784,
+  "engine_calls_started": 0,
+  "footprint_plan": "new N64H3 only, no dataset restore; local build~90MiB and planned store/checker small relative retained native forecast; protected data and inside reserve preserved",
+  "manual_review": "Retained behavioral assertions unchanged. Single initial-bootstrap payload field source-confirmed. Host admission/clock wrappers removed, no fake capability/qualification receipts. Native process handles saved before stdin, finally cleanup/joins. Complete v6 oracle semantics unchanged, original companions pinned."
+}

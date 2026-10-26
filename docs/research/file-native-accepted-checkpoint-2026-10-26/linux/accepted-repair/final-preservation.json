@@ -1,0 +1,27 @@
+{
+  "source_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "live_frozen_correspondence": true,
+  "scope_changed_existing": [
+    "src/physical_lifetime.rs"
+  ],
+  "added_test": "src/physical_checkpoint_tests.rs",
+  "report_sha256": "9d9d59323892279f1bf53bc5cbbf4312e2840cfa4e4e971fabdb8880725483d4",
+  "allocated_bytes": 110968832,
+  "logical_bytes": 108311737,
+  "files": 855,
+  "native_free_bytes": 30696914944,
+  "all_stage_closure_verified": true,
+  "prior_evidence": [
+    {
+      "root": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+      "manifest_files_unchanged": 657,
+      "manifest_sha256": "6110b528ef6dd08c94dbb29153cec9ed48e63bb09bb003b85926cfb1c990753f"
+    },
+    {
+      "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+      "manifest_files_unchanged": 277,
+      "manifest_sha256": "4da3d669312a8391aa88c3ed4b2e41a1e7898acd3b33692d668c4c667567fefe"
+    }
+  ],
+  "old_full31_binary_preserved": true
+}

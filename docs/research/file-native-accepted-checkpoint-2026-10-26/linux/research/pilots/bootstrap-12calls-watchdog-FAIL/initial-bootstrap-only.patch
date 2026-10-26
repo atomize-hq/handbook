@@ -1,0 +1,11 @@
+--- prior-task-owned/pilot_recipe_native.py
++++ new-task-owned/pilot_recipe_native.py
+@@ -10,7 +10,7 @@
+     with h.case(CASE, root, forecast):
+         h.note('readiness-pilot-native-start', forecast=copy.deepcopy(forecast))
+         h.initialize(root, 'A', count=64)
+-        h.pack(root)                 # actual base physical representation
++        h.pack(root, bootstrap=True)                 # actual base physical representation
+         h.cleanup(root, max_batches=8)
+         h.publish(root, 'readiness-tail', retries=1)  # H2, after completed cutoff
+         before = h.state(root)

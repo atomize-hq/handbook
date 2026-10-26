@@ -1,0 +1,100 @@
+[
+  {
+    "seconds": 0.000495383981615305,
+    "tree_rss": 14200832,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 14200832,
+    "processes": 1
+  },
+  {
+    "seconds": 0.207260652910918,
+    "tree_rss": 357634048,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 168722432,
+    "processes": 3
+  },
+  {
+    "seconds": 0.4134546061977744,
+    "tree_rss": 291131392,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 215896064,
+    "processes": 3
+  },
+  {
+    "seconds": 0.6197885531000793,
+    "tree_rss": 195395584,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 163913728,
+    "processes": 2
+  },
+  {
+    "seconds": 0.8264726991765201,
+    "tree_rss": 219082752,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 108777472,
+    "processes": 3
+  },
+  {
+    "seconds": 1.0327760493382812,
+    "tree_rss": 332070912,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 155414528,
+    "processes": 3
+  },
+  {
+    "seconds": 1.2389795412309468,
+    "tree_rss": 144941056,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 113459200,
+    "processes": 2
+  },
+  {
+    "seconds": 1.4452894129790366,
+    "tree_rss": 248860672,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 217378816,
+    "processes": 2
+  },
+  {
+    "seconds": 1.6515240538865328,
+    "tree_rss": 285655040,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 254173184,
+    "processes": 2
+  },
+  {
+    "seconds": 1.8577822432853281,
+    "tree_rss": 310104064,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 278622208,
+    "processes": 2
+  },
+  {
+    "seconds": 2.0640144692733884,
+    "tree_rss": 347975680,
+    "supervisor_rss": 17899520,
+    "max_process_rss": 316493824,
+    "processes": 2
+  },
+  {
+    "seconds": 2.2779096770100296,
+    "tree_rss": 392486912,
+    "supervisor_rss": 18391040,
+    "max_process_rss": 361005056,
+    "processes": 2
+  },
+  {
+    "seconds": 2.4841684009879827,
+    "tree_rss": 412540928,
+    "supervisor_rss": 18391040,
+    "max_process_rss": 381059072,
+    "processes": 2
+  },
+  {
+    "seconds": 2.690672311000526,
+    "tree_rss": 0,
+    "supervisor_rss": 18391040,
+    "max_process_rss": 0,
+    "processes": 0
+  }
+]

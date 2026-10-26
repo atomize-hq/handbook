@@ -1,0 +1,10 @@
+{
+  "original": "/private/tmp/file-native-online-macos-20261020/source/pilot-sdk-20261021/sdk/pilot_recipe.py",
+  "original_sha256": "afb62d7b4cbba98e973fff2549ffe26a0e1b07ff4a5248ef702035a81f00c386",
+  "task_owned_sha256": "35128756dab4d5cdffab04e0a758ff5c8aa165240fe80b4b4f51c5374076b491",
+  "behavior_ast_unchanged_after_first_note": false,
+  "removed": "obsolete admission/expired-clock/phase/qualified40ms wrapper only; replaced by current explicit authorization + native functional limits, no fabricated receipt",
+  "changed_behavioral_assertions": 0,
+  "engine_call_cap": 37,
+  "required_initial_bootstrap": "Added only bootstrap=True to first physical build; source rolling.rs explicitly requires this at first adoption; corrected before any engine call; original unrun adapted copy retained"
+}

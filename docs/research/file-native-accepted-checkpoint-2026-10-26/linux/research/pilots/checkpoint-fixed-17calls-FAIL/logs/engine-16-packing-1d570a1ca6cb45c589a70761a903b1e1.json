@@ -1,0 +1,28 @@
+{
+  "token": "1d570a1ca6cb45c589a70761a903b1e1",
+  "label": "engine-16-packing",
+  "argv": [
+    "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+  ],
+  "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+  "stdin_expected": 136,
+  "stdin_sent": 136,
+  "environment": {},
+  "limit": 2147483648,
+  "timeout": 120,
+  "starts_ns": 3811537455542051,
+  "pid": 2296818,
+  "birth": 381153745,
+  "positive_rss": 192512,
+  "observed_ns": 3811537456059723,
+  "stdin_eof_ns": 3811537456308230,
+  "exit": 0,
+  "native_wait_ns": 3811537520351989,
+  "remaining_group": [],
+  "stdout-eof": 3811537510203407,
+  "stdout-bytes": 3124,
+  "stderr-eof": 3811537510338825,
+  "stderr-bytes": 0,
+  "seconds": 0.08683699928224087,
+  "readers_joined": true
+}

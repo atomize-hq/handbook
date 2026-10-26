@@ -1,0 +1,31 @@
+{
+  "name": "pilot-native-run",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/pilot_worker.py"
+  ],
+  "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "timeout_seconds": 480,
+  "stdout": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/logs/pilot-native-run.stdout",
+  "stderr": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/logs/pilot-native-run.stderr",
+  "pid": 674917,
+  "process_group": 674917,
+  "exit": 0,
+  "seconds": 4.9043067609891295,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 31379456,
+  "sampled_tree_plus_supervisor_peak_rss": 49922048,
+  "sampled_process_peak_rss": 26980352,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 112668672,
+    "files": 648
+  },
+  "native_free_after": 41620799488
+}

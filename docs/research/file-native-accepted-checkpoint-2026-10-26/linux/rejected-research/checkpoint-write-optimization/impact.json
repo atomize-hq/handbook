@@ -1,0 +1,13 @@
+{
+  "gitnexus": "Repository not found for exact standalone source; unindexed UNKNOWN; no index/bootstrap",
+  "manual_risk": "HIGH: checkpoint durability and native ownership; this is manual assessment, no automated HIGH result exists",
+  "modified_production": [
+    "physical_lifetime::save_inner -> checkpoint_directories/CheckpointDirs -> checkpoint_write -> io::write_checkpoint_new",
+    "physical_lifetime::persist_plan -> persist_plan_inner(None), public build/test path retains generic mkdir",
+    "physical_lifetime::save_inner -> persist_plan_inner(Some(proof)), cleanup only onLinux",
+    "io::write_new -> write_new_inner(None), same charge/namespace/mkdir/write/file-sync/parent-sync ordering",
+    "packing callers of physical::save: aborted-owner adoption, retirement, cancel, pre-container and final cleanup; all held by existing maintenance protocol"
+  ],
+  "outside_scope": "global io::mkdir behavior, formats, packing scheduling, budget limits, reader/CAS/reclamation semantics; nonLinux uses generic fallback",
+  "current_runtime_modified": false
+}

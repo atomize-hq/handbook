@@ -1,0 +1,220 @@
+[
+  {
+    "cargo_home": "/Users/spensermcconnell/.cargo",
+    "packages": [
+      {
+        "name": "zstd-0.14.3",
+        "locked_checksum": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70",
+        "archives": [],
+        "source_dirs": [],
+        "index_versions": [
+          {
+            "path": "/Users/spensermcconnell/.cargo/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/zs/td/zstd",
+            "matching_or_zstd_versions": [
+              {
+                "version": "0.12.2+zstd.1.5.2",
+                "checksum": "e9262a83dc741c0b0ffec209881b45dbc232c21b02a2b9cb1adb93266e41303d",
+                "yanked": false
+              },
+              {
+                "version": "0.12.3+zstd.1.5.2",
+                "checksum": "76eea132fb024e0e13fd9c2f5d5d595d8a967aa72382ac2f9d39fcc95afd0806",
+                "yanked": false
+              },
+              {
+                "version": "0.12.4",
+                "checksum": "1a27595e173641171fc74a1232b7b1c7a7cb6e18222c11e9dfb9888fa424c53c",
+                "yanked": false
+              },
+              {
+                "version": "0.13.0",
+                "checksum": "bffb3309596d527cfcba7dfc6ed6052f1d39dfbd7c867aa2e865e4a449c10110",
+                "yanked": false
+              },
+              {
+                "version": "0.13.1",
+                "checksum": "2d789b1514203a1120ad2429eae43a7bd32b90976a7bb8a05f7ec02fa88cc23a",
+                "yanked": false
+              },
+              {
+                "version": "0.13.2",
+                "checksum": "fcf2b778a664581e31e389454a7072dab1647606d44f7feea22cd5abb9c9f3f9",
+                "yanked": false
+              },
+              {
+                "version": "0.13.3",
+                "checksum": "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a",
+                "yanked": false
+              },
+              {
+                "version": "0.14.0",
+                "checksum": "bf06bd8162af0734b344780deb55b42a2429ae430870d13fcc12f238e880fe6e",
+                "yanked": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "zstd-safe-8.2.0",
+        "locked_checksum": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b",
+        "archives": [],
+        "source_dirs": [],
+        "index_versions": [
+          {
+            "path": "/Users/spensermcconnell/.cargo/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/zs/td/zstd-safe",
+            "matching_or_zstd_versions": []
+          }
+        ]
+      },
+      {
+        "name": "zstd-sys-2.1.2+zstd.1.5.7",
+        "locked_checksum": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3",
+        "archives": [],
+        "source_dirs": [],
+        "index_versions": [
+          {
+            "path": "/Users/spensermcconnell/.cargo/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/zs/td/zstd-sys",
+            "matching_or_zstd_versions": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cargo_home": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed",
+    "packages": [
+      {
+        "name": "zstd-0.14.3",
+        "locked_checksum": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70",
+        "archives": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/cache/index.crates.io-1949cf8c6b5b557f/zstd-0.14.3.crate",
+            "bytes": 52615,
+            "sha256": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70",
+            "matches_lock": true
+          }
+        ],
+        "source_dirs": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/src/index.crates.io-1949cf8c6b5b557f/zstd-0.14.3",
+            "package": "zstd",
+            "version": "0.14.3",
+            "rust_version": "1.64"
+          }
+        ],
+        "index_versions": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/zs/td/zstd",
+            "matching_or_zstd_versions": [
+              {
+                "version": "0.12.3+zstd.1.5.2",
+                "checksum": "76eea132fb024e0e13fd9c2f5d5d595d8a967aa72382ac2f9d39fcc95afd0806",
+                "yanked": false
+              },
+              {
+                "version": "0.12.4",
+                "checksum": "1a27595e173641171fc74a1232b7b1c7a7cb6e18222c11e9dfb9888fa424c53c",
+                "yanked": false
+              },
+              {
+                "version": "0.13.0",
+                "checksum": "bffb3309596d527cfcba7dfc6ed6052f1d39dfbd7c867aa2e865e4a449c10110",
+                "yanked": false
+              },
+              {
+                "version": "0.13.1",
+                "checksum": "2d789b1514203a1120ad2429eae43a7bd32b90976a7bb8a05f7ec02fa88cc23a",
+                "yanked": false
+              },
+              {
+                "version": "0.13.2",
+                "checksum": "fcf2b778a664581e31e389454a7072dab1647606d44f7feea22cd5abb9c9f3f9",
+                "yanked": false
+              },
+              {
+                "version": "0.13.3",
+                "checksum": "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a",
+                "yanked": false
+              },
+              {
+                "version": "0.14.0",
+                "checksum": "bf06bd8162af0734b344780deb55b42a2429ae430870d13fcc12f238e880fe6e",
+                "yanked": false
+              },
+              {
+                "version": "0.14.3",
+                "checksum": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70",
+                "yanked": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "zstd-safe-8.2.0",
+        "locked_checksum": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b",
+        "archives": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/cache/index.crates.io-1949cf8c6b5b557f/zstd-safe-8.2.0.crate",
+            "bytes": 46799,
+            "sha256": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b",
+            "matches_lock": true
+          }
+        ],
+        "source_dirs": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/src/index.crates.io-1949cf8c6b5b557f/zstd-safe-8.2.0",
+            "package": "zstd-safe",
+            "version": "8.2.0",
+            "rust_version": "1.64"
+          }
+        ],
+        "index_versions": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/zs/td/zstd-safe",
+            "matching_or_zstd_versions": [
+              {
+                "version": "8.2.0",
+                "checksum": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b",
+                "yanked": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "zstd-sys-2.1.2+zstd.1.5.7",
+        "locked_checksum": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3",
+        "archives": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/cache/index.crates.io-1949cf8c6b5b557f/zstd-sys-2.1.2+zstd.1.5.7.crate",
+            "bytes": 785774,
+            "sha256": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3",
+            "matches_lock": true
+          }
+        ],
+        "source_dirs": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/src/index.crates.io-1949cf8c6b5b557f/zstd-sys-2.1.2+zstd.1.5.7",
+            "package": "zstd-sys",
+            "version": "2.1.2+zstd.1.5.7",
+            "rust_version": "1.64"
+          }
+        ],
+        "index_versions": [
+          {
+            "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/zs/td/zstd-sys",
+            "matching_or_zstd_versions": [
+              {
+                "version": "2.1.2+zstd.1.5.7",
+                "checksum": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3",
+                "yanked": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

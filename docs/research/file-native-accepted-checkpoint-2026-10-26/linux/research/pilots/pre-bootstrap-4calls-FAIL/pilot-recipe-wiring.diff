@@ -1,0 +1,131 @@
+--- retained/sdk/pilot_recipe.py
++++ task/pilot_recipe_native.py
+@@ -1,98 +1,12 @@
+-"""Real online readiness schedule; host-owned native containment is mandatory.
+-
+-No process launches or writes at import. Host entry calls run() only after its
+-fresh reviewed source manifest, category admission and per-host runtime GO.
+-All engine operations below are existing final062 CLI actions, via Harness.call.
+-"""
+-import copy
+-import hashlib
+-import time
+-
+-PIN = '0628322e4b48e0efad19cdc32238a622d4aaa7a8'
+-FUNCTIONAL_CUTOFF = 1792605960  # 2026-10-21 18:06 UTC
+-ABSOLUTE_END = 1792607760       # 2026-10-21 18:36 UTC, closure included
+-CASE = 'readiness-real-online-A-H3'
+-REQUIRED_CAPABILITIES = frozenset(('barrier:pack-catalog-captured',
+-    'barrier:physical-before-selection', 'barrier:candidate-ready'))
+-
+-
+-def need(value, reason):
+-    if not value:
+-        raise RuntimeError(reason)
+-
+-
+-def digest(raw):
+-    return hashlib.sha256(raw).hexdigest()
+-
+-
+-def environment(control, phase):
+-    return dict(EXP_BARRIER=phase, EXP_READY=control['ready'],
+-                EXP_RELEASE=control['release'])
+-
+-
+-def run(h, root, forecast, admission):
+-    """Use a real native Host's Harness; never construct an unguarded Driver.
+-
+-    Linux: Host(m,manifest_sha).h (host owner supplies current manifest).
+-    Windows: LaneHost(...).harness (host owner supplies current gate/grant).
+-    Mac: reviewed host bridge must expose this same Driver/Adapter boundary.
+-    admission is a host-verified receipt, not caller-created permission.
+-    """
+-    validator = getattr(h.a, 'readiness_admission', None)
+-    need(callable(validator), 'concrete-host-readiness-admission-binding-required')
+-    admission = validator(CASE, root, copy.deepcopy(forecast), copy.deepcopy(admission))
+-    # This method belongs to the reviewed host adapter. It must read and consume
+-    # the real owner/source/transport/category/output-limit bindings; returning
+-    # caller assertions without those operations is not an implementation.
+-    need(type(admission) is dict and type(admission.get('consumed_bindings')) is dict
+-         and {'native_owner', 'source_closure', 'transport_limits',
+-              'output_reservations', 'category_instances', 'final31',
+-              'guard_qualification'} <= set(admission['consumed_bindings']),
+-         'actual-consumed-native-bindings-required')
+-    need(h.final_pin == PIN, 'exact-final062')
+-    need(h.check_time.__globals__.get('FUNCTIONAL_CUTOFF') == FUNCTIONAL_CUTOFF
+-         and h.call.__globals__.get('FUNCTIONAL_CUTOFF') == FUNCTIONAL_CUTOFF,
+-         'reviewed-readiness-Harness-clock-successor-required')
+-    need(admission.get('runtime_go') is True and admission.get('source_review') is True
+-         and admission.get('case_id') == CASE and admission.get('root') == str(root)
+-         and admission.get('source_pin') == PIN
+-         and admission.get('functional_cutoff') == FUNCTIONAL_CUTOFF
+-         and admission.get('absolute_end') == ABSOLUTE_END,
+-         'fresh-exact-host-GO-required')
+-    need(admission.get('complete31_unfiltered') is True
+-         and admission.get('heavy_fixture_bytes') == 80976318
+-         and admission.get('native_guard_qualified') is True,
+-         'native-final31-and-real-heavy-boundary-prerequisites')
+-    need(admission.get('actual_sampling_limit_ms') == 40
+-         and admission.get('monitor_through_eof') is True
+-         and admission.get('selected_oracle_accounting_consumed') is True,
+-         'actual-host-containment-accounting-bindings')
+-    need(admission.get('oracle_route') in ('complete-native-v6', 'complete-checker-cli'),
+-         'complete-independent-oracle-route')
+-    if admission['oracle_route'] == 'complete-checker-cli':
+-        need(admission.get('complete_checker14_limits_consumed') is True
+-             and admission.get('checker_output_reserved_names') == 17
+-             and admission.get('both_guard_bounds_consumed') is True,
+-             'selected-checker-CLI-all14-limits-two-guard-budgets-17names-required')
+-    # The host verifies these facts against its actual transport/category ledger
+-    # before handing over the receipt; the recipe cannot manufacture them.
+-    for field in ('receipt_sha256', 'source_manifest_sha256', 'guard_sha256',
+-                  'oracle_source_sha256', 'category_admission_sha256'):
+-        value = admission.get(field)
+-        need(type(value) is str and len(value) == 64
+-             and all(c in '0123456789abcdef' for c in value), 'missing-binding:'+field)
+-    need(REQUIRED_CAPABILITIES <= set(h.a.capabilities), 'three-real-phase-hooks')
+-    now = h.a.wall_time()
+-    need(admission.get('workload_seconds') == 300
+-         and admission.get('kill_seconds') == 30
+-         and admission.get('drain_seconds') == 60
+-         and admission.get('accounting_seconds') == 90
+-         and type(admission.get('workload_deadline_utc')) in (int, float)
+-         and now < admission['workload_deadline_utc'] <= now+300
+-         and admission.get('native_deadline_enforced') is True,
+-         'host-enforced-five-minute-pilot-and-bounded-closure')
+-    need(now + 480 < FUNCTIONAL_CUTOFF,
+-         'pilot-kill-drain-accounting-must-fit-before-final-closure')
++"""Task-owned native wiring of the retained real pilot; original preserved."""
++import copy, hashlib, time
++PIN="0628322e4b48e0efad19cdc32238a622d4aaa7a8"
++CASE="readiness-real-online-A-H3"
++def need(value,reason):
++    if not value:raise RuntimeError(reason)
++def digest(raw):return hashlib.sha256(raw).hexdigest()
++def environment(control,phase):return dict(EXP_BARRIER=phase,EXP_READY=control['ready'],EXP_RELEASE=control['release'])
++def run(h,root,forecast):
+     with h.case(CASE, root, forecast):
+         h.note('readiness-pilot-admission', admission=copy.deepcopy(admission))
+         h.initialize(root, 'A', count=64)
+@@ -228,8 +142,7 @@
+              and mapped.get('independent') is True and mapped.get('receipt_sha256'),
+              'independent-complete-mapping-binding')
+         held_inventory = h.a.inventory(root)
+-        h.cleanup(root, max_batches=8)
+-        h.cleanup(root, max_batches=8)
++        h.drain_two_passes(root)  # exactly two final maintenance invocations
+         backlog = h.a.backlog(root)
+         need(type(backlog.get('unprotected')) is int and backlog['unprotected'] == 0,
+              'actual-unprotected-backlog-drained')
+@@ -242,9 +155,4 @@
+         need(proof.get('actual_H') == 3, 'complete-H3-oracle')
+         h.note('readiness-pilot-semantic-complete', actual_H=3, proof=proof,
+                qualification='awaiting-host-native-EOF-descendants-locks-registry-accounting')
+-    # h.case closes callbacks/processes/handles. Host FINALIZER must additionally
+-    # certify sampled EOF, descendants absent, registry/locks and resource ledger.
+-    return dict(status='semantic-pilot-complete-awaiting-native-finalizer',
+-                case_id=CASE, source_pin=PIN, full_matrix_released=False,
+-                admission_receipt_sha256=admission['receipt_sha256'],
+-                required_finalizer_bindings=copy.deepcopy(admission['consumed_bindings']))
++    return dict(status="semantic-pilot-complete-awaiting-native-finalizer",case_id=CASE,baseline_pin=PIN,full_matrix_released=False)

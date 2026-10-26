@@ -1,0 +1,16 @@
+{
+  "pid": 45181,
+  "parent": 45117,
+  "pgid": 45181,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-I",
+    "-S",
+    "-B",
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/checker.py"
+  ],
+  "role": "checker",
+  "root": null,
+  "env_overrides": {},
+  "start_ns": 3648166845846916
+}

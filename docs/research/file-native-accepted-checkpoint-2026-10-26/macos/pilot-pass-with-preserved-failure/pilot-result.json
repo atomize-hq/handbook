@@ -1,0 +1,19 @@
+{
+  "native_closure": {
+    "processes_closed": true,
+    "handles_closed": true,
+    "native_commands": 16,
+    "peak_sampled_aggregate_rss": 44204032,
+    "missing_rss": [],
+    "monitor_failures": []
+  },
+  "status": "FAIL",
+  "failure": {
+    "error": "NameError(\"name 'strict' is not defined\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/runner.py\", line 193, in <module>\n    result=pilot_behavior.run(H,ROOT,forecast);result['engine_calls']=driver.count;result['accepted_inputs']=H.ledgers[ROOT].oracle_inputs();result['oracle_receipts']=H.oracles;result['source_after']=source_check();(OUT/'accepted-inputs-results.json').write_text(json.dumps(H.ledgers[ROOT].accepted,indent=2));result['final_state']=H.state(ROOT);result['final_backlog']=a.backlog(ROOT);result['binary_sha256']=driver.binary_sha256\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/pilot_behavior.py\", line 146, in run\n    backlog = h.a.backlog(root)\n              ^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/runner.py\", line 160, in backlog\n    def backlog(self,root):return self.oracle_helper.backlog(root)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-online-macos-20261020/source/pilot-sdk-20261021/sdk/suite_oracle.py\", line 27, in backlog\n    config=strict((root/'STORE.json').read_bytes(),65536)\n           ^^^^^^\nNameError: name 'strict' is not defined\n"
+  },
+  "elapsed_seconds": 22.200627541635185,
+  "engine_calls": 16,
+  "source_identity": "baseline062 plus fixture10",
+  "adapter_sha256": "780dd392e569a0a8c170b548e76cbe4ff5535587782d2eaaabe09dfd9192af63"
+}

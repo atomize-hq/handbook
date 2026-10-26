@@ -1,0 +1,28 @@
+{
+  "observation_type": "Focused owner read-only repair/delta/proof check",
+  "independent_reviewer": false,
+  "external_owner_or_agent_started": false,
+  "scope": "Only telemetry_old_suffix_vs_deferred init n=1 to n=10",
+  "changed_paths": [
+    "src/io.rs"
+  ],
+  "exact_one_byte_insertion": true,
+  "all_assertions_unchanged": true,
+  "production_Store_init_min10_unchanged": true,
+  "other24source_files_unchanged": true,
+  "baseline_freeze_manifest_unchanged": true,
+  "previous_failed_result_and4binaries_unchanged": true,
+  "corrected4binaries_unchanged_after_run": true,
+  "actual_catalog_matches31": true,
+  "actual_full_run": {
+    "passed": 31,
+    "failed": 0,
+    "ignored": 0,
+    "filtered": 0
+  },
+  "telemetry_assertions_receipt_present": true,
+  "new_actual_heavy_fixture_bytes": 80976318,
+  "owned_process_closure_verified": true,
+  "blocking_findings": [],
+  "qualification_limit": "No independent review or broader engine/pilot/platform acceptance claimed; this is owner verification of the exact authorized fixture correction and full workspace proof."
+}

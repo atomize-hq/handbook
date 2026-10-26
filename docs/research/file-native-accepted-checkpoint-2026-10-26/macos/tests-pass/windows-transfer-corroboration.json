@@ -1,0 +1,9 @@
+{
+  "source_thread": "01a16fd3-b2c6-7af1-b036-fd72bdba257d",
+  "reported_five_exact_archives_match_lock": true,
+  "fallback_tar_windows_local": "C:/Users/spmcc/.codex/visualizations/2026/10/24/01a16fd3-b2c6-7af1-b036-fd72bdba257d/final062-fixture10-20261025/mac-exact-dependencies.tar",
+  "reported_tar_sha256": "e3661689635e145c84d49ed460b9f522421397839e9af0138d4c9142c5f9bd11",
+  "reported_tar_bytes": 1095680,
+  "transfer_used": false,
+  "mac_route": "direct exact crates.io downloads, locally checksum-verified"
+}

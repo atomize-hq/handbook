@@ -1,0 +1,128 @@
+{
+  "status": "FAIL_PILOT",
+  "started_utc": "2026-10-26T02:22:11.976089+00:00",
+  "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 + telemetry fixture10 + reviewed checkpoint-resume repair",
+  "reviewed_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "removed_ambient_environment_names": [],
+  "stages": [
+    {
+      "name": "build-cli",
+      "argv": [
+        "cargo",
+        "build",
+        "--manifest-path",
+        "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--release",
+        "-j2",
+        "--bin",
+        "file-native-incremental",
+        "--target-dir",
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 600,
+      "stdout": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/logs/build-cli.stdout",
+      "stderr": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/logs/build-cli.stderr",
+      "pid": 2294311,
+      "process_group": 2294311,
+      "exit": 0,
+      "seconds": 24.624647645279765,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 542699520,
+      "sampled_tree_plus_supervisor_peak_rss": 561836032,
+      "sampled_process_peak_rss": 511655936,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 110518272,
+        "files": 431
+      },
+      "native_free_after": 99766882304
+    },
+    {
+      "name": "pilot-observed",
+      "argv": [
+        "/home/spenser/.pyenv/versions/3.10.11/bin/python",
+        "-B",
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/pilot_observed.py"
+      ],
+      "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+      "timeout_seconds": 480,
+      "stdout": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/logs/pilot-observed.stdout",
+      "stderr": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/logs/pilot-observed.stderr",
+      "pid": 2296032,
+      "process_group": 2296032,
+      "exit": 0,
+      "seconds": 22.46514451596886,
+      "termination_reason": null,
+      "process_closure_observations": [
+        [],
+        []
+      ],
+      "process_closure_verified": true,
+      "sampled_tree_peak_rss": 39706624,
+      "sampled_tree_plus_supervisor_peak_rss": 58986496,
+      "sampled_process_peak_rss": 27455488,
+      "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+      "owned_after": {
+        "allocated_bytes": 113410048,
+        "files": 721
+      },
+      "native_free_after": 99762716672
+    }
+  ],
+  "attempts_allowed": 1,
+  "pilot_attempts": 1,
+  "engine_source_modified": false,
+  "full_matrix_released": false,
+  "limits": {
+    "native_floor_bytes": 21474836480,
+    "aggregate_rss_bytes": 3221225472,
+    "per_process_rss_bytes": 2147483648,
+    "task_allocated_bytes": 2147483648,
+    "task_files": 100000,
+    "old_reader_rss_bytes": 268435456,
+    "engine_call_max": 37,
+    "compile_timeout_seconds": 600,
+    "pilot_outer_timeout_seconds": 480,
+    "pilot_functional_seconds": 300
+  },
+  "binary_sha256": "058c306ea04c6b06057aa51a0197eead832363482c1c9559b1de6431a5dedf40",
+  "pilot_status": "FAIL",
+  "engine_calls": 17,
+  "independent_checker_processes": 0,
+  "source_matches_reviewed_after": true,
+  "protected_after": {
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/EVIDENCE-SHA256.json": "93ae6dfa9818420b1df9061e5b8621cf0436ead62e6f64b4db9cc52caaf5c0f1",
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/REPORT.md": "668d37b644a78776acf20438be2341778b58bff85342cad42d933f851b5acfef",
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/result.json": "f0147929df2015417544bfe2e8b1a304c00bf2fcc22516c029a496cb231024b9",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/EVIDENCE-SHA256.json": "a3d48bf7334c1f276158319e6240e78d6874a6d996f8201dc9b44980ffed904f",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/REPORT.md": "9d9d59323892279f1bf53bc5cbbf4312e2840cfa4e4e971fabdb8880725483d4",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/result.json": "27042560a8df5c74e264940d84e020d5e941e9daaee8ff91e1ff3c75a890f54d",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/EVIDENCE-SHA256.json": "6110b528ef6dd08c94dbb29153cec9ed48e63bb09bb003b85926cfb1c990753f",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/REPORT.md": "655946fa58860a72311be5b895379b2b336cb3818430b8998d5a0650f5f6cc3c",
+    "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/result.json": "217e8ed8c1da2d14c9266a20d70ca8017de4ba45799a68036db2b02f7776528f",
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/EVIDENCE-SHA256.json": "4da3d669312a8391aa88c3ed4b2e41a1e7898acd3b33692d668c4c667567fefe",
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/REPORT.md": "622c6f0acbdb50f7eb3a9ef4dd6eb304ec6989574de5c363e26ff87892994eac",
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/result.json": "c55acdbce3ab5257558918aa4e2308dc73ec2a7198f68a63e756b1c9ca38c2a1",
+    "/tmp/file-native-disk-assessment-20261025-01a16fd3/REPORT-SHA256.json": "4f201f9394098dff97e68e0312610533b1f2049919b44f50a54f66d0e3ec4ea4",
+    "/tmp/file-native-disk-assessment-20261025-01a16fd3/REPORT.md": "a287740aeb6f1bfadd1c02af7be4de40c6dbb3c130b42e5071856e2dff3a84e5",
+    "/tmp/file-native-disk-assessment-20261025-01a16fd3/result.json": "2af78c0386e495a772e4e271c11a3e18233f10ca7fdcd5d0cf9989ba88fc8de4",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/SOURCE_FREEZE.json": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+    "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5"
+  },
+  "protected_record_hashes_unchanged": true,
+  "native_free_after": 99762696192,
+  "owned_after": {
+    "allocated_bytes": 113430528,
+    "files": 723
+  },
+  "finished_utc": "2026-10-26T02:22:59.101410+00:00"
+}

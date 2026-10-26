@@ -1,0 +1,122 @@
+{
+  "model_profile": "cost-model.md",
+  "results": [
+    {
+      "clock_ms": 56.15,
+      "jobs": [
+        {
+          "key": "attempts/attempt-3700437-1793025739841644990-37/allocations/publication-3700437-1793025739989665318-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempts/attempt-3700437-1793025739841644990-37/candidate.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempt-hints/attempt-3700437-1793025739841644990-37.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "publications/publication-3700437-1793025739989665318-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "results/b9fb7db7c25ab868544ffe387bddb78810ab73aa8daa2dfc68ada1324d2a157e.json",
+          "position": 0,
+          "records": 1
+        }
+      ],
+      "older": 0,
+      "pass": 1,
+      "pending": [
+        "attempt-hints/attempt-3700437-1793025739841644990-37.json",
+        "attempts/attempt-3700437-1793025739841644990-37/allocations/publication-3700437-1793025739989665318-43.json",
+        "attempts/attempt-3700437-1793025739841644990-37/candidate.json",
+        "pack-catalogs/fc8140229aae44234e48a38bd7f59d9a1dc9a4ac5840652080b5e05c3e2b13b7.json",
+        "physical-pins/physical-1-birth-3700437-1793025739326249438-31.lock",
+        "physical-plans/17d1468a13e72b81ae72149028b862fd1a13b87d99d11628ab4d988be40f4f9c.json",
+        "publications/publication-3700437-1793025739989665318-43.json",
+        "results/b9fb7db7c25ab868544ffe387bddb78810ab73aa8daa2dfc68ada1324d2a157e.json"
+      ],
+      "result": {
+        "batch_ns": 55594975,
+        "candidate_limit": 1000,
+        "candidates": 96,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      },
+      "selected": {
+        "id": "physical-2-birth-3700437-1793025740142115575-51",
+        "ordinal": 2,
+        "plan": "5765b48f91a5b01243d471fee55567c3414be6ac7d4357e9aecc94f5ac3086e7"
+      },
+      "tail_exists": true
+    },
+    {
+      "clock_ms": 56.15,
+      "jobs": [
+        {
+          "key": "attempts/attempt-3700437-1793025739841644990-37/allocations/publication-3700437-1793025739989665318-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempts/attempt-3700437-1793025739841644990-37/candidate.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "attempt-hints/attempt-3700437-1793025739841644990-37.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "publications/publication-3700437-1793025739989665318-43.json",
+          "position": 0,
+          "records": 1
+        },
+        {
+          "key": "results/b9fb7db7c25ab868544ffe387bddb78810ab73aa8daa2dfc68ada1324d2a157e.json",
+          "position": 0,
+          "records": 1
+        }
+      ],
+      "older": 0,
+      "pass": 2,
+      "pending": [
+        "pack-catalogs/fc8140229aae44234e48a38bd7f59d9a1dc9a4ac5840652080b5e05c3e2b13b7.json",
+        "physical-pins/physical-1-birth-3700437-1793025739326249438-31.lock",
+        "physical-plans/17d1468a13e72b81ae72149028b862fd1a13b87d99d11628ab4d988be40f4f9c.json",
+        "results/b9fb7db7c25ab868544ffe387bddb78810ab73aa8daa2dfc68ada1324d2a157e.json"
+      ],
+      "result": {
+        "batch_ns": 56432769,
+        "candidate_limit": 1000,
+        "candidates": 121,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      },
+      "selected": {
+        "id": "physical-2-birth-3700437-1793025740142115575-51",
+        "ordinal": 2,
+        "plan": "5765b48f91a5b01243d471fee55567c3414be6ac7d4357e9aecc94f5ac3086e7"
+      },
+      "tail_exists": false
+    }
+  ],
+  "verdict": "FAIL: final pending4; both modeled elapsed56.15ms; no repeats or promotion"
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "label": "accepted-repair-exact-preimage",
+    "argv": [
+      "git",
+      "apply",
+      "--check",
+      "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/accepted-repair/repair.patch"
+    ],
+    "cwd": "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/accepted-repair/baseline-source-fixture10",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "error: dev/null: No such file or directory\n",
+    "applied": false
+  },
+  {
+    "label": "rejected-research-patch-only-not-applied",
+    "argv": [
+      "git",
+      "apply",
+      "--check",
+      "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/rejected-research/checkpoint-write-optimization/candidate.patch"
+    ],
+    "cwd": "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/accepted-source/final-engine",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "applied": false
+  }
+]

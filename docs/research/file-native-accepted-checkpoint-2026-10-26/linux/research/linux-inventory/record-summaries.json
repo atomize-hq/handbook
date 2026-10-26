@@ -1,0 +1,2033 @@
+[
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-evidence/accounting-environment.json",
+    "scalars": {
+      "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "source_tar_sha256": "7e51fed2dcb487afdbbe17cbd1eb77cf7efba8c4262082c790fb83a0b24ec7fd",
+      "exe_sha256": "6aae7978cc97c97cea3b1374bc90243f9fa1231c645c66cbb2dcdf114bcd8f9b",
+      "outer_exit": 0,
+      "elapsed_including_export": 135.75510025024414,
+      "cap_seconds": 1800,
+      "work_deadline_epoch": 1792367209.1903849,
+      "owned_directory_logical_bytes": 2232647955,
+      "additional_source_tar_bytes": 27965440,
+      "free_bytes": 198318346240
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-evidence/finished.json.gz",
+    "scalars": {
+      "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "started": 1792365709.2499769,
+      "cap_seconds": 1800,
+      "elapsed_seconds": 134.60686309402809,
+      "logical_owned_bytes": 2231444719
+    },
+    "rows": [
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.0659409812651575
+      },
+      {
+        "name": "tests",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 4.800685807131231
+      },
+      {
+        "name": "paired-intents",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.938566373195499
+      },
+      {
+        "name": "supplement",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 9.253718751948327
+      },
+      {
+        "name": "replay-lifetime",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 107.54700838169083
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/finished.json",
+    "scalars": {
+      "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "started": 1792365709.2499769,
+      "cap_seconds": 1800,
+      "elapsed_seconds": 134.60686309402809,
+      "logical_owned_bytes": 2231444719
+    },
+    "rows": [
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.0659409812651575
+      },
+      {
+        "name": "tests",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 4.800685807131231
+      },
+      {
+        "name": "paired-intents",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.938566373195499
+      },
+      {
+        "name": "supplement",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 9.253718751948327
+      },
+      {
+        "name": "replay-lifetime",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 107.54700838169083
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-export/finished.json.gz",
+    "scalars": {
+      "pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "started": 1792360404.9827485,
+      "cap_seconds": 1800,
+      "elapsed_seconds": 33.875279534142464,
+      "logical_owned_bytes": 1784966575
+    },
+    "rows": [
+      {
+        "name": "tests",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 5.083343887235969
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.142573850695044
+      },
+      {
+        "name": "audit-evidence",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 22.647921801079065
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/finished.json",
+    "scalars": {
+      "pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "started": 1792360404.9827485,
+      "cap_seconds": 1800,
+      "elapsed_seconds": 33.875279534142464,
+      "logical_owned_bytes": 1784966575
+    },
+    "rows": [
+      {
+        "name": "tests",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 5.083343887235969
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.142573850695044
+      },
+      {
+        "name": "audit-evidence",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 22.647921801079065
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-evidence-20261018/finished.json.gz",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "elapsed_seconds": 271.4780214638449,
+      "logical_bytes": 455230358
+    },
+    "rows": [
+      {
+        "name": "test",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.011489568743855
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.036315859761089
+      },
+      {
+        "name": "native",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 259.42880161106586
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-evidence-20261018/results/completed.json.gz",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "affected_checks": true,
+      "smoke_n": 1000,
+      "consumers": 2,
+      "shell_copies": 3,
+      "finished": 1792352268.4102848
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-evidence-20261018/results/environment.json.gz",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "machine": "x86_64",
+      "python": "3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]",
+      "exe_sha256": "7410b92f65bde1c01766e0002226db99fc6448026737fc04ad37e6c6cfbc7422"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-evidence-20261018/results/adversarial/summary.json.gz",
+    "scalars": {
+      "large_header_indirection": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-evidence-20261018/results/supplement/summary.json.gz",
+    "scalars": {
+      "review_findings": "regressions passed",
+      "actual_retired_source_reclaimed": true,
+      "reader_overlap": true,
+      "stable_divergence_backups": 1,
+      "quota_slots": 8,
+      "additional_boundaries": 8,
+      "fallback": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/finished.json",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "elapsed_seconds": 271.4780214638449,
+      "logical_bytes": 455230358
+    },
+    "rows": [
+      {
+        "name": "test",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.011489568743855
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.036315859761089
+      },
+      {
+        "name": "native",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 259.42880161106586
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/results/completed.json",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "affected_checks": true,
+      "smoke_n": 1000,
+      "consumers": 2,
+      "shell_copies": 3,
+      "finished": 1792352268.4102848
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/results/environment.json",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "machine": "x86_64",
+      "python": "3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]",
+      "exe_sha256": "7410b92f65bde1c01766e0002226db99fc6448026737fc04ad37e6c6cfbc7422"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/results/adversarial/summary.json",
+    "scalars": {
+      "large_header_indirection": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/results/supplement/summary.json",
+    "scalars": {
+      "review_findings": "regressions passed",
+      "actual_retired_source_reclaimed": true,
+      "reader_overlap": true,
+      "stable_divergence_backups": 1,
+      "quota_slots": 8,
+      "additional_boundaries": 8,
+      "fallback": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/finished.json",
+    "scalars": {
+      "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "elapsed_seconds": 231.51931502996013,
+      "logical_bytes": 436415612
+    },
+    "rows": [
+      {
+        "name": "test",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.016051730141044
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.041773152071983
+      },
+      {
+        "name": "replay-lifetime",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 110.9325292869471
+      },
+      {
+        "name": "namespace",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 2.0908126970753074
+      },
+      {
+        "name": "checks",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 82.76851585088298
+      },
+      {
+        "name": "supplement",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 10.745776234660298
+      },
+      {
+        "name": "adversarial",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 12.920510774012655
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/global-finished.json",
+    "scalars": {
+      "exit": 0,
+      "censored": false,
+      "reason": null,
+      "epoch": 1792352391.425646
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/assembly-summary-7ac70f9.json",
+    "scalars": {
+      "final_tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "final_native_events": 610,
+      "final_native_censors": 0,
+      "source_files": 60,
+      "prior_a1108c6_events": 570,
+      "prior_f3_events": 726,
+      "development_events": 117,
+      "all_retained_events": 2023,
+      "all_retained_censors": 0,
+      "no_native_1k_rerun": true,
+      "no_native_history_rerun": true,
+      "original_deadline_preserved": true,
+      "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+      "epoch": 1792356616.051303
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/assembly-summary.json",
+    "scalars": {
+      "final_tested_source_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "current_lane_events": 42,
+      "current_lane_censors": 0,
+      "current_lane_negative_cases": 18,
+      "successful_restored_audits": 18,
+      "prior_7ac70f9_events": 610,
+      "prior_a1108c6_events": 570,
+      "prior_f3_events": 726,
+      "development_events": 117,
+      "all_retained_events": 2065,
+      "all_retained_censors": 0,
+      "retained_evidence_lanes": 7,
+      "original_measurement_windows_reopened": false,
+      "explicit_correction_cap_seconds": 1800,
+      "report_only_parent": "fe6e01e287bb6d4592059b1a6a9170789ab1c631",
+      "epoch": 1792360589.1539881
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/pins-7ac70f9.json",
+    "scalars": {
+      "final_tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "source_files": 60,
+      "source_pins": "evidence/replay-7ac70f9/outer--source-pins.json",
+      "prior_affected_pins": "pins-a1108c6.json",
+      "prior_smoke_pins": "pins-f3.json",
+      "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+      "qualification": "Report follow-up contains only native-macos artifacts. Tested core comes from the separate exact 7ac70f9 source capsule, not the older core inherited by this result branch."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/development-environment.json",
+    "scalars": {
+      "python": "3.11.9 (main, May 21 2025, 12:40:01) [Clang 16.0.0 (clang-1600.0.26.6)]",
+      "machine": "arm64",
+      "case_sensitive": false,
+      "normalization_sensitive": false,
+      "hard_link_same_inode": true,
+      "power_loss_qualified": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/development-development-wrapper-pins.json",
+    "scalars": {}
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/pins-f3.json",
+    "scalars": {
+      "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+      "capsule_files": 49,
+      "capsule_pin_file_sha256": "f9b2b3de1df50a8fc809b1946dd30baafd481a9c3f0ec565dc233b62a2641f44",
+      "rust_source_set_sha256": "54698893f040961c98e3afb3917c883af7add72820d542fb6577b18a702d33cd"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/pins.json",
+    "scalars": {
+      "final_tested_source_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "current_lane": "N128 A/B strict negative-evidence audit only",
+      "source_files": 70,
+      "source_pins": "evidence/audit-7e00d22/outer--source-pins.json",
+      "prior_replay_pins": "pins-7ac70f9.json",
+      "prior_affected_pins": "pins-a1108c6.json",
+      "prior_smoke_pins": "pins-f3.json",
+      "report_only_parent": "fe6e01e287bb6d4592059b1a6a9170789ab1c631",
+      "qualification": "Current strict audit observations are source-bound to 7e00d22. Earlier measurements retain their own pins. The report-only branch does not transplant the independently tested core."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/assembly-summary-a1108c6.json",
+    "scalars": {
+      "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+      "final_affected_events": 570,
+      "final_affected_censors": 0,
+      "f3_bounded_events": 726,
+      "f3_bounded_censors": 0,
+      "development_events": 117,
+      "all_retained_events": 1413,
+      "all_retained_censors": 0,
+      "corrected_source_files_verified": 53,
+      "no_corrected_smoke_rerun": true,
+      "original_final_deadline_preserved": true,
+      "epoch": 1792353864.575865
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/pins-a1108c6.json",
+    "scalars": {
+      "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+      "capsule_files": 53,
+      "final_affected_source_pins": "evidence/corrected/outer--source-pins.json",
+      "earlier_smoke_and_companion_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "earlier_pins": "pins-f3.json",
+      "qualification": "Each evidence lane keeps its own exact source/session/executable association. No observation is transferred to another executable."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/launch-bindings.json",
+    "scalars": {
+      "allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+      "outer_sha256": "216cc7e728f80ed8428f09fc2dff198f90e1b4341dc9f98f58b36442120e1803",
+      "common_runner_sha256": "3bf89a8e12454856fccfa56538684cc44392465ad46b5b9fde0250f29b931ed6"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/development-development-summary.json",
+    "scalars": {
+      "pin": "fb73e75bb9893a4d897ecd28eb5615f6cc2a45d2",
+      "build": "passed",
+      "cargo_tests_passed": 2,
+      "native_events": 117,
+      "native_censors": 0,
+      "native_complete": false,
+      "reason": "Coordinator superseded the common instrumentation pin and requested a hold before final measurements.",
+      "classification": "development only"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/native-macos/helpers/helper-pins.json",
+    "scalars": {
+      "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+      "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/evidence/windows-environment.json",
+    "scalars": {
+      "epoch_utc": "2026-10-18T23:07:59.2441466Z",
+      "python": "3.11.9",
+      "rust": "1.89.0",
+      "qualification": "Read-only environment snapshot during resident history. TotalVisibleMemorySize is KiB; file-volume fields are bytes. This is not a quiet timing or power-loss qualification."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/evidence/native-linux/finished.json.gz",
+    "scalars": {
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "elapsed_seconds": 271.4780214638449,
+      "logical_bytes": 455230358
+    },
+    "rows": [
+      {
+        "name": "test",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.011489568743855
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.036315859761089
+      },
+      {
+        "name": "native",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 259.42880161106586
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/evidence/native-linux-replay/finished.json.gz",
+    "scalars": {
+      "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "elapsed_seconds": 231.51931502996013,
+      "logical_bytes": 436415612
+    },
+    "rows": [
+      {
+        "name": "test",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.016051730141044
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.041773152071983
+      },
+      {
+        "name": "replay-lifetime",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 110.9325292869471
+      },
+      {
+        "name": "namespace",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 2.0908126970753074
+      },
+      {
+        "name": "checks",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 82.76851585088298
+      },
+      {
+        "name": "supplement",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 10.745776234660298
+      },
+      {
+        "name": "adversarial",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 12.920510774012655
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-5a65a21/evidence/native-linux-audit/finished.json.gz",
+    "scalars": {
+      "pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "started": 1792360404.9827485,
+      "cap_seconds": 1800,
+      "elapsed_seconds": 33.875279534142464,
+      "logical_owned_bytes": 1784966575
+    },
+    "rows": [
+      {
+        "name": "tests",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 5.083343887235969
+      },
+      {
+        "name": "build",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 6.142573850695044
+      },
+      {
+        "name": "audit-evidence",
+        "exit": 0,
+        "censored": false,
+        "reason": null,
+        "seconds": 22.647921801079065
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/global-finished.json",
+    "scalars": {
+      "exit": 0,
+      "censored": false,
+      "reason": null,
+      "epoch": 1792352391.425646
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/assembly-summary.json",
+    "scalars": {
+      "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+      "final_affected_events": 570,
+      "final_affected_censors": 0,
+      "f3_bounded_events": 726,
+      "f3_bounded_censors": 0,
+      "development_events": 117,
+      "all_retained_events": 1413,
+      "all_retained_censors": 0,
+      "corrected_source_files_verified": 53,
+      "no_corrected_smoke_rerun": true,
+      "original_final_deadline_preserved": true,
+      "epoch": 1792353864.575865
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/development-environment.json",
+    "scalars": {
+      "python": "3.11.9 (main, May 21 2025, 12:40:01) [Clang 16.0.0 (clang-1600.0.26.6)]",
+      "machine": "arm64",
+      "case_sensitive": false,
+      "normalization_sensitive": false,
+      "hard_link_same_inode": true,
+      "power_loss_qualified": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/development-development-wrapper-pins.json",
+    "scalars": {}
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/pins-f3.json",
+    "scalars": {
+      "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+      "capsule_files": 49,
+      "capsule_pin_file_sha256": "f9b2b3de1df50a8fc809b1946dd30baafd481a9c3f0ec565dc233b62a2641f44",
+      "rust_source_set_sha256": "54698893f040961c98e3afb3917c883af7add72820d542fb6577b18a702d33cd"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/pins.json",
+    "scalars": {
+      "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+      "capsule_files": 53,
+      "final_affected_source_pins": "evidence/corrected/outer--source-pins.json",
+      "earlier_smoke_and_companion_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "earlier_pins": "pins-f3.json",
+      "qualification": "Each evidence lane keeps its own exact source/session/executable association. No observation is transferred to another executable."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/launch-bindings.json",
+    "scalars": {
+      "allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+      "outer_sha256": "216cc7e728f80ed8428f09fc2dff198f90e1b4341dc9f98f58b36442120e1803",
+      "common_runner_sha256": "3bf89a8e12454856fccfa56538684cc44392465ad46b5b9fde0250f29b931ed6"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/development-development-summary.json",
+    "scalars": {
+      "pin": "fb73e75bb9893a4d897ecd28eb5615f6cc2a45d2",
+      "build": "passed",
+      "cargo_tests_passed": 2,
+      "native_events": 117,
+      "native_censors": 0,
+      "native_complete": false,
+      "reason": "Coordinator superseded the common instrumentation pin and requested a hold before final measurements.",
+      "classification": "development only"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7ac70f9/native-macos/helpers/helper-pins.json",
+    "scalars": {
+      "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+      "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/global-finished.json",
+    "scalars": {
+      "exit": 0,
+      "censored": false,
+      "reason": null,
+      "epoch": 1792352391.425646
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/assembly-summary.json",
+    "scalars": {
+      "final_tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "final_native_events": 610,
+      "final_native_censors": 0,
+      "source_files": 60,
+      "prior_a1108c6_events": 570,
+      "prior_f3_events": 726,
+      "development_events": 117,
+      "all_retained_events": 2023,
+      "all_retained_censors": 0,
+      "no_native_1k_rerun": true,
+      "no_native_history_rerun": true,
+      "original_deadline_preserved": true,
+      "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+      "epoch": 1792356616.051303
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/development-environment.json",
+    "scalars": {
+      "python": "3.11.9 (main, May 21 2025, 12:40:01) [Clang 16.0.0 (clang-1600.0.26.6)]",
+      "machine": "arm64",
+      "case_sensitive": false,
+      "normalization_sensitive": false,
+      "hard_link_same_inode": true,
+      "power_loss_qualified": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/development-development-wrapper-pins.json",
+    "scalars": {}
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/pins-f3.json",
+    "scalars": {
+      "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+      "capsule_files": 49,
+      "capsule_pin_file_sha256": "f9b2b3de1df50a8fc809b1946dd30baafd481a9c3f0ec565dc233b62a2641f44",
+      "rust_source_set_sha256": "54698893f040961c98e3afb3917c883af7add72820d542fb6577b18a702d33cd"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/pins.json",
+    "scalars": {
+      "final_tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "source_files": 60,
+      "source_pins": "evidence/replay-7ac70f9/outer--source-pins.json",
+      "prior_affected_pins": "pins-a1108c6.json",
+      "prior_smoke_pins": "pins-f3.json",
+      "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+      "qualification": "Report follow-up contains only native-macos artifacts. Tested core comes from the separate exact 7ac70f9 source capsule, not the older core inherited by this result branch."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/assembly-summary-a1108c6.json",
+    "scalars": {
+      "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+      "final_affected_events": 570,
+      "final_affected_censors": 0,
+      "f3_bounded_events": 726,
+      "f3_bounded_censors": 0,
+      "development_events": 117,
+      "all_retained_events": 1413,
+      "all_retained_censors": 0,
+      "corrected_source_files_verified": 53,
+      "no_corrected_smoke_rerun": true,
+      "original_final_deadline_preserved": true,
+      "epoch": 1792353864.575865
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/pins-a1108c6.json",
+    "scalars": {
+      "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+      "capsule_files": 53,
+      "final_affected_source_pins": "evidence/corrected/outer--source-pins.json",
+      "earlier_smoke_and_companion_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "earlier_pins": "pins-f3.json",
+      "qualification": "Each evidence lane keeps its own exact source/session/executable association. No observation is transferred to another executable."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/launch-bindings.json",
+    "scalars": {
+      "allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+      "outer_sha256": "216cc7e728f80ed8428f09fc2dff198f90e1b4341dc9f98f58b36442120e1803",
+      "common_runner_sha256": "3bf89a8e12454856fccfa56538684cc44392465ad46b5b9fde0250f29b931ed6"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/development-development-summary.json",
+    "scalars": {
+      "pin": "fb73e75bb9893a4d897ecd28eb5615f6cc2a45d2",
+      "build": "passed",
+      "cargo_tests_passed": 2,
+      "native_events": 117,
+      "native_censors": 0,
+      "native_complete": false,
+      "reason": "Coordinator superseded the common instrumentation pin and requested a hold before final measurements.",
+      "classification": "development only"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-source-7e00d22/native-macos/helpers/helper-pins.json",
+    "scalars": {
+      "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+      "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/executable.json",
+    "scalars": {
+      "path": "/home/spenser/file-native-n-linux-20261019/build/release/file-native-incremental",
+      "bytes": 2324504,
+      "sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+      "source_manifest_sha256": "ef27b12471db7cc09d75b9914f934ec4ba4172e599ee09d8405da48ab68fb425"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/return.json",
+    "scalars": {
+      "archive": "/home/spenser/file-native-n-linux-20261019/native-raw.tar.gz",
+      "bytes": 753508,
+      "sha256": "248c413ea513a1f310b8064f29319767930ca75fbb9576ee9dbd5f5060b79895",
+      "raw_files": 120,
+      "raw_bytes": 7970157
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/closeout.json",
+    "scalars": {
+      "epoch": 1792451272.5016325,
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "actual_new_test_temporary_root": "/tmp/i1-bounds-250183-1792450605137123489-0",
+      "q_binary_preserved_sha256": "e70d47a82e1c51a989395f0025f85859e74aed07c07e482e0a6b37913e76e854",
+      "exact_transferred_source_reverified": true,
+      "closeout_checker_peak_rss": 24408064
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/matrix-failed.json",
+    "scalars": {
+      "status": "scope-cancelled-unqualified-prefix",
+      "epoch": 1792451209.9745507,
+      "reason": "Parent explicitly narrowed native qualification to N128 and small >512-record geometry (N1k); do not launch a native N10k performance matrix. N10k A had already started initialization when steering arrived.",
+      "kill": "SIGKILL after stopping the owning matrix controller",
+      "n10000_A_summary_present": false,
+      "n10000_B": "unperformed; never launched",
+      "earlier_four_cells": "success; raw receipts preserved",
+      "process_snapshot": "    PID    PPID    PGID   RSS COMMAND\n      1       0       1  9268 /sbin/init splash\n      2       0       0     0 [kthreadd]\n      3       2       0     0 [pool_workqueue_release]\n      4       2       0     0 [kworker/R-rcu_gp]\n      5       2       0     0 [kworker/R-sync_wq]\n      6       2       0     0 [kworker/R-kvfree_rcu_reclaim]\n      7       2       0     0 [kworker/R-slub_flushwq]\n      8       2       0     0 [kworker/R-netns]\n     10       2       0     0 [kworker/0:0H-events_highpri]\n     13       2       0     0 [kworker/R-mm_percpu_wq]\n     15       2       0     0 [ksoftirqd/0]\n     16       2       0     0 [rcu_preempt]\n     17       2       0     0 [rcub/1]\n     18       2       0     0 [rcu_exp_par_gp_kthread_worker/1]\n     19       2       0     0 [rcu_exp_gp_kthread_worker]\n     20       2       0     0 [migration/0]\n     21       2       0     0 [idle_inject/0]\n     22       2       0     0 [cpuhp/0]\n     23       2       0     0 [cpuhp/2]\n     24       2       0     0 [idle_inject/2]\n     25       2       0     0 [migration/2]\n     26       2       0     0 [ksoftirqd/2]\n     28       2       0     0 [kworker/2:0H-events_highpri]\n     29       2       0     0 [cpuhp/4]\n     30       2       0     0 [idle_inject/4]\n     31       2       0     0 [migration/4]\n     32       2       0     0 [ksoftirqd/4]\n     34       2       0     0 [kworker/4:0H-events_highpri]\n     35       2       0     0 [cpuhp/6]\n     36       2       0     0 [idle_inject/6]\n     37       2       0     0 [migration/6]\n     38       2       0     0 [ksoftirqd/6]\n     40       2       0     0 [kworker/6:0H-events_highpri]\n     41       2       0     0 [cpuhp/8]\n     42       2       0     0 [idle_inject/8]\n     43       2       0     0 [migration/8]\n     44       2       0     0 [ksoftirqd/8]\n     46       2       0     0 [kworker/8:0H-events_highpri]\n     47       2       0     0 [cpuhp/10]\n     48       2       0     0 [idle_inject/10]\n     49       2       0     0 [migration/10]\n     50       2       0     0 [ksoftirqd/10]\n     52       2       0     0 [kworker/10:0H-events_highpri]\n     53       2       0     0 [rcub/2]\n     54       2       0     0 [rcu_exp_par_gp_kthread_worker/2]\n     55       2       0     0 [cpuhp/12]\n     56       2       0     0 [idle_inject/12]\n     57       2       0     0 [migration/12]\n     58       2       0     0 [ksoftirqd/12]\n     60       2       0     0 [kworker/12:0H-events_highpri]\n     61       2       0     0 [cpuhp/13]\n     62       2       0     0 [idle_inject/13]\n     63       2       0     0 [migration/13]\n     64       2       0     0 [ksoftirqd/13]\n     66       2       0     0 [kworker/13:0H-events_highpri]\n     67       2       0     0 [cpuhp/14]\n     68       2       0     0 [idle_inject/14]\n     69       2       0     0 [migration/14]\n     70       2       0     0 [ksoftirqd/14]\n     72       2       0     0 [kworker/14:0H-events_highpri]\n     73       2       0     0 [cpuhp/15]\n     74       2       0     0 [idle_inject/15]\n     75       2       0     0 [migration/15]\n     76       2       0     0 [ksoftirqd/15]\n     78       2       0     0 [kworker/15:0H-events_highpri]\n     79       2       0     0 [cpuhp/16]\n     80       2       0     0 [idle_inject/16]\n     81       2       0     0 [migration/16]\n     82       2       0     0 [ksoftirqd/16]\n     84       2       0     0 [kworker/16:0H-events_highpri]\n     85       2       0     0 [cpuhp/17]\n     86       2       0     0 [idle_inject/17]\n     87       2       0     0 [migration/17]\n     88       2       0     0 [ksoftirqd/17]\n     90       2       0     0 [kworker/17:0H-events_highpri]\n     91       2       0     0 [cpuhp/18]\n     92       2       0     0 [idle_inject/18]\n     93       2       0     0 [migration/18]\n     94       2       0     0 [ksoftirqd/18]\n     96       2       0     0 [kworker/18:0H-events_highpri]\n     97       2       0     0 [cpuhp/19]\n     98       2       0     0 [idle_inject/19]\n     99       2       0     0 [migration/19]\n    100       2       0     0 [ksoftirqd/19]\n    102       2       0     0 [kworker/19:0H-events_highpri]\n    103       2       0     0 [cpuhp/1]\n    104       2       0     0 [idle_inject/1]\n    105       2       0     0 [migration/1]\n    106       2       0     0 [ksoftirqd/1]\n    108       2       0     0 [kworker/1:0H-events_highpri]\n    109       2       0     0 [cpuhp/3]\n    110       2       0     0 [idle_inject/3]\n    111       2       0     0 [migration/3]\n    112       2       0     0 [ksoftirqd/3]\n    114       2       0     0 [kworker/3:0H-events_highpri]\n    115       2       0     0 [cpuhp/5]\n    116       2       0     0 [idle_inject/5]\n    117       2       0     0 [migration/5]\n    118       2       0     0 [ksoftirqd/5]\n    120       2       0     0 [kworker/5:0H-events_highpri]\n    121       2       0     0 [cpuhp/7]\n    122       2       0     0 [idle_inject/7]\n    123       2       0     0 [migration/7]\n    124       2       0     0 [ksoftirqd/7]\n    126       2       0     0 [kworker/7:0H-events_highpri]\n    127       2       0     0 [cpuhp/9]\n    128       2       0     0 [idle_inject/9]\n    129       2       0     0 [migration/9]\n    130       2       0     0 [ksoftirqd/9]\n    132       2       0     0 [kworker/9:0H-events_highpri]\n    133       2       0     0 [cpuhp/11]\n    134       2       0     0 [idle_inject/11]\n    135       2       0     0 [migration/11]\n    136       2       0     0 [ksoftirqd/11]\n    138       2       0     0 [kworker/11:0H-events_highpri]\n    139       2       0     0 [kdevtmpfs]\n    140       2       0     0 [kworker/R-inet_frag_wq]\n    141       2       0     0 [rcu_tasks_kthread]\n    142       2       0     0 [rcu_tasks_rude_kthread]\n    143       2       0     0 [rcu_tasks_trace_kthread]\n    144       2       0     0 [kauditd]\n    145       2       0     0 [khungtaskd]\n    147       2       0     0 [oom_reaper]\n    148       2       0     0 [kworker/R-writeback]\n    149       2       0     0 [kcompactd0]\n    150       2       0     0 [ksmd]\n    151       2       0     0 [khugepaged]\n    152       2       0     0 [kworker/R-kblockd]\n    154       2       0     0 [kworker/R-blkcg_punt_bio]\n    155       2       0     0 [kworker/R-kintegrityd]\n    156       2       0     0 [irq/9-acpi]\n    160       2       0     0 [kworker/R-tpm_dev_wq]\n    161       2       0     0 [kworker/R-ata_sff]\n    162       2       0     0 [kworker/R-edac-poller]\n    163       2       0     0 [kworker/R-devfreq_wq]\n    164       2       0     0 [watchdogd]\n    166       2       0     0 [kworker/12:1H-kblockd]\n    168       2       0     0 [kswapd0]\n    169       2       0     0 [kworker/R-kthrotld]\n    170       2       0     0 [irq/121-pciehp]\n    171       2       0     0 [kworker/R-acpi_thermal_pm]\n    172       2       0     0 [hwrng]\n    177       2       0     0 [scsi_eh_0]\n    178       2       0     0 [kworker/R-scsi_tmf_0]\n    179       2       0     0 [scsi_eh_1]\n    180       2       0     0 [kworker/R-scsi_tmf_1]\n    181       2       0     0 [scsi_eh_2]\n    182       2       0     0 [kworker/R-scsi_tmf_2]\n    183       2       0     0 [scsi_eh_3]\n    184       2       0     0 [kworker/R-scsi_tmf_3]\n    185       2       0     0 [scsi_eh_4]\n    186       2       0     0 [kworker/R-scsi_tmf_4]\n    187       2       0     0 [scsi_eh_5]\n    188       2       0     0 [kworker/R-scsi_tmf_5]\n    189       2       0     0 [scsi_eh_6]\n    190       2       0     0 [kworker/R-scsi_tmf_6]\n    191       2       0     0 [scsi_eh_7]\n    192       2       0     0 [kworker/R-scsi_tmf_7]\n    199       2       0     0 [kworker/R-hfi-updates]\n    201       2       0     0 [kworker/R-mld]\n    202       2       0     0 [kworker/4:1H-kblockd]\n    203       2       0     0 [kworker/R-ipv6_addrconf]\n    210       2       0     0 [kworker/R-kstrp]\n    220       2       0     0 [kworker/R-zswap-shrink]\n    222       2       0     0 [kworker/0:1H-kblockd]\n    256       2       0     0 [kworker/16:1H-kblockd]\n    277       2       0     0 [kworker/2:1H-kblockd]\n    279       2       0     0 [kworker/8:1H-kblockd]\n    281       2       0     0 [kworker/1:1H-kblockd]\n    282       2       0     0 [kworker/14:1H-i915_cleanup]\n    283       2       0     0 [kworker/18:1H-kblockd]\n    284       2       0     0 [kworker/17:1H-i915_cleanup]\n    285       2       0     0 [kworker/15:1H-kblockd]\n    286       2       0     0 [kworker/13:1H-kblockd]\n    304       2       0     0 [kworker/10:1H-kblockd]\n    305       2       0     0 [kworker/3:1H-kblockd]\n    306       2       0     0 [kworker/9:1H-kblockd]\n    308       2       0     0 [kworker/6:1H-kblockd]\n    309       2       0     0 [kworker/11:1H-kblockd]\n    310       2       0     0 [kworker/R-nvme-wq]\n    311       2       0     0 [kworker/R-nvme-reset-wq]\n    312       2       0     0 [kworker/R-nvme-delete-wq]\n    313       2       0     0 [kworker/R-nvme-auth-wq]\n    315       2       0     0 [kworker/R-ttm]\n    316       2       0     0 [card1-crtc0]\n    317       2       0     0 [card1-crtc1]\n    318       2       0     0 [card1-crtc2]\n    319       2       0     0 [card1-crtc3]\n    325       2       0     0 [kworker/19:1H-kblockd]\n    330       2       0     0 [kworker/7:1H-kblockd]\n    331       2       0     0 [kworker/5:1H-kblockd]\n    400       2       0     0 [jbd2/nvme0n1p2-8]\n    401       2       0     0 [kworker/R-ext4-rsv-conversion]\n    460       1     460 46136 /usr/lib/systemd/systemd-journald\n    538       1     538  1552 /usr/lib/systemd/systemd-userdbd\n    628       2       0     0 [psimon]\n    642       2       0     0 [kworker/R-iprt-VBoxWQueue]\n    647       1     647  2436 /usr/lib/systemd/systemd-timesyncd\n    661       2       0     0 [iprt-VBoxTscThread]\n    669       1     669  3468 /usr/lib/systemd/systemd-udevd\n    680       2       0     0 [psimon]\n    853       2       0     0 [kworker/R-cfg80211]\n    857       2       0     0 [irq/155-mei_me]\n    862       2       0     0 [irq/156-iwlwifi:default_queue]\n    863       2       0     0 [irq/157-iwlwifi:queue_1]\n    864       2       0     0 [irq/158-iwlwifi:queue_2]\n    865       2       0     0 [irq/159-iwlwifi:queue_3]\n    866       2       0     0 [irq/160-iwlwifi:queue_4]\n    867       2       0     0 [irq/161-iwlwifi:queue_5]\n    868       2       0     0 [irq/162-iwlwifi:queue_6]\n    869       2       0     0 [irq/163-iwlwifi:queue_7]\n    870       2       0     0 [irq/164-iwlwifi:queue_8]\n    871       2       0     0 [irq/165-iwlwifi:queue_9]\n    872       2       0     0 [irq/166-iwlwifi:queue_10]\n    873       2       0     0 [irq/167-iwlwifi:queue_11]\n    874       2       0     0 [irq/168-iwlwifi:queue_12]\n    875       2       0     0 [irq/169-iwlwifi:queue_13]\n    876       2       0     0 [irq/170-iwlwifi:queue_14]\n    877       2       0     0 [irq/171-iwlwifi:exception]\n    975       1     975  1512 /usr/bin/dbus-broker-launch --scope system --audit\n    982     975     975  2336 dbus-broker --log 10 --controller 9 --machine-id 24b2675a060346fc84e60da1a6f4d133 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit\n    991       1     991 10384 /usr/bin/NetworkManager --no-daemon\n    993       1     993  2044 avahi-daemon: running [spenser-linux.local]\n    994       1     994  1760 /usr/lib/bluetooth/bluetoothd\n    995       1     995  3364 /usr/lib/polkit-1/polkitd --no-debug --log-level=notice\n    998       1     998  3692 /usr/lib/systemd/systemd-logind\n    999       1     999  2672 /usr/lib/systemd/systemd-machined\n   1001     993     993     4 avahi-daemon: chroot helper\n   1062       1    1062  4116 /usr/bin/ModemManager\n   1141       1    1141  4088 /usr/bin/wpa_supplicant -u -s -O /run/wpa_supplicant\n   1146       1    1146    16 /usr/bin/cupsd -l\n   1149       1    1149  3892 sshd: /usr/bin/sshd -D [listener] 0 of 10-100 startups\n   1158       1    1158 24168 /usr/bin/containerd\n   1160       1    1160  3516 /usr/sbin/crond -n\n   1242       1    1242  2908 /usr/bin/lightdm\n   1250       1    1250  3008 /usr/lib/accounts-daemon\n   1643       1    1643     8 /usr/bin/ssh-agent -s\n   1681       1    1681   340 /usr/lib/rtkit-daemon\n   1743       2       0     0 [krfcommd]\n   1794       1    1794  4576 /usr/lib/colord\n   1888       1    1888  5752 /usr/lib/upowerd\n   1918       1    1918  5064 /usr/lib/udisks2/udisksd\n   2104       1    2104    12 /bin/bash /opt/actions-runner/runsvc.sh\n   2105       1    2105 40272 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n   2110    2104    2104   700 ./externals/node20/bin/node ./bin/RunnerService.js\n   2153    2110    2104 58456 /opt/actions-runner/bin/Runner.Listener run --startuptype service\n 101404    1149  101404 11884 sshd-session: spenser [priv]\n 101672  101404  101404  7020 sshd-session: spenser@notty\n 101686  101672  101686 74664 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/codex app-server proxy\n 101820    1149  101820 12040 sshd-session: spenser [priv]\n 102110  101820  101820  7520 sshd-session: spenser@notty\n 102112  102110  102112 74680 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/codex app-server proxy\n 102113  101686  101686 106760 /home/spenser/.config/nvm/versions/node/v24.11.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex app-server proxy\n 102494  102112  102112 74424 /home/spenser/.config/nvm/versions/node/v24.11.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex app-server proxy\n 105155 2654298  105155 98876 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 105156 2654298  105156 74084 node ./mcp/server.bundle.mjs\n 105226 2654298  105226 74432 node ./mcp/server.bundle.mjs\n 105228 2654298  105228 98768 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 106278       1  106278 20200 /usr/bin/pamac-daemon\n 108929       2       0     0 [kworker/17:0-mm_percpu_wq]\n 112358 2654298  112358 2877096 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 112362 2654298  112362 74084 node ./mcp/server.bundle.mjs\n 133696 2654298  133696 99460 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 172201       2       0     0 [kworker/6:0-mm_percpu_wq]\n 192866 2654298  192866 87516 node ./mcp/server.bundle.mjs\n 192870 2654298  192870 103224 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 193632       2       0     0 [kworker/u81:2-rb_allocator]\n 193649       2       0     0 [kworker/2:0-mm_percpu_wq]\n 193853       2       0     0 [kworker/u80:5-ipv6_addrconf]\n 197830 2654298  197830 80648 node ./mcp/server.bundle.mjs\n 197834 2654298  197834 103636 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 203331       2       0     0 [kworker/3:1]\n 224272       2       0     0 [kworker/7:2-mm_percpu_wq]\n 225985 2654298  225985 1192584 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229686 2654298  229686 103532 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229738 3429256  229738  9384 /usr/bin/gnome-keyring-daemon --start --foreground --components=secrets\n 229750 3429256  229750 12612 /usr/bin/gnome-keyring-daemon --foreground --components=pkcs11,secrets --control-directory=/run/user/1000/keyring\n 229784 2654298  229784 108704 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229793 2654298  229793 111272 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229808 2654298  229808 110808 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229831 2654298  229831 113220 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229847 2654298  229847 112312 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 229865 2654298  229865 112344 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 232208       2       0     0 [kworker/5:2-mm_percpu_wq]\n 233548 2654298  233548 126904 node ./mcp/server.bundle.mjs\n 234775 2654298  234775 2045332 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 235216       2       0     0 [kworker/4:2-mm_percpu_wq]\n 236827 3429256  236827 47880 /usr/lib/gcr-prompter\n 238743 4086620 4086612 59000 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=renderer --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --remote-debugging-port=0 --ozone-platform=x11 --disable-blink-features=AutomationControlled --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=3279111957590 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,5234395905755554733,1595605403667996467,1572864 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190709007863834021\n 240716       2       0     0 [kworker/3:2-mm_percpu_wq]\n 245622       2       0     0 [kworker/0:1-events]\n 246484 2654298  246484 126832 node ./mcp/server.bundle.mjs\n 246960       2       0     0 [kworker/u80:1-flush-259:0]\n 247613       2       0     0 [kworker/12:2-cgroup_destroy]\n 248588       2       0     0 [kworker/u80:0-events_unbound]\n 248919       2       0     0 [kworker/8:0-mm_percpu_wq]\n 248926       2       0     0 [kworker/5:0-mm_percpu_wq]\n 248988 2654298  248988 129408 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 249442       2       0     0 [kworker/13:1-cgroup_destroy]\n 251339 2654298  251339 504096 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n 251877       2       0     0 [kworker/u80:2-writeback]\n 252025       2       0     0 [kworker/12:1-events]\n 252262       2       0     0 [kworker/0:0-events]\n 252320       2       0     0 [kworker/4:0]\n 252501       2       0     0 [kworker/6:1-cgroup_destroy]\n 252511       2       0     0 [kworker/1:1-cgroup_destroy]\n 252933       2       0     0 [kworker/7:1-events]\n 252945       2       0     0 [kworker/10:1-cgroup_destroy]\n 253635    1149  253635 12180 sshd-session: spenser [priv]\n 253640  253635  253635  7604 sshd-session: spenser@notty\n 253641  253640  253641  3176 bash -c cd /home/spenser/file-native-n-linux-20261019 && python3 resource_watch.py > watcher.stdout 2> watcher.stderr\n 253642  253641  253641 14844 python3 resource_watch.py\n 253697       2       0     0 [kworker/17:1]\n 254104       2       0     0 [kworker/8:1-mm_percpu_wq]\n 254258     538     538  7088 systemd-userwork: waiting...\n 254266     538     538  7160 systemd-userwork: waiting...\n 254519     538     538  7052 systemd-userwork: waiting...\n 254587       2       0     0 [kworker/0:2-events]\n 254623       2       0     0 [kworker/10:2]\n 254649       2       0     0 [kworker/7:0-events]\n 254735       2       0     0 [kworker/13:0]\n 254803       2       0     0 [kworker/2:2]\n 254845       2       0     0 [kworker/12:0]\n 254853    1149  254853 12192 sshd-session: spenser [priv]\n 254854       2       0     0 [kworker/14:1]\n 254857  254853  254853  7600 sshd-session: spenser@notty\n 254858  254857  254858  3208 bash -c cd /home/spenser/file-native-n-linux-20261019 && python3 scope_cancel.py > scope-cancel.stdout && python3 finish_native.py > finish.stdout 2> finish.stderr\n 254859  254858  254858 18676 python3 scope_cancel.py\n 254860  254859  254858  6004 ps -eo pid,ppid,pgid,rss,args\n 838216       1  838216 17024 /usr/lib/snapd/snapd\n 924392       2       0     0 [psimon]\n 924393       1  924393 134264 /usr/sbin/tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/run/tailscale/tailscaled.sock --port=41641\n1384653 3880688 3880202 17876 xfce4-terminal\n1384664 1384653 1384664  1952 bash\n1897216       1 1897216  6944 /home/spenser/.claude/remote/srv/5fd08069bd5f33e9b8a2b104c631bbbfbd4e2536/server --serve --socket /home/spenser/.claude/remote/run/c308c786/rpc.sock --token-file /home/spenser/.claude/remote/run/c308c786/token.3d6d82b2d9f291fa\n2149941       1 2149941  7204 /home/spenser/.vscode-server/code-a44adf7f53e00964ab890f9f8758a334f1fc15bc --cli-data-dir /home/spenser/.vscode-server/cli agent host\n2654288       1 2653953 39988 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/codex -c features.code_mode_host=true app-server --listen unix://\n2654298 2654288 2653953 892360 /home/spenser/.config/nvm/versions/node/v24.11.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex -c features.code_mode_host=true app-server --listen unix://\n2788878       1 2788878  1708 /usr/bin/dirmngr --homedir /etc/pacman.d/gnupg --supervised\n3296371       2       0     0 [kworker/18:1-mm_percpu_wq]\n3429256       1 3429256  7680 /usr/lib/systemd/systemd --user\n3429264 3429256 3429256   672 (sd-pam)\n3429635    1242 3429635 27324 /usr/lib/Xorg :0 -seat seat0 -auth /run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch\n3429944 3429256 3429944  1584 /usr/bin/dbus-broker-launch --scope user\n3430053 3429944 3429944  2184 dbus-broker --log 11 --controller 10 --machine-id 24b2675a060346fc84e60da1a6f4d133 --max-bytes 100000000000000 --max-fds 25000000000000 --max-matches 5000000000\n3430101 3429256 3430101  8184 /usr/lib/xdg-desktop-portal\n3430138 3429256 3430138   168 /usr/lib/xdg-permission-store\n3430143 3429256 3430143  3488 /usr/lib/xdg-document-portal\n3430154 3430143 3430154    76 fusermount3 -o rw,nosuid,nodev,fsname=portal,auto_unmount,subtype=portal -- /run/user/1000/doc\n3430197 3429256 3430197  8012 /usr/bin/pipewire\n3430198 3429256 3430198 14764 /usr/bin/wireplumber\n3431020    1242    1242    20 lightdm --session-child 12 20\n3431699 3429256 3431699  5148 /usr/bin/pipewire-pulse\n3459909       1 3459909  2816 /usr/local/bin/substrate-world-service\n3517534       2       0     0 [kworker/R-tls-strp]\n3880202 3431020 3880202 14404 xfce4-session\n3880605 3429256 3880605  3824 /usr/lib/gvfsd\n3880614 3429256 3880614   220 /usr/lib/at-spi-bus-launcher\n3880620 3880614 3880614    48 /usr/bin/dbus-broker-launch --config-file=/usr/share/defaults/at-spi2/accessibility.conf --scope user\n3880621 3880620 3880614  1472 dbus-broker --log 10 --controller 9 --machine-id 24b2675a060346fc84e60da1a6f4d133 --max-bytes 100000000000000 --max-fds 6400000 --max-matches 5000000000\n3880628 3429256 3880628  2148 /usr/lib/at-spi2-registryd --use-gnome-session\n3880634       1 3880634     8 /usr/bin/ssh-agent -s\n3880642 3429256 3880642  3800 /usr/bin/gpg-agent --supervised\n3880653 3880202 3880202 18020 xfwm4\n3880669 3429256 3880669   212 /usr/lib/dconf-service\n3880673 3880202 3880202 22096 xfce4-panel\n3880679 3880202 3880202 39468 Thunar --daemon\n3880686 3880202 3880202 28580 xfdesktop\n3880688 3880673 3880202 21616 /usr/lib/xfce4/panel/wrapper-2.0 /usr/lib/xfce4/panel/plugins/libwhiskermenu.so 8 16777223 whiskermenu Whisker Menu Show a menu to easily access installed applications\n3880692 3880673 3880202 15056 /usr/lib/xfce4/panel/wrapper-2.0 /usr/lib/xfce4/panel/plugins/libsystray.so 6 16777225 systray Status Tray Plugin Provides status notifier items (application indicators) and legacy systray items\n3880693 3880673 3880202 12592 /usr/lib/xfce4/panel/wrapper-2.0 /usr/lib/xfce4/panel/plugins/libpulseaudio-plugin.so 9 16777226 pulseaudio PulseAudio Plugin Adjust the audio volume of the PulseAudio sound system\n3880696 3880673 3880202 11584 /usr/lib/xfce4/panel/wrapper-2.0 /usr/lib/xfce4/panel/plugins/libactions.so 2 16777227 actions Action Buttons Log out, lock or other system actions\n3880715 3429256 3880715 14120 /usr/lib/xfce4/notifyd/xfce4-notifyd\n3880726 3880202 3880202 27828 copyq\n3880730 3880202 3880202  4832 xfce4-notes\n3880731 3880202 3880202 13764 pamac-tray\n3880732 3880202 3880202  3268 xiccd\n3880733 3880202 3880202 16128 nm-applet\n3880734       1 3880734   712 xcape -e Super_L Alt_L F1\n3880737 3880202 3880202 12352 xfce4-screensaver\n3880744 3880202 3880202    12 /usr/lib/geoclue-2.0/demos/agent\n3880746 3880202 3880202  9396 msm_notifier\n3880747 3880202 3880202  7916 xfce4-power-manager\n3880752 3880202 3880202 14700 /usr/bin/python /usr/bin/blueman-applet\n3880754 3880202 3880202  8076 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1\n3880815 3429256 3880815  6908 /usr/lib/gvfs-udisks2-volume-monitor\n3880830 3429256 3880830  6408 /usr/lib/gvfs-gphoto2-volume-monitor\n3880844 3429256 3880844  4248 /usr/lib/gvfs-afc-volume-monitor\n3880846 3429256 3880846 11768 /usr/lib/xdg-desktop-portal-gtk\n3880862 3429256 3880862  2932 /usr/lib/gvfs-mtp-volume-monitor\n3880928 3429256 3880928  5464 /usr/lib/gvfsd-metadata\n3880935 3880605 3880605  7628 /usr/lib/gvfsd-trash --spawner :1.998 /org/gtk/gvfs/exec_spaw/0\n3880950       1 3880202  8972 /usr/bin/python /usr/bin/blueman-tray\n3881174       1 3880202 13680 xfsettingsd --replace\n3881183 3880726 3880202 26096 /usr/bin/copyq --clipboard-access monitorClipboard\n3921258 3429256 3921258 24136 /opt/Synergy/synergy-service -d\n3921278 3921258 3921258  2624 /opt/Synergy/synergy-tray\n3921288 3921258 3921258  5796 /opt/Synergy/synergy-core client -f --no-tray --enable-crypto --profile-dir /home/spenser/.config/Synergy --debug INFO --name manjaro-79abe8a5 192.168.50.109:24800\n3988788       2       0     0 [kworker/11:1-events]\n4028643       2       0     0 [kworker/1:0-mm_percpu_wq]\n4032616 2654298 4032616 13444 /home/spenser/.config/nvm/versions/node/v24.11.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host\n4040231       2       0     0 [kworker/16:0-mm_percpu_wq]\n4049362       2       0     0 [kworker/19:0-mm_percpu_wq]\n4059812       2       0     0 [kworker/9:1-mm_percpu_wq]\n4062952       2       0     0 [kworker/13:2-mm_percpu_wq]\n4068572       2       0     0 [kworker/u81:0-rb_allocator]\n4082426       2       0     0 [kworker/11:0]\n4084683       2       0     0 [kworker/9:2-events]\n4085074       2       0     0 [kworker/18:0-cgroup_bpf_destroy]\n4086601       1 4086601 152532 /home/spenser/.config/nvm/versions/node/v24.11.0/bin/node /home/spenser/__Skills_By_Domain/chatgpt-pro-skills/chatgpt-pro-core/scripts/browser.mjs __daemon --startup-token a263b54d-f9bb-438d-8cc5-52de20a24c05\n4086612 4086601 4086612 151420 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-breakpad --no-default-browser-check --disable-dev-shm-usage --disable-edgeupdater --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --disable-hang-monitor --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --disable-blink-features=AutomationControlled --no-sandbox --remote-debugging-port=0 --ozone-platform=x11 --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --remote-debugging-pipe about:blank\n4086614       1 4086613  2080 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome_crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/home/spenser/.config/google-chrome-for-testing/Crash Reports --annotation=lsb-release=Manjaro Linux --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=153.0.8010.12 --initial-client-fd=7 --shared-client-connection\n4086616       1 4086615  1848 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome_crashpad_handler --no-periodic-tasks --monitor-self-annotation=ptype=crashpad-handler --database=/home/spenser/.config/google-chrome-for-testing/Crash Reports --annotation=lsb-release=Manjaro Linux --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=153.0.8010.12 --initial-client-fd=4 --shared-client-connection\n4086619 4086612 4086612 15944 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=zygote --no-zygote-sandbox --no-sandbox --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable\n4086620 4086612 4086612 18496 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=zygote --no-sandbox --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable\n4086642 4086619 4086612 82356 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=gpu-process --no-sandbox --disable-dev-shm-usage --disable-breakpad --ozone-platform=x11 --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --gpu-preferences=YAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAASAAAAAAAAAABAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAEAAAAAAAAACAAAAAAAAAAMAAAAAQAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --metrics-shmem-handle=4,i,5397930583617276888,9520995059445153427,262144 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708988185955192\n4086645 4086612 4086612 60536 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,5780421610556410338,16555458157682428613,524288 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708989122997041\n4086657 4086620 4086612 26440 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=utility --no-sandbox --disable-dev-shm-usage --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,13735142663597356196,18207201435712154479,524288 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708990060038890\n4086707 4086620 4086612 69812 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=renderer --top-chrome-webui --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --remote-debugging-port=0 --ozone-platform=x11 --disable-blink-features=AutomationControlled --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=3247125266841 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,16027383517943285753,441676964630039890,1572864 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708990997080739\n4086725 4086620 4086612 62452 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=renderer --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --remote-debugging-port=0 --ozone-platform=x11 --disable-blink-features=AutomationControlled --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=3247125283696 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,10146658402511450091,9580021297594753372,1572864 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708991934122588\n4086846 4086620 4086612 506648 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=renderer --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --remote-debugging-port=0 --ozone-platform=x11 --disable-blink-features=AutomationControlled --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=11 --launch-time-ticks=3247144301630 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,11707723269487828425,11407526476878946853,1572864 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708996619331833\n4086855 4086620 4086612 96676 /home/spenser/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome --type=renderer --crashpad-handler-pid=4086614 --enable-crash-reporter=, --user-data-dir=/home/spenser/.chatgpt-pro-browser/profile --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --remote-debugging-port=0 --ozone-platform=x11 --disable-blink-features=AutomationControlled --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=12 --launch-time-ticks=3247144548823 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,17770013247129948345,9784771184186150698,1572864 --field-trial-handle=3,i,7301679902368203320,12569867009110450305,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,4927280950421837688,13587185166978853073,4 --trace-process-track-uuid=3190708997556373682\n4107847       2       0     0 [kworker/2:1-cgroup_destroy]\n4109999       2       0     0 [kworker/19:2-events]\n4110182       2       0     0 [kworker/15:0-cgroup_destroy]\n4119180       2       0     0 [kworker/14:2-mm_percpu_wq]\n4123894       2       0     0 [kworker/15:2-mm_percpu_wq]\n4128751       2       0     0 [kworker/14:0-cgroup_destroy]\n4128912       2       0     0 [kworker/16:1]\n4129020 2654298 4129020 99192 node /home/spenser/.config/nvm/versions/node/v24.11.0/bin/gitnexus mcp\n4129022 2654298 4129022 73956 node ./mcp/server.bundle.mjs\n4148653       2       0     0 [kworker/10:0-mm_percpu_wq]\n"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/environment.json",
+    "scalars": {
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "python": "3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]",
+      "start_epoch": 1792450599.9784422,
+      "cutoff_epoch": 1792453485,
+      "source_verified": true,
+      "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+      "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\n"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/matrix/n128-B-p4/summary.json",
+    "scalars": {
+      "status": "success",
+      "n": 128,
+      "mode": "B",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 37.87705594114959,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n128-B-p4/cell/disposable/store",
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-B-p4/summary.json",
+    "scalars": {
+      "status": "success",
+      "n": 1000,
+      "mode": "B",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 260.6237971759401,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-B-p4/cell/disposable/store",
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/summary.json",
+    "scalars": {
+      "status": "success",
+      "n": 1000,
+      "mode": "A",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 55.43232332309708,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/cell/disposable/store",
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/matrix/n128-A-p4/summary.json",
+    "scalars": {
+      "status": "success",
+      "n": 128,
+      "mode": "A",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 19.389626698102802,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n128-A-p4/cell/disposable/store",
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/executable.json",
+    "scalars": {
+      "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+      "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/file-native-incremental",
+      "bytes": 2324504,
+      "sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+      "source_manifest_sha256": "4e9a39306385256489df87dca084870843cf1c75fdaccc3008fc5abfe0a7f1d2"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/completed.json",
+    "scalars": {
+      "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+      "status": "success",
+      "completed_epoch": 1792452106.5019462,
+      "original_cutoff_epoch": 1792453485,
+      "original_deadline_epoch": 1792454085,
+      "final_executable_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+      "preserved_6e66_executable_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/return.json",
+    "scalars": {
+      "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+      "archive_bytes": 350686,
+      "archive_sha256": "07ec4c40e36489424f23b05d58732c0baa511f2e28d4fa578254846b6e5e7548",
+      "raw_files": 30,
+      "raw_bytes": 3050382,
+      "final_executable_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/environment.json",
+    "scalars": {
+      "start_epoch": 1792451937.86653,
+      "compiler": "rustc 1.89.0 (29483883e 2025-08-04)\n",
+      "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+      "python": "3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]",
+      "source_verified": true,
+      "preserved_6e66_binary_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+      "supervisor_sha256": "b8e233811adac0e71112fcec38e42780167b024c592119f341eb0ac2aeb67663"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/review-summary.json",
+    "scalars": {
+      "epoch": 1792452120.7854698,
+      "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+      "core_files": 16,
+      "source_reverified": true,
+      "prior_6e66_source_executable_and_archive_unchanged": true,
+      "prior_Q_binary_unchanged": true,
+      "focused_cases": 39,
+      "focused_calls": 153,
+      "README_cases": 8,
+      "sampled_resource_rows": 461,
+      "missing_child_RSS_samples": 0,
+      "maximum_sampled_engine_child_RSS": 5771264,
+      "maximum_ordinary_child_seconds": 7.476845391094685,
+      "free_bytes": 41743462400,
+      "shared_cargo_logical_growth_bytes": 0
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/native-v3-targeted-prepare-closeout.json",
+    "scalars": {
+      "status": "SOURCE_PREPARED_NO_IMPORT_NO_EXECUTION_STATIC_PREFIX_BLOCKER",
+      "manifest_path": "/home/spenser/file-native-online-linux-20261020/source/targeted-controls-v3/manifest-run.json",
+      "manifest_sha256": "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609",
+      "admission_sha256": "61026455f802b5f46673d4ff9c77056fd132bb1ae63cb3e6c6875ecbb3257ce8",
+      "versions_sha256": "dc9b79352eeccac21dbffe8df9a6dd8d24da9e1575e7e39469ff050f193f088b",
+      "build_sha256": "13d06137a38203795cd1de7a9235dc43ce99c656d6355b7f9f04f5184c78684f",
+      "original_prefix_sha256": "dae316abd1a901312af6c2f5f6d6b871a38ac625be22e57332057def40311a33",
+      "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+      "harness_clean_git_pin": "2b651e05aa265c76e0c8d8254ff1d34035573f52",
+      "claim_id": "LINUX-V3-INTERFACE-CONTROLS-20261021",
+      "ledger_sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4",
+      "runtime_data_go": true,
+      "execution_authorized": false,
+      "static_blocker": "runpy __main__ owned __file__ self is rejected by frozen bootstrap pre-import scan; awaiting parent-reviewed external-prefix fix",
+      "copy_bytes": 234554,
+      "copy_files": 17,
+      "phase_sha256": "483a38ab0d9f35e5ceb851da5c12a9e01cf7f362d4e17024d75fbbec33650f12",
+      "self_bytes": 5863,
+      "self_sha_excluded": true,
+      "free_bytes": 74073579520
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/cp1-dependency-binding.json",
+    "scalars": {
+      "source_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+      "epoch": 1792528382.7139962,
+      "lock_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "locked_archive_count": 45,
+      "host_relevant_unpacked_count": 32,
+      "verified_source_file_count": 1530,
+      "verification_method": "lockedSHA256 archives; everyregulararchivedfile compared to actualunpackedsources; onlyCargo metadata extrasallowed",
+      "read_only_no_install_or_build": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/native-v3-peer-compile-closeout.json",
+    "scalars": {
+      "status": "COMPILE_PASSED_ELF_NOT_EXECUTED",
+      "scope": "native interface peer only; zero peer/engine/controls execution",
+      "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+      "claim_id": "LINUX-V3-PEER-COMPILE-20261021",
+      "ledger_sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a",
+      "elapsed_seconds": 0.17150259017944336,
+      "self_bytes": 4876,
+      "self_sha_excluded": true,
+      "native_growth_only": true,
+      "remaining_budget_requires_local_copy_census": true,
+      "source_total_conservative_local": 1468174,
+      "free_bytes": 74080788480
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/native-v3-targeted-controls-closeout.json",
+    "scalars": {
+      "elapsed_seconds": 1.0379946432076395,
+      "exit": 0,
+      "free_bytes": 79113449472,
+      "guard_stderr": "",
+      "guard_stdout": "{\"exit\": 0, \"censors\": [], \"seconds\": 1.0006821155548096, \"process_closure_verified\": true, \"memory_max_interval_seconds\": 0.02025300497189164, \"memory_intervals_over_40ms\": 0}\n",
+      "kind": "targeted-controls-wrapper-closeout"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/cp1-build-binding.json",
+    "scalars": {
+      "source_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+      "qualification": "PROVISIONAL build passed; 25Hz sampling cadence gap recorded; no engine invocation",
+      "source23_before_after_equal": true,
+      "build_receipt_sha256": "21599cd73cc5ff1343ac65aa245ba7e9e3e526403a233dfa5500d1eefb0b45e1",
+      "build_seconds": 23.077325582504272,
+      "rss_peak_heavy": 459894784,
+      "rss_peak_supervisor": 49221632,
+      "rss_max_interval": 0.0580982337705791,
+      "intervals_over_40ms": 234,
+      "closure": true,
+      "native_linked_libraries": "\tlinux-vdso.so.1 (0x00007f3dddaf8000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f3ddd7aa000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007f3ddd400000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f3dddafa000)\n"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/control-smoke/summary.json",
+    "scalars": {
+      "status": "passed-control-only",
+      "epoch": 1792526681.388857,
+      "guard_sha256": "dd2f93a43afe79f4123a662a69dd8c3b1d0cbc15d186d46c3f812c5cb1d1bafa",
+      "no_engine_build_or_invocation": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/control-smoke-v5/summary.json",
+    "scalars": {
+      "status": "passed-control-only",
+      "epoch": 1792528253.2309296,
+      "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+      "no_engine_build_or_invocation": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/control-smoke-v3/summary.json",
+    "scalars": {
+      "status": "passed-control-only",
+      "epoch": 1792526966.6953719,
+      "guard_sha256": "0c1e8b71aa38fd4c02a9fcfd509e66fd4fb1817c81d83a3d7a73cfcc1818a856",
+      "no_engine_build_or_invocation": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/control-smoke-v2/summary.json",
+    "scalars": {
+      "status": "passed-control-only",
+      "epoch": 1792526919.9711819,
+      "guard_sha256": "9233a7c911cc0773be2ff7b8e72839a08c31de1b7260cabc2fe7a17434868b6a",
+      "no_engine_build_or_invocation": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/driver-control/summary.json",
+    "scalars": {
+      "status": "passed-driver-control-only",
+      "no_engine_invocation": true,
+      "fake_peer_sha256": "79283843f1e669c92c99cea0e4306aff29f00fb3bfa5c693d1c32d9fa5c4c540",
+      "driver_sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce",
+      "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+      "events": 5
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/report-refusal-closeout.json",
+    "scalars": {
+      "epoch": 1792474553.115241,
+      "own_pid": 340156,
+      "status": "STOPPED_ON_REPORT_PREFLIGHT_REFUSAL",
+      "native_qualification_pass": null,
+      "immediate_cases_passed": 4,
+      "packing_cases_passed": 52,
+      "packing_events": 267,
+      "strict_cases_passed": 24,
+      "focus_cases_passed": 8,
+      "focus_events": 25,
+      "focus_shell_processes": 9,
+      "immediate_shell_processes": 8,
+      "recovery_completed_cases": 3,
+      "recovery_recorded_events_in_finally_summary": 94,
+      "recovery_events_in_atomic_case_file": 93,
+      "recovery_completed_engine_events_raw_ledger": 94,
+      "94th_engine_response_retained_and_expected": true,
+      "recovery_complete": false,
+      "refusal": "case-report-prewrite-bound in external compressed case events writer, before write",
+      "refusal_location": "frozen recovery capsule.py line62 while logging resolve(terminal-fence), after restored B128 was created and verified; assertion after call was not reached",
+      "scope_note": "All case-contained reports are already charged within176MiB fixture component; current adapter additionally counts them against2MiB report cap with128KiBsoftheadroom and temporary atomic-copy coexistence. Classification/headroom needs parent review before any continuation.",
+      "owned_processes_closed": true,
+      "source145_core18_match": true,
+      "all_original_search_logs_and_archive_retained": true,
+      "no_post_refusal_functional_work": true,
+      "stage_start_epoch": 1792472565,
+      "fixed_functional_cutoff_epoch": 1792474665,
+      "fixed_closeout_deadline_epoch": 1792474965
+    },
+    "source_binding": {
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_and18_match": true,
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/focus-result.json.gz",
+    "scalars": {
+      "status": "passed"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/capsule-phase-summary.json.gz",
+    "scalars": {
+      "epoch": 1792474075.8957555,
+      "phase": "capsule",
+      "status": "passed",
+      "case_event_format": "exact JSON bytes losslessly gzip-compressed at events.json.gz; raw process stdout/stderr retained in raw-process-events.jsonl.gz",
+      "original145modules_unchanged": true
+    },
+    "source_binding": {
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_and18_match": true,
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/immediate-result.json.gz",
+    "scalars": {
+      "status": "passed",
+      "engine_events": 12,
+      "ordinary_shell_processes": 8
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/focus-phase-summary.json.gz",
+    "scalars": {
+      "epoch": 1792474274.0859497,
+      "phase": "focus",
+      "status": "passed",
+      "case_event_format": "exact JSON bytes losslessly gzip-compressed at events.json.gz; raw process stdout/stderr retained in raw-process-events.jsonl.gz",
+      "original145modules_unchanged": true
+    },
+    "source_binding": {
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_and18_match": true,
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/immediate-phase-summary.json.gz",
+    "scalars": {
+      "epoch": 1792473276.3006327,
+      "phase": "immediate",
+      "status": "passed",
+      "case_event_format": "exact JSON bytes losslessly gzip-compressed at events.json.gz; raw process stdout/stderr retained in raw-process-events.jsonl.gz",
+      "original145modules_unchanged": true
+    },
+    "source_binding": {
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_and18_match": true,
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/strict-phase-summary.json.gz",
+    "scalars": {
+      "epoch": 1792474243.2835913,
+      "phase": "strict",
+      "status": "passed",
+      "case_event_format": "exact JSON bytes losslessly gzip-compressed at events.json.gz; raw process stdout/stderr retained in raw-process-events.jsonl.gz",
+      "original145modules_unchanged": true
+    },
+    "source_binding": {
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_and18_match": true,
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/strict-result.json.gz",
+    "scalars": {
+      "status": "passed",
+      "engine_events": 4
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/capsule-result.json.gz",
+    "scalars": {
+      "status": "passed"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/cleanup-result.json",
+    "scalars": {
+      "epoch": 1792472774.9364133,
+      "status": "FINAL_TARGET_AND_MAPPED_UNIT_FIXTURE_RECLAIMED",
+      "actual_successfully_deleted_bytes": 210312979,
+      "actual_successfully_deleted_files": 442,
+      "both_targets_absent": true,
+      "new_unit_results_remain_separate": true,
+      "new_and_old_source_bin_archive_preserved": true,
+      "stage_start_epoch": 1792472565,
+      "functional_deadline_epoch": 1792474665,
+      "closeout_deadline_epoch": 1792474965
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/result-complete.json",
+    "scalars": {
+      "epoch": 1792475899.5475218,
+      "status": "FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS",
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "fixture": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete",
+      "events": 282,
+      "old_entire_native_tree_unchanged_including_compressed_prefix": true,
+      "old_tree_files": 15990,
+      "old_tree_inventory_path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/old-native-tree-before-complete.json.gz",
+      "old_tree_inventory_sha256": "d84f62f9d4246cfe58085badf339c8a9689decb5f93d12c39e06c2fa3f613df2",
+      "new_stage_only_repeated_F_recovery_authorized": true,
+      "bootstrap_failure_prefix_preserved": true,
+      "old_phase_partial_not_relabelled": true,
+      "global_P_pass": null
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/closeout-audit.json",
+    "scalars": {
+      "epoch": 1792476198.657862,
+      "status": "FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS",
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "cases": 24,
+      "events": 282,
+      "old_entire_native_tree_unchanged_including_compressed_prefix": true,
+      "old_tree_files": 15990,
+      "bootstrap_failure_prefix_preserved": true,
+      "engine_resources_count": 282,
+      "old_phase_partial_not_relabelled": true,
+      "global_P_pass": null,
+      "cleanup_performed": false
+    },
+    "summary": {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete/summary.json",
+      "bytes": 3635,
+      "sha256": "82a485d5798bbbb3680a529e02b6e1f964360206d3a7dcb88e5cf24dbbe4f17a"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/outer-complete-result.json",
+    "scalars": {
+      "exit": 0,
+      "stdout_tail": "{\n  \"platform\": \"Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42\",\n  \"binary\": \"/home/spenser/file-native-p-linux-20261020/bin/candidate-linux-final\",\n  \"binary_sha256\": \"a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b\",\n  \"cases\": [\n    {\n      \"case\": \"navigation-and-operational-backup\",\n      \"mode\": \"A\",\n      \"n\": 16,\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"navigation-and-operational-backup\",\n      \"mode\": \"A\",\n      \"n\": 128,\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"navigation-and-operational-backup\",\n      \"mode\": \"B\",\n      \"n\": 16,\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"navigation-and-operational-backup\",\n      \"mode\": \"B\",\n      \"n\": 128,\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-plan\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-preserved\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-file\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-namespace\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-before-complete\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-complete\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"up\",\n      \"phase\": \"refresh-namespace-preserved\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"down\",\n      \"phase\": \"refresh-plan\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"down\",\n      \"phase\": \"refresh-preserved\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"down\",\n      \"phase\": \"refresh-file\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"down\",\n      \"phase\": \"refresh-namespace\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"down\",\n      \"phase\": \"refresh-before-complete\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"namespace-interruption-correcting-successor\",\n      \"direction\": \"down\",\n      \"phase\": \"refresh-complete\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"checkpoint-transfer-retire-repeat-gc\",\n      \"mode\": \"A\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"half-preparation-backup-recovery\",\n      \"mode\": \"A\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"checkpoint-transfer-retire-repeat-gc\",\n      \"mode\": \"B\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"half-preparation-backup-recovery\",\n      \"mode\": \"B\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"impossible-final-namespace\",\n      \"status\": \"expected refusal\"\n    },\n    {\n      \"case\": \"skipped-or-selected-once\",\n      \"mode\": \"A\",\n      \"status\": \"success\"\n    },\n    {\n      \"case\": \"skipped-or-selected-once\",\n      \"mode\": \"B\",\n      \"status\": \"success\"\n    }\n  ],\n  \"events\": 282,\n  \"seconds\": 172.497405604925\n}\n{\n  \"epoch\": 1792475899.5475218,\n  \"status\": \"FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS\",\n  \"core\": \"d70f3864f2888d46d9112213b4a03f8d82745a8e\",\n  \"exe_sha256\": \"a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b\",\n  \"fixture\": \"/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete\",\n  \"events\": 282,\n  \"original_events_UTF8_JSON\": {\n    \"path\": \"/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete/events.json\",\n    \"bytes\": 1567321,\n    \"sha256\": \"54eb3dc6f6b533c66be24367a01fffe7565ff4c9d32d55932f66c48c0971e58f\",\n    \"rows\": 282,\n    \"compressed\": false\n  },\n  \"source_before_after\": {\n    \"source145_core18_match\": true,\n    \"old_source139_match\": true,\n    \"old063_sha256\": \"063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe\",\n    \"new_a850_sha256\": \"a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b\",\n    \"old_QN_source_bindings\": [\n      {\n        \"root\": \"/home/spenser/file-native-n-linux-20261019\",\n        \"source_files\": 163,\n        \"all_match\": true\n      },\n      {\n        \"root\": \"/home/spenser/file-native-q-linux-20261019-final\",\n        \"source_files\": 95,\n        \"all_match\": true\n      }\n    ]\n  },\n  \"old_entire_native_tree_unchanged_including_compressed_prefix\": true,\n  \"old_tree_files\": 15990,\n  \"old_tree_inventory_path\": \"/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/old-native-tree-before-complete.json.gz\",\n  \"old_tree_inventory_sha256\": \"d84f62f9d4246cfe58085badf339c8a9689decb5f93d12c39e06c2fa3f613df2\",\n  \"ownership\": {\n    \"native\": {\n      \"bytes\": 251890762,\n      \"files\": 21537\n    },\n    \"new_fixture\": {\n      \"bytes\": 46820442,\n      \"files\": 5242\n    },\n    \"fixtures\": {\n      \"bytes\": 215825212,\n      \"files\": 18861\n    },\n    \"combined_bound_bytes\": 265288228,\n    \"combined_bound_files\": 22338,\n    \"native_report_bytes\": 1853742,\n    \"free_bytes\": 24755965952\n  },\n  \"new_stage_only_repeated_F_recovery_authorized\": true,\n  \"bootstrap_failure_prefix_preserved\": true,\n  \"frozen_oracle_binding\": {\n    \"path\": \"/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-navigation-2026-10-19/oracle.py\",\n    \"sha256\": \"877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f\"\n  },\n  \"old_phase_partial_not_relabelled\": true,\n  \"global_P_pass\": null\n}\n",
+      "stderr_tail": ""
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/outer-result.json",
+    "scalars": {
+      "exit": 1,
+      "stdout_tail": "",
+      "stderr_tail": "Traceback (most recent call last):\n  File \"/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/worker.py\", line 69, in <module>\n    result=prior.run(c.EXE,c.F);assert len(result['cases'])==24 and result['events']==282\n  File \"/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py\", line 30, in run\n    verify(root,initial)\n    ~~~~~~^^^^^^^^^^^^^^\n  File \"/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-recovery-reclamation-2026-10-19/oracle.py\", line 38, in verify\n    assert navigation(root/projection['collection.yaml']['source'])==expected\n                           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\nKeyError: 'collection.yaml'\n"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/strict-result.json",
+    "scalars": {
+      "epoch": 1792469822.2486498,
+      "status": "passed",
+      "mode": "strict",
+      "adapter_sha256": "1e8b49d51a09328704c0e94aeec2b39628b1b4c54ed76cca649422bbf20aee21"
+    },
+    "source_binding": {
+      "exe_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/unit-result.json",
+    "scalars": {
+      "epoch": 1792469482.2542574,
+      "returncode": 0,
+      "unit_pass": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/final-bindings.json",
+    "scalars": {
+      "epoch": 1792470132.4017203,
+      "synthetic_fixture_all8_hashes_unchanged": true,
+      "original_source_capsule_sha256": "3f605babad0ac1e13525b244aa9da0f9be6a6aef9ba7795fdf3a38b3bab8942c",
+      "original_core": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+      "original_harness": "59bbd168bfa67bbe68f6f4d669658018786ddaba",
+      "native_qualification_pass": null
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/native-closeout.json",
+    "scalars": {
+      "epoch": 1792470063.6172967,
+      "own_pid": 335621,
+      "functional_GO_utc": "2026-10-20T04:09:12Z",
+      "fixed_functional_cutoff_utc": "2026-10-20T04:39:12Z",
+      "fixed_closeout_deadline_utc": "2026-10-20T04:44:12Z",
+      "functional_work_stopped": true,
+      "stop_reason": "112MiB fixture component census exceeded during actual prior recovery; all failed/censored prefixes retained; no fixture deletion or further functional work",
+      "native_qualification_pass": null,
+      "unit_tests_passed": 5,
+      "packing_unique_cases_passed": 52,
+      "packing_prefix_cases": 33,
+      "packing_continuation_cases": 19,
+      "packing_prefix_events": 160,
+      "packing_continuation_events": 109,
+      "uninterrupted_full_capsule_pass": false,
+      "strict_cases_passed": 24,
+      "strict_engine_events": 4,
+      "actual_prior_recovery_events": 94,
+      "actual_prior_recovery_cases_passed": null,
+      "actual_prior_recovery_complete": false,
+      "bash_discovery_search_exact_copy_pass": null,
+      "bash_skip_reason": "Not started after fixture component stop",
+      "fixture_component_limit_bytes": 117440512,
+      "fixture_component_overshoot_bytes": 10914018,
+      "fixture_component_pass": false,
+      "sampling_overshoot_retained": true,
+      "protected_census_all_same": true,
+      "cargo_total_bytes": 627576362,
+      "cargo_total_files": 22804,
+      "cargo_new_paths_files": 301,
+      "cargo_positive_growth_bytes": 6079277,
+      "owned_processes_closed": true,
+      "observed_native_aggregate_peak_RSS_bytes": 465600512,
+      "exact_continuous_aggregate_peak_RSS_bytes": null,
+      "missing_RSS_sample_count": 371,
+      "missing_RSS_values_represented_as": null,
+      "source139_final_match": true,
+      "frozen_executable_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "target_still_absent": true,
+      "raw_inventory_path": "/home/spenser/file-native-p-linux-20261020/qualification/raw-inventory.json",
+      "raw_inventory_sha256": "967a0f704f6c7a8c37a0ceae987d7ef0c06ee1ca526f03120907bb12f9f4e396",
+      "raw_report_count": 1566,
+      "unknown_scopes": "Other native repositories and older excluded parent scopes are not removed or claimed as free capacity; parent global census remains controlling."
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/cleanup-result.json",
+    "scalars": {
+      "epoch": 1792469511.4813497,
+      "exact_authorized_target": "/home/spenser/file-native-p-linux-20261020/target",
+      "verified_realpath": "/home/spenser/file-native-p-linux-20261020/target",
+      "unit_pass_required": true,
+      "source_and_frozen_exe_verified": true,
+      "deletion_completed": true,
+      "epoch_after": 1792469511.9911742,
+      "target_absent": true,
+      "released_successful_target_bytes": 129332914,
+      "released_successful_target_files": 434,
+      "synthetic_fixture_unchanged": true,
+      "source139_and_exe_unchanged": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/result.json",
+    "scalars": {
+      "epoch": 1792470754.4834766,
+      "status": "counterexample",
+      "shell_returncode": 21,
+      "shell_stdout": "FAIL missing ordinary selected publication control: /home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store/publications/publication-335941-1792470750343863243-27.json\nNo engine, custom pack decoder, generation scan, or alternative discovery was used.\n",
+      "shell_stderr": "",
+      "store": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+      "shell_result_root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-shell",
+      "no_subsequent_publication": true,
+      "SELECTED_reads_during_discovery": 1,
+      "engine_calls_during_discovery": 0,
+      "custom_pack_decoder_calls_during_discovery": 0,
+      "generation_scan_fallback_used": false,
+      "ordinary_control_route_pass": false,
+      "exact_copy_pass": null,
+      "fixture_growth_shell_bytes": 312,
+      "frozen_exe_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "counterexample_preserved": true,
+      "repair_attempted": false,
+      "full_recovery_continuation_started": false,
+      "parent_GO_scope": "tiny ordinary Bash check only"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/final-closeout/source139-bindings.json",
+    "scalars": {
+      "exe_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preparation/preparation-closeout.json",
+    "scalars": {
+      "epoch": 1792468953.3296432,
+      "own_pid": 333795,
+      "native_owned_bytes": 137839212,
+      "native_owned_files": 579,
+      "cargo_new_paths": 301,
+      "cargo_positive_growth_bytes": 6079277,
+      "cargo_total_bytes": 627576362,
+      "cargo_total_files": 22804,
+      "all_protected_census_same": true,
+      "build_group_live_closed": true,
+      "native_free_bytes": 24963039232,
+      "source_all139_same": true,
+      "build_watchdog_note": "One zero/unavailable RSS sample retained as NULL; observed peak is not a continuous maximum guarantee. Root-exit cleanup path ran, and no live group members remain.",
+      "tests_run": false,
+      "engine_run": false,
+      "native_qualification_pass": null
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preparation/transport-bindings.json",
+    "scalars": {
+      "source_archive_sha256": "3f605babad0ac1e13525b244aa9da0f9be6a6aef9ba7795fdf3a38b3bab8942c",
+      "source_archive_bytes": 285915,
+      "dependency_tar_bytes": 1515520,
+      "dependency_tar_sha256": "29e4730a42ecaea082f68ad377d63f90d0a7a1008939a34e097bdda0da71422d"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preparation/build-result.json",
+    "scalars": {
+      "start_epoch": 1792468739.407738,
+      "end_epoch": 1792468765.805398,
+      "returncode": 0,
+      "build_seconds": 22.72769271209836,
+      "source139_before_after_match": true,
+      "cache_growth_bytes": 6079277,
+      "cache_metadata_backup_bytes": 656913,
+      "native_owned_bytes": 137820548,
+      "native_owned_files": 577,
+      "native_target_bytes": 123573292,
+      "native_free_bytes": 24963137536,
+      "native_qualification_pass": null,
+      "tests_run": false,
+      "engine_run": false,
+      "no_deletion": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/unit-result.json",
+    "scalars": {
+      "mode": "unit",
+      "start_epoch": 1792472227.185863,
+      "completed_epoch": 1792472232.1190543,
+      "returncode": 0,
+      "seconds": 4.933192014694214,
+      "source145_core18_before_after_match": true,
+      "old_source139_old_bin_archive_unchanged": true,
+      "Cargo_metadata_before_backup": "/home/spenser/file-native-p-linux-20261020/final-source-stage/unit-global-cache-before.bin",
+      "native_qualification_pass": null,
+      "full_capsule_or_cleanup_started": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/native-closeout.json",
+    "scalars": {
+      "epoch": 1792472446.548535,
+      "own_pid": 337588,
+      "stage_start": "2026-10-20T04:53:04Z",
+      "functional_deadline": "2026-10-20T05:08:04Z",
+      "closeout_deadline": "2026-10-20T05:13:04Z",
+      "build_pass": true,
+      "build_seconds": 22.295978784561157,
+      "unit_pass": true,
+      "unit_tests_passed": 5,
+      "unit_seconds": 4.933192014694214,
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_names_bytes_SHA256_GitblobSHA1_match": true,
+      "all18_final_core_match": true,
+      "old_source139_and_old_bin_preserved": true,
+      "old_frozen_bin_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "old_archive_sha256": "d6f3eca1abd4bb74ca393c9c3ef743abdf5c6061bb98aad74ac938769c2cdbc7",
+      "old_inventory_sha256": "1cf2e7bb0116495dfd0b883bf62916bd8701be60db9305eec5ff62ffc4b27ad9",
+      "protected_census_all_same": true,
+      "native_total_bytes": 243892097,
+      "native_total_files": 2346,
+      "native_Cargo_positive_growth_bytes": 6079277,
+      "native_Cargo_new_files": 301,
+      "native_free_bytes": 24839741440,
+      "owned_processes_closed": true,
+      "observed_native_aggregate_peak_RSS_bytes": 521715712,
+      "exact_continuous_aggregate_peak_RSS_bytes": null,
+      "missing_RSS_samples": 2,
+      "missing_RSS_value": null,
+      "build_group_limit_seconds": 590.0,
+      "unit_group_limit_seconds": 115.0,
+      "remap_proposal_sha256": "c91bd77fd9507db96ded926a73de194ff90eb9f1b5f8cd2c3d30b8bad8468e5b",
+      "native_stage_total_bytes_before_this_report": 1281739,
+      "old_source_or_new_source_full_capsule_run": false,
+      "cleanup_performed_in_this_stage": false,
+      "final_source_native_qualification_pass": null,
+      "global_P_pass": null
+    },
+    "new_final_binary": {
+      "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux-final",
+      "bytes": 3349520,
+      "sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "all145_and_core18_bound": true,
+      "executed": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/build-result.json",
+    "scalars": {
+      "mode": "build",
+      "start_epoch": 1792472149.2830484,
+      "completed_epoch": 1792472171.5790265,
+      "returncode": 0,
+      "seconds": 22.295978784561157,
+      "source145_core18_before_after_match": true,
+      "old_source139_old_bin_archive_unchanged": true,
+      "Cargo_metadata_before_backup": "/home/spenser/file-native-p-linux-20261020/final-source-stage/build-global-cache-before.bin",
+      "native_qualification_pass": null,
+      "full_capsule_or_cleanup_started": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/source139-bindings.json",
+    "scalars": {
+      "exe_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/closeout-native.json",
+    "scalars": {
+      "epoch": 1792471370.2739048,
+      "own_pid": 336268,
+      "kind": "artifact-only-preservation-closeout",
+      "manifest_sha256": "8c810dcd491a30e2f769f053a5c30455e26bf291aa6bd424c65e66bd4164aef3",
+      "no_originals_deleted": true,
+      "originals_content_rechecked_equal_inventory": true,
+      "source139_all_match": true,
+      "frozen_bin_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "stage_native_report_bytes_before_this_receipt": 52048,
+      "native_total_bytes": 237668209,
+      "native_total_files": 13426,
+      "native_Cargo_positive_growth_bytes": 6079277,
+      "native_Cargo_new_files": 301,
+      "native_free_bytes": 24803393536,
+      "owned_processes_closed": true,
+      "observed_native_aggregate_peak_RSS_bytes": 117739520,
+      "exact_continuous_aggregate_peak_RSS_bytes": null,
+      "missing_RSS_sample_count": 1,
+      "missing_RSS_value": null,
+      "preemptive_group_limit_seconds": 115.0,
+      "RSS_process_limit_bytes": 2147483648,
+      "native_aggregate_limit_bytes": 3221225472,
+      "functional_tests_run": false,
+      "recovery_or_core_repair_run": false,
+      "native_qualification_pass": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/reclamation-artifact/result.json",
+    "scalars": {
+      "epoch": 1792471553.8267875,
+      "status": "EXACT_TWO_ROOT_RECLAMATION_COMPLETE",
+      "successfully_deleted_logical_bytes": 209668643,
+      "successfully_deleted_files": 11704,
+      "successfully_deleted_directories": 6263,
+      "complete_original_hash_inventory_matched_before_removal": true,
+      "archive_inventory_hashes_match_after_removal": true,
+      "all139source_and_old_frozen_bin_unchanged": true,
+      "old_frozen_bin_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "Cargo_metadata_backups_unchanged": true,
+      "no_other_cleanup": true,
+      "censors_and_counterexample_preserved_in_archive": true,
+      "source139_bindings_sha256": "34560fd241c59a11438612ab0bb58c9a4b983ae7e1b5dfeeef348ff2f90d9291",
+      "native_qualification_pass": false,
+      "new_build_or_test_started": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/reclamation-artifact/source139-bindings.json",
+    "scalars": {
+      "exe_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/reclamation-artifact/closeout-native.json",
+    "scalars": {
+      "epoch": 1792471682.9975972,
+      "own_pid": 336409,
+      "status": "RECLAMATION_ARTIFACT_ONLY_CLOSEOUT",
+      "deleted_bytes": 209668643,
+      "deleted_files": 11704,
+      "deleted_directories": 6263,
+      "both_exact_targets_absent": true,
+      "source139_all_match": true,
+      "old_frozen_bin_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "metadata_backups_unchanged": true,
+      "protected_census_all_same": true,
+      "native_total_bytes": 28052524,
+      "native_total_files": 1730,
+      "native_Cargo_positive_growth_bytes": 6079277,
+      "native_Cargo_new_files": 301,
+      "native_free_bytes": 25034051584,
+      "owned_processes_closed": true,
+      "observed_native_aggregate_peak_RSS_bytes": 83652608,
+      "missing_RSS_samples": 1,
+      "missing_RSS_value": null,
+      "exact_continuous_aggregate_peak_RSS_bytes": null,
+      "preemptive_group_limit_seconds": 115.0,
+      "stage_native_metadata_bytes_before_this_receipt": 44303,
+      "native_qualification_pass": false,
+      "new_source_build_or_test_started": false,
+      "no_other_cleanup": true,
+      "counterexample_and_censors_preserved_in_verified_archive": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preflight/native-closeout.json",
+    "scalars": {
+      "epoch": 1792468047.915673,
+      "own_pid": 332434,
+      "inherited_all_bytes_files_unchanged": true,
+      "cargo_bytes_files_unchanged": true,
+      "rustup_bytes_files_unchanged": true,
+      "free_bytes": 25088507904,
+      "free_threshold_pass": true,
+      "owned_later_source_or_engine_created": false
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/source-pins.json",
+    "scalars": {
+      "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+      "archive_sha256": "8d2cdb7f466525afc56352d0dfb645246e4d90c1252624c1751d9a84ae4737a2"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/export/source-pins.json",
+    "scalars": {
+      "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+      "archive_sha256": "8d2cdb7f466525afc56352d0dfb645246e4d90c1252624c1751d9a84ae4737a2"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/export/evidence/terminal-recovery-completed.json",
+    "scalars": {
+      "status": "passed",
+      "walkthroughs": 4,
+      "original_failure": "new wrapper omitted cp destination parent",
+      "change": "create fresh owned extraction parent; pinned walkthrough and engine unchanged",
+      "helper_sha256": "d9f7938f396c2c283b67ba9903553c848d3387bf8ebb4b3afb338a50d074b760",
+      "original_wrapper_sha256": "a50e978151ec40d3658fcec44c966a5bdf240b5635a2465495b0cdb58c1101ef"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/evidence/terminal-recovery-completed.json",
+    "scalars": {
+      "status": "passed",
+      "walkthroughs": 4,
+      "original_failure": "new wrapper omitted cp destination parent",
+      "change": "create fresh owned extraction parent; pinned walkthrough and engine unchanged",
+      "helper_sha256": "d9f7938f396c2c283b67ba9903553c848d3387bf8ebb4b3afb338a50d074b760",
+      "original_wrapper_sha256": "a50e978151ec40d3658fcec44c966a5bdf240b5635a2465495b0cdb58c1101ef"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/return.json",
+    "scalars": {
+      "archive_bytes": 8136562,
+      "archive_sha256": "29e8f03b0f58cca7fe1f4872df8dd7c9b4eff3d169790ff3f1c9fd2bf60db24b",
+      "native_bytes_plus_archive": 277571805,
+      "native_files_plus_archive": 15443
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/closeout.json",
+    "scalars": {
+      "original_deadline_utc": "2026-10-19T22:38:49Z",
+      "stop_epoch": 1792449439.0,
+      "epoch": 1792449255.446087
+    },
+    "stages": [
+      {
+        "name": "build",
+        "seconds": 5.100849628448486,
+        "exit": 0,
+        "status": "success",
+        "reason": null
+      },
+      {
+        "name": "tests",
+        "seconds": 1.1896703243255615,
+        "exit": 0,
+        "status": "success",
+        "reason": null
+      },
+      {
+        "name": "capsule",
+        "seconds": 80.69870710372925,
+        "exit": 1,
+        "status": "failure",
+        "reason": null
+      },
+      {
+        "name": "extra",
+        "seconds": 19.834651947021484,
+        "exit": 0,
+        "status": "success",
+        "reason": null
+      },
+      {
+        "name": "legacy",
+        "seconds": 2.326821804046631,
+        "exit": 0,
+        "status": "success",
+        "reason": null
+      },
+      {
+        "name": "supplement",
+        "seconds": 2.477372884750366,
+        "exit": 0,
+        "status": "success",
+        "reason": null
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/resource-closeout.json",
+    "scalars": {
+      "epoch": 1792449439.4452796,
+      "files": 15440,
+      "logical_bytes": 269435243,
+      "free_bytes": 46079942656,
+      "native_cap_bytes": 536870912,
+      "new_file_cap": 100000,
+      "archive_not_yet_included": true
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/binding.json",
+    "scalars": {
+      "checkout": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "core": "07a8574e581e66ba58d7caac87238aa5f93918be",
+      "executable_sha256": "e70d47a82e1c51a989395f0025f85859e74aed07c07e482e0a6b37913e76e854"
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/compatible-core-binding.json",
+    "scalars": {
+      "source_pin": "fe1ee22a82d65dc88a14e38b7e77c921538c4bc4",
+      "binary_sha256": "13e368f6f46e3781f32bf73616477de9fa3828ec762e4e08001f8b0e769aa6db"
+    },
+    "rows": [
+      {
+        "name": "legacy",
+        "seconds": 2.00311541557312,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "extra",
+        "status": "unperformed",
+        "reason": "full cap does not fit original native deadline"
+      },
+      {
+        "name": "capsule",
+        "status": "unperformed",
+        "reason": "full cap does not fit original native deadline"
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/backup-pipeline-supplement-binding.json",
+    "scalars": {
+      "start_epoch": 1792426877.032166,
+      "seconds": 69.60349416732788,
+      "exit": 0,
+      "status": "success",
+      "censor": null,
+      "peak_memory_bytes": 30945280
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/final-core-binding.json",
+    "scalars": {
+      "source_pin": "ec544776255c6eafb06700c40c04b1e27fdf8898",
+      "binary_sha256": "16343046dda1a8dc36d6fcae06b4b3b808e7131fdc7779aa42c91888ee8cb785"
+    },
+    "rows": [
+      {
+        "name": "build",
+        "seconds": 3.253678798675537,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "tests",
+        "seconds": 0.7520155906677246,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "capsule",
+        "seconds": 69.60931921005249,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "extra",
+        "seconds": 15.521973371505737,
+        "exit": 0,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/oracle-supplement-binding.json",
+    "scalars": {
+      "start_epoch": 1792426667.4954445,
+      "seconds": 69.35112500190735,
+      "exit": 0,
+      "status": "success",
+      "censor": null,
+      "peak_memory_bytes": 32100352
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/finished.json",
+    "scalars": {
+      "pin": "40509a90a015de84bd12d26e152a52c92721baa0",
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "seconds": 219.83439707756042,
+      "free_bytes": 50118004736,
+      "binary_sha256": "689f7ceb569ec628132fbd57e16b13d12c60215a9d465f5440a5543530e31392"
+    },
+    "rows": [
+      {
+        "name": "build",
+        "seconds": 5.756197690963745,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "tests",
+        "seconds": 4.005798578262329,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "capsule",
+        "seconds": 69.10363507270813,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "extra",
+        "seconds": 15.274133205413818,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "paired",
+        "seconds": 4.758151531219482,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "replay",
+        "seconds": 58.83692002296448,
+        "exit": 0,
+        "status": "success"
+      },
+      {
+        "name": "protocol",
+        "seconds": 62.09326672554016,
+        "exit": 0,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/small/summary.json",
+    "scalars": {
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "binary": "/home/spenser/file-native-recovery-20261019/results/build/release/file-native-incremental",
+      "binary_sha256": "689f7ceb569ec628132fbd57e16b13d12c60215a9d465f5440a5543530e31392",
+      "events": 280,
+      "seconds": 68.94714855123311
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/final-core-small/summary.json",
+    "scalars": {
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "binary": "/home/spenser/file-native-recovery-20261019/results/build/release/file-native-incremental",
+      "binary_sha256": "16343046dda1a8dc36d6fcae06b4b3b808e7131fdc7779aa42c91888ee8cb785",
+      "events": 280,
+      "seconds": 69.34545334475115
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/oracle-small-v2/summary.json",
+    "scalars": {
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "binary": "/home/spenser/file-native-recovery-20261019/results/build/release/file-native-incremental",
+      "binary_sha256": "689f7ceb569ec628132fbd57e16b13d12c60215a9d465f5440a5543530e31392",
+      "events": 280,
+      "seconds": 69.24325892701745
+    }
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/backup-pipeline/summary.json",
+    "scalars": {
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "binary": "/home/spenser/file-native-recovery-20261019/results/build/release/file-native-incremental",
+      "binary_sha256": "689f7ceb569ec628132fbd57e16b13d12c60215a9d465f5440a5543530e31392",
+      "events": 280,
+      "seconds": 69.38280701311305
+    }
+  }
+]

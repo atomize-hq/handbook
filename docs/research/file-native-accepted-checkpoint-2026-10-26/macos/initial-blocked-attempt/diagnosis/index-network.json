@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/curl",
+    "--head",
+    "--max-time",
+    "10",
+    "--silent",
+    "--show-error",
+    "https://index.crates.io/zs/td/zstd"
+  ],
+  "exit": 6,
+  "stdout": "",
+  "stderr": "curl: (6) Could not resolve host: index.crates.io\n"
+}

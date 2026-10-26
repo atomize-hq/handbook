@@ -1,0 +1,38 @@
+{
+  "files": [
+    {
+      "path": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/pilot_worker.py",
+      "bytes": 16364,
+      "sha256": "c863bb202b46a3a395ea92610558bf10db28a65666e421addd612fe32b746045"
+    },
+    {
+      "path": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/checker.py",
+      "bytes": 718,
+      "sha256": "73d57eb1e01c384d4c501094966b3ee5b16217f6017162402219a36bc20e158d"
+    },
+    {
+      "path": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/pilot_recipe_native.py",
+      "bytes": 9919,
+      "sha256": "6c0699055797a95914fd976bdf1afd69bc2412d45455e95a03249bd5a9de664b"
+    },
+    {
+      "path": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/oracle_mapping_bridge.py",
+      "bytes": 5668,
+      "sha256": "7cb8b9edcedb61bef463ad919a64d90e4e5e88591cf140b81b407e86156020c0"
+    }
+  ],
+  "sdk_original_members_verified": 26,
+  "recipe_body_unchanged_except_exact_two_pass_successor": false,
+  "mapping_and_backlog_methods_verbatim": true,
+  "administrative_route_change": "Original expired admission/prefund/phase prefix and trailing administrative finalizer fields replaced by current human authorization plus actual Linux host source/process/resource/EOF checks. No fake historical receipt or40ms qualification.",
+  "scope": "One real A/N64/H3 pilot, cap37 engine calls; full decoder/oracle sources unchanged",
+  "strict_parser_verbatim_from": "sdk/native_resources_v3.py",
+  "preengine_import_failure_retained": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/preengine-import-failure-01",
+  "engine_invocations_before_wiring_fix": 0,
+  "recipe_changes": [
+    "Expired administrative prefix/trailer replaced by native task checks",
+    "Initial admission event replaced by native start event with supplied forecast",
+    "Final repeated cleanup loop replaced by retained exact-two-pass successor"
+  ],
+  "preengine_admission_reference_failure_retained": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3/preengine-admission-reference-failure-02"
+}

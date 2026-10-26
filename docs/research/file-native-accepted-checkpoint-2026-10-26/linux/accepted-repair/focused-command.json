@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--lib",
+    "--target-dir",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/target",
+    "physical_lifetime::checkpoint_tests::",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env": {
+    "EXP_PACK_TEST_ROOT": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/fixtures",
+    "TMPDIR": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/tmp",
+    "TMP": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/tmp",
+    "TEMP": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

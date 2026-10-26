@@ -1,0 +1,16 @@
+{
+  "pid": 44187,
+  "parent": 44080,
+  "pgid": 44187,
+  "argv": [
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/target/release/file-native-incremental"
+  ],
+  "role": "engine",
+  "root": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/store/disposable/store",
+  "env_overrides": {
+    "EXP_BARRIER": "physical-before-selection",
+    "EXP_READY": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/controls/2-readiness-maintenance.ready",
+    "EXP_RELEASE": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/controls/2-readiness-maintenance.release"
+  },
+  "start_ns": 3647984119469166
+}

@@ -1,0 +1,32 @@
+{
+  "token": "eb5628fa7580469a88e7b16dc47bd6a9",
+  "label": "engine-13-publish",
+  "argv": [
+    "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+  ],
+  "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+  "stdin_expected": 329,
+  "stdin_sent": 329,
+  "environment": {
+    "EXP_BARRIER": "candidate-ready",
+    "EXP_READY": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-publisher/ready",
+    "EXP_RELEASE": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-publisher/release"
+  },
+  "limit": 2147483648,
+  "timeout": 60,
+  "starts_ns": 3811521484414938,
+  "pid": 2296292,
+  "birth": 381152148,
+  "positive_rss": 2478080,
+  "observed_ns": 3811521491244015,
+  "stdin_eof_ns": 3811521492651033,
+  "exit": 0,
+  "native_wait_ns": 3811521806606281,
+  "remaining_group": [],
+  "stdout-eof": 3811521794659668,
+  "stdout-bytes": 3848,
+  "stderr-eof": 3811521794726133,
+  "stderr-bytes": 0,
+  "seconds": 0.33314283890649676,
+  "readers_joined": true
+}

@@ -1,0 +1,40 @@
+{
+  "name": "compile",
+  "argv": [
+    "cargo",
+    "test",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--workspace",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/target",
+    "--no-run"
+  ],
+  "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "timeout_seconds": 900,
+  "stdout": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/compile.stdout",
+  "stderr": "/var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3/logs/compile.stderr",
+  "pid": 3616342,
+  "process_group": 3616342,
+  "exit": 0,
+  "seconds": 31.504379235208035,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 1007681536,
+  "sampled_tree_plus_supervisor_peak_rss": 1027518464,
+  "sampled_process_peak_rss": 492556288,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 109109248,
+    "files": 422
+  },
+  "native_free_after": 63888265216
+}

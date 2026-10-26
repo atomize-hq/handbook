@@ -1,0 +1,23 @@
+[
+  {
+    "classification": "LATEST_ACCEPTED_SOURCE_CLI",
+    "original_absolute_path": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental",
+    "bytes": 4063928,
+    "sha256": "058c306ea04c6b06057aa51a0197eead832363482c1c9559b1de6431a5dedf40",
+    "binary_exported": false
+  },
+  {
+    "classification": "PROTECTED_OLDER_CP1_CLI",
+    "original_absolute_path": "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental",
+    "bytes": 3545928,
+    "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "binary_exported": false
+  },
+  {
+    "classification": "PROTECTED_CP1_EVIDENCE_COPY",
+    "original_absolute_path": "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary",
+    "bytes": 3545928,
+    "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "binary_exported": false
+  }
+]

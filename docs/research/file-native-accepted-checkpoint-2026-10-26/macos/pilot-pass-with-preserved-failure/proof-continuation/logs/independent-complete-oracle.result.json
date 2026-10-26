@@ -1,0 +1,83 @@
+{
+  "pid": 45181,
+  "parent": 45117,
+  "pgid": 45181,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-I",
+    "-S",
+    "-B",
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/checker.py"
+  ],
+  "role": "checker",
+  "root": null,
+  "env_overrides": {},
+  "start_ns": 3648166845846916,
+  "birth": {
+    "pid_requested": 45181,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 45181,
+    "ppid": 45117,
+    "uid": 501,
+    "pgid": 45181,
+    "state": 2,
+    "start": [
+      1792959718,
+      435235
+    ]
+  },
+  "before_input": {
+    "pid": 45181,
+    "positive_rss": 688128,
+    "before_stdin_delivery": true,
+    "observed_ns": 3648166846241791,
+    "birth": {
+      "pid_requested": 45181,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 45181,
+      "ppid": 45117,
+      "uid": 501,
+      "pgid": 45181,
+      "state": 2,
+      "start": [
+        1792959718,
+        435235
+      ]
+    }
+  },
+  "exit": 0,
+  "seconds": 0.1690637501887977,
+  "stdout_eof": true,
+  "stderr_eof": true,
+  "stdin_closed": true,
+  "original_handle_waited": true,
+  "stdout_bytes": 131,
+  "stderr_bytes": 0,
+  "stdout_sha256": "fc9498a19cd6828a5d8fb72111ec389a6195f633a71648cbdce60d53454707e2",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "exception": null,
+  "closure": [
+    {
+      "pgid_requested": 45181,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3648166979223375
+    },
+    {
+      "pgid_requested": 45181,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3648166998246250
+    }
+  ],
+  "escaped_survivors": [],
+  "sampled_peak_process_rss": 35586048
+}

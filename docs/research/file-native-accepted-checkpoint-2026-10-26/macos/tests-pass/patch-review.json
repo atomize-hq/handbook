@@ -1,0 +1,8 @@
+{
+  "identity": "baseline0628322e4b48e0efad19cdc32238a622d4aaa7a8 PLUS telemetry fixture n1-to10",
+  "impact": "GitNexus target upstream impact attempted; standalone path unregistered. Graph coverage UNKNOWN; manual low-risk test-only scope, no production caller change. No bootstrap.",
+  "review": "Focused read-only review: Store::init rejects n<10; n10 is minimum valid fixture. Telemetry assertions depend on two bounded publication reads and scope restoration, not n1. Every assertion retained; production bounds unchanged.",
+  "old_io_sha256": "1e401ad489b78e10845dac65ccc1b36ee9f99753c0870aa5a41c4da6661aa02c",
+  "new_io_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "unchanged_admitted_files": 24
+}

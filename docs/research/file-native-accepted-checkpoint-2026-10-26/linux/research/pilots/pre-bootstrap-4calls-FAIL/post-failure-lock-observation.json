@@ -1,0 +1,22 @@
+[
+  {
+    "path": "pack-maintenance.lock",
+    "conflicting_live_holder": false
+  },
+  {
+    "path": "physical-capture.lock",
+    "conflicting_live_holder": false
+  },
+  {
+    "path": "writer.lock",
+    "conflicting_live_holder": false
+  },
+  {
+    "path": "pack-readers.lock",
+    "conflicting_live_holder": false
+  },
+  {
+    "path": "preparation.lock",
+    "conflicting_live_holder": false
+  }
+]

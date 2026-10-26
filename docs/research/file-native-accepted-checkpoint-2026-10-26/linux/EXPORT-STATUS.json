@@ -1,0 +1,50 @@
+{
+  "status": "SOURCE_EXPORT_READY_NOT_YET_GIT_COMMITTED",
+  "utc": "2026-10-26T15:30:41.769484+00:00",
+  "accepted_source_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+  "accepted_source_file_count": 26,
+  "accepted_repair_patch_sha256": "4ee1eceb2416a9c3d1124e453079992c46be6882e886693d8a56f93939909571",
+  "accepted_repair_review": "CLEAN_NO_BLOCKERS_REQUIRED_PROOF_SATISFIED_FOR_BOUNDED_REPAIR",
+  "accepted_repair_focused_tests_passed": 9,
+  "accepted_repair_work_bound_passed": 1,
+  "accepted_repair_non_test_compile": "PASS",
+  "latest_pilot": "FAIL/PENDING_17_CALLS",
+  "latest_cleanup_timing": "7_OF_8_BATCHES_OVER_50MS",
+  "complete_final_H3_oracle": "UNRUN",
+  "rejected_optimization_manifest_sha256": "01bc6bc93a827c0490e45b712647d70eebd35cc1facbb5f76dbb64ee57c804c3",
+  "rejected_optimization": "NOT_ACCEPTED_NOT_PROMOTED_CWR01_CWR02_P2_OPEN",
+  "rejected_strict_regression": "FAIL_TWO_CALLS_PENDING4_MODELED56.15MS_EACH",
+  "originals_modified": false,
+  "git_commits_by_linux_session": 0,
+  "step2_cleanup_started": false,
+  "patch_checks": [
+    {
+      "label": "accepted-repair-exact-preimage",
+      "argv": [
+        "git",
+        "apply",
+        "--check",
+        "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/accepted-repair/repair.patch"
+      ],
+      "cwd": "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/accepted-repair/baseline-source-fixture10",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "error: dev/null: No such file or directory\n",
+      "applied": false
+    },
+    {
+      "label": "rejected-research-patch-only-not-applied",
+      "argv": [
+        "git",
+        "apply",
+        "--check",
+        "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/rejected-research/checkpoint-write-optimization/candidate.patch"
+      ],
+      "cwd": "/var/tmp/file-native-git-checkpoint-export-20261026-01a16fd3/bundle/accepted-source/final-engine",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "applied": false
+    }
+  ]
+}

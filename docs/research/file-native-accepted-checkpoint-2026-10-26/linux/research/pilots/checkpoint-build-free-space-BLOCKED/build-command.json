@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "cargo",
+    "build",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--bin",
+    "file-native-incremental",
+    "--target-dir",
+    "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/target"
+  ],
+  "env": {
+    "TMPDIR": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/tmp",
+    "TMP": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/tmp",
+    "TEMP": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3/tmp",
+    "CARGO_INCREMENTAL": "0"
+  }
+}

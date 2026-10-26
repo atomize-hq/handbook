@@ -1,0 +1,57 @@
+[
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store",
+    "file": false,
+    "elapsed_ns": 5938
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-progress/checkpoint-g1.selector-stage",
+    "file": true,
+    "elapsed_ns": 9137838
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-progress",
+    "file": false,
+    "elapsed_ns": 26556
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store",
+    "file": false,
+    "elapsed_ns": 5967
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-progress/checkpoint-g1.work-stage",
+    "file": true,
+    "elapsed_ns": 9251149
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-progress",
+    "file": false,
+    "elapsed_ns": 52312
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store",
+    "file": false,
+    "elapsed_ns": 5489
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-plans",
+    "file": false,
+    "elapsed_ns": 8877551
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-progress",
+    "file": false,
+    "elapsed_ns": 8770735
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store",
+    "file": false,
+    "elapsed_ns": 8771201
+  },
+  {
+    "path": "/var/tmp/file-native-checkpoint-write-optimization-20261026-01a16fd3/fixtures/red-ancestor/checkpoint-resume-3680101-1793025271361514857-0/disposable/store/physical-plans",
+    "file": false,
+    "elapsed_ns": 8741927
+  }
+]

@@ -1,0 +1,498 @@
+[
+  {
+    "path": "/home/spenser/capsule-5a65a21.tar",
+    "archive_bytes": 27965440,
+    "members": 746,
+    "declared_file_bytes": 27403124,
+    "prefixes": {
+      "native-macos": 422,
+      "evidence": 230,
+      "src": 14,
+      "control": 10,
+      "consumers": 9,
+      "inputs": 4,
+      ".gitignore": 1,
+      "Cargo.lock": 1
+    },
+    "sample": [
+      ".gitignore",
+      "Cargo.lock",
+      "Cargo.toml"
+    ]
+  },
+  {
+    "path": "/home/spenser/capsule-7ac70f9.tar",
+    "archive_bytes": 7127040,
+    "members": 379,
+    "declared_file_bytes": 6844379,
+    "prefixes": {
+      "native-macos": 310,
+      "src": 14,
+      "control": 10,
+      "consumers": 9,
+      "inputs": 4,
+      ".gitignore": 1,
+      "Cargo.lock": 1,
+      "Cargo.toml": 1
+    },
+    "sample": [
+      ".gitignore",
+      "Cargo.lock",
+      "Cargo.toml"
+    ]
+  },
+  {
+    "path": "/home/spenser/capsule-7e00d22.tar",
+    "archive_bytes": 9369600,
+    "members": 459,
+    "declared_file_bytes": 9027515,
+    "prefixes": {
+      "native-macos": 380,
+      "src": 14,
+      "control": 10,
+      "consumers": 9,
+      "inputs": 4,
+      ".gitignore": 1,
+      "Cargo.lock": 1,
+      "Cargo.toml": 1
+    },
+    "sample": [
+      ".gitignore",
+      "Cargo.lock",
+      "Cargo.toml"
+    ]
+  },
+  {
+    "path": "/home/spenser/capsule-recipe-precommit.tar",
+    "archive_bytes": 471040,
+    "members": 65,
+    "declared_file_bytes": 419927,
+    "prefixes": {
+      "src": 14,
+      "control": 10,
+      "consumers": 9,
+      "inputs": 4,
+      ".gitignore": 1,
+      "Cargo.lock": 1,
+      "Cargo.toml": 1,
+      "README.md": 1
+    },
+    "sample": [
+      ".gitignore",
+      "Cargo.lock",
+      "Cargo.toml"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-capsule-f3e942f.tar",
+    "archive_bytes": 440320,
+    "members": 58,
+    "declared_file_bytes": 392763,
+    "prefixes": {
+      "src": 14,
+      "control": 10,
+      "consumers": 9,
+      "inputs": 4,
+      ".gitignore": 1,
+      "Cargo.lock": 1,
+      "Cargo.toml": 1,
+      "README.md": 1
+    },
+    "sample": [
+      ".gitignore",
+      "Cargo.lock",
+      "Cargo.toml"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-capsule-fb73e75.tar",
+    "archive_bytes": 419840,
+    "members": 59,
+    "declared_file_bytes": 374295,
+    "prefixes": {
+      "docs": 59
+    },
+    "sample": [
+      "docs",
+      "docs/research",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-capsule-rootfix-precommit.tar",
+    "archive_bytes": 460800,
+    "members": 62,
+    "declared_file_bytes": 404920,
+    "prefixes": {
+      "src": 14,
+      "control": 10,
+      "consumers": 9,
+      "inputs": 4,
+      ".gitignore": 1,
+      "Cargo.lock": 1,
+      "Cargo.toml": 1,
+      "README.md": 1
+    },
+    "sample": [
+      ".gitignore",
+      "Cargo.lock",
+      "Cargo.toml"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-evidence-20261018.tar.gz",
+    "archive_bytes": 1930575,
+    "members": 85,
+    "declared_file_bytes": 1952060,
+    "prefixes": {
+      ".": 85
+    },
+    "sample": [
+      ".",
+      "./outer.json.gz",
+      "./walk-cases"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix-evidence.tar.gz",
+    "archive_bytes": 939385,
+    "members": 28,
+    "declared_file_bytes": 942298,
+    "prefixes": {
+      ".": 28
+    },
+    "sample": [
+      ".",
+      "./unit.stdout.gz",
+      "./namespace"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/native-raw.tar.gz",
+    "archive_bytes": 753508,
+    "members": 121,
+    "declared_file_bytes": 7986290,
+    "prefixes": {
+      "matrix": 14,
+      "focused-data": 6,
+      "bash-A": 5,
+      "bash-B": 5,
+      "historical2-data": 2,
+      "stage1-data": 2,
+      "supplement-data": 2,
+      "admission_tiers.py": 1
+    },
+    "sample": [
+      "admission_tiers.py",
+      "bash-A/discovery.txt",
+      "bash-A/extracted-path.txt"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/source.tar",
+    "archive_bytes": 1198080,
+    "members": 163,
+    "declared_file_bytes": 1016836,
+    "prefixes": {
+      "docs": 163
+    },
+    "sample": [
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/two-roots.tar.gz",
+    "archive_bytes": 5525691,
+    "members": 17967,
+    "declared_file_bytes": 209668643,
+    "prefixes": {
+      "fixtures": 17956,
+      "unit-cache": 11
+    },
+    "sample": [
+      "fixtures",
+      "fixtures/bash-B16-immediate-pack",
+      "fixtures/bash-B16-immediate-pack/disposable"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/three-roots.tar.gz",
+    "archive_bytes": 7702241,
+    "members": 28594,
+    "declared_file_bytes": 215825212,
+    "prefixes": {
+      "final-qualification-fixtures": 20591,
+      "recovery-complete-fixture": 7901,
+      "recovery-bootstrap-fixture": 102
+    },
+    "sample": [
+      "final-qualification-fixtures",
+      "final-qualification-fixtures/capsule",
+      "final-qualification-fixtures/capsule/A-L-inventory.jsonl"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/native-evidence.tar.gz",
+    "archive_bytes": 3860096,
+    "members": 5583,
+    "declared_file_bytes": 6679711,
+    "prefixes": {
+      "evidence": 5583
+    },
+    "sample": [
+      "evidence",
+      "evidence/allocation.md",
+      "evidence/audit_fixtures.py"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/packet-repair-supplement.tar.gz",
+    "archive_bytes": 48830,
+    "members": 230,
+    "declared_file_bytes": 1113061,
+    "prefixes": {
+      "packet-repair-supplement": 230
+    },
+    "sample": [
+      "packet-repair-supplement",
+      "packet-repair-supplement/cow",
+      "packet-repair-supplement/cow/harness-session-1792337987556909967.json"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/source.tar",
+    "archive_bytes": 471040,
+    "members": 58,
+    "declared_file_bytes": 417594,
+    "prefixes": {
+      "docs": 57,
+      "AGENTS.md": 1
+    },
+    "sample": [
+      "AGENTS.md",
+      "docs",
+      "docs/research"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/runtime-raw.tar.gz",
+    "archive_bytes": 8136562,
+    "members": 15036,
+    "declared_file_bytes": 140385034,
+    "prefixes": {
+      "capsule-v2-data": 5082,
+      "capsule-data": 5081,
+      "replay-data": 2234,
+      "deep-data": 1188,
+      "extra-data": 788,
+      "legacy-data": 245,
+      "paired-data": 214,
+      "ordinary-A": 52
+    },
+    "sample": [
+      "bash-copy-A/collection.yaml",
+      "bash-copy-A/docs/item---d000008.md",
+      "bash-copy-A/docs/item-attachments-d000009/evidence/deep/source.txt"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/source.tar",
+    "archive_bytes": 532480,
+    "members": 95,
+    "declared_file_bytes": 447926,
+    "prefixes": {
+      "source": 95
+    },
+    "sample": [
+      "source/docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py",
+      "source/docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_windows.py",
+      "source/docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_wsl_final.py"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/evidence-compatible.tar.gz",
+    "archive_bytes": 2341143,
+    "members": 82,
+    "declared_file_bytes": 8972985,
+    "prefixes": {
+      "extra-data": 4,
+      "paired-data": 4,
+      "replay-data": 4,
+      "checks-data": 4,
+      "final-core-extra": 4,
+      "small": 2,
+      "oracle-small-v2": 2,
+      "backup-pipeline": 2
+    },
+    "sample": [
+      "protocol.json",
+      "compatible-focused-legacy.json",
+      "backup-pipeline-supplement.json"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/evidence-final-core.tar.gz",
+    "archive_bytes": 2339570,
+    "members": 71,
+    "declared_file_bytes": 8964716,
+    "prefixes": {
+      "extra-data": 4,
+      "paired-data": 4,
+      "replay-data": 4,
+      "checks-data": 4,
+      "final-core-extra": 4,
+      "small": 2,
+      "oracle-small-v2": 2,
+      "backup-pipeline": 2
+    },
+    "sample": [
+      "protocol.json",
+      "backup-pipeline-supplement.json",
+      "final-core-tests.json"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/evidence-final.tar.gz",
+    "archive_bytes": 1892054,
+    "members": 52,
+    "declared_file_bytes": 7151622,
+    "prefixes": {
+      "extra-data": 4,
+      "paired-data": 4,
+      "replay-data": 4,
+      "checks-data": 4,
+      "small": 2,
+      "oracle-small-v2": 2,
+      "backup-pipeline": 2,
+      "protocol.json": 1
+    },
+    "sample": [
+      "protocol.json",
+      "backup-pipeline-supplement.json",
+      "capsule.json"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/evidence.tar.gz",
+    "archive_bytes": 1402282,
+    "members": 40,
+    "declared_file_bytes": 4384561,
+    "prefixes": {
+      "extra-data": 4,
+      "paired-data": 4,
+      "replay-data": 4,
+      "checks-data": 4,
+      "small": 2,
+      "protocol.json": 1,
+      "capsule.json": 1,
+      "replay.json": 1
+    },
+    "sample": [
+      "protocol.json",
+      "capsule.json",
+      "replay.json"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/legacy-fixtures.tar.gz",
+    "archive_bytes": 30980,
+    "members": 281,
+    "declared_file_bytes": 686856,
+    "prefixes": {
+      "B": 184,
+      "A": 97
+    },
+    "sample": [
+      "A",
+      "A/attempt-hints",
+      "A/attempts"
+    ]
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019-source.tar",
+    "archive_bytes": 573440,
+    "members": 83,
+    "declared_file_bytes": 413826,
+    "prefixes": {
+      "file-native-incremental-engine-experiment-2026-10-18": 75,
+      "file-native-recovery-reclamation-2026-10-19": 8
+    },
+    "sample": [
+      "file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py",
+      "file-native-incremental-engine-experiment-2026-10-18/accounting_windows.py",
+      "file-native-incremental-engine-experiment-2026-10-18/accounting_wsl_final.py"
+    ]
+  },
+  {
+    "path": "/home/spenser/incremental-extra-evidence.tar.gz",
+    "archive_bytes": 610419,
+    "members": 26,
+    "declared_file_bytes": 614285,
+    "prefixes": {
+      "incremental-extra-evidence": 26
+    },
+    "sample": [
+      "incremental-extra-evidence",
+      "incremental-extra-evidence/old-oracle",
+      "incremental-extra-evidence/old-oracle/oracle-probe.json.gz"
+    ]
+  },
+  {
+    "path": "/home/spenser/incremental-recipe-proof.tar.gz",
+    "archive_bytes": 214376,
+    "members": 3,
+    "declared_file_bytes": 219139,
+    "prefixes": {
+      "proof-capsule": 3
+    },
+    "sample": [
+      "proof-capsule",
+      "proof-capsule/manifest.json",
+      "proof-capsule/part-000.jsonl.gz"
+    ]
+  },
+  {
+    "path": "/home/spenser/incremental-replay-evidence.tar.gz",
+    "archive_bytes": 1708580,
+    "members": 44,
+    "declared_file_bytes": 1721534,
+    "prefixes": {
+      "incremental-replay-evidence": 44
+    },
+    "sample": [
+      "incremental-replay-evidence",
+      "incremental-replay-evidence/outer.json.gz",
+      "incremental-replay-evidence/test.stdout.gz"
+    ]
+  },
+  {
+    "path": "/home/spenser/native-linux-accounting-evidence.tar.gz",
+    "archive_bytes": 1186463,
+    "members": 30,
+    "declared_file_bytes": 1196716,
+    "prefixes": {
+      "native-linux-accounting": 30
+    },
+    "sample": [
+      "native-linux-accounting",
+      "native-linux-accounting/accounting-environment.json",
+      "native-linux-accounting/build.stderr.gz"
+    ]
+  },
+  {
+    "path": "/home/spenser/native-linux-audit-evidence.tar.gz",
+    "archive_bytes": 315929,
+    "members": 16,
+    "declared_file_bytes": 318186,
+    "prefixes": {
+      ".": 16
+    },
+    "sample": [
+      ".",
+      "./outer.json.gz",
+      "./audit_lane.py.gz"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "completed_utc": "2026-10-26T12:20:42.656834+00:00",
+  "retained_evidence_files_checked": 734,
+  "all_evidence_unchanged": true,
+  "source26_all_unchanged": true,
+  "cli_unchanged": true,
+  "prior_report_manifest_unchanged": true,
+  "backlog_accounting_checked": true,
+  "new_experiment_executions": 0,
+  "active_lock_probes": 0,
+  "existing_path_mutations": 0
+}

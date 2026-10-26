@@ -1,0 +1,580 @@
+{
+  "source_files_verified": 25,
+  "sdk_members_verified": 26,
+  "source_identity": "0628322e4b48e0efad19cdc32238a622d4aaa7a8 + telemetry test fixture n1-to-n10",
+  "corrected_source_manifest_sha256": "1076b20ec662bc01a90119f15504789599fc3057f9014e9d5016c0d663fb646b",
+  "binary_sha256": "b46977f9440b5dea662c0ce547a7ca9b9b581358bf7755abf0a54b6c4df5873b",
+  "source_freeze_original_unchanged": true,
+  "adapter_files_unchanged": true,
+  "old_attempt_all_manifest_files_unchanged": 657,
+  "prior_artifacts_unchanged": [
+    "REPORT.md",
+    "result.json",
+    "pilot-result.json",
+    "EVIDENCE-SHA256.json",
+    "retained-store-inventory.json"
+  ],
+  "engine_calls": 12,
+  "checker_calls": 0,
+  "resources": {
+    "name": "pilot-bootstrap-run",
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/pilot_worker.py"
+    ],
+    "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+    "timeout_seconds": 480,
+    "stdout": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/logs/pilot-bootstrap-run.stdout",
+    "stderr": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/logs/pilot-bootstrap-run.stderr",
+    "pid": 769118,
+    "process_group": 769118,
+    "exit": 0,
+    "seconds": 5.9370075347833335,
+    "termination_reason": null,
+    "process_closure_observations": [
+      [],
+      []
+    ],
+    "process_closure_verified": true,
+    "sampled_tree_peak_rss": 31674368,
+    "sampled_tree_plus_supervisor_peak_rss": 50167808,
+    "sampled_process_peak_rss": 26886144,
+    "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+    "owned_after": {
+      "allocated_bytes": 6942720,
+      "files": 267
+    },
+    "native_free_after": 36504100864
+  },
+  "resource_error": null,
+  "closure": {
+    "processes_closed": true,
+    "handles_closed": true,
+    "python_callbacks_joined": true,
+    "secondary": []
+  },
+  "locks": [
+    {
+      "path": "pack-maintenance.lock",
+      "conflicting_live_holder": false
+    },
+    {
+      "path": "physical-capture.lock",
+      "conflicting_live_holder": false
+    },
+    {
+      "path": "writer.lock",
+      "conflicting_live_holder": false
+    },
+    {
+      "path": "pack-readers.lock",
+      "conflicting_live_holder": false
+    },
+    {
+      "path": "preparation.lock",
+      "conflicting_live_holder": false
+    },
+    {
+      "path": "physical-pins/physical-1-birth-769131-1792966800367777795-0.lock",
+      "conflicting_live_holder": false
+    }
+  ],
+  "native_calls": [
+    {
+      "label": "engine-01-init",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "init",
+        "mode": "A",
+        "consumer": "project",
+        "count": 64
+      },
+      "pid": 769120,
+      "birth": 379695490,
+      "positive_rss": 2519040,
+      "observed_ns": 3796954911841739,
+      "stdin_eof_ns": 3796954912261275,
+      "native_wait_ns": 3796959285727560,
+      "exit": 0,
+      "stdout_eof_ns": 3796959243390336,
+      "stderr_eof_ns": 3796959243229082,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 4335238626,
+      "result": null
+    },
+    {
+      "label": "engine-02-lifecycle",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "lifecycle",
+        "operation": "setup"
+      },
+      "pid": 769125,
+      "birth": 379695929,
+      "positive_rss": 2207744,
+      "observed_ns": 3796959301209840,
+      "stdin_eof_ns": 3796959301962378,
+      "native_wait_ns": 3796959333311789,
+      "exit": 0,
+      "stdout_eof_ns": 3796959329437749,
+      "stderr_eof_ns": 3796959329569814,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 32629403,
+      "result": null
+    },
+    {
+      "label": "engine-03-resolve",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "resolve",
+        "request_id": "initial"
+      },
+      "pid": 769128,
+      "birth": 379695935,
+      "positive_rss": 192512,
+      "observed_ns": 3796959354661729,
+      "stdin_eof_ns": 3796959354957693,
+      "native_wait_ns": 3796959356021767,
+      "exit": 0,
+      "stdout_eof_ns": 3796959355493679,
+      "stderr_eof_ns": 3796959355543068,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 220397,
+      "result": null
+    },
+    {
+      "label": "engine-04-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "build",
+        "codec": "zstd",
+        "include_attempts": true,
+        "cleanup": false,
+        "force": true,
+        "bootstrap": true
+      },
+      "pid": 769131,
+      "birth": 379695936,
+      "positive_rss": 2494464,
+      "observed_ns": 3796959368430022,
+      "stdin_eof_ns": 3796959368658819,
+      "native_wait_ns": 3796959733075860,
+      "exit": 0,
+      "stdout_eof_ns": 3796959707451416,
+      "stderr_eof_ns": 3796959707382089,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 343390028,
+      "result": {
+        "catalog": "a164f1c764b6af86d5974d0ca09221bb83112c885eb5eec1194bc1b2bfd9aa60",
+        "discovery": {
+          "completed": {
+            "selected": {
+              "digest": "3a0c01116f5d85bc11a27f112d47f2887e84f595af3f2f9eec0b1de7c479b52f",
+              "publication": "publication-769120-1792966798744101783-80"
+            },
+            "sequence": 0
+          },
+          "deferred": [],
+          "include_attempts": true,
+          "interval": null,
+          "version": 1
+        },
+        "forced_correctness": true,
+        "generation": {
+          "id": "physical-1-birth-769131-1792966800367777795-0",
+          "ordinal": 1,
+          "plan": "6d8142a8e5c35aebce7dbd2ef6b0afa082e28cda6434225325502dd0954b1e42"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "reserved_bytes": 268435456,
+        "status": "registered",
+        "successfully_deleted_bytes_recorded": 0,
+        "used_bytes": 82591
+      }
+    },
+    {
+      "label": "engine-05-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769134,
+      "birth": 379695974,
+      "positive_rss": 380928,
+      "observed_ns": 3796959744217157,
+      "stdin_eof_ns": 3796959744580024,
+      "native_wait_ns": 3796959808233125,
+      "exit": 0,
+      "stdout_eof_ns": 3796959801586604,
+      "stderr_eof_ns": 3796959801768480,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 56703300,
+      "result": {
+        "batch_ns": 56462540,
+        "candidate_limit": 1000,
+        "candidates": 96,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-06-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769137,
+      "birth": 379695983,
+      "positive_rss": 360448,
+      "observed_ns": 3796959830835663,
+      "stdin_eof_ns": 3796959831153671,
+      "native_wait_ns": 3796959944829365,
+      "exit": 0,
+      "stdout_eof_ns": 3796959897997066,
+      "stderr_eof_ns": 3796959898223062,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 66105755,
+      "result": {
+        "batch_ns": 66001971,
+        "candidate_limit": 1000,
+        "candidates": 82,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-07-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769140,
+      "birth": 379695995,
+      "positive_rss": 2260992,
+      "observed_ns": 3796959961253810,
+      "stdin_eof_ns": 3796959961927024,
+      "native_wait_ns": 3796960025472689,
+      "exit": 0,
+      "stdout_eof_ns": 3796960018231132,
+      "stderr_eof_ns": 3796960018683660,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 61350779,
+      "result": {
+        "batch_ns": 55586397,
+        "candidate_limit": 1000,
+        "candidates": 76,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-08-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769143,
+      "birth": 379696004,
+      "positive_rss": 2461696,
+      "observed_ns": 3796960050871007,
+      "stdin_eof_ns": 3796960051061091,
+      "native_wait_ns": 3796960114492637,
+      "exit": 0,
+      "stdout_eof_ns": 3796960105034507,
+      "stderr_eof_ns": 3796960104908442,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 58117153,
+      "result": {
+        "batch_ns": 53140526,
+        "candidate_limit": 1000,
+        "candidates": 76,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-09-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769146,
+      "birth": 379696013,
+      "positive_rss": 2396160,
+      "observed_ns": 3796960142612853,
+      "stdin_eof_ns": 3796960143100065,
+      "native_wait_ns": 3796960206521481,
+      "exit": 0,
+      "stdout_eof_ns": 3796960199606705,
+      "stderr_eof_ns": 3796960199790183,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 61061263,
+      "result": {
+        "batch_ns": 55718268,
+        "candidate_limit": 1000,
+        "candidates": 76,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-10-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769149,
+      "birth": 379696022,
+      "positive_rss": 360448,
+      "observed_ns": 3796960229220953,
+      "stdin_eof_ns": 3796960229714106,
+      "native_wait_ns": 3796960293573255,
+      "exit": 0,
+      "stdout_eof_ns": 3796960286499990,
+      "stderr_eof_ns": 3796960286309925,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 55942435,
+      "result": {
+        "batch_ns": 55789659,
+        "candidate_limit": 1000,
+        "candidates": 76,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-11-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769152,
+      "birth": 379696030,
+      "positive_rss": 192512,
+      "observed_ns": 3796960305839071,
+      "stdin_eof_ns": 3796960306128489,
+      "native_wait_ns": 3796960369587174,
+      "exit": 0,
+      "stdout_eof_ns": 3796960363138046,
+      "stderr_eof_ns": 3796960363235894,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 56168235,
+      "result": {
+        "batch_ns": 56060344,
+        "candidate_limit": 1000,
+        "candidates": 76,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    },
+    {
+      "label": "engine-12-packing",
+      "input": {
+        "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/disposable/store",
+        "action": "packing",
+        "operation": "cleanup"
+      },
+      "pid": 769155,
+      "birth": 379696039,
+      "positive_rss": 2134016,
+      "observed_ns": 3796960397171004,
+      "stdin_eof_ns": 3796960397854787,
+      "native_wait_ns": 3796960461296184,
+      "exit": 0,
+      "stdout_eof_ns": 3796960453069444,
+      "stderr_eof_ns": 3796960452839010,
+      "readers_joined": true,
+      "same_identity_remains": false,
+      "remaining_group": [],
+      "wall_ns": 59761097,
+      "result": {
+        "batch_ns": 54201253,
+        "candidate_limit": 1000,
+        "candidates": 76,
+        "completed": false,
+        "cooperative_limit_ms": 50,
+        "legacy_whole_index_indivisible": true,
+        "maintenance_deferral": "deferred:cleanup-entry-budget",
+        "native_allocation_credit": 0,
+        "selected_authority": "STORE.json",
+        "status": "cleaning"
+      }
+    }
+  ],
+  "cleanup_batches": [
+    {
+      "call": "engine-05-packing",
+      "batch_ns": 56462540,
+      "candidate_limit": 1000,
+      "candidates": 96,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-06-packing",
+      "batch_ns": 66001971,
+      "candidate_limit": 1000,
+      "candidates": 82,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-07-packing",
+      "batch_ns": 55586397,
+      "candidate_limit": 1000,
+      "candidates": 76,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-08-packing",
+      "batch_ns": 53140526,
+      "candidate_limit": 1000,
+      "candidates": 76,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-09-packing",
+      "batch_ns": 55718268,
+      "candidate_limit": 1000,
+      "candidates": 76,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-10-packing",
+      "batch_ns": 55789659,
+      "candidate_limit": 1000,
+      "candidates": 76,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-11-packing",
+      "batch_ns": 56060344,
+      "candidate_limit": 1000,
+      "candidates": 76,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    },
+    {
+      "call": "engine-12-packing",
+      "batch_ns": 54201253,
+      "candidate_limit": 1000,
+      "candidates": 76,
+      "completed": false,
+      "cooperative_limit_ms": 50,
+      "legacy_whole_index_indivisible": true,
+      "maintenance_deferral": "deferred:cleanup-entry-budget",
+      "native_allocation_credit": 0,
+      "selected_authority": "STORE.json",
+      "status": "cleaning"
+    }
+  ],
+  "cleanup50ms_target_misses": 8,
+  "store_files": 169,
+  "store_logical_bytes": 1650669,
+  "native_free_final": 36503228416
+}

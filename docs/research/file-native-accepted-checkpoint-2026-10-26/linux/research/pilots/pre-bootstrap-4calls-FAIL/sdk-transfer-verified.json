@@ -1,0 +1,138 @@
+{
+  "archive_sha256": "a3434929bf84706d42eca250db95635f1fdc6ce5c5ba2e3e8db0743e35eb1da0",
+  "member_count": 26,
+  "source_bytes": 483110,
+  "all_match": true,
+  "members": [
+    {
+      "path": "sdk/suite_adapter.py",
+      "bytes": 48263,
+      "sha256": "930c650e08de9f13cc905831239f53a5f5155b9252d0bdf1f41ace10eabed4c3"
+    },
+    {
+      "path": "research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+      "bytes": 3702,
+      "sha256": "a5ff418c13571fe1163a1ccfa8fdc01cf6af37d9f690009002c5cc3a49d4b431"
+    },
+    {
+      "path": "research/file-native-navigation-2026-10-19/oracle.py",
+      "bytes": 9057,
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+    },
+    {
+      "path": "research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+      "bytes": 9290,
+      "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+    },
+    {
+      "path": "research/file-native-packing-2026-10-20/independent.py",
+      "bytes": 13097,
+      "sha256": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66"
+    },
+    {
+      "path": "research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+      "bytes": 10936,
+      "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8"
+    },
+    {
+      "path": "sdk/outcome_oracle.py",
+      "bytes": 6564,
+      "sha256": "a5721ab4102ab742efe66f546c9016b051cd3914e07700cc3de7c0f55a3ced02"
+    },
+    {
+      "path": "sdk/verify_operational_v2.py",
+      "bytes": 10071,
+      "sha256": "e517d07c5f345e9fb3a90535d5185828147b45a27896e658dbf4164ea7a76caf"
+    },
+    {
+      "path": "sdk/quota_v2_oracle.py",
+      "bytes": 18418,
+      "sha256": "bf4e892298760c79ce5a164c3294e069e5188b8c2c260c8477e9c93e64c468d3"
+    },
+    {
+      "path": "sdk/paged_index.py",
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    {
+      "path": "sdk/physical_decoder_v6.py",
+      "bytes": 4036,
+      "sha256": "c4e0a160816372b76ffbfd2102a1a2d98985e0190bdbf2dff2c3fbb118ea3811"
+    },
+    {
+      "path": "sdk/physical_decoder_v5.py",
+      "bytes": 44817,
+      "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+    },
+    {
+      "path": "sdk/physical_decoder.py",
+      "bytes": 17128,
+      "sha256": "eb00a0b49ce4754b23bb4e4a340ec99070805cf43b6f2e1c1125d029f5453001"
+    },
+    {
+      "path": "sdk/native_resources_v3.py",
+      "bytes": 16072,
+      "sha256": "cbf601e0ebe547cc25ba194f5fc0f0d808300366388f0decfd866609701e96c5"
+    },
+    {
+      "path": "sdk/case_ledger.py",
+      "bytes": 14462,
+      "sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b"
+    },
+    {
+      "path": "sdk/focused_schedules.py",
+      "bytes": 27562,
+      "sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756"
+    },
+    {
+      "path": "sdk/focused_protocol.py",
+      "bytes": 50092,
+      "sha256": "27d67275e12f52e63efd2e79f9fdd6e74cfbd7b900ee720a9d24fc3f78a49129"
+    },
+    {
+      "path": "sdk/suite_growth.json",
+      "bytes": 10743,
+      "sha256": "10cafcf77caef864e07b8dec0c7d35af27c8638e87cbd9069f500ba4aab66e93"
+    },
+    {
+      "path": "sdk/suite_bootstrap.py",
+      "bytes": 16104,
+      "sha256": "8ce97085723d2657f9148bfa81bf3d70e67759c86872e30bd87b09805562a135"
+    },
+    {
+      "path": "sdk/suite_extensions.py",
+      "bytes": 48268,
+      "sha256": "71189d39ef28328563aaf1d26404ca89fa9c8b50cd2335f2b58bf1791a901f78"
+    },
+    {
+      "path": "sdk/suite_ordinary.py",
+      "bytes": 6561,
+      "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942"
+    },
+    {
+      "path": "sdk/suite_recovery.py",
+      "bytes": 21458,
+      "sha256": "cafc96fee600c22a8962343cf227d70f09fdb45cc76605eeaee75c0e27bd0caa"
+    },
+    {
+      "path": "sdk/suite_packing.py",
+      "bytes": 33671,
+      "sha256": "a965daddeac898d091753d152460c5734b1e5b90d4fe482d3a8b5f04cdd0487f"
+    },
+    {
+      "path": "sdk/suite_oracle.py",
+      "bytes": 11460,
+      "sha256": "59ac7c58f399230419edbc82ecd52c1585c7f15e65420d001353baaf3f3a915a"
+    },
+    {
+      "path": "research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+      "bytes": 8308,
+      "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe"
+    },
+    {
+      "path": "sdk/pilot_recipe.py",
+      "bytes": 14873,
+      "sha256": "afb62d7b4cbba98e973fff2549ffe26a0e1b07ff4a5248ef702035a81f00c386"
+    }
+  ]
+}

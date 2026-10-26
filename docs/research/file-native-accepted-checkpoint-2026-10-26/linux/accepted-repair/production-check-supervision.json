@@ -1,0 +1,39 @@
+{
+  "name": "production-check",
+  "argv": [
+    "cargo",
+    "check",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2",
+    "--lib",
+    "--target-dir",
+    "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/target"
+  ],
+  "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "timeout_seconds": 300,
+  "stdout": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/logs/production-check.stdout",
+  "stderr": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3/logs/production-check.stderr",
+  "pid": 885988,
+  "process_group": 885988,
+  "exit": 0,
+  "seconds": 2.9213863438926637,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 412540928,
+  "sampled_tree_plus_supervisor_peak_rss": 430931968,
+  "sampled_process_peak_rss": 381059072,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 110923776,
+    "files": 847
+  },
+  "native_free_after": 34145214464
+}

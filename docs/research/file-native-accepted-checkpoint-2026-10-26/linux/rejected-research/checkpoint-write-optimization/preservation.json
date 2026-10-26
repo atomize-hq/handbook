@@ -1,0 +1,38 @@
+{
+  "utc": "2026-10-26T14:47:52.747565+00:00",
+  "current_runtime26_unchanged": true,
+  "old_freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "prior_evidence": [
+    {
+      "root": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "files_checked": 734,
+      "unchanged": true
+    },
+    {
+      "root": "/var/tmp/file-native-online-pilot-checkpoint-resume-20261025-01a16fd3",
+      "files_checked": 48,
+      "unchanged": true
+    },
+    {
+      "root": "/var/tmp/file-native-checkpoint-repair-20261025-01a16fd3",
+      "files_checked": 857,
+      "unchanged": true
+    },
+    {
+      "root": "/var/tmp/file-native-online-pilot-n64-h3-20261025-01a16fd3",
+      "files_checked": 657,
+      "unchanged": true
+    },
+    {
+      "root": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+      "files_checked": 277,
+      "unchanged": true
+    }
+  ],
+  "native_available_bytes": 63034212352,
+  "owned_allocated_bytes_including_baseline_candidate_red_target_fixtures_logs": 112652288,
+  "owned_files": 1010,
+  "new_pilot_calls": 0,
+  "candidate_promoted": false,
+  "candidate_manifest_sha256": "01bc6bc93a827c0490e45b712647d70eebd35cc1facbb5f76dbb64ee57c804c3"
+}

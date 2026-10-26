@@ -1,0 +1,15 @@
+{
+  "source_identity": "baseline-plus-one-test-fixture-patch",
+  "baseline_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "baseline_freeze_sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+  "patch_sha256": "2dc0263e4ead79cdee5c9aa7af2839ec4495d2cfcb02a6e818dad776e41b1d61",
+  "new_io_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "corrected_code_manifest_sha256": "1076b20ec662bc01a90119f15504789599fc3057f9014e9d5016c0d663fb646b",
+  "source_files": 25,
+  "unchanged_baseline_files": 24,
+  "only_changed_path": "src/io.rs",
+  "original_manifest_preserved": true,
+  "exact_single_replacement": true,
+  "assertions_unchanged": true,
+  "engine_minimum_unchanged": true
+}

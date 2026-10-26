@@ -1,0 +1,167 @@
+{
+  "all_31": [
+    {
+      "test": "bounds_tests::bounded_file_and_indirection_routes_refuse",
+      "status": "ok"
+    },
+    {
+      "test": "disk::codec_tests::compact_refuses_damage_before_allocating",
+      "status": "ok"
+    },
+    {
+      "test": "io::telemetry_tests::telemetry_old_suffix_vs_deferred",
+      "status": "ok"
+    },
+    {
+      "test": "io::telemetry_tests::telemetry_writer_observes_nested_io",
+      "status": "ok"
+    },
+    {
+      "test": "lifetime::tests::legacy_owner_cannot_acquire_new_preselection_proof",
+      "status": "ok"
+    },
+    {
+      "test": "lifetime::tests::stage_handle_aliases_refuse_before_truncation",
+      "status": "ok"
+    },
+    {
+      "test": "lifetime::tests::terminal_caps_and_charge_are_independent_of_live_slots",
+      "status": "ok"
+    },
+    {
+      "test": "lifetime::tests::v1_bytes_and_old_parser_boundary_are_preserved",
+      "status": "ok"
+    },
+    {
+      "test": "pack::boundary_tests::raw_record_builder_bound",
+      "status": "ok"
+    },
+    {
+      "test": "pack::tests::cached_metadata_matches_owned_allocations_on_growth_and_failure",
+      "status": "ok"
+    },
+    {
+      "test": "pack::tests::decoder_never_uses_advertised_size",
+      "status": "ok"
+    },
+    {
+      "test": "pack::tests::typed_keys_exclude_controls_and_active_payloads",
+      "status": "ok"
+    },
+    {
+      "test": "packing::boundary_tests::catalog_count_bound",
+      "status": "ok"
+    },
+    {
+      "test": "packing::boundary_tests::install_birth_no_adoption",
+      "status": "ok"
+    },
+    {
+      "test": "packing::pace_tests::closed",
+      "status": "ok"
+    },
+    {
+      "test": "packing::pace_tests::header",
+      "status": "ok"
+    },
+    {
+      "test": "packing::pace_tests::schedule",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::caller_limit_precedes_raw_and_zstd_bodies_after_all_routes",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::constructor_reservation_evicts_before_allocating_output",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::loading_indexes_evicts_before_transient_allocation",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::mixed_capture_and_cold_warm_measurements_reconcile",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::paged_cache_identity_preserves_physical_instance",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::paged_four_routes_negative_duplicates_and_conflict",
+      "status": "ok"
+    },
+    {
+      "test": "packing::tests::production_builder_preserves_near_limit_index_bytes",
+      "status": "ok"
+    },
+    {
+      "test": "paged::tests::paged_exact_geometry_and_closed_keys",
+      "status": "ok"
+    },
+    {
+      "test": "paged::tests::paged_maximum_keys_split_before_total_index_bound",
+      "status": "ok"
+    },
+    {
+      "test": "paged::tests::paged_positive_negative_boundary_and_cache",
+      "status": "ok"
+    },
+    {
+      "test": "paged::tests::paged_touched_untouched_and_malformed_refusal",
+      "status": "ok"
+    },
+    {
+      "test": "physical_lifetime::boundary_tests::work_byte_bound",
+      "status": "ok"
+    },
+    {
+      "test": "rolling::boundary_tests::discovery_byte_bound",
+      "status": "ok"
+    },
+    {
+      "test": "rolling::boundary_tests::discovery_count_bound",
+      "status": "ok"
+    }
+  ],
+  "workspace_summaries": [
+    {
+      "passed": 31,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0
+    }
+  ],
+  "complete_unfiltered_runs": 1,
+  "cargo_exit": 0
+}

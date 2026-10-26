@@ -1,0 +1,12 @@
+{
+  "utc": "2026-10-25T17:32:01.940127+00:00",
+  "coordinator_thread_id": "01a16f73-5070-7431-868e-b9e0e174b06e",
+  "requested_host_id": "local",
+  "status": "UNDELIVERED_TOOL_UNAVAILABLE",
+  "completion_discovery_count": 1,
+  "matching_send_message_to_thread_tools": [],
+  "send_attempted": false,
+  "error": "send_message_to_thread is not exposed in this session tool catalog; no supported coordinator messaging transport is available.",
+  "prepared_completion_message": "DONE: spenser-linux native Manjaro/ext4. PASS: authorized one-byte fixture correction only, init n=1 to n=10 in io::telemetry_tests::telemetry_old_suffix_vs_deferred. Baseline 0628322e4b48e0efad19cdc32238a622d4aaa7a8 / freeze 464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3 PLUS patch 2dc0263e4ead79cdee5c9aa7af2839ec4495d2cfcb02a6e818dad776e41b1d61. Corrected io.rs SHA256 836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d; corrected 25-file manifest SHA256 1076b20ec662bc01a90119f15504789599fc3057f9014e9d5016c0d663fb646b. Build/list passed; catalog31/31; one complete unfiltered workspace run31passed/0failed/0ignored/0filtered; consumers/main/doctests completed0tests. Fresh real80976318-byte boundary PASS with emitted receipt; corrected telemetry assertion receipt present. Other24source files and assertions/min10 unchanged; patched bytes stable through run. Earlier baseline failure/result/4binaries and CP1 binaries unchanged. Owned process groups closed; no pilot/matrix/Sentinelcleanup/Git publication. Report /tmp/file-native-host-inventory-linux-20261024-01a16fd3/telemetry-n10-correction-20261025/REPORT.md; patch /tmp/file-native-host-inventory-linux-20261024-01a16fd3/telemetry-n10-correction-20261025/telemetry-n10.patch; full native result/logs /var/tmp/file-native-final062-telemetry-n10-20261025-01a16fd3.",
+  "fallback": "Complete substantive final response/report for coordinator read_thread."
+}

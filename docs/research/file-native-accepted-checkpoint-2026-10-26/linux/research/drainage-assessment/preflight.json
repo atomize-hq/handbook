@@ -1,0 +1,116 @@
+{
+  "host": "spenser-linux",
+  "started_utc": "2026-10-26T12:07:26.584993+00:00",
+  "source_files": [
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.lock",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/project/Cargo.toml",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/project/src/main.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/research/Cargo.toml",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/consumers/research/src/main.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/api.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/baseline_model.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/bounds_tests.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/differential.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/disk.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/graph.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/io.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/lib.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/lifetime.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/main.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/navigation.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/objects.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/pack.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/packing.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/paged.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/physical_checkpoint_tests.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/physical_lifetime.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/projection.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/rolling.rs",
+      "matches": true
+    },
+    {
+      "path": "/home/spenser/file-native-online-linux-20261020/source/final-engine/src/store.rs",
+      "matches": true
+    }
+  ],
+  "evidence_files_verified": 734,
+  "evidence_manifest_sha256": "b4adb117cf30419aa00a1cabc0f7c5dd43bf09fdcbae3505c8f912e773f07e05",
+  "mismatches": [],
+  "cli_sha256": "058c306ea04c6b06057aa51a0197eead832363482c1c9559b1de6431a5dedf40",
+  "output": "/tmp/file-native-drainage-assessment-20261026-01a16fd3",
+  "scope": "Read-only static source and evidence analysis; no experiment imports, calls, builds, tests, cleanup, lock probes or mutations"
+}

@@ -1,0 +1,57 @@
+{
+  "method": "Bounded selected rows from original allocated-block census; not a fresh scan; rows overlap",
+  "rows": [
+    {
+      "allocated_bytes": 189509623808,
+      "path": "/var/tmp/sentinel-sw17-runtime-20261018"
+    },
+    {
+      "allocated_bytes": 248371281920,
+      "path": "/var/tmp"
+    },
+    {
+      "allocated_bytes": 276069740544,
+      "path": "/var"
+    },
+    {
+      "allocated_bytes": 69662887936,
+      "path": "/home/spenser/.codex/orchestrations"
+    },
+    {
+      "allocated_bytes": 57855111168,
+      "path": "/home/spenser/.codex/task-worktrees"
+    },
+    {
+      "allocated_bytes": 16230461440,
+      "path": "/home/spenser/.codex/worktrees"
+    },
+    {
+      "allocated_bytes": 156984782848,
+      "path": "/home/spenser/.codex"
+    },
+    {
+      "allocated_bytes": 20072800256,
+      "path": "/home/spenser/__Active_code/.build"
+    },
+    {
+      "allocated_bytes": 67086270464,
+      "path": "/home/spenser/__Active_code/.worktrees"
+    },
+    {
+      "allocated_bytes": 109074624512,
+      "path": "/home/spenser/.cache"
+    },
+    {
+      "allocated_bytes": 564227993600,
+      "path": "/home/spenser"
+    },
+    {
+      "allocated_bytes": 564228001792,
+      "path": "/home"
+    },
+    {
+      "allocated_bytes": 862546911232,
+      "path": "/"
+    }
+  ]
+}

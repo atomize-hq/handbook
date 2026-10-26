@@ -1,0 +1,618 @@
+{
+  "status": "FAIL",
+  "baseline_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "source_identity": "baseline-plus-telemetry10-plus-reviewed-checkpoint-resume-repair",
+  "root": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/disposable/store",
+  "error": "RuntimeError('unprotected-backlog-after-two-passes')",
+  "engine_calls": 17,
+  "independent_checker_processes": 0,
+  "closure": {
+    "processes_closed": true,
+    "handles_closed": true,
+    "python_callbacks_joined": true,
+    "secondary": []
+  },
+  "resource_error": null,
+  "monitor_joined": true,
+  "source_verified": {
+    "source_identity": "baseline062+telemetry-fixture10+reviewed-checkpoint-resume-repair",
+    "reviewed_manifest_sha256": "43a298bb575b724187eea89de6d55176d67992c2ed3f025e78f8e46d90c981cb",
+    "repair_patch_sha256": "4ee1eceb2416a9c3d1124e453079992c46be6882e886693d8a56f93939909571",
+    "files": {
+      "Cargo.lock": {
+        "bytes": 10547,
+        "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d"
+      },
+      "Cargo.toml": {
+        "bytes": 561,
+        "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74"
+      },
+      "consumers/project/Cargo.toml": {
+        "bytes": 147,
+        "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e"
+      },
+      "consumers/project/src/main.rs": {
+        "bytes": 68,
+        "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173"
+      },
+      "consumers/research/Cargo.toml": {
+        "bytes": 148,
+        "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed"
+      },
+      "consumers/research/src/main.rs": {
+        "bytes": 69,
+        "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac"
+      },
+      "src/api.rs": {
+        "bytes": 12161,
+        "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851"
+      },
+      "src/baseline_model.rs": {
+        "bytes": 8570,
+        "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+      },
+      "src/bounds_tests.rs": {
+        "bytes": 1001,
+        "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+      },
+      "src/differential.rs": {
+        "bytes": 2661,
+        "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+      },
+      "src/disk.rs": {
+        "bytes": 31206,
+        "sha256": "2ea695569eba8a5631be5b1708273b2796c7c5573149a304b9e695e531b9208b"
+      },
+      "src/graph.rs": {
+        "bytes": 14324,
+        "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
+      },
+      "src/io.rs": {
+        "bytes": 21980,
+        "sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d"
+      },
+      "src/lib.rs": {
+        "bytes": 476,
+        "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea"
+      },
+      "src/lifetime.rs": {
+        "bytes": 47780,
+        "sha256": "6e788c5b66d8baddd3344e3332415a6e0b15d26c911d67bdc58421c5113160eb"
+      },
+      "src/main.rs": {
+        "bytes": 57,
+        "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+      },
+      "src/navigation.rs": {
+        "bytes": 10576,
+        "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6"
+      },
+      "src/objects.rs": {
+        "bytes": 3551,
+        "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6"
+      },
+      "src/pack.rs": {
+        "bytes": 20837,
+        "sha256": "993dfc29a6647c50e55c3751f68f6b36d8ee79fecd957cb0f6229031d43ab288"
+      },
+      "src/packing.rs": {
+        "bytes": 93086,
+        "sha256": "188c9f32796fc50003cb32f57f3d8c9b13af66ff0025b7a49247fd0120c13c1f"
+      },
+      "src/paged.rs": {
+        "bytes": 21434,
+        "sha256": "16515455ea11552fc566cce11a3069a14c3a68c04b540c92d0773076e2fd8aa0"
+      },
+      "src/physical_checkpoint_tests.rs": {
+        "bytes": 15374,
+        "sha256": "52edbe54705cea456b55d9b14f32b63582b2d3d0017ad392b7eb95954ebe4824"
+      },
+      "src/physical_lifetime.rs": {
+        "bytes": 27669,
+        "sha256": "36603ef499aa29234441f28b2095627ba8c93e3a1657a6f35aaa3a3198c4d8e0"
+      },
+      "src/projection.rs": {
+        "bytes": 27876,
+        "sha256": "6c4eb7de16dd3b75507e6ba4016a0ad65e714519990c148df3856b43018d32eb"
+      },
+      "src/rolling.rs": {
+        "bytes": 11249,
+        "sha256": "35fc900eeba0f0abd1200bac092eb90c291bca00dc53c1e315e2edeae36c53d4"
+      },
+      "src/store.rs": {
+        "bytes": 36102,
+        "sha256": "0caee89818eb36c2dba092e9ffd44645613cedb8583f15d34fcd0a85498e92cc"
+      }
+    }
+  },
+  "native_roles": [
+    {
+      "token": "115576e4db974bb4af009248a0b3ea3e",
+      "label": "engine-01-init",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 154,
+      "stdin_sent": 154,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811515663901259,
+      "pid": 2296034,
+      "birth": 381151566,
+      "positive_rss": 192512,
+      "observed_ns": 3811515664445238,
+      "stdin_eof_ns": 3811515664755264,
+      "exit": 0,
+      "native_wait_ns": 3811519991582534,
+      "remaining_group": [],
+      "stderr-eof": 3811519961929267,
+      "stderr-bytes": 5207,
+      "stdout-eof": 3811519961980926,
+      "stdout-bytes": 4729,
+      "seconds": 4.3488772213459015,
+      "readers_joined": true
+    },
+    {
+      "token": "c85280e8f3324af7a0661467f91c9063",
+      "label": "engine-02-lifecycle",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520013545617,
+      "pid": 2296220,
+      "birth": 381152001,
+      "positive_rss": 2502656,
+      "observed_ns": 3811520019253442,
+      "stdin_eof_ns": 3811520019878488,
+      "exit": 0,
+      "native_wait_ns": 3811520051289464,
+      "remaining_group": [],
+      "stdout-eof": 3811520047183271,
+      "stdout-bytes": 2819,
+      "stderr-eof": 3811520047306625,
+      "stderr-bytes": 0,
+      "seconds": 0.05753458198159933,
+      "readers_joined": true
+    },
+    {
+      "token": "4967c9f12dfe40959918bc9b4bac5e45",
+      "label": "engine-03-resolve",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 137,
+      "stdin_sent": 137,
+      "environment": {},
+      "limit": 268435456,
+      "timeout": 120,
+      "starts_ns": 3811520071697204,
+      "pid": 2296223,
+      "birth": 381152007,
+      "positive_rss": 192512,
+      "observed_ns": 3811520072416449,
+      "stdin_eof_ns": 3811520072830334,
+      "exit": 0,
+      "native_wait_ns": 3811520073911493,
+      "remaining_group": [],
+      "stdout-eof": 3811520073253335,
+      "stdout-bytes": 3434,
+      "stderr-eof": 3811520073325196,
+      "stderr-bytes": 0,
+      "seconds": 0.008472064044326544,
+      "readers_joined": true
+    },
+    {
+      "token": "ca8283a9e66f4053a003fbb4c79d9e90",
+      "label": "engine-04-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 219,
+      "stdin_sent": 219,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520080675469,
+      "pid": 2296226,
+      "birth": 381152008,
+      "positive_rss": 2486272,
+      "observed_ns": 3811520086152620,
+      "stdin_eof_ns": 3811520086404288,
+      "exit": 0,
+      "native_wait_ns": 3811520450997486,
+      "remaining_group": [],
+      "stdout-eof": 3811520416675132,
+      "stdout-bytes": 3886,
+      "stderr-eof": 3811520416805402,
+      "stderr-bytes": 0,
+      "seconds": 0.38151818653568625,
+      "readers_joined": true
+    },
+    {
+      "token": "401fc03753664a4581a8749847a5edd2",
+      "label": "engine-05-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520462771459,
+      "pid": 2296229,
+      "birth": 381152046,
+      "positive_rss": 589824,
+      "observed_ns": 3811520463272683,
+      "stdin_eof_ns": 3811520463659522,
+      "exit": 0,
+      "native_wait_ns": 3811520527399852,
+      "remaining_group": [],
+      "stderr-eof": 3811520516977470,
+      "stderr-bytes": 0,
+      "stdout-eof": 3811520517196547,
+      "stdout-bytes": 3431,
+      "seconds": 0.07531457208096981,
+      "readers_joined": true
+    },
+    {
+      "token": "92bd39bba33044768cfecacf3cb685ec",
+      "label": "engine-06-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520539659083,
+      "pid": 2296232,
+      "birth": 381152053,
+      "positive_rss": 192512,
+      "observed_ns": 3811520540106005,
+      "stdin_eof_ns": 3811520540394645,
+      "exit": 0,
+      "native_wait_ns": 3811520603981862,
+      "remaining_group": [],
+      "stdout-eof": 3811520592669303,
+      "stdout-bytes": 3426,
+      "stderr-eof": 3811520592705305,
+      "stderr-bytes": 0,
+      "seconds": 0.07960562175139785,
+      "readers_joined": true
+    },
+    {
+      "token": "b463c2b6cf48418a9752536c551982ef",
+      "label": "engine-07-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520621117785,
+      "pid": 2296260,
+      "birth": 381152062,
+      "positive_rss": 2502656,
+      "observed_ns": 3811520626557150,
+      "stdin_eof_ns": 3811520626788655,
+      "exit": 0,
+      "native_wait_ns": 3811520690259588,
+      "remaining_group": [],
+      "stdout-eof": 3811520678914022,
+      "stdout-bytes": 3240,
+      "stderr-eof": 3811520678950997,
+      "stderr-bytes": 0,
+      "seconds": 0.0897517311386764,
+      "readers_joined": true
+    },
+    {
+      "token": "5c3050ce741844c289e34f4cbf890ee5",
+      "label": "engine-08-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520713014128,
+      "pid": 2296272,
+      "birth": 381152071,
+      "positive_rss": 2502656,
+      "observed_ns": 3811520718538408,
+      "stdin_eof_ns": 3811520718839962,
+      "exit": 0,
+      "native_wait_ns": 3811520782292110,
+      "remaining_group": [],
+      "stdout-eof": 3811520780528436,
+      "stdout-bytes": 3192,
+      "stderr-eof": 3811520780652937,
+      "stderr-bytes": 0,
+      "seconds": 0.0903644310310483,
+      "readers_joined": true
+    },
+    {
+      "token": "018d1b8869054603a6577fd3f83555b9",
+      "label": "engine-09-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520805641716,
+      "pid": 2296275,
+      "birth": 381152080,
+      "positive_rss": 528384,
+      "observed_ns": 3811520806257382,
+      "stdin_eof_ns": 3811520806575460,
+      "exit": 0,
+      "native_wait_ns": 3811520870435828,
+      "remaining_group": [],
+      "stderr-eof": 3811520839077924,
+      "stderr-bytes": 0,
+      "stdout-eof": 3811520839235931,
+      "stdout-bytes": 3897,
+      "seconds": 0.08704546000808477,
+      "readers_joined": true
+    },
+    {
+      "token": "c66acc1dcc8d4f6a9808ef00fb31aa4e",
+      "label": "engine-10-publish",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 321,
+      "stdin_sent": 321,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811520894555340,
+      "pid": 2296278,
+      "birth": 381152089,
+      "positive_rss": 536576,
+      "observed_ns": 3811520895219420,
+      "stdin_eof_ns": 3811520895499248,
+      "exit": 0,
+      "native_wait_ns": 3811521209552778,
+      "remaining_group": [],
+      "stderr-eof": 3811521184604849,
+      "stderr-bytes": 0,
+      "stdout-eof": 3811521184770330,
+      "stdout-bytes": 3792,
+      "seconds": 0.3253107196651399,
+      "readers_joined": true
+    },
+    {
+      "token": "eb5628fa7580469a88e7b16dc47bd6a9",
+      "label": "engine-13-publish",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 329,
+      "stdin_sent": 329,
+      "environment": {
+        "EXP_BARRIER": "candidate-ready",
+        "EXP_READY": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-publisher/ready",
+        "EXP_RELEASE": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-publisher/release"
+      },
+      "limit": 2147483648,
+      "timeout": 60,
+      "starts_ns": 3811521484414938,
+      "pid": 2296292,
+      "birth": 381152148,
+      "positive_rss": 2478080,
+      "observed_ns": 3811521491244015,
+      "stdin_eof_ns": 3811521492651033,
+      "exit": 0,
+      "native_wait_ns": 3811521806606281,
+      "remaining_group": [],
+      "stdout-eof": 3811521794659668,
+      "stdout-bytes": 3848,
+      "stderr-eof": 3811521794726133,
+      "stderr-bytes": 0,
+      "seconds": 0.33314283890649676,
+      "readers_joined": true
+    },
+    {
+      "token": "a761c672eac14ed4afaea49c5db995a6",
+      "label": "engine-12-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 202,
+      "stdin_sent": 202,
+      "environment": {
+        "EXP_BARRIER": "physical-before-selection",
+        "EXP_READY": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-maintenance/ready",
+        "EXP_RELEASE": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-maintenance/release"
+      },
+      "limit": 2147483648,
+      "timeout": 60,
+      "starts_ns": 3811521249627474,
+      "pid": 2296288,
+      "birth": 381152124,
+      "positive_rss": 192512,
+      "observed_ns": 3811521250336805,
+      "stdin_eof_ns": 3811521250784193,
+      "exit": 0,
+      "native_wait_ns": 3811521916949166,
+      "remaining_group": [],
+      "stdout-eof": 3811521884606412,
+      "stdout-bytes": 4011,
+      "stderr-eof": 3811521884655731,
+      "stderr-bytes": 0,
+      "seconds": 0.6888232422061265,
+      "readers_joined": true
+    },
+    {
+      "token": "c028a11d90a845b1bf82362d6856508b",
+      "label": "engine-14-resolve",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 153,
+      "stdin_sent": 153,
+      "environment": {},
+      "limit": 268435456,
+      "timeout": 120,
+      "starts_ns": 3811521940515700,
+      "pid": 2296295,
+      "birth": 381152194,
+      "positive_rss": 176128,
+      "observed_ns": 3811521941199270,
+      "stdin_eof_ns": 3811521941585927,
+      "exit": 0,
+      "native_wait_ns": 3811521942691741,
+      "remaining_group": [],
+      "stdout-eof": 3811521942488437,
+      "stdout-bytes": 2987,
+      "stderr-eof": 3811521942533452,
+      "stderr-bytes": 0,
+      "seconds": 0.01709410734474659,
+      "readers_joined": true
+    },
+    {
+      "token": "5c741b03378047b79226e5bad2de63dd",
+      "label": "engine-15-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811521958513902,
+      "pid": 2296298,
+      "birth": 381152195,
+      "positive_rss": 172032,
+      "observed_ns": 3811521959263209,
+      "stdin_eof_ns": 3811521959621480,
+      "exit": 0,
+      "native_wait_ns": 3811522023178154,
+      "remaining_group": [],
+      "stdout-eof": 3811522013058240,
+      "stdout-bytes": 3192,
+      "stderr-eof": 3811522013185800,
+      "stderr-bytes": 0,
+      "seconds": 0.08535809209570289,
+      "readers_joined": true
+    },
+    {
+      "token": "411f9adad6fd462dacefc815fc29ab9d",
+      "label": "engine-11-resolve",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 144,
+      "stdin_sent": 144,
+      "environment": {
+        "EXP_BARRIER": "pack-catalog-captured",
+        "EXP_READY": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-old/ready",
+        "EXP_RELEASE": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/controls/readiness-old/release"
+      },
+      "limit": 268435456,
+      "timeout": 60,
+      "starts_ns": 3811521243408432,
+      "pid": 2296284,
+      "birth": 381152124,
+      "positive_rss": 397312,
+      "observed_ns": 3811521244068953,
+      "stdin_eof_ns": 3811521244391183,
+      "exit": 0,
+      "native_wait_ns": 3811537413122281,
+      "remaining_group": [],
+      "stderr-eof": 3811537363741154,
+      "stderr-bytes": 0,
+      "stdout-eof": 3811537363940461,
+      "stdout-bytes": 2984,
+      "seconds": 16.181283520068973,
+      "readers_joined": true
+    },
+    {
+      "token": "1d570a1ca6cb45c589a70761a903b1e1",
+      "label": "engine-16-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811537455542051,
+      "pid": 2296818,
+      "birth": 381153745,
+      "positive_rss": 192512,
+      "observed_ns": 3811537456059723,
+      "stdin_eof_ns": 3811537456308230,
+      "exit": 0,
+      "native_wait_ns": 3811537520351989,
+      "remaining_group": [],
+      "stdout-eof": 3811537510203407,
+      "stdout-bytes": 3124,
+      "stderr-eof": 3811537510338825,
+      "stderr-bytes": 0,
+      "seconds": 0.08683699928224087,
+      "readers_joined": true
+    },
+    {
+      "token": "2604e9b3e3204cb7ab8398da9c0cada1",
+      "label": "engine-17-packing",
+      "argv": [
+        "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3/target/release/file-native-incremental"
+      ],
+      "cwd": "/var/tmp/file-native-checkpoint-pilot-after-space-20261025-01a16fd3",
+      "stdin_expected": 136,
+      "stdin_sent": 136,
+      "environment": {},
+      "limit": 2147483648,
+      "timeout": 120,
+      "starts_ns": 3811537551206350,
+      "pid": 2296822,
+      "birth": 381153755,
+      "positive_rss": 2469888,
+      "observed_ns": 3811537556642801,
+      "stdin_eof_ns": 3811537557022693,
+      "exit": 0,
+      "native_wait_ns": 3811537620512194,
+      "remaining_group": [],
+      "stdout-eof": 3811537612840058,
+      "stdout-bytes": 3490,
+      "stderr-eof": 3811537612922441,
+      "stderr-bytes": 0,
+      "seconds": 0.08942663623020053,
+      "readers_joined": true
+    }
+  ]
+}

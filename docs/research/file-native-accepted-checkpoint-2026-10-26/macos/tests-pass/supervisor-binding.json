@@ -1,0 +1,7 @@
+{
+  "source": "/private/tmp/file-native-macos-inventory-20261024/resume-20261025/supervise.py",
+  "current_sha256": "5a5e42bfac0f70b60db0356664871a6c17277b2dd232553b6f2e9200a435d5f9",
+  "changes": "fresh output rooted at __file__, Cargo no-fail-fast, network enabled; existing libproc/Popen corrected supervisor reused",
+  "limits": "3GiB aggregate,2GiB test process,20GiB free floor,1800s finite timeout; sampled functional observations only",
+  "resource_basis": "Fresh room122GB, planned target/fixtures/cache within existing unmaterialized native forecasts under44GiB/5million combined and inside1GiB reserve; no new all-host total asserted."
+}

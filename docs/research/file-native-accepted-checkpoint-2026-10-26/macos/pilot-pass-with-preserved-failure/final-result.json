@@ -1,0 +1,157 @@
+{
+  "status": "PASS_FUNCTIONAL_SMALL_REAL_PILOT_WITH_RETAINED_ADAPTER_FAILURE_AND_TIMING_MISSES",
+  "host": "Mac",
+  "source_identity": "baseline0628322e4b48e0efad19cdc32238a622d4aaa7a8 PLUS ONLY telemetry fixture n1-to10",
+  "io_rs_sha256": "836c8a6ceac0f1e972bf77ab3e54be30333f28e763ff1d0ec2f1bff3b34a599d",
+  "engine_binary_sha256": "d07adb431f4f6c5fd570e6ce8e30965bf443abd2dfd6b1b5bb3d08368b6f242e",
+  "mode": "A",
+  "N": 64,
+  "H": 3,
+  "engine_invocations": 19,
+  "engine_call_cap": 37,
+  "checker_processes": 1,
+  "distinct_roles": {
+    "old": {
+      "pid": 44186,
+      "positive_rss": 671744,
+      "before_stdin_delivery": true,
+      "observed_ns": 3647984076023708,
+      "birth": {
+        "pid_requested": 44186,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 44186,
+        "ppid": 44080,
+        "uid": 501,
+        "pgid": 44186,
+        "state": 2,
+        "start": [
+          1792959535,
+          661976
+        ]
+      }
+    },
+    "maintenance": {
+      "pid": 44187,
+      "positive_rss": 704512,
+      "before_stdin_delivery": true,
+      "observed_ns": 3647984119834583,
+      "birth": {
+        "pid_requested": 44187,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 44187,
+        "ppid": 44080,
+        "uid": 501,
+        "pgid": 44187,
+        "state": 2,
+        "start": [
+          1792959535,
+          706523
+        ]
+      }
+    },
+    "publisher": {
+      "pid": 44188,
+      "positive_rss": 638976,
+      "before_stdin_delivery": true,
+      "observed_ns": 3647984279148750,
+      "birth": {
+        "pid_requested": 44188,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 44188,
+        "ppid": 44080,
+        "uid": 501,
+        "pgid": 44188,
+        "state": 2,
+        "start": [
+          1792959535,
+          864644
+        ]
+      }
+    }
+  },
+  "old_reader_hold_seconds": 16.103821917,
+  "capture_selected_H2": {
+    "publication": "publication-44174-1792959535503206000-6",
+    "digest": "e3f635222aa8e0dbc2e2ce9c80e2f319ef09f8ff523bbe124125e89636755da4"
+  },
+  "accepted_H3": {
+    "digest": "b640ccdd3cde61354e2711e77652387b8bef5e010c1f45dc4073642252130f3f",
+    "publication": "publication-44188-1792959536022309000-6"
+  },
+  "accepted_ns": 3647984554460041,
+  "activation_joined_ns": 3647984634382791,
+  "changed_activation": true,
+  "old_binding": {
+    "id": "physical-1-birth-44171-1792959534862337000-0",
+    "ordinal": 1,
+    "plan": "4af7f396c8afd667b3a30ac6a8f9024aab61b1b9d86bd2b474614e8418c06671"
+  },
+  "installed_binding_at_activation": {
+    "id": "physical-2-birth-44187-1792959535741410000-0",
+    "ordinal": 2,
+    "plan": "8399de26cb93a1e41287d462563d7d3528c6fe81a1feaec1b39d2e20e02a8cb8"
+  },
+  "captured_plan_sha256": "8399de26cb93a1e41287d462563d7d3528c6fe81a1feaec1b39d2e20e02a8cb8",
+  "tail_loose_path_removed": "publications/publication-44174-1792959535503206000-6.json",
+  "tail_file_absent": true,
+  "tail_independently_mapped_sha256": "e3f635222aa8e0dbc2e2ce9c80e2f319ef09f8ff523bbe124125e89636755da4",
+  "two_postrelease_drainage_passes_complete": true,
+  "backlog_unprotected": 0,
+  "protected_physical_paths": 20,
+  "excluded": 0,
+  "full_independent_oracle": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/proof-continuation/checker/complete-oracle.json",
+  "full_oracle_sha256": "106e7e10431cce372f060cd520f9dc7185b09ccf08b2270681ec34bb2730fbcd",
+  "all_outcomes_exact": true,
+  "source_unchanged": true,
+  "owned_commands_closed": true,
+  "prefix_status_preserved": "FAIL",
+  "prefix_adapter_error_preserved": {
+    "error": "NameError(\"name 'strict' is not defined\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/runner.py\", line 193, in <module>\n    result=pilot_behavior.run(H,ROOT,forecast);result['engine_calls']=driver.count;result['accepted_inputs']=H.ledgers[ROOT].oracle_inputs();result['oracle_receipts']=H.oracles;result['source_after']=source_check();(OUT/'accepted-inputs-results.json').write_text(json.dumps(H.ledgers[ROOT].accepted,indent=2));result['final_state']=H.state(ROOT);result['final_backlog']=a.backlog(ROOT);result['binary_sha256']=driver.binary_sha256\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/pilot_behavior.py\", line 146, in run\n    backlog = h.a.backlog(root)\n              ^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/runner.py\", line 160, in backlog\n    def backlog(self,root):return self.oracle_helper.backlog(root)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-online-macos-20261020/source/pilot-sdk-20261021/sdk/suite_oracle.py\", line 27, in backlog\n    config=strict((root/'STORE.json').read_bytes(),65536)\n           ^^^^^^\nNameError: name 'strict' is not defined\n"
+  },
+  "proof_only_continuation": true,
+  "native_prefix_replayed": false,
+  "additional_engine_calls_in_continuation": 3,
+  "cleanup_50ms_target_misses_ns": [
+    51227250,
+    52667042
+  ],
+  "resource_qualification": "native sampled functional RSS; no40ms/hardpeak/fullmatrixqualification",
+  "prefix_sampled_peak_rss": 44204032,
+  "continuation_sampled_peak_rss": 70762496,
+  "monitor_failures": [],
+  "footprint": {
+    "target": {
+      "files": 389,
+      "logical_bytes": 90455749
+    },
+    "store": {
+      "files": 186,
+      "logical_bytes": 1660589
+    },
+    "checker": {
+      "files": 0,
+      "logical_bytes": 0
+    },
+    "logs": {
+      "files": 88,
+      "logical_bytes": 816021
+    },
+    "tmp": {
+      "files": 0,
+      "logical_bytes": 0
+    },
+    "proof-continuation": {
+      "files": 30,
+      "logical_bytes": 209055
+    }
+  },
+  "free_bytes": 112993292288,
+  "full_matrix_released": false
+}

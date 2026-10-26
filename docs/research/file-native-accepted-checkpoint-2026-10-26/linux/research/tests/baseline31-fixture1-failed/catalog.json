@@ -1,0 +1,41 @@
+{
+  "name": "catalog",
+  "argv": [
+    "cargo",
+    "test",
+    "--manifest-path",
+    "/home/spenser/file-native-online-linux-20261020/source/final-engine/Cargo.toml",
+    "--locked",
+    "--offline",
+    "--workspace",
+    "--release",
+    "-j2",
+    "--target-dir",
+    "/var/tmp/file-native-final062-buildtest-20261025-01a16fd3/target",
+    "--",
+    "--list"
+  ],
+  "cwd": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+  "timeout_seconds": 120,
+  "stdout": "/var/tmp/file-native-final062-buildtest-20261025-01a16fd3/logs/catalog.stdout",
+  "stderr": "/var/tmp/file-native-final062-buildtest-20261025-01a16fd3/logs/catalog.stderr",
+  "pid": 1568128,
+  "process_group": 1568128,
+  "exit": 0,
+  "seconds": 0.6595084937289357,
+  "termination_reason": null,
+  "process_closure_observations": [
+    [],
+    []
+  ],
+  "process_closure_verified": true,
+  "sampled_tree_peak_rss": 153088000,
+  "sampled_tree_plus_supervisor_peak_rss": 173838336,
+  "sampled_process_peak_rss": 123346944,
+  "sampling_claim": "Approximately 200ms sampling; not a hard peak or40ms qualification",
+  "owned_after": {
+    "allocated_bytes": 109150208,
+    "files": 427
+  },
+  "native_free_after": 110494416896
+}

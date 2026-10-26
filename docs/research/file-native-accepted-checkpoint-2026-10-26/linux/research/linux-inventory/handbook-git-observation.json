@@ -1,0 +1,8 @@
+{
+  "head": "commit e6df715f7448e263597351cfdb9510233fa57658\nAuthor:     spenquatch <spmcconnell.totaltele@gmail.com>\nAuthorDate: Sun Jan 4 00:16:27 2026 -0500\nCommit:     spenquatch <spmcconnell.totaltele@gmail.com>\nCommitDate: Sun Jan 4 00:16:27 2026 -0500\n\n    CLI Specs\n",
+  "status": " M .gitignore\n M docs/README.md\n M services/app.py\n M services/cli/dev.py\n M services/cli/governance.py\n M tests/services/test_cli_governance.py\n?? docs/guides/aph-smoke-test-commands.md\n",
+  "refs": "refs/heads/main e6df715f7448e263597351cfdb9510233fa57658 origin/main \nrefs/remotes/origin/HEAD e6df715f7448e263597351cfdb9510233fa57658  \nrefs/remotes/origin/codex/research-tech-stack-decisions-and-options 70795a6d6aa7cc2c17dfab95b49ebbb9b8e72c65  \nrefs/remotes/origin/codex/update-ai_agent_platform_foundation.md a9e1f26e64cb3cb2e0c5d9a26e02535913bccdaa  \nrefs/remotes/origin/main e6df715f7448e263597351cfdb9510233fa57658  \n",
+  "common_dir": "/home/spenser/__Active_code/project-handbook/.git\n",
+  "recent": "e6df715 CLI Specs\n03243ed CLI Specs\n663ea0c CLI Specs\n0750550 CLI Specs\nef9716f CLI Specs\n4bf3747 CLI Specs\n4387fe3 CLI Specs\n589b1cb Author the ingestion & GitHub App playbook - complete\n",
+  "worktrees": "worktree /home/spenser/__Active_code/project-handbook\nHEAD e6df715f7448e263597351cfdb9510233fa57658\nbranch refs/heads/main\n\n"
+}

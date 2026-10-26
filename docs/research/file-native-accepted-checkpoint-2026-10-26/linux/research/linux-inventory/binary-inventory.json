@@ -1,0 +1,483 @@
+[
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/build/release/file-native-incremental.d",
+    "bytes": 909,
+    "sha256": "9be1ffaf348235c00ec500ab9cb20b069ec65c4a06adce8c69370ca2ae46b428",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T23:21:54.752658+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/build/release/libfile_native_incremental.rlib",
+    "bytes": 5409612,
+    "sha256": "521e1fad4ca2cc81925593cf108ab3d5df7366d11c1b5b10449b28d192058501",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T23:21:54.659657+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/build/release/file-native-incremental",
+    "bytes": 2140136,
+    "sha256": "6aae7978cc97c97cea3b1374bc90243f9fa1231c645c66cbb2dcdf114bcd8f9b",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T23:21:54.745658+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2140136,
+    "sha256": "6aae7978cc97c97cea3b1374bc90243f9fa1231c645c66cbb2dcdf114bcd8f9b",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T23:21:54.745658+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/build/debug/deps/file_native_incremental-90339a5a1da1f8f8",
+    "bytes": 6108928,
+    "sha256": "6f171f9016f59f80823e9c9dc7a9bc6282d6a6ad2138c0f9a7672ba7d25b4cca",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T23:21:59.189538+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-accounting-final/build/debug/deps/file_native_incremental-4ba2680be0a00832",
+    "bytes": 13781984,
+    "sha256": "4cc82cb639733bcd1286d5bfc2ff4ba6f403e4b00ce774a487dab47aed06325c",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T23:21:58.740720+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/build/release/file-native-incremental.d",
+    "bytes": 904,
+    "sha256": "671323f14dd19cfbdbf9cb86b85bfe714f657221273f57731b0c52308dbc7489",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T21:53:35.181357+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/build/release/libfile_native_incremental.rlib",
+    "bytes": 5409250,
+    "sha256": "5affb61a1edbf922c713023e124c26cb50f8ea026f3c6d75787bb63871f957b2",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T21:53:35.079355+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/build/release/file-native-incremental",
+    "bytes": 2140120,
+    "sha256": "c14716013fb61aff0db9868c445001bd4c57ee52f037869e7a4edfb13260ca03",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T21:53:35.172977+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2140120,
+    "sha256": "c14716013fb61aff0db9868c445001bd4c57ee52f037869e7a4edfb13260ca03",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T21:53:35.172977+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/build/debug/deps/file_native_incremental-90339a5a1da1f8f8",
+    "bytes": 6108928,
+    "sha256": "039276b5db94a578ecdbcf7a556e510d7f65e1cc4cf8c2be2f395098aa654d06",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T21:53:29.064737+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-audit-final/build/debug/deps/file_native_incremental-4ba2680be0a00832",
+    "bytes": 13781984,
+    "sha256": "fb6f1f1fae96f36b3691fa2ae3d9755548b953eee27a2612783bdbc5391decbf",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T21:53:28.609255+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/build/release/file-native-incremental.d",
+    "bytes": 907,
+    "sha256": "bc4328e64a6ebdc069a9f8ef9eb3b297cc060df432cc7807d47cdfa8194f278b",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T19:33:29.049090+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/build/release/libfile_native_incremental.rlib",
+    "bytes": 5410804,
+    "sha256": "bfc45498a85b66487507e9783decccede62c9f780cf1741db48bde64c1ed0aa0",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T19:33:28.933089+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/build/release/file-native-incremental",
+    "bytes": 2141544,
+    "sha256": "7410b92f65bde1c01766e0002226db99fc6448026737fc04ad37e6c6cfbc7422",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:33:29.044537+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2141544,
+    "sha256": "7410b92f65bde1c01766e0002226db99fc6448026737fc04ad37e6c6cfbc7422",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:33:29.044537+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/build/debug/deps/file_native_incremental-90339a5a1da1f8f8",
+    "bytes": 6108928,
+    "sha256": "50041af608a1c8493fb2f16e8c7c29ae06c5dba68c76600993350a719d085732",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:33:21.725977+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-final-20261018/build/debug/deps/file_native_incremental-4ba2680be0a00832",
+    "bytes": 13690952,
+    "sha256": "e222371786cfd638ea2b21c54ec1bdd938275a04298b8fbe8738beba0766a6b9",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:33:21.281970+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-recipe/build/release/file-native-incremental.d",
+    "bytes": 887,
+    "sha256": "6e9b1dc4f107901955ef65c5ce8e45e4cc13feb42bfd178d84dd566d6e336263",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T20:04:16.515908+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-recipe/build/release/libfile_native_incremental.rlib",
+    "bytes": 5410920,
+    "sha256": "56da63a23768a9b5487e5de2cc05382a23603d810b19040759eb2c55df2b2c33",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T20:04:16.400906+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-recipe/build/release/file-native-incremental",
+    "bytes": 2137424,
+    "sha256": "ded98833f0c6fe232e3be4a2dd4428306cc1c069272614defc212f18cc0b208e",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T20:04:16.510001+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-recipe/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2137424,
+    "sha256": "ded98833f0c6fe232e3be4a2dd4428306cc1c069272614defc212f18cc0b208e",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T20:04:16.510001+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/build/release/file-native-incremental.d",
+    "bytes": 905,
+    "sha256": "93be563e3c1f7afcbe939df8b3c40172343d7a5dfd85e615810af1d6ce407a97",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T20:44:28.960627+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/build/release/libfile_native_incremental.rlib",
+    "bytes": 5407642,
+    "sha256": "325079215d1d7d8273019aba783f22debbb86379c1ba2dcb32461283e515226a",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T20:44:28.838625+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/build/release/file-native-incremental",
+    "bytes": 2140120,
+    "sha256": "40cf20889d09b401987365f9c6255a0d97f344960385c62a29758f0f274dcd15",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T20:44:28.955626+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2140120,
+    "sha256": "40cf20889d09b401987365f9c6255a0d97f344960385c62a29758f0f274dcd15",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T20:44:28.955626+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/build/debug/deps/file_native_incremental-90339a5a1da1f8f8",
+    "bytes": 6108928,
+    "sha256": "1370dd8d17dcaec4f29350a266dc38d5ae984779d54c613125f96c82b5820814",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T20:44:21.784656+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-replay-final/build/debug/deps/file_native_incremental-4ba2680be0a00832",
+    "bytes": 13781984,
+    "sha256": "9dd0b428ca6451df09df054d20f69215d237cae895384c28289a0e18773aff14",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T20:44:21.308515+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix/build/release/file-native-incremental.d",
+    "bytes": 900,
+    "sha256": "e69354577bf9461924c5550e685f2f88b96454dfd66181d06c664331c4f4b644",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T19:51:06.640620+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix/build/release/libfile_native_incremental.rlib",
+    "bytes": 5410898,
+    "sha256": "23fe4350db65a69715bdff11aaa7b8a2c660d75229315d216ff9bb9f0f036e32",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T19:51:06.545619+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix/build/release/file-native-incremental",
+    "bytes": 2137408,
+    "sha256": "6bc8b72a2badb858f0a49e7fc4ba29a4d296e0a2dffafe5dd117521f3245e9b8",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:51:06.635358+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2137408,
+    "sha256": "6bc8b72a2badb858f0a49e7fc4ba29a4d296e0a2dffafe5dd117521f3245e9b8",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:51:06.635358+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix/build/debug/deps/file_native_incremental-90339a5a1da1f8f8",
+    "bytes": 6108928,
+    "sha256": "3e3670fecab79363f66b7ad6c7b81c7a1ad885c8e055d0ac9ab1baa222d0d068",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:51:01.409781+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-incremental-linux-rootfix/build/debug/deps/file_native_incremental-4ba2680be0a00832",
+    "bytes": 13696992,
+    "sha256": "c33044c9eb4bb70d0243050961d72aed65873b14d95df0f5b4e90ccc55294067",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T19:51:00.953532+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/build/release/file-native-incremental.d",
+    "bytes": 1794,
+    "sha256": "6cda3faca8222b95c24f02794e6b5522732e847ea76e0791d7e5fff1f6c129bc",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T22:56:56.363517+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/build/release/libfile_native_incremental.rlib",
+    "bytes": 5955376,
+    "sha256": "9b78c43af449c1d787393d3b57f7ef2a6f98e62c9b8cf09194ce6f6a9c3123dc",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T22:56:56.250515+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/build/release/file-native-incremental",
+    "bytes": 2324504,
+    "sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:56:56.358517+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2324504,
+    "sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:56:56.358517+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/build/debug/deps/file_native_incremental-f27fd798007e361b",
+    "bytes": 2740608,
+    "sha256": "68144f22c64cd4faaf0d458b109ce866317a902b564c311dddb40a0ec27f9c06",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:56:44.590371+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/build/debug/deps/file_native_incremental-dd134df53a1dcb76",
+    "bytes": 1081256,
+    "sha256": "d709fa6da949c25bbbbf512a33c220c454a20a76d534960df2ba067a03f3fd24",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:56:45.065949+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/file-native-incremental.d",
+    "bytes": 1948,
+    "sha256": "40b7317f61d3187bc57bc1a0012c9b71973767e2715dd0f12a86be8a6bd958d4",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T23:19:14.352977+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/libfile_native_incremental.rlib",
+    "bytes": 5955424,
+    "sha256": "9aa94c5464dd514108f2cc412994ad8c16e6c8fe5aa97fc64f9b3526a530f03e",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T23:19:14.227975+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/file-native-incremental",
+    "bytes": 2324504,
+    "sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T23:19:14.349007+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2324504,
+    "sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T23:19:14.349007+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/debug/deps/file_native_incremental-f27fd798007e361b",
+    "bytes": 2740608,
+    "sha256": "68144f22c64cd4faaf0d458b109ce866317a902b564c311dddb40a0ec27f9c06",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T23:19:02.321804+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/debug/deps/file_native_incremental-dd134df53a1dcb76",
+    "bytes": 1081256,
+    "sha256": "d709fa6da949c25bbbbf512a33c220c454a20a76d534960df2ba067a03f3fd24",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T23:19:02.790646+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/native-peer-v3-targeted",
+    "bytes": 16312,
+    "sha256": "fa2b5ae4ae2fe27bf3d5c320b2178bd3947ab01e1f028a2599fc8d38a224f770",
+    "ELF": true,
+    "mtime_utc": "2026-10-21T00:55:39.701798+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental.d",
+    "bytes": 2491,
+    "sha256": "5abea41b4d03ecca788540cdc4287ae545525878f6ffd774faa8d01618eb5265",
+    "ELF": false,
+    "mtime_utc": "2026-10-20T20:28:09.152387+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/release/libfile_native_incremental.rlib",
+    "bytes": 7843556,
+    "sha256": "6468aa9dae9e6d5bdfe599d211206a0f0f64e42ada29fa793e82d4011992b3fd",
+    "ELF": false,
+    "mtime_utc": "2026-10-20T20:28:08.937384+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental",
+    "bytes": 3545928,
+    "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "ELF": true,
+    "mtime_utc": "2026-10-20T20:28:09.048386+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/release/deps/file_native_incremental-9c5a2a833af28a88",
+    "bytes": 3545928,
+    "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "ELF": true,
+    "mtime_utc": "2026-10-20T20:28:09.048386+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux",
+    "bytes": 3349920,
+    "sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+    "ELF": true,
+    "mtime_utc": "2026-10-20T03:59:25.803127+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux-final",
+    "bytes": 3349520,
+    "sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "ELF": true,
+    "mtime_utc": "2026-10-20T04:56:11.576774+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/build/release/file-native-publication-experiment.d",
+    "bytes": 867,
+    "sha256": "12aaae958058b777e7a541b6ddeebf931873b9f22c7c84b807189b58deb9275c",
+    "ELF": false,
+    "mtime_utc": "2026-10-18T15:03:45.880360+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-prerequisite-linux-20261018/build/release/file-native-publication-experiment",
+    "bytes": 1537344,
+    "sha256": "15eb58aab51b67d38127dae66bbc4752bd0154934b53b6476d67bf4ad7ab10a9",
+    "ELF": true,
+    "mtime_utc": "2026-10-18T15:03:45.870359+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental.d",
+    "bytes": 1735,
+    "sha256": "fcaec6c4330d448db561f655f6ad53b44a90128c78bd115eb34806270202ea36",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T22:32:28.856940+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/build/debug/libfile_native_incremental.rlib",
+    "bytes": 11642184,
+    "sha256": "afd610ac98431aac2dd4006d9ca45fdc18526ef36e6d8e2041c7495dd8f2e0ca",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T22:32:28.537935+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+    "bytes": 5379304,
+    "sha256": "e70d47a82e1c51a989395f0025f85859e74aed07c07e482e0a6b37913e76e854",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:32:28.706363+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/build/debug/deps/file_native_incremental-f27fd798007e361b",
+    "bytes": 2726816,
+    "sha256": "e6cde3c2d33ff20c5fde5c56dc91ddeb6fc760400027ab024d47f9eb465d1657",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:32:29.904234+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/build/debug/deps/file_native_incremental-dd134df53a1dcb76",
+    "bytes": 1081256,
+    "sha256": "d709fa6da949c25bbbbf512a33c220c454a20a76d534960df2ba067a03f3fd24",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:32:28.999198+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/build/debug/deps/file_native_incremental-00414a9a911aefde",
+    "bytes": 5379304,
+    "sha256": "e70d47a82e1c51a989395f0025f85859e74aed07c07e482e0a6b37913e76e854",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T22:32:28.706363+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/build/release/file-native-incremental.d",
+    "bytes": 1428,
+    "sha256": "b197ab190a7797398b622f6aa0b1ec8d1e12c48b6fe439f979c748e90a98968b",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T16:31:50.408252+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/build/release/libfile_native_incremental.rlib",
+    "bytes": 5595046,
+    "sha256": "09e754fb999667458ed8c023ee2b9c0a2efba6f8f64cb7ae62c0af259fbbcccc",
+    "ELF": false,
+    "mtime_utc": "2026-10-19T16:31:50.314250+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/build/release/file-native-incremental",
+    "bytes": 2200640,
+    "sha256": "13e368f6f46e3781f32bf73616477de9fa3828ec762e4e08001f8b0e769aa6db",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T16:31:50.404568+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/build/release/deps/file_native_incremental-1d684d78a6f04ee5",
+    "bytes": 2200640,
+    "sha256": "13e368f6f46e3781f32bf73616477de9fa3828ec762e4e08001f8b0e769aa6db",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T16:31:50.404568+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/build/debug/deps/file_native_incremental-90339a5a1da1f8f8",
+    "bytes": 6108968,
+    "sha256": "9895a37725011a66e496ac2e4f6b31c272bc71ccbb4f524fa5e4dd808b1a67bc",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T16:31:51.226264+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-recovery-20261019/results/build/debug/deps/file_native_incremental-4ba2680be0a00832",
+    "bytes": 13782024,
+    "sha256": "ccf19cbd3901803e5728fdea1ef5a05e67fc869af17ac29fca6dd379c521533f",
+    "ELF": true,
+    "mtime_utc": "2026-10-19T16:31:51.032261+00:00"
+  },
+  {
+    "path": "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary",
+    "bytes": 3545928,
+    "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+    "ELF": true
+  },
+  {
+    "path": "/home/spenser/file-native-q-linux-20261019-final/io-probe",
+    "bytes": 4417904,
+    "sha256": "69e25078ecfc997f7ab7312b74d68185c7d0ee0d180362c71b969592b2169f47",
+    "ELF": true
+  }
+]

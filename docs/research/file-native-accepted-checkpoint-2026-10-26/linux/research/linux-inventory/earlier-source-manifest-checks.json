@@ -1,0 +1,1554 @@
+[
+  {
+    "manifest": "/home/spenser/file-native-p-linux-20261020/final-source-stage/source-manifest.json",
+    "source": "/home/spenser/file-native-p-linux-20261020/source-final",
+    "records": [
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_windows.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_wsl_final.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/adversarial.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_lane.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/calibrate_documents.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/checks.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_geometry.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_upgrade.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/contention_final.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/Cargo.lock",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/backend.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/disk.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/io.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/lifecycle.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/model.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/controller.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/derive_contention.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/export_wsl_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/final_resources.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_matrix.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_proofs.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_resource_census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_verification.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_gc_continuation.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_run.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/index_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/install_wsl_budget.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/matrix.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/namespace_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native_linux_final_census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/ordinary.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_history.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_ledger.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/paired_intents.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_intent_regression.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_retired_regression.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/quota_bytes.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/replay_lifetime.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/resource_bindings.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/root_geometry.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_differential.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_lane.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows_v2.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/session_source_associations.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/summarize.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/supplement.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_exports.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_gc_outcomes.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_genuine.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_projection.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_wsl_sources.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/walk_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/windows_resources.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/wsl_budget_adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/archive_fixture.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/closeout.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/focused.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/genesis_delta.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/legacy-fixtures.tar.gz",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/measure.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/oracle.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/seed.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/stage1.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/summarize.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/allocation.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/b_shell_reproducer.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/bind.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/candidate/handoff.json",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/candidate/source-binding.json",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/capsule.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/cohort_forecast.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/dependency_inventory.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/driver.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/fix2-candidate/qualification.json",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/fix2-candidate/source-binding.json",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/fix2_build.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/fix2_regression.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/guard.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/handoff_candidate.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/independent.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/inspect_dependencies.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/loose_regression.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/preservation_reopen.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/preservation_reopen_check.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/preservation_stage.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/qualified_loose.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/request_preservation.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/selected_once_copy.ps1",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/slice1.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/strict_supplement.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/watchdog_check.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/watchdog_final_check.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-packing-2026-10-20/watchdog_group_check.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bounded.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bundle_results.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/collect_native_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/final_native.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/finish_compatible.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/inventory.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/long_trial.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/native_runner.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle_supplement.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/post_gc_probes.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restore_gate.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restored_fences.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/small_costs.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+        "exists": true,
+        "matches": true
+      }
+    ]
+  },
+  {
+    "manifest": "/home/spenser/file-native-n-linux-20261019/final-4bde/source-manifest.json",
+    "source": "/home/spenser/file-native-n-linux-20261019/final-4bde/source",
+    "records": [
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_windows.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_wsl_final.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/adversarial.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_lane.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/calibrate_documents.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/checks.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_geometry.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_upgrade.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/contention_final.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/Cargo.lock",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/Cargo.toml",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/backend.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/disk.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/io.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/lifecycle.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/model.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/controller.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/derive_contention.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/design-and-scope.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/evidence/native-linux-accounting/linux_accounting_launch.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/evidence/setup-failures/install-wsl-budget-v0.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/evidence/setup-failures/proof-intent-regression-v0.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/evidence/source-capsules-accounting/archive-accounting-source.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/export_wsl_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/final_resources.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_matrix.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_proofs.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_resource_census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_verification.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_gc_continuation.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_run.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/index_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/install_wsl_budget.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/matrix.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/namespace_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/7ac70f9-replay-report.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/7e00d22-audit-report.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/a1108c6-affected-report.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/accounting-5a65a21/outer--accounting-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/accounting-5a65a21/outer--accounting-verifier.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/audit-7e00d22/outer--audit-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/audit-7e00d22/outer--audit-verifier.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/corrected/outer--affected-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/deep/outer--common-adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/deep/outer--global-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/deep/outer--lane--adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/development/outer--development-capsule_adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/development/outer--development-outer.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/primary/common-adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/primary/outer--common-adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/primary/outer--global-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/primary/outer--lane--adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/replay-7ac70f9/outer--replay-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/replay-7ac70f9/outer--replay-verifier.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/walk/outer--common-adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/walk/outer--global-launcher.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/evidence/walk/outer--lane--adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/f3-bounded-path-report.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/assemble_accounting_report.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/assemble_audit_report.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/assemble_corrected_report.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/assemble_replay_report.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/capsule_adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/collect_results.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/deep_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/launch_accounting.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/launch_affected.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/launch_audit.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/launch_companions.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/launch_final.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/launch_replay.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/make_report.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/outer.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/verify_accounting_run.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/verify_audit_run.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/verify_completion.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/verify_export.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/verify_replay_run.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/helpers/walk_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native_linux_final_census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/ordinary.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_history.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_ledger.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/paired_intents.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_intent_regression.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_retired_regression.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/protocol.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/quota_bytes.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/replay_lifetime.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/report.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/resource_bindings.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/root_geometry.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_differential.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_lane.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows_v2.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/session_source_associations.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/summarize.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/supplement.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_exports.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_gc_outcomes.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_genuine.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_projection.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_wsl_sources.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/walk_cases.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/windows_resources.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/wsl_budget_adapter.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/.gitignore",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/HANDOFF.md",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/census.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/focused.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/legacy-fixtures.tar.gz",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/measure.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/oracle.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/run-matrix.ps1",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-navigation-2026-10-19/stage1.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bounded.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bundle_results.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/collect_native_evidence.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/final_native.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/finish_compatible.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/inventory.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/long_trial.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/native_runner.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle_supplement.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/post_gc_probes.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restore_gate.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restored_fences.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/small_costs.py",
+        "exists": true,
+        "matches": true
+      },
+      {
+        "path": "docs/research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+        "exists": true,
+        "matches": true
+      }
+    ]
+  }
+]

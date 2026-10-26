@@ -1,0 +1,12 @@
+{
+  "pid": 44189,
+  "parent": 44080,
+  "pgid": 44189,
+  "argv": [
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/target/release/file-native-incremental"
+  ],
+  "role": "old-reader",
+  "root": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/store/disposable/store",
+  "env_overrides": {},
+  "start_ns": 3647984638762166
+}

@@ -1,0 +1,79 @@
+{
+  "pid": 44141,
+  "parent": 44080,
+  "pgid": 44141,
+  "argv": [
+    "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/target/release/file-native-incremental"
+  ],
+  "role": "engine",
+  "root": "/private/tmp/file-native-macos-inventory-20261024/pilot-A64-H3-20261025/store/disposable/store",
+  "env_overrides": {},
+  "start_ns": 3647978563158041,
+  "birth": {
+    "pid_requested": 44141,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 44141,
+    "ppid": 44080,
+    "uid": 501,
+    "pgid": 44141,
+    "state": 2,
+    "start": [
+      1792959530,
+      150269
+    ]
+  },
+  "before_input": {
+    "pid": 44141,
+    "positive_rss": 32768,
+    "before_stdin_delivery": true,
+    "observed_ns": 3647978563435666,
+    "birth": {
+      "pid_requested": 44141,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 44141,
+      "ppid": 44080,
+      "uid": 501,
+      "pgid": 44141,
+      "state": 2,
+      "start": [
+        1792959530,
+        150269
+      ]
+    }
+  },
+  "exit": 0,
+  "seconds": 4.486833166796714,
+  "stdout_eof": true,
+  "stderr_eof": true,
+  "stdin_closed": true,
+  "original_handle_waited": true,
+  "stdout_bytes": 4726,
+  "stderr_bytes": 5213,
+  "stdout_sha256": "33c545f2b67aa207bc3a552f6767998695f99839d0501a3882cda3c54bc1fa9a",
+  "stderr_sha256": "f76c89866a761dbac37daeac425ad4948ba7d7113ab3bed11ee7af26b7e6bef8",
+  "exception": null,
+  "closure": [
+    {
+      "pgid_requested": 44141,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3647983015166125
+    },
+    {
+      "pgid_requested": 44141,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3647983034566166
+    }
+  ],
+  "escaped_survivors": [],
+  "sampled_peak_process_rss": 5603328
+}

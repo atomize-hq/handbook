@@ -1,0 +1,28 @@
+{
+  "token": "f0e31edf73784569a58a1a8f580b82f5",
+  "label": "engine-08-packing",
+  "argv": [
+    "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3/target/release/file-native-incremental"
+  ],
+  "cwd": "/var/tmp/file-native-online-pilot-n64-h3-bootstrap-20261025-01a16fd3",
+  "stdin_expected": 137,
+  "stdin_sent": 137,
+  "environment": {},
+  "limit": 2147483648,
+  "timeout": 120,
+  "starts_ns": 3796960045488508,
+  "pid": 769143,
+  "birth": 379696004,
+  "positive_rss": 2461696,
+  "observed_ns": 3796960050871007,
+  "stdin_eof_ns": 3796960051061091,
+  "exit": 0,
+  "native_wait_ns": 3796960114492637,
+  "remaining_group": [],
+  "stderr-eof": 3796960104908442,
+  "stderr-bytes": 0,
+  "stdout-eof": 3796960105034507,
+  "stdout-bytes": 3239,
+  "seconds": 0.09086911007761955,
+  "readers_joined": true
+}

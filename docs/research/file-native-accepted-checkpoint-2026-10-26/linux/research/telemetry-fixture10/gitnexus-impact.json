@@ -1,0 +1,22 @@
+{
+  "tool": "mcp__gitnexus__impact",
+  "arguments": {
+    "repo": "/home/spenser/file-native-online-linux-20261020/source/final-engine",
+    "target": "telemetry_old_suffix_vs_deferred",
+    "file_path": "src/io.rs",
+    "direction": "upstream",
+    "includeTests": true,
+    "maxDepth": 1,
+    "timeoutMs": 10000
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Error: Repository \"/home/spenser/file-native-online-linux-20261020/source/final-engine\" not found. Available: substrate-b3-2a-wa-docs, substrate (/home/spenser/substrate-a1-f0-docs-authorization), substrate (/home/spenser/__Active_code/.worktrees/substrate-runtime-refactor-e3d-ca-impact-f863), substrate-a1-f5-pd-docs, substrate-current, substrate-r3-meta, substrate-a1-3-p0-transport-packet-docs, substrate-a3, substrate-a3-rg-base-03-gate-correction, substrate-e2-authority-correction-2, substrate-e3e-product, substrate-e3e-ownership-authority, sentinel (/home/spenser/__Active_code/atomize-hq/sentinel), sentinel (/home/spenser/__Active_code/atomize-hq/sentinel-p2-compat-20261023), substrate-e3f-w8-checkpoint, sentinel-p2-analysis-20261023"
+      }
+    ],
+    "isError": true
+  },
+  "assessment": "UNINDEXED copied source; graph impact UNKNOWN. Manual test-only literal argument edit authorized. No index/bootstrap or unrelated repository refresh."
+}
