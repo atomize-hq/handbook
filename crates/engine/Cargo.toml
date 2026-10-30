@@ -16,9 +16,10 @@ path = "src/lib.rs"
 # Deliberately non-default: integration tests may interrupt an already-real
 # posture write at a durable boundary, then prove restart recovery through the
 # normal typed facade. It is not enabled by the public SDK dependency.
-test-support = []
+test-support = ["file-native/test-support"]
 
 [dependencies]
+file-native = { path = "../file-native", version = "0.1.0" }
 base64 = "0.22.1"
 getrandom = "0.3.4"
 jsonschema = { version = "0.47.0", default-features = false }

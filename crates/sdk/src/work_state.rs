@@ -15,13 +15,23 @@ pub use handbook_engine::work_state::{
     WorkRegistrationInputV1, WorkRegistrationReceiptV1, WorkRegistrationScopeV1,
     WorkRegistrationTermsV1, WorkRequestLocatorV1, WorkRequirementsDefinitionV1,
     WorkRevocationReceiptV1, WorkRevokeLocatorV1, WorkRolePermissionV1, WorkRoleValueV1,
-    WorkSnapshotV1, WorkTermsTransitionV1, ORDINARY_LEAF_COMPOSITION_V1,
+    WorkSnapshotV1, WorkTermsTransitionV1, WorkStorageStatisticsV1, WorkMaintenanceBudgetV1, WorkMaintenanceProgressV1, WorkStorageSnapshotV1, WorkHistoryPageV1, WorkHistoryRecordV1, WorkRetainedOutcomeV1, ORDINARY_LEAF_COMPOSITION_V1,
     PLANNING_OUTPUT_COMPOSITION_V1, REQUIREMENTS_INPUT_COMPOSITION_V1, WORK_EXPLICIT_SCOPE_V1,
     WORK_IDENTITY_SCHEME_V1, WORK_KIND_BINDING_SCHEMA_V1, WORK_KIND_DEFINITION_SCHEMA_V1,
     WORK_KIND_ESTABLISHMENT_RULE_V1, WORK_REGISTRATION_RULE_V1, WORK_STATE_FULL_OWNER_REACH_V1,
 };
 
 impl HandbookSdkV1 {
+    pub fn with_retained_work_snapshot<R>(&self,read:impl FnOnce(&WorkStorageSnapshotV1<'_>)->R)->Result<R,LocalAuthorityRefusalV1>{
+        NativeWorkStateV1::with_storage_snapshot(&self.repo_root,read)
+    }
+    pub fn work_storage_statistics(&self) -> Result<WorkStorageStatisticsV1,LocalAuthorityRefusalV1> {
+        NativeWorkStateV1::storage_statistics(&self.repo_root)
+    }
+    pub fn maintain_work_storage(&self,budget:WorkMaintenanceBudgetV1) -> Result<WorkMaintenanceProgressV1,LocalAuthorityRefusalV1> {
+        NativeWorkStateV1::maintain_storage(&self.repo_root,budget)
+    }
+
     /// Prepares the original human's approval of one exact immutable definition.
     /// Supply the observed native basis and check fingerprint in that approval;
     /// they are validated inward, never replaced by this observation. Definition

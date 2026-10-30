@@ -210,7 +210,6 @@ fn registration_every_prefix_crosses_original_successor_governance_revocation_an
                 NativeWorkStateV1::register_with_boundary_for_test(dir.path(), p, fault(at));
             assert!(interrupted.outcome.is_none(), "{at:?} {interrupted:?}");
             let committed = matches!(at, B::Terminal | B::Reply);
-            let attempted = at == B::PublicationAttempt;
             let current = sdk.resolve_current_work_item(&grant, "item").unwrap();
             assert!(
                 match (&current, at) {
@@ -237,8 +236,6 @@ fn registration_every_prefix_crosses_original_successor_governance_revocation_an
             let recovered = sdk.recover_work_registration_request(&loc);
             let expected = if committed {
                 WorkDispositionV1::Replayed
-            } else if attempted {
-                WorkDispositionV1::Uncertain
             } else if at == B::BeforeIntent {
                 WorkDispositionV1::Unaccepted
             } else if transition == 0 {
@@ -256,22 +253,11 @@ fn registration_every_prefix_crosses_original_successor_governance_revocation_an
                     WorkCurrentItemV1::Open(_)
                 ));
             }
-            if attempted {
-                assert!(sdk
-                    .register_work_item(
-                        sdk.prepare_work_registration(
-                            &initial,
-                            &grant,
-                            input(&grant, "blind-retry", "item")
-                        )
-                        .unwrap()
-                    )
-                    .outcome
-                    .is_none());
-                assert!(matches!(
-                    sdk.resolve_current_work_item(&grant, "item").unwrap(),
-                    WorkCurrentItemV1::Pending { .. }
-                ));
+            if at==B::PublicationAttempt {
+                // Native Owned contains exact terminal evidence before outputs;
+                // recovery uses explicit negative proof, never an absent marker.
+                assert_eq!(sdk.resolve_work_registration_request(&loc).disposition,
+                    if expected==WorkDispositionV1::Committed{WorkDispositionV1::Replayed}else{expected.clone()});
             }
             if expected == WorkDispositionV1::NonCommitted && transition == 2 {
                 let g = activate(&sdk, &initial, &check, "grant-G", Some(&grant));
@@ -344,8 +330,6 @@ fn activation_and_revocation_have_the_same_terminal_and_original_recovery_bounda
                 };
                 let expected = if matches!(at, B::Terminal | B::Reply) {
                     WorkDispositionV1::Replayed
-                } else if at == B::PublicationAttempt {
-                    WorkDispositionV1::Uncertain
                 } else if at == B::BeforeIntent {
                     WorkDispositionV1::Unaccepted
                 } else if transition == 0 {
@@ -467,8 +451,8 @@ fn bounded_peak_inventory_preserves_old_recovery_and_request_reservations_are_lo
     let pending = p.locator().clone();
     NativeWorkStateV1::register_with_boundary_for_test(dir.path(), p, fault(B::PublicationAttempt));
     let mut first = None;
-    // 32 retained transactions include the grant and unresolved reservation;
-    // all candidate/attempt/terminal or noncommit files fit the declared bound.
+    // Cross the retired 32-transaction mechanism while retaining the exact
+    // unresolved original. A new key must continue without consuming history.
     for i in 0..30 {
         let k = format!("item-{i}");
         let p = sdk
@@ -485,7 +469,7 @@ fn bounded_peak_inventory_preserves_old_recovery_and_request_reservations_are_lo
         .unwrap();
     assert_eq!(
         sdk.register_work_item(overflow).disposition,
-        WorkDispositionV1::Refused
+        WorkDispositionV1::Committed
     );
     assert!(sdk
         .resolve_work_registration_request(&first.unwrap())
@@ -695,7 +679,7 @@ fn native_work_child() {
 fn real_process_death_preserves_pending_attempt_uncertainty_and_committed_terminal_proof() {
     for (mode, expected) in [
         ("crash-snapshot", WorkDispositionV1::Committed),
-        ("crash-attempt", WorkDispositionV1::Uncertain),
+        ("crash-attempt", WorkDispositionV1::Committed),
         ("crash-terminal", WorkDispositionV1::Replayed),
     ] {
         let dir = tempdir().unwrap();
@@ -766,8 +750,6 @@ fn explicit_g_first_activation_and_interrupted_compatible_g_reestablishment_reco
             let recovered = sdk.recover_work_registration_terms_request(&original);
             let expected = if matches!(at, B::Terminal | B::Reply) {
                 WorkDispositionV1::Replayed
-            } else if at == B::PublicationAttempt {
-                WorkDispositionV1::Uncertain
             } else if at == B::BeforeIntent {
                 WorkDispositionV1::Unaccepted
             } else {
@@ -876,8 +858,6 @@ fn planning_and_requirements_prefixes_never_borrow_successor_or_transition_autho
                 let recovered = sdk.recover_work_registration_request(&original);
                 let expected = if at == B::Terminal {
                     WorkDispositionV1::Replayed
-                } else if at == B::PublicationAttempt {
-                    WorkDispositionV1::Uncertain
                 } else {
                     WorkDispositionV1::NonCommitted
                 };
@@ -960,11 +940,7 @@ fn pending_scope_administration_suspends_use_and_original_noncommit_controls_rel
                 &original,
                 fault(B::Snapshot),
             );
-            let expected = if at == B::PublicationAttempt {
-                WorkDispositionV1::Uncertain
-            } else {
-                WorkDispositionV1::NonCommitted
-            };
+            let expected = WorkDispositionV1::NonCommitted;
             assert_eq!(
                 execution.disposition, expected,
                 "{at:?} lost={lost_basis}: {execution:?}"
@@ -972,7 +948,7 @@ fn pending_scope_administration_suspends_use_and_original_noncommit_controls_rel
             assert_eq!(
                 sdk.resolve_current_work_registration_terms(&initial, &grant)
                     .is_ok(),
-                !lost_basis && at != B::PublicationAttempt
+                !lost_basis
             );
             assert_eq!(
                 sdk.resolve_work_registration_terms_request(&original)
@@ -1133,7 +1109,7 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
         let dir = tempdir().unwrap();
         let sdk = HandbookSdkV1::open(dir.path());
         let (initial, check) = setup(&sdk);
-        let first = activate_menu(&sdk, &initial, &check); // slot 1
+        let first = activate_menu(&sdk, &initial, &check); // first exact grant
         let prepared = sdk
             .prepare_work_registration_terms(
                 &initial,
@@ -1142,7 +1118,7 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
                 WorkTermsTransitionV1::ScopeChange(&first),
             )
             .unwrap();
-        let grant = prepared.locator().clone(); // slot 2
+        let grant = prepared.locator().clone(); // exact scope successor
         assert_eq!(
             sdk.activate_work_registration_terms(prepared).disposition,
             WorkDispositionV1::Committed
@@ -1157,7 +1133,7 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
                     role_input(&grant, true, "pending-last-item"),
                 )
                 .unwrap();
-            let original = prepared.locator().clone(); // slot 3
+            let original = prepared.locator().clone(); // retained pending original
             NativeWorkStateV1::register_with_boundary_for_test(
                 dir.path(),
                 prepared,
@@ -1165,7 +1141,7 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
             );
             Some(original)
         };
-        let count = if authority_last { 29 } else { 27 };
+        let count = 40; // Preserve original recovery branches beyond old lifetime slots.
         let mut retained = None;
         for index in 0..count {
             let key = format!("capacity-{index}");
@@ -1191,7 +1167,7 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
                 WorkTermsTransitionV1::ScopeChange(&grant),
             )
             .unwrap();
-        let administration = prepared.locator().clone(); // slot 31 or 32
+        let administration = prepared.locator().clone(); // retained pending original1 or 32
         NativeWorkStateV1::activate_with_boundary_for_test(
             dir.path(),
             prepared,
@@ -1222,7 +1198,7 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
             assert_eq!(
                 sdk.register_work_item(prepared).disposition,
                 WorkDispositionV1::Committed
-            ); // slot 32
+            ); // retained pending original2
             let recovered = sdk.recover_work_registration_request(pending_item.as_ref().unwrap());
             assert_eq!(
                 recovered.disposition,
@@ -1240,8 +1216,9 @@ fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slo
             .unwrap();
         assert_eq!(
             sdk.register_work_item(overflow).disposition,
-            WorkDispositionV1::Refused
+            WorkDispositionV1::Committed
         );
+        assert_eq!(sdk.work_storage_statistics().unwrap().live_records,if authority_last {41}else{43});
         let original = retained.unwrap();
         assert_eq!(
             sdk.recover_work_registration_request(&original).disposition,

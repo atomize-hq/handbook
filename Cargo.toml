@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "crates/file-native",
     "crates/cli",
     "crates/contracts",
     "crates/dock",

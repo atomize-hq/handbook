@@ -1,5 +1,6 @@
 //! Immutable same-project open leaf registration. Retained history is distinct
 //! from current operating permission; terminal publication is the commit point.
+mod database;
 mod kind;
 mod scope;
 mod store;
@@ -9,7 +10,8 @@ mod types;
 pub use kind::*;
 pub use scope::*;
 pub use submitted::*;
-pub use transaction::{NativeWorkStateV1, WorkWriteBoundaryV1};
+pub use transaction::{NativeWorkStateV1, WorkWriteBoundaryV1, WorkStorageStatisticsV1,WorkStorageSnapshotV1,WorkHistoryPageV1,WorkHistoryRecordV1,WorkRetainedOutcomeV1};
+pub use file_native::{MaintenanceBudget as WorkMaintenanceBudgetV1, MaintenanceProgress as WorkMaintenanceProgressV1};
 pub use types::*;
 
 use crate::local_authority::{refuse, LocalAuthorityRefusalV1};

@@ -911,6 +911,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "file-native"
+version = "0.1.0"
+dependencies = [
+ "getrandom 0.3.4",
+ "libc",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tempfile",
+]
+
+[[package]]
 name = "find-msvc-tools"
 version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1379,6 +1391,7 @@ version = "0.2.0"
 dependencies = [
  "base64 0.22.1",
  "file-id",
+ "file-native",
  "getrandom 0.3.4",
  "jsonschema",
  "p256",
@@ -1421,6 +1434,7 @@ dependencies = [
 name = "handbook-sdk"
 version = "0.1.0"
 dependencies = [
+ "file-native",
  "handbook-contracts",
  "handbook-dock",
  "handbook-engine",

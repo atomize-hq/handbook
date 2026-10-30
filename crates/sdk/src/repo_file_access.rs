@@ -371,7 +371,7 @@ fn write_repo_relative_bytes_unix(
     })?;
     let mut temp_file = unsafe { File::from_raw_fd(temp_fd.into_raw_fd()) };
 
-    let result = (|| -> Result<(), RepoRelativeMutationError> {
+    let result = (|| -> Result<AdapterPublicEffect, RepoRelativeMutationError> {
         temp_file
             .write_all(bytes)
             .map_err(|source| RepoRelativeMutationError::WriteFailure {

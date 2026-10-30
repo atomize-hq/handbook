@@ -1,19 +1,14 @@
 use super::*;
-use crate::repository_durability::RepositoryDirectoryEntryKindV1 as Kind;
+use super::database::{WorkFs,db_error};
 use crate::{RepositoryExclusiveLockV1, RepositoryReadV1, RetainedRepositoryRootV1};
 use std::cell::Cell;
-use std::collections::BTreeMap;
+
 
 pub(super) const LOCK: &str = ".handbook/work-state/work.lock";
 const ANCHOR: &str = ".handbook-work-state.v1.json";
 const BOOT: &str = ".handbook-work-state-bootstrap.v1.json";
 const STAGE: &str = ".handbook/work-state-bootstrap";
 const OWNER: &str = ".handbook/work-state/v1/owner.json";
-pub(super) const CAPACITY: usize = 32;
-const INVENTORY_BYTES: usize = 128 * 1024 * 1024;
-const SLOT_SCHEMA: &str = "handbook.work-state-reservation-slot@1.0.0";
-const ROOT_INVENTORY_ENTRIES: usize = 4 * CAPACITY + 1;
-
 /// Historical grant origins retain their exact raw representation. Only the new
 /// kind origin has a closed, purpose-specific discriminant and owner schema.
 #[derive(Clone, Debug, PartialEq)]
@@ -88,76 +83,6 @@ impl BootstrapOrigin {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(deny_unknown_fields)]
-struct SlotEntry {
-    name: String,
-    intent_byte_fingerprint: String,
-}
-
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(deny_unknown_fields)]
-struct Slot {
-    schema: String,
-    owner_identity: String,
-    slot: usize,
-    entry: Option<SlotEntry>,
-}
-
-struct Manifest {
-    slots: Vec<Slot>,
-    paths: Vec<String>,
-    bytes: usize,
-}
-
-fn empty_slot(owner: &Owner, index: usize) -> Slot {
-    Slot {
-        schema: SLOT_SCHEMA.into(),
-        owner_identity: owner.identity.clone(),
-        slot: index,
-        entry: None,
-    }
-}
-
-fn slot_name(index: usize) -> String {
-    format!("slot-{index:02}.json")
-}
-fn displaced_slot_name(index: usize) -> String {
-    format!("slot-{index:02}.displaced.json")
-}
-fn prepared_slot_name(index: usize) -> String {
-    format!("slot-{index:02}.prepared.json")
-}
-fn slot_path(index: usize) -> String {
-    format!("{WORK_STATE_ROOT_V1}/{}", slot_name(index))
-}
-fn displaced_slot_path(index: usize) -> String {
-    format!("{WORK_STATE_ROOT_V1}/{}", displaced_slot_name(index))
-}
-fn prepared_slot_path(index: usize) -> String {
-    format!("{WORK_STATE_ROOT_V1}/{}", prepared_slot_name(index))
-}
-fn slot_artifact(name: &str) -> bool {
-    (0..CAPACITY).any(|index| {
-        [
-            slot_name(index),
-            displaced_slot_name(index),
-            prepared_slot_name(index),
-        ]
-        .iter()
-        .any(|expected| expected == name)
-    })
-}
-
-fn valid_intent_fingerprint(value: &str) -> bool {
-    value.strip_prefix("sha256:").is_some_and(|digest| {
-        digest.len() == 64
-            && digest
-                .bytes()
-                .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
-    })
-}
-
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub(super) struct Owner {
@@ -173,9 +98,16 @@ pub(super) struct WorkLock<'a> {
     pub root: &'a RetainedRepositoryRootV1,
     lock: RepositoryExclusiveLockV1,
     pub owner: Owner,
+    pub db: file_native::Database<WorkFs<'a>>,
+    proof:crate::RepositoryExactFilesCheckpointV1<'a>,
 }
 impl WorkLock<'_> {
     pub fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+        self.proof.validate().map_err(fs_error)?;
+        let entries=self.root.list_directory_bounded(WORK_STATE_ROOT_V1,2).map_err(fs_error)?;
+        if entries.len()!=2 || entries.iter().any(|entry| !matches!((entry.name(),entry.kind()),("owner.json",crate::RepositoryDirectoryEntryKindV1::RegularFile)|("database",crate::RepositoryDirectoryEntryKindV1::Directory))) {
+            return Err(refuse("work_inventory","closed current-format owner root required"));
+        }
         self.lock.validate_at(self.root, LOCK).map_err(fs_error)?;
         if self.lock.physical_fingerprint_v1().map_err(fs_error)? != self.owner.lock_fingerprint
             || required(self.root, OWNER)? != encode(&self.owner)?
@@ -194,358 +126,7 @@ impl WorkLock<'_> {
         }
         Ok(())
     }
-    pub fn inventory(&self) -> Result<Inventory, LocalAuthorityRefusalV1> {
-        self.validate()?;
-        let parent = self
-            .root
-            .list_directory_bounded(".handbook/work-state", 2)
-            .map_err(fs_error)?;
-        if parent.len() != 2
-            || parent.iter().any(|entry| {
-                !matches!(
-                    (entry.name(), entry.kind()),
-                    ("work.lock", Kind::RegularFile) | ("v1", Kind::Directory)
-                )
-            })
-        {
-            return Err(refuse(
-                "work_inventory",
-                "complete closed owner root inventory required",
-            ));
-        }
-        if self
-            .root
-            .list_directory_bounded(".handbook", 4096)
-            .map_err(fs_error)?
-            .iter()
-            .any(|e| e.name() == "work-state-bootstrap")
-        {
-            return Err(refuse(
-                "work_bootstrap_conflict",
-                "published owner cannot have a substituted/pending bootstrap candidate",
-            ));
-        }
-        let manifest = self.manifest()?;
-        let mut transactions = BTreeMap::new();
-        let mut bytes = manifest
-            .bytes
-            .checked_add(required(self.root, OWNER)?.len())
-            .and_then(|bytes| bytes.checked_add(required(self.root, ANCHOR).ok()?.len()))
-            .and_then(|bytes| bytes.checked_add(required(self.root, BOOT).ok()?.len()))
-            .ok_or_else(|| codec("overflow"))?;
-        if bytes > INVENTORY_BYTES {
-            return Err(refuse(
-                "work_inventory_bound",
-                "complete owner records exceed byte bound",
-            ));
-        }
-        for entry in self
-            .root
-            .list_directory_bounded(WORK_STATE_ROOT_V1, ROOT_INVENTORY_ENTRIES)
-            .map_err(fs_error)?
-        {
-            if entry.name() == "owner.json" && entry.kind() == Kind::RegularFile {
-                continue;
-            }
-            if slot_artifact(entry.name()) && entry.kind() == Kind::RegularFile {
-                continue;
-            }
-            if entry.kind() != Kind::Directory || !valid_transaction_name(entry.name()) {
-                return Err(refuse(
-                    "work_inventory",
-                    "unknown or unsupported owner inventory entry",
-                ));
-            }
-            let base = format!("{WORK_STATE_ROOT_V1}/{}", entry.name());
-            let mut files = BTreeMap::new();
-            for file in self
-                .root
-                .list_directory_bounded(&base, 8)
-                .map_err(fs_error)?
-            {
-                if file.kind() != Kind::RegularFile
-                    || ![
-                        "intent.json",
-                        "not-attempted.json",
-                        "attempted.json",
-                        "decision.json",
-                        "snapshot.json",
-                        "terminal.pending",
-                        "terminal.json",
-                        "noncommit.json",
-                    ]
-                    .contains(&file.name())
-                {
-                    return Err(refuse(
-                        "work_inventory",
-                        "unknown transaction target or nonregular entry",
-                    ));
-                }
-                let b = required(self.root, &format!("{base}/{}", file.name()))?;
-                bytes = bytes
-                    .checked_add(b.len())
-                    .ok_or_else(|| codec("overflow"))?;
-                if bytes > INVENTORY_BYTES {
-                    return Err(refuse(
-                        "work_inventory_bound",
-                        "complete owner inventory exceeds byte bound",
-                    ));
-                }
-                files.insert(file.name().to_owned(), b);
-            }
-            transactions.insert(entry.name().to_owned(), files);
-        }
-        let mut declared = BTreeMap::new();
-        for slot in &manifest.slots {
-            if let Some(entry) = &slot.entry {
-                if declared
-                    .insert(entry.name.clone(), entry.intent_byte_fingerprint.clone())
-                    .is_some()
-                {
-                    return Err(refuse(
-                        "work_manifest_conflict",
-                        "one request cannot occupy multiple retained slots",
-                    ));
-                }
-                let accepted = transactions.get(&entry.name);
-                let candidate = transactions.get(&format!("accept-{}", entry.name));
-                let files = match (accepted, candidate) {
-                    (Some(files), None) | (None, Some(files)) => files,
-                    _ => return Err(refuse("work_manifest_missing", "declared original transaction is missing or conflicts; loss is not absence")),
-                };
-                let intent = files.get("intent.json").ok_or_else(|| refuse("work_manifest_missing", "declared transaction has no exact original intent; reservation remains uncertain"))?;
-                if crate::DefinitionFingerprint::from_bytes(intent).as_str()
-                    != entry.intent_byte_fingerprint
-                {
-                    return Err(refuse(
-                        "work_manifest_intent",
-                        "retained transaction intent differs from its positive slot declaration",
-                    ));
-                }
-            }
-        }
-        if transactions.len() > CAPACITY
-            || transactions
-                .keys()
-                .any(|name| !declared.contains_key(name.strip_prefix("accept-").unwrap_or(name)))
-        {
-            return Err(refuse(
-                "work_manifest_undeclared",
-                "every transaction must have exactly one retained positive slot declaration",
-            ));
-        }
-        self.validate()?;
-        Ok(Inventory {
-            transactions,
-            bytes,
-            manifest_paths: manifest.paths,
-        })
-    }
-
-    // Independent required-slot reads also work immediately after a durable
-    // reservation but before its directory exists. Normal inventory refuses
-    // that prefix rather than treating the missing declared effect as absence.
-    fn manifest(&self) -> Result<Manifest, LocalAuthorityRefusalV1> {
-        self.validate()?;
-        let mut slots = Vec::with_capacity(CAPACITY);
-        let mut paths = Vec::new();
-        let mut bytes = 0usize;
-        for index in 0..CAPACITY {
-            let path = slot_path(index);
-            let content = required(self.root, &path)?;
-            let slot: Slot = decode(&content)?;
-            if slot.schema != SLOT_SCHEMA
-                || slot.owner_identity != self.owner.identity
-                || slot.slot != index
-                || encode(&slot)? != content
-            {
-                return Err(refuse(
-                    "work_manifest_slot",
-                    "required exact canonical owner/index slot record differs",
-                ));
-            }
-            bytes = bytes
-                .checked_add(content.len())
-                .ok_or_else(|| codec("overflow"))?;
-            let displaced_path = displaced_slot_path(index);
-            let displaced = optional(self.root, &displaced_path)?;
-            let prepared_path = prepared_slot_path(index);
-            if let Some(content) = optional(self.root, &prepared_path)? {
-                let pending: Slot = decode(&content)?;
-                if pending.schema != SLOT_SCHEMA
-                    || pending.owner_identity != self.owner.identity
-                    || pending.slot != index
-                    || pending.entry.is_none()
-                    || encode(&pending)? != content
-                {
-                    return Err(refuse(
-                        "work_manifest_slot",
-                        "pending replacement slot is substituted",
-                    ));
-                }
-                return Err(refuse(
-                    "work_manifest_pending",
-                    "slot publication is pending or uncertain; no empty-slot fallback",
-                ));
-            }
-            match &slot.entry {
-                None if displaced.is_some() => {
-                    return Err(refuse(
-                        "work_manifest_reset",
-                        "a consumed slot cannot be reset to empty",
-                    ))
-                }
-                None => {}
-                Some(entry) => {
-                    if entry.name.starts_with("accept-")
-                        || !valid_transaction_name(&entry.name)
-                        || !valid_intent_fingerprint(&entry.intent_byte_fingerprint)
-                    {
-                        return Err(refuse(
-                            "work_manifest_slot",
-                            "slot must declare one exact bounded request and intent byte identity",
-                        ));
-                    }
-                    let expected = encode(&empty_slot(&self.owner, index))?;
-                    if displaced.as_deref() != Some(expected.as_slice()) {
-                        return Err(refuse(
-                            "work_manifest_displaced",
-                            "occupied slot requires its exact retained displaced empty predecessor",
-                        ));
-                    }
-                    bytes = bytes
-                        .checked_add(expected.len())
-                        .ok_or_else(|| codec("overflow"))?;
-                    paths.push(displaced_path);
-                }
-            }
-            paths.push(path);
-            slots.push(slot);
-        }
-        paths.sort();
-        self.validate()?;
-        Ok(Manifest {
-            slots,
-            paths,
-            bytes,
-        })
-    }
-
-    /// Durably consumes exactly one positive required empty slot before the
-    /// caller creates an acceptance directory. Mutation is marked attempted
-    /// before the first native write, after all effect-free capacity checks.
-    /// Slots and displaced predecessors are never reused.
-    pub fn reserve_intent(
-        &self,
-        name: &str,
-        intent: &[u8],
-        mutation_attempted: &Cell<bool>,
-    ) -> Result<(), LocalAuthorityRefusalV1> {
-        if name.starts_with("accept-")
-            || !valid_transaction_name(name)
-            || intent.is_empty()
-            || intent.len() > MAX
-        {
-            return Err(refuse(
-                "work_manifest_request",
-                "one exact bounded transaction intent required",
-            ));
-        }
-        let entry = SlotEntry {
-            name: name.into(),
-            intent_byte_fingerprint: crate::DefinitionFingerprint::from_bytes(intent).to_string(),
-        };
-        let inventory = self.inventory()?;
-        let manifest = self.manifest()?;
-        if let Some(slot) = manifest.slots.iter().find(|slot| {
-            slot.entry
-                .as_ref()
-                .is_some_and(|retained| retained.name == name)
-        }) {
-            if slot.entry.as_ref() != Some(&entry) {
-                return Err(refuse(
-                    "work_manifest_conflict",
-                    "original slot request or intent bytes conflict",
-                ));
-            }
-            let accepted = optional(
-                self.root,
-                &format!("{WORK_STATE_ROOT_V1}/{name}/intent.json"),
-            )?;
-            let candidate = optional(
-                self.root,
-                &format!("{WORK_STATE_ROOT_V1}/accept-{name}/intent.json"),
-            )?;
-            return match (accepted, candidate) {
-                (Some(bytes), None) | (None, Some(bytes)) if bytes == intent => Ok(()),
-                _ => Err(refuse("work_manifest_uncertain", "occupied slot has no exact singular original transaction prefix; reservation cannot be replaced")),
-            };
-        }
-        let index = manifest
-            .slots
-            .iter()
-            .find(|slot| slot.entry.is_none())
-            .map(|slot| slot.slot)
-            .ok_or_else(|| {
-                refuse(
-                    "work_capacity",
-                    "all positive retained transaction slots are consumed",
-                )
-            })?;
-        let mut slot = empty_slot(&self.owner, index);
-        let before = encode(&slot)?;
-        slot.entry = Some(entry);
-        let after = encode(&slot)?;
-        if inventory
-            .bytes
-            .checked_add(8 * MAX)
-            .and_then(|bytes| bytes.checked_add(after.len()))
-            .and_then(|bytes| bytes.checked_add(before.len()))
-            .is_none_or(|bytes| bytes > INVENTORY_BYTES)
-        {
-            return Err(refuse(
-                "work_capacity",
-                "reserve complete peak transaction and slot publication bytes before acceptance",
-            ));
-        }
-        let prepared = prepared_slot_path(index);
-        mutation_attempted.set(true);
-        self.root
-            .write_new_durable(&prepared, &after)
-            .map_err(fs_error)?;
-        self.lock.validate_at(self.root, LOCK).map_err(fs_error)?;
-        self.root
-            .replace_exact_durable(
-                &slot_path(index),
-                &before,
-                &prepared,
-                &displaced_slot_path(index),
-            )
-            .map_err(fs_error)?;
-        if required(self.root, &slot_path(index))? != after
-            || required(self.root, &displaced_slot_path(index))? != before
-            || optional(self.root, &prepared)?.is_some()
-        {
-            return Err(refuse(
-                "work_manifest_uncertain",
-                "exact slot replacement publication is unverifiable",
-            ));
-        }
-        self.validate()
-    }
 }
-pub(super) struct Inventory {
-    pub transactions: BTreeMap<String, BTreeMap<String, Vec<u8>>>,
-    pub bytes: usize,
-    pub manifest_paths: Vec<String>,
-}
-fn valid_transaction_name(v: &str) -> bool {
-    let v = v.strip_prefix("accept-").unwrap_or(v);
-    ["grant-", "item-", "revoke-", "kind-"]
-        .iter()
-        .any(|p| v.strip_prefix(p).is_some_and(|s| token(s).is_ok()))
-}
-
 pub(super) fn open<'a>(
     root: &'a RetainedRepositoryRootV1,
 ) -> Result<WorkLock<'a>, LocalAuthorityRefusalV1> {
@@ -566,7 +147,9 @@ pub(super) fn open<'a>(
     let lock = root
         .acquire_existing_exclusive_lock_v1(LOCK)
         .map_err(fs_error)?;
-    let result = WorkLock { root, lock, owner };
+    let db = file_native::Database::open_for_recovery(WorkFs {root,prefix:format!("{WORK_STATE_ROOT_V1}/database"),physical:owner.physical.clone()},&owner.identity).map_err(db_error)?;
+    let proof=owner_proof(root)?;
+    let result = WorkLock { root, lock, owner, db, proof };
     result.validate()?;
     Ok(result)
 }
@@ -667,19 +250,16 @@ pub(super) fn establish<'a>(
         lock_fingerprint: retained.physical_fingerprint_v1().map_err(fs_error)?,
         ..candidate
     };
-    for index in 0..CAPACITY {
-        let path = format!("{STAGE}/v1/{}", slot_name(index));
-        let expected = encode(&empty_slot(&owner, index))?;
-        if stage_owner_present {
-            if required(root, &path)? != expected {
-                return Err(refuse(
-                    "work_bootstrap_manifest",
-                    "original unpublished owner slots are missing or changed; no regeneration",
-                ));
-            }
-        } else {
-            write_exact(root, &path, &expected)?;
-        }
+    write_exact(root, &stage_owner, &encode(&owner)?)?;
+    let database_path=format!("{STAGE}/v1/database");
+    let io=WorkFs {root,prefix:database_path.clone(),physical:owner.physical.clone()};
+    if stage_owner_present && optional(root,&format!("{database_path}/CREATING.json"))?.is_some() {
+        file_native::Database::resume_creation(io,&owner.identity).map_err(db_error)?;
+    } else if stage_owner_present {
+        file_native::Database::open(io,&owner.identity).map_err(db_error)?;
+    } else {
+        root.create_directories(&database_path).map_err(fs_error)?;
+        file_native::Database::create(io,&owner.identity).map_err(db_error)?;
     }
     write_exact(root, &stage_owner, &encode(&owner)?)?;
     retained.validate_at(root, &stage_lock).map_err(fs_error)?;
@@ -725,4 +305,15 @@ pub(super) fn write_exact(
         )),
         None => root.write_new_durable(p, b).map_err(fs_error),
     }
+}
+
+pub(super) fn validate_reader_owner(root:&RetainedRepositoryRootV1,owner:&Owner)->Result<(),LocalAuthorityRefusalV1>{
+    if required(root,OWNER)?!=encode(owner)? || required(root,ANCHOR)?!=encode(owner)? || required(root,BOOT)?!=encode(&owner.bootstrap)? || root.governance_physical_root_fingerprint_v1().map_err(fs_error)?!=owner.physical || root.existing_lock_physical_fingerprint_v1(LOCK).map_err(fs_error)?!=owner.lock_fingerprint {
+        return Err(refuse("work_owner_substituted","original retained reader root/owner/lock required"));
+    }
+    Ok(())
+}
+
+pub(super) fn owner_proof(root:&RetainedRepositoryRootV1)->Result<crate::RepositoryExactFilesCheckpointV1<'_>,LocalAuthorityRefusalV1>{
+    root.retain_exact_files_checkpoint_v1(&[BOOT,ANCHOR,OWNER]).map_err(fs_error)
 }

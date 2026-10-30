@@ -130,8 +130,6 @@ fn definition_every_publication_prefix_preserves_original_basis_after_governance
             let recovered = sdk.recover_work_kind_request(&original);
             let expected = if committed {
                 WorkDispositionV1::Replayed
-            } else if at == B::PublicationAttempt {
-                WorkDispositionV1::Uncertain
             } else if at == B::BeforeIntent {
                 WorkDispositionV1::Unaccepted
             } else if transition == 0 {
@@ -217,8 +215,6 @@ fn kind_item_every_publication_prefix_never_borrows_successor_or_transition_auth
             }
             let expected = if matches!(at, B::Terminal | B::Reply) {
                 WorkDispositionV1::Replayed
-            } else if at == B::PublicationAttempt {
-                WorkDispositionV1::Uncertain
             } else if at == B::BeforeIntent {
                 WorkDispositionV1::Unaccepted
             } else if transition == 0 {
@@ -421,8 +417,8 @@ fn combined_saturation_closes_accepted_definition_and_kind_item_without_fresh_sl
     let dir = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(dir.path());
     let (initial, check) = setup(&sdk);
-    let binding = establish_kind(&sdk, &initial, &check, "kind", "project.kind.leaf@1.0.0"); // slot 1
-    let grant = activate(&sdk, &initial, &check, "grant", None); // slot 2
+    let binding = establish_kind(&sdk, &initial, &check, "kind", "project.kind.leaf@1.0.0"); // original kind
+    let grant = activate(&sdk, &initial, &check, "grant", None); // original grant
     let content = definition("project.kind.leaf@2.0.0");
     let prepared = sdk
         .prepare_work_kind_establishment(
@@ -432,7 +428,7 @@ fn combined_saturation_closes_accepted_definition_and_kind_item_without_fresh_sl
             approval(&sdk, &initial, &check, &content, "accepted-kind"),
         )
         .unwrap();
-    let pending_kind = prepared.locator().clone(); // slot 3
+    let pending_kind = prepared.locator().clone(); // retained pending kind
     NativeWorkStateV1::establish_kind_with_boundary_for_test(
         dir.path(),
         prepared,
@@ -441,7 +437,7 @@ fn combined_saturation_closes_accepted_definition_and_kind_item_without_fresh_sl
     let prepared = sdk
         .prepare_work_registration(&initial, &grant, input(&grant, &binding, "accepted-item"))
         .unwrap();
-    let pending_item = prepared.locator().clone(); // slot 4
+    let pending_item = prepared.locator().clone(); // retained pending item
     NativeWorkStateV1::register_with_boundary_for_test(dir.path(), prepared, fault(B::Snapshot));
     let mut retained = None;
     for index in 0..28 {
@@ -476,52 +472,15 @@ fn combined_saturation_closes_accepted_definition_and_kind_item_without_fresh_sl
             .disposition,
         WorkDispositionV1::Replayed
     );
-    let fresh_item = sdk
-        .prepare_work_registration(&initial, &grant, input(&grant, &binding, "fresh-overflow"))
-        .unwrap();
-    assert_eq!(
-        sdk.register_work_item(fresh_item).disposition,
-        WorkDispositionV1::Refused
-    );
-    let fresh = definition("project.kind.leaf@3.0.0");
-    match sdk.prepare_work_kind_establishment(
-        &initial,
-        &check,
-        fresh.clone(),
-        approval(&sdk, &initial, &check, &fresh, "fresh-kind-overflow"),
-    ) {
-        Err(_) => {}
-        Ok(prepared) => assert_eq!(
-            sdk.establish_work_kind(prepared).disposition,
-            WorkDispositionV1::Refused
-        ),
-    }
-    let revocation = sdk.prepare_work_registration_revocation(
-        &grant,
-        "fresh-revoke-overflow",
-        &grant.terms.principal,
-        "human.revoke",
-        "Fresh revocation at capacity",
-    );
-    match revocation {
-        Err(_) => {}
-        Ok(request) => assert_eq!(
-            sdk.revoke_work_registration_terms(&request).disposition,
-            WorkDispositionV1::Refused
-        ),
-    }
-    match sdk.prepare_work_registration_terms(
-        &initial,
-        &check,
-        terms(&check, "fresh-authority-overflow"),
-        WorkTermsTransitionV1::ScopeChange(&grant),
-    ) {
-        Err(_) => {}
-        Ok(prepared) => assert_eq!(
-            sdk.activate_work_registration_terms(prepared).disposition,
-            WorkDispositionV1::Refused
-        ),
-    }
+    let fresh_item = sdk.prepare_work_registration(&initial,&grant,input(&grant,&binding,"fresh-overflow")).unwrap();
+    assert_eq!(sdk.register_work_item(fresh_item).disposition,WorkDispositionV1::Committed);
+    let fresh=definition("project.kind.leaf@3.0.0");
+    let prepared=sdk.prepare_work_kind_establishment(&initial,&check,fresh.clone(),approval(&sdk,&initial,&check,&fresh,"fresh-kind-overflow")).unwrap();
+    assert_eq!(sdk.establish_work_kind(prepared).disposition,WorkDispositionV1::Committed);
+    let prepared=sdk.prepare_work_registration_terms(&initial,&check,terms(&check,"fresh-authority-overflow"),WorkTermsTransitionV1::ScopeChange(&grant)).unwrap();
+    let successor=prepared.locator().clone();assert_eq!(sdk.activate_work_registration_terms(prepared).disposition,WorkDispositionV1::Committed);
+    let revocation=sdk.prepare_work_registration_revocation(&successor,"fresh-revoke-overflow",&successor.terms.principal,"human.revoke","Fresh revocation beyond old capacity").unwrap();
+    assert_eq!(sdk.revoke_work_registration_terms(&revocation).disposition,WorkDispositionV1::Committed);
     assert!(matches!(
         sdk.resolve_work_kind(&binding).unwrap(),
         WorkCurrentKindV1::Committed(_)
@@ -531,18 +490,9 @@ fn combined_saturation_closes_accepted_definition_and_kind_item_without_fresh_sl
             .unwrap(),
         WorkCurrentItemV1::Open(_)
     ));
-    assert_eq!(
-        fs::read_dir(dir.path().join(".handbook/work-state/v1"))
-            .unwrap()
-            .filter_map(Result::ok)
-            .filter(|entry| {
-                let name = entry.file_name();
-                let name = name.to_string_lossy();
-                name.len() == 12 && name.starts_with("slot-") && name.ends_with(".json")
-            })
-            .count(),
-        32
-    );
+    let statistics=sdk.work_storage_statistics().unwrap();
+    assert_eq!(statistics.live_records,30);
+    assert_eq!(statistics.retained_original_outcomes,36);
 }
 
 fn child(repo: &Path, mode: &str, pause: Option<B>) -> std::process::Child {
@@ -573,7 +523,7 @@ fn real_process_death_preserves_definition_and_kind_item_publication_truth() {
             (B::Intent, WorkDispositionV1::Committed),
             (B::Decision, WorkDispositionV1::Committed),
             (B::Snapshot, WorkDispositionV1::Committed),
-            (B::PublicationAttempt, WorkDispositionV1::Uncertain),
+            (B::PublicationAttempt, WorkDispositionV1::Committed),
             (B::Terminal, WorkDispositionV1::Replayed),
             (B::Reply, WorkDispositionV1::Replayed),
         ] {

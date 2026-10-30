@@ -123,6 +123,8 @@ pub struct RetainedRepositoryRootV1 {
     root: File,
     identity: PhysicalDirectoryIdentity,
     root_path: PathBuf,
+    #[cfg(target_os = "linux")]
+    linux_journal: Option<std::sync::Mutex<linux_path_guard::Journal>>,
     #[cfg(unix)]
     ancestor_epochs: Vec<RetainedDirectoryEpoch>,
     #[cfg(windows)]
@@ -285,9 +287,12 @@ impl RetainedRepositoryTreeGuardV1<'_> {
                 ));
             }
         }
+        self.root.require_stable_path_epoch()?;
         Ok(())
     }
 
+    // Returned ambient-path observations remain quarantined until the final
+    // native path journal and exact authority-file validations succeed.
     pub(crate) fn with_stable_path<R>(
         &self,
         use_path: impl FnOnce(&Path) -> R,
@@ -601,6 +606,16 @@ impl RetainedRepositoryRootV1 {
     pub fn open_exact(repo_root: impl AsRef<Path>) -> Result<Self, RepositoryDurabilityErrorV1> {
         ensure_supported_platform()?;
         let root_path = validate_root_path(repo_root.as_ref())?;
+        #[cfg(target_os = "linux")]
+        if let Some((root, identity, journal)) = linux_path_guard::capture(&root_path)? {
+            let retained = Self {
+                root, identity, root_path,
+                ancestor_epochs: Vec::new(),
+                linux_journal: Some(std::sync::Mutex::new(journal)),
+            };
+            retained.require_stable_path_epoch()?;
+            return Ok(retained);
+        }
 
         #[cfg(unix)]
         {
@@ -619,6 +634,8 @@ impl RetainedRepositoryRootV1 {
                 identity,
                 root_path,
                 ancestor_epochs,
+                #[cfg(target_os = "linux")]
+                linux_journal: None,
             })
         }
 
@@ -668,6 +685,10 @@ impl RetainedRepositoryRootV1 {
     }
 
     pub(crate) fn path_still_names_same_physical_root(&self, path: &Path) -> bool {
+        #[cfg(target_os = "linux")]
+        if path == self.root_path && self.linux_journal.is_some() {
+            return self.require_stable_path_epoch().is_ok();
+        }
         Self::open_exact(path).is_ok_and(|current| self.same_physical_root(&current))
     }
 
@@ -1002,9 +1023,15 @@ impl RetainedRepositoryRootV1 {
     }
 
     fn require_stable_path_epoch(&self) -> Result<(), RepositoryDurabilityErrorV1> {
+        #[cfg(target_os = "linux")]
+        if let Some(journal) = &self.linux_journal {
+            return journal.lock()
+                .map_err(|_| uncertain("repository relevant-entry journal mutex poisoned"))?
+                .validate(&self.root, self.identity);
+        }
         #[cfg(unix)]
         {
-            for retained in &self.ancestor_epochs {
+            for (index, retained) in self.ancestor_epochs.iter().enumerate() {
                 let current = unix_directory_epoch(&retained.directory)?;
                 if current.identity != retained.identity
                     || current.modified_seconds != retained.modified_seconds
@@ -1012,6 +1039,32 @@ impl RetainedRepositoryRootV1 {
                     || current.changed_seconds != retained.changed_seconds
                     || current.changed_nanoseconds != retained.changed_nanoseconds
                 {
+                    #[cfg(feature = "test-support")]
+                    {
+                        let PhysicalDirectoryIdentity::Unix {
+                            device: expected_device,
+                            inode: expected_inode,
+                        } = retained.identity;
+                        let PhysicalDirectoryIdentity::Unix {
+                            device: observed_device,
+                            inode: observed_inode,
+                        } = current.identity;
+                        let _ = std::io::Write::write_fmt(
+                            &mut std::io::stderr(),
+                            format_args!(
+                                "repository root ancestor witness; ancestor_index={index}; root_path={}; expected_identity={expected_device}:{expected_inode}; observed_identity={observed_device}:{observed_inode}; expected_mtime={}.{:09}; observed_mtime={}.{:09}; expected_ctime={}.{:09}; observed_ctime={}.{:09}\n",
+                                self.root_path.display(),
+                                retained.modified_seconds,
+                                retained.modified_nanoseconds,
+                                current.modified_seconds,
+                                current.modified_nanoseconds,
+                                retained.changed_seconds,
+                                retained.changed_nanoseconds,
+                                current.changed_seconds,
+                                current.changed_nanoseconds,
+                            ),
+                        );
+                    }
                     return Err(unsafe_fs(
                         "repository root ancestor changed during retained operation",
                     ));
@@ -1222,6 +1275,33 @@ impl RetainedRepositoryRootV1 {
         relative: &str,
     ) -> Result<RepositoryExclusiveLockV1, RepositoryDurabilityErrorV1> {
         self.lock_existing(&ValidatedRelativePath::parse(relative, false)?)
+    }
+
+    /// Tries an existing retained empty native lock without waiting. Contention
+    /// alone is None; missing/substituted state and IO errors remain refusals.
+    pub fn try_acquire_existing_exclusive_lock_v1(
+        &self,
+        relative: &str,
+    ) -> Result<Option<RepositoryExclusiveLockV1>, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let relative = ValidatedRelativePath::parse(relative, false)?;
+        let file = self.open_regular_optional(&relative, true)?
+            .ok_or_else(|| not_found("lock file disappeared before try acquisition"))?;
+        match file.try_lock() {
+            Ok(()) => {},
+            Err(std::fs::TryLockError::WouldBlock) => return Ok(None),
+            Err(_) => return Err(lock_unavailable("native try lock failed")),
+        }
+        let snapshot = regular_file_snapshot(&file)?;
+        #[cfg(windows)]
+        let parent_guards = self.pin_windows_parent(&relative)?;
+        let guard = RepositoryExclusiveLockV1 {
+            file: Some(file), snapshot,
+            #[cfg(windows)]
+            _parent_guards: parent_guards,
+        };
+        guard.validate_at(self, relative.as_str())?;
+        Ok(Some(guard))
     }
 
     fn lock_existing(
@@ -1536,6 +1616,418 @@ fn directory_identity(
         device: metadata.dev(),
         inode: metadata.ino(),
     })
+}
+
+
+#[cfg(target_os = "linux")]
+mod linux_path_guard {
+    use super::*;
+    use rustix::fd::OwnedFd;
+    use rustix::fs::{inotify, open, openat, Mode, OFlags};
+    use std::collections::BTreeMap;
+    use std::ffi::{OsStr, OsString};
+    use std::mem::MaybeUninit;
+    use std::os::fd::AsRawFd;
+    use std::os::unix::ffi::OsStrExt;
+    use std::os::unix::fs::MetadataExt;
+
+    const KERNEL_RECORD_LIMIT: usize = 1024 * 1024;
+    const JOURNAL_BUDGET: usize = 64 * 1024;
+    const MAX_EVENT_CHARGE: usize = 272;
+
+    struct ProcView {
+        process: File,
+        fdinfo: File,
+    }
+
+    impl ProcView {
+        fn open() -> Option<Self> {
+            let proc = File::from(open("/proc", dir_flags(), Mode::empty()).ok()?);
+            if rustix::fs::fstatfs(&proc).ok()?.f_type as u64 != 0x9fa0 {
+                return None;
+            }
+            let process = File::from(
+                openat(&proc, std::process::id().to_string(), dir_flags(), Mode::empty()).ok()?,
+            );
+            let fdinfo = File::from(openat(&process, "fdinfo", dir_flags(), Mode::empty()).ok()?);
+            Some(Self { process, fdinfo })
+        }
+
+        fn mounts(&self) -> Option<Vec<u8>> {
+            let file = File::from(
+                openat(&self.process, "mountinfo", OFlags::RDONLY | OFlags::CLOEXEC | OFlags::NOFOLLOW, Mode::empty()).ok()?,
+            );
+            bounded_kernel_read(file)
+        }
+
+        fn descriptor(&self, fd: i32) -> Option<Vec<u8>> {
+            let file = File::from(
+                openat(&self.fdinfo, fd.to_string(), OFlags::RDONLY | OFlags::CLOEXEC | OFlags::NOFOLLOW, Mode::empty()).ok()?,
+            );
+            bounded_kernel_read(file)
+        }
+    }
+
+    fn dir_flags() -> OFlags {
+        OFlags::RDONLY | OFlags::CLOEXEC | OFlags::DIRECTORY | OFlags::NOFOLLOW
+    }
+
+    fn bounded_kernel_read(file: File) -> Option<Vec<u8>> {
+        let mut bytes = Vec::new();
+        file.take((KERNEL_RECORD_LIMIT + 1) as u64).read_to_end(&mut bytes).ok()?;
+        (bytes.len() <= KERNEL_RECORD_LIMIT).then_some(bytes)
+    }
+
+    fn mount_id(bytes: &[u8]) -> Option<u64> {
+        let mut found = None;
+        for line in std::str::from_utf8(bytes).ok()?.lines() {
+            if let Some(value) = line.strip_prefix("mnt_id:") {
+                if found.is_some() { return None; }
+                found = Some(value.trim().parse().ok()?);
+            }
+        }
+        found
+    }
+
+    #[derive(Clone, Copy)]
+    struct Profile {
+        mount: u64,
+        device: u64,
+    }
+
+    // The magic alone also identifies ext2/ext3. Require the retained FD's
+    // mount ID to resolve to an explicit ext4 root mount, with matching device.
+    fn ext4_root_mount(bytes: &[u8], profile: Profile) -> Option<()> {
+        let mut found = false;
+        for line in std::str::from_utf8(bytes).ok()?.lines() {
+            let (left, right) = line.split_once(" - ")?;
+            let fields = left.split_whitespace().collect::<Vec<_>>();
+            if fields.len() < 6 { return None; }
+            if fields[0].parse::<u64>().ok()? != profile.mount { continue; }
+            if found || fields[3] != "/" || fields[4] != "/" { return None; }
+            let (major, minor) = fields[2].split_once(':')?;
+            if major.parse::<u32>().ok()? != rustix::fs::major(profile.device)
+                || minor.parse::<u32>().ok()? != rustix::fs::minor(profile.device)
+                || right.split_whitespace().next()? != "ext4"
+            {
+                return None;
+            }
+            found = true;
+        }
+        found.then_some(())
+    }
+
+    struct Node {
+        name: Option<OsString>,
+        directory: File,
+        identity: PhysicalDirectoryIdentity,
+    }
+
+    fn node(name: Option<OsString>, directory: File) -> Result<Node, RepositoryDurabilityErrorV1> {
+        let identity = directory_identity(&directory)?;
+        Ok(Node { name, directory, identity })
+    }
+
+    fn open_child(parent: &File, name: &OsStr) -> Result<File, RepositoryDurabilityErrorV1> {
+        openat(parent, name, dir_flags(), Mode::empty())
+            .map(File::from)
+            .map_err(|_| unsafe_fs("repository path component no-follow open failed"))
+    }
+
+    fn probe_chain(path: &Path) -> Result<Vec<Node>, RepositoryDurabilityErrorV1> {
+        let slash = open("/", dir_flags(), Mode::empty())
+            .map(File::from)
+            .map_err(|_| unsafe_fs("repository filesystem root open failed"))?;
+        let mut nodes = vec![node(None, slash)?];
+        for part in path.components().skip(1) {
+            let name = part.as_os_str();
+            let directory = open_child(&nodes.last().unwrap().directory, name)?;
+            nodes.push(node(Some(name.to_os_string()), directory)?);
+        }
+        Ok(nodes)
+    }
+
+    fn profile(proc: &ProcView, nodes: &[Node], mounts: &[u8]) -> Option<Profile> {
+        let first = nodes.first()?;
+        let profile = Profile {
+            mount: mount_id(&proc.descriptor(first.directory.as_raw_fd())?)?,
+            device: first.directory.metadata().ok()?.dev(),
+        };
+        ext4_root_mount(mounts, profile)?;
+        for node in nodes {
+            if rustix::fs::fstatfs(&node.directory).ok()?.f_type as u64 != 0xef53
+                || node.directory.metadata().ok()?.dev() != profile.device
+                || mount_id(&proc.descriptor(node.directory.as_raw_fd())?)? != profile.mount
+            {
+                return None;
+            }
+        }
+        Some(profile)
+    }
+
+    struct Watch {
+        inode: u64,
+        device: u64,
+        names: BTreeSet<Vec<u8>>,
+    }
+
+    fn charge_event(charged: &mut usize) -> Result<(), RepositoryDurabilityErrorV1> {
+        *charged += MAX_EVENT_CHARGE;
+        if *charged > JOURNAL_BUDGET {
+            return Err(uncertain("repository relevant-entry journal drain budget exceeded"));
+        }
+        Ok(())
+    }
+
+    pub(super) struct Journal {
+        fd: OwnedFd,
+        nodes: Vec<Node>,
+        watches: BTreeMap<i32, Watch>,
+        invalid: Option<RepositoryDurabilityErrorV1>,
+        profile: Profile,
+    }
+
+    fn encoded_device(device: u64) -> u64 {
+        let major = u64::from(rustix::fs::major(device));
+        let minor = u64::from(rustix::fs::minor(device));
+        (major << 20) | minor
+    }
+
+    // Read only our own kernel FDinfo, through the retained procfs capability.
+    // Registration's pathname success is not proof of the watched object.
+    fn watch_records(bytes: &[u8]) -> Option<BTreeMap<i32, (u64, u64)>> {
+        let mut result = BTreeMap::new();
+        for line in std::str::from_utf8(bytes).ok()?.lines() {
+            if !line.starts_with("inotify ") { continue; }
+            let mut wd = None;
+            let mut inode = None;
+            let mut device = None;
+            for field in line.split_whitespace().skip(1) {
+                let (key, value) = field.split_once(':')?;
+                match key {
+                    "wd" if wd.is_none() => wd = Some(i32::from_str_radix(value, 16).ok()?),
+                    "ino" if inode.is_none() => inode = Some(u64::from_str_radix(value, 16).ok()?),
+                    "sdev" if device.is_none() => device = Some(u64::from_str_radix(value, 16).ok()?),
+                    "wd" | "ino" | "sdev" => return None,
+                    _ => {}
+                }
+            }
+            if result.insert(wd?, (inode?, device?)).is_some() { return None; }
+        }
+        Some(result)
+    }
+
+    impl Journal {
+        fn arm(&mut self, proc: &ProcView, directory: &File, name: Option<&OsStr>) -> Result<(), RepositoryDurabilityErrorV1> {
+            let mask = inotify::WatchFlags::ONLYDIR
+                | inotify::WatchFlags::CREATE | inotify::WatchFlags::DELETE
+                | inotify::WatchFlags::MOVED_FROM | inotify::WatchFlags::MOVED_TO
+                | inotify::WatchFlags::MOVE_SELF | inotify::WatchFlags::DELETE_SELF;
+            let wd = inotify::add_watch(&self.fd, format!("/proc/self/fd/{}", directory.as_raw_fd()), mask)
+                .map_err(|_| uncertain("repository relevant-entry watch could not be armed"))?;
+            let metadata = directory.metadata().map_err(|_| uncertain("watched directory metadata unavailable"))?;
+            let expected = (metadata.ino(), encoded_device(metadata.dev()));
+            let watch = self.watches.entry(wd).or_insert_with(|| Watch {
+                inode: expected.0, device: expected.1, names: BTreeSet::new(),
+            });
+            if (watch.inode, watch.device) != expected {
+                return Err(unsafe_fs("repository watch descriptor aliases another physical object"));
+            }
+            if let Some(name) = name { watch.names.insert(name.as_bytes().to_vec()); }
+            let bytes = proc.descriptor(self.fd.as_raw_fd())
+                .ok_or_else(|| uncertain("repository physical watch correspondence unavailable"))?;
+            let actual = watch_records(&bytes)
+                .ok_or_else(|| uncertain("repository physical watch correspondence unrecognized"))?;
+            if actual.len() != self.watches.len() || self.watches.iter().any(|(wd, w)| actual.get(wd) != Some(&(w.inode, w.device))) {
+                return Err(unsafe_fs("repository watch does not bind the retained physical directory"));
+            }
+            Ok(())
+        }
+
+        fn classify(&self, wd: i32, flags: inotify::ReadFlags, name: Option<&[u8]>) -> Result<(), RepositoryDurabilityErrorV1> {
+            use inotify::ReadFlags as F;
+            if flags.intersects(F::QUEUE_OVERFLOW | F::IGNORED | F::UNMOUNT) {
+                return Err(uncertain("repository relevant-entry journal lost coverage"));
+            }
+            let watch = self.watches.get(&wd)
+                .ok_or_else(|| uncertain("repository relevant-entry journal returned an unknown watch"))?;
+            if flags.intersects(F::MOVE_SELF | F::DELETE_SELF) {
+                return Err(unsafe_fs("retained repository path directory moved or disappeared"));
+            }
+            let namespace = F::CREATE | F::DELETE | F::MOVED_FROM | F::MOVED_TO;
+            let known = namespace | F::MOVE_SELF | F::DELETE_SELF | F::ISDIR | F::ATTRIB;
+            if flags.bits() & !known.bits() != 0 {
+                return Err(uncertain("repository relevant-entry journal returned unknown events"));
+            }
+            // ATTRIB alone (including nlink/ctime from sibling directories) is
+            // not evidence of a named-edge replacement. Authority file metadata
+            // and content/version checks are retained separately.
+            if flags.intersects(namespace) {
+                let name = name.ok_or_else(|| uncertain("repository namespace event has no raw name"))?;
+                if name.len() > MAX_COMPONENT_BYTES {
+                    return Err(uncertain("repository namespace event exceeds the name bound"));
+                }
+                if watch.names.contains(name) {
+                    return Err(unsafe_fs("repository relevant path entry changed during retained operation"));
+                }
+            }
+            Ok(())
+        }
+
+        fn remember(&mut self, result: Result<(), RepositoryDurabilityErrorV1>) -> Result<(), RepositoryDurabilityErrorV1> {
+            if let Err(error) = &result { self.invalid = Some(error.clone()); }
+            result
+        }
+
+        fn drain(&mut self) -> Result<(), RepositoryDurabilityErrorV1> {
+            if let Some(error) = &self.invalid { return Err(error.clone()); }
+            let result = (|| {
+                let mut buffer = [MaybeUninit::<u8>::uninit(); 4096];
+                let mut reader = inotify::Reader::new(&self.fd, &mut buffer);
+                let mut charged = 0_usize;
+                loop {
+                    let event = match reader.next() {
+                        Ok(event) => event,
+                        Err(error) if error == rustix::io::Errno::AGAIN => return Ok(()),
+                        Err(_) => return Err(uncertain("repository relevant-entry journal read failed")),
+                    };
+                    charge_event(&mut charged)?;
+                    self.classify(event.wd(), event.events(), event.file_name().map(|n| n.to_bytes()))?;
+                }
+            })();
+            self.remember(result)
+        }
+
+        fn chain(&self, root: &File, identity: PhysicalDirectoryIdentity) -> Result<(), RepositoryDurabilityErrorV1> {
+            let mut current = File::from(open("/", dir_flags(), Mode::empty())
+                .map_err(|_| unsafe_fs("current repository filesystem root unavailable"))?);
+            for (index, retained) in self.nodes.iter().enumerate() {
+                if index != 0 { current = open_child(&current, retained.name.as_ref().unwrap())?; }
+                if directory_identity(&retained.directory)? != retained.identity
+                    || directory_identity(&current)? != retained.identity
+                {
+                    return Err(unsafe_fs("repository path no longer names the retained physical chain"));
+                }
+            }
+            if directory_identity(root)? != identity || directory_identity(&current)? != identity {
+                return Err(unsafe_fs("repository path no longer names the retained physical root"));
+            }
+            Ok(())
+        }
+
+        pub(super) fn validate(&mut self, root: &File, identity: PhysicalDirectoryIdentity) -> Result<(), RepositoryDurabilityErrorV1> {
+            self.drain()?;
+            let result = self.chain(root, identity);
+            self.remember(result)?;
+            self.drain()
+        }
+    }
+
+    pub(super) fn capture(path: &Path) -> Result<Option<(File, PhysicalDirectoryIdentity, Journal)>, RepositoryDurabilityErrorV1> {
+        capture_with(path, &mut |_, _| {})
+    }
+
+    fn capture_with(path: &Path, hook: &mut impl FnMut(&Path, &OsStr)) -> Result<Option<(File, PhysicalDirectoryIdentity, Journal)>, RepositoryDurabilityErrorV1> {
+        if path.as_os_str().as_bytes().len() > MAX_RELATIVE_PATH_BYTES || path.components().count() > MAX_RELATIVE_COMPONENTS {
+            return Ok(None);
+        }
+        let proc = match ProcView::open() { Some(proc) => proc, None => return Ok(None) };
+        let probed = probe_chain(path)?;
+        let mounts = match proc.mounts() { Some(mounts) => mounts, None => return Ok(None) };
+        let qualified = match profile(&proc, &probed, &mounts) { Some(profile) => profile, None => return Ok(None) };
+        if proc.mounts().as_deref() != Some(mounts.as_slice()) { return Ok(None); }
+        let fd = inotify::init(inotify::CreateFlags::NONBLOCK | inotify::CreateFlags::CLOEXEC)
+            .map_err(|_| uncertain("repository relevant-entry journal unavailable"))?;
+        let mut journal = Journal { fd, nodes: Vec::new(), watches: BTreeMap::new(), invalid: None, profile: qualified };
+        let slash = File::from(open("/", dir_flags(), Mode::empty()).map_err(|_| unsafe_fs("repository capture root unavailable"))?);
+        journal.nodes.push(node(None, slash)?);
+        let mut parent_path = PathBuf::from("/");
+        for observed in probed.iter().skip(1) {
+            let name = observed.name.as_ref().unwrap();
+            let parent = journal.nodes.last().unwrap().directory.try_clone()
+                .map_err(|_| uncertain("repository parent capability duplication failed"))?;
+            journal.arm(&proc, &parent, Some(name))?;
+            hook(&parent_path, name);
+            let directory = open_child(&parent, name)?;
+            let child = node(Some(name.clone()), directory)?;
+            if child.identity != observed.identity {
+                return Err(unsafe_fs("repository child changed during path capture"));
+            }
+            journal.nodes.push(child);
+            parent_path.push(name);
+        }
+        let root = journal.nodes.last().unwrap().directory.try_clone()
+            .map_err(|_| uncertain("repository root capability duplication failed"))?;
+        journal.arm(&proc, &root, None)?;
+        if profile(&proc, &journal.nodes, &mounts).is_none()
+            || proc.mounts().as_deref() != Some(mounts.as_slice())
+        {
+            return Err(uncertain("repository filesystem profile changed during path capture"));
+        }
+        let identity = directory_identity(&root)?;
+        journal.validate(&root, identity)?;
+        Ok(Some((root, identity, journal)))
+    }
+
+    #[cfg(test)]
+    pub(super) fn capture_for_test(path: &Path, hook: &mut impl FnMut(&Path, &OsStr)) -> Result<Option<(File, PhysicalDirectoryIdentity, Journal)>, RepositoryDurabilityErrorV1> {
+        capture_with(path, hook)
+    }
+
+    #[cfg(test)]
+    pub(super) fn lose_watch_for_test(journal: &mut Journal) {
+        inotify::remove_watch(&journal.fd, *journal.watches.keys().next().unwrap()).unwrap();
+    }
+
+    #[cfg(test)]
+    pub(super) fn classify_failure_for_test(journal: &mut Journal, flags: inotify::ReadFlags) {
+        let result = journal.classify(*journal.watches.keys().next().unwrap(), flags, None);
+        journal.remember(result).unwrap_err();
+    }
+
+    #[cfg(test)]
+    pub(super) fn budget_failure_for_test(journal: &mut Journal) {
+        // Exercise the actual charging branch without a global queue storm.
+        let mut charged = 0;
+        for _ in 0..=(JOURNAL_BUDGET / MAX_EVENT_CHARGE) {
+            if let Err(error) = charge_event(&mut charged) {
+                journal.remember(Err(error)).unwrap_err();
+                return;
+            }
+        }
+        panic!("journal budget did not refuse");
+    }
+
+    #[cfg(test)]
+    pub(super) fn profile_for_test(journal: &Journal) -> (u64, u64, usize) {
+        (journal.profile.mount, journal.profile.device, journal.watches.len())
+    }
+    #[cfg(test)]
+    #[test]
+    fn profile_selector_does_not_admit_remote_or_other_root_mounts() {
+        let local = Profile { mount: 34, device: 66306 };
+        let original = "34 2 259:2 / / rw,noatime - ext4 /dev/test rw\n";
+        assert!(ext4_root_mount(original.as_bytes(), local).is_some());
+        for other in [
+            "34 2 259:2 / / rw - nfs server:/share rw\n",
+            "34 2 259:2 / / rw - ext3 /dev/test rw\n",
+            "34 2 259:2 /subdirectory / rw - ext4 /dev/test rw\n",
+            "34 2 0:1 / / rw - ext4 /dev/test rw\n",
+            "35 2 259:2 / / rw - ext4 /dev/test rw\n",
+        ] {
+            assert!(ext4_root_mount(other.as_bytes(), local).is_none());
+        }
+        // A real mixed root/procfs chain remains unqualified, before any watch.
+        let proc = ProcView::open().unwrap();
+        let mounts = proc.mounts().unwrap();
+        let nodes = vec![
+            node(None, File::from(open("/", dir_flags(), Mode::empty()).unwrap())).unwrap(),
+            node(Some(OsString::from("proc")), File::from(open("/proc", dir_flags(), Mode::empty()).unwrap())).unwrap(),
+        ];
+        assert!(profile(&proc, &nodes, &mounts).is_none());
+        println!("native mixed ext4/procfs chain unqualified; remote/other-root rows are synthetic predicate checks");
+    }
+
 }
 
 #[cfg(unix)]
@@ -1984,10 +2476,10 @@ mod platform {
         Ok(File::from(open_directory(root, relative.as_path())?))
     }
 
-    fn open_parent(
+    fn open_parent<'a>(
         root: &RetainedRepositoryRootV1,
-        relative: &ValidatedRelativePath,
-    ) -> Result<(OwnedFd, &Path), RepositoryDurabilityErrorV1> {
+        relative: &'a ValidatedRelativePath,
+    ) -> Result<(OwnedFd, &'a Path), RepositoryDurabilityErrorV1> {
         let (parent, name) = relative.parent_and_name()?;
         Ok((open_directory(root, parent)?, name))
     }
@@ -2030,10 +2522,8 @@ mod platform {
         let mut stream = Dir::read_from(&directory)
             .map_err(|_| uncertain("retained directory stream could not be opened"))?;
         let mut entries = Vec::new();
-        while let Some(entry) = stream
-            .read()
-            .map_err(|_| uncertain("retained directory listing failed"))?
-        {
+        while let Some(entry) = stream.read() {
+            let entry = entry.map_err(|_| uncertain("retained directory listing failed"))?;
             let name = entry.file_name().to_bytes();
             if name == b"." || name == b".." {
                 continue;
@@ -2211,10 +2701,8 @@ mod platform {
         }
         rustix::fs::fsync(&source_parent)
             .map_err(|_| uncertain("rename source parent flush failed"))?;
-        if source_parent.as_fd() != target_parent.as_fd() {
-            rustix::fs::fsync(&target_parent)
-                .map_err(|_| uncertain("rename target parent flush failed"))?;
-        }
+        rustix::fs::fsync(&target_parent)
+            .map_err(|_| uncertain("rename target parent flush failed"))?;
         let installed = open_regular_optional(root, target, false)?
             .ok_or_else(|| uncertain("renamed target is absent after publication"))?;
         let installed = regular_file_snapshot(&installed)?;
@@ -2878,5 +3366,185 @@ mod tests {
         std::fs::write(&contract, b"new-head").unwrap();
 
         guard.validate().unwrap();
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_unrelated_file_and_directory_siblings_preserve_consumption() {
+        let parent = tempfile::tempdir().unwrap();
+        let project = parent.path().join("project");
+        let state = project.join(".handbook/state");
+        std::fs::create_dir_all(&state).unwrap();
+        std::fs::write(state.join("head"), b"exact original authority").unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(&project).unwrap();
+        let guard = root.retain_tree_guard(".handbook/state", 16).unwrap();
+        let result = guard.with_stable_path(|path| {
+            let sibling = parent.path().join("unrelated-file");
+            let renamed = parent.path().join("renamed-file");
+            std::fs::write(&sibling, b"unrelated").unwrap();
+            std::fs::rename(&sibling, &renamed).unwrap();
+            std::fs::remove_file(&renamed).unwrap();
+            let directory = parent.path().join("unrelated-directory");
+            let moved = parent.path().join("renamed-directory");
+            std::fs::create_dir(&directory).unwrap();
+            std::fs::rename(&directory, &moved).unwrap();
+            std::fs::remove_dir(&moved).unwrap();
+            std::fs::read(path.join(".handbook/state/head")).unwrap()
+        });
+        assert_eq!(result.unwrap(), b"exact original authority");
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_profile_and_physical_watch_correspondence_are_admitted() {
+        let parent = tempfile::tempdir().unwrap();
+        let project = parent.path().join("project");
+        std::fs::create_dir(&project).unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(&project).unwrap();
+        let journal = root.linux_journal.as_ref().expect("test requires the positively qualified ext4 profile").lock().unwrap();
+        let (mount, device, watches) = linux_path_guard::profile_for_test(&journal);
+        assert!(mount > 0);
+        assert!(watches > 0);
+        use std::os::unix::fs::MetadataExt;
+        assert_eq!(device, root.root.metadata().unwrap().dev());
+        println!("admitted ext4 root mount={mount} device={device} physical_watches={watches}; each kernel FDinfo wd/inode/sdev verified");
+        drop(journal);
+        root.require_stable_path_epoch().unwrap();
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_capture_refuses_relevant_rename_and_symlink_restore() {
+        use std::os::unix::fs::symlink;
+        for link in [false, true] {
+            let parent = tempfile::tempdir().unwrap();
+            let ancestor = parent.path().join("ancestor");
+            let project = ancestor.join("project");
+            std::fs::create_dir_all(&project).unwrap();
+            let target = if link { project.clone() } else { ancestor.clone() };
+            let parked = parent.path().join("parked");
+            let substitute = parent.path().join("substitute");
+            std::fs::create_dir(&substitute).unwrap();
+            let mut injected = false;
+            let result = linux_path_guard::capture_for_test(&project, &mut |directory, name| {
+                if directory.join(name) != target { return; }
+                injected = true;
+                std::fs::rename(&target, &parked).unwrap();
+                if link {
+                    symlink(&substitute, &target).unwrap();
+                    std::fs::remove_file(&target).unwrap();
+                } else {
+                    std::fs::rename(&substitute, &target).unwrap();
+                    std::fs::rename(&target, &substitute).unwrap();
+                }
+                std::fs::rename(&parked, &target).unwrap();
+            });
+            assert!(injected, "qualified capture must reach the armed-before-child boundary");
+            assert!(result.is_err(), "restored endpoint identity cannot erase a capture event");
+        }
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_callback_quarantines_root_ancestor_and_link_substitutes() {
+        use std::os::unix::fs::symlink;
+        for role in ["root", "ancestor", "link"] {
+            let parent = tempfile::tempdir().unwrap();
+            let ancestor = parent.path().join("ancestor");
+            let project = ancestor.join("project");
+            let original = project.join(".handbook/state");
+            std::fs::create_dir_all(&original).unwrap();
+            std::fs::write(original.join("head"), b"original").unwrap();
+            let victim = if role == "ancestor" { ancestor.clone() } else { project.clone() };
+            let parked = parent.path().join("parked");
+            let substitute = parent.path().join("substitute");
+            let substituted_project = if role == "ancestor" { substitute.join("project") } else { substitute.clone() };
+            std::fs::create_dir_all(substituted_project.join(".handbook/state")).unwrap();
+            std::fs::write(substituted_project.join(".handbook/state/head"), b"substituted").unwrap();
+            let root = RetainedRepositoryRootV1::open_exact(&project).unwrap();
+            assert!(root.linux_journal.is_some());
+            let guard = root.retain_tree_guard(".handbook/state", 16).unwrap();
+            let mut observed_substitute = false;
+            let result = guard.with_stable_path(|path| {
+                std::fs::rename(&victim, &parked).unwrap();
+                if role == "link" { symlink(&substitute, &victim).unwrap(); }
+                else { std::fs::rename(&substitute, &victim).unwrap(); }
+                let bytes = std::fs::read(path.join(".handbook/state/head")).unwrap();
+                observed_substitute = bytes == b"substituted";
+                if role == "link" { std::fs::remove_file(&victim).unwrap(); }
+                else { std::fs::rename(&victim, &substitute).unwrap(); }
+                std::fs::rename(&parked, &victim).unwrap();
+                bytes
+            });
+            assert!(observed_substitute, "exercise the actual ambient-path consuming window");
+            assert_eq!(result.unwrap_err().kind(), RepositoryDurabilityErrorKindV1::UnsafeFilesystem);
+            assert!(root.require_stable_path_epoch().is_err(), "failure remains sticky after restore");
+        }
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_relevant_event_is_sticky_across_concurrent_drains() {
+        use std::sync::{Arc, Barrier};
+        let parent = tempfile::tempdir().unwrap();
+        let project = parent.path().join("project");
+        let parked = parent.path().join("parked");
+        std::fs::create_dir(&project).unwrap();
+        let root = Arc::new(RetainedRepositoryRootV1::open_exact(&project).unwrap());
+        assert!(root.linux_journal.is_some());
+        std::fs::rename(&project, &parked).unwrap();
+        std::fs::rename(&parked, &project).unwrap();
+        let barrier = Arc::new(Barrier::new(3));
+        std::thread::scope(|scope| {
+            for _ in 0..2 {
+                let root = root.clone();
+                let barrier = barrier.clone();
+                scope.spawn(move || {
+                    barrier.wait();
+                    for _ in 0..3 { assert!(root.require_stable_path_epoch().is_err()); }
+                });
+            }
+            barrier.wait();
+        });
+        assert!(root.require_stable_path_epoch().is_err());
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_native_watch_loss_and_synthetic_failures_remain_uncertain() {
+        use rustix::fs::inotify::ReadFlags;
+        for mode in ["native-watch-loss", "synthetic-overflow", "synthetic-budget"] {
+            let parent = tempfile::tempdir().unwrap();
+            let root = RetainedRepositoryRootV1::open_exact(parent.path()).unwrap();
+            {
+                let mut journal = root.linux_journal.as_ref().unwrap().lock().unwrap();
+                match mode {
+                    "native-watch-loss" => linux_path_guard::lose_watch_for_test(&mut journal),
+                    "synthetic-overflow" => linux_path_guard::classify_failure_for_test(&mut journal, ReadFlags::QUEUE_OVERFLOW),
+                    _ => linux_path_guard::budget_failure_for_test(&mut journal),
+                }
+            }
+            for _ in 0..2 {
+                assert_eq!(root.require_stable_path_epoch().unwrap_err().kind(), RepositoryDurabilityErrorKindV1::DurabilityUncertain);
+            }
+            println!("sticky uncertainty: {mode}");
+        }
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn linux_guard_original_empty_lock_generation_refuses_named_replacement() {
+        let parent = tempfile::tempdir().unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(parent.path()).unwrap();
+        root.write_new_durable("generation.lock", &[]).unwrap();
+        let lock = root.acquire_existing_exclusive_lock_v1("generation.lock").unwrap();
+        let original = lock.physical_fingerprint_v1().unwrap();
+        lock.validate_at(&root, "generation.lock").unwrap();
+        std::fs::rename(parent.path().join("generation.lock"), parent.path().join("parked.lock")).unwrap();
+        root.write_new_durable("generation.lock", &[]).unwrap();
+        assert!(!original.is_empty());
+        assert_eq!(lock.validate_at(&root, "generation.lock").unwrap_err().kind(), RepositoryDurabilityErrorKindV1::UnsafeFilesystem);
+        assert!(parent.path().join("parked.lock").is_file());
+        assert_eq!(std::fs::read(parent.path().join("generation.lock")).unwrap(), b"");
     }
 }
