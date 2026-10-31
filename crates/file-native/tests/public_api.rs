@@ -986,3 +986,267 @@ fn initialized_control_create_child(){
         if role=="reader"{let _pin=db.snapshot().unwrap();panic!("observer not reached");}
     }
 }
+
+#[cfg(feature = "test-support")]
+#[test]
+fn same_key_reuse_preserves_accounting_originals_and_independent_retirement() {
+    // Inspect immutable payload identity independently of diagnostic counters.
+    fn objects(root: &std::path::Path) -> Vec<(std::path::PathBuf, Vec<u8>)> {
+        fn walk(root: &std::path::Path, out: &mut Vec<(std::path::PathBuf, Vec<u8>)>) {
+            for entry in std::fs::read_dir(root).unwrap() {
+                let path = entry.unwrap().path();
+                if path.is_dir() {
+                    walk(&path, out);
+                } else {
+                    let bytes = std::fs::read(&path).unwrap();
+                    assert!(bytes.starts_with(b"FNO2") && bytes.len() >= 76);
+                    out.push((path, bytes[76..].to_vec()));
+                }
+            }
+        }
+        let mut out = Vec::new();
+        walk(&root.join("objects"), &mut out);
+        out
+    }
+    fn check_accounting(
+        db: &Database<NativeBackend>,
+        root: &std::path::Path,
+        scope_key: Option<&str>,
+    ) {
+        let version = db.version().unwrap();
+        let user = db.snapshot().unwrap().page(None, 16).unwrap();
+        assert!(user.complete);
+        assert_eq!(version.records, user.records.len() as u64);
+        let mut logical: u64 = user.records.iter().map(|(_, v)| v.len() as u64).sum();
+        let mut originals = 0;
+        for (_, payload) in objects(root) {
+            if let Ok(value) = serde_json::from_slice::<serde_json::Value>(&payload) {
+                if value.get("fingerprint").is_some() && value.get("outcome").is_some() {
+                    originals += 1;
+                    logical += payload.len() as u64;
+                } else if value.get("scope").is_some()
+                    && value.get("reference").is_some()
+                    && value["reference"]["key"].as_str() == scope_key
+                {
+                    logical += payload.len() as u64;
+                }
+            }
+        }
+        assert_eq!(version.indexed_originals, originals);
+        assert_eq!(version.logical_bytes, logical);
+    }
+    let dir = tempfile::tempdir().unwrap();
+    let db = create(dir.path());
+    let shared = b"same-key-regression-distinct-owned-payload";
+    let mut seed = Transaction::new(db.version().unwrap(), "reuse-seed", b"seed result".to_vec());
+    seed.put("left", shared.to_vec()).unwrap();
+    seed.put("right", shared.to_vec()).unwrap();
+    let seed_out = db.publish(seed.clone()).unwrap();
+    let old = db.snapshot().unwrap();
+    let before = db.version().unwrap();
+    let owned: Vec<_> = objects(dir.path())
+        .into_iter()
+        .filter(|(_, p)| p == shared)
+        .map(|(p, _)| p)
+        .collect();
+    assert_eq!(
+        owned.len(),
+        2,
+        "distinct equal keys have distinct owned objects"
+    );
+    let mut same = Transaction::new(
+        before.clone(),
+        "reuse-same",
+        b"same original result".to_vec(),
+    );
+    same.put("left", shared.to_vec()).unwrap();
+    same.set_evidence("reuse-scope", b"exact opaque reuse evidence".to_vec())
+        .unwrap();
+    take_branch_build_counts();
+    let same_out = db.publish(same.clone()).unwrap();
+    let counts = take_branch_build_counts();
+    assert_eq!((counts.positive_branches, counts.negative_branches), (1, 1));
+    assert_eq!(
+        (
+            counts.same_key_equal_values,
+            counts.reused_values,
+            counts.value_allocations,
+            counts.value_retirements
+        ),
+        (1, 1, 0, 0)
+    );
+    assert_eq!(db.version().unwrap().sequence, before.sequence + 1);
+    assert_eq!(db.version().unwrap().records, before.records);
+    assert_eq!(
+        db.version().unwrap().indexed_originals,
+        before.indexed_originals + 1
+    );
+    assert_eq!(
+        objects(dir.path())
+            .iter()
+            .filter(|(_, p)| p == shared)
+            .count(),
+        2
+    );
+    let proof = db
+        .reconcile_evidence("reuse-scope", Some("reuse-same"))
+        .unwrap()
+        .original
+        .unwrap();
+    assert_eq!(proof.evidence.payload, b"exact opaque reuse evidence");
+    assert_eq!(proof.evidence.binding.expected, before);
+    assert_eq!(proof.evidence.binding.predecessor, before);
+    assert_eq!(proof.outcome, same_out);
+    check_accounting(&db, dir.path(), Some("reuse-same"));
+    let unchanged_version = db.version().unwrap();
+    assert_eq!(db.publish(same.clone()).unwrap(), same_out);
+    assert_eq!(db.version().unwrap(), unchanged_version);
+    let conflicting = Transaction::new(before.clone(), "reuse-same", b"different request".to_vec());
+    assert!(db.publish(conflicting).is_err());
+    assert_eq!(db.version().unwrap(), unchanged_version);
+    let mut mixed = Transaction::new(db.version().unwrap(), "reuse-mixed", vec![]);
+    mixed.put("left", shared.to_vec()).unwrap();
+    mixed.put("right", b"right successor".to_vec()).unwrap();
+    mixed.delete("missing").unwrap();
+    mixed
+        .set_evidence("reuse-scope", b"next evidence".to_vec())
+        .unwrap();
+    take_branch_build_counts();
+    db.publish(mixed).unwrap();
+    let counts = take_branch_build_counts();
+    assert_eq!(
+        (
+            counts.same_key_equal_values,
+            counts.reused_values,
+            counts.value_allocations,
+            counts.value_retirements
+        ),
+        (1, 1, 1, 1)
+    );
+    assert_eq!(old.get("left").unwrap(), Some(shared.to_vec()));
+    assert_eq!(old.get("right").unwrap(), Some(shared.to_vec()));
+    assert!(
+        db.maintain(MaintenanceBudget::default())
+            .unwrap()
+            .blocked_by_reader
+    );
+    assert!(owned.iter().all(|p| p.exists()));
+    check_accounting(&db, dir.path(), Some("reuse-mixed"));
+    drop(old);
+    while !db.maintain(MaintenanceBudget::default()).unwrap().complete {}
+    assert_eq!(owned.iter().filter(|p| p.exists()).count(), 1);
+    assert_eq!(db.get("left").unwrap(), Some(shared.to_vec()));
+    let pinned = db.snapshot().unwrap();
+    put(&db, "reuse-replace", "left", b"later replacement");
+    assert!(
+        db.maintain(MaintenanceBudget::default())
+            .unwrap()
+            .blocked_by_reader
+    );
+    assert_eq!(pinned.get("left").unwrap(), Some(shared.to_vec()));
+    drop(pinned);
+    while !db.maintain(MaintenanceBudget::default()).unwrap().complete {}
+    assert!(owned.iter().all(|p| !p.exists()));
+    let mut delete = Transaction::new(db.version().unwrap(), "reuse-delete", vec![]);
+    delete.delete("left").unwrap();
+    db.publish(delete).unwrap();
+    let current = db.version().unwrap();
+    let mut stale = Transaction::new(before, "reuse-stale", vec![]);
+    stale.put("right", shared.to_vec()).unwrap();
+    let conflict = db.publish(stale.clone()).unwrap();
+    assert_eq!(conflict.disposition, OriginalDisposition::Conflict);
+    assert_eq!(db.publish(stale).unwrap(), conflict);
+    assert_eq!(db.version().unwrap().sequence, current.sequence + 1);
+    assert_eq!(db.get("right").unwrap(), Some(b"right successor".to_vec()));
+    while !db.maintain(MaintenanceBudget::default()).unwrap().complete {}
+    check_accounting(&db, dir.path(), Some("reuse-mixed"));
+    drop(db);
+    let db = Database::open(NativeBackend::open(dir.path()).unwrap(), "test-owner").unwrap();
+    assert_eq!(db.get("left").unwrap(), None);
+    assert_eq!(
+        db.resolve("reuse-seed").unwrap(),
+        OriginalResolution::Resolved(seed_out)
+    );
+    assert_eq!(
+        db.resolve("reuse-same").unwrap(),
+        OriginalResolution::Resolved(same_out)
+    );
+    assert_eq!(
+        db.reconcile_evidence("reuse-scope", Some("reuse-same"))
+            .unwrap()
+            .original
+            .unwrap()
+            .evidence,
+        proof.evidence
+    );
+    check_accounting(&db, dir.path(), Some("reuse-mixed"));
+}
+
+#[cfg(feature = "test-support")]
+#[test]
+fn same_key_reuse_valid_writer_interruption_retains_predecessor_and_exact_original() {
+    for boundary in [
+        PublicationBoundary::Owned,
+        PublicationBoundary::SelectorDisplaced,
+        PublicationBoundary::Selected,
+    ] {
+        let dir = tempfile::tempdir().unwrap();
+        let db = create(dir.path());
+        put(&db, "reuse-interrupt-seed", "same", b"retained bytes");
+        let mut tx = Transaction::new(
+            db.version().unwrap(),
+            "reuse-interrupt",
+            b"exact result".to_vec(),
+        );
+        tx.put("same", b"retained bytes".to_vec()).unwrap();
+        tx.put("changed", b"new bytes".to_vec()).unwrap();
+        tx.set_evidence(
+            "reuse-interrupt-scope",
+            b"exact interrupted evidence".to_vec(),
+        )
+        .unwrap();
+        assert!(db
+            .publish_with_boundary(tx.clone(), |at| if at == boundary {
+                Err("valid writer interruption".into())
+            } else {
+                Ok(())
+            })
+            .is_err());
+        drop(db);
+        let db =
+            Database::open_for_recovery(NativeBackend::open(dir.path()).unwrap(), "test-owner")
+                .unwrap();
+        db.recover().unwrap();
+        let OriginalResolution::Resolved(out) = db.resolve("reuse-interrupt").unwrap() else {
+            panic!("exact original required")
+        };
+        let selected = boundary == PublicationBoundary::Selected;
+        assert_eq!(
+            out.disposition,
+            if selected {
+                OriginalDisposition::Selected
+            } else {
+                OriginalDisposition::NotSelected
+            }
+        );
+        assert_eq!(db.get("same").unwrap(), Some(b"retained bytes".to_vec()));
+        assert_eq!(
+            db.get("changed").unwrap(),
+            if selected {
+                Some(b"new bytes".to_vec())
+            } else {
+                None
+            }
+        );
+        assert_eq!(db.publish(tx).unwrap(), out);
+        let evidence = db
+            .reconcile_evidence("reuse-interrupt-scope", Some("reuse-interrupt"))
+            .unwrap()
+            .original
+            .unwrap();
+        assert_eq!(evidence.outcome, out);
+        assert_eq!(evidence.evidence.payload, b"exact interrupted evidence");
+        while !db.maintain(MaintenanceBudget::default()).unwrap().complete {}
+        assert_eq!(db.get("same").unwrap(), Some(b"retained bytes".to_vec()));
+    }
+}

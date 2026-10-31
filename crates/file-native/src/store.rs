@@ -7,6 +7,32 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
+/// Operation-local diagnostic counts. These describe completed branch construction,
+/// including the unselected negative alternative, not durable publication success.
+/// Reset immediately before a synchronous operation and take on the same thread.
+#[cfg(feature = "test-support")]
+#[derive(Clone, Debug, Default, Serialize)]
+pub struct BranchBuildCounts {
+    pub positive_branches: u64,
+    pub negative_branches: u64,
+    pub same_key_equal_values: u64,
+    pub reused_values: u64,
+    pub value_allocations: u64,
+    pub value_retirements: u64,
+    pub pending_objects: u64,
+    pub pending_framed_bytes: u64,
+    pub retired_objects: u64,
+}
+#[cfg(feature = "test-support")]
+std::thread_local! {
+    static BRANCH_BUILD_COUNTS: std::cell::RefCell<BranchBuildCounts> =
+        std::cell::RefCell::new(BranchBuildCounts::default());
+}
+#[cfg(feature = "test-support")]
+pub fn take_branch_build_counts() -> BranchBuildCounts {
+    BRANCH_BUILD_COUNTS.with(|counts| std::mem::take(&mut *counts.borrow_mut()))
+}
+
 const CONTROL: usize = 2 * 1024 * 1024;
 const GATE: &str = "gate.lock";
 fn nonce() -> Result<String> {
@@ -802,18 +828,35 @@ impl<B: Backend> Database<B> {
             .indexed_originals
             .checked_add(1)
             .ok_or("outcome count overflow")?;
+        #[cfg(feature = "test-support")]
+        let mut counts = BranchBuildCounts::default();
         let mut updates = Vec::new();
         for (key, value) in changes {
             let key = format!("d/{key}");
+            let mut reused = None;
             if let Some(old) = index.get(&mut objects, &key)?.filter(|id| !id.is_empty()) {
                 let id = std::str::from_utf8(&old)?;
                 let bytes = objects.read(id)?;
+                #[cfg(feature = "test-support")]
+                if value.as_ref().is_some_and(|value| value == &bytes) {
+                    counts.same_key_equal_values += 1;
+                }
                 version.logical_bytes = version
                     .logical_bytes
                     .checked_sub(bytes.len() as u64)
                     .ok_or("logical accounting")?;
                 version.records = version.records.checked_sub(1).ok_or("record accounting")?;
-                objects.retire(id);
+                // Reuse only this key's authenticated value. Keep subtraction
+                // and the addition below even when its payload is identical.
+                if value.as_ref().is_some_and(|value| value == &bytes) {
+                    reused = Some(old.clone());
+                    #[cfg(feature = "test-support")]
+                    { counts.reused_values += 1; }
+                } else {
+                    objects.retire(id);
+                    #[cfg(feature = "test-support")]
+                    { counts.value_retirements += 1; }
+                }
             }
             let value = match value {
                 Some(bytes) => {
@@ -822,7 +865,15 @@ impl<B: Backend> Database<B> {
                         .logical_bytes
                         .checked_add(bytes.len() as u64)
                         .ok_or("logical bytes")?;
-                    objects.write(bytes)?.into_bytes()
+                    match reused {
+                        Some(id) => id,
+                        None => {
+                            let id = objects.write(bytes)?.into_bytes();
+                            #[cfg(feature = "test-support")]
+                            { counts.value_allocations += 1; }
+                            id
+                        }
+                    }
                 }
                 None => Vec::new(),
             };
@@ -902,6 +953,22 @@ impl<B: Backend> Database<B> {
             token: token.into(),
             retired: objects.retired.iter().cloned().collect(),
         };
+        #[cfg(feature = "test-support")]
+        BRANCH_BUILD_COUNTS.with(|total| {
+            let mut total = total.borrow_mut();
+            if original.outcome.disposition == OriginalDisposition::NotSelected {
+                total.negative_branches += 1;
+            } else {
+                total.positive_branches += 1;
+            }
+            total.same_key_equal_values += counts.same_key_equal_values;
+            total.reused_values += counts.reused_values;
+            total.value_allocations += counts.value_allocations;
+            total.value_retirements += counts.value_retirements;
+            total.pending_objects += objects.pending.len() as u64;
+            total.pending_framed_bytes += objects.bytes as u64;
+            total.retired_objects += objects.retired.len() as u64;
+        });
         Ok(BuiltBranch {
             branch: Branch {
                 candidate,
