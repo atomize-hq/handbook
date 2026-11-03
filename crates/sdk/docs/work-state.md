@@ -53,6 +53,22 @@ without another effect. `resolve_current_work_registration_terms` remains a
 separate live observation callers can request for early diagnostics; it reserves
 nothing and does not promise a later invocation will succeed.
 
+New, positively absent items use two actual database publications: atomic
+accepted-ready intent/decision/pending snapshot, then a separate attempted
+terminal. Until the first publication selects, complete recovery may report
+Unaccepted; afterward the item is Pending until its exact terminal commits.
+The three early durable prefixes and their native originals are omitted for new
+items, along with their intermediate observation/refusal opportunities. Acceptance
+therefore starts later; identical detection of transient hostile edits is not
+claimed. Current authority and reservation/grant/kind checks remain fresh before
+terminal publication. Authority loss after accepted-ready can close
+NonCommitted only with positive native nonapplication proof.
+
+Existing accepted prefixes and all actually published originals remain retained
+and recoverable under their original rules, including staged-only uncertainty.
+Kind/grant/revocation administration keeps its existing sequence. Exact committed
+history, saved locators, receipts and the terminal commit boundary are preserved.
+
 Use separate stable item and request keys. Choose `WorkCompositionV1::ordinary_leaf()`,
 `planning_output(question)` or `requirements_input(definition)`. Planning declares
 one bounded required-output question before issuance; it contains no guessed future

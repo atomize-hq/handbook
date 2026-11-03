@@ -1596,26 +1596,49 @@ fn execute(
         validate(&rows)?;
         let name=op.name();let stage_name=format!("accept-{name}");
         let existing=inventory.transactions.get(&name).or_else(||inventory.transactions.get(&stage_name));
+        // Only a positively absent Item takes the two-publication path.
+        // Already accepted prefixes and all administration keep their original
+        // continuation and independently retained native publication outcomes.
+        let fresh_item = existing.is_none() && matches!(&op, Operation::Item(_));
         let expected=if let Some(files)=existing {artifacts.expected(&lock.owner,if inventory.transactions.contains_key(&name){&name}else{&stage_name},&files["intent.json"],&mut std::collections::BTreeSet::new())?}
         else {
             notify(WorkWriteBoundaryV1::BeforeIntent)?;
             let intent=Intent {schema:op.schema().into(),owner_identity:lock.owner.identity.clone(),operation:op.clone(),authority:held.capture_proof()?};
             let bytes=encode(&intent)?;let expected=artifacts.expected(&lock.owner,&name,&bytes,&mut std::collections::BTreeSet::new())?;
             held.validate_current()?;lock.validate()?;effects.set(true);
-            persist_record(&lock,&op,&Stored {staging:true,files:BTreeMap::from([("intent.json".into(),bytes)])},&expected,||held.validate_current(),&notify)?;
-            notify(WorkWriteBoundaryV1::Reservation)?;notify(WorkWriteBoundaryV1::AcceptanceCandidate)?;notify(WorkWriteBoundaryV1::StagedIntent)?;expected
+            if !fresh_item {
+                persist_record(&lock,&op,&Stored {staging:true,files:BTreeMap::from([("intent.json".into(),bytes)])},&expected,||held.validate_current(),&notify)?;
+                notify(WorkWriteBoundaryV1::Reservation)?;notify(WorkWriteBoundaryV1::AcceptanceCandidate)?;notify(WorkWriteBoundaryV1::StagedIntent)?;
+            }
+            expected
         };
         effects.set(true);
         let mut record=Stored {staging:!inventory.transactions.contains_key(&name),files:existing.cloned().unwrap_or_else(||BTreeMap::from([("intent.json".into(),encode(&expected.intent).expect("preflighted intent"))]))};
-        if record.staging {
+        if fresh_item {
+            // R atomically accepts/reserves the exact intent, decision and
+            // pending snapshot. It is not an attempted or committed terminal.
+            record.staging=false;
             record.files.insert("not-attempted.json".into(),expected.publication.clone());
+            record.files.insert("decision.json".into(),expected.decision.clone());
+            record.files.insert("snapshot.json".into(),expected.snapshot.clone());
+            record.files.insert("terminal.pending".into(),expected.terminal.clone());
             notify(WorkWriteBoundaryV1::AcceptanceReady)?;
-            record.staging=false;persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;
+            persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;
+            // These observations refer to the SAME selected R, not three
+            // independently published prefixes.
+            notify(WorkWriteBoundaryV1::Intent)?;
+            notify(WorkWriteBoundaryV1::Decision)?;
+        } else {
+            if record.staging {
+                record.files.insert("not-attempted.json".into(),expected.publication.clone());
+                notify(WorkWriteBoundaryV1::AcceptanceReady)?;
+                record.staging=false;persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;
+            }
+            notify(WorkWriteBoundaryV1::Intent)?;
+            if !record.files.contains_key("decision.json"){record.files.insert("decision.json".into(),expected.decision.clone());persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;}
+            notify(WorkWriteBoundaryV1::Decision)?;
+            record.files.insert("snapshot.json".into(),expected.snapshot.clone());record.files.insert("terminal.pending".into(),expected.terminal.clone());persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;
         }
-        notify(WorkWriteBoundaryV1::Intent)?;
-        if !record.files.contains_key("decision.json"){record.files.insert("decision.json".into(),expected.decision.clone());persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;}
-        notify(WorkWriteBoundaryV1::Decision)?;
-        record.files.insert("snapshot.json".into(),expected.snapshot.clone());record.files.insert("terminal.pending".into(),expected.terminal.clone());persist_record(&lock,&op,&record,&expected,||held.validate_current(),&notify)?;
         notify(WorkWriteBoundaryV1::Snapshot)?;
         held.validate_current()?;lock.validate()?;
         let (_,mut current)=scan_with_artifacts(&lock,&op,&mut artifacts)?;reservation(&op,&current)?;current.retain(|r|r.intent.operation!=op);validate(&current)?;

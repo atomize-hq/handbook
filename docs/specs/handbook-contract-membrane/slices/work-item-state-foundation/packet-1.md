@@ -235,15 +235,34 @@ creates only a reservation/pending candidate. A decision is not irrevocable comm
 Never expose candidate bytes as current state or report a pending item as absent.
 A receipt proves registration, never `local_closeout`.
 
-Retain exact accepted request/intent first; reserve item and request; prove expected
-absence; retain the exact decided snapshot/receipt and original authority closure;
-install the immutable candidate without replacement; revalidate original live
-admission and publish its terminal while native authority/work guards remain held.
-New-effect recovery uses those original checks. No gap between returned Allowed
-and later publication is permitted. Lost/uncertain terminal write is resolved by
-exact proof of installation under the original admitted path, not by publishing
-another terminal using another grant. Missing authorization proof stays uncertain/
-unverifiable. Physical file layout may not change these public semantics.
+For a **new, positively absent Item request**, the selected two-publication
+protocol accepts/reserves the exact intent, not-attempted checkpoint, decision,
+snapshot/receipt and pending terminal atomically in one accepted-ready publication
+R. Before R selects, a complete recovered owner inventory may prove Unaccepted;
+after R selects, the item is Pending, never Open. There are no separate fresh
+staged-only, accepted-without-decision or decision-without-snapshot durable roots
+or native originals. Acceptance occurs later, and the omitted publications also
+omit their intermediate authority observations/refusals; identical detection of
+transient hostile changes is not claimed. R has staging=false, so original
+authority loss can permit positively proven NonCommitted closure instead of the
+old staged-only Uncertain result. These are the approved fresh-Item semantic
+changes, not format or authority-cache changes.
+
+Revalidate original live admission and freshly scan reservation, grant and kind
+before the separate terminal-attempt publication T, while the original native
+authority/work guards remain held. T atomically replaces not-attempted/pending
+with attempted/terminal records. Both R and T retain the full native ownership,
+outputs, exact selection, retirement-event and Idle protocol and fresh guards.
+Full Committed replies require exact terminal/snapshot/native proof and all
+remaining verification and outer checks. New-effect recovery uses original live
+permission; an absent terminal cannot be completed under another grant.
+
+Existing accepted prefixes, including staged-only requests, keep their original
+continuation/uncertainty rules and every actually published original. Kind,
+grant activation and revocation keep their existing sequence. No existing data,
+saved locator, receipt, canonical bytes or native original is rewritten to
+simulate the omitted fresh-Item prefixes. Missing authorization or publication
+proof stays uncertain/unverifiable.
 
 | Retained durable prefix | Original authority unchanged/current | Successor adoption/supersession | D→G changes bound basis | Original authority revoked | Runtime-state reset |
 | --- | --- | --- | --- | --- | --- |

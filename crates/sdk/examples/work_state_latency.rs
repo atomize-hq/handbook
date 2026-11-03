@@ -1,4 +1,5 @@
-//! Fixed finite Linux SDK comparison. Run only after source/measurement release.
+//! Task13 fixed budget: exactly 40 candidate attempts; no warmup or baseline arm.
+//! Run only after the owner releases this frozen native Linux candidate.
 //! Existing setup helpers supply ordinary public-owner authorization.
 #[allow(dead_code)]
 #[path = "../tests/local_contract_support/mod.rs"]
@@ -183,10 +184,10 @@ fn main() -> Result<()> {
         );
         assert_eq!(
             after.database_publications - before.database_publications,
-            5
+            2
         );
-        assert_eq!(counts.positive_branches, 5);
-        assert_eq!(counts.negative_branches, 5);
+        assert_eq!(counts.positive_branches, 2);
+        assert_eq!(counts.negative_branches, 2);
     }
     let maintenance_start = Instant::now();
     let mut calls = 0;

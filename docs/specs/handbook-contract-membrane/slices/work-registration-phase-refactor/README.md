@@ -91,7 +91,7 @@ Hard product predecessors are complete in the live branch:
 
 | Predecessor | Current evidence and controlling contract |
 | --- | --- |
-| Work-item foundation | `cbfbf7629a0642b8cb08aefea36fa556009d9274`; [slice](../work-item-state-foundation/README.md) records eight conditions, meta aggregate closeout and human recap complete. [Packet 1's prefix/transition contract](../work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract) remains controlling. |
+| Work-item foundation | `cbfbf7629a0642b8cb08aefea36fa556009d9274`; [slice](../work-item-state-foundation/README.md) records eight conditions, meta aggregate closeout and human recap complete. [Packet 1's prefix/transition contract](../work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract) remains controlling. Its approved fresh-Item exception uses atomic accepted-ready R followed by separate terminal T; existing accepted prefixes and administration retain their prior sequence. |
 | Unified compositions/authority lifecycle | Packet 1 `7129b5c`; [completed slice](../work-compositions-and-kinds/README.md) and [Packet 1](../work-compositions-and-kinds/packet-1.md) own exact scope, successor, pending suspension, revocation and unchanged-scope D→G. |
 | Per-version kinds | Packet 2 `ae1af38`; [Packet 2](../work-compositions-and-kinds/packet-2.md) owns immutable exact kind approval/provenance and bootstrap. Slice/meta closeout and accepted human recap are complete. |
 | Duplication investigation | Reviewed completed audit at `a82f3b285b30337f93d7ac9eca84dc4882fd8629`; preparation/seam savings were unmeasured at that planning checkpoint. Packet-1 results are linked above. |

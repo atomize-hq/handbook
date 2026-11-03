@@ -115,9 +115,6 @@ fn real_sdk_indexed_lifecycle_continues_past_old_slots_with_exact_originals() {
 #[test]
 fn original_prefix_recovery_and_pending_administration_keep_the_same_authority_rule() {
     for at in [
-        B::Reservation,
-        B::AcceptanceCandidate,
-        B::StagedIntent,
         B::AcceptanceReady,
         B::Intent,
         B::Decision,
@@ -150,6 +147,11 @@ fn original_prefix_recovery_and_pending_administration_keep_the_same_authority_r
         let resolved = sdk.resolve_work_registration_request(&locator);
         if matches!(at, B::Terminal | B::Reply) {
             assert_eq!(resolved.disposition, WorkDispositionV1::Replayed);
+        } else if at == B::AcceptanceReady {
+            // Fresh Item acceptance begins only when the complete R selects.
+            assert_eq!(resolved.disposition, WorkDispositionV1::Unaccepted);
+            assert_eq!(sdk.recover_work_registration_request(&locator).disposition,
+                WorkDispositionV1::Unaccepted);
         } else {
             // PublicationAttempt now means complete native Owned checkpoint
             // BEFORE outputs, not a separately selected attempted-only row.
@@ -557,15 +559,15 @@ fn terminal_preownership_refusal_keeps_same_original_recoverable(){
     let result=NativeWorkStateV1::register_with_boundary_for_test(dir.path(),prepared,|at|{
         if at==B::NativeBeforeOwnership{
             stage+=1;
-            // staging, acceptance, decision, snapshot, then coupled terminal.
-            if stage==5{
+            // Atomic accepted-ready R, then the separate coupled terminal T.
+            if stage==2{
                 let cell:serde_json::Value=serde_json::from_slice(&std::fs::read(dir.path().join(".handbook/work-state/v1/database/active.json")).unwrap()).unwrap();
                 assert_eq!(cell["state"],"idle");
                 return Err(LocalAuthorityRefusalV1{code:"fresh_preownership_refusal".into(),detail:"terminal native ownership not yet accepted".into(),unresolved_request:None});
             }
         }Ok(())
     });
-    assert_eq!(stage,5);assert_eq!(result.disposition,WorkDispositionV1::Uncertain);assert_eq!(result.refusal.unwrap().code,"fresh_preownership_refusal");
+    assert_eq!(stage,2);assert_eq!(result.disposition,WorkDispositionV1::Uncertain);assert_eq!(result.refusal.unwrap().code,"fresh_preownership_refusal");
     let pending=sdk.resolve_work_registration_request(&saved);assert_eq!(pending.disposition,WorkDispositionV1::Pending);
     let recovered=sdk.recover_work_registration_request(&saved);assert_eq!(recovered.disposition,WorkDispositionV1::Committed,"{recovered:?}");assert_eq!(recovered.outcome.unwrap().locator.canonical_json_bytes().unwrap(),bytes);
 }
@@ -1141,4 +1143,287 @@ fn indexed_native_evidence_payload_substitution_refuses_without_outcome() {
     assert_eq!(resolved.disposition, WorkDispositionV1::Uncertain, "{resolved:?}");
     assert!(resolved.outcome.is_none());
     assert_eq!(resolved.refusal.as_ref().unwrap().code, "work_native_proof");
+}
+
+#[test]
+fn fresh_item_two_publications_preserve_exact_records_and_native_originals() {
+    use sha2::{Digest, Sha256};
+    use serde_json::{json, Value};
+    let canonical = |v: &Value| serde_json_canonicalizer::to_vec(v).unwrap();
+    let digest = |bytes: &[u8]| format!("sha256:{:x}", Sha256::digest(bytes));
+    let fingerprint = |domain: &str, content: &Value| {
+        digest(&canonical(&json!({"domain":domain,"content":content})))
+    };
+    let dir = tempfile::tempdir().unwrap();
+    let sdk = HandbookSdkV1::open(dir.path());
+    let (initial, check) = setup(&sdk);
+    let grant = activate(&sdk, &initial, &check, "oracle-grant", None);
+    let submitted = WorkRegistrationInputV1 {
+        request_key: "oracle-original".into(), item_key: "oracle-item".into(),
+        label: "independent label".into(), question: "independent question".into(),
+        actor: grant.terms.agent.clone(), expected_state: "absent".into(),
+        composition: WorkCompositionV1::ordinary_leaf().into(), display_level: None,
+    };
+    let prepared = sdk.prepare_work_registration(&initial, &grant, submitted).unwrap();
+    let locator = prepared.locator().clone();
+    let saved = locator.canonical_json_bytes().unwrap();
+    let before = sdk.work_storage_statistics().unwrap();
+    let base = dir.path().join(".handbook/work-state/v1/database");
+    let binding: Value = serde_json::from_slice(&std::fs::read(base.join("STORE.json")).unwrap()).unwrap();
+    let namespace = binding["namespace"].as_str().unwrap();
+    let mut plans = Vec::new();
+    let mut selected = Vec::new();
+    let mut observations = Vec::new();
+    let mut emitted = Vec::new();
+    let result = NativeWorkStateV1::register_with_boundary_for_test(dir.path(), prepared, |at| {
+        emitted.push(at);
+        if at == B::NativeOwned {
+            let active: Value = serde_json::from_slice(&std::fs::read(base.join("active.json")).unwrap()).unwrap();
+            assert_eq!(active["state"], "owned");
+            for id in active["value"]["positive"]["owned"].as_array().unwrap() {
+                let id = id.as_str().unwrap();
+                assert!(!base.join(format!("objects/{}/{}/{}", &id[..2], &id[2..4], id)).exists());
+            }
+            plans.push(active["value"].clone());
+        }
+        if at == B::NativeOutputs {
+            let plan = plans.last().unwrap();
+            for id in plan["positive"]["owned"].as_array().unwrap() {
+                let id = id.as_str().unwrap();
+                assert!(base.join(format!("objects/{}/{}/{}", &id[..2], &id[2..4], id)).is_file());
+            }
+        }
+        if matches!(at, B::Intent | B::Decision | B::Snapshot | B::Terminal) {
+            let selector: Value = serde_json::from_slice(&std::fs::read(base.join("SELECTED.json")).unwrap()).unwrap();
+            let active: Value = serde_json::from_slice(&std::fs::read(base.join("active.json")).unwrap()).unwrap();
+            assert_eq!(active["state"], "idle");
+            assert_eq!(active["value"], selector);
+            let root = handbook_engine::RetainedRepositoryRootV1::open_exact(dir.path()).unwrap();
+            let db = d04_native_store(&root, namespace);
+            let snapshot = db.snapshot().unwrap();
+            let mut records = std::collections::BTreeMap::new();
+            let mut after = None;
+            loop {
+                let page = snapshot.page(after.as_deref(), 16).unwrap();
+                records.extend(page.records);
+                if page.complete { break; }
+                after = page.next;
+            }
+            selected.push(selector);
+            observations.push(records);
+        }
+        Ok(())
+    });
+    assert_eq!(result.disposition, WorkDispositionV1::Committed, "{result:?}");
+    assert_eq!(plans.len(), 2);
+    assert_eq!(selected.len(), 4);
+    assert_eq!(selected[0], selected[1]);
+    assert_eq!(selected[1], selected[2]); // I/D/S are observations of the SAME R.
+    for removed in [B::Reservation, B::AcceptanceCandidate, B::StagedIntent] {
+        assert!(!emitted.contains(&removed));
+    }
+    let name = "item-oracle-original";
+    let r = &observations[0];
+    let t = &observations[3];
+    let read = |rows: &std::collections::BTreeMap<String, Vec<u8>>, file: &str| {
+        rows[&format!("record/{name}/{file}")].clone()
+    };
+    let intent_bytes = read(r, "intent.json");
+    let intent: Value = serde_json::from_slice(&intent_bytes).unwrap();
+    assert_eq!(canonical(&intent), intent_bytes);
+    assert_eq!(intent["schema"], "handbook.work-intent@2.0.0");
+    assert_eq!(intent["operation"], json!({"operation":"item","locator":locator}));
+    let owner: Value = serde_json::from_slice(&std::fs::read(dir.path().join(".handbook/work-state/v1/owner.json")).unwrap()).unwrap();
+    assert_eq!(intent["owner_identity"], owner["identity"]);
+    let descriptor = serde_json::to_value(WorkDescriptorV1::ordinary_leaf()).unwrap();
+    let descriptor_bytes = canonical(&descriptor);
+    let expected_snapshot = json!({
+        "version":"3","project_identity":locator.grant.check.predecessor.charter.binding.initialization_claim.proposed_repository_identity(),"item_identity":locator.item_identity,
+        "item_key":locator.input.item_key,"label":locator.input.label,"question":locator.input.question,
+        "state":"open",
+        "descriptor":descriptor,"descriptor_bytes":descriptor_bytes,
+        "descriptor_fingerprint":digest(&descriptor_bytes),
+        "registration_request_fingerprint":locator.fingerprint
+    });
+    let receipt_fp = fingerprint("handbook.work-registration-receipt@2.0.0",
+        &json!([locator,expected_snapshot,"register_open_leaf","local_advisory_claims"]));
+    let receipt = json!({"locator":locator,"snapshot":expected_snapshot,"effect":"register_open_leaf",
+        "assurance":"local_advisory_claims","receipt_fingerprint":receipt_fp});
+    assert_eq!(serde_json::to_value(result.outcome.as_ref().unwrap()).unwrap(), receipt);
+    let output = json!({"kind":"item","value":receipt});
+    let decision = json!({"intent_fingerprint":fingerprint("handbook.work-intent@2.0.0",&intent),"output":output});
+    let terminal = json!({"decision_fingerprint":fingerprint("handbook.work-decision@2.0.0",&decision),"effect":"committed"});
+    let publication = json!({"intent_fingerprint":decision["intent_fingerprint"],"target":"terminal.json"});
+    for (file, expected) in [
+        ("decision.json",canonical(&decision)),("snapshot.json",canonical(&output)),
+        ("not-attempted.json",canonical(&publication)),("terminal.pending",canonical(&terminal)),
+    ] { assert_eq!(read(r,file), expected, "{file}"); }
+    for (file, expected) in [
+        ("intent.json",intent_bytes.clone()),("decision.json",canonical(&decision)),
+        ("snapshot.json",canonical(&output)),("attempted.json",canonical(&publication)),
+        ("terminal.json",canonical(&terminal)),
+    ] { assert_eq!(read(t,file), expected, "{file}"); }
+    for (rows, files) in [
+        (r,vec!["decision.json","intent.json","not-attempted.json","snapshot.json","terminal.pending"]),
+        (t,vec!["attempted.json","decision.json","intent.json","snapshot.json","terminal.json"]),
+    ] {
+        let header: Value = serde_json::from_slice(&rows[&format!("request/{name}")]).unwrap();
+        assert_eq!(header,json!({"name":name,"staging":false,"intent_fingerprint":digest(&intent_bytes),"files":files}));
+        let actual: Vec<_> = rows.keys().filter_map(|k|k.strip_prefix(&format!("record/{name}/"))).collect();
+        assert_eq!(actual,files);
+        assert_eq!(rows[&format!("item/{}",locator.item_identity)],name.as_bytes());
+    }
+    let after = sdk.work_storage_statistics().unwrap();
+    assert_eq!(after.database_publications.checked_sub(before.database_publications),Some(2));
+    assert_eq!(after.live_records.checked_sub(before.live_records),Some(1));
+    assert_eq!(after.retained_original_outcomes.checked_sub(before.retained_original_outcomes),Some(1));
+    let bytes: u64 = t.iter().filter(|(k,_)|k.starts_with(&format!("record/{name}/"))).map(|(_,b)|b.len() as u64).sum();
+    assert_eq!(after.retained_record_bytes.checked_sub(before.retained_record_bytes),Some(bytes));
+    let mut originals = Vec::new();
+    for (i, role) in ["prefix-not-attempted","terminal-attempt"].iter().enumerate() {
+        let key = format!("{name}:{}",before.database_publications+i as u64);
+        let original = NativeWorkStateV1::checkpoint_evidence_for_test(dir.path(),&locator,Some(&key)).unwrap();
+        assert_eq!(original["reference"]["key"],key);
+        assert_eq!(original["outcome"]["disposition"],"Selected");
+        assert_eq!(original["evidence"]["binding"]["expected"]["sequence"],before.database_publications+i as u64);
+        assert_eq!(original["evidence"]["binding"]["candidate"]["sequence"],before.database_publications+i as u64+1);
+        let payload: Vec<u8> = serde_json::from_value(original["evidence"]["payload"].clone()).unwrap();
+        let checkpoint: Value = serde_json::from_slice(&payload).unwrap();
+        assert_eq!(checkpoint["checkpoint_role"],*role);
+        assert_eq!(checkpoint["work_intent_identity"],fingerprint("handbook.work-intent@2.0.0",&intent));
+        assert_eq!(checkpoint["work_intent_bytes_fingerprint"],digest(&intent_bytes));
+        let sequence = before.database_publications+i as u64+1;
+        let h = format!("{sequence:016x}");
+        let event: Value = serde_json::from_slice(&std::fs::read(base.join(format!("retirements/{}/{}/{}/{}/{}/{}/{}/{}",&h[..2],&h[2..4],&h[4..6],&h[6..8],&h[8..10],&h[10..12],&h[12..14],h))).unwrap()).unwrap();
+        assert_eq!(event,plans[i]["positive"]["event"]);
+        assert_eq!(event["sequence"],sequence);
+        assert_eq!(original["evidence"]["binding"]["candidate"]["token"],plans[i]["positive"]["candidate"]["token"]);
+        originals.push(original);
+    }
+    assert_eq!(originals[1]["evidence"]["previous"],originals[0]["reference"]);
+    assert_eq!(plans[1]["prior"],selected[0]);
+    println!("TASK13_INDEPENDENT_ORACLE {}",json!({"saved":serde_json::from_slice::<Value>(&saved).unwrap(),"receipt":receipt,"R":r,"T":t,"plans":plans,"originals":originals,"before":before,"after":after,"retained_item_bytes":bytes}));
+    while !sdk.maintain_work_storage(WorkMaintenanceBudgetV1::default()).unwrap().complete {}
+    drop(sdk);
+    let sdk = HandbookSdkV1::open(dir.path());
+    assert_eq!(sdk.resolve_work_registration_request(&locator).outcome,result.outcome);
+    assert_eq!(locator.canonical_json_bytes().unwrap(),saved);
+    for original in originals {
+        let key = original["reference"]["key"].as_str().unwrap();
+        let retained = NativeWorkStateV1::checkpoint_evidence_for_test(dir.path(),&locator,Some(key)).unwrap();
+        assert_eq!(retained["reference"],original["reference"]);
+        assert_eq!(retained["outcome"],original["outcome"]);
+        assert_eq!(retained["evidence"],original["evidence"]);
+    }
+}
+
+#[test]
+fn fresh_item_native_r_and_t_interruptions_preserve_acceptance_truth() {
+    for publication in [1,2] {
+        for at in [B::NativeBeforeOwnership,B::NativeOwned,B::NativeOutputs,B::NativeBeforeSelection,B::NativeSelectorDisplaced] {
+            for lose_authority in [false,true] {
+                let dir = tempfile::tempdir().unwrap();
+                let sdk = HandbookSdkV1::open(dir.path());
+                let (initial,check) = setup(&sdk);
+                let kind = establish_kind(&sdk,&initial,&check,"interrupt-kind","project.interrupt@1.0.0");
+                let grant = activate(&sdk,&initial,&check,"interrupt-grant",None);
+                let submitted = input(&grant,&kind,"interrupt-original");
+                let prepared = sdk.prepare_work_registration(&initial,&grant,submitted.clone()).unwrap();
+                let locator = prepared.locator().clone();
+                let canonical = locator.canonical_json_bytes().unwrap();
+                let mut observed = 0;
+                let interrupted = NativeWorkStateV1::register_with_boundary_for_test(dir.path(),prepared,|point| {
+                    if point==at {
+                        observed+=1;
+                        if observed==publication {
+                            return Err(LocalAuthorityRefusalV1{code:"task13_native_interruption".into(),detail:format!("{publication}:{at:?}"),unresolved_request:None});
+                        }
+                    }
+                    Ok(())
+                });
+                assert_eq!(observed,publication);
+                assert_eq!(interrupted.disposition,WorkDispositionV1::Uncertain);
+                let resolved = sdk.resolve_work_registration_request(&locator);
+                let expected = if publication==1 { WorkDispositionV1::Unaccepted } else { WorkDispositionV1::Pending };
+                assert_eq!(resolved.disposition,expected,"{publication} {at:?}: {resolved:?}");
+                assert!(resolved.outcome.is_none());
+                if lose_authority {
+                    assert!(sdk.run_setup(&SetupRequest{mode:SetupMode::Refresh,rewrite:false,reset_state:true}).unwrap().reset_applied);
+                }
+                let recovered = sdk.recover_work_registration_request(&locator);
+                let expected = if publication==1 { WorkDispositionV1::Unaccepted } else if lose_authority { WorkDispositionV1::NonCommitted } else { WorkDispositionV1::Committed };
+                assert_eq!(recovered.disposition,expected,"{publication} {at:?} authorityloss={lose_authority}: {recovered:?}");
+                if publication==1 && !lose_authority {
+                    let retry = sdk.prepare_work_registration(&initial,&grant,submitted).unwrap();
+                    assert_eq!(retry.locator().canonical_json_bytes().unwrap(),canonical);
+                    assert_eq!(sdk.register_work_item(retry).disposition,WorkDispositionV1::Committed);
+                }
+                assert_eq!(locator.canonical_json_bytes().unwrap(),canonical);
+                println!("TASK13_NATIVE_CUT publication={publication} at={at:?} authorityloss={lose_authority} resolved={:?} recovered={:?}",resolved.disposition,recovered.disposition);
+            }
+        }
+    }
+}
+
+#[test]
+#[ignore = "requires four exact-baseline native fixtures; run explicitly with TASK13_LEGACY_FIXTURES"]
+fn old_item_prefixes_recover_without_rewriting_originals() {
+    use serde_json::{json, Value};
+    let parent=std::path::PathBuf::from(std::env::var_os("TASK13_LEGACY_FIXTURES").expect("exact-baseline fixture parent"));
+    let manifest:Vec<Value>=serde_json::from_slice(&std::fs::read(parent.join("manifest.json")).unwrap()).unwrap();
+    assert_eq!(manifest.len(),4);
+    for (index,entry) in manifest.into_iter().enumerate() {
+        let path=std::path::PathBuf::from(entry["path"].as_str().unwrap());
+        assert_eq!(path,parent.join(format!("prefix-{index}")));
+        let canonical:Vec<u8>=serde_json::from_value(entry["canonical"].clone()).unwrap();
+        let locator=WorkRequestLocatorV1::from_json_bytes(&canonical).unwrap();
+        assert_eq!(serde_json::to_value(&locator).unwrap(),entry["locator"]);
+        assert_eq!(locator.canonical_json_bytes().unwrap(),canonical);
+        let base=path.join(".handbook/work-state/v1/database");
+        let store:Value=serde_json::from_slice(&std::fs::read(base.join("STORE.json")).unwrap()).unwrap();
+        {
+            let root=handbook_engine::RetainedRepositoryRootV1::open_exact(&path).unwrap();
+            let db=d04_native_store(&root,store["namespace"].as_str().unwrap());
+            let header:Value=serde_json::from_slice(&db.get("request/item-old-original").unwrap().unwrap()).unwrap();
+            let expected_files=match index {
+                0=>vec!["intent.json"],
+                1=>vec!["intent.json","not-attempted.json"],
+                2=>vec!["decision.json","intent.json","not-attempted.json"],
+                _=>vec!["decision.json","intent.json","not-attempted.json","snapshot.json","terminal.pending"],
+            };
+            assert_eq!(header["staging"],index==0);
+            assert_eq!(header["files"],json!(expected_files));
+            assert_eq!(db.version().unwrap().sequence,
+                entry["after"]["database_publications"].as_u64().unwrap());
+        }
+        let sdk=HandbookSdkV1::open(&path);
+        assert_eq!(sdk.resolve_work_registration_request(&locator).disposition,WorkDispositionV1::Pending);
+        assert_eq!(entry["originals"].as_array().unwrap().len(),index+1);
+        for original in entry["originals"].as_array().unwrap() {
+            let retained=NativeWorkStateV1::checkpoint_evidence_for_test(&path,&locator,Some(original["reference"]["key"].as_str().unwrap())).unwrap();
+            assert_eq!(retained["reference"],original["reference"]);
+            assert_eq!(retained["outcome"],original["outcome"]);
+            assert_eq!(retained["evidence"],original["evidence"]);
+        }
+        if index==0 {
+            assert!(sdk.run_setup(&SetupRequest{mode:SetupMode::Refresh,rewrite:false,reset_state:true}).unwrap().reset_applied);
+        }
+        let result=sdk.recover_work_registration_request(&locator);
+        assert_eq!(result.disposition,
+            if index==0 {WorkDispositionV1::Uncertain}else{WorkDispositionV1::Committed},
+            "old prefix {index}: {result:?}");
+        while !sdk.maintain_work_storage(WorkMaintenanceBudgetV1::default()).unwrap().complete {}
+        drop(sdk);
+        let sdk=HandbookSdkV1::open(&path);
+        assert_eq!(sdk.resolve_work_registration_request(&locator).disposition,
+            if index==0 {WorkDispositionV1::Pending}else{WorkDispositionV1::Replayed});
+        for original in entry["originals"].as_array().unwrap() {
+            let retained=NativeWorkStateV1::checkpoint_evidence_for_test(&path,&locator,Some(original["reference"]["key"].as_str().unwrap())).unwrap();
+            assert_eq!(retained["reference"],original["reference"]);
+            assert_eq!(retained["outcome"],original["outcome"]);
+            assert_eq!(retained["evidence"],original["evidence"]);
+        }
+        assert_eq!(locator.canonical_json_bytes().unwrap(),canonical);
+        println!("TASK13_OLD_PREFIX_RECOVERED index={index} boundary={} result={:?} old_originals={}",entry["boundary"],result.disposition,index+1);
+    }
 }
