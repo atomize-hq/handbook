@@ -31,6 +31,7 @@ fn manifest(bytes: &[u8]) -> Value {
 
 #[test]
 fn isolated_normal_package_builds_reproduce_the_complete_frozen_identity() {
+    #[cfg(not(all(target_os = "macos", target_arch = "aarch64")))]
     assert_eq!(
         production::CARGO_ARGUMENTS,
         [
@@ -44,6 +45,19 @@ fn isolated_normal_package_builds_reproduce_the_complete_frozen_identity() {
             "--",
             "-C",
             "link-arg=/Brepro",
+        ]
+    );
+    #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+    assert_eq!(
+        production::CARGO_ARGUMENTS,
+        [
+            "rustc",
+            "--offline",
+            "--locked",
+            "-p",
+            "handbook-dock-json-schema",
+            "--bin",
+            "handbook-dock-json-schema"
         ]
     );
     assert_eq!(
@@ -67,14 +81,14 @@ fn isolated_normal_package_builds_reproduce_the_complete_frozen_identity() {
         &first.executable_path,
         first_host.path(),
         production::SUPPORTED_TARGET,
-        ".exe",
+        std::env::consts::EXE_SUFFIX,
     )
     .unwrap();
     let second_staged = staging::stage_native_package_v1(
         &second.executable_path,
         second_host.path(),
         production::SUPPORTED_TARGET,
-        ".exe",
+        std::env::consts::EXE_SUFFIX,
     )
     .unwrap();
     assert_eq!(first_staged.manifest_bytes, second_staged.manifest_bytes);
@@ -90,14 +104,17 @@ fn isolated_normal_package_builds_reproduce_the_complete_frozen_identity() {
     assert_eq!(
         frozen["implementation_bundle"]["files"],
         json!([{
-            "path": "bin/handbook-dock-json-schema.exe",
+            "path": format!("bin/handbook-dock-json-schema{}", std::env::consts::EXE_SUFFIX),
             "length": first_executable.len() as u64,
             "sha256": executable_fingerprint,
         }])
     );
     assert_eq!(
         frozen["implementation_bundle"]["entrypoint"],
-        "bin/handbook-dock-json-schema.exe"
+        format!(
+            "bin/handbook-dock-json-schema{}",
+            std::env::consts::EXE_SUFFIX
+        )
     );
     assert_eq!(
         frozen["implementation_bundle"]["entrypoint_fingerprint"],
@@ -147,7 +164,7 @@ fn isolated_normal_package_builds_reproduce_the_complete_frozen_identity() {
         Path::new(env!("CARGO_BIN_EXE_handbook-dock-json-schema")),
         test_host.path(),
         production::SUPPORTED_TARGET,
-        ".exe",
+        std::env::consts::EXE_SUFFIX,
     )
     .unwrap();
     assert_ne!(test_staged.manifest_bytes, first_staged.manifest_bytes);

@@ -140,6 +140,14 @@ pub fn stage_native_package_v1(
     fs::create_dir_all(&bundle_bin).map_err(io_error("create package layout"))?;
     let staged_executable = bundle_bin.join(expected_name);
     fs::write(&staged_executable, &executable_bytes).map_err(io_error("stage executable"))?;
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        let mut permissions = metadata.permissions();
+        permissions.set_mode(permissions.mode() | 0o100);
+        fs::set_permissions(&staged_executable, permissions)
+            .map_err(io_error("set executable permissions"))?;
+    }
     fs::write(package_root.join("manifest.json"), &manifest_bytes)
         .map_err(io_error("stage manifest"))?;
     let staged_bytes = fs::read(&staged_executable).map_err(io_error("verify executable"))?;
