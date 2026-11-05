@@ -50,6 +50,36 @@ impl From<ContractOwnerRepositoryErrorV1> for LocalCheckSdkErrorV1 {
 }
 
 impl HandbookSdkV1 {
+    /// Read the exact selected Charter for the approved Field Notes planning
+    /// instruction. Agent and principal are unverified local-advisory assertions.
+    pub fn read_local_planning_charter(
+        &self,
+        initial: &LocalInitialSetupLocatorV1,
+        locator: &LocalCheckLocatorV1,
+        unverified_asserted_agent: &str,
+        asserted_instruction: &str,
+    ) -> Result<
+        handbook_engine::local_authority::local_check::LocalPlanningCharterReadV1,
+        LocalAuthorityRefusalV1,
+    > {
+        initial
+            .canonical_json_bytes()
+            .map_err(|e| error(&e.code, &e.detail))?;
+        if locator.predecessor != initial.terms {
+            return Err(error(
+                "project_binding",
+                "successor and initial setup differ",
+            ));
+        }
+        let basis = self.observe_local_check_basis(initial)?;
+        NativeLocalCheckAuthorityV1::read_planning_charter(
+            &self.repo_root,
+            locator,
+            &basis,
+            unverified_asserted_agent,
+            asserted_instruction,
+        )
+    }
     /// Opens the native retained-capture source. Every resolution freshly checks
     /// owner qualification and live authority through the consuming callback.
     pub fn open_local_contract_evidence_source(

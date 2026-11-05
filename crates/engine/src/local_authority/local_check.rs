@@ -412,8 +412,90 @@ impl LocalCheckAdmissionV1<'_> {
     }
 }
 
+/// The sole purpose admitted by the Field Notes local-advisory Charter read.
+/// This exact owner-approved instruction is not a general purpose parser.
+pub const FIELD_NOTES_PLANNING_INSTRUCTION_V1: &str =
+    "Inspect the Field Notes Charter and index.html as local evidence for planning the demo.";
+
+/// Bytes and fingerprint from one guarded local-advisory observation. The
+/// named parties are assertions in the selected terms, not authenticated identities.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct LocalPlanningCharterReadV1 {
+    pub canonical_bytes: Vec<u8>,
+    pub canonical_fingerprint: String,
+    pub unverified_asserted_agent: String,
+    pub unverified_asserted_principal: String,
+}
+
 pub struct NativeLocalCheckAuthorityV1;
 impl NativeLocalCheckAuthorityV1 {
+    /// Dedicated Charter read for the exact selected Field Notes instruction.
+    /// The caller-supplied agent is an unverified advisory assertion.
+    pub fn read_planning_charter(
+        repo: impl AsRef<Path>,
+        locator: &LocalCheckLocatorV1,
+        basis: &LocalCheckCurrentBasisV1,
+        unverified_asserted_agent: &str,
+        asserted_instruction: &str,
+    ) -> Result<LocalPlanningCharterReadV1, LocalAuthorityRefusalV1> {
+        const CHARTER: &str = ".handbook/project/charter.yaml";
+        locator.validate()?;
+        let guard = OperatingGuard::acquire(repo.as_ref(), &locator.predecessor, false)?;
+        let tree = guard
+            .root()
+            .retain_local_check_authority_tree_guard()
+            .map_err(fs_error)?;
+        check_current(guard.root(), locator, basis)?;
+        // This consuming rule is authorized for the exact approved Field Notes
+        // successor, whose validated terms bind its original predecessor and Charter.
+        if locator.terms.approved_content_fingerprint
+            != "sha256:6d2f7bae73225ea0fbb3000a2e6857d1fbf80e064d81188f11398b28baa39ec6"
+        {
+            return Err(refuse(
+                "planning_charter_authority",
+                "the exact approved Field Notes successor terms are required",
+            ));
+        }
+        if asserted_instruction != FIELD_NOTES_PLANNING_INSTRUCTION_V1
+            || locator.terms.instruction != FIELD_NOTES_PLANNING_INSTRUCTION_V1
+            || unverified_asserted_agent != locator.terms.agent
+            || !locator.terms.allowed_input_paths.iter().any(|selector| {
+                crate::context_resolution::local_path_within_selector(selector, CHARTER)
+                    .unwrap_or(false)
+            })
+        {
+            return Err(refuse("planning_charter_scope", "exact advisory agent assertion, selected Field Notes instruction and approved Charter input are required"));
+        }
+        let bytes = match guard
+            .root()
+            .read_local_owner_optional_bounded(CHARTER, 1_048_576)
+            .map_err(fs_error)?
+        {
+            RepositoryReadV1::Found(bytes) => bytes,
+            RepositoryReadV1::Absent => {
+                return Err(refuse(
+                    "planning_charter_missing",
+                    "selected Charter bytes are absent",
+                ))
+            }
+        };
+        let digest = DefinitionFingerprint::from_bytes(&bytes).to_string();
+        if digest != locator.predecessor.charter.canonical_fingerprint {
+            return Err(refuse(
+                "planning_charter_changed",
+                "observed Charter bytes differ from the exact approved source",
+            ));
+        }
+        tree.validate().map_err(fs_error)?;
+        guard.validate()?;
+        check_current(guard.root(), locator, basis)?;
+        Ok(LocalPlanningCharterReadV1 {
+            canonical_bytes: bytes,
+            canonical_fingerprint: digest,
+            unverified_asserted_agent: unverified_asserted_agent.to_owned(),
+            unverified_asserted_principal: locator.terms.principal.clone(),
+        })
+    }
     pub fn observe_basis(
         repo: impl AsRef<Path>,
         relation_fingerprint: impl Into<String>,
