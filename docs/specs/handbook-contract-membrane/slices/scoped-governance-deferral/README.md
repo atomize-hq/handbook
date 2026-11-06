@@ -273,6 +273,10 @@ ordinary retry; no new attempt on this reserved P is delivered here.
 
 ## Typed consumer and exact scope-to-use limit
 
+> Historical planning: the generation-specific SDK lifecycle routes below were
+> superseded by the unified versioned governance API; native owner records and
+> their exact identity preimages retain their existing meanings.
+
 Select the real Rust `HandbookSdkV1` integration consumer in
 [SDK admission-governance tests](../../../../../crates/sdk/tests/admission_governance.rs),
 using the actual Contracts owner. Add purpose-named typed methods, provisionally:

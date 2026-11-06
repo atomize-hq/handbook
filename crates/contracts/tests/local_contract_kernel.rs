@@ -129,10 +129,52 @@ fn local_schema_representation_matches_native_path_and_reference_grammar() {
 
 #[test]
 fn validator_dependency_refuses_a_self_consistent_same_ref_descriptor_substitution() {
-    let bytes =
-        include_bytes!("../../dock/production-manifests/x86_64-pc-windows-msvc/manifest.json")
-            .strip_suffix(b"\n")
-            .unwrap();
+    let manifests: [&[u8]; 3] = [
+        include_bytes!("../../dock/production-manifests/x86_64-unknown-linux-gnu/manifest.json"),
+        include_bytes!("../../dock/production-manifests/x86_64-pc-windows-msvc/manifest.json"),
+        include_bytes!("../../dock/production-manifests/aarch64-apple-darwin/manifest.json"),
+    ];
+    let selected = if cfg!(all(
+        target_arch = "x86_64",
+        target_vendor = "unknown",
+        target_os = "linux",
+        target_env = "gnu",
+        target_pointer_width = "64",
+        target_abi = ""
+    )) {
+        Some(0)
+    } else if cfg!(all(
+        target_arch = "x86_64",
+        target_vendor = "pc",
+        target_os = "windows",
+        target_env = "msvc",
+        target_pointer_width = "64",
+        target_abi = ""
+    )) {
+        Some(1)
+    } else if cfg!(all(
+        target_arch = "aarch64",
+        target_vendor = "apple",
+        target_os = "macos",
+        target_env = "",
+        target_pointer_width = "64",
+        target_abi = ""
+    )) {
+        Some(2)
+    } else {
+        None
+    };
+    for (index, candidate) in manifests.iter().enumerate() {
+        let candidate = candidate.strip_suffix(b"\n").unwrap();
+        assert_eq!(
+            LocalValidatorDependencyV2::from_manifest_json(candidate).is_ok(),
+            selected == Some(index)
+        );
+    }
+    let Some(selected) = selected else {
+        return;
+    };
+    let bytes = manifests[selected].strip_suffix(b"\n").unwrap();
     assert!(LocalValidatorDependencyV2::from_manifest_json(bytes).is_ok());
     let mut manifest: serde_json::Value = serde_json::from_slice(bytes).unwrap();
     manifest["implementation_bundle"]["entrypoint"] = json!("unsupported-validator.exe");

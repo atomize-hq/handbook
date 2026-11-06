@@ -20,6 +20,132 @@ const MAX_STRICT_READ_BYTES: usize = 16 * 1024 * 1024;
 const MAX_DIRECTORY_ENTRIES: usize = 4096;
 const MAX_RETAINED_TREE_BYTES: u64 = 256 * 1024 * 1024;
 
+// These commitments cover the exact canonical bytes selected for each Cargo
+// target. Updating a shipped native manifest requires a coordinated Engine
+// commitment update. Engine does not read another crate's source or assets.
+const MAX_NATIVE_MANIFEST_BYTES: usize = 1024 * 1024;
+const MAX_NATIVE_MEMBER_BYTES: u64 = 64 * 1024 * 1024;
+const MAX_NATIVE_MANIFEST_MEMBERS: usize = 256;
+
+#[derive(Clone, Debug)]
+struct RepositoryNativeManifestMemberV1 {
+    path: String,
+    length: u64,
+    sha256: [u8; 32],
+}
+
+/// Opaque authority over the members of the exact compile-target manifest.
+/// Its fields are private and it cannot be constructed from member claims.
+#[derive(Clone, Debug)]
+pub struct RepositoryNativeManifestAdmissionV1 {
+    members: Vec<RepositoryNativeManifestMemberV1>,
+}
+
+impl RepositoryNativeManifestAdmissionV1 {
+    fn native_member_v1(
+        &self,
+        relative: &str,
+    ) -> Result<&RepositoryNativeManifestMemberV1, RepositoryDurabilityErrorV1> {
+        self.members
+            .iter()
+            .find(|member| member.path == relative)
+            .ok_or_else(|| mismatch("path is not an admitted native manifest member"))
+    }
+}
+
+fn parse_native_manifest_sha256_v1(value: &str) -> Result<[u8; 32], RepositoryDurabilityErrorV1> {
+    let hex = value
+        .strip_prefix("sha256:")
+        .ok_or_else(|| mismatch("native manifest fingerprint is malformed"))?;
+    if hex.len() != 64
+        || !hex.bytes().all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
+    {
+        return Err(mismatch("native manifest fingerprint is malformed"));
+    }
+    let mut digest = [0_u8; 32];
+    for (index, output) in digest.iter_mut().enumerate() {
+        *output = u8::from_str_radix(&hex[index * 2..index * 2 + 2], 16)
+            .map_err(|_| mismatch("native manifest fingerprint is malformed"))?;
+    }
+    Ok(digest)
+}
+
+/// Admits only the bounded, exact canonical manifest committed for Cargo's
+/// complete compile target. No filesystem observation or mutation occurs here.
+pub fn admit_native_production_manifest_v1(
+    bytes: &[u8],
+) -> Result<RepositoryNativeManifestAdmissionV1, RepositoryDurabilityErrorV1> {
+    if bytes.is_empty() || bytes.len() > MAX_NATIVE_MANIFEST_BYTES {
+        return Err(bound("native manifest exceeds its byte bound"));
+    }
+    let target = env!("HANDBOOK_ENGINE_COMPILE_TARGET_V1");
+    let expected = match target {
+        "x86_64-unknown-linux-gnu" => "1c0cb7c0aba207f8be7e5561d7ae1f024f8c49e4d724f90c51cea421fa04c9fa",
+        "x86_64-pc-windows-msvc" => "655bfc9badf8105dfa6993513fc56619254dad22be920915c4adc49c45c47279",
+        "aarch64-apple-darwin" => "8d7d4e6347aba34f6e0be4f31861f7887c0165ea7cdab96eb78d2744d734b059",
+        _ => return Err(mismatch("native manifest target is unsupported")),
+    };
+    if format!("{:x}", Sha256::digest(bytes)) != expected {
+        return Err(mismatch("native manifest does not match the target commitment"));
+    }
+    let manifest: serde_json::Value = serde_json::from_slice(bytes)
+        .map_err(|_| mismatch("native manifest cannot be parsed"))?;
+    let bundle = &manifest["implementation_bundle"];
+    if bundle["target"].as_str() != Some(target) {
+        return Err(mismatch("native manifest target does not match"));
+    }
+    let bundle_fingerprint = bundle["bundle_fingerprint"]
+        .as_str()
+        .ok_or_else(|| mismatch("native bundle fingerprint is absent"))?;
+    parse_native_manifest_sha256_v1(bundle_fingerprint)?;
+    let package_root = format!(
+        ".handbook/state/dock/local-evaluation-v1/packages/{}",
+        &bundle_fingerprint[7..]
+    );
+    let files = bundle["files"]
+        .as_array()
+        .ok_or_else(|| mismatch("native manifest members are absent"))?;
+    if files.is_empty() || files.len() > MAX_NATIVE_MANIFEST_MEMBERS {
+        return Err(bound("native manifest member count is outside its bound"));
+    }
+    let mut members = Vec::with_capacity(files.len());
+    let mut total = 0_u64;
+    let mut previous = None::<String>;
+    for file in files {
+        let relative = file["path"]
+            .as_str()
+            .ok_or_else(|| mismatch("native manifest member path is absent"))?;
+        if relative == "manifest.json"
+            || relative.contains(':')
+            || previous.as_deref().is_some_and(|old| old >= relative)
+        {
+            return Err(mismatch("native manifest member path is invalid or unordered"));
+        }
+        let path = format!("{package_root}/{relative}");
+        ValidatedRelativePath::parse(&path, false)?;
+        let length = file["length"]
+            .as_u64()
+            .ok_or_else(|| mismatch("native manifest member length is absent"))?;
+        if length > MAX_NATIVE_MEMBER_BYTES {
+            return Err(bound("native manifest member exceeds its byte bound"));
+        }
+        total = total
+            .checked_add(length)
+            .ok_or_else(|| bound("native manifest member bytes overflowed"))?;
+        if total > MAX_RETAINED_TREE_BYTES {
+            return Err(bound("native manifest members exceed their aggregate bound"));
+        }
+        let sha256 = parse_native_manifest_sha256_v1(
+            file["sha256"]
+                .as_str()
+                .ok_or_else(|| mismatch("native manifest member fingerprint is absent"))?,
+        )?;
+        members.push(RepositoryNativeManifestMemberV1 { path, length, sha256 });
+        previous = Some(relative.to_owned());
+    }
+    Ok(RepositoryNativeManifestAdmissionV1 { members })
+}
+
 /// Closed refusal categories for retained-root durability operations.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum RepositoryDurabilityErrorKindV1 {
@@ -34,24 +160,53 @@ pub enum RepositoryDurabilityErrorKindV1 {
     UnsupportedPlatform,
 }
 
+// Private evidence for the native production-source observer only. Existing
+// repository consumers continue to see the original public kind and detail.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum NativeSourceObservationEvidenceV1 {
+    Missing,
+    Unobservable,
+    DetectedUnsafe,
+}
+
 /// A bounded durability refusal that exposes neither native IDs nor raw paths.
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone)]
 pub struct RepositoryDurabilityErrorV1 {
     kind: RepositoryDurabilityErrorKindV1,
     detail: &'static str,
+    native_source_evidence: Option<NativeSourceObservationEvidenceV1>,
 }
+
+// Match the pre-existing derived Debug/Eq behavior: private source evidence is
+// not a new public error category and does not alter ordinary comparisons.
+impl fmt::Debug for RepositoryDurabilityErrorV1 {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.debug_struct("RepositoryDurabilityErrorV1")
+            .field("kind", &self.kind)
+            .field("detail", &self.detail)
+            .finish()
+    }
+}
+
+impl PartialEq for RepositoryDurabilityErrorV1 {
+    fn eq(&self, other: &Self) -> bool {
+        self.kind == other.kind && self.detail == other.detail
+    }
+}
+impl Eq for RepositoryDurabilityErrorV1 {}
 
 impl RepositoryDurabilityErrorV1 {
     pub(crate) fn initialization_refusal(
         kind: RepositoryDurabilityErrorKindV1,
         detail: &'static str,
     ) -> Self {
-        Self { kind, detail }
+        Self { kind, detail, native_source_evidence: None }
     }
     pub(crate) fn prepared_identity_occupied() -> Self {
         Self {
             kind: RepositoryDurabilityErrorKindV1::AlreadyExists,
             detail: "prepared repository identity path is already occupied",
+            native_source_evidence: None,
         }
     }
 
@@ -59,6 +214,7 @@ impl RepositoryDurabilityErrorV1 {
         Self {
             kind: RepositoryDurabilityErrorKindV1::DurabilityUncertain,
             detail: "prepared repository identity publication could not be verified exactly",
+            native_source_evidence: None,
         }
     }
 
@@ -152,6 +308,7 @@ struct RetainedTreeFile {
     file: File,
     snapshot: RegularFileSnapshot,
     content_fingerprint: [u8; 32],
+    native_member: Option<RepositoryNativeManifestMemberV1>,
 }
 
 pub(crate) struct RetainedRepositoryTreeGuardV1<'root> {
@@ -240,6 +397,34 @@ impl RepositoryExactFilesCheckpointV1<'_> {
         }
         self.validate()
     }
+
+    /// Requires a pinned file to carry this admission's exact member witness.
+    pub fn require_native_manifest_member_v1(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        admission: &RepositoryNativeManifestAdmissionV1,
+        relative: &str,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        self.validate()?;
+        if !self.inner.root.same_physical_root(root) {
+            return Err(unsafe_fs("source checkpoint belongs to another physical root"));
+        }
+        let expected = admission.native_member_v1(relative)?;
+        let retained = self.inner.files.iter()
+            .find(|file| file.relative == relative)
+            .ok_or_else(|| unsafe_fs("required native member is not pinned"))?;
+        let member = retained.native_member.as_ref()
+            .ok_or_else(|| unsafe_fs("pinned file lacks native manifest admission"))?;
+        if member.path != expected.path
+            || member.length != expected.length
+            || member.sha256 != expected.sha256
+            || retained.snapshot.length != expected.length
+            || retained.content_fingerprint != expected.sha256
+        {
+            return Err(unsafe_fs("pinned native member differs from manifest admission"));
+        }
+        self.validate()
+    }
 }
 
 impl RetainedRepositoryTreeGuardV1<'_> {
@@ -276,7 +461,15 @@ impl RetainedRepositoryTreeGuardV1<'_> {
                     "retained state file identity or version changed during authority use",
                 ));
             }
-            if !guard.relative.ends_with(".lock")
+            if let Some(member) = &guard.native_member {
+                if retained_native_file_fingerprint_v1(&guard.file, member)?
+                    != guard.content_fingerprint
+                    || retained_native_file_fingerprint_v1(&current, member)?
+                        != guard.content_fingerprint
+                {
+                    return Err(unsafe_fs("retained native member content changed during authority use"));
+                }
+            } else if !guard.relative.ends_with(".lock")
                 && (retained_file_fingerprint(&guard.file, guard.snapshot.length)?
                     != guard.content_fingerprint
                     || retained_file_fingerprint(&current, guard.snapshot.length)?
@@ -308,6 +501,399 @@ impl RetainedRepositoryTreeGuardV1<'_> {
 struct DirectorySnapshot {
     identity: PhysicalDirectoryIdentity,
     version: NativeFileVersion,
+}
+
+/// Classification scoped only to observing the exact native production source.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum RepositoryNativeSourceFailureV1 {
+    Missing,
+    Unavailable,
+    Unsafe,
+}
+
+fn classify_native_source_error_v1(
+    error: RepositoryDurabilityErrorV1,
+    witnessed: bool,
+) -> RepositoryNativeSourceFailureV1 {
+    match error.native_source_evidence {
+        Some(NativeSourceObservationEvidenceV1::Missing) => {
+            if witnessed { RepositoryNativeSourceFailureV1::Unsafe }
+            else { RepositoryNativeSourceFailureV1::Missing }
+        }
+        Some(NativeSourceObservationEvidenceV1::Unobservable) => RepositoryNativeSourceFailureV1::Unavailable,
+        Some(NativeSourceObservationEvidenceV1::DetectedUnsafe) => RepositoryNativeSourceFailureV1::Unsafe,
+        None => match error.kind {
+            RepositoryDurabilityErrorKindV1::NotFound => {
+                if witnessed { RepositoryNativeSourceFailureV1::Unsafe }
+                else { RepositoryNativeSourceFailureV1::Missing }
+            }
+            RepositoryDurabilityErrorKindV1::UnsafeFilesystem
+            | RepositoryDurabilityErrorKindV1::InvalidRelativePath
+            | RepositoryDurabilityErrorKindV1::BoundExceeded
+            | RepositoryDurabilityErrorKindV1::CurrentValueMismatch => RepositoryNativeSourceFailureV1::Unsafe,
+            _ => RepositoryNativeSourceFailureV1::Unavailable,
+        },
+    }
+}
+
+/// Retains the exact native production package or bundle root.
+pub struct RepositoryNativeSourceRootV1 {
+    root: RetainedRepositoryRootV1,
+}
+
+/// Retains one admitted source file and its parent directory witnesses.
+pub struct RepositoryNativeSourceFileV1<'root> {
+    root: &'root RepositoryNativeSourceRootV1,
+    relative: ValidatedRelativePath,
+    file: std::sync::Mutex<File>,
+    snapshot: RegularFileSnapshot,
+    expected: RepositoryNativeManifestMemberV1,
+    parents: Vec<RetainedTreeDirectory>,
+}
+
+/// Opens a source root without creating or changing anything.
+pub fn open_production_source_root_v1(
+    path: impl AsRef<Path>,
+) -> Result<RepositoryNativeSourceRootV1, RepositoryNativeSourceFailureV1> {
+    let root = RetainedRepositoryRootV1::open_exact(path)
+        .map_err(|error| classify_native_source_error_v1(error, false))?;
+    let source = RepositoryNativeSourceRootV1 { root };
+    source.validate_production_source_root_v1()?;
+    Ok(source)
+}
+
+impl RepositoryNativeSourceRootV1 {
+    /// Revalidates the original path witness without reducing failure to bool.
+    pub fn validate_production_source_root_v1(&self) -> Result<(), RepositoryNativeSourceFailureV1> {
+        validate_production_source_root_v1(&self.root)
+            .map_err(|error| classify_native_source_error_v1(error, true))
+    }
+
+    /// Reads and retains only the exact target-selected canonical manifest.
+    pub fn read_production_source_manifest_v1(
+        &self,
+        expected: &[u8],
+    ) -> Result<(Vec<u8>, RepositoryNativeSourceFileV1<'_>), RepositoryNativeSourceFailureV1> {
+        admit_native_production_manifest_v1(expected)
+            .map_err(|error| classify_native_source_error_v1(error, false))?;
+        let member = RepositoryNativeManifestMemberV1 {
+            path: "manifest.json".to_owned(),
+            length: expected.len() as u64,
+            sha256: Sha256::digest(expected).into(),
+        };
+        capture_production_source_file_v1(self, "manifest.json", member)
+    }
+
+    /// Reads only a member named by the sealed production manifest admission.
+    pub fn read_production_source_member_v1(
+        &self,
+        admission: &RepositoryNativeManifestAdmissionV1,
+        relative: &str,
+    ) -> Result<(Vec<u8>, RepositoryNativeSourceFileV1<'_>), RepositoryNativeSourceFailureV1> {
+        const PREFIX: &str = ".handbook/state/dock/local-evaluation-v1/packages/";
+        let member = admission.members.iter().find(|member| {
+            member.path.strip_prefix(PREFIX)
+                .and_then(|tail| tail.split_once('/').map(|(_, relative)| relative))
+                == Some(relative)
+        }).cloned().ok_or(RepositoryNativeSourceFailureV1::Unsafe)?;
+        capture_production_source_file_v1(self, relative, member)
+    }
+}
+
+/// An inventory observation was refused; no cause is asserted.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RepositoryNativeSourceInventoryRefusedV1;
+
+/// Retains the manifest-derived native source directory inventory.
+pub struct RepositoryNativeSourceInventoryV1<'root> {
+    root: &'root RepositoryNativeSourceRootV1,
+    root_snapshot: DirectorySnapshot,
+    directories: Vec<RetainedTreeDirectory>,
+}
+
+fn production_source_inventory_expected_v1(
+    admission: &RepositoryNativeManifestAdmissionV1,
+) -> Result<std::collections::BTreeMap<String, std::collections::BTreeMap<String, RepositoryDirectoryEntryKindV1>>, RepositoryNativeSourceInventoryRefusedV1> {
+    const PREFIX: &str = ".handbook/state/dock/local-evaluation-v1/packages/";
+    let mut expected: std::collections::BTreeMap<String, std::collections::BTreeMap<String, RepositoryDirectoryEntryKindV1>> = std::collections::BTreeMap::new();
+    expected.insert(String::new(), std::collections::BTreeMap::new());
+    for member in &admission.members {
+        let relative = member.path.strip_prefix(PREFIX)
+            .and_then(|tail| tail.split_once('/').map(|(_, relative)| relative))
+            .ok_or(RepositoryNativeSourceInventoryRefusedV1)?;
+        let path = ValidatedRelativePath::parse(relative, false)
+            .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+        let parts: Vec<_> = path.as_str().split('/').collect();
+        let mut parent = String::new();
+        for (index, part) in parts.iter().enumerate() {
+            let last = index + 1 == parts.len();
+            let kind = if last { RepositoryDirectoryEntryKindV1::RegularFile }
+                       else { RepositoryDirectoryEntryKindV1::Directory };
+            let previous = expected.entry(parent.clone()).or_default().insert((*part).to_owned(), kind);
+            if previous.is_some_and(|prior| prior != kind || last) {
+                return Err(RepositoryNativeSourceInventoryRefusedV1);
+            }
+            if !last {
+                if !parent.is_empty() { parent.push('/'); }
+                parent.push_str(part);
+                expected.entry(parent.clone()).or_default();
+            }
+        }
+    }
+    Ok(expected)
+}
+
+fn validate_source_inventory_root_v1(
+    root: &RepositoryNativeSourceRootV1,
+    expected: DirectorySnapshot,
+) -> Result<(), RepositoryNativeSourceInventoryRefusedV1> {
+    root.validate_production_source_root_v1().map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+    if directory_snapshot(&root.root.root)
+        .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)? != expected
+    {
+        return Err(RepositoryNativeSourceInventoryRefusedV1);
+    }
+    root.validate_production_source_root_v1().map_err(|_| RepositoryNativeSourceInventoryRefusedV1)
+}
+
+impl RepositoryNativeSourceRootV1 {
+    /// Pins and checks only directories and files named by the admitted manifest.
+    pub fn retain_production_source_inventory_v1(
+        &self,
+        admission: &RepositoryNativeManifestAdmissionV1,
+    ) -> Result<RepositoryNativeSourceInventoryV1<'_>, RepositoryNativeSourceInventoryRefusedV1> {
+        let expected = production_source_inventory_expected_v1(admission)?;
+        self.validate_production_source_root_v1().map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+        let root_snapshot = directory_snapshot(&self.root.root)
+            .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+        let mut guard = RepositoryNativeSourceInventoryV1 {
+            root: self, root_snapshot, directories: Vec::new(),
+        };
+        let mut pending = VecDeque::from([String::new()]);
+        while let Some(relative) = pending.pop_front() {
+            if !relative.is_empty() {
+                let path = ValidatedRelativePath::parse(&relative, false)
+                    .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+                let directory = platform::open_retained_directory(&self.root, &path)
+                    .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+                let snapshot = directory_snapshot(&directory)
+                    .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+                guard.directories.push(RetainedTreeDirectory { relative: relative.clone(), directory, snapshot });
+            }
+            let validate_current = || -> Result<(), RepositoryNativeSourceInventoryRefusedV1> {
+                validate_source_inventory_root_v1(self, root_snapshot)?;
+                if !relative.is_empty() {
+                    let current = guard.directories.last().ok_or(RepositoryNativeSourceInventoryRefusedV1)?;
+                    validate_source_parent_guards_v1(&self.root, std::slice::from_ref(current))
+                        .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+                }
+                validate_source_inventory_root_v1(self, root_snapshot)
+            };
+            let children = expected.get(&relative).ok_or(RepositoryNativeSourceInventoryRefusedV1)?;
+            if children.len() > MAX_NATIVE_MANIFEST_MEMBERS {
+                return Err(RepositoryNativeSourceInventoryRefusedV1);
+            }
+            let limit = children.len().checked_add(1).ok_or(RepositoryNativeSourceInventoryRefusedV1)?;
+            validate_current()?;
+            // Unix reopens the name; Windows lists a pinned path. Retained and
+            // current directory witnesses bracket the existing listing call.
+            let entries = self.root.list_directory_bounded(&relative, limit)
+                .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+            #[cfg(all(test, target_os = "linux"))]
+            native_listing_race_test::after_source_listing_v1();
+            validate_current()?;
+            if entries.len() != children.len() { return Err(RepositoryNativeSourceInventoryRefusedV1); }
+            let mut seen = BTreeSet::new();
+            for entry in entries {
+                if children.get(entry.name()) != Some(&entry.kind()) || !seen.insert(entry.name().to_owned()) {
+                    return Err(RepositoryNativeSourceInventoryRefusedV1);
+                }
+                if entry.kind() == RepositoryDirectoryEntryKindV1::Directory {
+                    let child = if relative.is_empty() { entry.name().to_owned() }
+                                else { format!("{}/{}", relative, entry.name()) };
+                    pending.push_back(child);
+                }
+            }
+        }
+        guard.validate_production_source_inventory_v1()?;
+        Ok(guard)
+    }
+}
+
+impl RepositoryNativeSourceInventoryV1<'_> {
+    /// Checks retained and current directory identities and versions.
+    pub fn validate_production_source_inventory_v1(&self) -> Result<(), RepositoryNativeSourceInventoryRefusedV1> {
+        validate_source_inventory_root_v1(self.root, self.root_snapshot)?;
+        validate_source_parent_guards_v1(&self.root.root, &self.directories)
+            .map_err(|_| RepositoryNativeSourceInventoryRefusedV1)?;
+        validate_source_inventory_root_v1(self.root, self.root_snapshot)
+    }
+}
+
+fn validate_production_source_root_v1(
+    root: &RetainedRepositoryRootV1,
+) -> Result<(), RepositoryDurabilityErrorV1> {
+    #[cfg(target_os = "linux")]
+    if let Some(journal) = &root.linux_journal {
+        return journal.lock()
+            .map_err(|_| uncertain("repository relevant-entry journal mutex poisoned"))?
+            .validate(&root.root, root.identity);
+    }
+    #[cfg(unix)]
+    {
+        for retained in &root.ancestor_epochs {
+            let current = unix_directory_epoch(&retained.directory)?;
+            if current.identity != retained.identity
+                || current.modified_seconds != retained.modified_seconds
+                || current.modified_nanoseconds != retained.modified_nanoseconds
+                || current.changed_seconds != retained.changed_seconds
+                || current.changed_nanoseconds != retained.changed_nanoseconds
+            {
+                return Err(unsafe_fs("repository root ancestor changed during retained operation"));
+            }
+        }
+        // Preserve the existing fallback reopen and identity checks, while
+        // retaining the reason for a failed observation instead of a bool.
+        let current = RetainedRepositoryRootV1::open_exact(&root.root_path)?;
+        if current.identity != root.identity
+            || directory_identity(&root.root)? != root.identity
+            || directory_identity(&current.root)? != root.identity
+        {
+            return Err(unsafe_fs("repository path no longer names the retained physical root"));
+        }
+    }
+    #[cfg(windows)]
+    require_root_unchanged(root)?;
+    Ok(())
+}
+
+// A missing previously retained path is a changed witness, not initial absence.
+fn after_native_source_witness_v1(
+    mut error: RepositoryDurabilityErrorV1,
+) -> RepositoryDurabilityErrorV1 {
+    if error.native_source_evidence == Some(NativeSourceObservationEvidenceV1::Missing)
+        || (error.native_source_evidence.is_none()
+            && error.kind == RepositoryDurabilityErrorKindV1::NotFound)
+    {
+        error.native_source_evidence = Some(NativeSourceObservationEvidenceV1::DetectedUnsafe);
+    }
+    error
+}
+
+fn source_parent_guards_v1(
+    root: &RetainedRepositoryRootV1,
+    relative: &ValidatedRelativePath,
+) -> Result<Vec<RetainedTreeDirectory>, RepositoryDurabilityErrorV1> {
+    let parts = relative.as_str().split('/').collect::<Vec<_>>();
+    let mut path = String::new();
+    let mut guards = Vec::new();
+    for part in parts.iter().take(parts.len().saturating_sub(1)) {
+        if !path.is_empty() { path.push('/'); }
+        path.push_str(part);
+        let validated = ValidatedRelativePath::parse(&path, false)?;
+        let directory = match platform::open_retained_directory(root, &validated) {
+            Ok(directory) => directory,
+            Err(error) => {
+                // Preserve the original failure only if all earlier witnessed
+                // root and parent identities still validate.
+                validate_production_source_root_v1(root).map_err(after_native_source_witness_v1)?;
+                validate_source_parent_guards_v1(root, &guards).map_err(after_native_source_witness_v1)?;
+                return Err(error);
+            }
+        };
+        let snapshot = directory_snapshot(&directory)?;
+        guards.push(RetainedTreeDirectory { relative: path.clone(), directory, snapshot });
+    }
+    Ok(guards)
+}
+
+fn validate_source_parent_guards_v1(
+    root: &RetainedRepositoryRootV1,
+    guards: &[RetainedTreeDirectory],
+) -> Result<(), RepositoryDurabilityErrorV1> {
+    for guard in guards {
+        let retained = directory_snapshot(&guard.directory)?;
+        let relative = ValidatedRelativePath::parse(&guard.relative, false)?;
+        let current = platform::open_retained_directory(root, &relative)?;
+        if retained != guard.snapshot || directory_snapshot(&current)? != guard.snapshot {
+            return Err(unsafe_fs("native source parent identity or version changed"));
+        }
+    }
+    Ok(())
+}
+
+fn capture_production_source_file_v1<'root>(
+    root: &'root RepositoryNativeSourceRootV1,
+    relative: &str,
+    expected: RepositoryNativeManifestMemberV1,
+) -> Result<(Vec<u8>, RepositoryNativeSourceFileV1<'root>), RepositoryNativeSourceFailureV1> {
+    let path = ValidatedRelativePath::parse(relative, false)
+        .map_err(|error| classify_native_source_error_v1(error, false))?;
+    root.validate_production_source_root_v1()?;
+    let parents = source_parent_guards_v1(&root.root, &path)
+        .map_err(|error| classify_native_source_error_v1(error, false))?;
+    let mut file = platform::open_native_source_optional_v1(&root.root, &path)
+        .map_err(|error| classify_native_source_error_v1(error, true))?
+        .ok_or(RepositoryNativeSourceFailureV1::Missing)?;
+    let snapshot = regular_file_snapshot(&file)
+        .map_err(|error| classify_native_source_error_v1(error, false))?;
+    if snapshot.length != expected.length || expected.length > MAX_NATIVE_MEMBER_BYTES {
+        return Err(RepositoryNativeSourceFailureV1::Unsafe);
+    }
+    let limit = expected.length.checked_add(1).ok_or(RepositoryNativeSourceFailureV1::Unsafe)?;
+    let mut bytes = Vec::new();
+    (&mut file).take(limit).read_to_end(&mut bytes)
+        .map_err(|_| RepositoryNativeSourceFailureV1::Unavailable)?;
+    let fingerprint: [u8; 32] = Sha256::digest(&bytes).into();
+    if bytes.len() as u64 != expected.length || fingerprint != expected.sha256 {
+        return Err(RepositoryNativeSourceFailureV1::Unsafe);
+    }
+    let guard = RepositoryNativeSourceFileV1 {
+        root, relative: path, file: std::sync::Mutex::new(file), snapshot, expected, parents,
+    };
+    guard.validate_production_source_file_v1()?;
+    Ok((bytes, guard))
+}
+
+impl RepositoryNativeSourceFileV1<'_> {
+    /// Revalidates retained and named handles, including parents and root.
+    pub fn validate_production_source_file_v1(&self) -> Result<(), RepositoryNativeSourceFailureV1> {
+        self.root.validate_production_source_root_v1()?;
+        validate_source_parent_guards_v1(&self.root.root, &self.parents)
+            .map_err(|error| classify_native_source_error_v1(error, true))?;
+        let file = self.file.lock().map_err(|_| RepositoryNativeSourceFailureV1::Unavailable)?;
+        if regular_file_snapshot(&file)
+            .map_err(|error| classify_native_source_error_v1(error, true))? != self.snapshot
+        {
+            return Err(RepositoryNativeSourceFailureV1::Unsafe);
+        }
+        #[cfg(all(test, target_os = "linux"))]
+        native_source_tests::before_source_named_reopen_v1();
+        let current = platform::open_native_source_optional_v1(&self.root.root, &self.relative)
+            .map_err(|error| classify_native_source_error_v1(error, true))?
+            .ok_or(RepositoryNativeSourceFailureV1::Unsafe)?;
+        if regular_file_snapshot(&current)
+            .map_err(|error| classify_native_source_error_v1(error, true))? != self.snapshot
+        {
+            return Err(RepositoryNativeSourceFailureV1::Unsafe);
+        }
+        retained_native_file_fingerprint_v1(&file, &self.expected)
+            .map_err(|error| classify_native_source_error_v1(error, true))?;
+        retained_native_file_fingerprint_v1(&current, &self.expected)
+            .map_err(|error| classify_native_source_error_v1(error, true))?;
+        validate_source_parent_guards_v1(&self.root.root, &self.parents)
+            .map_err(|error| classify_native_source_error_v1(error, true))?;
+        self.root.validate_production_source_root_v1()
+    }
+
+    /// Returns permissions from the retained file between currentness checks.
+    pub fn production_source_file_permissions_v1(&self) -> Result<fs::Permissions, RepositoryNativeSourceFailureV1> {
+        self.validate_production_source_file_v1()?;
+        let permissions = self.file.lock().map_err(|_| RepositoryNativeSourceFailureV1::Unavailable)?
+            .metadata().map_err(|_| RepositoryNativeSourceFailureV1::Unavailable)?.permissions();
+        self.validate_production_source_file_v1()?;
+        Ok(permissions)
+    }
 }
 
 /// A process/native exclusive lock held until this guard is dropped.
@@ -625,7 +1211,7 @@ impl RetainedRepositoryRootV1 {
                 OFlags::RDONLY | OFlags::CLOEXEC | OFlags::DIRECTORY | OFlags::NOFOLLOW,
                 Mode::empty(),
             )
-            .map_err(|_| unsafe_fs("repository root no-follow open failed"))?;
+            .map_err(|error| source_directory_open_error_v1("repository root no-follow open failed", error))?;
             let root = File::from(root);
             let identity = directory_identity(&root)?;
             let ancestor_epochs = retain_unix_ancestor_epochs(&root_path)?;
@@ -854,6 +1440,61 @@ impl RetainedRepositoryRootV1 {
                 file,
                 snapshot,
                 content_fingerprint,
+                native_member: None,
+            });
+        }
+        let checkpoint = RepositoryExactFilesCheckpointV1 {
+            inner: RetainedRepositoryTreeGuardV1 {
+                root: self,
+                directories: Vec::new(),
+                files,
+            },
+        };
+        checkpoint.validate()?;
+        Ok(checkpoint)
+    }
+
+    /// Pins exact admitted members and ordinary files under one aggregate bound.
+    pub fn retain_exact_files_with_native_manifest_v1(
+        &self,
+        paths: &[&str],
+        admission: &RepositoryNativeManifestAdmissionV1,
+    ) -> Result<RepositoryExactFilesCheckpointV1<'_>, RepositoryDurabilityErrorV1> {
+        if paths.is_empty() || paths.len() > 256 || paths.windows(2).any(|p| p[0] >= p[1]) {
+            return Err(bound(
+                "source files must be nonempty, sorted, unique and bounded",
+            ));
+        }
+        self.require_stable_path_epoch()?;
+        let mut files = Vec::new();
+        let mut total = 0_u64;
+        for path in paths {
+            let relative = ValidatedRelativePath::parse(path, false)?;
+            let file = self
+                .open_regular_optional(&relative, false)?
+                .ok_or_else(|| not_found("required immutable source file is absent"))?;
+            let snapshot = regular_file_snapshot(&file)?;
+            total = total
+                .checked_add(snapshot.length)
+                .ok_or_else(|| bound("source byte population overflow"))?;
+            if total > MAX_RETAINED_TREE_BYTES {
+                return Err(bound(
+                    "source file population exceeds the retained byte bound",
+                ));
+            }
+            let native_member = admission.members.iter()
+                .find(|member| member.path == relative.as_str()).cloned();
+            let content_fingerprint = if let Some(member) = &native_member {
+                retained_native_file_fingerprint_v1(&file, member)?
+            } else {
+                retained_file_fingerprint(&file, snapshot.length)?
+            };
+            files.push(RetainedTreeFile {
+                relative: relative.as_str().to_owned(),
+                file,
+                snapshot,
+                content_fingerprint,
+                native_member,
             });
         }
         let checkpoint = RepositoryExactFilesCheckpointV1 {
@@ -936,6 +1577,7 @@ impl RetainedRepositoryRootV1 {
                             file,
                             snapshot,
                             content_fingerprint,
+                            native_member: None,
                         });
                     }
                     RepositoryDirectoryEntryKindV1::RegularFile => {}
@@ -1014,6 +1656,7 @@ impl RetainedRepositoryRootV1 {
                             file,
                             snapshot,
                             content_fingerprint,
+                            native_member: None,
                         });
                     }
                 }
@@ -1109,6 +1752,65 @@ impl RetainedRepositoryRootV1 {
             return Err(unsafe_fs("regular file changed during retained read"));
         }
         Ok(RepositoryReadV1::Found(bytes))
+    }
+
+    /// Reads only an exact admitted native member, bounded by its declared
+    /// length, while retaining the named-file and repository-root witnesses.
+    pub fn read_native_manifest_member_v1(
+        &self,
+        admission: &RepositoryNativeManifestAdmissionV1,
+        relative: &str,
+    ) -> Result<RepositoryReadV1, RepositoryDurabilityErrorV1> {
+        let member = admission.native_member_v1(relative)?;
+        let path = ValidatedRelativePath::parse(relative, false)?;
+        self.require_stable_path_epoch()?;
+        let Some(mut file) = self.open_regular_optional(&path, false)? else {
+            self.require_stable_path_epoch()?;
+            return Ok(RepositoryReadV1::Absent);
+        };
+        let before = regular_file_snapshot(&file)?;
+        if before.length != member.length {
+            return Err(mismatch("native manifest member length differs"));
+        }
+        let limit = member.length.checked_add(1)
+            .ok_or_else(|| bound("native manifest member read bound overflowed"))?;
+        let mut bytes = Vec::new();
+        (&mut file).take(limit).read_to_end(&mut bytes)
+            .map_err(|_| uncertain("native manifest member read failed"))?;
+        let after = regular_file_snapshot(&file)?;
+        let current = self.open_regular_optional(&path, false)?
+            .ok_or_else(|| unsafe_fs("native manifest member disappeared during read"))?;
+        if before != after || regular_file_snapshot(&current)? != before {
+            return Err(unsafe_fs("native manifest member changed during read"));
+        }
+        let fingerprint: [u8; 32] = Sha256::digest(&bytes).into();
+        if bytes.len() as u64 != member.length || fingerprint != member.sha256 {
+            return Err(mismatch("native manifest member bytes differ"));
+        }
+        self.require_stable_path_epoch()?;
+        Ok(RepositoryReadV1::Found(bytes))
+    }
+
+    /// Durably creates one exact admitted member without replacing a file.
+    /// The caller retains the owner lock and resolves uncertain writes normally.
+    pub fn write_native_manifest_member_new_durable_v1(
+        &self,
+        admission: &RepositoryNativeManifestAdmissionV1,
+        relative: &str,
+        bytes: &[u8],
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        let member = admission.native_member_v1(relative)?;
+        if bytes.len() as u64 != member.length {
+            return Err(mismatch("native manifest member length differs"));
+        }
+        let fingerprint: [u8; 32] = Sha256::digest(bytes).into();
+        if fingerprint != member.sha256 {
+            return Err(mismatch("native manifest member fingerprint differs"));
+        }
+        let path = ValidatedRelativePath::parse(relative, false)?;
+        self.require_stable_path_epoch()?;
+        platform::write_new(self, &path, bytes)?;
+        self.require_stable_path_epoch()
     }
 
     /// Lists a directory in stable name order, refusing links, special files,
@@ -1565,6 +2267,68 @@ fn retained_file_fingerprint(
     Ok(digest.finalize().into())
 }
 
+fn retained_native_file_fingerprint_v1(
+    file: &File,
+    member: &RepositoryNativeManifestMemberV1,
+) -> Result<[u8; 32], RepositoryDurabilityErrorV1> {
+    let expected_length = member.length;
+    if expected_length > MAX_NATIVE_MEMBER_BYTES {
+        return Err(bound(
+            "retained authority file exceeds the per-file byte bound",
+        ));
+    }
+    let before = regular_file_snapshot(file)?;
+    if before.length != expected_length {
+        return Err(unsafe_fs(
+            "retained authority file length changed before fingerprinting",
+        ));
+    }
+    let mut reader = file;
+    reader
+        .seek(SeekFrom::Start(0))
+        .map_err(|_| uncertain("retained authority file seek failed"))?;
+    let mut remaining = expected_length;
+    let mut digest = Sha256::new();
+    let mut buffer = [0_u8; 8192];
+    while remaining != 0 {
+        let requested = usize::try_from(remaining.min(buffer.len() as u64))
+            .expect("bounded read size fits usize");
+        let read = reader
+            .read(&mut buffer[..requested])
+            .map_err(|_| uncertain("retained authority file read failed"))?;
+        if read == 0 {
+            return Err(unsafe_fs(
+                "retained authority file ended before its admitted length",
+            ));
+        }
+        digest.update(&buffer[..read]);
+        remaining -= read as u64;
+    }
+    let mut extra = [0_u8; 1];
+    if reader
+        .read(&mut extra)
+        .map_err(|_| uncertain("retained authority file terminal read failed"))?
+        != 0
+    {
+        return Err(unsafe_fs(
+            "retained authority file exceeds its admitted length",
+        ));
+    }
+    reader
+        .seek(SeekFrom::Start(0))
+        .map_err(|_| uncertain("retained authority file reset failed"))?;
+    if regular_file_snapshot(file)? != before {
+        return Err(unsafe_fs(
+            "retained authority file changed while fingerprinting",
+        ));
+    }
+    let fingerprint: [u8; 32] = digest.finalize().into();
+    if fingerprint != member.sha256 {
+        return Err(mismatch("native manifest member fingerprint differs"));
+    }
+    Ok(fingerprint)
+}
+
 fn validate_root_path(path: &Path) -> Result<PathBuf, RepositoryDurabilityErrorV1> {
     if !path.is_absolute()
         || path
@@ -1577,7 +2341,7 @@ fn validate_root_path(path: &Path) -> Result<PathBuf, RepositoryDurabilityErrorV
     }
     for ancestor in path.ancestors() {
         let metadata = fs::symlink_metadata(ancestor)
-            .map_err(|_| unsafe_fs("repository root ancestor metadata admission failed"))?;
+            .map_err(|error| source_metadata_error_v1("repository root ancestor metadata admission failed", &error))?;
         if !metadata.is_dir() || metadata.file_type().is_symlink() || metadata_is_reparse(&metadata)
         {
             return Err(unsafe_fs(
@@ -1731,13 +2495,13 @@ mod linux_path_guard {
     fn open_child(parent: &File, name: &OsStr) -> Result<File, RepositoryDurabilityErrorV1> {
         openat(parent, name, dir_flags(), Mode::empty())
             .map(File::from)
-            .map_err(|_| unsafe_fs("repository path component no-follow open failed"))
+            .map_err(|error| source_directory_open_error_v1("repository path component no-follow open failed", error))
     }
 
     fn probe_chain(path: &Path) -> Result<Vec<Node>, RepositoryDurabilityErrorV1> {
         let slash = open("/", dir_flags(), Mode::empty())
             .map(File::from)
-            .map_err(|_| unsafe_fs("repository filesystem root open failed"))?;
+            .map_err(|error| source_directory_open_error_v1("repository filesystem root open failed", error))?;
         let mut nodes = vec![node(None, slash)?];
         for part in path.components().skip(1) {
             let name = part.as_os_str();
@@ -1900,7 +2664,7 @@ mod linux_path_guard {
 
         fn chain(&self, root: &File, identity: PhysicalDirectoryIdentity) -> Result<(), RepositoryDurabilityErrorV1> {
             let mut current = File::from(open("/", dir_flags(), Mode::empty())
-                .map_err(|_| unsafe_fs("current repository filesystem root unavailable"))?);
+                .map_err(|error| source_directory_open_error_v1("current repository filesystem root unavailable", error))?);
             for (index, retained) in self.nodes.iter().enumerate() {
                 if index != 0 { current = open_child(&current, retained.name.as_ref().unwrap())?; }
                 if directory_identity(&retained.directory)? != retained.identity
@@ -1939,7 +2703,7 @@ mod linux_path_guard {
         let fd = inotify::init(inotify::CreateFlags::NONBLOCK | inotify::CreateFlags::CLOEXEC)
             .map_err(|_| uncertain("repository relevant-entry journal unavailable"))?;
         let mut journal = Journal { fd, nodes: Vec::new(), watches: BTreeMap::new(), invalid: None, profile: qualified };
-        let slash = File::from(open("/", dir_flags(), Mode::empty()).map_err(|_| unsafe_fs("repository capture root unavailable"))?);
+        let slash = File::from(open("/", dir_flags(), Mode::empty()).map_err(|error| source_directory_open_error_v1("repository capture root unavailable", error))?);
         journal.nodes.push(node(None, slash)?);
         let mut parent_path = PathBuf::from("/");
         for observed in probed.iter().skip(1) {
@@ -2046,7 +2810,7 @@ fn retain_unix_ancestor_epochs(
                 Mode::empty(),
             )
             .map(File::from)
-            .map_err(|_| unsafe_fs("repository root ancestor no-follow open failed"))?;
+            .map_err(|error| source_directory_open_error_v1("repository root ancestor no-follow open failed", error))?;
             unix_directory_epoch(&directory)
         })
         .collect()
@@ -2208,10 +2972,16 @@ fn windows_handle_info(
             ) != 0
     };
     if !ok {
-        return Err(unsafe_fs("retained Windows information query failed"));
+        return Err(with_native_source_evidence_v1(
+            unsafe_fs("retained Windows information query failed"),
+            NativeSourceObservationEvidenceV1::Unobservable,
+        ));
     }
     if id.file_id.identifier == [0; 16] || id.file_id.identifier == [u8::MAX; 16] {
-        return Err(unsafe_fs("retained Windows file identity is unavailable"));
+        return Err(with_native_source_evidence_v1(
+            unsafe_fs("retained Windows file identity is unavailable"),
+            NativeSourceObservationEvidenceV1::Unobservable,
+        ));
     }
     if standard.delete_pending != 0 {
         return Err(unsafe_fs("retained Windows object is pending deletion"));
@@ -2329,10 +3099,10 @@ fn open_windows_directory_guard(path: &Path) -> Result<File, RepositoryDurabilit
         .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE)
         .custom_flags(FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT)
         .open(path)
-        .map_err(|_| unsafe_fs("Windows directory could not be pinned"))?;
+        .map_err(|error| source_metadata_error_v1("Windows directory could not be pinned", &error))?;
     let metadata = file
         .metadata()
-        .map_err(|_| unsafe_fs("Windows pinned directory metadata failed"))?;
+        .map_err(|error| source_metadata_error_v1("Windows pinned directory metadata failed", &error))?;
     if !metadata.is_dir() || metadata_is_reparse(&metadata) {
         return Err(unsafe_fs("Windows pinned directory is unsafe"));
     }
@@ -2390,7 +3160,53 @@ fn refusal(
     kind: RepositoryDurabilityErrorKindV1,
     detail: &'static str,
 ) -> RepositoryDurabilityErrorV1 {
-    RepositoryDurabilityErrorV1 { kind, detail }
+    RepositoryDurabilityErrorV1 { kind, detail, native_source_evidence: None }
+}
+
+// Record only evidence obtained at the same native operation. In particular,
+// permission or sharing failure is not evidence that the object is safe.
+fn with_native_source_evidence_v1(
+    mut error: RepositoryDurabilityErrorV1,
+    evidence: NativeSourceObservationEvidenceV1,
+) -> RepositoryDurabilityErrorV1 {
+    error.native_source_evidence = Some(evidence);
+    error
+}
+
+fn source_metadata_error_v1(detail: &'static str, error: &std::io::Error) -> RepositoryDurabilityErrorV1 {
+    let evidence = if error.kind() == std::io::ErrorKind::NotFound {
+        NativeSourceObservationEvidenceV1::Missing
+    } else {
+        NativeSourceObservationEvidenceV1::Unobservable
+    };
+    with_native_source_evidence_v1(unsafe_fs(detail), evidence)
+}
+
+#[cfg(unix)]
+fn source_directory_open_error_v1(detail: &'static str, error: rustix::io::Errno) -> RepositoryDurabilityErrorV1 {
+    let evidence = if error == rustix::io::Errno::NOENT {
+        NativeSourceObservationEvidenceV1::Missing
+    } else if error == rustix::io::Errno::LOOP || error == rustix::io::Errno::NOTDIR {
+        NativeSourceObservationEvidenceV1::DetectedUnsafe
+    } else {
+        NativeSourceObservationEvidenceV1::Unobservable
+    };
+    with_native_source_evidence_v1(unsafe_fs(detail), evidence)
+}
+
+#[cfg(unix)]
+fn source_file_open_error_v1(
+    detail: &'static str,
+    error: rustix::io::Errno,
+) -> RepositoryDurabilityErrorV1 {
+    let evidence = if error == rustix::io::Errno::NOENT {
+        NativeSourceObservationEvidenceV1::Missing
+    } else if error == rustix::io::Errno::LOOP || error == rustix::io::Errno::NOTDIR {
+        NativeSourceObservationEvidenceV1::DetectedUnsafe
+    } else {
+        NativeSourceObservationEvidenceV1::Unobservable
+    };
+    with_native_source_evidence_v1(unsafe_fs(detail), evidence)
 }
 
 fn invalid_path(detail: &'static str) -> RepositoryDurabilityErrorV1 {
@@ -2446,7 +3262,10 @@ mod platform {
         root: &RetainedRepositoryRootV1,
     ) -> Result<OwnedFd, RepositoryDurabilityErrorV1> {
         rustix::io::dup(&root.root)
-            .map_err(|_| unsafe_fs("retained repository root duplication failed"))
+            .map_err(|_| with_native_source_evidence_v1(
+            unsafe_fs("retained repository root duplication failed"),
+            NativeSourceObservationEvidenceV1::Unobservable,
+        ))
     }
 
     fn open_directory(
@@ -2464,7 +3283,7 @@ mod platform {
                 DIRECTORY_FLAGS,
                 Mode::empty(),
             )
-            .map_err(|_| unsafe_fs("repository directory component failed no-follow admission"))?;
+            .map_err(|error| source_directory_open_error_v1("repository directory component failed no-follow admission", error))?;
         }
         Ok(current)
     }
@@ -2510,6 +3329,29 @@ mod platform {
             Err(_) => Err(unsafe_fs(
                 "repository regular file failed no-follow admission",
             )),
+        }
+    }
+
+    // Source-only opener. The descriptor is nonblocking before its type is
+    // inspected, so a FIFO cannot wait for a writer during acquisition.
+    pub(super) fn open_native_source_optional_v1(
+        root: &RetainedRepositoryRootV1,
+        relative: &ValidatedRelativePath,
+    ) -> Result<Option<File>, RepositoryDurabilityErrorV1> {
+        let (parent, name) = open_parent(root, relative)?;
+        match openat(
+            &parent,
+            name,
+            OFlags::RDONLY | OFlags::CLOEXEC | OFlags::NOFOLLOW | OFlags::NONBLOCK,
+            Mode::empty(),
+        ) {
+            Ok(file) => {
+                let file = File::from(file);
+                regular_file_snapshot(&file)?;
+                Ok(Some(file))
+            }
+            Err(rustix::io::Errno::NOENT) => Ok(None),
+            Err(error) => Err(source_file_open_error_v1("native source no-follow open failed", error)),
         }
     }
 
@@ -2880,6 +3722,27 @@ mod platform {
         Ok(Some(file))
     }
 
+    // Keep the established Windows no-follow and sharing policy. The source
+    // observer records the original open failure before it is discarded.
+    pub(super) fn open_native_source_optional_v1(
+        root: &RetainedRepositoryRootV1,
+        relative: &ValidatedRelativePath,
+    ) -> Result<Option<File>, RepositoryDurabilityErrorV1> {
+        let _guards = root.pin_windows_parent(relative)?;
+        let file = match OpenOptions::new()
+            .read(true)
+            .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE)
+            .custom_flags(FILE_FLAG_OPEN_REPARSE_POINT)
+            .open(root.absolute(relative))
+        {
+            Ok(file) => file,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+            Err(error) => return Err(source_metadata_error_v1("Windows native source open failed", &error)),
+        };
+        regular_file_snapshot(&file)?;
+        Ok(Some(file))
+    }
+
     pub(super) fn list_directory(
         root: &RetainedRepositoryRootV1,
         relative: &ValidatedRelativePath,
@@ -3162,6 +4025,18 @@ mod platform {
 mod platform {
     compile_error!("repository durability is supported only on Unix and Windows");
 }
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "repository_native_source_tests.rs"]
+mod native_source_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "repository_native_inventory_tests.rs"]
+mod native_inventory_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "repository_native_listing_race_test.rs"]
+mod native_listing_race_test;
 
 #[cfg(test)]
 mod tests {

@@ -188,16 +188,16 @@ pub fn input(
 }
 
 pub fn govern(sdk: &HandbookSdkV1, initial: &LocalInitialSetupLocatorV1) {
-    let project = ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone());
-    let ProjectAdmissionScopeBasisV3::DeferredV2(deferred) = sdk
-        .resolve_project_admission_scope_v3(&project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
+    let project = GovernanceProjectSelectionV1::InitiallyDeferred(initial.deferral.project.clone());
+    let CurrentProjectGovernanceV1::Deferred { basis: deferred, .. } = sdk
+        .resolve_current_project_governance(&project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
         .unwrap()
     else {
         panic!("current D required")
     };
-    let request = DeferredEstablishmentRequestV3::human_approved(
+    let request = GovernanceEstablishmentRequestV1::human_approved(
         initial.deferral.project.clone(),
-        ExpectedDeferredBasisV2 {
+        DeferredRevisionV1 {
             outcome_fingerprint: deferred.outcome_fingerprint,
             relation_fingerprint: deferred.relation_fingerprint,
         },
@@ -207,11 +207,11 @@ pub fn govern(sdk: &HandbookSdkV1, initial: &LocalInitialSetupLocatorV1) {
     )
     .unwrap();
     assert!(matches!(
-        sdk.establish_deferred_project_admission_governance(
-            sdk.prepare_deferred_project_admission_governance(&request)
+        sdk.establish_project_governance(
+            sdk.prepare_project_governance_establishment(&request)
                 .unwrap()
         ),
-        DeferredEstablishmentExecutionV3::Committed { .. }
+        ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
     ));
 }
 

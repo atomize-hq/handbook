@@ -227,6 +227,10 @@ or preservation of unrelated Contracts evidence inside resettable state.
 
 ## Typed Rust consumer contract
 
+> Historical planning: the public SDK lifecycle routes below were superseded by
+> the unified versioned governance API. Native v1/v2/v3 owner records, original
+> locators and their identity preimages retain their existing meanings.
+
 Select additive v3 typed request/locator/execution/current/expected-basis contracts
 and purpose-named `HandbookSdkV1` methods. Concrete Rust identifiers may be refined
 just in time; these method responsibilities and discriminants are fixed:

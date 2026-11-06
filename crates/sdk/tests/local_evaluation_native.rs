@@ -1109,7 +1109,7 @@ fn native_full_pass_violation_and_original_recovery_never_relaunch() {
         use handbook_contracts::project_admission_governance::{
             ExpectedDeferredBasisV2, ProjectAdmissionScopeBasisV3,
         };
-        use handbook_sdk::admission_governance::{
+        use handbook_contracts::project_admission_governance::{
             DeferredEstablishmentExecutionV3, DeferredEstablishmentRequestV3,
         };
         let ProjectAdmissionScopeBasisV3::DeferredV2(d) = first
@@ -1121,15 +1121,15 @@ fn native_full_pass_violation_and_original_recovery_never_relaunch() {
         else {
             panic!("initial fixture requires D")
         };
-        let establishment = fixture.sdk.prepare_deferred_project_admission_governance(&DeferredEstablishmentRequestV3::human_approved(
-        d.project, ExpectedDeferredBasisV2 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
+        let establishment = fixture.sdk.prepare_project_governance_establishment(&handbook_sdk::admission_governance::GovernanceEstablishmentRequestV1::human_approved(
+        serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(), handbook_sdk::admission_governance::DeferredRevisionV1 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
         3600, "native-full-establish-g", "Illustrative supplied human approval of this exact same-project G freshness scope.",
     ).unwrap()).unwrap();
         assert!(matches!(
             fixture
                 .sdk
-                .establish_deferred_project_admission_governance(establishment),
-            DeferredEstablishmentExecutionV3::Committed { .. }
+                .establish_project_governance(establishment),
+            handbook_sdk::admission_governance::ProjectGovernanceExecutionV1::Committed { outcome: handbook_sdk::admission_governance::ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
         ));
         finish_refused_checkpoints(before_g, "governance_currentness");
         assert!(fixture
@@ -2240,7 +2240,7 @@ fn native_retained_packet3_acceptance_continuation() {
         use handbook_contracts::project_admission_governance::{
             ExpectedDeferredBasisV2, ProjectAdmissionScopeBasisV3,
         };
-        use handbook_sdk::admission_governance::{
+        use handbook_contracts::project_admission_governance::{
             DeferredEstablishmentExecutionV3, DeferredEstablishmentRequestV3,
         };
         let ProjectAdmissionScopeBasisV3::DeferredV2(d) = first
@@ -2252,15 +2252,15 @@ fn native_retained_packet3_acceptance_continuation() {
         else {
             panic!("the original retained fixture requires actual D")
         };
-        let establishment = fixture.sdk.prepare_deferred_project_admission_governance(&DeferredEstablishmentRequestV3::human_approved(
-            d.project, ExpectedDeferredBasisV2 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
+        let establishment = fixture.sdk.prepare_project_governance_establishment(&handbook_sdk::admission_governance::GovernanceEstablishmentRequestV1::human_approved(
+            serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(), handbook_sdk::admission_governance::DeferredRevisionV1 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
             3600, "native-full-establish-g", "Illustrative supplied human approval of this exact same-project G freshness scope.",
         ).unwrap()).unwrap();
         assert!(matches!(
             fixture
                 .sdk
-                .establish_deferred_project_admission_governance(establishment),
-            DeferredEstablishmentExecutionV3::Committed { .. }
+                .establish_project_governance(establishment),
+            handbook_sdk::admission_governance::ProjectGovernanceExecutionV1::Committed { outcome: handbook_sdk::admission_governance::ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
         ));
         finish_refused_checkpoints(before_g, "governance_currentness");
         assert!(fixture
@@ -2387,7 +2387,7 @@ fn native_governance_and_revocation_use_untouched_operating_generation() {
         use handbook_contracts::project_admission_governance::{
             ExpectedDeferredBasisV2, ProjectAdmissionScopeBasisV3,
         };
-        use handbook_sdk::admission_governance::{
+        use handbook_contracts::project_admission_governance::{
             DeferredEstablishmentExecutionV3, DeferredEstablishmentRequestV3,
         };
 
@@ -2456,10 +2456,10 @@ fn native_governance_and_revocation_use_untouched_operating_generation() {
         };
         let establishment = fixture
             .sdk
-            .prepare_deferred_project_admission_governance(
-                &DeferredEstablishmentRequestV3::human_approved(
-                    d.project,
-                    ExpectedDeferredBasisV2 {
+            .prepare_project_governance_establishment(
+                &handbook_sdk::admission_governance::GovernanceEstablishmentRequestV1::human_approved(
+                    serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(),
+                    handbook_sdk::admission_governance::DeferredRevisionV1 {
                         outcome_fingerprint: d.outcome_fingerprint,
                         relation_fingerprint: d.relation_fingerprint,
                     },
@@ -2473,8 +2473,8 @@ fn native_governance_and_revocation_use_untouched_operating_generation() {
         assert!(matches!(
             fixture
                 .sdk
-                .establish_deferred_project_admission_governance(establishment),
-            DeferredEstablishmentExecutionV3::Committed { .. }
+                .establish_project_governance(establishment),
+            handbook_sdk::admission_governance::ProjectGovernanceExecutionV1::Committed { outcome: handbook_sdk::admission_governance::ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
         ));
         finish_refused_checkpoints(before_g, "governance_currentness");
         let verify_d_histories = || {
@@ -2566,3 +2566,15 @@ mod owner_acceptance;
 
 #[path = "local_evaluation_native/correction_acceptance.rs"]
 mod correction_acceptance;
+
+#[cfg(all(
+    feature = "governance-test-support",
+    target_arch = "x86_64",
+    target_vendor = "unknown",
+    target_os = "linux",
+    target_env = "gnu",
+    target_pointer_width = "64",
+    target_abi = ""
+))]
+#[path = "local_evaluation_native/native_manifest_preflight.rs"]
+mod native_manifest_preflight;

@@ -1,7 +1,10 @@
+mod admission_governance_support;
+use admission_governance_support::*;
 use handbook_contracts::project_admission_governance::{
-    EstablishmentFaultBoundaryV3, ProjectAdmissionEstablishmentV3, GOVERNANCE_CURRENT_PATH_V2,
+    EstablishmentFaultBoundaryV3, GOVERNANCE_CURRENT_PATH_V2,
 };
 use handbook_sdk::admission_governance::*;
+use handbook_contracts::project_admission_governance::*;
 use handbook_sdk::{HandbookSdkV1, SetupMode, SetupRequest};
 use std::collections::BTreeMap;
 use std::fs;
@@ -10,18 +13,22 @@ use tempfile::tempdir;
 
 fn defer(root: &Path) -> (DeferralCommittedOutcomeV2, DeferredGovernanceBasisV2) {
     let sdk = HandbookSdkV1::open(root);
-    let prepared = sdk
-        .prepare_project_admission_deferral(&DeferralRequestInputV2::human_approved(
+    let prepared = prepare_initial_deferred(&sdk, &DeferralRequestInputV2::human_approved(
             "original-deferral",
             "The human approved creating this project and deferring freshness governance.",
         ))
         .unwrap();
     let project = prepared.locator().project.clone();
-    let original = committed_deferral(sdk.initialize_project_admission_deferral(prepared));
-    let deferred =
-        handbook_contracts::project_admission_governance::ProjectAdmissionDeferralV2::new()
-            .resolve_current(root, &project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
-            .unwrap();
+    let original = committed_deferral(initialize_deferred(&sdk, prepared));
+    let deferred = match current_scope(
+        &sdk,
+        &ProjectAdmissionBindingV3::ScopedChoiceV2(project),
+        ADMISSION_GOVERNANCE_SCOPE_V1,
+        None,
+    ).unwrap() {
+        ProjectAdmissionScopeBasisV3::DeferredV2(basis) => basis,
+        other => panic!("expected deferred basis: {other:?}"),
+    };
     (original, deferred)
 }
 
@@ -58,8 +65,7 @@ fn committed_deferral(result: DeferralExecutionV2) -> DeferralCommittedOutcomeV2
 }
 
 fn current(sdk: &HandbookSdkV1, project: &ProjectBindingV2) -> EstablishedFromDeferredBasisV3 {
-    match sdk
-        .resolve_project_admission_scope_v3(
+    match current_scope(&sdk,
             &ProjectAdmissionBindingV3::ScopedChoiceV2(project.clone()),
             ADMISSION_GOVERNANCE_SCOPE_V1,
             None,
@@ -137,14 +143,13 @@ fn sdk_prepares_and_establishes_exact_governance_on_the_deferred_project() {
         let sdk = HandbookSdkV1::open(root.path());
         let input = request(&deferred, ceiling, "later-establishment");
         let original_files = retained_files(root.path());
-        let prepared = sdk
-            .prepare_deferred_project_admission_governance(&input)
+        let prepared = prepare_deferred_establishment(&sdk, &input)
             .unwrap();
         let encoded = prepared.locator().canonical_json_bytes().unwrap();
         let locator = DeferredEstablishmentLocatorV3::from_json_bytes(&encoded).unwrap();
         assert_eq!(*prepared.locator(), locator);
         assert_eq!(retained_files(root.path()), original_files);
-        let original_g = committed(sdk.establish_deferred_project_admission_governance(prepared));
+        let original_g = committed(establish_deferred(&sdk, prepared));
         assert!(
             original_g.validation_confirmed
                 && original_g.advisory_permission_accepted
@@ -188,19 +193,11 @@ fn sdk_prepares_and_establishes_exact_governance_on_the_deferred_project() {
         assert_eq!(basis.outcome_fingerprint, original_g.outcome_fingerprint);
         assert_eq!(basis.replacement_basis, input.replacement_basis);
         assert_eq!(basis.establishment_rule.version, "3.0.0");
-        let native = ProjectAdmissionEstablishmentV3::new();
         assert_eq!(
-            native
-                .resolve_current(
-                    root.path(),
-                    &deferred.project,
-                    ADMISSION_GOVERNANCE_SCOPE_V1,
-                    None
-                )
-                .unwrap(),
-            DeferredScopeBasisV3::EstablishedFromDeferredV3(basis)
+            basis.canonical_json_bytes().unwrap(),
+            fs::read(root.path().join(GOVERNANCE_CURRENT_PATH_V2)).unwrap()
         );
-        let replay = reopened.resolve_deferred_admission_governance_request(&locator);
+        let replay = resolve_deferred_establishment(&reopened, &locator);
         assert!(matches!(
             &replay,
             DeferredEstablishmentExecutionV3::Committed {
@@ -208,10 +205,13 @@ fn sdk_prepares_and_establishes_exact_governance_on_the_deferred_project() {
                 ..
             }
         ));
-        assert_eq!(replay, native.resolve_request(root.path(), &locator));
+        assert_eq!(
+            serde_json_canonicalizer::to_vec(&original_g).unwrap(),
+            fs::read(root.path().join(transition_request_storage_path_v3(&locator)).join("outcome.json")).unwrap()
+        );
         assert_eq!(committed(replay), original_g);
         assert_eq!(
-            committed_deferral(reopened.resolve_admission_deferral_request(&original_d.locator)),
+            committed_deferral(resolve_initial_deferred(&reopened, &original_d.locator)),
             original_d
         );
         assert_eq!(retained_files(root.path()), before_reset);
@@ -236,12 +236,11 @@ fn complete_pre_effect_locator_resolves_after_first_consumer_serialization_failu
     let sdk = HandbookSdkV1::open(root.path());
     let input = request(&deferred, 7_200, "lost-sdk-reply");
     let before = retained_files(root.path());
-    let prepared = sdk
-        .prepare_deferred_project_admission_governance(&input)
+    let prepared = prepare_deferred_establishment(&sdk, &input)
         .unwrap();
     let encoded = prepared.locator().canonical_json_bytes().unwrap();
     assert_eq!(retained_files(root.path()), before);
-    let execution = sdk.establish_deferred_project_admission_governance(prepared);
+    let execution = establish_deferred(&sdk, prepared);
     assert!(matches!(
         &execution,
         DeferredEstablishmentExecutionV3::Committed {
@@ -256,10 +255,13 @@ fn complete_pre_effect_locator_resolves_after_first_consumer_serialization_failu
     assert_eq!(locator.request, input);
     let reopened = HandbookSdkV1::open(root.path());
     let before_replay = retained_files(root.path());
-    let replay = reopened.resolve_deferred_admission_governance_request(&locator);
+    let replay = resolve_deferred_establishment(&reopened, &locator);
+    assert!(matches!(replay, DeferredEstablishmentExecutionV3::Committed {
+        delivery: GovernanceDeliveryV1::Replay, ..
+    }));
     assert_eq!(
-        replay,
-        ProjectAdmissionEstablishmentV3::new().resolve_request(root.path(), &locator)
+        serde_json_canonicalizer::to_vec(&original).unwrap(),
+        fs::read(root.path().join(transition_request_storage_path_v3(&locator)).join("outcome.json")).unwrap()
     );
     assert_eq!(committed(replay), original);
     assert_eq!(retained_files(root.path()), before_replay);
@@ -271,11 +273,10 @@ fn historical_sdk_replays_never_restore_or_repair_damaged_current() {
     let (original_d, deferred) = defer(root.path());
     let sdk = HandbookSdkV1::open(root.path());
     let input = request(&deferred, 86_400, "historical-replay");
-    let prepared = sdk
-        .prepare_deferred_project_admission_governance(&input)
+    let prepared = prepare_deferred_establishment(&sdk, &input)
         .unwrap();
     let locator = prepared.locator().clone();
-    let original_g = committed(sdk.establish_deferred_project_admission_governance(prepared));
+    let original_g = committed(establish_deferred(&sdk, prepared));
     let encoded = DeferredEstablishmentExecutionV3::Committed {
         outcome: original_g.clone(),
         delivery: GovernanceDeliveryV1::Original,
@@ -290,15 +291,14 @@ fn historical_sdk_replays_never_restore_or_repair_damaged_current() {
         original_g
     );
     assert_eq!(
-        committed(sdk.resolve_deferred_admission_governance_request(&locator)),
+        committed(resolve_deferred_establishment(&sdk, &locator)),
         original_g
     );
     assert_eq!(
-        committed_deferral(sdk.resolve_admission_deferral_request(&original_d.locator)),
+        committed_deferral(resolve_initial_deferred(&sdk, &original_d.locator)),
         original_d
     );
-    assert!(sdk
-        .resolve_project_admission_scope_v3(
+    assert!(current_scope(&sdk,
             &ProjectAdmissionBindingV3::ScopedChoiceV2(deferred.project),
             ADMISSION_GOVERNANCE_SCOPE_V1,
             None
@@ -318,7 +318,7 @@ fn tagged_scope_and_exact_expected_basis_preserve_owner_limits() {
         relation_fingerprint: deferred.relation_fingerprint.clone(),
     });
     assert_eq!(
-        sdk.resolve_project_admission_scope_v3(
+        current_scope(&sdk,
             &project,
             ADMISSION_GOVERNANCE_SCOPE_V1,
             Some(&expected_d)
@@ -330,8 +330,7 @@ fn tagged_scope_and_exact_expected_basis_preserve_owner_limits() {
         configuration_fingerprint: deferred.outcome_fingerprint.clone(),
         outcome_fingerprint: deferred.outcome_fingerprint.clone(),
     });
-    assert!(sdk
-        .resolve_project_admission_scope_v3(
+    assert!(current_scope(&sdk,
             &project,
             ADMISSION_GOVERNANCE_SCOPE_V1,
             Some(&wrong_tag)
@@ -341,21 +340,18 @@ fn tagged_scope_and_exact_expected_basis_preserve_owner_limits() {
     encoded["project_contract"] = serde_json::json!("established_v1");
     let wrong_project_tag =
         ProjectAdmissionBindingV3::from_json_bytes(&serde_json::to_vec(&encoded).unwrap()).unwrap();
-    assert!(sdk
-        .resolve_project_admission_scope_v3(&wrong_project_tag, ADMISSION_GOVERNANCE_SCOPE_V1, None)
+    assert!(current_scope(&sdk, &wrong_project_tag, ADMISSION_GOVERNANCE_SCOPE_V1, None)
         .is_err());
-    assert!(sdk
-        .resolve_project_admission_scope_v3(
+    assert!(current_scope(&sdk,
             &project,
             "contracts.evidence-freshness-policy/other",
             None
         )
         .is_err());
     let input = request(&deferred, 7_200, "expected-exact");
-    let prepared = sdk
-        .prepare_deferred_project_admission_governance(&input)
+    let prepared = prepare_deferred_establishment(&sdk, &input)
         .unwrap();
-    committed(sdk.establish_deferred_project_admission_governance(prepared));
+    committed(establish_deferred(&sdk, prepared));
     let g = current(&sdk, &deferred.project);
     let expected_g = ExpectedProjectAdmissionBasisV3::EstablishedFromDeferredV3(
         ExpectedEstablishedFromDeferredBasisV3 {
@@ -365,15 +361,14 @@ fn tagged_scope_and_exact_expected_basis_preserve_owner_limits() {
         },
     );
     let before = retained_files(root.path());
-    assert!(sdk
-        .resolve_project_admission_scope_v3(
+    assert!(current_scope(&sdk,
             &project,
             ADMISSION_GOVERNANCE_SCOPE_V1,
             Some(&expected_d)
         )
         .is_err());
     assert_eq!(
-        sdk.resolve_project_admission_scope_v3(
+        current_scope(&sdk,
             &project,
             ADMISSION_GOVERNANCE_SCOPE_V1,
             Some(&expected_g)
@@ -385,18 +380,9 @@ fn tagged_scope_and_exact_expected_basis_preserve_owner_limits() {
     if let ExpectedProjectAdmissionBasisV3::EstablishedFromDeferredV3(ref mut basis) = wrong_g {
         basis.relation_fingerprint = deferred.relation_fingerprint.clone();
     }
-    assert!(sdk
-        .resolve_project_admission_scope_v3(&project, ADMISSION_GOVERNANCE_SCOPE_V1, Some(&wrong_g))
+    assert!(current_scope(&sdk, &project, ADMISSION_GOVERNANCE_SCOPE_V1, Some(&wrong_g))
         .is_err());
-    assert!(sdk
-        .prepare_deferred_project_admission_governance(&input)
-        .is_err());
-    assert!(sdk
-        .resolve_project_admission_scope(
-            &ProjectAdmissionBindingV2::ScopedChoiceV2(deferred.project),
-            ADMISSION_GOVERNANCE_SCOPE_V1,
-            None
-        )
+    assert!(prepare_deferred_establishment(&sdk, &input)
         .is_err());
     assert_eq!(retained_files(root.path()), before);
 }
@@ -408,8 +394,7 @@ fn missing_claim_and_future_inventory_cannot_supply_sdk_eligibility() {
         let (_, deferred) = defer(root.path());
         let sdk = HandbookSdkV1::open(root.path());
         let input = request(&deferred, 7_200, "damaged-predecessor");
-        let prepared = sdk
-            .prepare_deferred_project_admission_governance(&input)
+        let prepared = prepare_deferred_establishment(&sdk, &input)
             .unwrap();
         if missing_claim {
             fs::remove_file(
@@ -421,21 +406,19 @@ fn missing_claim_and_future_inventory_cannot_supply_sdk_eligibility() {
             fs::create_dir(root.path().join(".handbook/admission-governance/v4")).unwrap();
         }
         let before = retained_files(root.path());
-        let sdk_error = sdk
-            .prepare_deferred_project_admission_governance(&input)
+        let sdk_error = prepare_deferred_establishment(&sdk, &input)
             .unwrap_err();
-        assert_eq!(
-            sdk_error,
-            ProjectAdmissionEstablishmentV3::new()
-                .prepare(root.path(), &input)
-                .unwrap_err()
-        );
+        let expected = if missing_claim {
+            GovernanceRefusalV1::new("original_claim_unavailable", "Original claim, receipt and root guard must remain retained")
+        } else {
+            GovernanceRefusalV1::new("filesystem_BoundExceeded", "retained directory listing exceeded its entry limit")
+        };
+        assert_eq!(sdk_error, expected);
         assert!(matches!(
-            sdk.establish_deferred_project_admission_governance(prepared),
+            establish_deferred(&sdk, prepared),
             DeferredEstablishmentExecutionV3::Refused { .. }
         ));
-        assert!(sdk
-            .resolve_project_admission_scope_v3(
+        assert!(current_scope(&sdk,
                 &ProjectAdmissionBindingV3::ScopedChoiceV2(deferred.project),
                 ADMISSION_GOVERNANCE_SCOPE_V1,
                 None
@@ -446,6 +429,7 @@ fn missing_claim_and_future_inventory_cannot_supply_sdk_eligibility() {
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn sdk_preserves_noncommit_uncertainty_and_exact_native_recovery() {
     for boundary in [
         EstablishmentFaultBoundaryV3::Stage(2),
@@ -456,29 +440,26 @@ fn sdk_preserves_noncommit_uncertainty_and_exact_native_recovery() {
         let (_, deferred) = defer(root.path());
         let sdk = HandbookSdkV1::open(root.path());
         let input = request(&deferred, 7_200, "interrupted-sdk-operation");
-        let prepared = sdk
-            .prepare_deferred_project_admission_governance(&input)
-            .unwrap();
+        let prepared = prepare_deferred_establishment(&sdk, &input).unwrap();
         let locator = prepared.locator().clone();
-        let interrupted = ProjectAdmissionEstablishmentV3::new()
-            .with_fault_for_testing(boundary)
-            .establish(root.path(), prepared);
+        let interrupted = establish_deferred_with_fault(&sdk, prepared, GovernanceTestFaultV1::Establishment(boundary));
         assert!(matches!(
-            interrupted,
-            DeferredEstablishmentExecutionV3::Uncertain { .. }
+            &interrupted,
+            DeferredEstablishmentExecutionV3::Uncertain { locator: original, .. } if original == &locator
         ));
-        let replay = sdk.resolve_deferred_admission_governance_request(&locator);
-        assert_eq!(
-            replay,
-            ProjectAdmissionEstablishmentV3::new().resolve_request(root.path(), &locator)
-        );
+        let replay = resolve_deferred_establishment(&sdk, &locator);
+        match &replay {
+            DeferredEstablishmentExecutionV3::Committed { outcome, delivery: GovernanceDeliveryV1::Replay } => assert_eq!(outcome.locator, locator),
+            DeferredEstablishmentExecutionV3::NotCommitted { outcome, delivery: GovernanceDeliveryV1::Replay } => assert_eq!(outcome.locator, locator),
+            other => panic!("expected exact original replay: {other:?}"),
+        }
         if boundary == EstablishmentFaultBoundaryV3::Stage(2) {
             assert!(matches!(
                 replay,
                 DeferredEstablishmentExecutionV3::NotCommitted { .. }
             ));
             assert_eq!(
-                sdk.resolve_project_admission_scope_v3(
+                current_scope(&sdk,
                     &ProjectAdmissionBindingV3::ScopedChoiceV2(deferred.project.clone()),
                     ADMISSION_GOVERNANCE_SCOPE_V1,
                     None
@@ -487,17 +468,16 @@ fn sdk_preserves_noncommit_uncertainty_and_exact_native_recovery() {
                 ProjectAdmissionScopeBasisV3::DeferredV2(deferred.clone())
             );
             let next = request(&deferred, 86_400, "new-approved-attempt");
-            let prepared = sdk
-                .prepare_deferred_project_admission_governance(&next)
+            let prepared = prepare_deferred_establishment(&sdk, &next)
                 .unwrap();
-            committed(sdk.establish_deferred_project_admission_governance(prepared));
+            committed(establish_deferred(&sdk, prepared));
             assert_eq!(
                 current(&sdk, &deferred.project).configuration.bindings[0]
                     .max_observation_age_seconds,
                 86_400
             );
             assert_eq!(
-                sdk.resolve_deferred_admission_governance_request(&locator),
+                resolve_deferred_establishment(&sdk, &locator),
                 replay
             );
         } else {
@@ -546,8 +526,7 @@ fn additive_sdk_methods_leave_all_generic_catalogs_unchanged() {
 fn v3_tagged_resolution_preserves_the_existing_v1_project_contract() {
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
-    let prepared = sdk
-        .prepare_project_admission_governance(&GovernanceRequestInputV1::standalone_freshness(
+    let prepared = prepare_initial_established(&sdk, &GovernanceRequestInputV1::standalone_freshness(
             7_200,
             "existing-v1",
             "The human approved this exact fresh-project governance.",
@@ -555,18 +534,17 @@ fn v3_tagged_resolution_preserves_the_existing_v1_project_contract() {
         .unwrap();
     let locator = prepared.locator().clone();
     assert!(matches!(
-        sdk.initialize_project_admission_governance(prepared),
+        initialize_established(&sdk, prepared),
         GovernanceExecutionV1::Committed { .. }
     ));
-    let active = sdk
-        .resolve_project_admission_governance(&locator.project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
+    let active = current_initial_established(&sdk, &locator.project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
         .unwrap();
     let expected = ExpectedProjectAdmissionBasisV3::EstablishedV1(ExpectedGovernanceBasisV1 {
         configuration_fingerprint: active.configuration_fingerprint.clone(),
         outcome_fingerprint: active.outcome_fingerprint.clone(),
     });
     assert_eq!(
-        sdk.resolve_project_admission_scope_v3(
+        current_scope(&sdk,
             &ProjectAdmissionBindingV3::EstablishedV1(locator.project),
             ADMISSION_GOVERNANCE_SCOPE_V1,
             Some(&expected)
@@ -588,6 +566,7 @@ fn wait_file(path: &Path) {
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn deferred_establishment_sdk_process_worker() {
     let Ok(mode) = std::env::var("HCM_D2G_SDK_MODE") else {
         return;
@@ -603,7 +582,9 @@ fn deferred_establishment_sdk_process_worker() {
         &fs::read(control.join("deferral.json")).unwrap(),
     )
     .unwrap();
-    let prepared = if matches!(mode.as_str(), "winner" | "same" | "different") {
+    // The SDK fault hook pauses the winning semantic operation at the owner boundary.
+    let native_winner = if mode == "winner" { Some(prepare_deferred_establishment(&sdk, &locator.request).unwrap()) } else { None };
+    let prepared = if matches!(mode.as_str(), "same" | "different") {
         let input = if mode == "different" {
             DeferredEstablishmentRequestV3::human_approved(
                 locator.request.project.clone(),
@@ -617,7 +598,7 @@ fn deferred_establishment_sdk_process_worker() {
             locator.request.clone()
         };
         Some(
-            sdk.prepare_deferred_project_admission_governance(&input)
+            prepare_deferred_establishment(&sdk, &input)
                 .unwrap(),
         )
     } else {
@@ -633,17 +614,19 @@ fn deferred_establishment_sdk_process_worker() {
                 "displacement" => EstablishmentFaultBoundaryV3::CurrentDisplaced,
                 other => panic!("unsupported boundary {other}"),
             };
-            let execution = ProjectAdmissionEstablishmentV3::new()
-                .with_pause_for_testing(
+            let execution = establish_deferred_with_fault(
+                &sdk,
+                native_winner.unwrap(),
+                GovernanceTestFaultV1::PauseEstablishment(
                     boundary,
                     control.join("winner.paused"),
                     control.join("winner.release"),
-                )
-                .establish(&root, prepared.unwrap());
+                ),
+            );
             serde_json::json!({"execution":execution,"selected":retained_files(&root)})
         }
         "same" | "different" => {
-            serde_json::json!({"execution":sdk.establish_deferred_project_admission_governance(prepared.unwrap())})
+            serde_json::json!({"execution":establish_deferred(&sdk, prepared.unwrap())})
         }
         "refresh" => {
             let outcome = sdk
@@ -662,8 +645,7 @@ fn deferred_establishment_sdk_process_worker() {
             serde_json::json!({"ok":true,"identity":identity.repository_identity_fingerprint()})
         }
         "current" => {
-            let basis = sdk
-                .resolve_project_admission_scope_v3(
+            let basis = current_scope(&sdk,
                     &ProjectAdmissionBindingV3::ScopedChoiceV2(locator.request.project.clone()),
                     ADMISSION_GOVERNANCE_SCOPE_V1,
                     None,
@@ -672,10 +654,10 @@ fn deferred_establishment_sdk_process_worker() {
             serde_json::json!({"ok":true,"basis":basis})
         }
         "recover" => {
-            serde_json::json!({"execution":sdk.resolve_deferred_admission_governance_request(&locator)})
+            serde_json::json!({"execution":resolve_deferred_establishment(&sdk, &locator)})
         }
         "original_d" => {
-            serde_json::json!({"execution":sdk.resolve_admission_deferral_request(&original_d)})
+            serde_json::json!({"execution":resolve_initial_deferred(&sdk, &original_d)})
         }
         other => panic!("unsupported SDK worker mode {other}"),
     };
@@ -734,6 +716,7 @@ fn worker(root: &Path, control: &Path, mode: &str, boundary: &str) -> std::proce
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn paused_native_transition_serializes_sdk_reset_readers_recovery_and_identity() {
     for boundary in ["decision", "displacement"] {
         let root = tempdir().unwrap();
@@ -741,8 +724,7 @@ fn paused_native_transition_serializes_sdk_reset_readers_recovery_and_identity()
         let (original_d, deferred) = defer(root.path());
         let sdk = HandbookSdkV1::open(root.path());
         let input = request(&deferred, 7_200, "paused-exact-winner");
-        let locator = sdk
-            .prepare_deferred_project_admission_governance(&input)
+        let locator = prepare_deferred_establishment(&sdk, &input)
             .unwrap()
             .locator()
             .clone();

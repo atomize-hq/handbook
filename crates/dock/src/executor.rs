@@ -57,12 +57,24 @@ pub type DockExecutionReceiptV1 = DockStoreReceiptV1;
 pub struct DockResolvedFirstPartyBundleV1 {
     manifest: DockManifestV1,
     bundle_root: PathBuf,
+    production_package_root: Option<PathBuf>,
 }
 
 impl DockResolvedFirstPartyBundleV1 {
     pub(crate) fn capture_verified_files_v1(
         &self,
     ) -> Result<Vec<(String, Vec<u8>)>, DockExecutorErrorV1> {
+        if let Some(package_root) = &self.production_package_root {
+            let mut files = Vec::new();
+            with_production_source_bundle_v1(package_root, &self.manifest,
+                |relative, bytes, _| { files.push((relative.to_owned(), bytes)); Ok(()) },
+                || Ok(()),
+            ).map_err(|failure| match failure {
+                ProductionSourceBundleFailureV1::Manifest(_) => admission("production manifest is unavailable or changed"),
+                ProductionSourceBundleFailureV1::Bundle(error) => error,
+            })?;
+            return Ok(files);
+        }
         verify_bundle(&self.manifest, &self.bundle_root)?;
         let mut files = Vec::new();
         for definition in self.manifest.implementation_bundle().files() {
@@ -72,8 +84,16 @@ impl DockResolvedFirstPartyBundleV1 {
                     .as_str()
                     .replace('/', std::path::MAIN_SEPARATOR_STR),
             );
-            let bytes =
-                fs::read(path).map_err(|_| admission("verified package capture unavailable"))?;
+            let limit = definition
+                .length()
+                .checked_add(1)
+                .ok_or_else(|| admission("verified package capture length overflowed"))?;
+            let mut bytes = Vec::new();
+            File::open(path)
+                .map_err(|_| admission("verified package capture unavailable"))?
+                .take(limit)
+                .read_to_end(&mut bytes)
+                .map_err(|_| admission("verified package capture unavailable"))?;
             if bytes.len() as u64 != definition.length()
                 || FingerprintV1::parse(&format!("sha256:{:x}", Sha256::digest(&bytes)))
                     .map_err(|_| invariant("package capture fingerprint failed"))?
@@ -115,26 +135,21 @@ impl DockResolvedFirstPartyBundleV1 {
             .join("handbook.dock.json-schema")
             .join("1.0.0")
             .join(host_target_tuple_v1());
-        let package_metadata =
-            fs::symlink_metadata(&package_root).map_err(|_| production_unavailable())?;
-        if !package_metadata.is_dir() || package_metadata.file_type().is_symlink() {
-            return Err(production_launch_refused());
-        }
-        let manifest_path = package_root.join("manifest.json");
-        let manifest_metadata =
-            fs::symlink_metadata(&manifest_path).map_err(|_| production_unavailable())?;
-        if !manifest_metadata.is_file() || manifest_metadata.file_type().is_symlink() {
-            return Err(production_launch_refused());
-        }
-        let installed_manifest = fs::read(&manifest_path).map_err(|_| production_unavailable())?;
-        if installed_manifest.as_slice() != crate::registry::production_manifest_bytes_v1() {
-            return Err(production_launch_refused());
-        }
         let bundle_root = package_root.join("bundle");
-        verify_bundle(&manifest, &bundle_root).map_err(|_| production_launch_refused())?;
+        with_production_source_bundle_v1(&package_root, &manifest, |_, _, _| Ok(()), || Ok(()))
+            .map_err(|failure| match failure {
+                ProductionSourceBundleFailureV1::Manifest(
+                    handbook_engine::repository_durability::RepositoryNativeSourceFailureV1::Missing
+                    | handbook_engine::repository_durability::RepositoryNativeSourceFailureV1::Unavailable
+                ) => production_unavailable(),
+                ProductionSourceBundleFailureV1::Manifest(
+                    handbook_engine::repository_durability::RepositoryNativeSourceFailureV1::Unsafe
+                ) | ProductionSourceBundleFailureV1::Bundle(_) => production_launch_refused(),
+            })?;
         Ok(Self {
             manifest,
             bundle_root,
+            production_package_root: Some(package_root),
         })
     }
 
@@ -151,8 +166,65 @@ impl DockResolvedFirstPartyBundleV1 {
         Ok(Self {
             manifest,
             bundle_root: bundle_root.as_ref().to_owned(),
+            production_package_root: None,
         })
     }
+}
+
+// Preserve the initial package/manifest distinction; all bundle observations
+// retain verify_bundle's existing refusal behavior.
+enum ProductionSourceBundleFailureV1 {
+    Manifest(handbook_engine::repository_durability::RepositoryNativeSourceFailureV1),
+    Bundle(DockExecutorErrorV1),
+}
+
+fn with_production_source_bundle_v1<R>(
+    package_root: &Path,
+    manifest: &DockManifestV1,
+    mut visit: impl FnMut(&str, Vec<u8>, fs::Permissions) -> Result<(), DockExecutorErrorV1>,
+    finish: impl FnOnce() -> Result<R, DockExecutorErrorV1>,
+) -> Result<R, ProductionSourceBundleFailureV1> {
+    use handbook_engine::repository_durability::{
+        admit_native_production_manifest_v1, open_production_source_root_v1,
+    };
+    let refused = || ProductionSourceBundleFailureV1::Bundle(admission("production source bundle was refused"));
+    let manifest_bytes = crate::registry::production_manifest_bytes_v1();
+    let admission = admit_native_production_manifest_v1(manifest_bytes).map_err(|_| refused())?;
+    if manifest.canonical_json_bytes().map_err(|_| refused())?.as_slice() != manifest_bytes {
+        return Err(refused());
+    }
+    let package = open_production_source_root_v1(package_root)
+        .map_err(ProductionSourceBundleFailureV1::Manifest)?;
+    let (_, manifest_guard) = package.read_production_source_manifest_v1(manifest_bytes)
+        .map_err(ProductionSourceBundleFailureV1::Manifest)?;
+    let bundle = open_production_source_root_v1(package_root.join("bundle"))
+        .map_err(|_| refused())?;
+    let inventory = bundle.retain_production_source_inventory_v1(&admission)
+        .map_err(|_| refused())?;
+    let mut files = Vec::new();
+    for definition in manifest.implementation_bundle().files() {
+        inventory.validate_production_source_inventory_v1().map_err(|_| refused())?;
+        let relative = definition.path().as_str();
+        let (bytes, file) = bundle.read_production_source_member_v1(&admission, relative)
+            .map_err(|_| refused())?;
+        let permissions = file.production_source_file_permissions_v1().map_err(|_| refused())?;
+        visit(relative, bytes, permissions).map_err(ProductionSourceBundleFailureV1::Bundle)?;
+        files.push(file);
+    }
+    manifest_guard.validate_production_source_file_v1()
+        .map_err(ProductionSourceBundleFailureV1::Manifest)?;
+    inventory.validate_production_source_inventory_v1().map_err(|_| refused())?;
+    for file in &files {
+        file.validate_production_source_file_v1().map_err(|_| refused())?;
+    }
+    let result = finish().map_err(ProductionSourceBundleFailureV1::Bundle)?;
+    for file in &files {
+        file.validate_production_source_file_v1().map_err(|_| refused())?;
+    }
+    inventory.validate_production_source_inventory_v1().map_err(|_| refused())?;
+    manifest_guard.validate_production_source_file_v1()
+        .map_err(ProductionSourceBundleFailureV1::Manifest)?;
+    Ok(result)
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -350,7 +422,15 @@ impl DockProcessExecutorV1 {
             });
         }
 
-        verify_bundle(&manifest, &input.resolved_bundle.bundle_root)?;
+        if let Some(package_root) = &input.resolved_bundle.production_package_root {
+            with_production_source_bundle_v1(package_root, &manifest, |_, _, _| Ok(()), || Ok(()))
+                .map_err(|failure| match failure {
+                    ProductionSourceBundleFailureV1::Manifest(_) => admission("production manifest is unavailable or changed"),
+                    ProductionSourceBundleFailureV1::Bundle(error) => error,
+                })?;
+        } else {
+            verify_bundle(&manifest, &input.resolved_bundle.bundle_root)?;
+        }
         let private_root = tempfile::Builder::new()
             .prefix("handbook-dock-")
             .tempdir()
@@ -360,12 +440,29 @@ impl DockProcessExecutorV1 {
         fs::create_dir(&staged_bundle)
             .and_then(|_| fs::create_dir(&private_cwd))
             .map_err(|_| admission("private execution directory is unavailable"))?;
-        stage_bundle(
-            &manifest,
-            &input.resolved_bundle.bundle_root,
-            &staged_bundle,
-        )?;
-        let entrypoint = verify_bundle(&manifest, &staged_bundle)?;
+        let entrypoint = if let Some(package_root) = &input.resolved_bundle.production_package_root {
+            with_production_source_bundle_v1(package_root, &manifest,
+                |relative, bytes, permissions| {
+                    let destination = staged_bundle.join(relative.replace('/', std::path::MAIN_SEPARATOR_STR));
+                    let parent = destination.parent().ok_or_else(|| invariant("staged bundle member has no parent"))?;
+                    fs::create_dir_all(parent).map_err(|_| admission("private bundle staging is unavailable"))?;
+                    let mut output = fs::OpenOptions::new().write(true).create_new(true).open(destination)
+                        .map_err(|_| admission("implementation bundle changed during private staging"))?;
+                    std::io::Write::write_all(&mut output, &bytes)
+                        .map_err(|_| admission("implementation bundle changed during private staging"))?;
+                    output.set_permissions(permissions)
+                        .map_err(|_| admission("implementation bundle changed during private staging"))?;
+                    Ok(())
+                },
+                || verify_bundle(&manifest, &staged_bundle),
+            ).map_err(|failure| match failure {
+                ProductionSourceBundleFailureV1::Manifest(_) => admission("production manifest is unavailable or changed"),
+                ProductionSourceBundleFailureV1::Bundle(error) => error,
+            })?
+        } else {
+            stage_bundle(&manifest, &input.resolved_bundle.bundle_root, &staged_bundle)?;
+            verify_bundle(&manifest, &staged_bundle)?
+        };
         #[cfg(feature = "test-support")]
         if fault == Some(DockExecutorFaultV1::SubstituteSourceAfterPrivateStage) {
             substitute_source_entrypoint_for_testing(
@@ -687,7 +784,28 @@ fn stage_bundle(
             .ok_or_else(|| invariant("staged bundle member has no parent"))?;
         fs::create_dir_all(parent)
             .map_err(|_| admission("private bundle staging is unavailable"))?;
-        fs::copy(source, destination)
+        let input = File::open(source)
+            .map_err(|_| admission("implementation bundle changed during private staging"))?;
+        let permissions = input
+            .metadata()
+            .map_err(|_| admission("implementation bundle changed during private staging"))?
+            .permissions();
+        let mut output = fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(destination)
+            .map_err(|_| admission("implementation bundle changed during private staging"))?;
+        let limit = definition
+            .length()
+            .checked_add(1)
+            .ok_or_else(|| admission("implementation bundle length overflowed"))?;
+        let copied = std::io::copy(&mut input.take(limit), &mut output)
+            .map_err(|_| admission("implementation bundle changed during private staging"))?;
+        if copied != definition.length() {
+            return Err(admission("implementation bundle changed during private staging"));
+        }
+        output
+            .set_permissions(permissions)
             .map_err(|_| admission("implementation bundle changed during private staging"))?;
     }
     Ok(())
@@ -843,8 +961,12 @@ fn hash_regular_file(
             "implementation bundle member length was substituted",
         ));
     }
-    let mut input =
-        File::open(path).map_err(|_| admission("implementation bundle member cannot be opened"))?;
+    let limit = expected_length
+        .checked_add(1)
+        .ok_or_else(|| admission("implementation bundle length overflowed"))?;
+    let mut input = File::open(path)
+        .map_err(|_| admission("implementation bundle member cannot be opened"))?
+        .take(limit);
     let mut digest = Sha256::new();
     let mut length = 0_u64;
     let mut buffer = [0_u8; 64 * 1024];
@@ -905,3 +1027,7 @@ const fn invariant(detail: &'static str) -> DockExecutorErrorV1 {
         detail,
     }
 }
+
+#[cfg(test)]
+#[path = "executor_production_admission_tests.rs"]
+mod production_admission_tests;

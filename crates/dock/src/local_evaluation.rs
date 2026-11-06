@@ -297,6 +297,7 @@ impl DockLocalEvaluationOwnerV1 {
         admission:&handbook_engine::local_authority::local_evaluation::LocalEvaluationTermsAdmissionV1<'_>,
         reach: &DockLocalEvaluationReachV1,
     ) -> Result<Self, DockLocalEvaluationErrorV1> {
+        production_native_admission_v1()?;
         reach.mutation()?;
         reach.read(".handbook/state/dock")?;
         reach.read(".handbook/state")?;
@@ -419,6 +420,9 @@ impl DockLocalEvaluationOwnerV1 {
                 "supplied Dock retention horizon is already past",
             ));
         }
+        // Refuse a changed target or descriptor before touching artifact bytes
+        // or creating package state.
+        production_native_admission_v1()?;
         let manifest = crate::registry::production_manifest_v1();
         let resolved = DockResolvedFirstPartyBundleV1::resolve_production();
         let (availability, reason, files) = match resolved {
@@ -584,6 +588,7 @@ impl DockLocalEvaluationOwnerV1 {
         reach: &DockLocalEvaluationReachV1,
         consume: impl for<'a> FnOnce(&handbook_contracts::ResolvedLocalEvaluationCapabilityV3<'a>) -> R,
     ) -> Result<R, DockLocalEvaluationErrorV1> {
+        let native_admission = native_dependencies_admission_v1(dependencies)?;
         let mut paths = vec![LOCK.to_owned(), record.relative_path()];
         if let Some(path) = record.controls["manifest_path"].as_str() {
             paths.push(path.into());
@@ -601,11 +606,11 @@ impl DockLocalEvaluationOwnerV1 {
         }
         let checkpoint = self
             .root
-            .retain_exact_files_checkpoint_v1(&paths.iter().map(String::as_str).collect::<Vec<_>>())
+            .retain_exact_files_with_native_manifest_v1(
+                &paths.iter().map(String::as_str).collect::<Vec<_>>(),
+                &native_admission,
+            )
             .map_err(|_| unavailable())?;
-        if dependencies.validator.manifest != crate::registry::production_manifest_v1().binding() {
-            return Err(substituted());
-        }
         handbook_contracts::resolve_native_local_evaluation_capability_v3(
             &self.root,
             &checkpoint,
@@ -778,13 +783,15 @@ impl DockLocalEvaluationOwnerV1 {
             return Err(error(DockLocalEvaluationErrorKindV1::AuthorityRefused, "decision-seeking cannot attempt an unavailable original capability observation"));
         }
         let capability_paths = self.capability_paths(&capability, reach)?;
+        let native_admission = production_native_admission_v1()?;
         let source_checkpoint = self
             .root
-            .retain_exact_files_checkpoint_v1(
+            .retain_exact_files_with_native_manifest_v1(
                 &capability_paths
                     .iter()
                     .map(String::as_str)
                     .collect::<Vec<_>>(),
+                &native_admission,
             )
             .map_err(|_| unavailable())?;
         self.validate_launch_capability(&capability, &source_checkpoint, reach)?;
@@ -980,6 +987,7 @@ impl DockLocalEvaluationOwnerV1 {
         reach: &DockLocalEvaluationReachV1,
         consume: impl for<'a> FnOnce(&handbook_contracts::ResolvedLocalEvaluationOriginV3<'a>) -> R,
     ) -> Result<R, DockLocalEvaluationErrorV1> {
+        let native_admission = native_dependencies_admission_v1(dependencies)?;
         let DockLocalEvaluationAttemptOutcomeV1::Terminal {
             intent, terminal, ..
         } = self.resolve_exact_attempt(attempt, reach, false)?
@@ -1058,7 +1066,10 @@ impl DockLocalEvaluationOwnerV1 {
         }
         let checkpoint = self
             .root
-            .retain_exact_files_checkpoint_v1(&paths.iter().map(String::as_str).collect::<Vec<_>>())
+            .retain_exact_files_with_native_manifest_v1(
+                &paths.iter().map(String::as_str).collect::<Vec<_>>(),
+                &native_admission,
+            )
             .map_err(|_| unavailable())?;
         handbook_contracts::resolve_native_local_evaluation_origin_v3(
             &self.root,
@@ -1076,6 +1087,24 @@ impl DockLocalEvaluationOwnerV1 {
     }
 
     fn write_exact(&self, path: &str, bytes: &[u8]) -> Result<(), DockLocalEvaluationErrorV1> {
+        if let Some(admission) = native_member_admission_v1(path)? {
+            return match self.root
+                .read_native_manifest_member_v1(&admission, path)
+                .map_err(map_native_member_read_error_v1)?
+            {
+                RepositoryReadV1::Found(existing) if existing == bytes => Ok(()),
+                RepositoryReadV1::Found(_) => Err(substituted()),
+                RepositoryReadV1::Absent => self.root
+                    .write_native_manifest_member_new_durable_v1(&admission, path, bytes)
+                    .map_err(|failure| {
+                        if failure.kind() == handbook_engine::RepositoryDurabilityErrorKindV1::CurrentValueMismatch {
+                            substituted()
+                        } else {
+                            error(DockLocalEvaluationErrorKindV1::Uncertain, "native immutable write was uncertain")
+                        }
+                    }),
+            };
+        }
         match self
             .root
             .read_regular_bounded(path, native_read_limit(path)?)
@@ -1120,6 +1149,7 @@ impl DockLocalEvaluationOwnerV1 {
         reach: &DockLocalEvaluationReachV1,
     ) -> Result<(), DockLocalEvaluationErrorV1> {
         record.validate().map_err(|_| substituted())?;
+        let native_admission = production_native_admission_v1()?;
         let manifest = crate::registry::production_manifest_v1();
         if record.manifest != manifest.binding()
             || record.target != host_target_tuple_v1()
@@ -1212,15 +1242,11 @@ impl DockLocalEvaluationOwnerV1 {
         for (proof, expected) in proofs.iter().zip(manifest.implementation_bundle().files()) {
             let path = format!("{package_root}/{}", expected.path().as_str());
             reach.read(&path)?;
-            let bytes = self.read_optional(&path, reach)?.ok_or_else(unavailable)?;
-            if proof != &json!({"path":path,"length":expected.length(),"sha256":expected.sha256()})
-                || bytes.len() as u64 != expected.length()
-                || fingerprint_bytes(&bytes) != *expected.sha256()
-            {
+            if proof != &json!({"path":path,"length":expected.length(),"sha256":expected.sha256()}) {
                 return Err(substituted());
             }
             checkpoint
-                .require_exact_file(&self.root, &path, &bytes)
+                .require_native_manifest_member_v1(&self.root, &native_admission, &path)
                 .map_err(|_| substituted())?;
         }
         checkpoint.validate().map_err(|_| substituted())
@@ -1231,10 +1257,14 @@ impl DockLocalEvaluationOwnerV1 {
         reach: &DockLocalEvaluationReachV1,
     ) -> Result<Option<Vec<u8>>, DockLocalEvaluationErrorV1> {
         reach.read(path)?;
-        match self
-            .root
-            .read_regular_bounded(path, native_read_limit(path)?)
-            .map_err(|_| unavailable())?
+        let read = if let Some(admission) = native_member_admission_v1(path)? {
+            self.root.read_native_manifest_member_v1(&admission, path)
+                .map_err(map_native_member_read_error_v1)?
+        } else {
+            self.root.read_regular_bounded(path, native_read_limit(path)?)
+                .map_err(|_| unavailable())?
+        };
+        match read
         {
             RepositoryReadV1::Found(bytes) => Ok(Some(bytes)),
             RepositoryReadV1::Absent => Ok(None),
@@ -1583,6 +1613,56 @@ fn covers(declared: &str, actual: &str) -> bool {
                     .is_some_and(|tail| tail.starts_with('/'))
         })
 }
+fn production_native_admission_v1(
+) -> Result<handbook_engine::repository_durability::RepositoryNativeManifestAdmissionV1, DockLocalEvaluationErrorV1> {
+    handbook_engine::repository_durability::admit_native_production_manifest_v1(
+        crate::registry::production_manifest_bytes_v1(),
+    ).map_err(|_| substituted())
+}
+
+fn native_dependencies_admission_v1(
+    dependencies: &LocalDefinitionDependenciesV2,
+) -> Result<handbook_engine::repository_durability::RepositoryNativeManifestAdmissionV1, DockLocalEvaluationErrorV1> {
+    let admission = production_native_admission_v1()?;
+    let manifest = crate::registry::production_manifest_v1();
+    if dependencies.validator.manifest != manifest.binding()
+        || dependencies.validator.canonical_manifest
+            != serde_json::to_value(&manifest).map_err(|_| substituted())?
+    {
+        return Err(substituted());
+    }
+    Ok(admission)
+}
+
+fn native_member_admission_v1(
+    path: &str,
+) -> Result<Option<handbook_engine::repository_durability::RepositoryNativeManifestAdmissionV1>, DockLocalEvaluationErrorV1> {
+    let manifest = crate::registry::production_manifest_v1();
+    let package_root = format!(
+        "{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/",
+        fingerprint_hex(manifest.implementation_bundle().bundle_fingerprint())
+    );
+    let is_member = path.strip_prefix(&package_root).is_some_and(|relative| {
+        manifest.implementation_bundle().files().iter()
+            .any(|member| member.path().as_str() == relative)
+    });
+    if is_member {
+        Ok(Some(production_native_admission_v1()?))
+    } else {
+        Ok(None)
+    }
+}
+
+fn map_native_member_read_error_v1(
+    failure: handbook_engine::RepositoryDurabilityErrorV1,
+) -> DockLocalEvaluationErrorV1 {
+    if failure.kind() == handbook_engine::RepositoryDurabilityErrorKindV1::CurrentValueMismatch {
+        substituted()
+    } else {
+        unavailable()
+    }
+}
+
 fn native_read_limit(path: &str) -> Result<usize, DockLocalEvaluationErrorV1> {
     let manifest = crate::registry::production_manifest_v1();
     let package_root = format!(
@@ -1732,6 +1812,7 @@ mod tests {
         owner
             .write_exact(&manifest_path, &manifest.canonical_json_bytes().unwrap())
             .unwrap();
+        let native_admission = production_native_admission_v1().unwrap();
         let mut package_files = Vec::new();
         let mut largest = None;
         for (relative, bytes) in bundle.capture_verified_files_v1().unwrap() {
@@ -1740,10 +1821,17 @@ mod tests {
                 .root
                 .create_directories(path.rsplit_once('/').unwrap().0)
                 .unwrap();
-            assert_eq!(native_read_limit(&path).unwrap(), bytes.len());
-            assert!(bytes.len() <= MAX_NATIVE_ARTIFACT_BYTES);
+            let expected = manifest.implementation_bundle().files().iter()
+                .find(|member| member.path().as_str() == relative).unwrap();
+            assert_eq!(bytes.len() as u64, expected.length());
+            assert_eq!(&fingerprint_bytes(&bytes), expected.sha256());
             owner.write_exact(&path, &bytes).unwrap();
             owner.write_exact(&path, &bytes).unwrap();
+            assert_eq!(owner.root.read_native_manifest_member_v1(&native_admission, &path).unwrap(),
+                RepositoryReadV1::Found(bytes.clone()));
+            if bytes.len() > MAX_NATIVE_ARTIFACT_BYTES {
+                assert!(owner.root.read_regular_bounded(&path, MAX_NATIVE_ARTIFACT_BYTES).is_err());
+            }
             assert_eq!(
                 owner.read_optional(&path, &reach()).unwrap(),
                 Some(bytes.clone())
@@ -1758,6 +1846,12 @@ mod tests {
             }
         }
         let (artifact_path, artifact) = largest.unwrap();
+        if host_target_tuple_v1() == "x86_64-unknown-linux-gnu" {
+            assert_eq!(artifact.len(), 37_053_312);
+            assert_eq!(fingerprint_bytes(&artifact).as_str(),
+                "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+            assert!(artifact.len() > MAX_NATIVE_ARTIFACT_BYTES);
+        }
         if cfg!(target_os = "windows") {
             assert!(
                 artifact.len() > MAX_BYTES,
@@ -1794,7 +1888,10 @@ mod tests {
         let paths = owner.capability_paths(&record, &reach()).unwrap();
         let checkpoint = owner
             .root
-            .retain_exact_files_checkpoint_v1(&paths.iter().map(String::as_str).collect::<Vec<_>>())
+            .retain_exact_files_with_native_manifest_v1(
+                &paths.iter().map(String::as_str).collect::<Vec<_>>(),
+                &native_admission,
+            )
             .unwrap();
         owner
             .validate_launch_capability(&record, &checkpoint, &reach())

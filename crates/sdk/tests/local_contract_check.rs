@@ -1,3 +1,4 @@
+use handbook_contracts::project_admission_governance::{DeferredEstablishmentExecutionV3, DeferredEstablishmentRequestV3, ExpectedDeferredBasisV2, ProjectAdmissionScopeBasisV3};
 mod local_contract_support;
 
 use handbook_contracts::*;
@@ -848,13 +849,13 @@ fn stale_deferred_use_refuses_then_fresh_governed_use_qualifies_exact_dependenci
     else {
         panic!("must start in D")
     };
-    let prepared = sdk.prepare_deferred_project_admission_governance(&DeferredEstablishmentRequestV3::human_approved(
-        d.project, ExpectedDeferredBasisV2 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
+    let prepared = sdk.prepare_project_governance_establishment(&GovernanceEstablishmentRequestV1::human_approved(
+        serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(), DeferredRevisionV1 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
         300, "packet2-establish-exact-g", "The supplied human approved this exact freshness ceiling and same-project establishment.",
     ).unwrap()).unwrap();
     assert!(matches!(
-        sdk.establish_deferred_project_admission_governance(prepared),
-        DeferredEstablishmentExecutionV3::Committed { .. }
+        sdk.establish_project_governance(prepared),
+        ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
     ));
     let source_action = LocalCheckActionRequestV1 {
         action: LocalCheckActionV1::EvidenceSource,
@@ -970,10 +971,9 @@ fn stale_deferred_use_refuses_then_fresh_governed_use_qualifies_exact_dependenci
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn positive_v3_noncommit_keeps_fresh_successor_definition_use_deferred() {
-    use handbook_contracts::project_admission_governance::{
-        EstablishmentFaultBoundaryV3, ProjectAdmissionEstablishmentV3,
-    };
+    use handbook_contracts::project_admission_governance::EstablishmentFaultBoundaryV3;
     use handbook_sdk::admission_governance::*;
     let directory = tempfile::tempdir().unwrap();
     let sdk = HandbookSdkV1::open(directory.path());
@@ -998,31 +998,25 @@ fn positive_v3_noncommit_keeps_fresh_successor_definition_use_deferred() {
     else {
         panic!("D expected")
     };
-    let prepared = sdk
-        .prepare_deferred_project_admission_governance(
-            &DeferredEstablishmentRequestV3::human_approved(
-                d.project,
-                ExpectedDeferredBasisV2 {
-                    outcome_fingerprint: d.outcome_fingerprint,
-                    relation_fingerprint: d.relation_fingerprint,
-                },
-                300,
-                "packet2-g-positive-noncommit",
-                "The supplied human approved the bounded establishment attempt.",
-            )
-            .unwrap(),
-        )
-        .unwrap();
+    // The SDK fault hook interrupts the prepared operation at the owner boundary.
+    let request = DeferredEstablishmentRequestV3::human_approved(
+        d.project,
+        ExpectedDeferredBasisV2 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
+        300, "packet2-g-positive-noncommit", "The supplied human approved the bounded establishment attempt.",
+    ).unwrap();
+    let semantic_request: GovernanceEstablishmentRequestV1 = serde_json::from_value(serde_json::to_value(&request).unwrap()).unwrap();
+    let prepared = sdk.prepare_project_governance_establishment(&semantic_request).unwrap();
     let governance_locator = prepared.locator().clone();
     assert!(matches!(
-        ProjectAdmissionEstablishmentV3::new()
-            .with_fault_for_testing(EstablishmentFaultBoundaryV3::Stage(2))
-            .establish(directory.path(), prepared),
-        DeferredEstablishmentExecutionV3::Uncertain { .. }
+        sdk.establish_project_governance_with_fault_for_testing(
+            prepared,
+            GovernanceTestFaultV1::Establishment(EstablishmentFaultBoundaryV3::Stage(2)),
+        ),
+        ProjectGovernanceExecutionV1::Uncertain { locator, .. } if locator == governance_locator
     ));
     assert!(matches!(
-        sdk.resolve_deferred_admission_governance_request(&governance_locator),
-        DeferredEstablishmentExecutionV3::NotCommitted { .. }
+        sdk.resolve_project_governance_request(&governance_locator),
+        ProjectGovernanceExecutionV1::NotCommitted { outcome: ProjectGovernanceNotCommittedV1::EstablishedFromDeferred(_), .. }
     ));
     let fresh = sdk
         .prepare_local_contract_use(
@@ -1265,13 +1259,13 @@ fn real_native_sources_reopen_and_revalidate_through_admission_append_and_verdic
     let ProjectAdmissionScopeBasisV3::DeferredV2(d) = d_applicability.governance_basis else {
         panic!("native evidence must start in D")
     };
-    let establishment = sdk.prepare_deferred_project_admission_governance(&DeferredEstablishmentRequestV3::human_approved(
-        d.project, ExpectedDeferredBasisV2 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
+    let establishment = sdk.prepare_project_governance_establishment(&GovernanceEstablishmentRequestV1::human_approved(
+        serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(), DeferredRevisionV1 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
         3600, "packet2-native-source-g", "The supplied human approved this exact same-project freshness ceiling for the retained native order capture.",
     ).unwrap()).unwrap();
     assert!(matches!(
-        sdk.establish_deferred_project_admission_governance(establishment),
-        DeferredEstablishmentExecutionV3::Committed { .. }
+        sdk.establish_project_governance(establishment),
+        ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
     ));
     let fresh_g = admit_evidence_candidate_v1(
         &owner,

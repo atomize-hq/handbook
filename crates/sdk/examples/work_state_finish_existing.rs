@@ -11,7 +11,7 @@ mod original_consumer;
 use handbook_sdk::{HandbookSdkV1, SetupMode, SetupRequest};
 use handbook_sdk::work_state::*;
 use handbook_sdk::local_setup::LocalInitialSetupLocatorV1;
-use handbook_sdk::admission_governance::DeferralRequestLocatorV2;
+use handbook_contracts::project_admission_governance::DeferralRequestLocatorV2;
 use handbook_engine::{RetainedRepositoryRootV1, RepositoryReadV1};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest,Sha256};

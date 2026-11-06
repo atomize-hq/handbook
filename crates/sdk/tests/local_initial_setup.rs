@@ -3,7 +3,7 @@ use handbook_engine::{
     CharterIntakeEnvelope, CharterIntakeSourceKind, ContextResolutionMutationDecision,
     ContextResolutionValidationDecision,
 };
-use handbook_sdk::admission_governance::{DeferralExecutionV2, DeferralRequestInputV2};
+use handbook_sdk::admission_governance::*;
 use handbook_sdk::local_setup::*;
 use handbook_sdk::HandbookSdkV1;
 use std::fs;
@@ -89,10 +89,10 @@ fn supplied_request() -> LocalInitialSetupRequestV1 {
     })
     .collect();
     LocalInitialSetupRequestV1 {
-        deferral: DeferralRequestInputV2::human_approved(
+        deferral: InitialDeferralRequestV1::human_approved(
             "deferral-once",
             "The human supplied and approved the initial scoped deferral.",
-        ),
+        ).unwrap(),
         charter: NativeLocalCharterRequestV1 {
             request_key: "charter-once".into(),
             intake: CharterIntakeEnvelope {
@@ -165,7 +165,7 @@ fn established(sdk: &HandbookSdkV1) -> (LocalInitialSetupLocatorV1, LocalInitial
     let locator = prepared.locator().clone();
     let execution = sdk.establish_local_initial_setup(prepared);
     assert!(
-        matches!(execution.deferral, DeferralExecutionV2::Committed { .. }),
+        matches!(execution.deferral, ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::InitialDeferred(_), .. }),
         "deferral did not commit"
     );
     assert_eq!(
@@ -478,7 +478,7 @@ fn charter_commit_and_terms_refusal_remain_separately_attributable() {
     assert!(!operating_lock.exists());
     let recovered = sdk.resume_local_initial_setup_request(&locator).unwrap();
     assert!(
-        matches!(recovered.deferral, DeferralExecutionV2::Committed { .. }),
+        matches!(recovered.deferral, ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::InitialDeferred(_), .. }),
         "original deferral did not replay"
     );
     assert!(recovered.terms.as_ref().unwrap().outcome.is_none());
@@ -545,10 +545,11 @@ fn native_process_child() {
     if mode == "crash" || mode == "crash_before_terms" {
         let request = supplied_request();
         let deferral = sdk
-            .prepare_project_admission_deferral(&request.deferral)
+            .prepare_initial_project_governance(&InitialProjectGovernanceV1::Deferred(request.deferral.clone()))
             .unwrap();
+        let ProjectGovernanceLocatorV1::InitializeDeferred(original_deferral) = deferral.locator() else { panic!("expected D locator") };
         let binding = LocalProjectBindingV1 {
-            initialization_claim: deferral.locator().initialization_claim.clone(),
+            initialization_claim: original_deferral.initialization_claim.clone(),
         };
         let charter = handbook_engine::local_charter::NativeLocalCharterServiceV1::prepare(
             &root,
@@ -556,12 +557,13 @@ fn native_process_child() {
             request.charter,
         )
         .unwrap();
+        let native_deferral: handbook_contracts::project_admission_governance::DeferralRequestLocatorV2 = serde_json::from_value(serde_json::to_value(original_deferral).unwrap()).unwrap();
         let terms = handbook_engine::local_authority::NativeLocalAuthorityServiceV1::prepare(
             &root,
             charter.locator(),
             request.terms,
             handbook_engine::DefinitionFingerprint::from_bytes(
-                &deferral
+                &native_deferral
                     .prospective_deferred_basis()
                     .unwrap()
                     .canonical_json_bytes()
@@ -574,7 +576,7 @@ fn native_process_child() {
         let locator = LocalInitialSetupLocatorV1 {
             schema_id: "handbook.sdk.local-initial-setup-locator".into(),
             schema_version: "1.0.0".into(),
-            deferral: deferral.locator().clone(),
+            deferral: original_deferral.clone(),
             charter: charter.locator().clone(),
             terms: terms.locator().clone(),
         };
@@ -586,8 +588,8 @@ fn native_process_child() {
         std::io::Write::write_all(&mut file, &locator.canonical_json_bytes().unwrap()).unwrap();
         file.sync_all().unwrap();
         assert!(matches!(
-            sdk.initialize_project_admission_deferral(deferral),
-            DeferralExecutionV2::Committed { .. }
+            sdk.initialize_project_governance(deferral),
+            ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::InitialDeferred(_), .. }
         ));
         let established =
             handbook_engine::local_charter::NativeLocalCharterServiceV1::establish(&root, charter);
@@ -812,22 +814,21 @@ fn paused_actual_validation_prevents_or_detects_physical_root_substitution() {
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn v3_noncommit_keeps_current_d_usable_then_establishment_refuses_stale_d_use() {
-    use handbook_contracts::project_admission_governance::{
-        EstablishmentFaultBoundaryV3, ProjectAdmissionEstablishmentV3,
-    };
+    use handbook_contracts::project_admission_governance::EstablishmentFaultBoundaryV3;
     use handbook_sdk::admission_governance::*;
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
     let (locator, _) = established(&sdk);
     let current = sdk.resolve_current_local_initial_setup(&locator).unwrap();
-    let ProjectAdmissionScopeBasisV3::DeferredV2(basis) = current.governance else {
+    let CurrentProjectGovernanceV1::Deferred { basis, .. } = current.governance else {
         panic!("expected current D")
     };
     let request = |key: &str| {
-        DeferredEstablishmentRequestV3::human_approved(
+        GovernanceEstablishmentRequestV1::human_approved(
             basis.project.clone(),
-            ExpectedDeferredBasisV2 {
+            DeferredRevisionV1 {
                 outcome_fingerprint: basis.outcome_fingerprint.clone(),
                 relation_fingerprint: basis.relation_fingerprint.clone(),
             },
@@ -837,20 +838,21 @@ fn v3_noncommit_keeps_current_d_usable_then_establishment_refuses_stale_d_use() 
         )
         .unwrap()
     };
-    let prepared = sdk
-        .prepare_deferred_project_admission_governance(&request("positive-noncommit"))
-        .unwrap();
+    // The SDK fault hook interrupts the exact prepared operation at the owner boundary.
+    let semantic_request = request("positive-noncommit");
+    let prepared = sdk.prepare_project_governance_establishment(&semantic_request).unwrap();
     let governance_locator = prepared.locator().clone();
-    let interrupted = ProjectAdmissionEstablishmentV3::new()
-        .with_fault_for_testing(EstablishmentFaultBoundaryV3::Stage(2))
-        .establish(root.path(), prepared);
+    let interrupted = sdk.establish_project_governance_with_fault_for_testing(
+        prepared,
+        GovernanceTestFaultV1::Establishment(EstablishmentFaultBoundaryV3::Stage(2)),
+    );
     assert!(matches!(
-        interrupted,
-        DeferredEstablishmentExecutionV3::Uncertain { .. }
+        &interrupted,
+        ProjectGovernanceExecutionV1::Uncertain { locator, .. } if locator == &governance_locator
     ));
     assert!(matches!(
-        sdk.resolve_deferred_admission_governance_request(&governance_locator),
-        DeferredEstablishmentExecutionV3::NotCommitted { .. }
+        sdk.resolve_project_governance_request(&governance_locator),
+        ProjectGovernanceExecutionV1::NotCommitted { outcome: ProjectGovernanceNotCommittedV1::EstablishedFromDeferred(_), .. }
     ));
     sdk.resolve_current_local_initial_setup(&locator).unwrap();
     let envelope = sdk
@@ -861,11 +863,11 @@ fn v3_noncommit_keeps_current_d_usable_then_establishment_refuses_stale_d_use() 
         ContextResolutionValidationDecision::Authorized
     );
     let prepared = sdk
-        .prepare_deferred_project_admission_governance(&request("establish-g"))
+        .prepare_project_governance_establishment(&request("establish-g"))
         .unwrap();
     assert!(matches!(
-        sdk.establish_deferred_project_admission_governance(prepared),
-        DeferredEstablishmentExecutionV3::Committed { .. }
+        sdk.establish_project_governance(prepared),
+        ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
     ));
     let refusal = sdk
         .resolve_current_local_initial_setup(&locator)
@@ -873,7 +875,7 @@ fn v3_noncommit_keeps_current_d_usable_then_establishment_refuses_stale_d_use() 
     assert_eq!(refusal.code, "unsupported_governance_basis");
     assert!(matches!(
         refusal.observed_governance_basis,
-        Some(ProjectAdmissionScopeBasisV3::EstablishedFromDeferredV3(_))
+        Some(CurrentProjectGovernanceV1::Established { origin: EstablishedGovernanceOriginV1::FromDeferred { .. } })
     ));
     assert!(envelope.authorize_validation("unit_closeout").is_err());
     let replay = sdk.resume_local_initial_setup_request(&locator).unwrap();
@@ -885,16 +887,15 @@ fn v3_noncommit_keeps_current_d_usable_then_establishment_refuses_stale_d_use() 
 fn relation_substitution_after_v3_refuses_before_any_terms_intent() {
     use handbook_engine::local_authority::NativeLocalAuthorityServiceV1;
     use handbook_engine::local_charter::NativeLocalCharterServiceV1;
-    use handbook_sdk::admission_governance::{
-        ProjectAdmissionBindingV3, ProjectAdmissionScopeBasisV3, ADMISSION_GOVERNANCE_SCOPE_V1,
-    };
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
     let request = supplied_request();
     let deferral = sdk
-        .prepare_project_admission_deferral(&request.deferral)
+        .prepare_initial_project_governance(&InitialProjectGovernanceV1::Deferred(request.deferral.clone()))
         .unwrap();
-    let relation = deferral
+    let ProjectGovernanceLocatorV1::InitializeDeferred(original_deferral) = deferral.locator() else { panic!("expected D locator") };
+    let native_deferral: handbook_contracts::project_admission_governance::DeferralRequestLocatorV2 = serde_json::from_value(serde_json::to_value(original_deferral).unwrap()).unwrap();
+    let relation = native_deferral
         .prospective_deferred_basis()
         .unwrap()
         .canonical_json_bytes()
@@ -905,7 +906,7 @@ fn relation_substitution_after_v3_refuses_before_any_terms_intent() {
     let charter = NativeLocalCharterServiceV1::prepare(
         root.path(),
         &LocalProjectBindingV1 {
-            initialization_claim: deferral.locator().initialization_claim.clone(),
+            initialization_claim: original_deferral.initialization_claim.clone(),
         },
         request.charter,
     )
@@ -920,7 +921,7 @@ fn relation_substitution_after_v3_refuses_before_any_terms_intent() {
     let locator = LocalInitialSetupLocatorV1 {
         schema_id: "handbook.sdk.local-initial-setup-locator".into(),
         schema_version: "1.0.0".into(),
-        deferral: deferral.locator().clone(),
+        deferral: original_deferral.clone(),
         charter: charter.locator().clone(),
         terms: terms.locator().clone(),
     };
@@ -929,21 +930,21 @@ fn relation_substitution_after_v3_refuses_before_any_terms_intent() {
             .unwrap();
     assert_eq!(fs::read_dir(root.path()).unwrap().count(), 0);
     assert!(matches!(
-        sdk.initialize_project_admission_deferral(deferral),
-        DeferralExecutionV2::Committed { .. }
+        sdk.initialize_project_governance(deferral),
+        ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::InitialDeferred(_), .. }
     ));
     assert_eq!(
         NativeLocalCharterServiceV1::establish(root.path(), charter).disposition,
         LocalCharterDispositionV1::Committed
     );
     assert!(matches!(
-        sdk.resolve_project_admission_scope_v3(
-            &ProjectAdmissionBindingV3::ScopedChoiceV2(restored.deferral.project.clone()),
+        sdk.resolve_current_project_governance(
+            &GovernanceProjectSelectionV1::InitiallyDeferred(restored.deferral.project.clone()),
             ADMISSION_GOVERNANCE_SCOPE_V1,
             None,
         )
         .unwrap(),
-        ProjectAdmissionScopeBasisV3::DeferredV2(_)
+        CurrentProjectGovernanceV1::Deferred { .. }
     ));
     let current_path = root
         .path()
@@ -964,4 +965,27 @@ fn relation_substitution_after_v3_refuses_before_any_terms_intent() {
         .path()
         .join(".handbook/state/locks/local-operating.lock")
         .exists());
+}
+
+#[test]
+fn semantic_setup_locator_preserves_exact_original_native_transport_bytes() {
+    #[derive(serde::Serialize)]
+    struct NativeSetupLocator {
+        schema_id: String,
+        schema_version: String,
+        deferral: handbook_contracts::project_admission_governance::DeferralRequestLocatorV2,
+        charter: LocalCharterLocatorV1,
+        terms: LocalAuthorityLocatorV1,
+    }
+    let root = tempdir().unwrap();
+    let sdk = HandbookSdkV1::open(root.path());
+    let prepared = sdk.prepare_local_initial_setup(&supplied_request()).unwrap();
+    let locator = prepared.locator();
+    let native = handbook_contracts::project_admission_governance::DeferralRequestLocatorV2::from_json_bytes(&locator.deferral.canonical_json_bytes().unwrap()).unwrap();
+    let old_shape = NativeSetupLocator { schema_id: locator.schema_id.clone(), schema_version: locator.schema_version.clone(), deferral: native, charter: locator.charter.clone(), terms: locator.terms.clone() };
+    let native_bytes = handbook_sdk::contract_membrane::canonical_json_bytes(&old_shape, &handbook_sdk::contract_membrane::ContractLimits::packet0()).unwrap();
+    assert_eq!(locator.canonical_json_bytes().unwrap(), native_bytes);
+    let restored = LocalInitialSetupLocatorV1::from_json_bytes(&native_bytes).unwrap();
+    assert_eq!(restored.canonical_json_bytes().unwrap(), native_bytes);
+    assert_eq!(fs::read_dir(root.path()).unwrap().count(), 0);
 }

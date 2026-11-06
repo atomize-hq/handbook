@@ -50,7 +50,7 @@ impl ProjectAdmissionBindingV2 {
     }
 }
 
-pub fn resolve_project_admission_scope(
+pub(crate) fn resolve_project_admission_scope(
     root: impl AsRef<Path>,
     project: &ProjectAdmissionBindingV2,
     scope: &str,

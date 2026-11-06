@@ -3,7 +3,7 @@ use handbook_engine::{
     CharterAcquisitionMode, CharterCoverageSubmission, CharterIntakeConsumer,
     CharterIntakeEnvelope, CharterIntakeSourceKind,
 };
-use handbook_sdk::admission_governance::DeferralRequestInputV2;
+use handbook_sdk::admission_governance::InitialDeferralRequestV1;
 use handbook_sdk::local_check::*;
 use handbook_sdk::local_setup::*;
 use handbook_sdk::work_state::*;
@@ -190,10 +190,10 @@ pub fn supplied_initial_request() -> LocalInitialSetupRequestV1 {
     })
     .collect();
     LocalInitialSetupRequestV1 {
-        deferral: DeferralRequestInputV2::human_approved(
+        deferral: InitialDeferralRequestV1::human_approved(
             "packet2-deferral",
             "The supplied test human approved this exact scoped deferral.",
-        ),
+        ).unwrap(),
         charter: NativeLocalCharterRequestV1 {
             request_key: "packet2-charter".into(),
             intake: CharterIntakeEnvelope {

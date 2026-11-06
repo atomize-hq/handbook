@@ -4,9 +4,10 @@
 //! permission to create state, reactivate a revoked head, or use an envelope.
 
 use crate::admission_governance::{
-    DeferralExecutionV2, DeferralRequestInputV2, DeferralRequestLocatorV2, GovernanceRefusalV1,
-    PreparedAdmissionDeferralV2, ProjectAdmissionBindingV3, ProjectAdmissionScopeBasisV3,
-    ADMISSION_GOVERNANCE_SCOPE_V1,
+    CurrentProjectGovernanceV1, GovernanceProjectSelectionV1, GovernanceRefusalV1,
+    InitialDeferralLocatorV1, InitialDeferralRequestV1, InitialProjectGovernanceV1,
+    PreparedInitialProjectGovernanceV1, ProjectGovernanceCommittedV1, ProjectGovernanceExecutionV1,
+    ProjectGovernanceLocatorV1, ADMISSION_GOVERNANCE_SCOPE_V1,
 };
 use crate::contract_membrane::{canonical_json_bytes, ContractLimits};
 use crate::HandbookSdkV1;
@@ -35,7 +36,7 @@ const LOCATOR_VERSION: &str = "1.0.0";
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct LocalInitialSetupRequestV1 {
-    pub deferral: DeferralRequestInputV2,
+    pub deferral: InitialDeferralRequestV1,
     pub charter: NativeLocalCharterRequestV1,
     pub terms: LocalOperatingTermsV1,
 }
@@ -53,7 +54,7 @@ impl LocalInitialSetupRequestV1 {
 pub struct LocalInitialSetupLocatorV1 {
     pub schema_id: String,
     pub schema_version: String,
-    pub deferral: DeferralRequestLocatorV2,
+    pub deferral: InitialDeferralLocatorV1,
     pub charter: LocalCharterLocatorV1,
     pub terms: LocalAuthorityLocatorV1,
 }
@@ -100,7 +101,7 @@ impl LocalInitialSetupLocatorV1 {
 #[derive(Debug)]
 pub struct PreparedLocalInitialSetupV1 {
     locator: LocalInitialSetupLocatorV1,
-    deferral: PreparedAdmissionDeferralV2,
+    deferral: PreparedInitialProjectGovernanceV1,
     charter: PreparedLocalCharterV1,
     terms: PreparedLocalAuthorityV1,
 }
@@ -128,7 +129,7 @@ pub struct LocalSetupRefusalV1 {
     pub stage: LocalSetupStageV1,
     pub code: String,
     pub detail: String,
-    pub observed_governance_basis: Option<ProjectAdmissionScopeBasisV3>,
+    pub observed_governance_basis: Option<CurrentProjectGovernanceV1>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub unresolved_request: Option<Box<LocalUnresolvedRequestV1>>,
 }
@@ -137,8 +138,8 @@ pub struct LocalSetupRefusalV1 {
 #[derive(Debug, Serialize)]
 pub struct LocalInitialSetupExecutionV1 {
     pub locator: LocalInitialSetupLocatorV1,
-    pub deferral: DeferralExecutionV2,
-    pub governance: Option<ProjectAdmissionScopeBasisV3>,
+    pub deferral: ProjectGovernanceExecutionV1,
+    pub governance: Option<CurrentProjectGovernanceV1>,
     pub charter: Option<LocalCharterExecutionV1>,
     pub terms: Option<LocalAuthorityExecutionV1>,
     pub stopped: Option<LocalSetupRefusalV1>,
@@ -146,7 +147,7 @@ pub struct LocalInitialSetupExecutionV1 {
 
 #[derive(Debug, Serialize)]
 pub struct LocalInitialSetupCurrentV1 {
-    pub governance: ProjectAdmissionScopeBasisV3,
+    pub governance: CurrentProjectGovernanceV1,
     pub charter: LocalCharterOutcomeV1,
     pub terms: LocalAuthorityOutcomeV1,
 }
@@ -262,10 +263,22 @@ impl HandbookSdkV1 {
             }
         }
         let deferral = self
-            .prepare_project_admission_deferral(&request.deferral)
+            .prepare_initial_project_governance(&InitialProjectGovernanceV1::Deferred(
+                request.deferral.clone(),
+            ))
             .map_err(|error| governance_error(LocalSetupStageV1::Preparation, error))?;
+        let ProjectGovernanceLocatorV1::InitializeDeferred(deferral_locator) = deferral.locator()
+        else {
+            return Err(governance_error(
+                LocalSetupStageV1::Preparation,
+                GovernanceRefusalV1::new(
+                    "governance_operation",
+                    "Expected an initial deferral locator",
+                ),
+            ));
+        };
         let binding = LocalProjectBindingV1 {
-            initialization_claim: deferral.locator().initialization_claim.clone(),
+            initialization_claim: deferral_locator.initialization_claim.clone(),
         };
         let charter = NativeLocalCharterServiceV1::prepare(
             &self.repo_root,
@@ -277,13 +290,13 @@ impl HandbookSdkV1 {
             &self.repo_root,
             charter.locator(),
             request.terms.clone(),
-            prospective_governance_relation_fingerprint(deferral.locator())?,
+            prospective_governance_relation_fingerprint(deferral_locator)?,
         )
         .map_err(|error| engine_error(LocalSetupStageV1::Preparation, error))?;
         let locator = LocalInitialSetupLocatorV1 {
             schema_id: LOCATOR_SCHEMA.into(),
             schema_version: LOCATOR_VERSION.into(),
-            deferral: deferral.locator().clone(),
+            deferral: deferral_locator.clone(),
             charter: charter.locator().clone(),
             terms: terms.locator().clone(),
         };
@@ -307,11 +320,14 @@ impl HandbookSdkV1 {
             charter,
             terms,
         } = prepared;
-        let mut execution = new_execution(
-            locator,
-            self.initialize_project_admission_deferral(deferral),
-        );
-        if !matches!(execution.deferral, DeferralExecutionV2::Committed { .. }) {
+        let mut execution = new_execution(locator, self.initialize_project_governance(deferral));
+        if !matches!(
+            execution.deferral,
+            ProjectGovernanceExecutionV1::Committed {
+                outcome: ProjectGovernanceCommittedV1::InitialDeferred(_),
+                ..
+            }
+        ) {
             return execution;
         }
         match self.resolve_local_applicability(&execution.locator) {
@@ -421,9 +437,17 @@ impl HandbookSdkV1 {
         locator.validate()?;
         let mut execution = new_execution(
             locator.clone(),
-            self.resolve_admission_deferral_request(&locator.deferral),
+            self.resolve_project_governance_request(
+                &ProjectGovernanceLocatorV1::InitializeDeferred(locator.deferral.clone()),
+            ),
         );
-        if !matches!(execution.deferral, DeferralExecutionV2::Committed { .. }) {
+        if !matches!(
+            execution.deferral,
+            ProjectGovernanceExecutionV1::Committed {
+                outcome: ProjectGovernanceCommittedV1::InitialDeferred(_),
+                ..
+            }
+        ) {
             return Ok(execution);
         }
         // Historical delivery remains available after applicability invalidation;
@@ -458,16 +482,16 @@ impl HandbookSdkV1 {
     fn resolve_local_applicability(
         &self,
         locator: &LocalInitialSetupLocatorV1,
-    ) -> Result<ProjectAdmissionScopeBasisV3, LocalSetupRefusalV1> {
+    ) -> Result<CurrentProjectGovernanceV1, LocalSetupRefusalV1> {
         let basis = self
-            .resolve_project_admission_scope_v3(
-                &ProjectAdmissionBindingV3::ScopedChoiceV2(locator.deferral.project.clone()),
+            .resolve_current_project_governance(
+                &GovernanceProjectSelectionV1::InitiallyDeferred(locator.deferral.project.clone()),
                 ADMISSION_GOVERNANCE_SCOPE_V1,
                 None,
             )
             .map_err(|error| governance_error(LocalSetupStageV1::CurrentApplicability, error))?;
         match basis {
-            ProjectAdmissionScopeBasisV3::DeferredV2(_) => Ok(basis),
+            CurrentProjectGovernanceV1::Deferred { .. } => Ok(basis),
             _ => Err(LocalSetupRefusalV1 {
                 stage: LocalSetupStageV1::CurrentApplicability,
                 code: "unsupported_governance_basis".into(),
@@ -481,7 +505,7 @@ impl HandbookSdkV1 {
 
 fn new_execution(
     locator: LocalInitialSetupLocatorV1,
-    deferral: DeferralExecutionV2,
+    deferral: ProjectGovernanceExecutionV1,
 ) -> LocalInitialSetupExecutionV1 {
     LocalInitialSetupExecutionV1 {
         locator,
@@ -538,9 +562,12 @@ fn governance_error(stage: LocalSetupStageV1, error: GovernanceRefusalV1) -> Loc
 }
 
 fn prospective_governance_relation_fingerprint(
-    locator: &DeferralRequestLocatorV2,
+    locator: &InitialDeferralLocatorV1,
 ) -> Result<String, LocalSetupRefusalV1> {
-    let bytes = locator
+    let native: handbook_contracts::project_admission_governance::DeferralRequestLocatorV2 =
+        crate::governance_v1::translate(locator)
+            .map_err(|error| governance_error(LocalSetupStageV1::Preparation, error))?;
+    let bytes = native
         .prospective_deferred_basis()
         .and_then(|basis| basis.canonical_json_bytes())
         .map_err(|error| governance_error(LocalSetupStageV1::Preparation, error))?;

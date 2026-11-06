@@ -1,9 +1,11 @@
 //! Typed local-check composition. Native owners retain authority and qualification.
 use crate::admission_governance::{
-    ProjectAdmissionBindingV3, ProjectAdmissionScopeBasisV3, ADMISSION_GOVERNANCE_SCOPE_V1,
+    CurrentProjectGovernanceV1, EstablishedGovernanceOriginV1, GovernanceProjectSelectionV1,
+    ADMISSION_GOVERNANCE_SCOPE_V1,
 };
 use crate::local_setup::LocalInitialSetupLocatorV1;
 use crate::HandbookSdkV1;
+use handbook_contracts::project_admission_governance::ProjectAdmissionBindingV3;
 use handbook_contracts::{
     ContractOwnerRepositoryErrorV1, ContractOwnerRepositoryV1, ExactBindingV1, SemanticTimeV1,
 };
@@ -102,7 +104,7 @@ impl HandbookSdkV1 {
         DockLocalEvidenceCandidateSourceV2::open(
             &self.repo_root,
             locator.clone(),
-            ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone()),
+            ProjectAdmissionBindingV3::ScopedChoiceV2((&initial.deferral.project).into()),
             definition,
             intent,
         )
@@ -129,7 +131,7 @@ impl HandbookSdkV1 {
             .map_err(|e| error(&e.code, &e.detail))?;
         let owner = ContractOwnerRepositoryV1::open(&self.repo_root)?;
         Ok(owner.prepare_local_definition_append_v2(
-            &ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone()),
+            &ProjectAdmissionBindingV3::ScopedChoiceV2((&initial.deferral.project).into()),
             definition,
             stack,
         )?)
@@ -186,7 +188,7 @@ impl HandbookSdkV1 {
         Ok(
             ContractOwnerRepositoryV1::open_existing_for_local_use_v2(&self.repo_root)?
                 .prepare_local_lifecycle_transition_v2(
-                    &ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone()),
+                    &ProjectAdmissionBindingV3::ScopedChoiceV2((&initial.deferral.project).into()),
                     binding,
                     input,
                 )?,
@@ -224,7 +226,7 @@ impl HandbookSdkV1 {
         Ok(
             ContractOwnerRepositoryV1::open_existing_for_local_use_v2(&self.repo_root)?
                 .prepare_local_contract_use_v2(
-                    &ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone()),
+                    &ProjectAdmissionBindingV3::ScopedChoiceV2((&initial.deferral.project).into()),
                     binding,
                     intent,
                 )?,
@@ -288,13 +290,16 @@ impl HandbookSdkV1 {
         initial
             .canonical_json_bytes()
             .map_err(|e| error(&e.code, &e.detail))?;
-        let project = ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone());
+        let project =
+            GovernanceProjectSelectionV1::InitiallyDeferred(initial.deferral.project.clone());
         let before = self
-            .resolve_project_admission_scope_v3(&project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
+            .resolve_current_project_governance(&project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
             .map_err(|e| error(&e.condition, &e.detail))?;
         let bytes = match &before {
-            ProjectAdmissionScopeBasisV3::DeferredV2(b) => b.canonical_json_bytes(),
-            ProjectAdmissionScopeBasisV3::EstablishedFromDeferredV3(b) => b.canonical_json_bytes(),
+            CurrentProjectGovernanceV1::Deferred { basis: b, .. } => b.native_canonical_bytes(),
+            CurrentProjectGovernanceV1::Established {
+                origin: EstablishedGovernanceOriginV1::FromDeferred { basis: b, .. },
+            } => b.native_canonical_bytes(),
             _ => {
                 return Err(error(
                     "unsupported_project_contract",
@@ -308,7 +313,7 @@ impl HandbookSdkV1 {
             handbook_engine::DefinitionFingerprint::from_bytes(&bytes).to_string(),
         )?;
         let after = self
-            .resolve_project_admission_scope_v3(&project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
+            .resolve_current_project_governance(&project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
             .map_err(|e| error(&e.condition, &e.detail))?;
         if before != after {
             return Err(error(

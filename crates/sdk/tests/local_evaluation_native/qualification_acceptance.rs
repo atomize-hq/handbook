@@ -115,6 +115,7 @@ fn register_reviewed(fixture: &Fixture, definition: &LocalContractDefinitionV3, 
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn native_exact_non_applicability_and_fresh_g_qualify_while_required_q_and_over_ceiling_refuse() {
     on_stack(|| {
         let _package = InstalledProductionPackage::install();
@@ -135,9 +136,8 @@ fn native_exact_non_applicability_and_fresh_g_qualify_while_required_q_and_over_
                 profile.context_resolution(),
             )
             .is_err());
-        use handbook_contracts::project_admission_governance::{
-            EstablishmentFaultBoundaryV3, ProjectAdmissionEstablishmentV3,
-        };
+        use handbook_contracts::project_admission_governance::EstablishmentFaultBoundaryV3;
+        use handbook_sdk::admission_governance::{GovernanceEstablishmentRequestV1, GovernanceTestFaultV1, ProjectGovernanceExecutionV1, ProjectGovernanceNotCommittedV1};
         let local_use = fixture
             .sdk
             .prepare_local_evaluation_use(
@@ -151,24 +151,23 @@ fn native_exact_non_applicability_and_fresh_g_qualify_while_required_q_and_over_
         else {
             panic!("actual D required")
         };
-        let governance_owner = ProjectAdmissionEstablishmentV3::new();
         let request = DeferredEstablishmentRequestV3::human_approved(
             noncommit_d.project.clone(), ExpectedDeferredBasisV2 { outcome_fingerprint: noncommit_d.outcome_fingerprint.clone(), relation_fingerprint: noncommit_d.relation_fingerprint.clone() },
             3600, "packet3-qualification-closed-noncommit-0001", "Illustrative supplied exact establishment request whose retained intent is interrupted before decision.",
         ).unwrap();
-        let prepared = governance_owner
-            .prepare(fixture.root.path(), &request)
-            .unwrap();
+        let semantic_request: GovernanceEstablishmentRequestV1 = serde_json::from_value(serde_json::to_value(&request).unwrap()).unwrap();
+        let prepared = fixture.sdk.prepare_project_governance_establishment(&semantic_request).unwrap();
         let original_locator = prepared.locator().clone();
         assert!(matches!(
-            ProjectAdmissionEstablishmentV3::new()
-                .with_fault_for_testing(EstablishmentFaultBoundaryV3::Intent)
-                .establish(fixture.root.path(), prepared),
-            DeferredEstablishmentExecutionV3::Uncertain { .. }
+            fixture.sdk.establish_project_governance_with_fault_for_testing(
+                prepared,
+                GovernanceTestFaultV1::Establishment(EstablishmentFaultBoundaryV3::Intent),
+            ),
+            ProjectGovernanceExecutionV1::Uncertain { locator, .. } if locator == original_locator
         ));
         assert!(matches!(
-            governance_owner.resolve_request(fixture.root.path(), &original_locator),
-            DeferredEstablishmentExecutionV3::NotCommitted { .. }
+            fixture.sdk.resolve_project_governance_request(&original_locator),
+            ProjectGovernanceExecutionV1::NotCommitted { outcome: ProjectGovernanceNotCommittedV1::EstablishedFromDeferred(_), .. }
         ));
         fixture.definition = non_applicable;
         let non_applicable = fixture.form(
@@ -208,9 +207,7 @@ fn native_exact_non_applicability_and_fresh_g_qualify_while_required_q_and_over_
         use handbook_contracts::project_admission_governance::{
             ExpectedDeferredBasisV2, ProjectAdmissionScopeBasisV3,
         };
-        use handbook_sdk::admission_governance::{
-            DeferredEstablishmentExecutionV3, DeferredEstablishmentRequestV3,
-        };
+        use handbook_contracts::project_admission_governance::DeferredEstablishmentRequestV3;
         let ProjectAdmissionScopeBasisV3::DeferredV2(d) = non_applicable
             .snapshot
             .requirements
@@ -220,15 +217,15 @@ fn native_exact_non_applicability_and_fresh_g_qualify_while_required_q_and_over_
         else {
             panic!("actual D required")
         };
-        let prepared = fixture.sdk.prepare_deferred_project_admission_governance(&DeferredEstablishmentRequestV3::human_approved(
-            d.project, ExpectedDeferredBasisV2 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
+        let prepared = fixture.sdk.prepare_project_governance_establishment(&handbook_sdk::admission_governance::GovernanceEstablishmentRequestV1::human_approved(
+            serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(), handbook_sdk::admission_governance::DeferredRevisionV1 { outcome_fingerprint: d.outcome_fingerprint, relation_fingerprint: d.relation_fingerprint },
             3600, "packet3-qualification-establish-g-0001", "Illustrative supplied human approval of this exact same-project freshness ceiling.",
         ).unwrap()).unwrap();
         assert!(matches!(
             fixture
                 .sdk
-                .establish_deferred_project_admission_governance(prepared),
-            DeferredEstablishmentExecutionV3::Committed { .. }
+                .establish_project_governance(prepared),
+            handbook_sdk::admission_governance::ProjectGovernanceExecutionV1::Committed { outcome: handbook_sdk::admission_governance::ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
         ));
         fixture.definition = original;
         let fresh_g = fixture.form(

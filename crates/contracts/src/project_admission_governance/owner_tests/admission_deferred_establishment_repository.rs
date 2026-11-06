@@ -2,7 +2,7 @@
 use handbook_contracts::project_admission_governance::*;
 use handbook_contracts::FingerprintV1;
 use sha2::{Digest, Sha256};
-#[path = "fixtures/admission_reader_v2.rs"]
+#[path = "../../../tests/fixtures/admission_reader_v2.rs"]
 mod predecessor_reader;
 use std::{
     collections::BTreeMap,

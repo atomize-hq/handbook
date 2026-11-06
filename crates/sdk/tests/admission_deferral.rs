@@ -1,4 +1,7 @@
+mod admission_governance_support;
+use admission_governance_support::*;
 use handbook_sdk::admission_governance::*;
+use handbook_contracts::project_admission_governance::*;
 use handbook_sdk::{HandbookSdkV1, SetupMode, SetupRequest};
 use std::collections::BTreeMap;
 use std::fs;
@@ -63,13 +66,12 @@ fn retained_files(root: &Path) -> BTreeMap<String, Vec<u8>> {
 fn approved_deferral_reopens_with_exact_owner_basis_and_original_replay() {
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
-    let prepared = sdk
-        .prepare_project_admission_deferral(&input("defer-once"))
+    let prepared = prepare_initial_deferred(&sdk, &input("defer-once"))
         .unwrap();
     let serialized = prepared.locator().canonical_json_bytes().unwrap();
     let locator = DeferralRequestLocatorV2::from_json_bytes(&serialized).unwrap();
     assert_eq!(fs::read_dir(root.path()).unwrap().count(), 0);
-    let original = committed(sdk.initialize_project_admission_deferral(prepared));
+    let original = committed(initialize_deferred(&sdk, prepared));
     assert_eq!(original.locator, locator);
     assert!(
         original.validation_confirmed
@@ -82,18 +84,9 @@ fn approved_deferral_reopens_with_exact_owner_basis_and_original_replay() {
     drop(sdk);
     let reopened = HandbookSdkV1::open(root.path());
     let binding = ProjectAdmissionBindingV2::ScopedChoiceV2(locator.project.clone());
-    let basis = reopened
-        .resolve_project_admission_scope(&binding, ADMISSION_GOVERNANCE_SCOPE_V1, None)
+    let basis = current_scoped_assertion(&reopened, &binding, ADMISSION_GOVERNANCE_SCOPE_V1, None)
         .unwrap();
-    let owner = handbook_contracts::project_admission_governance::ProjectAdmissionDeferralV2::new()
-        .resolve_current(
-            root.path(),
-            &locator.project,
-            ADMISSION_GOVERNANCE_SCOPE_V1,
-            None,
-        )
-        .unwrap();
-    assert_eq!(basis, ProjectAdmissionScopeBasisV2::Deferred(owner.clone()));
+    let ProjectAdmissionScopeBasisV2::Deferred(owner) = basis else { panic!("expected deferred basis") };
     assert!(owner.never_established);
     assert_eq!(owner.outcome_fingerprint, original.outcome_fingerprint);
     assert_eq!(
@@ -101,7 +94,7 @@ fn approved_deferral_reopens_with_exact_owner_basis_and_original_replay() {
         original.validated.establishment_rule
     );
     let before = retained_files(root.path());
-    let replay = reopened.resolve_admission_deferral_request(&locator);
+    let replay = resolve_initial_deferred(&reopened, &locator);
     assert!(matches!(
         replay,
         DeferralExecutionV2::Committed {
@@ -111,8 +104,7 @@ fn approved_deferral_reopens_with_exact_owner_basis_and_original_replay() {
     ));
     assert_eq!(committed(replay), original);
     assert_eq!(retained_files(root.path()), before);
-    assert!(reopened
-        .resolve_project_admission_scope(
+    assert!(current_scoped_assertion(&reopened,
             &binding,
             "contracts.evidence-freshness-policy/other",
             None
@@ -125,11 +117,10 @@ fn actual_refresh_reset_retains_claim_locks_history_and_deferral() {
     let root = tempdir().unwrap();
     fs::create_dir(root.path().join(".git")).unwrap();
     let sdk = HandbookSdkV1::open(root.path());
-    let prepared = sdk
-        .prepare_project_admission_deferral(&input("reset-deferred"))
+    let prepared = prepare_initial_deferred(&sdk, &input("reset-deferred"))
         .unwrap();
     let locator = prepared.locator().clone();
-    let original = committed(sdk.initialize_project_admission_deferral(prepared));
+    let original = committed(initialize_deferred(&sdk, prepared));
     let before = retained_files(root.path());
     let state = root.path().join(".handbook/state/temporary");
     fs::create_dir_all(&state).unwrap();
@@ -146,12 +137,11 @@ fn actual_refresh_reset_retains_claim_locks_history_and_deferral() {
     assert_eq!(retained_files(root.path()), before);
     let reopened = HandbookSdkV1::open(root.path());
     assert_eq!(
-        committed(reopened.resolve_admission_deferral_request(&locator)),
+        committed(resolve_initial_deferred(&reopened, &locator)),
         original
     );
     assert!(matches!(
-        reopened
-            .resolve_project_admission_scope(
+        current_scoped_assertion(&reopened,
                 &ProjectAdmissionBindingV2::ScopedChoiceV2(locator.project),
                 ADMISSION_GOVERNANCE_SCOPE_V1,
                 None
@@ -174,11 +164,10 @@ fn lost_consumer_reply_restores_only_original_request_resolution() {
     }
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
-    let prepared = sdk
-        .prepare_project_admission_deferral(&input("lost-reply"))
+    let prepared = prepare_initial_deferred(&sdk, &input("lost-reply"))
         .unwrap();
     let serialized = prepared.locator().canonical_json_bytes().unwrap();
-    let original = sdk.initialize_project_admission_deferral(prepared);
+    let original = initialize_deferred(&sdk, prepared);
     assert!(matches!(original, DeferralExecutionV2::Committed { .. }));
     assert!(serde_json::to_writer(Disconnected, &original).is_err());
     let outcome = committed(original);
@@ -187,15 +176,13 @@ fn lost_consumer_reply_restores_only_original_request_resolution() {
     let sdk = HandbookSdkV1::open(root.path());
     let before = retained_files(root.path());
     assert_eq!(
-        committed(sdk.resolve_admission_deferral_request(&restored)),
+        committed(resolve_initial_deferred(&sdk, &restored)),
         outcome
     );
     assert_eq!(retained_files(root.path()), before);
-    assert!(sdk
-        .prepare_project_admission_deferral(&input("retry"))
+    assert!(prepare_initial_deferred(&sdk, &input("retry"))
         .is_err());
-    assert!(sdk
-        .prepare_project_admission_governance(&GovernanceRequestInputV1::standalone_freshness(
+    assert!(prepare_initial_established(&sdk, &GovernanceRequestInputV1::standalone_freshness(
             300,
             "new-governance",
             "Old deferral does not approve governance terms"
@@ -204,9 +191,10 @@ fn lost_consumer_reply_restores_only_original_request_resolution() {
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn owner_outcomes_refusals_and_advisory_claims_are_preserved_by_sdk() {
     use handbook_contracts::project_admission_governance::{
-        DeferralFaultBoundaryV2, ProjectAdmissionDeferralV2,
+        DeferralFaultBoundaryV2,
     };
     for (boundary, expected_commit) in [
         (DeferralFaultBoundaryV2::Claim, false),
@@ -218,12 +206,10 @@ fn owner_outcomes_refusals_and_advisory_claims_are_preserved_by_sdk() {
         request.instruction.asserted_principal = Some("asserted-human".into());
         request.instruction.asserted_agent = Some("configured-agent".into());
         request.instruction.asserted_delegation = Some("advisory claim only".into());
-        let prepared = sdk.prepare_project_admission_deferral(&request).unwrap();
+        let prepared = prepare_initial_deferred(&sdk, &request).unwrap();
         let locator = prepared.locator().clone();
-        let interrupted = ProjectAdmissionDeferralV2::new()
-            .with_fault_for_testing(boundary)
-            .initialize(root.path(), prepared);
-        assert!(matches!(interrupted, DeferralExecutionV2::Uncertain { .. }));
+        let interrupted = initialize_deferred_with_fault(&sdk, prepared, GovernanceTestFaultV1::Deferred(boundary));
+        assert!(matches!(&interrupted, DeferralExecutionV2::Uncertain { locator: original, .. } if original == &locator));
         let wire = serde_json::to_vec(&interrupted).unwrap();
         assert_eq!(
             serde_json::from_slice::<DeferralExecutionV2>(&wire).unwrap(),
@@ -231,11 +217,7 @@ fn owner_outcomes_refusals_and_advisory_claims_are_preserved_by_sdk() {
         );
         drop(sdk);
         let sdk = HandbookSdkV1::open(root.path());
-        let resolved = sdk.resolve_admission_deferral_request(&locator);
-        assert_eq!(
-            resolved,
-            ProjectAdmissionDeferralV2::new().resolve_request(root.path(), &locator)
-        );
+        let resolved = resolve_initial_deferred(&sdk, &locator);
         if expected_commit {
             assert_eq!(
                 committed(resolved).validated.input.instruction,
@@ -263,21 +245,18 @@ fn owner_outcomes_refusals_and_advisory_claims_are_preserved_by_sdk() {
         assert_eq!(retained_files(root.path()), before);
         let mut changed = locator;
         changed.request.request_key = "changed-key".into();
-        assert_eq!(
-            sdk.resolve_admission_deferral_request(&changed),
-            ProjectAdmissionDeferralV2::new().resolve_request(root.path(), &changed)
-        );
         assert!(matches!(
-            sdk.resolve_admission_deferral_request(&changed),
+            resolve_initial_deferred(&sdk, &changed),
             DeferralExecutionV2::Refused { .. }
         ));
     }
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn retained_noncommit_witness_freezes_initialization_after_partial_claim_loss() {
     use handbook_contracts::project_admission_governance::{
-        DeferralFaultBoundaryV2, ProjectAdmissionDeferralV2,
+        DeferralFaultBoundaryV2,
     };
     use handbook_engine::{
         RepositoryInvocationIdentityServiceV1, REPOSITORY_INITIALIZATION_CLAIM_PATH_V1,
@@ -292,21 +271,16 @@ fn retained_noncommit_witness_freezes_initialization_after_partial_claim_loss() 
             "competing-establishment",
             "Approved initial establishment terms",
         );
-        let old_establishment = sdk
-            .prepare_project_admission_governance(&establishment)
+        let old_establishment = prepare_initial_established(&sdk, &establishment)
             .unwrap();
-        let prepared = sdk
-            .prepare_project_admission_deferral(&input("retained-noncommit"))
-            .unwrap();
+        let prepared = prepare_initial_deferred(&sdk, &input("retained-noncommit")).unwrap();
         let locator = prepared.locator().clone();
         assert!(matches!(
-            ProjectAdmissionDeferralV2::new()
-                .with_fault_for_testing(DeferralFaultBoundaryV2::Claim)
-                .initialize(root.path(), prepared),
+            initialize_deferred_with_fault(&sdk, prepared, GovernanceTestFaultV1::Deferred(DeferralFaultBoundaryV2::Claim)),
             DeferralExecutionV2::Uncertain { .. }
         ));
         assert!(matches!(
-            sdk.resolve_admission_deferral_request(&locator),
+            resolve_initial_deferred(&sdk, &locator),
             DeferralExecutionV2::NotCommitted { .. }
         ));
         fs::remove_file(root.path().join(REPOSITORY_INITIALIZATION_CLAIM_PATH_V1)).unwrap();
@@ -316,14 +290,12 @@ fn retained_noncommit_witness_freezes_initialization_after_partial_claim_loss() 
         }
         let before = retained_files(root.path());
         let reopened = HandbookSdkV1::open(root.path());
-        assert!(reopened
-            .prepare_project_admission_governance(&establishment)
+        assert!(prepare_initial_established(&reopened, &establishment)
             .is_err());
-        assert!(reopened
-            .prepare_project_admission_deferral(&input("fresh-again"))
+        assert!(prepare_initial_deferred(&reopened, &input("fresh-again"))
             .is_err());
         assert!(matches!(
-            reopened.initialize_project_admission_governance(old_establishment),
+            initialize_established(&reopened, old_establishment),
             GovernanceExecutionV1::Refused { .. }
         ));
         assert!(reopened
@@ -337,7 +309,7 @@ fn retained_noncommit_witness_freezes_initialization_after_partial_claim_loss() 
             .initialize_for_setup(root.path())
             .is_err());
         assert!(matches!(
-            reopened.resolve_admission_deferral_request(&locator),
+            resolve_initial_deferred(&reopened, &locator),
             DeferralExecutionV2::Uncertain { .. }
         ));
         assert!(!root.path().join(".handbook").exists());
@@ -357,14 +329,12 @@ fn retained_noncommit_witness_freezes_initialization_after_partial_claim_loss() 
 fn exact_expected_basis_and_explicit_version_tags_cannot_expand_scope() {
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
-    let prepared = sdk
-        .prepare_project_admission_deferral(&input("exact-basis"))
+    let prepared = prepare_initial_deferred(&sdk, &input("exact-basis"))
         .unwrap();
     let locator = prepared.locator().clone();
-    let outcome = committed(sdk.initialize_project_admission_deferral(prepared));
+    let outcome = committed(initialize_deferred(&sdk, prepared));
     let binding = ProjectAdmissionBindingV2::ScopedChoiceV2(locator.project.clone());
-    let basis = sdk
-        .resolve_project_admission_scope(&binding, &locator.request.scope, None)
+    let basis = current_scoped_assertion(&sdk, &binding, &locator.request.scope, None)
         .unwrap();
     let ProjectAdmissionScopeBasisV2::Deferred(deferred) = &basis else {
         panic!("deferred basis")
@@ -374,7 +344,7 @@ fn exact_expected_basis_and_explicit_version_tags_cannot_expand_scope() {
         relation_fingerprint: deferred.relation_fingerprint.clone(),
     });
     assert_eq!(
-        sdk.resolve_project_admission_scope(&binding, &locator.request.scope, Some(&expected))
+        current_scoped_assertion(&sdk, &binding, &locator.request.scope, Some(&expected))
             .unwrap(),
         basis
     );
@@ -382,15 +352,13 @@ fn exact_expected_basis_and_explicit_version_tags_cannot_expand_scope() {
         inner.relation_fingerprint =
             FingerprintV1::parse(&format!("sha256:{}", "0".repeat(64))).unwrap();
     }
-    assert!(sdk
-        .resolve_project_admission_scope(&binding, &locator.request.scope, Some(&expected))
+    assert!(current_scoped_assertion(&sdk, &binding, &locator.request.scope, Some(&expected))
         .is_err());
     let wrong_tag = ExpectedProjectAdmissionBasisV2::EstablishedV1(ExpectedGovernanceBasisV1 {
         configuration_fingerprint: deferred.deferral_fingerprint.clone(),
         outcome_fingerprint: deferred.outcome_fingerprint.clone(),
     });
-    assert!(sdk
-        .resolve_project_admission_scope(&binding, &locator.request.scope, Some(&wrong_tag))
+    assert!(current_scoped_assertion(&sdk, &binding, &locator.request.scope, Some(&wrong_tag))
         .is_err());
     let wire = binding.canonical_json_bytes().unwrap();
     assert_eq!(
@@ -402,8 +370,7 @@ fn exact_expected_basis_and_explicit_version_tags_cannot_expand_scope() {
     assert!(
         ProjectAdmissionBindingV2::from_json_bytes(&serde_json::to_vec(&wrong).unwrap()).is_err()
     );
-    assert!(sdk
-        .resolve_project_admission_scope(
+    assert!(current_scoped_assertion(&sdk,
             &ProjectAdmissionBindingV2::ScopedChoiceV2(locator.project),
             "contracts.other-policy/root",
             None
@@ -415,8 +382,7 @@ fn exact_expected_basis_and_explicit_version_tags_cannot_expand_scope() {
 fn explicit_v1_resolution_still_returns_owner_establishment() {
     let root = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(root.path());
-    let prepared = sdk
-        .prepare_project_admission_governance(&GovernanceRequestInputV1::standalone_freshness(
+    let prepared = prepare_initial_established(&sdk, &GovernanceRequestInputV1::standalone_freshness(
             7200,
             "establish-v1",
             "Human approves exact v1 governance",
@@ -424,14 +390,13 @@ fn explicit_v1_resolution_still_returns_owner_establishment() {
         .unwrap();
     let locator = prepared.locator().clone();
     assert!(matches!(
-        sdk.initialize_project_admission_governance(prepared),
+        initialize_established(&sdk, prepared),
         GovernanceExecutionV1::Committed { .. }
     ));
-    let expected_owner = sdk
-        .resolve_project_admission_governance(&locator.project, &locator.request.scope, None)
+    let expected_owner = current_initial_established(&sdk, &locator.project, &locator.request.scope, None)
         .unwrap();
     assert_eq!(
-        sdk.resolve_project_admission_scope(
+        current_scoped_assertion(&sdk,
             &ProjectAdmissionBindingV2::EstablishedV1(locator.project),
             &locator.request.scope,
             None
@@ -453,6 +418,7 @@ fn wait_file(path: &Path) {
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn sdk_deferral_process_worker() {
     let Ok(mode) = std::env::var("HCM_SCOPED_SDK_MODE") else {
         return;
@@ -460,9 +426,11 @@ fn sdk_deferral_process_worker() {
     let root = std::path::PathBuf::from(std::env::var_os("HCM_SCOPED_SDK_ROOT").unwrap());
     let control = std::path::PathBuf::from(std::env::var_os("HCM_SCOPED_SDK_CONTROL").unwrap());
     let sdk = HandbookSdkV1::open(&root);
-    let deferral = if matches!(mode.as_str(), "winner" | "defer") {
+    // The paused winner is owner-injected; competing deferral uses the SDK.
+    let native_winner = if mode == "winner" { Some(prepare_initial_deferred(&sdk, &input(&mode)).unwrap()) } else { None };
+    let deferral = if mode == "defer" {
         Some(
-            sdk.prepare_project_admission_deferral(&input(&mode))
+            prepare_initial_deferred(&sdk, &input(&mode))
                 .unwrap(),
         )
     } else {
@@ -470,7 +438,7 @@ fn sdk_deferral_process_worker() {
     };
     let establishment = if mode == "establish" {
         Some(
-            sdk.prepare_project_admission_governance(
+            prepare_initial_established(&sdk,
                 &GovernanceRequestInputV1::standalone_freshness(
                     300,
                     "competing-v1",
@@ -488,7 +456,7 @@ fn sdk_deferral_process_worker() {
     let result = match mode.as_str() {
         "winner" => {
             use handbook_contracts::project_admission_governance::{
-                DeferralFaultBoundaryV2, ProjectAdmissionDeferralV2,
+                DeferralFaultBoundaryV2,
             };
             let boundary = match std::env::var("HCM_SCOPED_SDK_BOUNDARY").unwrap().as_str() {
                 "claim" => DeferralFaultBoundaryV2::Claim,
@@ -496,29 +464,23 @@ fn sdk_deferral_process_worker() {
                 "anchor" => DeferralFaultBoundaryV2::Anchor,
                 other => panic!("unsupported test boundary {other}"),
             };
-            let prepared = deferral.unwrap();
+            let prepared = native_winner.unwrap();
             fs::write(
                 control.join("winner.locator.json"),
                 prepared.locator().canonical_json_bytes().unwrap(),
             )
             .unwrap();
             serde_json::to_value(
-                ProjectAdmissionDeferralV2::new()
-                    .with_pause_for_testing(
-                        boundary,
-                        control.join("winner.paused"),
-                        control.join("winner.release"),
-                    )
-                    .initialize(&root, prepared),
+                initialize_deferred_with_fault(&sdk, prepared, GovernanceTestFaultV1::PauseDeferred(boundary, control.join("winner.paused"), control.join("winner.release"))),
             )
             .unwrap()
         }
         "defer" => {
-            serde_json::to_value(sdk.initialize_project_admission_deferral(deferral.unwrap()))
+            serde_json::to_value(initialize_deferred(&sdk, deferral.unwrap()))
                 .unwrap()
         }
         "establish" => serde_json::to_value(
-            sdk.initialize_project_admission_governance(establishment.unwrap()),
+            initialize_established(&sdk, establishment.unwrap()),
         )
         .unwrap(),
         "init" | "refresh" => {
@@ -571,6 +533,7 @@ fn worker(root: &Path, control: &Path, mode: &str, boundary: &str) -> std::proce
 }
 
 #[test]
+#[cfg(feature = "governance-test-support")]
 fn native_deferral_serializes_sdk_init_refresh_establishment_and_direct_identity() {
     for boundary in ["claim", "reservation", "anchor"] {
         let root = tempdir().unwrap();
@@ -641,11 +604,11 @@ fn native_deferral_serializes_sdk_init_refresh_establishment_and_direct_identity
         );
         let sdk = HandbookSdkV1::open(root.path());
         assert_eq!(
-            committed(sdk.resolve_admission_deferral_request(&locator)),
+            committed(resolve_initial_deferred(&sdk, &locator)),
             committed(serde_json::from_value(result("winner")).unwrap())
         );
         assert!(matches!(
-            sdk.resolve_project_admission_scope(
+            current_scoped_assertion(&sdk,
                 &ProjectAdmissionBindingV2::ScopedChoiceV2(locator.project),
                 ADMISSION_GOVERNANCE_SCOPE_V1,
                 None

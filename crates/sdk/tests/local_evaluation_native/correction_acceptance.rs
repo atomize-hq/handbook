@@ -897,7 +897,7 @@ fn native_packet4_upfront_distinct_decider_and_interrupted_single_correction() {
         use handbook_contracts::project_admission_governance::{
             ExpectedDeferredBasisV2, ProjectAdmissionScopeBasisV3,
         };
-        use handbook_sdk::admission_governance::{
+        use handbook_contracts::project_admission_governance::{
             DeferredEstablishmentExecutionV3, DeferredEstablishmentRequestV3,
         };
         let d_input = followup(
@@ -945,10 +945,10 @@ fn native_packet4_upfront_distinct_decider_and_interrupted_single_correction() {
         };
         let establishment = fixture
             .sdk
-            .prepare_deferred_project_admission_governance(
-                &DeferredEstablishmentRequestV3::human_approved(
-                    d.project,
-                    ExpectedDeferredBasisV2 {
+            .prepare_project_governance_establishment(
+                &handbook_sdk::admission_governance::GovernanceEstablishmentRequestV1::human_approved(
+                    serde_json::from_value(serde_json::to_value(d.project).unwrap()).unwrap(),
+                    handbook_sdk::admission_governance::DeferredRevisionV1 {
                         outcome_fingerprint: d.outcome_fingerprint,
                         relation_fingerprint: d.relation_fingerprint,
                     },
@@ -962,8 +962,8 @@ fn native_packet4_upfront_distinct_decider_and_interrupted_single_correction() {
         assert!(matches!(
             fixture
                 .sdk
-                .establish_deferred_project_admission_governance(establishment),
-            DeferredEstablishmentExecutionV3::Committed { .. }
+                .establish_project_governance(establishment),
+            handbook_sdk::admission_governance::ProjectGovernanceExecutionV1::Committed { outcome: handbook_sdk::admission_governance::ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
         ));
         assert!(fixture
             .sdk
@@ -1336,5 +1336,357 @@ fn native_packet4_interrupted_upfront_delegation_recovers_exact_original_intent(
                 .exists(),
             "upfront adoption and recovery create no unresolved request"
         );
+    });
+}
+
+#[cfg(all(feature = "governance-test-support", target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""))]
+#[test]
+fn saved_native_history_classifies_each_dependency() {
+    use std::io::{Read, Seek, SeekFrom, Write};
+    use std::os::unix::fs::{MetadataExt, PermissionsExt};
+    use std::path::PathBuf;
+    use sha2::{Digest, Sha256};
+
+    struct SavedNativeMemberRestoreGuardV1 { path: PathBuf, backup: PathBuf }
+    impl Drop for SavedNativeMemberRestoreGuardV1 {
+        fn drop(&mut self) {
+            if self.backup.exists() {
+                if self.path.exists() { std::fs::remove_file(&self.path).expect("remove owned replacement"); }
+                std::fs::rename(&self.backup, &self.path).expect("restore original inode");
+            }
+        }
+    }
+    struct SavedNativePermissionGuardV1 { path: PathBuf, permissions: std::fs::Permissions }
+    impl Drop for SavedNativePermissionGuardV1 {
+        fn drop(&mut self) { std::fs::set_permissions(&self.path, self.permissions.clone()).expect("restore original mode"); }
+    }
+    on_stack(|| {
+        let _package = InstalledProductionPackage::install();
+        let fixture = Fixture::new();
+        let formed = fixture.form(
+            "task19-saved-native-history-0001", supplied_validation_content(),
+            production_manifest().resolution_ceiling().clone(), LocalEvaluationUseIntentV1::Diagnostic,
+        );
+        let original = complete(&fixture, &formed);
+        let locator = original.result_locator().unwrap();
+        let result_bytes = original.result.as_ref().unwrap().canonical_json_bytes().unwrap();
+        let manifest = production_manifest();
+        let bundle = manifest.implementation_bundle();
+        let member = &bundle.files()[0];
+        let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
+            bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
+        assert!(original.origin_paths.contains(&member_path));
+        assert_eq!(member.length(), 37_053_312);
+        assert_eq!(member.sha256().as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        assert!(original.result.as_ref().unwrap().dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        let path = fixture.root.path().join(&member_path);
+        let metadata = std::fs::symlink_metadata(&path).unwrap();
+        assert!(metadata.is_file() && !metadata.file_type().is_symlink());
+        assert_eq!(metadata.nlink(), 1);
+        assert_eq!(metadata.len(), member.length());
+        let inode = metadata.ino();
+        let mode = metadata.permissions().mode();
+        let ctime_before = (metadata.ctime(), metadata.ctime_nsec());
+        let mut bytes = Vec::new();
+        std::fs::File::open(&path).unwrap().take(member.length() + 1).read_to_end(&mut bytes).unwrap();
+        assert_eq!(bytes.len() as u64, member.length());
+        assert_eq!(format!("sha256:{:x}", Sha256::digest(&bytes)), member.sha256().as_str());
+        let executions = || {
+            let directory = fixture.root.path().join(format!("{DOCK_OPERATIONAL_STORE_RELATIVE_ROOT_V1}/executions"));
+            let mut entries = std::fs::read_dir(directory).unwrap().map(|entry| {
+                let entry = entry.unwrap(); let meta = entry.metadata().unwrap();
+                assert!(meta.is_file() && meta.len() <= 1024 * 1024);
+                (entry.file_name(), format!("{:x}", Sha256::digest(std::fs::read(entry.path()).unwrap())))
+            }).collect::<Vec<_>>();
+            entries.sort(); entries
+        };
+        let executions_before = executions();
+        let baseline = fixture.sdk.read_local_evaluation_result_history(&locator).unwrap();
+        assert!(baseline.exact_replay_available);
+        assert_eq!(baseline.result.canonical_json_bytes().unwrap(), result_bytes);
+        let baseline_other = baseline.dependencies.iter().filter(|entry| entry.path != member_path).cloned().collect::<Vec<_>>();
+        let check = |status: &str, reason: &str| {
+            // This history API reopens original owner state and reads only; it
+            // never executes the retained member or launches the producer.
+            let history = fixture.sdk.read_local_evaluation_result_history(&locator).unwrap();
+            assert_eq!(history.result.canonical_json_bytes().unwrap(), result_bytes);
+            let matches = history.dependencies.iter().filter(|entry| entry.path == member_path).collect::<Vec<_>>();
+            assert_eq!(matches.len(), 1);
+            assert_eq!((matches[0].status.as_str(), matches[0].reason.as_str()), (status, reason));
+            assert_eq!(history.dependencies.iter().filter(|entry| entry.path != member_path).cloned().collect::<Vec<_>>(), baseline_other);
+            assert_eq!(history.exact_replay_available, status == "resolved");
+            assert_eq!(executions(), executions_before);
+        };
+        check("resolved", "exact_retained_owner_dependency");
+        let backup = path.with_file_name(".task19-owned-history-original");
+        assert!(!backup.exists());
+        {
+            std::fs::rename(&path, &backup).unwrap();
+            let _restore = SavedNativeMemberRestoreGuardV1 { path: path.clone(), backup: backup.clone() };
+            check("unavailable", "retained_dependency_missing");
+        }
+        assert_eq!(std::fs::metadata(&path).unwrap().ino(), inode);
+        {
+            std::fs::rename(&path, &backup).unwrap();
+            let _restore = SavedNativeMemberRestoreGuardV1 { path: path.clone(), backup: backup.clone() };
+            std::fs::copy(&backup, &path).unwrap();
+            let mut replacement = std::fs::OpenOptions::new().write(true).open(&path).unwrap();
+            replacement.seek(SeekFrom::Start(0)).unwrap();
+            replacement.write_all(&[bytes[0] ^ 1]).unwrap();
+            replacement.sync_all().unwrap();
+            check("unverifiable", "retained_dependency_substituted");
+        }
+        assert_eq!(std::fs::metadata(&path).unwrap().ino(), inode);
+        {
+            let _restore = SavedNativePermissionGuardV1 { path: path.clone(), permissions: std::fs::metadata(&path).unwrap().permissions() };
+            std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0)).unwrap();
+            assert_eq!(std::fs::File::open(&path).unwrap_err().kind(), std::io::ErrorKind::PermissionDenied);
+            check("unverifiable", "retained_dependency_unobservable");
+        }
+        let after = std::fs::symlink_metadata(&path).unwrap();
+        assert_eq!((after.ino(), after.nlink(), after.len(), after.permissions().mode()),
+            (inode, 1, member.length(), mode));
+        eprintln!("owned original member ctime before={ctime_before:?} after={:?}", (after.ctime(), after.ctime_nsec()));
+        check("resolved", "exact_retained_owner_dependency");
+        assert_eq!(fixture.sdk.recover_local_evaluation(&original.locator).unwrap(), original);
+        assert_eq!(executions(), executions_before);
+    });
+}
+
+#[cfg(all(feature = "governance-test-support", target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""))]
+#[test]
+#[ignore = "requires an empty task-owned test target and the exact production validator"]
+fn diagnostic_followup_retains_exact_inherited_native_source() {
+    use std::io::Read;
+    use std::os::unix::fs::MetadataExt;
+    use std::path::PathBuf;
+    use sha2::{Digest, Sha256};
+    struct OwnedPackageRestoreV1 { path: PathBuf, backup: PathBuf }
+    impl Drop for OwnedPackageRestoreV1 {
+        fn drop(&mut self) {
+            if self.backup.exists() {
+                assert!(std::fs::symlink_metadata(&self.path).is_err_and(|error| error.kind() == std::io::ErrorKind::NotFound),
+                    "do not replace another package during restore");
+                std::fs::rename(&self.backup, &self.path).expect("restore owned installed package");
+            }
+        }
+    }
+    on_stack(|| {
+        let owned_target = std::fs::canonicalize(std::env::var_os("HANDBOOK_TASK19_OWNED_TARGET")
+            .expect("a fresh task-owned target is required")).unwrap();
+        let executable = std::fs::canonicalize(std::env::current_exe().unwrap()).unwrap();
+        assert!(executable.starts_with(&owned_target), "test binary must be in the owned target");
+        let package_path = executable.parent().unwrap().join("handbook-docks/handbook.dock.json-schema/1.0.0")
+            .join(handbook_dock::host_target_tuple_v1());
+        assert!(std::fs::symlink_metadata(&package_path).is_err_and(|error| error.kind() == std::io::ErrorKind::NotFound),
+            "do not reuse or hide any preexisting installed package");
+        let _package = InstalledProductionPackage::install();
+        let installed = std::fs::symlink_metadata(&package_path).unwrap();
+        assert!(installed.is_dir() && !installed.file_type().is_symlink());
+        let parent_before = std::fs::symlink_metadata(package_path.parent().unwrap()).unwrap();
+        let package_version_before = (installed.mtime(), installed.mtime_nsec(), installed.ctime(), installed.ctime_nsec());
+        let parent_version_before = (parent_before.mtime(), parent_before.mtime_nsec(), parent_before.ctime(), parent_before.ctime_nsec());
+        let backup = package_path.with_file_name("task19-owned-package-backup");
+        assert!(std::fs::symlink_metadata(&backup).is_err_and(|error| error.kind() == std::io::ErrorKind::NotFound));
+        let fixture = Fixture::new();
+        let value = supplied_validation_content();
+        let original_capture = capture(value.clone());
+        let formed = fixture.form("task19-inherited-original-0001", value,
+            production_manifest().resolution_ceiling().clone(), LocalEvaluationUseIntentV1::Diagnostic);
+        let original = complete(&fixture, &formed);
+        let original_locator = original.result_locator().unwrap();
+        let original_bytes = original.result.as_ref().unwrap().canonical_json_bytes().unwrap();
+        let manifest = production_manifest();
+        let bundle = manifest.implementation_bundle();
+        let member = &bundle.files()[0];
+        let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
+            bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
+        assert_eq!(member.length(), 37_053_312);
+        assert_eq!(member.sha256().as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        let installed_member = package_path.join("bundle").join(member.path().as_str());
+        let installed_member_before = std::fs::symlink_metadata(&installed_member).unwrap();
+        assert!(installed_member_before.is_file() && !installed_member_before.file_type().is_symlink());
+        assert_eq!(installed_member_before.len(), member.length());
+        let installed_member_inode = installed_member_before.ino();
+        let installed_member_mode = installed_member_before.mode();
+        assert!(original.origin_paths.contains(&member_path));
+        assert!(original.result.as_ref().unwrap().dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        let input = followup(&fixture, &original, &original_capture, &original_capture,
+            LocalEvaluationFollowupActionV1::FreshRepeat, "task19-inherited-followup-0002");
+        let prepared = fixture.sdk.prepare_local_evaluation_followup(&fixture.initial, &fixture.authority, input).unwrap();
+        let next = fixture.sdk.form_local_evaluation_followup(&fixture.authority, prepared).unwrap();
+        let lineage = fixture.sdk.read_local_evaluation_lineage(&next.locator).unwrap().unwrap();
+        assert_eq!(lineage.original, original_locator);
+        assert!(lineage.dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        let executions_dir = fixture.root.path().join(format!("{DOCK_OPERATIONAL_STORE_RELATIVE_ROOT_V1}/executions"));
+        let execution_count = std::fs::read_dir(&executions_dir).unwrap().count();
+        std::fs::rename(&package_path, &backup).unwrap();
+        let _restore = OwnedPackageRestoreV1 { path: package_path.clone(), backup: backup.clone() };
+        let followup = issue(&fixture, next, original_capture);
+        let assessed = fixture.assess(&followup);
+        assert_eq!(assessed.stage, LocalEvaluationStageV3::Attemptable);
+        assert_eq!(assessed.readiness_bases.last().unwrap().readiness, LocalEvaluationReadinessV3::KnownLimited);
+        assert_eq!(assessed.readiness_bases.last().unwrap().capability.availability, "known_limited");
+        let session = fixture.session(&followup);
+        fixture.sdk.commit_local_evaluation_collection(&session).unwrap();
+        let outcome = fixture.sdk.execute_local_evaluation_once(
+            &session, followup.process_request.as_ref().unwrap(), &dock_reach(), &DockCancellationV1::new(),
+        ).unwrap();
+        let DockLocalEvaluationAttemptOutcomeV1::Terminal { terminal, replayed: false, .. } = outcome else {
+            panic!("the diagnostic absence must produce a fresh terminal");
+        };
+        assert_eq!(terminal.kind, "refused_before_launch");
+        assert!(terminal.execution.is_none());
+        finish(&fixture, &followup);
+        let closed = fixture.sdk.recover_local_evaluation(&followup.snapshot.locator).unwrap();
+        assert_eq!(closed.stage, LocalEvaluationStageV3::ResultClosed);
+        assert!(!closed.origin_paths.contains(&member_path), "the new origin must not contain the inherited member");
+        assert!(closed.result.as_ref().unwrap().dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        assert_eq!(fixture.sdk.read_local_evaluation_result_history(&original_locator).unwrap()
+            .result.canonical_json_bytes().unwrap(), original_bytes);
+        assert_eq!(std::fs::read_dir(&executions_dir).unwrap().count(), execution_count, "diagnostic refusal must not launch");
+        drop(_restore);
+        let restored = std::fs::symlink_metadata(&package_path).unwrap();
+        let parent_after = std::fs::symlink_metadata(package_path.parent().unwrap()).unwrap();
+        let restored_member = std::fs::symlink_metadata(&installed_member).unwrap();
+        assert_eq!(restored.ino(), installed.ino());
+        assert_eq!((restored_member.ino(), restored_member.len(), restored_member.mode()),
+            (installed_member_inode, member.length(), installed_member_mode));
+        let mut restored_bytes = Vec::new();
+        std::fs::File::open(&installed_member).unwrap().take(member.length() + 1)
+            .read_to_end(&mut restored_bytes).unwrap();
+        assert_eq!(restored_bytes.len() as u64, member.length());
+        assert_eq!(format!("sha256:{:x}", Sha256::digest(&restored_bytes)), member.sha256().as_str());
+        eprintln!("owned package version before={package_version_before:?} after={:?}; parent version before={parent_version_before:?} after={:?}",
+            (restored.mtime(), restored.mtime_nsec(), restored.ctime(), restored.ctime_nsec()),
+            (parent_after.mtime(), parent_after.mtime_nsec(), parent_after.ctime(), parent_after.ctime_nsec()));
+    });
+}
+
+#[cfg(all(feature = "governance-test-support", target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""))]
+#[test]
+#[ignore = "requires the exact production validator"]
+fn followup_refuses_omitted_saved_native_dependency_reach() {
+    // Observe only the actual Contracts/Dock owner families, never file-native
+    // index/frame/pack/matcher paths. No caller-supplied fixture is modified.
+    fn native_reach_snapshot_walk_v1(
+        root: &std::path::Path,
+        path: &std::path::Path,
+        out: &mut std::collections::BTreeMap<String, String>,
+    ) {
+        use sha2::{Digest, Sha256};
+        use std::io::Read;
+        use std::os::unix::fs::{MetadataExt, PermissionsExt};
+        let relative = path.strip_prefix(root).unwrap().to_str().unwrap().to_owned();
+        let metadata = match std::fs::symlink_metadata(path) {
+            Ok(metadata) => metadata,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+                out.insert(relative, "absent".into());
+                return;
+            }
+            Err(error) => panic!("owner snapshot metadata failed: {error}"),
+        };
+        assert!(!metadata.file_type().is_symlink());
+        if metadata.is_dir() {
+            out.insert(relative, format!("directory:{}:{}:{:o}", metadata.dev(), metadata.ino(), metadata.permissions().mode()));
+            let mut count = 0;
+            for entry in std::fs::read_dir(path).unwrap() {
+                count += 1;
+                assert!(count <= 4096, "snapshot directory exceeded its bound");
+                native_reach_snapshot_walk_v1(root, &entry.unwrap().path(), out);
+            }
+        } else {
+            assert!(metadata.is_file());
+            assert!(metadata.len() <= 64 * 1024 * 1024, "snapshot file exceeded its bound");
+            let mut file = std::fs::File::open(path).unwrap().take(metadata.len() + 1);
+            let mut digest = Sha256::new();
+            let mut buffer = [0_u8; 64 * 1024];
+            let mut total = 0_u64;
+            loop {
+                let count = file.read(&mut buffer).unwrap();
+                if count == 0 { break; }
+                total += count as u64;
+                digest.update(&buffer[..count]);
+            }
+            let after = std::fs::symlink_metadata(path).unwrap();
+            assert_eq!((total, after.dev(), after.ino(), after.len(), after.mtime(), after.mtime_nsec(), after.ctime(), after.ctime_nsec()),
+                (metadata.len(), metadata.dev(), metadata.ino(), metadata.len(), metadata.mtime(), metadata.mtime_nsec(), metadata.ctime(), metadata.ctime_nsec()));
+            out.insert(relative, format!("file:{}:{}:{}:{}:{:o}:{:x}", metadata.dev(), metadata.ino(), metadata.nlink(), metadata.len(), metadata.permissions().mode(), digest.finalize()));
+        }
+    }
+    fn native_reach_original_snapshot_v1(root: &std::path::Path) -> std::collections::BTreeMap<String, String> {
+        let mut result = std::collections::BTreeMap::new();
+        for relative in [
+            LOCAL_EVALUATION_OWNER_ROOT_V3,
+            ".handbook/state/contracts/v1/transactions",
+            DOCK_LOCAL_EVALUATION_ROOT_V1,
+            DOCK_OPERATIONAL_STORE_RELATIVE_ROOT_V1,
+        ] {
+            native_reach_snapshot_walk_v1(root, &root.join(relative), &mut result);
+        }
+        result
+    }
+    on_stack(|| {
+        let _package = InstalledProductionPackage::install();
+        let fixture = Fixture::new();
+        let value = supplied_validation_content();
+        let original_capture = capture(value.clone());
+        let formed = fixture.form("task19-reach-original-0001", value,
+            production_manifest().resolution_ceiling().clone(), LocalEvaluationUseIntentV1::Diagnostic);
+        let original = complete(&fixture, &formed);
+        let result = original.result.as_ref().unwrap();
+        let result_bytes = result.canonical_json_bytes().unwrap();
+        let manifest = production_manifest();
+        let bundle = manifest.implementation_bundle();
+        let member = &bundle.files()[0];
+        let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
+            bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
+        assert_eq!(member.length(), 37_053_312);
+        assert_eq!(member.sha256().as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        assert!(result.dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        let mut input = followup(&fixture, &original, &original_capture, &original_capture,
+            LocalEvaluationFollowupActionV1::FreshRepeat, "task19-reach-refused-0002");
+        let mut paths = [
+            ".handbook-initialization-receipt.v1.json", ".handbook-initialization.lock",
+            ".handbook-initialization.v1.json", ".handbook/project/charter.yaml",
+            ".handbook/repository-identity.v1", ".handbook/local-charter/v1/**",
+            ".handbook/local-operating/**", ".handbook/admission-governance/v2/**",
+            ".handbook/state/contracts/**", ".handbook/state/locks/**",
+            ".handbook/state/dock/v1/**", ".handbook/state/dock/local-evaluation-v1/attempts/**",
+            ".handbook/state/dock/local-evaluation-v1/capabilities/**", "handbook-docks/**", "inputs/*",
+        ].into_iter().map(str::to_owned).collect::<Vec<_>>();
+        for dependency in &result.dependencies {
+            if dependency.path != member_path && !paths.iter().any(|selector| {
+                selector == &dependency.path || selector.strip_suffix("/**").is_some_and(|prefix|
+                    dependency.path == prefix || dependency.path.starts_with(&format!("{prefix}/")))
+            }) {
+                paths.push(dependency.path.clone());
+            }
+        }
+        paths.sort(); paths.dedup();
+        assert!(paths.len() <= 64, "the test must remain within ordinary reach bounds");
+        assert!(!paths.iter().any(|selector| selector == &member_path || selector.strip_suffix("/**")
+            .is_some_and(|prefix| member_path == prefix || member_path.starts_with(&format!("{prefix}/")))));
+        input.input.formation.reach.input_paths = paths;
+        // Captured-input formation requires the whole Dock owner subtree, so
+        // omitting this member must be refused before follow-up formation.
+        let before = native_reach_original_snapshot_v1(fixture.root.path());
+        match fixture.sdk.prepare_local_evaluation_followup(&fixture.initial, &fixture.authority, input) {
+            Err(LocalEvaluationSdkErrorV1::Engine(error)) => {
+                assert_eq!(error.code, "required_owner_subtree");
+                assert_eq!(error.detail, "explicit complete consuming owner subtree required");
+            }
+            other => panic!("expected complete captured-input Dock subtree refusal, got {other:?}"),
+        }
+        assert_eq!(native_reach_original_snapshot_v1(fixture.root.path()), before,
+            "refusal must not alter original Contracts/Dock records or execution");
+        assert_eq!(fixture.sdk.read_local_evaluation_result_history(&original.result_locator().unwrap()).unwrap()
+            .result.canonical_json_bytes().unwrap(), result_bytes);
+        assert_eq!(native_reach_original_snapshot_v1(fixture.root.path()), before);
     });
 }

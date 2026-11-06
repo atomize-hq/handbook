@@ -5,7 +5,7 @@ use handbook_engine::{
     CharterAcquisitionMode, CharterCoverageSubmission, CharterIntakeConsumer,
     CharterIntakeEnvelope, CharterIntakeSourceKind,
 };
-use handbook_sdk::admission_governance::DeferralRequestInputV2;
+use handbook_sdk::admission_governance::InitialDeferralRequestV1;
 use handbook_sdk::local_setup::*;
 use handbook_sdk::HandbookSdkV1;
 use serde_json::{json, Value};
@@ -95,10 +95,10 @@ pub fn supplied_initial_request() -> LocalInitialSetupRequestV1 {
     })
     .collect();
     LocalInitialSetupRequestV1 {
-        deferral: DeferralRequestInputV2::human_approved(
+        deferral: InitialDeferralRequestV1::human_approved(
             "packet2-deferral",
             "The supplied test human approved this exact scoped deferral.",
-        ),
+        ).unwrap(),
         charter: NativeLocalCharterRequestV1 {
             request_key: "packet2-charter".into(),
             intake: CharterIntakeEnvelope {
@@ -235,6 +235,9 @@ impl InstalledProductionPackage {
             .join(manifest.implementation_bundle().entrypoint().as_str());
         fs::create_dir_all(staged_executable.parent().unwrap()).unwrap();
         fs::write(&staged_executable, bytes).unwrap();
+        #[cfg(unix)]
+        fs::set_permissions(&staged_executable, fs::metadata(&executable).unwrap().permissions())
+            .unwrap();
         fs::write(
             package_root.join("manifest.json"),
             manifest.canonical_json_bytes().unwrap(),
@@ -547,7 +550,7 @@ pub fn project(
     initial: &LocalInitialSetupLocatorV1,
 ) -> handbook_contracts::project_admission_governance::ProjectAdmissionBindingV3 {
     handbook_contracts::project_admission_governance::ProjectAdmissionBindingV3::ScopedChoiceV2(
-        initial.deferral.project.clone(),
+        (&initial.deferral.project).into(),
     )
 }
 

@@ -219,16 +219,26 @@ fn closed(value: &Value, keys: &[&str]) -> Result<(), ContractError> {
     }
     Ok(())
 }
+fn admit_native_validator_manifest_v1(
+    dependencies: &LocalDefinitionDependenciesV2,
+) -> Result<handbook_engine::repository_durability::RepositoryNativeManifestAdmissionV1, ContractError> {
+    let manifest_bytes = canonical_bytes(&dependencies.validator.canonical_manifest)?;
+    let recognized = LocalValidatorDependencyV2::from_manifest_json(&manifest_bytes)?;
+    if recognized != dependencies.validator {
+        return Err(ContractError::InvalidInvariant);
+    }
+    handbook_engine::repository_durability::admit_native_production_manifest_v1(&manifest_bytes)
+        .map_err(|_| ContractError::InvalidInvariant)
+}
+
 fn validate_capability_proof(
     root: &RetainedRepositoryRootV1,
     checkpoint: &RepositoryExactFilesCheckpointV1<'_>,
     record: &NativeLocalEvaluationCapabilityV3,
     dependencies: &LocalDefinitionDependenciesV2,
 ) -> Result<(), ContractError> {
-    let recognized = LocalValidatorDependencyV2::from_manifest_json(&canonical_bytes(
-        &dependencies.validator.canonical_manifest,
-    )?)?;
-    if recognized != dependencies.validator || record.manifest != recognized.manifest {
+    let native_admission = admit_native_validator_manifest_v1(dependencies)?;
+    if record.manifest != dependencies.validator.manifest {
         return Err(ContractError::InvalidInvariant);
     }
     closed(
@@ -351,20 +361,22 @@ fn validate_capability_proof(
             if path.strip_prefix(&prefix) != Some(text(member, "path")?) {
                 return Err(ContractError::InvalidInvariant);
             }
-            let bytes = pinned(root, checkpoint, path)?;
-            let digest = format!("sha256:{:x}", Sha256::digest(&bytes));
+            let expected_length = member["length"]
+                .as_u64()
+                .ok_or(ContractError::InvalidInvariant)?;
             let expected_digest = member["sha256"]
                 .as_str()
                 .or_else(|| member["fingerprint"].as_str())
                 .ok_or(ContractError::InvalidInvariant)?;
-            if proof["length"] != bytes.len()
-                || text(proof, "sha256")? != digest
-                || member["length"] != bytes.len()
-                || expected_digest.trim_start_matches("sha256:")
-                    != digest.trim_start_matches("sha256:")
+            if proof["length"].as_u64() != Some(expected_length)
+                || text(proof, "sha256")?
+                    != format!("sha256:{}", expected_digest.trim_start_matches("sha256:"))
             {
                 return Err(ContractError::InvalidInvariant);
             }
+            checkpoint
+                .require_native_manifest_member_v1(root, &native_admission, path)
+                .map_err(|_| ContractError::InvalidInvariant)?;
         }
     } else if !record.controls["manifest_path"].is_null()
         || record.controls["package_files"] != json!([])
@@ -439,6 +451,9 @@ pub fn resolve_native_local_evaluation_origin_v3<'a, R>(
     if !run.is_local_evaluation_v3() {
         return Err(ContractError::InvalidInvariant);
     }
+    // Admit the exact static descriptor before checkpoint validation can read
+    // any artifact while resolving the historical origin.
+    admit_native_validator_manifest_v1(dependencies)?;
     let directory = format!(
         "{NATIVE_LOCAL_EVALUATION_ROOT_V3}/attempts/{}",
         attempt.fingerprint().as_str().trim_start_matches("sha256:")
@@ -1090,9 +1105,9 @@ fn validate_native_attempt_transaction(
 mod tests {
     use super::*;
     fn dependencies() -> LocalDefinitionDependenciesV2 {
-        let descriptor: Value = serde_json::from_slice(include_bytes!(
-            "../../dock/production-manifests/x86_64-pc-windows-msvc/manifest.json"
-        ))
+        let descriptor: Value = serde_json::from_slice(
+            crate::local_contract::selected_dock_manifest_bytes().expect("supported Dock target"),
+        )
         .unwrap();
         let validator =
             LocalValidatorDependencyV2::from_manifest_json(&canonical_bytes(&descriptor).unwrap())
@@ -1153,7 +1168,7 @@ mod tests {
             .unwrap();
         let mut deps = dependencies();
         let bundle = &deps.validator.canonical_manifest["implementation_bundle"];
-        let record=NativeLocalEvaluationCapabilityV3::new(deps.validator.manifest.clone(),ContentAddressedBindingV1::new(bundle["bundle_ref"].as_str().unwrap(),FingerprintV1::parse(bundle["bundle_fingerprint"].as_str().unwrap()).unwrap()).unwrap(),"x86_64-pc-windows-msvc".into(),"available".into(),json!({"profile":"first_party_native_advisory","availability_reason":"caller_says_native_ready"}),SemanticTimeV1::parse("2026-10-06T00:00:00Z").unwrap(),SemanticTimeV1::parse("2026-11-06T00:00:00Z").unwrap()).unwrap();
+        let record=NativeLocalEvaluationCapabilityV3::new(deps.validator.manifest.clone(),ContentAddressedBindingV1::new(bundle["bundle_ref"].as_str().unwrap(),FingerprintV1::parse(bundle["bundle_fingerprint"].as_str().unwrap()).unwrap()).unwrap(),bundle["target"].as_str().unwrap().into(),"available".into(),json!({"profile":"first_party_native_advisory","availability_reason":"caller_says_native_ready"}),SemanticTimeV1::parse("2026-10-06T00:00:00Z").unwrap(),SemanticTimeV1::parse("2026-11-06T00:00:00Z").unwrap()).unwrap();
         let granted = std::cell::Cell::new(false);
         assert!(resolve_native_local_evaluation_capability_v3(
             &root,

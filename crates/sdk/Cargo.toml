@@ -26,6 +26,7 @@ doc = false
 
 [features]
 default = []
+governance-test-support = ["handbook-contracts/test-support"]
 contract-schema-generation = ["dep:schemars"]
 dock-test-support = ["handbook-dock/test-support", "dep:serde_json_canonicalizer"]
 

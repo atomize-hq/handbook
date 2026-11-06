@@ -216,7 +216,7 @@ pub enum DeferralFaultBoundaryV2 {
     Reply,
 }
 #[derive(Default)]
-pub struct ProjectAdmissionDeferralV2 {
+pub(crate) struct ProjectAdmissionDeferralV2 {
     #[cfg(feature = "test-support")]
     fault: Option<DeferralFaultBoundaryV2>,
     #[cfg(feature = "test-support")]

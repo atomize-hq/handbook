@@ -7,6 +7,12 @@
 //! in the same decided transaction as activation; usable truth requires terminal
 //! closure of every installed fact. Recovery does not allocate an identity.
 
+#[cfg(test)]
+mod owner_tests;
+mod semantic_types;
+mod semantic;
+pub use semantic_types::*;
+pub use semantic::*;
 mod types;
 pub use types::*;
 mod deferral;
@@ -140,7 +146,7 @@ pub enum GovernanceFaultBoundaryV1 {
     Reply,
 }
 #[derive(Default)]
-pub struct ProjectAdmissionGovernanceV1 {
+pub(crate) struct ProjectAdmissionGovernanceV1 {
     #[cfg(feature = "test-support")]
     fault: Option<GovernanceFaultBoundaryV1>,
     #[cfg(feature = "test-support")]
@@ -478,6 +484,19 @@ impl ProjectAdmissionGovernanceV1 {
         scope: &str,
         expected: Option<&ExpectedGovernanceBasisV1>,
     ) -> Result<ActiveGovernanceBasisV1, GovernanceRefusalV1> {
+        self.resolve_active_with_original(root, project, scope, expected)
+            .map(|(basis, _)| basis)
+    }
+
+    /// Returns current owner-verified truth and its exact original request.
+    /// The historical locator alone never establishes current applicability.
+    pub fn resolve_active_with_original(
+        &self,
+        root: impl AsRef<Path>,
+        project: &ProjectBindingV1,
+        scope: &str,
+        expected: Option<&ExpectedGovernanceBasisV1>,
+    ) -> Result<(ActiveGovernanceBasisV1, GovernanceRequestLocatorV1), GovernanceRefusalV1> {
         if scope != GOVERNANCE_SCOPE_V1 {
             return Err(refusal(
                 "unsupported_scope",
@@ -543,7 +562,7 @@ impl ProjectAdmissionGovernanceV1 {
                 }
                 native.release().map_err(fs_refusal)?;
                 guard.release().map_err(fs_refusal)?;
-                Ok(facts.active)
+                Ok((facts.active, locator))
             }
             GovernanceExecutionV1::Refused { refusal } => Err(refusal),
             GovernanceExecutionV1::NotCommitted { .. } => Err(refusal(

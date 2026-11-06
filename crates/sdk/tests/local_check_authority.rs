@@ -425,18 +425,18 @@ fn local_authority_child() {
         fs::write(messages.join("changing"), []).unwrap();
         let project = initial.deferral.project.clone();
         let current = sdk
-            .resolve_project_admission_scope_v3(
-                &ProjectAdmissionBindingV3::ScopedChoiceV2(project.clone()),
+            .resolve_current_project_governance(
+                &GovernanceProjectSelectionV1::InitiallyDeferred(project.clone()),
                 ADMISSION_GOVERNANCE_SCOPE_V1,
                 None,
             )
             .unwrap();
-        let ProjectAdmissionScopeBasisV3::DeferredV2(deferred) = current else {
+        let CurrentProjectGovernanceV1::Deferred { basis: deferred, .. } = current else {
             panic!("D expected");
         };
-        let request = DeferredEstablishmentRequestV3::human_approved(
+        let request = GovernanceEstablishmentRequestV1::human_approved(
             project,
-            ExpectedDeferredBasisV2 {
+            DeferredRevisionV1 {
                 outcome_fingerprint: deferred.outcome_fingerprint,
                 relation_fingerprint: deferred.relation_fingerprint,
             },
@@ -446,11 +446,11 @@ fn local_authority_child() {
         )
         .unwrap();
         let prepared = sdk
-            .prepare_deferred_project_admission_governance(&request)
+            .prepare_project_governance_establishment(&request)
             .unwrap();
         assert!(matches!(
-            sdk.establish_deferred_project_admission_governance(prepared),
-            DeferredEstablishmentExecutionV3::Committed { .. }
+            sdk.establish_project_governance(prepared),
+            ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }
         ));
     } else {
         fs::write(messages.join("changing"), []).unwrap();
@@ -470,4 +470,42 @@ fn local_authority_child() {
         )
         .unwrap();
     }
+}
+
+#[test]
+fn unified_current_observation_uses_exact_native_basis_bytes_before_and_after_establishment() {
+    use handbook_sdk::admission_governance::{
+        CurrentProjectGovernanceV1, EstablishedGovernanceOriginV1, GovernanceEstablishmentRequestV1, DeferredRevisionV1,
+        GovernanceProjectSelectionV1, ProjectGovernanceCommittedV1, ProjectGovernanceExecutionV1,
+        ADMISSION_GOVERNANCE_SCOPE_V1,
+    };
+    let dir = tempdir().unwrap();
+    let sdk = HandbookSdkV1::open(dir.path());
+    let initial = establish_initial(&sdk);
+    let binding = GovernanceProjectSelectionV1::InitiallyDeferred(initial.deferral.project.clone());
+    let basis = match sdk.resolve_current_project_governance(&binding, ADMISSION_GOVERNANCE_SCOPE_V1, None).unwrap() {
+        CurrentProjectGovernanceV1::Deferred { basis, .. } => basis,
+        other => panic!("expected deferred basis: {other:?}"),
+    };
+    let actual = sdk.observe_local_check_basis(&initial).unwrap();
+    let bytes = fs::read(dir.path().join(".handbook/admission-governance/v2/scope-current.json")).unwrap();
+    let native: handbook_contracts::project_admission_governance::DeferredGovernanceBasisV2 = serde_json::from_value(serde_json::to_value(&basis).unwrap()).unwrap();
+    assert_eq!(bytes, native.canonical_json_bytes().unwrap());
+    assert_eq!(actual.relation_fingerprint, handbook_engine::DefinitionFingerprint::from_bytes(&bytes).to_string());
+    let request = GovernanceEstablishmentRequestV1::human_approved(
+        basis.project.clone(),
+        DeferredRevisionV1 { outcome_fingerprint: basis.outcome_fingerprint, relation_fingerprint: basis.relation_fingerprint },
+        7200, "basis-byte-establishment", "Approve the exact selected governance.",
+    ).unwrap();
+    let prepared = sdk.prepare_project_governance_establishment(&request).unwrap();
+    assert!(matches!(sdk.establish_project_governance(prepared), ProjectGovernanceExecutionV1::Committed { outcome: ProjectGovernanceCommittedV1::EstablishedFromDeferred(_), .. }));
+    let basis = match sdk.resolve_current_project_governance(&binding, ADMISSION_GOVERNANCE_SCOPE_V1, None).unwrap() {
+        CurrentProjectGovernanceV1::Established { origin: EstablishedGovernanceOriginV1::FromDeferred { basis, .. } } => basis,
+        other => panic!("expected established basis: {other:?}"),
+    };
+    let actual = sdk.observe_local_check_basis(&initial).unwrap();
+    let bytes = fs::read(dir.path().join(".handbook/admission-governance/v2/scope-current.json")).unwrap();
+    let native: handbook_contracts::project_admission_governance::EstablishedFromDeferredBasisV3 = serde_json::from_value(serde_json::to_value(&basis).unwrap()).unwrap();
+    assert_eq!(bytes, native.canonical_json_bytes().unwrap());
+    assert_eq!(actual.relation_fingerprint, handbook_engine::DefinitionFingerprint::from_bytes(&bytes).to_string());
 }

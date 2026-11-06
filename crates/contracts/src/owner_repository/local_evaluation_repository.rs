@@ -54,6 +54,76 @@ fn retained_evaluation_dependency_fingerprint(
     }
 }
 
+// A native exception is private to an already validated saved descriptor and
+// the exact dependency being consumed. Ordinary records retain their limit.
+enum RetainedDependencyObservationV1 {
+    Present(FingerprintV1),
+    Absent,
+    Substituted,
+}
+
+fn saved_native_member_digest_v1(
+    validator: &LocalValidatorDependencyV2,
+    path: &str,
+) -> Result<Option<FingerprintV1>, ContractOwnerRepositoryErrorV1> {
+    let bundle = &validator.canonical_manifest["implementation_bundle"];
+    let fingerprint = bundle["bundle_fingerprint"].as_str()
+        .and_then(|value| value.strip_prefix("sha256:"))
+        .ok_or_else(|| invalid("saved native bundle fingerprint is malformed"))?;
+    let prefix = format!("{NATIVE_LOCAL_EVALUATION_ROOT_V3}/packages/{fingerprint}/");
+    let Some(relative) = path.strip_prefix(&prefix) else { return Ok(None); };
+    let members = bundle["files"].as_array()
+        .ok_or_else(|| invalid("saved native member list is malformed"))?;
+    let Some(member) = members.iter().find(|member| member["path"].as_str() == Some(relative))
+        else { return Ok(None); };
+    let digest = member["sha256"].as_str()
+        .ok_or_else(|| invalid("saved native member fingerprint is malformed"))?;
+    Ok(Some(FingerprintV1::parse(digest).map_err(map_contract_input)?))
+}
+
+fn retained_dependency_with_saved_native_v1(
+    root: &RetainedRepositoryRootV1,
+    path: &str,
+    lock_generations: &[handbook_engine::local_authority::LocalBindingV1],
+    validator: &LocalValidatorDependencyV2,
+    saved_fingerprint: Option<&FingerprintV1>,
+    origin: Option<&ResolvedLocalEvaluationOriginV3<'_>>,
+) -> Result<RetainedDependencyObservationV1, ContractOwnerRepositoryErrorV1> {
+    let Some(expected) = saved_native_member_digest_v1(validator, path)? else {
+        return Ok(match retained_evaluation_dependency_fingerprint(root, path, lock_generations)? {
+            Some(fingerprint) => RetainedDependencyObservationV1::Present(fingerprint),
+            None => RetainedDependencyObservationV1::Absent,
+        });
+    };
+    let manifest_bytes = canonical_bytes(&validator.canonical_manifest).map_err(map_contract_input)?;
+    let admission = handbook_engine::repository_durability::admit_native_production_manifest_v1(&manifest_bytes)
+        .map_err(|_| invalid("saved native descriptor is not admitted"))?;
+    if saved_fingerprint.is_some_and(|saved| saved != &expected) {
+        return Ok(RetainedDependencyObservationV1::Substituted);
+    }
+    if let Some(origin) = origin {
+        origin.require_repository_root(root).map_err(map_contract_input)?;
+        origin.checkpoint.require_native_manifest_member_v1(root, &admission, path)
+            .map_err(map_durability)?;
+    }
+    match root.read_native_manifest_member_v1(&admission, path) {
+        Ok(RepositoryReadV1::Found(bytes)) => {
+            let actual = FingerprintV1::from_bytes(&bytes);
+            if actual != expected {
+                return Ok(RetainedDependencyObservationV1::Substituted);
+            }
+            Ok(RetainedDependencyObservationV1::Present(actual))
+        }
+        Ok(RepositoryReadV1::Absent) => Ok(RetainedDependencyObservationV1::Absent),
+        Err(failure) if failure.kind() == RepositoryDurabilityErrorKindV1::CurrentValueMismatch => {
+            // Engine admission and exact descriptor member lookup above have
+            // succeeded: here this kind denotes observed length/digest change.
+            Ok(RetainedDependencyObservationV1::Substituted)
+        }
+        Err(failure) => Err(map_durability(failure)),
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 struct EvaluationLedger {
@@ -1192,25 +1262,31 @@ impl ContractOwnerRepositoryV1 {
         self.with_existing_full_definition_lock(|owner| {
             owner.require_eval_locator_root(locator)?;
             let state = owner.eval_current(locator)?;
+            let validator = state.definition.dependencies().validator.clone();
             let result = state
                 .result
                 .ok_or_else(|| invalid("original occurrence has no closed historical result"))?;
             let mut observations = vec![];
             let mut available = true;
             for dependency in &result.dependencies {
-                let (status, reason) = match retained_evaluation_dependency_fingerprint(
+                let (status, reason) = match retained_dependency_with_saved_native_v1(
                     &owner.repository_root,
                     &dependency.path,
                     &state.retained_lock_generations,
+                    &validator,
+                    Some(&dependency.bytes_fingerprint),
+                    None,
                 ) {
-                    Ok(Some(fingerprint)) if fingerprint == dependency.bytes_fingerprint => {
+                    Ok(RetainedDependencyObservationV1::Present(fingerprint))
+                        if fingerprint == dependency.bytes_fingerprint => {
                         ("resolved", "exact_retained_owner_dependency")
                     }
-                    Ok(Some(_)) => {
+                    Ok(RetainedDependencyObservationV1::Present(_))
+                    | Ok(RetainedDependencyObservationV1::Substituted) => {
                         available = false;
                         ("unverifiable", "retained_dependency_substituted")
                     }
-                    Ok(None) => {
+                    Ok(RetainedDependencyObservationV1::Absent) => {
                         available = false;
                         ("unavailable", "retained_dependency_missing")
                     }
@@ -1398,15 +1474,51 @@ impl ContractOwnerRepositoryV1 {
                     admission.require_input_path(&path).map_err(|_| {
                         invalid("final closure omitted actual retained dependency proof reach")
                     })?;
-                    let Some(bytes_fingerprint) = retained_evaluation_dependency_fingerprint(
-                        &owner.repository_root,
-                        &path,
-                        &next.retained_lock_generations,
-                    )?
-                    else {
-                        return Err(invalid(
+                    let live_origin = origin.filter(|origin| origin.native_paths().iter().any(|item| item == &path));
+                    let mut inherited = None;
+                    if live_origin.is_none()
+                        && saved_native_member_digest_v1(&next.definition.dependencies().validator, &path)?.is_some()
+                    {
+                        if let Some(lineage) = &lineage {
+                            if let Some(prior) = lineage.dependencies.iter().find(|entry| entry.path == path) {
+                                let original = owner.eval_current(&lineage.original.evaluation)?;
+                                let result = original.result.as_ref().ok_or_else(|| substituted("lineage original has no result"))?;
+                                if result.identity != lineage.original.result
+                                    || !result.dependencies.iter().any(|entry| entry.path == path
+                                        && entry.bytes_fingerprint == prior.bytes_fingerprint)
+                                {
+                                    return Err(substituted("lineage native member is not in the exact original result"));
+                                }
+                                inherited = Some((original, prior.bytes_fingerprint.clone()));
+                            }
+                        }
+                    }
+                    let observed = if let Some(original) = live_origin {
+                        retained_dependency_with_saved_native_v1(
+                            &owner.repository_root, &path, &next.retained_lock_generations,
+                            &next.definition.dependencies().validator, None, Some(original),
+                        )?
+                    } else if let Some((original, fingerprint)) = &inherited {
+                        retained_dependency_with_saved_native_v1(
+                            &owner.repository_root, &path, &next.retained_lock_generations,
+                            &original.definition.dependencies().validator, Some(fingerprint), None,
+                        )?
+                    } else {
+                        match retained_evaluation_dependency_fingerprint(
+                            &owner.repository_root, &path, &next.retained_lock_generations,
+                        )? {
+                            Some(fingerprint) => RetainedDependencyObservationV1::Present(fingerprint),
+                            None => RetainedDependencyObservationV1::Absent,
+                        }
+                    };
+                    let bytes_fingerprint = match observed {
+                        RetainedDependencyObservationV1::Present(fingerprint) => fingerprint,
+                        RetainedDependencyObservationV1::Absent => return Err(invalid(
                             "required historical dependency is already unavailable",
-                        ));
+                        )),
+                        RetainedDependencyObservationV1::Substituted => return Err(substituted(
+                            "retained native dependency changed before result closure",
+                        )),
                     };
                     if lineage.as_ref().is_some_and(|lineage| {
                         lineage.dependencies.iter().any(|dependency| {
@@ -2647,6 +2759,98 @@ mod population_tests {
             ContractOwnerRepositoryErrorKindV1::RecoveryAmbiguous
         );
         assert_eq!(std::fs::read(path).unwrap(), bytes);
+    }
+
+    #[cfg(all(target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""))]
+    #[test]
+    #[ignore = "requires the exact production validator in HANDBOOK_PACKET2_VALIDATOR_EXE"]
+    fn saved_native_retention_classifies_exact_and_ordinary() {
+        use std::io::{Read, Seek, SeekFrom, Write};
+        use std::os::unix::fs::{MetadataExt, PermissionsExt};
+        use std::path::PathBuf;
+        struct SavedMemberRestoreV1 { path: PathBuf, backup: PathBuf }
+        impl Drop for SavedMemberRestoreV1 {
+            fn drop(&mut self) {
+                if self.backup.exists() {
+                    if self.path.exists() { std::fs::remove_file(&self.path).expect("remove disposable replacement"); }
+                    std::fs::rename(&self.backup, &self.path).expect("restore original member");
+                }
+            }
+        }
+        struct SavedPermissionsRestoreV1 { path: PathBuf, permissions: std::fs::Permissions }
+        impl Drop for SavedPermissionsRestoreV1 {
+            fn drop(&mut self) { std::fs::set_permissions(&self.path, self.permissions.clone()).expect("restore member permissions"); }
+        }
+        let manifest_bytes = crate::local_contract::selected_dock_manifest_bytes().unwrap()
+            .strip_suffix(b"\n").unwrap();
+        let validator = LocalValidatorDependencyV2::from_manifest_json(manifest_bytes).unwrap();
+        let bundle = &validator.canonical_manifest["implementation_bundle"];
+        let fingerprint = bundle["bundle_fingerprint"].as_str().unwrap().strip_prefix("sha256:").unwrap();
+        let member = &bundle["files"][0];
+        let relative = format!("{NATIVE_LOCAL_EVALUATION_ROOT_V3}/packages/{fingerprint}/{}", member["path"].as_str().unwrap());
+        let digest = FingerprintV1::parse(member["sha256"].as_str().unwrap()).unwrap();
+        assert_eq!(member["length"].as_u64().unwrap(), 37_053_312);
+        assert_eq!(digest.as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        let actual = PathBuf::from(std::env::var_os("HANDBOOK_PACKET2_VALIDATOR_EXE").expect("exact real validator path required"));
+        let mut bytes = Vec::new();
+        std::fs::File::open(&actual).expect("exact real validator must be readable")
+            .take(37_053_313).read_to_end(&mut bytes).unwrap();
+        assert_eq!(bytes.len(), 37_053_312);
+        assert_eq!(FingerprintV1::from_bytes(&bytes), digest);
+        let temporary = tempfile::Builder::new().prefix("task19-contract-retention-").tempdir().unwrap();
+        let native_path = temporary.path().join(&relative);
+        std::fs::create_dir_all(native_path.parent().unwrap()).unwrap();
+        std::fs::write(&native_path, &bytes).unwrap();
+        let unrelated = format!("{NATIVE_LOCAL_EVALUATION_ROOT_V3}/packages/{fingerprint}/bin/unrelated");
+        std::fs::File::create(temporary.path().join(&unrelated)).unwrap().set_len(16 * 1024 * 1024 + 1).unwrap();
+        let lock_path = temporary.path().join(LOCK_RELATIVE_PATH);
+        std::fs::create_dir_all(lock_path.parent().unwrap()).unwrap();
+        std::fs::write(&lock_path, []).unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(temporary.path()).unwrap();
+        let inode = std::fs::metadata(&native_path).unwrap().ino();
+        let read = |path: &str, saved: Option<&FingerprintV1>, locks: &[handbook_engine::local_authority::LocalBindingV1]| {
+            retained_dependency_with_saved_native_v1(&root, path, locks, &validator, saved, None)
+        };
+        assert!(matches!(read(&relative, Some(&digest), &[]).unwrap(),
+            RetainedDependencyObservationV1::Present(value) if value == digest));
+        let backup = native_path.with_file_name("validator-owned-backup");
+        assert!(!backup.exists());
+        {
+            std::fs::rename(&native_path, &backup).unwrap();
+            let _restore = SavedMemberRestoreV1 { path: native_path.clone(), backup: backup.clone() };
+            assert!(matches!(read(&relative, Some(&digest), &[]).unwrap(), RetainedDependencyObservationV1::Absent));
+            std::fs::copy(&backup, &native_path).unwrap();
+            let mut replacement = std::fs::OpenOptions::new().write(true).open(&native_path).unwrap();
+            replacement.seek(SeekFrom::Start(0)).unwrap();
+            replacement.write_all(&[bytes[0] ^ 1]).unwrap();
+            replacement.sync_all().unwrap();
+            assert!(matches!(read(&relative, Some(&digest), &[]).unwrap(), RetainedDependencyObservationV1::Substituted));
+        }
+        assert_eq!(std::fs::metadata(&native_path).unwrap().ino(), inode);
+        assert!(matches!(read(&relative, Some(&digest), &[]).unwrap(),
+            RetainedDependencyObservationV1::Present(value) if value == digest));
+        {
+            let _restore = SavedPermissionsRestoreV1 { path: native_path.clone(), permissions: std::fs::metadata(&native_path).unwrap().permissions() };
+            std::fs::set_permissions(&native_path, std::fs::Permissions::from_mode(0)).unwrap();
+            assert_eq!(std::fs::File::open(&native_path).unwrap_err().kind(), std::io::ErrorKind::PermissionDenied);
+            assert!(read(&relative, Some(&digest), &[]).is_err());
+        }
+        let ordinary_failure = match read(&unrelated, None, &[]) {
+            Ok(_) => panic!("unrelated oversized metadata must be refused"),
+            Err(error) => error,
+        };
+        assert_eq!(ordinary_failure.kind(), ContractOwnerRepositoryErrorKindV1::BoundExceeded);
+        let lock = root.acquire_existing_exclusive_lock_v1(LOCK_RELATIVE_PATH).unwrap();
+        let generation = handbook_engine::local_authority::LocalBindingV1 {
+            reference: LOCK_RELATIVE_PATH.into(), fingerprint: lock.physical_fingerprint_v1().unwrap(),
+        };
+        assert!(matches!(read(LOCK_RELATIVE_PATH, None, &[generation]).unwrap(),
+            RetainedDependencyObservationV1::Present(value) if value == FingerprintV1::from_bytes(&[])));
+        lock.release().unwrap();
+        let mut foreign = validator.clone();
+        foreign.canonical_manifest["implementation_bundle"]["target"] = serde_json::json!("foreign-target");
+        assert!(retained_dependency_with_saved_native_v1(&root, &relative, &[], &foreign, Some(&digest), None).is_err(),
+            "an unadmitted descriptor must not be classified as an artifact substitution");
     }
 
     #[test]

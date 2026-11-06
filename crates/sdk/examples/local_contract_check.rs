@@ -44,12 +44,12 @@ fn run() -> Result<(), String> {
         return print_json(&sdk.establish_local_initial_setup(prepared));
     }
     if args[0] == "establish-g" && args.len() == 3 {
-        let request: handbook_sdk::admission_governance::DeferredEstablishmentRequestV3 =
+        let request: handbook_sdk::admission_governance::GovernanceEstablishmentRequestV1 =
             decode(&read(&args[2])?)?;
         let prepared = sdk
-            .prepare_deferred_project_admission_governance(&request)
+            .prepare_project_governance_establishment(&request)
             .map_err(debug)?;
-        return print_json(&sdk.establish_deferred_project_admission_governance(prepared));
+        return print_json(&sdk.establish_project_governance(prepared));
     }
     if args[0] == "adopt" && args.len() == 5 {
         let initial =

@@ -4,6 +4,9 @@
 //! transports. Compatibility classifications are descriptive only: callers
 //! must always select definitions by an exact reference and fingerprint.
 
+#[cfg(test)]
+extern crate self as handbook_contracts;
+
 mod canonical;
 mod claim;
 mod claim_verdict;

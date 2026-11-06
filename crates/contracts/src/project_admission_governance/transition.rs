@@ -197,7 +197,7 @@ pub enum EstablishmentFaultBoundaryV3 {
     Reply,
 }
 #[derive(Default)]
-pub struct ProjectAdmissionEstablishmentV3 {
+pub(crate) struct ProjectAdmissionEstablishmentV3 {
     #[cfg(feature = "test-support")]
     fault: Option<EstablishmentFaultBoundaryV3>,
     #[cfg(feature = "test-support")]
@@ -573,6 +573,19 @@ impl ProjectAdmissionEstablishmentV3 {
         scope: &str,
         expected: Option<&ExpectedProjectAdmissionBasisV3>,
     ) -> Result<DeferredScopeBasisV3, GovernanceRefusalV1> {
+        self.resolve_current_with_original(root, project, scope, expected)
+            .map(|(basis, _)| basis)
+    }
+
+    /// Returns the current selected basis and its verified original deferral.
+    /// Original replay is historical evidence, not current authorization.
+    pub fn resolve_current_with_original(
+        &self,
+        root: impl AsRef<Path>,
+        project: &ProjectBindingV2,
+        scope: &str,
+        expected: Option<&ExpectedProjectAdmissionBasisV3>,
+    ) -> Result<(DeferredScopeBasisV3, DeferralRequestLocatorV2), GovernanceRefusalV1> {
         if scope != ADMISSION_GOVERNANCE_SCOPE_V1 {
             return Err(refusal(
                 "unsupported_scope",
@@ -597,7 +610,7 @@ impl ProjectAdmissionEstablishmentV3 {
                 TransitionFacts::new(&last.selection.locator)?.basis,
             )
         } else {
-            DeferredScopeBasisV3::DeferredV2(original.basis)
+            DeferredScopeBasisV3::DeferredV2(original.basis.clone())
         };
         if !expected_matches(&basis, expected) {
             return Err(refusal(
@@ -607,7 +620,7 @@ impl ProjectAdmissionEstablishmentV3 {
         }
         native.release().map_err(fs_refusal)?;
         guard.release().map_err(fs_refusal)?;
-        Ok(basis)
+        Ok((basis, original.locator))
     }
 }
 

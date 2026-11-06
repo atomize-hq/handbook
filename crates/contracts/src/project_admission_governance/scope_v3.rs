@@ -45,7 +45,7 @@ impl ProjectAdmissionBindingV3 {
         governance_canonical_bytes(self)
     }
 }
-pub fn resolve_project_admission_scope_v3(
+pub(crate) fn resolve_project_admission_scope_v3(
     root: impl AsRef<Path>,
     project: &ProjectAdmissionBindingV3,
     scope: &str,

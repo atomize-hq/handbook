@@ -115,10 +115,10 @@ claiming current executable qualification.
 Contracts resolves applicability for every actually required definition/use, and
 binds the complete finite dependency population in its local usability outcome.
 Claim subject/case applicability is a separate question from project governance
-qualification. SDK invokes `resolve_project_admission_scope_v3`; the governance
-owner retains sole responsibility for native D/G state and original request
-recovery. No v2 fallback on any durable v3 footprint, including positive closed
-NotCommitted with D still current. No missing-file exemption or scope inheritance.
+qualification. SDK invokes `resolve_current_project_governance`; the governance
+owner retains sole responsibility for native v3 D/G selection, currentness and
+original request recovery. No v2 fallback on any durable v3 footprint, including
+positive closed NotCommitted with D still current. No missing-file exemption or scope inheritance.
 
 The supported project population remains Packet 1's positively registered
 defer-first P, including later `EstablishedFromDeferredV3` on that same P/S.

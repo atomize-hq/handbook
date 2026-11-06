@@ -2,7 +2,7 @@
 //!
 //! Supplied approval and review records are inputs. Contracts, Engine and Dock
 //! independently qualify them and retain the resulting owner observations.
-use crate::admission_governance::ProjectAdmissionBindingV3;
+use handbook_contracts::project_admission_governance::ProjectAdmissionBindingV3;
 use crate::local_check::LocalCheckLocatorV1;
 use crate::local_setup::LocalInitialSetupLocatorV1;
 use crate::HandbookSdkV1;
@@ -449,6 +449,12 @@ impl HandbookSdkV1 {
         dock_reach: &DockLocalEvaluationReachV1,
         cancellation: &handbook_dock::DockCancellationV1,
     ) -> Result<DockLocalEvaluationAttemptOutcomeV1, LocalEvaluationSdkErrorV1> {
+        handbook_engine::repository_durability::admit_native_production_manifest_v1(
+            handbook_dock::production_manifest_bytes_v1(),
+        )
+        .map_err(|_| engine_error("native_manifest", "compiled native manifest admission refused"))?;
+        #[cfg(feature = "governance-test-support")]
+        check_additional_native_manifest_for_testing_v1()?;
         let snapshot = self.recover_local_evaluation(session.evaluation)?;
         let coordinates = coordinates(&snapshot)?;
         let run = snapshot
@@ -742,8 +748,56 @@ impl HandbookSdkV1 {
     }
 }
 
+// This test-only seam can add a real admission check, never replace the
+// unconditional production-manifest admission at the SDK boundary.
+#[cfg(feature = "governance-test-support")]
+thread_local! {
+    static NATIVE_MANIFEST_ADDITIONAL_TEST_BYTES: std::cell::Cell<Option<&'static [u8]>> =
+        const { std::cell::Cell::new(None) };
+}
+
+#[cfg(feature = "governance-test-support")]
+struct NativeManifestTestGuardV1 {
+    previous: Option<&'static [u8]>,
+    not_send: std::marker::PhantomData<std::rc::Rc<()>>,
+}
+
+#[cfg(feature = "governance-test-support")]
+impl Drop for NativeManifestTestGuardV1 {
+    fn drop(&mut self) {
+        NATIVE_MANIFEST_ADDITIONAL_TEST_BYTES.with(|slot| slot.set(self.previous));
+    }
+}
+
+/// Adds a test-only descriptor rejection check on this thread for one closure.
+/// Nested scopes and unwinding restore the previous value.
+#[cfg(feature = "governance-test-support")]
+#[doc(hidden)]
+pub fn with_additional_native_manifest_check_for_testing_v1<R>(
+    bytes: &'static [u8],
+    body: impl FnOnce() -> R,
+) -> R {
+    let previous = NATIVE_MANIFEST_ADDITIONAL_TEST_BYTES.with(|slot| slot.replace(Some(bytes)));
+    let _guard = NativeManifestTestGuardV1 {
+        previous,
+        not_send: std::marker::PhantomData,
+    };
+    body()
+}
+
+#[cfg(feature = "governance-test-support")]
+fn check_additional_native_manifest_for_testing_v1() -> Result<(), LocalAuthorityRefusalV1> {
+    NATIVE_MANIFEST_ADDITIONAL_TEST_BYTES.with(|slot| {
+        if let Some(bytes) = slot.get() {
+            handbook_engine::repository_durability::admit_native_production_manifest_v1(bytes)
+                .map_err(|_| engine_error("native_manifest", "additional test manifest admission refused"))?;
+        }
+        Ok(())
+    })
+}
+
 fn project(initial: &LocalInitialSetupLocatorV1) -> ProjectAdmissionBindingV3 {
-    ProjectAdmissionBindingV3::ScopedChoiceV2(initial.deferral.project.clone())
+    ProjectAdmissionBindingV3::ScopedChoiceV2((&initial.deferral.project).into())
 }
 fn engine_error(code: &str, detail: &str) -> LocalAuthorityRefusalV1 {
     LocalAuthorityRefusalV1 {

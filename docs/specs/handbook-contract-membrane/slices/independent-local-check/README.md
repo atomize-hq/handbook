@@ -221,7 +221,8 @@ CLI/skill/agent experience remains tracked under the delivery allocation above.
    assurance or author-as-independent-reviewer substitution. Independently justified
    requirements and complete populations remain unchanged by a favorable result.
 3. Each actually required definition/use has positive owner-resolved applicability.
-   Use `resolve_project_admission_scope_v3` from the outset. A durable v3 footprint,
+   Use `resolve_current_project_governance` from the outset; its native owner
+   retains v3 selection and currentness checks. A durable v3 footprint,
    including a closed positive NotCommitted attempt leaving D current, never
    permits v2-reader fallback. Original D request replay is history only. Current
    G succeeds only with actual positive non-applicability or satisfied required

@@ -186,7 +186,7 @@ impl Worker {
             Command::new(std::env::current_exe().unwrap())
                 .args([
                     "--exact",
-                    "admission_deferred_establishment_process_worker",
+                    "project_admission_governance::owner_tests::admission_deferred_establishment_process::admission_deferred_establishment_process_worker",
                     "--nocapture",
                     "--test-threads=1",
                 ])

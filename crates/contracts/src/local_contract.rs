@@ -339,9 +339,9 @@ impl LocalValidatorDependencyV2 {
     fn validate(&self) -> Result<(), ContractError> {
         // Reuse the same immutable, checked-in native descriptor selected by
         // Dock's production registry. No runtime Dock permission is inferred.
-        let shipped_manifest: Value = serde_json::from_slice(include_bytes!(
-            "../../dock/production-manifests/x86_64-pc-windows-msvc/manifest.json"
-        ))
+        let shipped_manifest: Value = serde_json::from_slice(
+            selected_dock_manifest_bytes().ok_or(ContractError::InvalidInvariant)?,
+        )
         .map_err(|_| ContractError::InvalidInvariant)?;
         if self.manifest.reference().as_str() != "handbook.dock.json-schema@1.0.0"
             || self.canonical_manifest != shipped_manifest
@@ -369,6 +369,79 @@ impl LocalValidatorDependencyV2 {
         Ok(())
     }
 }
+// Dock supports these exact Cargo target tuples. Unknown targets fail closed;
+// no runtime input or foreign descriptor can select a different manifest.
+pub(crate) fn selected_dock_manifest_bytes() -> Option<&'static [u8]> {
+    #[cfg(all(
+        target_arch = "x86_64",
+        target_vendor = "unknown",
+        target_os = "linux",
+        target_env = "gnu",
+        target_pointer_width = "64",
+        target_abi = ""
+    ))]
+    {
+        Some(include_bytes!(
+            "../../dock/production-manifests/x86_64-unknown-linux-gnu/manifest.json"
+        ))
+    }
+    #[cfg(all(
+        target_arch = "x86_64",
+        target_vendor = "pc",
+        target_os = "windows",
+        target_env = "msvc",
+        target_pointer_width = "64",
+        target_abi = ""
+    ))]
+    {
+        Some(include_bytes!(
+            "../../dock/production-manifests/x86_64-pc-windows-msvc/manifest.json"
+        ))
+    }
+    #[cfg(all(
+        target_arch = "aarch64",
+        target_vendor = "apple",
+        target_os = "macos",
+        target_env = "",
+        target_pointer_width = "64",
+        target_abi = ""
+    ))]
+    {
+        Some(include_bytes!(
+            "../../dock/production-manifests/aarch64-apple-darwin/manifest.json"
+        ))
+    }
+    #[cfg(not(any(
+        all(
+            target_arch = "x86_64",
+            target_vendor = "unknown",
+            target_os = "linux",
+            target_env = "gnu",
+            target_pointer_width = "64",
+            target_abi = ""
+        ),
+        all(
+            target_arch = "x86_64",
+            target_vendor = "pc",
+            target_os = "windows",
+            target_env = "msvc",
+            target_pointer_width = "64",
+            target_abi = ""
+        ),
+        all(
+            target_arch = "aarch64",
+            target_vendor = "apple",
+            target_os = "macos",
+            target_env = "",
+            target_pointer_width = "64",
+            target_abi = ""
+        ),
+    )))]
+    {
+        None
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct LocalDefinitionDependenciesV2 {

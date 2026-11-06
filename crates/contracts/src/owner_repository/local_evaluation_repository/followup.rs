@@ -544,11 +544,16 @@ impl ContractOwnerRepositoryV1 {
                 .map_err(|_| {
                     invalid("new lineage omitted exact original dependency proof reach")
                 })?;
-            if retained_evaluation_dependency_fingerprint(
+            let observed = retained_dependency_with_saved_native_v1(
                 &self.repository_root,
                 &dependency.path,
                 &original.retained_lock_generations,
-            )? != Some(dependency.bytes_fingerprint.clone())
+                &original.definition.dependencies().validator,
+                Some(&dependency.bytes_fingerprint),
+                None,
+            )?;
+            if !matches!(observed, RetainedDependencyObservationV1::Present(ref fingerprint)
+                if fingerprint == &dependency.bytes_fingerprint)
             {
                 return Err(substituted(
                     "original result dependency unavailable or substituted before new lineage",

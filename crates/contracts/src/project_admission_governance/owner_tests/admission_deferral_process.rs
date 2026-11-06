@@ -9,34 +9,49 @@ use std::process::{Child, Command, Output, Stdio};
 use std::thread;
 use std::time::{Duration, Instant};
 
-const WORKER_MODE: &str = "HCM_NATIVE_GOV_TEST_MODE";
-const WORKER_ROOT: &str = "HCM_NATIVE_GOV_TEST_ROOT";
-const WORKER_CONTROL: &str = "HCM_NATIVE_GOV_TEST_CONTROL";
-const WORKER_ID: &str = "HCM_NATIVE_GOV_TEST_ID";
-const WORKER_KEY: &str = "HCM_NATIVE_GOV_TEST_KEY";
-const WORKER_BOUNDARY: &str = "HCM_NATIVE_GOV_TEST_BOUNDARY";
-const WORKER_SOURCE: &str = "HCM_NATIVE_GOV_TEST_SOURCE";
+const WORKER_MODE: &str = "HCM_NATIVE_DEFERRAL_TEST_MODE";
+const WORKER_ROOT: &str = "HCM_NATIVE_DEFERRAL_TEST_ROOT";
+const WORKER_CONTROL: &str = "HCM_NATIVE_DEFERRAL_TEST_CONTROL";
+const WORKER_ID: &str = "HCM_NATIVE_DEFERRAL_TEST_ID";
+const WORKER_KEY: &str = "HCM_NATIVE_DEFERRAL_TEST_KEY";
+const WORKER_BOUNDARY: &str = "HCM_NATIVE_DEFERRAL_TEST_BOUNDARY";
+const WORKER_SOURCE: &str = "HCM_NATIVE_DEFERRAL_TEST_SOURCE";
 const TIMEOUT: Duration = Duration::from_secs(20);
 
 /// The subprocess terminates at real owner durability boundaries while the
 /// native lock remains held. Process exit, rather than dropping Rust guards,
 /// must release it before the restarted resolver can finish the exact request.
 #[test]
-fn admission_governance_process_worker() {
+fn admission_deferral_process_worker() {
     let Ok(mode) = std::env::var(WORKER_MODE) else {
         return;
     };
     let root = PathBuf::from(std::env::var_os(WORKER_ROOT).unwrap());
     let control = PathBuf::from(std::env::var_os(WORKER_CONTROL).unwrap());
     let id = std::env::var(WORKER_ID).unwrap();
-    let owner = ProjectAdmissionGovernanceV1::new();
+    if mode == "establish" {
+        let owner = ProjectAdmissionGovernanceV1::new();
+        let request =
+            GovernanceRequestInputV1::standalone("establish", 300, "Human-approved establishment");
+        let prepared = owner.prepare(&root, &request).unwrap();
+        write_json(
+            &control.join(format!("{id}.locator.json")),
+            prepared.locator(),
+        );
+        rendezvous(&control, &id);
+        write_json(
+            &control.join(format!("{id}.result.json")),
+            &owner.initialize(&root, prepared),
+        );
+        return;
+    }
+    let owner = ProjectAdmissionDeferralV2::new();
     let result = match mode.as_str() {
         "initialize" | "crash" => {
             let key = std::env::var(WORKER_KEY).unwrap();
-            let request = GovernanceRequestInputV1::standalone_freshness(
-                7200,
+            let request = DeferralRequestInputV2::human_approved(
                 key,
-                "Establish this fresh local project",
+                "Human approves deferring this scope for the fresh local project",
             );
             let prepared = owner.prepare(&root, &request).unwrap();
             // This caller-controlled locator is flushed before the first owner
@@ -55,11 +70,19 @@ fn admission_governance_process_worker() {
             rendezvous(&control, &id);
             owner.initialize(&root, prepared)
         }
-        "resolve" => {
+        "resolve" | "resolve-crash" => {
             let source = std::env::var(WORKER_SOURCE).unwrap();
-            let locator: GovernanceRequestLocatorV1 =
+            let locator: DeferralRequestLocatorV2 =
                 read_json(&control.join(format!("{source}.locator.json")));
             rendezvous(&control, &id);
+            if mode == "resolve-crash" {
+                let result = owner
+                    .with_crash_for_testing(parse_boundary(
+                        &std::env::var(WORKER_BOUNDARY).unwrap(),
+                    ))
+                    .resolve_request(&root, &locator);
+                panic!("Recovery crash did not terminate: {result:?}");
+            }
             owner.resolve_request(&root, &locator)
         }
         other => panic!("unknown worker mode {other}"),
@@ -67,21 +90,26 @@ fn admission_governance_process_worker() {
     write_json(&control.join(format!("{id}.result.json")), &result);
 }
 
-fn parse_boundary(name: &str) -> GovernanceFaultBoundaryV1 {
+fn parse_boundary(name: &str) -> DeferralFaultBoundaryV2 {
     match name {
-        "reservation" => GovernanceFaultBoundaryV1::Reservation,
-        "anchor" => GovernanceFaultBoundaryV1::Anchor,
-        "identity" => GovernanceFaultBoundaryV1::Identity,
-        "registration" => GovernanceFaultBoundaryV1::Registration,
-        "intent" => GovernanceFaultBoundaryV1::Intent,
-        "decision" => GovernanceFaultBoundaryV1::Decision,
-        "terminal" => GovernanceFaultBoundaryV1::Terminal,
-        "reply" => GovernanceFaultBoundaryV1::Reply,
+        "claim" => DeferralFaultBoundaryV2::Claim,
+        "reservation" => DeferralFaultBoundaryV2::Reservation,
+        "anchor" => DeferralFaultBoundaryV2::Anchor,
+        "identity" => DeferralFaultBoundaryV2::Identity,
+        "registration" => DeferralFaultBoundaryV2::Registration,
+        "intent" => DeferralFaultBoundaryV2::Intent,
+        "decision" => DeferralFaultBoundaryV2::Decision,
+        "current" => DeferralFaultBoundaryV2::CurrentRelation,
+        "terminal" => DeferralFaultBoundaryV2::Terminal,
+        "receipt" => DeferralFaultBoundaryV2::ClaimReceipt,
+        "noncommit-witness" => DeferralFaultBoundaryV2::NonCommitWitness,
+        "noncommit-receipt" => DeferralFaultBoundaryV2::NonCommitReceipt,
+        "reply" => DeferralFaultBoundaryV2::Reply,
         other => {
             if let Some(index) = other.strip_prefix("stage-") {
-                GovernanceFaultBoundaryV1::Stage(index.parse().unwrap())
+                DeferralFaultBoundaryV2::Stage(index.parse().unwrap())
             } else if let Some(index) = other.strip_prefix("installation-") {
-                GovernanceFaultBoundaryV1::Installation(index.parse().unwrap())
+                DeferralFaultBoundaryV2::Installation(index.parse().unwrap())
             } else {
                 panic!("unknown boundary {name}");
             }
@@ -135,7 +163,7 @@ impl Worker {
             Command::new(std::env::current_exe().unwrap())
                 .args([
                     "--exact",
-                    "admission_governance_process_worker",
+                    "project_admission_governance::owner_tests::admission_deferral_process::admission_deferral_process_worker",
                     "--nocapture",
                     "--test-threads=1",
                 ])
@@ -202,18 +230,18 @@ fn concurrent_process_creators_commit_once_for_same_and_different_request_keys()
         File::create(control.join("go")).unwrap();
         assert_success(&left.finish());
         assert_success(&right.finish());
-        let outcomes: Vec<GovernanceExecutionV1> = ["left", "right"]
+        let outcomes: Vec<DeferralExecutionV2> = ["left", "right"]
             .into_iter()
             .map(|id| read_json(&control.join(format!("{id}.result.json"))))
             .collect();
         let committed: Vec<_> = outcomes
             .iter()
             .filter_map(|outcome| match outcome {
-                GovernanceExecutionV1::Committed { outcome, delivery } => {
+                DeferralExecutionV2::Committed { outcome, delivery } => {
                     assert_eq!(*delivery, GovernanceDeliveryV1::Original);
                     Some(outcome)
                 }
-                GovernanceExecutionV1::Refused { refusal } => {
+                DeferralExecutionV2::Refused { refusal } => {
                     assert_eq!(refusal.condition, "initial_registration_unavailable");
                     None
                 }
@@ -222,14 +250,19 @@ fn concurrent_process_creators_commit_once_for_same_and_different_request_keys()
             .collect();
         assert_eq!(committed.len(), 1, "{outcomes:?}");
         let winner = committed[0];
-        let owner = ProjectAdmissionGovernanceV1::new();
+        let owner = ProjectAdmissionDeferralV2::new();
         let active = owner
-            .resolve_active(&root, &winner.locator.project, GOVERNANCE_SCOPE_V1, None)
+            .resolve_current(
+                &root,
+                &winner.locator.project,
+                ADMISSION_GOVERNANCE_SCOPE_V1,
+                None,
+            )
             .unwrap();
         assert_eq!(active.outcome_fingerprint, winner.outcome_fingerprint);
         assert_eq!(
             owner.resolve_request(&root, &winner.locator),
-            GovernanceExecutionV1::Committed {
+            DeferralExecutionV2::Committed {
                 outcome: winner.clone(),
                 delivery: GovernanceDeliveryV1::Replay
             }
@@ -241,14 +274,13 @@ fn concurrent_process_creators_commit_once_for_same_and_different_request_keys()
 fn concurrent_process_resolvers_replay_one_exact_original_outcome() {
     let base = tempfile::tempdir().unwrap();
     let (root, control) = fresh_paths(base.path());
-    let owner = ProjectAdmissionGovernanceV1::new();
-    let request =
-        GovernanceRequestInputV1::standalone_freshness(7200, "original", "Establish project");
+    let owner = ProjectAdmissionDeferralV2::new();
+    let request = DeferralRequestInputV2::human_approved("original", "Establish project");
     let prepared = owner.prepare(&root, &request).unwrap();
     let locator = prepared.locator().clone();
     write_json(&control.join("original.locator.json"), &locator);
     let result = owner.initialize(&root, prepared);
-    let GovernanceExecutionV1::Committed { outcome, .. } = result else {
+    let DeferralExecutionV2::Committed { outcome, .. } = result else {
         panic!("{result:?}");
     };
     let left = Worker::start(&root, &control, "left", "resolve", "", "", "original");
@@ -258,13 +290,13 @@ fn concurrent_process_resolvers_replay_one_exact_original_outcome() {
     File::create(control.join("go")).unwrap();
     assert_success(&left.finish());
     assert_success(&right.finish());
-    let expected = GovernanceExecutionV1::Committed {
+    let expected = DeferralExecutionV2::Committed {
         outcome,
         delivery: GovernanceDeliveryV1::Replay,
     };
     for id in ["left", "right"] {
         assert_eq!(
-            read_json::<GovernanceExecutionV1>(&control.join(format!("{id}.result.json"))),
+            read_json::<DeferralExecutionV2>(&control.join(format!("{id}.result.json"))),
             expected
         );
     }
@@ -272,13 +304,17 @@ fn concurrent_process_resolvers_replay_one_exact_original_outcome() {
 
 #[test]
 fn crashes_release_held_locks_and_restart_resolves_only_the_original_request() {
-    let boundaries: Vec<String> = ["reservation", "anchor", "identity", "registration"]
+    let boundaries: Vec<String> = ["claim", "reservation", "anchor", "identity", "registration"]
         .into_iter()
         .map(str::to_owned)
-        .chain((0..5).map(|i| format!("stage-{i}")))
+        .chain((0..6).map(|i| format!("stage-{i}")))
         .chain(["intent", "decision"].into_iter().map(str::to_owned))
-        .chain((0..5).map(|i| format!("installation-{i}")))
-        .chain(["terminal", "reply"].into_iter().map(str::to_owned))
+        .chain((0..6).map(|i| format!("installation-{i}")))
+        .chain(
+            ["current", "terminal", "receipt", "reply"]
+                .into_iter()
+                .map(str::to_owned),
+        )
         .collect();
     for boundary in boundaries {
         let base = tempfile::tempdir().unwrap();
@@ -289,47 +325,36 @@ fn crashes_release_held_locks_and_restart_resolves_only_the_original_request() {
         let output = creator.finish();
         assert_eq!(output.status.code(), Some(71), "{boundary}: {output:?}");
         assert!(!control.join("original.result.json").exists());
-        let locator: GovernanceRequestLocatorV1 = read_json(&control.join("original.locator.json"));
+        let locator: DeferralRequestLocatorV2 = read_json(&control.join("original.locator.json"));
         File::create(control.join("go")).unwrap();
         let resolver = Worker::start(&root, &control, "restarted", "resolve", "", "", "original");
         assert_success(&resolver.finish());
-        let recovered: GovernanceExecutionV1 = read_json(&control.join("restarted.result.json"));
-        let owner = ProjectAdmissionGovernanceV1::new();
+        let recovered: DeferralExecutionV2 = read_json(&control.join("restarted.result.json"));
+        let owner = ProjectAdmissionDeferralV2::new();
         match boundary.as_str() {
-            "reservation" => {
-                assert!(
-                    matches!(&recovered, GovernanceExecutionV1::Uncertain { locator: original, .. } if original == &locator),
-                    "{boundary}: {recovered:?}"
-                );
-                assert!(!root.join(GOVERNANCE_ANCHOR_PATH_V1).exists());
-            }
-            "decision" | "terminal" | "reply" => {
+            "decision" | "current" | "terminal" | "receipt" | "reply" => {
                 assert_committed_recovery(&root, &locator, &recovered)
             }
             name if name.starts_with("installation-") => {
                 assert_committed_recovery(&root, &locator, &recovered)
             }
             _ => {
-                let GovernanceExecutionV1::NotCommitted { outcome, delivery } = &recovered else {
+                let DeferralExecutionV2::NotCommitted { outcome, delivery } = &recovered else {
                     panic!("{boundary}: {recovered:?}");
                 };
                 assert_eq!(*delivery, GovernanceDeliveryV1::Replay);
                 assert_eq!(&outcome.locator, &locator);
                 assert_eq!(outcome.condition, "verified_predecision_noncommit");
-                assert!(!outcome.activation_committed);
+                assert!(!outcome.deferral_committed);
                 assert_eq!(owner.resolve_request(&root, &locator), recovered);
                 assert!(owner
-                    .resolve_active(&root, &locator.project, GOVERNANCE_SCOPE_V1, None)
+                    .resolve_current(&root, &locator.project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
                     .is_err());
             }
         }
         // Every reserved root is consumed for creation, including a reservation
         // without an anchor. A new token cannot become a retry or second project.
-        let request = GovernanceRequestInputV1::standalone_freshness(
-            7200,
-            "replacement",
-            "Establish project",
-        );
+        let request = DeferralRequestInputV2::human_approved("replacement", "Establish project");
         let refused = owner.prepare(&root, &request).unwrap_err();
         assert_eq!(
             refused.condition, "initial_registration_unavailable",
@@ -347,7 +372,7 @@ fn concurrent_process_resolvers_finish_one_decided_transaction_without_duplicate
     );
     let crashed = creator.finish();
     assert_eq!(crashed.status.code(), Some(71), "{crashed:?}");
-    let locator: GovernanceRequestLocatorV1 = read_json(&control.join("original.locator.json"));
+    let locator: DeferralRequestLocatorV2 = read_json(&control.join("original.locator.json"));
     let left = Worker::start(&root, &control, "left", "resolve", "", "", "original");
     let right = Worker::start(&root, &control, "right", "resolve", "", "", "original");
     wait_for_file(&control.join("left.ready"));
@@ -355,18 +380,18 @@ fn concurrent_process_resolvers_finish_one_decided_transaction_without_duplicate
     File::create(control.join("go")).unwrap();
     assert_success(&left.finish());
     assert_success(&right.finish());
-    let left: GovernanceExecutionV1 = read_json(&control.join("left.result.json"));
-    let right: GovernanceExecutionV1 = read_json(&control.join("right.result.json"));
+    let left: DeferralExecutionV2 = read_json(&control.join("left.result.json"));
+    let right: DeferralExecutionV2 = read_json(&control.join("right.result.json"));
     assert_eq!(left, right);
     assert_committed_recovery(&root, &locator, &left);
 }
 
 fn assert_committed_recovery(
     root: &Path,
-    locator: &GovernanceRequestLocatorV1,
-    recovered: &GovernanceExecutionV1,
+    locator: &DeferralRequestLocatorV2,
+    recovered: &DeferralExecutionV2,
 ) {
-    let GovernanceExecutionV1::Committed { outcome, delivery } = recovered else {
+    let DeferralExecutionV2::Committed { outcome, delivery } = recovered else {
         panic!("{recovered:?}");
     };
     assert_eq!(*delivery, GovernanceDeliveryV1::Replay);
@@ -374,52 +399,91 @@ fn assert_committed_recovery(
     assert!(
         outcome.validation_confirmed
             && outcome.advisory_permission_accepted
-            && outcome.activation_committed
+            && outcome.deferral_committed
     );
-    let owner = ProjectAdmissionGovernanceV1::new();
+    let owner = ProjectAdmissionDeferralV2::new();
     assert_eq!(&owner.resolve_request(root, locator), recovered);
     let active = owner
-        .resolve_active(root, &locator.project, GOVERNANCE_SCOPE_V1, None)
+        .resolve_current(root, &locator.project, ADMISSION_GOVERNANCE_SCOPE_V1, None)
         .unwrap();
     assert_eq!(active.outcome_fingerprint, outcome.outcome_fingerprint);
-    assert_eq!(
-        active.configuration.bindings[0].max_observation_age_seconds,
-        7200
-    );
+    assert!(active.never_established);
 }
 
 #[test]
-fn copied_governance_and_identity_refuse_an_updated_path_locator() {
-    let base = tempfile::tempdir().unwrap();
-    let (root, _) = fresh_paths(base.path());
-    let owner = ProjectAdmissionGovernanceV1::new();
-    let request =
-        GovernanceRequestInputV1::standalone_freshness(7200, "original", "Establish project");
-    let prepared = owner.prepare(&root, &request).unwrap();
-    let locator = prepared.locator().clone();
-    assert!(matches!(
-        owner.initialize(&root, prepared),
-        GovernanceExecutionV1::Committed { .. }
-    ));
-    let copied = base.path().join("copied");
-    copy_tree(&root, &copied);
-    let mut substituted = locator.project;
-    substituted.retained_root = copied.to_str().unwrap().to_owned();
-    let refused = owner
-        .resolve_active(&copied, &substituted, GOVERNANCE_SCOPE_V1, None)
-        .unwrap_err();
-    assert_eq!(refused.condition, "physical_root_substituted");
+fn concurrent_establishment_and_deferral_retain_only_the_exact_native_winner() {
+    for _ in 0..4 {
+        let base = tempfile::tempdir().unwrap();
+        let (root, control) = fresh_paths(base.path());
+        let defer = Worker::start(&root, &control, "defer", "initialize", "defer", "", "");
+        let establish = Worker::start(&root, &control, "establish", "establish", "", "", "");
+        wait_for_file(&control.join("defer.ready"));
+        wait_for_file(&control.join("establish.ready"));
+        File::create(control.join("go")).unwrap();
+        assert_success(&defer.finish());
+        assert_success(&establish.finish());
+        let deferred: DeferralExecutionV2 = read_json(&control.join("defer.result.json"));
+        let established: GovernanceExecutionV1 = read_json(&control.join("establish.result.json"));
+        let identity =
+            fs::read_to_string(root.join(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH)).unwrap();
+        match (deferred, established) {
+            (
+                DeferralExecutionV2::Committed { outcome, .. },
+                GovernanceExecutionV1::Refused { .. },
+            ) => {
+                assert_eq!(
+                    identity,
+                    outcome.locator.project.repository_identity_fingerprint
+                );
+                assert_committed_recovery(
+                    &root,
+                    &outcome.locator,
+                    &ProjectAdmissionDeferralV2::new().resolve_request(&root, &outcome.locator),
+                );
+            }
+            (
+                DeferralExecutionV2::Refused { .. },
+                GovernanceExecutionV1::Committed { outcome, .. },
+            ) => {
+                assert_eq!(
+                    identity,
+                    outcome.locator.project.repository_identity_fingerprint
+                );
+                assert!(ProjectAdmissionGovernanceV1::new()
+                    .resolve_active(&root, &outcome.locator.project, GOVERNANCE_SCOPE_V1, None)
+                    .is_ok());
+            }
+            outcomes => panic!("Expected exactly one winner: {outcomes:?}"),
+        }
+    }
 }
 
-fn copy_tree(source: &Path, target: &Path) {
-    fs::create_dir(target).unwrap();
-    for entry in fs::read_dir(source).unwrap() {
-        let entry = entry.unwrap();
-        let destination = target.join(entry.file_name());
-        if entry.file_type().unwrap().is_dir() {
-            copy_tree(&entry.path(), &destination);
-        } else {
-            fs::copy(entry.path(), destination).unwrap();
-        }
+#[test]
+fn crashes_during_early_noncommit_closure_replay_one_consumed_reservation() {
+    for boundary in ["noncommit-witness", "noncommit-receipt"] {
+        let base = tempfile::tempdir().unwrap();
+        let (root, control) = fresh_paths(base.path());
+        let original = Worker::start(&root, &control, "original", "crash", "initial", "claim", "");
+        assert_eq!(original.finish().status.code(), Some(71));
+        File::create(control.join("go")).unwrap();
+        let resolver = Worker::start(
+            &root,
+            &control,
+            "recovering",
+            "resolve-crash",
+            "",
+            boundary,
+            "original",
+        );
+        assert_eq!(resolver.finish().status.code(), Some(71));
+        let locator: DeferralRequestLocatorV2 = read_json(&control.join("original.locator.json"));
+        let owner = ProjectAdmissionDeferralV2::new();
+        let result = owner.resolve_request(&root, &locator);
+        assert!(
+            matches!(&result, DeferralExecutionV2::NotCommitted { outcome, .. } if !outcome.deferral_committed)
+        );
+        assert_eq!(owner.resolve_request(&root, &locator), result);
+        assert!(!root.join(".handbook").exists());
+        assert!(owner.prepare(&root, &locator.request).is_err());
     }
 }
