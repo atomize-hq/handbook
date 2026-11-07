@@ -19,11 +19,11 @@ use tauri::webview::InvokeRequest;
 
 const PRODUCTION_DOCK_REF: &str = "handbook.dock.json-schema@1.0.2";
 const PRODUCTION_DOCK_FINGERPRINT: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
-    "sha256:112c3d7e6589f2dcf9b5994e118b7e388f6b9f0011bf8167f2e040e5b017ad74"
+    "sha256:5d21b75ca34526e17dacc8cd866bfa3bb3d1c009ec6019d796e497f30a3908bb"
 } else if cfg!(all(target_arch = "aarch64", target_os = "macos")) {
-    "sha256:0aad9b76379d32015a5e5994748ae82d837ef90f887500271cb59a25f0b74fd1"
+    "sha256:4c3bd31835b102140e86b5203487ec515393ab4af5532ed224ffa4ef283d962a"
 } else if cfg!(all(target_arch = "x86_64", target_os = "linux", target_env = "gnu")) {
-    "sha256:982690abba3e931770e25b156a9a94ab1e703f84c68311cba1f9de5929f5e142"
+    "sha256:6e722f2b93606b998340fefb0a1a54584e0a2184d46ba9c733c786e9b03bbc66"
 } else {
     "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893"
 };
@@ -99,11 +99,8 @@ fn run_request(raw_key: &str) -> handbook_sdk::contract_membrane::OperationReque
     );
     let body = DockRunRequestV1::new(
         ContractRecordBindingDtoV1::new(
-            "handbook.dock.json-schema@1.0.0",
-            Fingerprint::parse(
-                "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893",
-            )
-            .unwrap(),
+            PRODUCTION_DOCK_REF,
+            Fingerprint::parse(PRODUCTION_DOCK_FINGERPRINT).unwrap(),
         )
         .unwrap(),
         evaluation,
@@ -223,7 +220,8 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
     for request in requests {
         let operation_ref = request.operation().reference().as_str().to_owned();
         let invocation = InvocationRequestV1::operation(request, &limits).unwrap();
-        let expected = sdk.invoke_tauri(&invocation, &limits).unwrap();
+        let expected = sdk.invoke_tauri(&invocation, &limits)
+            .unwrap_or_else(|error| panic!("operation {operation_ref} failed: {error:?}"));
         let actual: serde_json::Value =
             serde_json::from_slice(&invoke_ipc(&webview, "handbook_invoke_v1", invocation))
                 .unwrap();

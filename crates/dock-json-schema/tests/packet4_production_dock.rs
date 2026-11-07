@@ -71,16 +71,16 @@ fn production_executable_bytes() -> &'static [u8] {
                 let (expected_length, expected_sha256) =
                     match env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") {
                         "x86_64-pc-windows-msvc" => (
-                            9_585_152,
-                            "sha256:a1adbe64c1cd3272a23927c081611ed1ddb613712c9902c9d5e92742f35ffde0",
+                            9_595_904,
+                            "sha256:75b48edbf090b176c41e9a7075360289cba75ab64e2ab50c137690f18107b874",
                         ),
                         "aarch64-apple-darwin" => (
                             13_491_920,
-                            "sha256:b7d7b2c0811a7fe9c24eb75b120eda296ffa65ab9996e8223fec3d3779fdd177",
+                            "sha256:f78b9e378cfd0c5d086994ef2d49325bd4120b688b27c26a83981fb24ce8188f",
                         ),
                         "x86_64-unknown-linux-gnu" => (
-                            37_053_312,
-                            "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523",
+                            37_057_976,
+                            "sha256:e54dc2fcbcc3aee569bfa874e80670e0afbfed1fc6c70854fe2d84bb6d231519",
                         ),
                         target => panic!("unsupported retained validator target: {target}"),
                     };

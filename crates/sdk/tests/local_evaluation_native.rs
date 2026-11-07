@@ -69,6 +69,11 @@ enum NativeFixtureDirectory {
     Retained(std::path::PathBuf),
 }
 
+fn retain_native_fixture() -> bool {
+    std::env::var_os("HANDBOOK_NATIVE_FIXTURE_RETAIN").as_deref()
+        == Some(std::ffi::OsStr::new("1"))
+}
+
 impl NativeFixtureDirectory {
     fn new() -> Self {
         let directory = match std::env::var_os("HANDBOOK_NATIVE_FIXTURE_PARENT") {
@@ -93,7 +98,7 @@ impl NativeFixtureDirectory {
 
 impl Drop for NativeFixtureDirectory {
     fn drop(&mut self) {
-        if std::thread::panicking() {
+        if std::thread::panicking() || retain_native_fixture() {
             if let Self::Temporary(directory) = self {
                 directory.disable_cleanup(true);
             }
@@ -336,6 +341,17 @@ impl Fixture {
                 "repository_path":root.path(),"initial":initial,"definition":definition,"authority":authority
             })).unwrap(),
         ).unwrap();
+        if retain_native_fixture() {
+            let capture = checkpoint_artifacts.path().join("native-closed-results.jsonl");
+            std::fs::File::create(&capture).unwrap();
+            eprintln!(
+                "native fixture root: {}; handoff: {}; formed records: {}; closed results: {}",
+                root.path().display(),
+                checkpoint_artifacts.path().join("native-fixture-handoff.json").display(),
+                checkpoint_artifacts.path().display(),
+                capture.display()
+            );
+        }
         Self {
             root,
             sdk,
@@ -634,12 +650,57 @@ fn finish(fixture: &Fixture, formed: &Formed) -> LocalEvaluationResultV3 {
         .set_sources
         .borrow_mut()
         .insert(formed.snapshot.locator.request_key.clone(), source);
-    fixture
+    let result = fixture
         .sdk
         .close_local_evaluation_result(&session)
         .unwrap()
         .result
-        .unwrap()
+        .unwrap();
+    if retain_native_fixture() {
+        use std::io::Write;
+        let mut bytes = serde_json_canonicalizer::to_vec(&formed.snapshot.locator).unwrap();
+        bytes.push(b'\n');
+        bytes.extend(result.canonical_json_bytes().unwrap());
+        bytes.push(b'\n');
+        std::fs::OpenOptions::new()
+            .append(true)
+            .open(fixture.checkpoint_artifacts.path().join("native-closed-results.jsonl"))
+            .unwrap()
+            .write_all(&bytes)
+            .unwrap();
+    }
+    result
+}
+
+#[test]
+fn native_fixture_directory_retention() {
+    use std::io::Write;
+    if let Some(parent) = std::env::var_os("HANDBOOK_NATIVE_FIXTURE_PARENT") {
+        assert!(std::path::Path::new(&parent).is_absolute());
+    }
+    let directory = NativeFixtureDirectory::new();
+    let path = directory.path().to_owned();
+    let capture = path.join("capture.jsonl");
+    std::fs::write(&capture, []).unwrap();
+    #[cfg(unix)]
+    let inode = {
+        use std::os::unix::fs::MetadataExt;
+        std::fs::metadata(&capture).unwrap().ino()
+    };
+    std::fs::OpenOptions::new().append(true).open(&capture).unwrap()
+        .write_all(b"capture\n").unwrap();
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::MetadataExt;
+        assert_eq!(std::fs::metadata(&capture).unwrap().ino(), inode);
+    }
+    assert_eq!(std::fs::read(&capture).unwrap(), b"capture\n");
+    drop(directory);
+    assert_eq!(path.exists(), retain_native_fixture());
+    if retain_native_fixture() {
+        std::fs::remove_dir_all(&path).unwrap();
+        assert!(!path.exists());
+    }
 }
 
 #[test]
@@ -1509,7 +1570,7 @@ fn native_unknown_availability_is_observed_from_a_private_host_read_failure() {
             .unwrap()
             .join("handbook-docks/handbook.dock.json-schema")
             .join(if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
-                "1.0.1"
+                "1.0.2"
             } else {
                 "1.0.0"
             })

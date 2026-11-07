@@ -1395,8 +1395,8 @@ fn windows_diagnostic_followup_retains_exact_inherited_native_source() {
         let manifest = production_manifest();
         let bundle = manifest.implementation_bundle();
         let member = &bundle.files()[0];
-        assert_eq!(member.length(), 9_585_152);
-        assert_eq!(member.sha256().as_str(), "sha256:a1adbe64c1cd3272a23927c081611ed1ddb613712c9902c9d5e92742f35ffde0");
+        assert_eq!(member.length(), 9_595_904);
+        assert_eq!(member.sha256().as_str(), "sha256:75b48edbf090b176c41e9a7075360289cba75ab64e2ab50c137690f18107b874");
         let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
             bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
         let installed_member = package_path.join("bundle").join(member.path().as_str());
@@ -1481,8 +1481,8 @@ fn saved_native_history_classifies_each_dependency() {
         let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
             bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
         assert!(original.origin_paths.contains(&member_path));
-        assert_eq!(member.length(), 37_053_312);
-        assert_eq!(member.sha256().as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        assert_eq!(member.length(), 37_057_976);
+        assert_eq!(member.sha256().as_str(), "sha256:e54dc2fcbcc3aee569bfa874e80670e0afbfed1fc6c70854fe2d84bb6d231519");
         assert!(original.result.as_ref().unwrap().dependencies.iter().any(|entry|
             entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
         let path = fixture.root.path().join(&member_path);
@@ -1614,8 +1614,8 @@ fn diagnostic_followup_retains_exact_inherited_native_source() {
         let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
             bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
         let (expected_length, expected_sha256) = match handbook_dock::host_target_tuple_v1() {
-            "x86_64-unknown-linux-gnu" => (37_053_312, "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523"),
-            "aarch64-apple-darwin" => (13_491_920, "sha256:b7d7b2c0811a7fe9c24eb75b120eda296ffa65ab9996e8223fec3d3779fdd177"),
+            "x86_64-unknown-linux-gnu" => (37_057_976, "sha256:e54dc2fcbcc3aee569bfa874e80670e0afbfed1fc6c70854fe2d84bb6d231519"),
+            "aarch64-apple-darwin" => (13_491_920, "sha256:f78b9e378cfd0c5d086994ef2d49325bd4120b688b27c26a83981fb24ce8188f"),
             target => panic!("unexpected native target: {target}"),
         };
         assert_eq!(member.length(), expected_length);
@@ -1761,8 +1761,8 @@ fn followup_refuses_omitted_saved_native_dependency_reach() {
         let member = &bundle.files()[0];
         let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
             bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
-        assert_eq!(member.length(), 37_053_312);
-        assert_eq!(member.sha256().as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        assert_eq!(member.length(), 37_057_976);
+        assert_eq!(member.sha256().as_str(), "sha256:e54dc2fcbcc3aee569bfa874e80670e0afbfed1fc6c70854fe2d84bb6d231519");
         assert!(result.dependencies.iter().any(|entry|
             entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
         let mut input = followup(&fixture, &original, &original_capture, &original_capture,
