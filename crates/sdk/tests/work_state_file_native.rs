@@ -8,6 +8,107 @@ use handbook_engine::work_state::{NativeWorkStateV1, WorkWriteBoundaryV1 as B};
 use handbook_sdk::work_state::*;
 use handbook_sdk::{HandbookSdkV1, SetupMode, SetupRequest};
 use work_kind_support::*;
+
+// Independent test oracle: identity and bytes are read from one open file.
+#[derive(Debug, PartialEq, Eq)]
+struct ObservedFile {
+    identity: ObservedIdentity,
+    bytes: Vec<u8>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+struct ObservedIdentity {
+    #[cfg(unix)]
+    dev: u64,
+    #[cfg(unix)]
+    inode: u64,
+    #[cfg(windows)]
+    volume_serial: u64,
+    #[cfg(windows)]
+    file_id: [u8; 16],
+}
+
+fn observe_file(path: &std::path::Path) -> std::io::Result<ObservedFile> {
+    use std::io::{Error, ErrorKind, Read};
+    #[cfg(unix)]
+    use std::os::unix::fs::MetadataExt;
+    #[cfg(windows)]
+    use std::os::windows::{fs::{MetadataExt, OpenOptionsExt}, io::AsRawHandle};
+
+    // Preserve the original final-component no-symlink check on Unix.
+    #[cfg(unix)]
+    if std::fs::symlink_metadata(path)?.file_type().is_symlink() {
+        return Err(Error::new(ErrorKind::InvalidData, "symlink is not a regular file"));
+    }
+    let mut options = std::fs::OpenOptions::new();
+    options.read(true);
+    #[cfg(windows)]
+    options.custom_flags(0x0020_0000); // FILE_FLAG_OPEN_REPARSE_POINT
+    let mut file = options.open(path)?;
+    let metadata = file.metadata()?;
+    #[cfg(windows)]
+    if metadata.file_attributes() & 0x400 != 0 { // FILE_ATTRIBUTE_REPARSE_POINT
+        return Err(Error::new(ErrorKind::InvalidData, "reparse point is not a regular file"));
+    }
+    if !metadata.is_file() {
+        return Err(Error::new(ErrorKind::InvalidData, "not a regular file"));
+    }
+    #[cfg(unix)]
+    let identity = ObservedIdentity { dev: metadata.dev(), inode: metadata.ino() };
+    #[cfg(windows)]
+    let identity = {
+        #[repr(C)]
+        struct FileIdInfo { volume_serial: u64, file_id: [u8; 16] }
+        #[link(name = "kernel32")]
+        extern "system" {
+            fn GetFileInformationByHandleEx(handle: *mut std::ffi::c_void, class: i32, info: *mut std::ffi::c_void, size: u32) -> i32;
+        }
+        let mut info = FileIdInfo { volume_serial: 0, file_id: [0; 16] };
+        // FileIdInfo is FILE_INFO_BY_HANDLE_CLASS 18; the layout is FILE_ID_INFO.
+        let ok = unsafe { GetFileInformationByHandleEx(file.as_raw_handle(), 18, (&mut info as *mut FileIdInfo).cast(), std::mem::size_of::<FileIdInfo>() as u32) };
+        if ok == 0 { return Err(Error::last_os_error()); }
+        ObservedIdentity { volume_serial: info.volume_serial, file_id: info.file_id }
+    };
+    let mut bytes = Vec::new();
+    file.read_to_end(&mut bytes)?;
+    Ok(ObservedFile { identity, bytes }) // file closes before the caller acts
+}
+
+fn lock_identity_evidence(path: &str, observed: &ObservedFile) -> serde_json::Value {
+    #[cfg(unix)]
+    { serde_json::json!([path, observed.identity.dev, observed.identity.inode, observed.bytes]) }
+    #[cfg(windows)]
+    { serde_json::json!({"path":path,"windows_volume_serial":observed.identity.volume_serial,"windows_file_id":observed.identity.file_id,"bytes":observed.bytes}) }
+}
+
+#[test]
+fn observed_file_identity_distinguishes_equal_bytes_replacement_and_reparse() {
+    let dir = tempfile::tempdir().unwrap();
+    let first = dir.path().join("first");
+    let second = dir.path().join("second");
+    std::fs::write(&first, b"same bytes").unwrap();
+    std::fs::write(&second, b"same bytes").unwrap();
+    let before = observe_file(&first).unwrap();
+    assert_eq!(before, observe_file(&first).unwrap());
+    let other = observe_file(&second).unwrap();
+    assert_eq!(before.bytes, other.bytes);
+    assert_ne!(before.identity, other.identity);
+    std::fs::remove_file(&first).unwrap();
+    std::fs::rename(&second, &first).unwrap();
+    assert_eq!(observe_file(&first).unwrap(), other);
+    assert_ne!(observe_file(&first).unwrap().identity, before.identity);
+    let link = dir.path().join("link");
+    #[cfg(unix)]
+    let link_result = std::os::unix::fs::symlink(&first, &link);
+    #[cfg(windows)]
+    let link_result = std::os::windows::fs::symlink_file(&first, &link);
+    match link_result {
+        Ok(()) => assert!(observe_file(&link).is_err(), "final symlink/reparse point must be refused"),
+        #[cfg(windows)]
+        Err(error) if error.raw_os_error() == Some(1314) || error.kind() == std::io::ErrorKind::PermissionDenied => println!("reparse discriminator unavailable: {error}"),
+        Err(error) => panic!("creating test symlink failed: {error}"),
+    }
+}
 #[test]
 fn real_sdk_indexed_lifecycle_continues_past_old_slots_with_exact_originals() {
     let dir = tempfile::tempdir().unwrap();
@@ -614,7 +715,6 @@ fn exact_original_resolution_refuses_lost_established_work_lock_without_recreati
 #[test]
 fn exact_original_resolution_refuses_lost_established_native_gate_without_recreation() {
     use std::io::Write;
-    use std::os::unix::fs::MetadataExt;
     let evidence = std::path::PathBuf::from(std::env::var_os("D04_GATE_EVIDENCE_DIR").expect("owned gate evidence directory"));
     let dir = tempfile::tempdir().unwrap().keep();
     println!("gate_fixture={}", dir.display());
@@ -639,13 +739,14 @@ fn exact_original_resolution_refuses_lost_established_native_gate_without_recrea
     let before = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     std::fs::write(evidence.join("controls-before.json"), serde_json::to_vec(&before).unwrap()).unwrap();
     let outer_lock = dir.join(".handbook/work-state/work.lock");
-    let outer_metadata = std::fs::symlink_metadata(&outer_lock).unwrap();
-    let outer_identity = (outer_metadata.dev(), outer_metadata.ino());
+    let outer = observe_file(&outer_lock).unwrap();
     let gate = dir.join(".handbook/work-state/v1/database/gate.lock");
-    let gate_metadata = std::fs::symlink_metadata(&gate).unwrap();
-    assert!(gate_metadata.is_file()); assert!(!gate_metadata.file_type().is_symlink());
-    let gate_bytes = std::fs::read(&gate).unwrap();
-    std::fs::write(evidence.join("gate-before.json"), serde_json::to_vec(&serde_json::json!({"dev":gate_metadata.dev(),"inode":gate_metadata.ino(),"bytes":gate_bytes,"outer_lock_dev":outer_identity.0,"outer_lock_inode":outer_identity.1})).unwrap()).unwrap();
+    let gate_observed = observe_file(&gate).unwrap();
+    #[cfg(unix)]
+    let gate_evidence = serde_json::json!({"dev":gate_observed.identity.dev,"inode":gate_observed.identity.inode,"bytes":gate_observed.bytes,"outer_lock_dev":outer.identity.dev,"outer_lock_inode":outer.identity.inode});
+    #[cfg(windows)]
+    let gate_evidence = serde_json::json!({"windows_volume_serial":gate_observed.identity.volume_serial,"windows_file_id":gate_observed.identity.file_id,"bytes":gate_observed.bytes,"outer_lock_windows_volume_serial":outer.identity.volume_serial,"outer_lock_windows_file_id":outer.identity.file_id});
+    std::fs::write(evidence.join("gate-before.json"), serde_json::to_vec(&gate_evidence).unwrap()).unwrap();
     drop(sdk);
     std::fs::remove_file(&gate).unwrap();
     let sdk = HandbookSdkV1::open(&dir);
@@ -664,8 +765,8 @@ fn exact_original_resolution_refuses_lost_established_native_gate_without_recrea
     assert_eq!(std::fs::symlink_metadata(&gate).unwrap_err().kind(), std::io::ErrorKind::NotFound);
     assert_eq!(std::fs::symlink_metadata(dir.join(".handbook/work-state-bootstrap")).unwrap_err().kind(), std::io::ErrorKind::NotFound);
     assert_eq!(before, after);
-    let after_lock = std::fs::symlink_metadata(&outer_lock).unwrap();
-    assert_eq!((after_lock.dev(), after_lock.ino()), outer_identity);
+    let after_lock = observe_file(&outer_lock).unwrap();
+    assert_eq!(after_lock.identity, outer.identity);
     assert_eq!(std::fs::read(evidence.join("original.json")).unwrap(), canonical);
     assert_eq!(original.canonical_json_bytes().unwrap(), canonical);
 }
@@ -788,7 +889,6 @@ fn d04_native_store<'a>(root: &'a handbook_engine::RetainedRepositoryRootV1, nam
 enum D04Case { Header, Terminal, Grant, Kind }
 fn d04_run_indexed_case(case: D04Case) {
     use std::io::Write;
-    use std::os::unix::fs::MetadataExt;
     let label = match case { D04Case::Header => "H", D04Case::Terminal => "T", D04Case::Grant => "A", D04Case::Kind => "K" };
     let evidence = std::path::PathBuf::from(std::env::var_os("D04_INDEXED_EVIDENCE_DIR").expect("owned indexed-integrity evidence"));
     let dir = tempfile::tempdir().unwrap().keep();
@@ -837,8 +937,9 @@ fn d04_run_indexed_case(case: D04Case) {
     let baseline_controls = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     std::fs::write(evidence.join("controls-before-injection.json"), serde_json::to_vec(&baseline_controls).unwrap()).unwrap();
     let lock_paths = [".handbook/work-state/work.lock", ".handbook/work-state/v1/database/gate.lock"];
-    let lock_identities = lock_paths.map(|path| { let m = std::fs::symlink_metadata(dir.join(path)).unwrap(); assert!(m.is_file()); assert!(!m.file_type().is_symlink()); (path, m.dev(), m.ino(), std::fs::read(dir.join(path)).unwrap()) });
-    std::fs::write(evidence.join("lock-identities-before.json"), serde_json::to_vec(&lock_identities).unwrap()).unwrap();
+    let lock_identities = lock_paths.map(|path| (path, observe_file(&dir.join(path)).unwrap()));
+    let lock_evidence = lock_identities.each_ref().map(|(path, observed)| lock_identity_evidence(path, observed));
+    std::fs::write(evidence.join("lock-identities-before.json"), serde_json::to_vec(&lock_evidence).unwrap()).unwrap();
     drop(sdk);
     {
         let root = handbook_engine::RetainedRepositoryRootV1::open_exact(&dir).unwrap();
@@ -888,10 +989,8 @@ fn d04_run_indexed_case(case: D04Case) {
     let after = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     std::fs::write(evidence.join("controls-after-resolution.json"), serde_json::to_vec(&after).unwrap()).unwrap();
     assert_eq!(after, post_injection);
-    for (path, dev, inode, bytes) in lock_identities {
-        let m = std::fs::symlink_metadata(dir.join(path)).unwrap();
-        assert_eq!((m.dev(), m.ino()), (dev, inode));
-        assert_eq!(std::fs::read(dir.join(path)).unwrap(), bytes);
+    for (path, before) in lock_identities {
+        assert_eq!(observe_file(&dir.join(path)).unwrap(), before);
     }
     assert_eq!(std::fs::symlink_metadata(dir.join(".handbook/work-state-bootstrap")).unwrap_err().kind(), std::io::ErrorKind::NotFound);
     assert_eq!(std::fs::read(evidence.join("original.json")).unwrap(), canonical);
@@ -914,7 +1013,6 @@ fn indexed_malformed_kind_header_refuses_without_outcome() { d04_run_indexed_cas
 #[test]
 fn original_absence_and_retained_snapshot_keep_positive_witness_distinction() {
     use std::io::Write;
-    use std::os::unix::fs::MetadataExt;
     let evidence_override = std::env::var_os("D04_FINITE_EVIDENCE_DIR");
     let evidence_temp = evidence_override.is_none().then(|| tempfile::tempdir().unwrap());
     let evidence = evidence_override.map(std::path::PathBuf::from).unwrap_or_else(|| evidence_temp.as_ref().unwrap().path().to_path_buf());
@@ -970,8 +1068,9 @@ fn original_absence_and_retained_snapshot_keep_positive_witness_distinction() {
     let paths = [".handbook-work-state.v1.json", ".handbook-work-state-bootstrap.v1.json", ".handbook/work-state/v1/owner.json", ".handbook/work-state/v1/database/STORE.json", ".handbook/work-state/v1/database/READY.json", ".handbook/work-state/v1/database/SELECTED.json", ".handbook/work-state/v1/database/active.json", ".handbook/work-state/v1/database/maintenance.json"];
     let baseline_controls = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     let lock_paths = [".handbook/work-state/work.lock", ".handbook/work-state/v1/database/gate.lock"];
-    let lock_identities = lock_paths.map(|path| { let m = std::fs::symlink_metadata(dir.join(path)).unwrap(); assert!(m.is_file()); assert!(!m.file_type().is_symlink()); (path, m.dev(), m.ino(), std::fs::read(dir.join(path)).unwrap()) });
-    std::fs::write(evidence.join("lock-identities-before.json"), serde_json::to_vec(&lock_identities).unwrap()).unwrap();
+    let lock_identities = lock_paths.map(|path| (path, observe_file(&dir.join(path)).unwrap()));
+    let lock_evidence = lock_identities.each_ref().map(|(path, observed)| lock_identity_evidence(path, observed));
+    std::fs::write(evidence.join("lock-identities-before.json"), serde_json::to_vec(&lock_evidence).unwrap()).unwrap();
     drop(sdk);
     {
         let root = handbook_engine::RetainedRepositoryRootV1::open_exact(&dir).unwrap();
@@ -1008,10 +1107,8 @@ fn original_absence_and_retained_snapshot_keep_positive_witness_distinction() {
     let after = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     std::fs::write(evidence.join("controls-after-retained-resolution.json"), serde_json::to_vec(&after).unwrap()).unwrap();
     assert_eq!(after, post_injection);
-    for (path, dev, inode, bytes) in lock_identities {
-        let m = std::fs::symlink_metadata(dir.join(path)).unwrap();
-        assert_eq!((m.dev(), m.ino()), (dev, inode));
-        assert_eq!(std::fs::read(dir.join(path)).unwrap(), bytes);
+    for (path, before) in lock_identities {
+        assert_eq!(observe_file(&dir.join(path)).unwrap(), before);
     }
     assert_eq!(std::fs::symlink_metadata(dir.join(".handbook/work-state-bootstrap")).unwrap_err().kind(), std::io::ErrorKind::NotFound);
     assert_eq!(std::fs::read(evidence.join("original.json")).unwrap(), canonical);
@@ -1025,7 +1122,6 @@ fn original_absence_and_retained_snapshot_keep_positive_witness_distinction() {
 #[test]
 fn indexed_native_evidence_payload_substitution_refuses_without_outcome() {
     use std::io::Write;
-    use std::os::unix::fs::MetadataExt;
     let evidence_override = std::env::var_os("D04_NATIVE_EVIDENCE_DIR");
     let evidence_temp = evidence_override.is_none().then(|| tempfile::tempdir().unwrap());
     let evidence = evidence_override.map(std::path::PathBuf::from).unwrap_or_else(|| evidence_temp.as_ref().unwrap().path().to_path_buf());
@@ -1074,8 +1170,9 @@ fn indexed_native_evidence_payload_substitution_refuses_without_outcome() {
     let baseline_controls = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     std::fs::write(evidence.join("controls-before-publication.json"), serde_json::to_vec(&baseline_controls).unwrap()).unwrap();
     let lock_paths = [".handbook/work-state/work.lock", ".handbook/work-state/v1/database/gate.lock"];
-    let lock_identities = lock_paths.map(|path| { let m = std::fs::symlink_metadata(dir.join(path)).unwrap(); assert!(m.is_file()); assert!(!m.file_type().is_symlink()); (path, m.dev(), m.ino(), std::fs::read(dir.join(path)).unwrap()) });
-    std::fs::write(evidence.join("lock-identities-before.json"), serde_json::to_vec(&lock_identities).unwrap()).unwrap();
+    let lock_identities = lock_paths.map(|path| (path, observe_file(&dir.join(path)).unwrap()));
+    let lock_evidence = lock_identities.each_ref().map(|(path, observed)| lock_identity_evidence(path, observed));
+    std::fs::write(evidence.join("lock-identities-before.json"), serde_json::to_vec(&lock_evidence).unwrap()).unwrap();
     drop(sdk);
     {
         let root = handbook_engine::RetainedRepositoryRootV1::open_exact(&dir).unwrap();
@@ -1130,10 +1227,8 @@ fn indexed_native_evidence_payload_substitution_refuses_without_outcome() {
     let after = paths.map(|path| (path, std::fs::read(dir.join(path)).unwrap()));
     std::fs::write(evidence.join("controls-after-resolution.json"), serde_json::to_vec(&after).unwrap()).unwrap();
     assert_eq!(after, post_publication);
-    for (path, dev, inode, bytes) in lock_identities {
-        let m = std::fs::symlink_metadata(dir.join(path)).unwrap();
-        assert_eq!((m.dev(), m.ino()), (dev, inode));
-        assert_eq!(std::fs::read(dir.join(path)).unwrap(), bytes);
+    for (path, before) in lock_identities {
+        assert_eq!(observe_file(&dir.join(path)).unwrap(), before);
     }
     assert_eq!(std::fs::symlink_metadata(dir.join(".handbook/work-state-bootstrap")).unwrap_err().kind(), std::io::ErrorKind::NotFound);
     for (i, label) in ["a", "b"].iter().enumerate() {

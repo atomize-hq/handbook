@@ -81,7 +81,7 @@ pub fn admit_native_production_manifest_v1(
     let target = env!("HANDBOOK_ENGINE_COMPILE_TARGET_V1");
     let expected = match target {
         "x86_64-unknown-linux-gnu" => "1c0cb7c0aba207f8be7e5561d7ae1f024f8c49e4d724f90c51cea421fa04c9fa",
-        "x86_64-pc-windows-msvc" => "655bfc9badf8105dfa6993513fc56619254dad22be920915c4adc49c45c47279",
+        "x86_64-pc-windows-msvc" => "1b710cb7c5b2d6dc9d217f0ed1caf8ccab06f11f88f9f8a8c1ac941ee5fe2e49",
         "aarch64-apple-darwin" => "8d7d4e6347aba34f6e0be4f31861f7887c0165ea7cdab96eb78d2744d734b059",
         _ => return Err(mismatch("native manifest target is unsupported")),
     };

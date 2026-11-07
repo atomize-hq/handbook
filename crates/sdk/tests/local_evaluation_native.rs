@@ -71,7 +71,11 @@ enum NativeFixtureDirectory {
 
 impl NativeFixtureDirectory {
     fn new() -> Self {
-        Self::Temporary(tempfile::tempdir().unwrap())
+        let directory = match std::env::var_os("HANDBOOK_NATIVE_FIXTURE_PARENT") {
+            Some(parent) => tempfile::tempdir_in(parent).unwrap(),
+            None => tempfile::tempdir().unwrap(),
+        };
+        Self::Temporary(directory)
     }
 
     fn retained(path: std::path::PathBuf) -> Self {
@@ -1503,7 +1507,12 @@ fn native_unknown_availability_is_observed_from_a_private_host_read_failure() {
         let manifest_path = executable
             .parent()
             .unwrap()
-            .join("handbook-docks/handbook.dock.json-schema/1.0.0")
+            .join("handbook-docks/handbook.dock.json-schema")
+            .join(if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+                "1.0.1"
+            } else {
+                "1.0.0"
+            })
             .join(host_target_tuple_v1())
             .join("manifest.json");
         // The private host's actual manifest stays present and unmodified. A

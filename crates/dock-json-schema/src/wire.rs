@@ -88,8 +88,13 @@ fn validate_request(request: &Request) -> Result<JsonSchemaValidationInputV1, Va
         RESULT_SCHEMA_REF,
         Some(RESULT_SCHEMA_FP),
     )?;
-    validate_binding(&request.manifest, DOCK_REF, None)?;
-    validate_binding(&request.implementation_bundle, BUNDLE_REF, None)?;
+    let (dock_ref, bundle_ref) = if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+        ("handbook.dock.json-schema@1.0.1", "handbook.dock.bundle.json-schema-native@1.0.1")
+    } else {
+        (DOCK_REF, BUNDLE_REF)
+    };
+    validate_binding(&request.manifest, dock_ref, None)?;
+    validate_binding(&request.implementation_bundle, bundle_ref, None)?;
     validate_binding(
         &request.protocol,
         PROTOCOL_REF,

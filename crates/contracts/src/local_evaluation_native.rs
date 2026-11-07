@@ -10,11 +10,16 @@ use sha2::{Digest, Sha256};
 pub const NATIVE_LOCAL_EVALUATION_ROOT_V3: &str = ".handbook/state/dock/local-evaluation-v1";
 
 pub fn native_local_evaluation_capability_binding_v3() -> Result<ExactBindingV1, ContractError> {
+    let (capability, producer) = if env!("HANDBOOK_CONTRACTS_COMPILE_TARGET_V1") == "x86_64-pc-windows-msvc" {
+        ("handbook.dock.json-schema.semantic-capability@1.0.1", "handbook.dock.json-schema@1.0.1")
+    } else {
+        ("handbook.dock.json-schema.semantic-capability@1.0.0", "handbook.dock.json-schema@1.0.0")
+    };
     Ok(ExactBindingV1::new(
-        ExactRefV1::parse("handbook.dock.json-schema.semantic-capability@1.0.0")?,
+        ExactRefV1::parse(capability)?,
         canonical_fingerprint(
             &json!({"schema_ref":"handbook.producer-semantic-capability@1.0.0",
-            "producer":"handbook.dock.json-schema@1.0.0","role":"schema_conformance",
+            "producer":producer,"role":"schema_conformance",
             "dialect":"https://json-schema.org/draft/2020-12/schema",
             "profile":"closed_offline_local_closure","input":"handbook.dock-json-schema-validation-input@1.0.0",
             "fact":"handbook.fact.schema-conformance@1.0.0","partial_completion":false,"max_attempts":1}),
@@ -278,13 +283,10 @@ fn validate_capability_proof(
     {
         return Err(ContractError::InvalidInvariant);
     }
-    let native_target = if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
-        "x86_64-pc-windows-msvc"
-    } else if cfg!(all(target_os = "linux", target_arch = "x86_64")) {
-        "x86_64-unknown-linux-gnu"
-    } else {
-        return Err(ContractError::InvalidInvariant);
-    };
+    let native_target = text(
+        &dependencies.validator.canonical_manifest["implementation_bundle"],
+        "target",
+    )?;
     if record.target != native_target
         || record.controls["target"] != native_target
         || record.controls["network_enforcement"] != "not_provided"

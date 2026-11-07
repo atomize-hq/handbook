@@ -13,7 +13,28 @@ pub const LOCAL_EVALUATION_ROOT_V1: &str = ".handbook/local-operating/local-eval
 pub const LOCAL_EVALUATION_PURPOSE_SCHEMA_V1: &str = "handbook.local-evaluation-purpose@1.0.0";
 pub const LOCAL_EVALUATION_PLAN_SCHEMA_V1: &str = "handbook.local-evaluation-plan@1.0.0";
 pub const LOCAL_EVALUATION_ROLE_V1: &str = "schema_conformance";
-pub const LOCAL_EVALUATION_PRODUCER_V1: &str = "handbook.dock.json-schema@1.0.0";
+const fn is_windows_native_target_v1(target: &str) -> bool {
+    let actual = target.as_bytes();
+    let expected = b"x86_64-pc-windows-msvc";
+    if actual.len() != expected.len() {
+        return false;
+    }
+    let mut index = 0;
+    while index < expected.len() {
+        if actual[index] != expected[index] {
+            return false;
+        }
+        index += 1;
+    }
+    true
+}
+
+pub const LOCAL_EVALUATION_PRODUCER_V1: &str =
+    if is_windows_native_target_v1(env!("HANDBOOK_ENGINE_COMPILE_TARGET_V1")) {
+        "handbook.dock.json-schema@1.0.1"
+    } else {
+        "handbook.dock.json-schema@1.0.0"
+    };
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]

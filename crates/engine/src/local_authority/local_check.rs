@@ -450,6 +450,10 @@ impl NativeLocalCheckAuthorityV1 {
         // successor, whose validated terms bind its original predecessor and Charter.
         if locator.terms.approved_content_fingerprint
             != "sha256:6d2f7bae73225ea0fbb3000a2e6857d1fbf80e064d81188f11398b28baa39ec6"
+            && locator.terms.approved_content_fingerprint
+                != "sha256:cf25d67d8b5addce25a6d9edaac3412a48d01caee0856dd24ef965bc4a304046"
+            && locator.terms.approved_content_fingerprint
+                != "sha256:fde572fa8066c4a7f3b74092f1e76ee33ce4ae856e4d773c260ba2a9830586eb"
         {
             return Err(refuse(
                 "planning_charter_authority",

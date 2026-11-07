@@ -40,6 +40,11 @@ pub fn stage_native_package_v1(
     executable_suffix: &str,
 ) -> Result<StagedPackageV1, String> {
     validate_target(target)?;
+    let (version, dock_ref, bundle_ref) = if target == "x86_64-pc-windows-msvc" {
+        ("1.0.1", "handbook.dock.json-schema@1.0.1", "handbook.dock.bundle.json-schema-native@1.0.1")
+    } else {
+        ("1.0.0", DOCK_REF_V1, BUNDLE_REF_V1)
+    };
     validate_suffix(executable_suffix)?;
     let expected_name = format!("handbook-dock-json-schema{executable_suffix}");
     if executable.file_name().and_then(|name| name.to_str()) != Some(expected_name.as_str()) {
@@ -59,7 +64,7 @@ pub fn stage_native_package_v1(
         "sha256": executable_fingerprint
     }]);
     let bundle_preimage = json!({
-        "bundle_ref": BUNDLE_REF_V1,
+        "bundle_ref": bundle_ref,
         "files": files,
         "entrypoint": entrypoint,
         "entrypoint_fingerprint": executable_fingerprint,
@@ -104,8 +109,8 @@ pub fn stage_native_package_v1(
     let manifest_preimage = json!({
         "manifest_schema": manifest_schema,
         "dock_id": "handbook.dock.json-schema",
-        "dock_version": "1.0.0",
-        "dock_ref": DOCK_REF_V1,
+        "dock_version": version,
+        "dock_ref": dock_ref,
         "protocol": protocol,
         "request_schema": request_schema,
         "result_schema": result_schema,
@@ -131,7 +136,7 @@ pub fn stage_native_package_v1(
     let package_root = host_executable_directory
         .join("handbook-docks")
         .join("handbook.dock.json-schema")
-        .join("1.0.0")
+        .join(version)
         .join(target);
     if package_root.exists() {
         return Err("target package root already exists".to_owned());

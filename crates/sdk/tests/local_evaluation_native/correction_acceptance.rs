@@ -1339,6 +1339,111 @@ fn native_packet4_interrupted_upfront_delegation_recovers_exact_original_intent(
     });
 }
 
+#[cfg(all(feature = "governance-test-support", target_arch = "x86_64", target_vendor = "pc", target_os = "windows", target_env = "msvc", target_pointer_width = "64", target_abi = ""))]
+#[test]
+#[ignore = "requires an empty task-owned test target and the exact Windows production validator"]
+fn windows_diagnostic_followup_retains_exact_inherited_native_source() {
+    use std::io::Read;
+    use std::os::windows::{fs::{MetadataExt, OpenOptionsExt}, io::AsRawHandle};
+    use std::path::{Path, PathBuf};
+    use sha2::{Digest, Sha256};
+
+    // Observe identity and bytes on the same no-reparse final-component handle.
+    fn observe(path: &Path) -> (u64, [u8; 16], Vec<u8>) {
+        #[repr(C)]
+        struct FileIdInfo { volume: u64, id: [u8; 16] }
+        #[link(name = "kernel32")]
+        extern "system" {
+            fn GetFileInformationByHandleEx(handle: *mut std::ffi::c_void, class: i32, info: *mut std::ffi::c_void, size: u32) -> i32;
+        }
+        let mut file = OpenOptionsExt::custom_flags(std::fs::OpenOptions::new().read(true), 0x0020_0000).open(path).unwrap();
+        let metadata = file.metadata().unwrap();
+        assert!(metadata.is_file() && metadata.file_attributes() & 0x400 == 0);
+        let mut info = FileIdInfo { volume: 0, id: [0; 16] };
+        let ok = unsafe { GetFileInformationByHandleEx(file.as_raw_handle(), 18, (&mut info as *mut FileIdInfo).cast(), std::mem::size_of::<FileIdInfo>() as u32) };
+        assert_ne!(ok, 0, "file identity unavailable: {}", std::io::Error::last_os_error());
+        let mut bytes = Vec::new();
+        file.read_to_end(&mut bytes).unwrap();
+        assert_eq!(bytes.len() as u64, metadata.len());
+        (info.volume, info.id, bytes)
+    }
+    struct Restore { path: PathBuf, backup: PathBuf }
+    impl Drop for Restore {
+        fn drop(&mut self) {
+            if self.backup.exists() {
+                assert!(!self.path.exists(), "do not replace another package during restore");
+                std::fs::rename(&self.backup, &self.path).expect("restore owned installed package");
+            }
+        }
+    }
+    on_stack(|| {
+        let owned_target = std::fs::canonicalize(std::env::var_os("HANDBOOK_TASK22_OWNED_TARGET").expect("task-owned target required")).unwrap();
+        let executable = std::fs::canonicalize(std::env::current_exe().unwrap()).unwrap();
+        assert!(executable.starts_with(&owned_target));
+        assert_eq!(handbook_dock::host_target_tuple_v1(), "x86_64-pc-windows-msvc");
+        let package_path = executable.parent().unwrap().join("handbook-docks/handbook.dock.json-schema/1.0.1/x86_64-pc-windows-msvc");
+        assert!(std::fs::symlink_metadata(&package_path).is_err_and(|e| e.kind() == std::io::ErrorKind::NotFound));
+        let _package = InstalledProductionPackage::install();
+        let fixture = Fixture::new();
+        let value = supplied_validation_content();
+        let original_capture = capture(value.clone());
+        let formed = fixture.form("task22-windows-inherited-original-0001", value,
+            production_manifest().resolution_ceiling().clone(), LocalEvaluationUseIntentV1::Diagnostic);
+        let original = complete(&fixture, &formed);
+        let original_locator = original.result_locator().unwrap();
+        let original_bytes = original.result.as_ref().unwrap().canonical_json_bytes().unwrap();
+        let manifest = production_manifest();
+        let bundle = manifest.implementation_bundle();
+        let member = &bundle.files()[0];
+        assert_eq!(member.length(), 9_585_152);
+        assert_eq!(member.sha256().as_str(), "sha256:a1adbe64c1cd3272a23927c081611ed1ddb613712c9902c9d5e92742f35ffde0");
+        let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
+            bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
+        let installed_member = package_path.join("bundle").join(member.path().as_str());
+        let before = observe(&installed_member);
+        assert_eq!(before.2.len() as u64, member.length());
+        assert_eq!(format!("sha256:{:x}", Sha256::digest(&before.2)), member.sha256().as_str());
+        assert!(original.origin_paths.contains(&member_path));
+        assert!(original.result.as_ref().unwrap().dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        let input = followup(&fixture, &original, &original_capture, &original_capture,
+            LocalEvaluationFollowupActionV1::FreshRepeat, "task22-windows-inherited-followup-0002");
+        let prepared = fixture.sdk.prepare_local_evaluation_followup(&fixture.initial, &fixture.authority, input).unwrap();
+        let next = fixture.sdk.form_local_evaluation_followup(&fixture.authority, prepared).unwrap();
+        let lineage = fixture.sdk.read_local_evaluation_lineage(&next.locator).unwrap().unwrap();
+        assert_eq!(lineage.original, original_locator);
+        assert!(lineage.dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        let executions_dir = fixture.root.path().join(format!("{DOCK_OPERATIONAL_STORE_RELATIVE_ROOT_V1}/executions"));
+        let execution_count = std::fs::read_dir(&executions_dir).unwrap().count();
+        let backup = package_path.with_file_name("task22-owned-package-backup");
+        assert!(std::fs::symlink_metadata(&backup).is_err_and(|e| e.kind() == std::io::ErrorKind::NotFound));
+        std::fs::rename(&package_path, &backup).unwrap();
+        let restore = Restore { path: package_path.clone(), backup };
+        let followup = issue(&fixture, next, original_capture);
+        let assessed = fixture.assess(&followup);
+        assert_eq!(assessed.stage, LocalEvaluationStageV3::Attemptable);
+        assert_eq!(assessed.readiness_bases.last().unwrap().readiness, LocalEvaluationReadinessV3::KnownLimited);
+        assert_eq!(assessed.readiness_bases.last().unwrap().capability.availability, "known_limited");
+        let session = fixture.session(&followup);
+        fixture.sdk.commit_local_evaluation_collection(&session).unwrap();
+        let outcome = fixture.sdk.execute_local_evaluation_once(&session, followup.process_request.as_ref().unwrap(), &dock_reach(), &DockCancellationV1::new()).unwrap();
+        let DockLocalEvaluationAttemptOutcomeV1::Terminal { terminal, replayed: false, .. } = outcome else { panic!("fresh diagnostic refusal required"); };
+        assert_eq!(terminal.kind, "refused_before_launch");
+        assert!(terminal.execution.is_none());
+        finish(&fixture, &followup);
+        let closed = fixture.sdk.recover_local_evaluation(&followup.snapshot.locator).unwrap();
+        assert_eq!(closed.stage, LocalEvaluationStageV3::ResultClosed);
+        assert!(!closed.origin_paths.contains(&member_path));
+        assert!(closed.result.as_ref().unwrap().dependencies.iter().any(|entry|
+            entry.path == member_path && entry.bytes_fingerprint == *member.sha256()));
+        assert_eq!(fixture.sdk.read_local_evaluation_result_history(&original_locator).unwrap().result.canonical_json_bytes().unwrap(), original_bytes);
+        assert_eq!(std::fs::read_dir(&executions_dir).unwrap().count(), execution_count);
+        drop(restore);
+        assert_eq!(observe(&installed_member), before, "restore must preserve exact member identity and bytes");
+    });
+}
+
 #[cfg(all(feature = "governance-test-support", target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""))]
 #[test]
 fn saved_native_history_classifies_each_dependency() {
@@ -1454,7 +1559,13 @@ fn saved_native_history_classifies_each_dependency() {
     });
 }
 
-#[cfg(all(feature = "governance-test-support", target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""))]
+#[cfg(all(
+    feature = "governance-test-support",
+    any(
+        all(target_arch = "x86_64", target_vendor = "unknown", target_os = "linux", target_env = "gnu", target_pointer_width = "64", target_abi = ""),
+        all(target_arch = "aarch64", target_vendor = "apple", target_os = "macos", target_env = "", target_pointer_width = "64", target_abi = "")
+    )
+))]
 #[test]
 #[ignore = "requires an empty task-owned test target and the exact production validator"]
 fn diagnostic_followup_retains_exact_inherited_native_source() {
@@ -1502,8 +1613,13 @@ fn diagnostic_followup_retains_exact_inherited_native_source() {
         let member = &bundle.files()[0];
         let member_path = format!("{DOCK_LOCAL_EVALUATION_ROOT_V1}/packages/{}/{}",
             bundle.bundle_fingerprint().as_str().strip_prefix("sha256:").unwrap(), member.path().as_str());
-        assert_eq!(member.length(), 37_053_312);
-        assert_eq!(member.sha256().as_str(), "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523");
+        let (expected_length, expected_sha256) = match handbook_dock::host_target_tuple_v1() {
+            "x86_64-unknown-linux-gnu" => (37_053_312, "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523"),
+            "aarch64-apple-darwin" => (13_491_920, "sha256:b7d7b2c0811a7fe9c24eb75b120eda296ffa65ab9996e8223fec3d3779fdd177"),
+            target => panic!("unexpected native target: {target}"),
+        };
+        assert_eq!(member.length(), expected_length);
+        assert_eq!(member.sha256().as_str(), expected_sha256);
         let installed_member = package_path.join("bundle").join(member.path().as_str());
         let installed_member_before = std::fs::symlink_metadata(&installed_member).unwrap();
         assert!(installed_member_before.is_file() && !installed_member_before.file_type().is_symlink());

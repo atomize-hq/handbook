@@ -10,9 +10,20 @@ use std::collections::BTreeSet;
 
 const VALIDATION_INPUT_REF: &str = "handbook.dock-json-schema-validation-input@1.0.0";
 const FACT_REF: &str = "handbook.fact.schema-conformance@1.0.0";
-const PRODUCTION_DOCK_REF: &str = "handbook.dock.json-schema@1.0.0";
-const PRODUCTION_DOCK_FINGERPRINT: &str =
-    "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893";
+const PRODUCTION_DOCK_REF: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+    "handbook.dock.json-schema@1.0.1"
+} else {
+    "handbook.dock.json-schema@1.0.0"
+};
+const PRODUCTION_DOCK_FINGERPRINT: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+    "sha256:112c3d7e6589f2dcf9b5994e118b7e388f6b9f0011bf8167f2e040e5b017ad74"
+} else if cfg!(all(target_arch = "aarch64", target_os = "macos")) {
+    "sha256:0aad9b76379d32015a5e5994748ae82d837ef90f887500271cb59a25f0b74fd1"
+} else if cfg!(all(target_arch = "x86_64", target_os = "linux", target_env = "gnu")) {
+    "sha256:982690abba3e931770e25b156a9a94ab1e703f84c68311cba1f9de5929f5e142"
+} else {
+    "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893"
+};
 
 #[test]
 fn packet6_closes_exact_public_truth_through_the_generic_rust_consumer() {

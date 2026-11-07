@@ -17,6 +17,21 @@ use tauri::test::{
 };
 use tauri::webview::InvokeRequest;
 
+const PRODUCTION_DOCK_REF: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+    "handbook.dock.json-schema@1.0.1"
+} else {
+    "handbook.dock.json-schema@1.0.0"
+};
+const PRODUCTION_DOCK_FINGERPRINT: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+    "sha256:112c3d7e6589f2dcf9b5994e118b7e388f6b9f0011bf8167f2e040e5b017ad74"
+} else if cfg!(all(target_arch = "aarch64", target_os = "macos")) {
+    "sha256:0aad9b76379d32015a5e5994748ae82d837ef90f887500271cb59a25f0b74fd1"
+} else if cfg!(all(target_arch = "x86_64", target_os = "linux", target_env = "gnu")) {
+    "sha256:982690abba3e931770e25b156a9a94ab1e703f84c68311cba1f9de5929f5e142"
+} else {
+    "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893"
+};
+
 const OPERATIONS: [&str; 3] = [
     "dock.manifest.list@1.0.0",
     "dock.manifest.read@1.0.0",
@@ -153,7 +168,7 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
             .as_array()
             .unwrap()
             .len(),
-        170
+        180
     );
 
     let catalog_request = CatalogReadRequestV1::new(
@@ -172,7 +187,7 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
     let CatalogReadResponseBodyV1::CapabilityPage(page) = catalog.response() else {
         panic!("Tauri capability read returned a non-capability page");
     };
-    assert_eq!(page.root().total_entries().get(), 31);
+    assert_eq!(page.root().total_entries().get(), 35);
     let capabilities = page
         .entries()
         .iter()
@@ -199,11 +214,8 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
             Some("packet-five-tauri-read"),
             DockManifestReadRequestV1::new(
                 ContractRecordBindingDtoV1::new(
-                    "handbook.dock.json-schema@1.0.0",
-                    Fingerprint::parse(
-                        "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893",
-                    )
-                    .unwrap(),
+                    PRODUCTION_DOCK_REF,
+                    Fingerprint::parse(PRODUCTION_DOCK_FINGERPRINT).unwrap(),
                 )
                 .unwrap(),
             ),
@@ -237,7 +249,7 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
                 );
                 assert_eq!(
                     actual["response"]["data"]["entries"][0]["manifest"]["ref"],
-                    "handbook.dock.json-schema@1.0.0"
+                    PRODUCTION_DOCK_REF
                 );
             }
             "dock.manifest.read@1.0.0" => {
@@ -245,7 +257,7 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
                 assert_eq!(actual["response"]["data"]["outcome"], "found");
                 assert_eq!(
                     actual["response"]["data"]["manifest"]["document"]["dock_ref"],
-                    "handbook.dock.json-schema@1.0.0"
+                    PRODUCTION_DOCK_REF
                 );
             }
             "dock.run@1.0.0" => {

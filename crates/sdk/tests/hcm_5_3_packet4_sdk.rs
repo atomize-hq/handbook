@@ -178,7 +178,11 @@ fn empty_production_manifest_use_cases_are_re_admitted_outward() {
     assert_eq!(entries.len(), 1);
     assert_eq!(
         entries[0]["manifest"]["ref"],
-        "handbook.dock.json-schema@1.0.0"
+        if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+            "handbook.dock.json-schema@1.0.1"
+        } else {
+            "handbook.dock.json-schema@1.0.0"
+        }
     );
     let rendered = serde_json::to_string(&listed).unwrap();
     assert!(!rendered.contains("handbook-docks"));
@@ -232,7 +236,11 @@ fn generic_capability_consumer_dispatches_dock_without_a_specific_adapter() {
         .unwrap();
     let bytes = canonical_json_bytes(&response, &ContractLimits::packet0()).unwrap();
     let rendered = String::from_utf8(bytes).unwrap();
-    assert!(rendered.contains("handbook.dock.json-schema@1.0.0"));
+    assert!(rendered.contains(if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
+            "handbook.dock.json-schema@1.0.1"
+        } else {
+            "handbook.dock.json-schema@1.0.0"
+        }));
     assert!(!rendered.contains("handbook-docks"));
     assert!(rendered.contains(DOCK_MANIFEST_LIST_REF));
 

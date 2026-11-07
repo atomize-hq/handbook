@@ -133,7 +133,7 @@ impl DockResolvedFirstPartyBundleV1 {
         let package_root = host_directory
             .join("handbook-docks")
             .join("handbook.dock.json-schema")
-            .join("1.0.0")
+            .join(if host_target_tuple_v1() == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" })
             .join(host_target_tuple_v1());
         let bundle_root = package_root.join("bundle");
         with_production_source_bundle_v1(&package_root, &manifest, |_, _, _| Ok(()), || Ok(()))

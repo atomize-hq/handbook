@@ -48,17 +48,33 @@ fn production_executable_bytes() -> &'static [u8] {
     static EXECUTABLE: OnceLock<Vec<u8>> = OnceLock::new();
     EXECUTABLE
         .get_or_init(|| {
-            let target_directory = tempfile::tempdir().unwrap();
-            let workspace = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
-            let package =
-                production::produce_current_package_v1(&workspace, target_directory.path())
-                    .unwrap();
-            let bytes = fs::read(&package.executable_path).unwrap();
-            assert_eq!(bytes.len(), 9_548_800);
-            assert_eq!(
-                format!("sha256:{:x}", Sha256::digest(&bytes)),
-                "sha256:067d9d4386382ed1fc97f312336fc8a148bb135269679d4bb46c5058fe18d411"
-            );
+            let bytes = if let Some(path) = std::env::var_os("HANDBOOK_PACKET2_VALIDATOR_EXE") {
+                let bytes = fs::read(path).expect("read retained production validator");
+                if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+                    assert_eq!(bytes.len(), 9_585_152);
+                    assert_eq!(
+                        format!("sha256:{:x}", sha2::Sha256::digest(&bytes)),
+                        "sha256:a1adbe64c1cd3272a23927c081611ed1ddb613712c9902c9d5e92742f35ffde0"
+                    );
+                }
+                bytes
+            } else {
+                let target_directory = tempfile::tempdir().unwrap();
+                let workspace = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+                let package =
+                    production::produce_current_package_v1(&workspace, target_directory.path())
+                        .unwrap();
+                fs::read(package.executable_path).unwrap()
+            };
+            let (length, fingerprint) = if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+                (9_585_152, "sha256:a1adbe64c1cd3272a23927c081611ed1ddb613712c9902c9d5e92742f35ffde0")
+            } else if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "aarch64-apple-darwin" {
+                (13_491_920, "sha256:b7d7b2c0811a7fe9c24eb75b120eda296ffa65ab9996e8223fec3d3779fdd177")
+            } else {
+                (9_548_800, "sha256:067d9d4386382ed1fc97f312336fc8a148bb135269679d4bb46c5058fe18d411")
+            };
+            assert_eq!(bytes.len(), length);
+            assert_eq!(format!("sha256:{:x}", Sha256::digest(&bytes)), fingerprint);
             bytes
         })
         .as_slice()
@@ -73,7 +89,12 @@ impl InstalledProductionPackage {
         let host = std::env::current_exe().unwrap();
         let host = host.parent().unwrap();
         let package_root = host
-            .join("handbook-docks/handbook.dock.json-schema/1.0.0")
+            .join("handbook-docks/handbook.dock.json-schema")
+            .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+            "1.0.1"
+        } else {
+            "1.0.0"
+        })
             .join(host_target_tuple_v1());
         assert!(
             !package_root.exists(),

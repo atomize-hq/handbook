@@ -216,9 +216,12 @@ impl InstalledProductionPackage {
             format!("sha256:{:x}", Sha256::digest(&bytes)),
             entry.sha256().as_str()
         );
+        let target = handbook_dock::host_target_tuple_v1();
+        let version = if target == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" };
         let package_root = host_directory
-            .join("handbook-docks/handbook.dock.json-schema/1.0.0")
-            .join(handbook_dock::host_target_tuple_v1());
+            .join("handbook-docks/handbook.dock.json-schema")
+            .join(version)
+            .join(target);
         if package_root.exists() {
             // Reuse only the exact owner-resolved production package. It may
             // already be staged by a prior interrupted proof; never overwrite

@@ -17,7 +17,8 @@ pub const DOCK_LOCAL_EVALUATION_ROOT_V1: &str = ".handbook/state/dock/local-eval
 /// Native owner-relative package source; this is not a repository or host path.
 pub fn dock_native_package_read_selector_v1() -> String {
     format!(
-        "handbook-docks/handbook.dock.json-schema/1.0.0/{}/**",
+        "handbook-docks/handbook.dock.json-schema/{}/{}/**",
+        if host_target_tuple_v1() == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" },
         host_target_tuple_v1()
     )
 }
@@ -447,7 +448,7 @@ impl DockLocalEvaluationOwnerV1 {
                             parent
                                 .join("handbook-docks")
                                 .join("handbook.dock.json-schema")
-                                .join("1.0.0")
+                                .join(if host_target_tuple_v1() == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" })
                                 .join(host_target_tuple_v1())
                         })
                     })

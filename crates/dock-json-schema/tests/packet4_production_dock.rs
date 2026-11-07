@@ -13,6 +13,7 @@ use handbook_contracts::{
 };
 use handbook_dock::*;
 use serde_json::json;
+use sha2::Digest;
 use std::fs;
 use std::path::Path;
 use std::sync::OnceLock;
@@ -65,12 +66,39 @@ fn production_executable_bytes() -> &'static [u8] {
     static EXECUTABLE: OnceLock<Vec<u8>> = OnceLock::new();
     EXECUTABLE
         .get_or_init(|| {
-            let target_directory = tempfile::tempdir().unwrap();
-            let workspace = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
-            let package =
-                production::produce_current_package_v1(&workspace, target_directory.path())
-                    .unwrap();
-            fs::read(package.executable_path).unwrap()
+            let bytes = if let Some(path) = std::env::var_os("HANDBOOK_PACKET2_VALIDATOR_EXE") {
+                let bytes = fs::read(path).expect("read retained production validator");
+                let (expected_length, expected_sha256) =
+                    match env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") {
+                        "x86_64-pc-windows-msvc" => (
+                            9_585_152,
+                            "sha256:a1adbe64c1cd3272a23927c081611ed1ddb613712c9902c9d5e92742f35ffde0",
+                        ),
+                        "aarch64-apple-darwin" => (
+                            13_491_920,
+                            "sha256:b7d7b2c0811a7fe9c24eb75b120eda296ffa65ab9996e8223fec3d3779fdd177",
+                        ),
+                        "x86_64-unknown-linux-gnu" => (
+                            37_053_312,
+                            "sha256:8750a2295d63b4e8ce9c0e3e8ecb0017651b6a88576489c23bd2973a0b4a7523",
+                        ),
+                        target => panic!("unsupported retained validator target: {target}"),
+                    };
+                assert_eq!(bytes.len(), expected_length);
+                assert_eq!(
+                    format!("sha256:{:x}", sha2::Sha256::digest(&bytes)),
+                    expected_sha256
+                );
+                bytes
+            } else {
+                let target_directory = tempfile::tempdir().unwrap();
+                let workspace = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+                let package =
+                    production::produce_current_package_v1(&workspace, target_directory.path())
+                        .unwrap();
+                fs::read(package.executable_path).unwrap()
+            };
+            bytes
         })
         .as_slice()
 }
@@ -114,7 +142,14 @@ fn production_registry_embeds_exact_one_entry_without_package_material() {
         .unwrap();
     assert_eq!(page.entries().len(), 1);
     let manifest = production_manifest();
-    assert_eq!(manifest.dock_ref().as_str(), staging::DOCK_REF_V1);
+    assert_eq!(
+        manifest.dock_ref().as_str(),
+        if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+            "handbook.dock.json-schema@1.0.1"
+        } else {
+            "handbook.dock.json-schema@1.0.0"
+        }
+    );
     assert_eq!(manifest.implementation_bundle().files().len(), 1);
     assert!(manifest
         .implementation_bundle()
@@ -190,7 +225,13 @@ fn production_package_requires_exact_manifest_and_one_regular_member() {
     let staged = stage_package(wrong_target_host.path());
     let wrong = wrong_target_host
         .path()
-        .join("handbook-docks/handbook.dock.json-schema/1.0.0/wrong-target-tuple");
+        .join("handbook-docks/handbook.dock.json-schema")
+        .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+            "1.0.1"
+        } else {
+            "1.0.0"
+        })
+        .join("wrong-target-tuple");
     fs::rename(&staged.package_root, wrong).unwrap();
     assert!(
         DockResolvedFirstPartyBundleV1::resolve_from_host_directory_for_testing(
@@ -358,7 +399,12 @@ impl InstalledProductionPackage {
         let host = std::env::current_exe().unwrap();
         let host = host.parent().unwrap();
         let package_root = host
-            .join("handbook-docks/handbook.dock.json-schema/1.0.0")
+            .join("handbook-docks/handbook.dock.json-schema")
+            .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
+            "1.0.1"
+        } else {
+            "1.0.0"
+        })
             .join(host_target_tuple_v1());
         assert!(
             !package_root.exists(),
