@@ -343,7 +343,7 @@ impl LocalValidatorDependencyV2 {
             selected_dock_manifest_bytes().ok_or(ContractError::InvalidInvariant)?,
         )
         .map_err(|_| ContractError::InvalidInvariant)?;
-        if self.manifest.reference().as_str() != if env!("HANDBOOK_CONTRACTS_COMPILE_TARGET_V1") == "x86_64-pc-windows-msvc" { "handbook.dock.json-schema@1.0.1" } else { "handbook.dock.json-schema@1.0.0" }
+        if self.manifest.reference().as_str() != "handbook.dock.json-schema@1.0.2"
             || self.canonical_manifest != shipped_manifest
         {
             return Err(ContractError::InvalidInvariant);

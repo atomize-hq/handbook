@@ -65,7 +65,7 @@ fn native_manifest_rejection_preserves_originals() {
         let _package = InstalledProductionPackage::install();
         let manifest = production_manifest();
         let staged = std::env::current_exe().unwrap().parent().unwrap()
-            .join("handbook-docks/handbook.dock.json-schema/1.0.0")
+            .join("handbook-docks/handbook.dock.json-schema/1.0.2")
             .join(handbook_dock::host_target_tuple_v1())
             .join("bundle")
             .join(manifest.implementation_bundle().entrypoint().as_str());

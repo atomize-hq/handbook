@@ -493,11 +493,7 @@ fn production_registry_is_immutable_empty_and_list_read_are_bounded_exact_use_ca
     assert_eq!(page.entries().len(), 1);
     assert_eq!(
         page.entries()[0].manifest_ref().as_str(),
-        if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
-            "handbook.dock.json-schema@1.0.1"
-        } else {
-            "handbook.dock.json-schema@1.0.0"
-        }
+        "handbook.dock.json-schema@1.0.2"
     );
     assert!(page.next_cursor().is_none());
     assert_eq!(page.retention(), DockManifestRetentionV1::ImmutableExact);

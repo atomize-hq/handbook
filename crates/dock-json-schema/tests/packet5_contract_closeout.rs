@@ -90,11 +90,7 @@ impl InstalledProductionPackage {
         let host = host.parent().unwrap();
         let package_root = host
             .join("handbook-docks/handbook.dock.json-schema")
-            .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            "1.0.1"
-        } else {
-            "1.0.0"
-        })
+            .join("1.0.2")
             .join(host_target_tuple_v1());
         assert!(
             !package_root.exists(),

@@ -1381,7 +1381,7 @@ fn windows_diagnostic_followup_retains_exact_inherited_native_source() {
         let executable = std::fs::canonicalize(std::env::current_exe().unwrap()).unwrap();
         assert!(executable.starts_with(&owned_target));
         assert_eq!(handbook_dock::host_target_tuple_v1(), "x86_64-pc-windows-msvc");
-        let package_path = executable.parent().unwrap().join("handbook-docks/handbook.dock.json-schema/1.0.1/x86_64-pc-windows-msvc");
+        let package_path = executable.parent().unwrap().join("handbook-docks/handbook.dock.json-schema/1.0.2/x86_64-pc-windows-msvc");
         assert!(std::fs::symlink_metadata(&package_path).is_err_and(|e| e.kind() == std::io::ErrorKind::NotFound));
         let _package = InstalledProductionPackage::install();
         let fixture = Fixture::new();
@@ -1588,7 +1588,7 @@ fn diagnostic_followup_retains_exact_inherited_native_source() {
             .expect("a fresh task-owned target is required")).unwrap();
         let executable = std::fs::canonicalize(std::env::current_exe().unwrap()).unwrap();
         assert!(executable.starts_with(&owned_target), "test binary must be in the owned target");
-        let package_path = executable.parent().unwrap().join("handbook-docks/handbook.dock.json-schema/1.0.0")
+        let package_path = executable.parent().unwrap().join("handbook-docks/handbook.dock.json-schema/1.0.2")
             .join(handbook_dock::host_target_tuple_v1());
         assert!(std::fs::symlink_metadata(&package_path).is_err_and(|error| error.kind() == std::io::ErrorKind::NotFound),
             "do not reuse or hide any preexisting installed package");

@@ -217,7 +217,7 @@ impl InstalledProductionPackage {
             entry.sha256().as_str()
         );
         let target = handbook_dock::host_target_tuple_v1();
-        let version = if target == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" };
+        let version = "1.0.2";
         let package_root = host_directory
             .join("handbook-docks/handbook.dock.json-schema")
             .join(version)

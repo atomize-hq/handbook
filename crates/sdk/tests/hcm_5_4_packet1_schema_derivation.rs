@@ -164,11 +164,11 @@ fn assert_local_refs_only(value: &Value) {
 fn packet3_wire_vectors_bind_the_exact_generated_input_and_fact_schema_bytes() {
     let tree = derive_hcm_5_4_packet_1_schema_tree_for_test().unwrap();
     let request: Value = serde_json::from_slice(include_bytes!(
-        "../../dock-json-schema/tests/vectors/process-request-v1.json"
+        "../../dock-json-schema/tests/vectors/process-request-common-1.0.2.json"
     ))
     .unwrap();
     let result: Value = serde_json::from_slice(include_bytes!(
-        "../../dock-json-schema/tests/vectors/process-result-v1.json"
+        "../../dock-json-schema/tests/vectors/process-result-common-1.0.2.json"
     ))
     .unwrap();
 

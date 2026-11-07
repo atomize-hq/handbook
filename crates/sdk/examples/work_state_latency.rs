@@ -1,5 +1,6 @@
-//! Task13 fixed budget: exactly 40 candidate attempts; no warmup or baseline arm.
-//! Run only after the owner releases this frozen native Linux candidate.
+//! Fixed budget: 20 sequential ordinary owner Work registrations, with no warmups or replacements.
+//! Run only after the owner releases this frozen candidate on the selected native host.
+//! Native 1.0.2 evaluation correctness is a separate cohort; this is not evaluation timing.
 //! Existing setup helpers supply ordinary public-owner authorization.
 #[allow(dead_code)]
 #[path = "../tests/local_contract_support/mod.rs"]
@@ -23,6 +24,28 @@ fn append(file: &mut File, value: &serde_json::Value) -> Result<()> {
     file.sync_all()?;
     Ok(())
 }
+// Match the Engine's native directory-flush sequence; failures stop before invocation.
+fn sync_proof_directory(path: &Path) -> std::io::Result<()> {
+    #[cfg(unix)]
+    {
+        File::open(path)?.sync_all()
+    }
+    #[cfg(windows)]
+    {
+        use std::os::windows::fs::OpenOptionsExt;
+        const FILE_SHARE_READ: u32 = 0x0000_0001;
+        const FILE_SHARE_WRITE: u32 = 0x0000_0002;
+        const FILE_SHARE_DELETE: u32 = 0x0000_0004;
+        const FILE_FLAG_BACKUP_SEMANTICS: u32 = 0x0200_0000;
+        const FILE_FLAG_OPEN_REPARSE_POINT: u32 = 0x0020_0000;
+        OpenOptions::new()
+            .write(true)
+            .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE)
+            .custom_flags(FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT)
+            .open(path)?
+            .sync_all()
+    }
+}
 fn save_original(proof: &Path, n: usize, locator: &WorkRequestLocatorV1) -> Result<()> {
     let bytes = locator
         .canonical_json_bytes()
@@ -33,7 +56,7 @@ fn save_original(proof: &Path, n: usize, locator: &WorkRequestLocatorV1) -> Resu
         .open(proof.join(format!("original-{n:02}.json")))?;
     file.write_all(&bytes)?;
     file.sync_all()?;
-    File::open(proof)?.sync_all()?;
+    sync_proof_directory(proof)?;
     Ok(())
 }
 fn settle_original(
@@ -74,10 +97,6 @@ fn settle_original(
     Err("exact original unresolved after finite recovery; arm stopped".into())
 }
 fn main() -> Result<()> {
-    assert!(
-        cfg!(target_os = "linux"),
-        "this driver targets native Linux only"
-    );
     let args: Vec<_> = std::env::args_os().collect();
     assert_eq!(
         args.len(),
@@ -97,7 +116,7 @@ fn main() -> Result<()> {
         .create_new(true)
         .write(true)
         .open(proof.join("samples.jsonl"))?;
-    File::open(proof)?.sync_all()?;
+    sync_proof_directory(proof)?;
     std::fs::create_dir(root)?;
     let setup_start = Instant::now();
     let sdk = HandbookSdkV1::open(root);
@@ -107,7 +126,7 @@ fn main() -> Result<()> {
         &mut trace,
         &serde_json::json!({"stage":"setup-grant", "elapsed_ns":setup_start.elapsed().as_nanos(), "statistics":sdk.work_storage_statistics().map_err(|e|format!("{e:?}"))?}),
     )?;
-    for n in 0..40 {
+    for n in 0..20 {
         let before = sdk
             .work_storage_statistics()
             .map_err(|e| format!("{e:?}"))?;
@@ -206,7 +225,7 @@ fn main() -> Result<()> {
     }
     append(
         &mut trace,
-        &serde_json::json!({"stage":"finished","attempts":40,"maintenance_ns":maintenance_start.elapsed().as_nanos(),"statistics":sdk.work_storage_statistics().map_err(|e|format!("{e:?}"))?}),
+        &serde_json::json!({"stage":"finished","attempts":20,"maintenance_ns":maintenance_start.elapsed().as_nanos(),"statistics":sdk.work_storage_statistics().map_err(|e|format!("{e:?}"))?}),
     )?;
     Ok(())
 }

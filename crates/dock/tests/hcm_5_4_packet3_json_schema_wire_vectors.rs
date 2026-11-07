@@ -1,9 +1,9 @@
 use handbook_dock::{DockProcessRequestV1, DockProcessResultStatusV1, DockProcessResultV1};
 
 const REQUEST_BYTES: &[u8] =
-    include_bytes!("../../dock-json-schema/tests/vectors/process-request-v1.json");
+    include_bytes!("../../dock-json-schema/tests/vectors/process-request-common-1.0.2.json");
 const RESULT_BYTES: &[u8] =
-    include_bytes!("../../dock-json-schema/tests/vectors/process-result-v1.json");
+    include_bytes!("../../dock-json-schema/tests/vectors/process-result-common-1.0.2.json");
 
 #[test]
 fn native_json_schema_validator_vectors_are_byte_compatible_without_a_crate_edge() {

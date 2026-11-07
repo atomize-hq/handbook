@@ -444,11 +444,7 @@ fn staged_package_is_exact_single_member_target_bound_and_registry_neutral() {
     let package = fixture
         .root
         .join("handbook-docks/handbook.dock.json-schema")
-        .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            "1.0.1"
-        } else {
-            "1.0.0"
-        })
+        .join("1.0.2")
         .join(target);
     let manifest_bytes = fs::read(package.join("manifest.json")).unwrap();
     assert_eq!(
@@ -457,11 +453,7 @@ fn staged_package_is_exact_single_member_target_bound_and_registry_neutral() {
     );
     assert_eq!(
         fixture.manifest["dock_ref"],
-        if target == "x86_64-pc-windows-msvc" {
-            "handbook.dock.json-schema@1.0.1"
-        } else {
-            "handbook.dock.json-schema@1.0.0"
-        }
+        "handbook.dock.json-schema@1.0.2"
     );
     assert_eq!(fixture.manifest["implementation_kind"], "native_process");
     assert_eq!(
@@ -602,21 +594,13 @@ fn canonical_request_and_result_match_the_shared_cross_crate_vectors() {
     let result = run_request(&request);
     assert_eq!(
         serde_json_canonicalizer::to_vec(&request).unwrap(),
-        (if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            &include_bytes!("vectors/process-request-windows-v1.json")[..]
-        } else {
-            &include_bytes!("vectors/process-request-v1.json")[..]
-        })
+        (&include_bytes!("vectors/process-request-common-1.0.2.json")[..])
             .strip_suffix(b"\n")
             .unwrap()
     );
     assert_eq!(
         serde_json_canonicalizer::to_vec(&result).unwrap(),
-        (if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            &include_bytes!("vectors/process-result-windows-v1.json")[..]
-        } else {
-            &include_bytes!("vectors/process-result-v1.json")[..]
-        })
+        (&include_bytes!("vectors/process-result-common-1.0.2.json")[..])
             .strip_suffix(b"\n")
             .unwrap()
     );
@@ -626,20 +610,17 @@ fn canonical_request_and_result_match_the_shared_cross_crate_vectors() {
 fn foreign_version_manifest_and_bundle_are_refused() {
     let fixture = Fixture::new();
     let base = fixture.request(validation_input(json!({"$schema": DIALECT}), json!(null)));
-    let other_version = if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-        "1.0.0"
-    } else {
-        "1.0.1"
-    };
-    for (field, prefix) in [
-        ("manifest", "handbook.dock.json-schema"),
-        ("implementation_bundle", "handbook.dock.bundle.json-schema-native"),
-    ] {
-        let mut request = base.clone();
-        request[field]["ref"] = json!(format!("{prefix}@{other_version}"));
-        refresh_request_binding(&mut request);
-        let result = run_request(&request);
-        assert_eq!(result["refusal_reason"], "input_refused", "{field}");
-        assert_eq!(result["diagnostics"][0]["code"], "handbook.validator.input-malformed");
+    for other_version in ["1.0.0", "1.0.1"] {
+        for (field, prefix) in [
+            ("manifest", "handbook.dock.json-schema"),
+            ("implementation_bundle", "handbook.dock.bundle.json-schema-native"),
+        ] {
+            let mut request = base.clone();
+            request[field]["ref"] = json!(format!("{prefix}@{other_version}"));
+            refresh_request_binding(&mut request);
+            let result = run_request(&request);
+            assert_eq!(result["refusal_reason"], "input_refused", "{field}@{other_version}");
+            assert_eq!(result["diagnostics"][0]["code"], "handbook.validator.input-malformed");
+        }
     }
 }

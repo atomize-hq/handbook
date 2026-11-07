@@ -3,8 +3,8 @@ use sha2::{Digest, Sha256};
 use std::fs;
 use std::path::{Path, PathBuf};
 
-pub const DOCK_REF_V1: &str = "handbook.dock.json-schema@1.0.0";
-pub const BUNDLE_REF_V1: &str = "handbook.dock.bundle.json-schema-native@1.0.0";
+pub const DOCK_REF_V1: &str = "handbook.dock.json-schema@1.0.2";
+pub const BUNDLE_REF_V1: &str = "handbook.dock.bundle.json-schema-native@1.0.2";
 pub const EVIDENCE_KIND_V1: &str = "handbook.evidence.schema-conformance";
 pub const FACT_SCHEMA_REF_V1: &str = "handbook.fact.schema-conformance@1.0.0";
 pub const FACT_SCHEMA_FINGERPRINT_V1: &str =
@@ -40,11 +40,7 @@ pub fn stage_native_package_v1(
     executable_suffix: &str,
 ) -> Result<StagedPackageV1, String> {
     validate_target(target)?;
-    let (version, dock_ref, bundle_ref) = if target == "x86_64-pc-windows-msvc" {
-        ("1.0.1", "handbook.dock.json-schema@1.0.1", "handbook.dock.bundle.json-schema-native@1.0.1")
-    } else {
-        ("1.0.0", DOCK_REF_V1, BUNDLE_REF_V1)
-    };
+    let (version, dock_ref, bundle_ref) = ("1.0.2", DOCK_REF_V1, BUNDLE_REF_V1);
     validate_suffix(executable_suffix)?;
     let expected_name = format!("handbook-dock-json-schema{executable_suffix}");
     if executable.file_name().and_then(|name| name.to_str()) != Some(expected_name.as_str()) {

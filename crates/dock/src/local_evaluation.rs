@@ -18,7 +18,7 @@ pub const DOCK_LOCAL_EVALUATION_ROOT_V1: &str = ".handbook/state/dock/local-eval
 pub fn dock_native_package_read_selector_v1() -> String {
     format!(
         "handbook-docks/handbook.dock.json-schema/{}/{}/**",
-        if host_target_tuple_v1() == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" },
+        "1.0.2",
         host_target_tuple_v1()
     )
 }
@@ -448,7 +448,7 @@ impl DockLocalEvaluationOwnerV1 {
                             parent
                                 .join("handbook-docks")
                                 .join("handbook.dock.json-schema")
-                                .join(if host_target_tuple_v1() == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" })
+                                .join("1.0.2")
                                 .join(host_target_tuple_v1())
                         })
                     })

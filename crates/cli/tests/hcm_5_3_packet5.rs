@@ -4,11 +4,7 @@ use std::collections::BTreeMap;
 use std::path::Path;
 use std::process::{Command, Output};
 
-const PRODUCTION_DOCK_REF: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
-    "handbook.dock.json-schema@1.0.1"
-} else {
-    "handbook.dock.json-schema@1.0.0"
-};
+const PRODUCTION_DOCK_REF: &str = "handbook.dock.json-schema@1.0.2";
 const PRODUCTION_DOCK_FINGERPRINT: &str = if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
     "sha256:112c3d7e6589f2dcf9b5994e118b7e388f6b9f0011bf8167f2e040e5b017ad74"
 } else if cfg!(all(target_arch = "aarch64", target_os = "macos")) {

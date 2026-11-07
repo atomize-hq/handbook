@@ -241,11 +241,7 @@ fn generic_rust_sdk_consumes_all_three_rows_and_production_run_stops_before_spaw
     assert_eq!(entries.len(), 1);
     assert_eq!(
         entries[0]["manifest"]["ref"],
-        if cfg!(all(target_arch = "x86_64", target_os = "windows", target_env = "msvc")) {
-            "handbook.dock.json-schema@1.0.1"
-        } else {
-            "handbook.dock.json-schema@1.0.0"
-        }
+        "handbook.dock.json-schema@1.0.2"
     );
 
     let absent = ContractRecordBindingDtoV1::new(

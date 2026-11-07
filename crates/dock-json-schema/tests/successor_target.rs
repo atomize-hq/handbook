@@ -13,10 +13,10 @@ fn staging_selects_successor_only_for_the_exact_windows_target() {
     let executable = source.path().join("handbook-dock-json-schema.exe");
     fs::write(&executable, b"distinct test member").unwrap();
     for (target, version) in [
-        ("x86_64-pc-windows-msvc", "1.0.1"),
-        ("x86_64-pc-windows-gnu", "1.0.0"),
-        ("x86_64-unknown-linux-gnu", "1.0.0"),
-        ("aarch64-apple-darwin", "1.0.0"),
+        ("x86_64-pc-windows-msvc", "1.0.2"),
+        ("x86_64-pc-windows-gnu", "1.0.2"),
+        ("x86_64-unknown-linux-gnu", "1.0.2"),
+        ("aarch64-apple-darwin", "1.0.2"),
     ] {
         let host = tempfile::tempdir().unwrap();
         let staged = staging::stage_native_package_v1(&executable, host.path(), target, ".exe").unwrap();
@@ -34,7 +34,7 @@ fn staging_selects_successor_only_for_the_exact_windows_target() {
 fn compiled_manifest_is_the_only_admitted_successor_descriptor() {
     let bytes = production_manifest_bytes_v1();
     let target = env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET");
-    let version = if target == "x86_64-pc-windows-msvc" { "1.0.1" } else { "1.0.0" };
+    let version = "1.0.2";
     let descriptor = LocalValidatorDependencyV2::from_manifest_json(bytes).unwrap();
     assert_eq!(descriptor.manifest.reference().as_str(), format!("handbook.dock.json-schema@{version}"));
     assert!(admit_native_production_manifest_v1(bytes).is_ok());

@@ -10,11 +10,10 @@ use sha2::{Digest, Sha256};
 pub const NATIVE_LOCAL_EVALUATION_ROOT_V3: &str = ".handbook/state/dock/local-evaluation-v1";
 
 pub fn native_local_evaluation_capability_binding_v3() -> Result<ExactBindingV1, ContractError> {
-    let (capability, producer) = if env!("HANDBOOK_CONTRACTS_COMPILE_TARGET_V1") == "x86_64-pc-windows-msvc" {
-        ("handbook.dock.json-schema.semantic-capability@1.0.1", "handbook.dock.json-schema@1.0.1")
-    } else {
-        ("handbook.dock.json-schema.semantic-capability@1.0.0", "handbook.dock.json-schema@1.0.0")
-    };
+    let (capability, producer) = (
+        "handbook.dock.json-schema.semantic-capability@1.0.2",
+        "handbook.dock.json-schema@1.0.2",
+    );
     Ok(ExactBindingV1::new(
         ExactRefV1::parse(capability)?,
         canonical_fingerprint(

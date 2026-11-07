@@ -144,11 +144,7 @@ fn production_registry_embeds_exact_one_entry_without_package_material() {
     let manifest = production_manifest();
     assert_eq!(
         manifest.dock_ref().as_str(),
-        if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            "handbook.dock.json-schema@1.0.1"
-        } else {
-            "handbook.dock.json-schema@1.0.0"
-        }
+        "handbook.dock.json-schema@1.0.2"
     );
     assert_eq!(manifest.implementation_bundle().files().len(), 1);
     assert!(manifest
@@ -226,11 +222,7 @@ fn production_package_requires_exact_manifest_and_one_regular_member() {
     let wrong = wrong_target_host
         .path()
         .join("handbook-docks/handbook.dock.json-schema")
-        .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            "1.0.1"
-        } else {
-            "1.0.0"
-        })
+        .join("1.0.2")
         .join("wrong-target-tuple");
     fs::rename(&staged.package_root, wrong).unwrap();
     assert!(
@@ -400,11 +392,7 @@ impl InstalledProductionPackage {
         let host = host.parent().unwrap();
         let package_root = host
             .join("handbook-docks/handbook.dock.json-schema")
-            .join(if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-            "1.0.1"
-        } else {
-            "1.0.0"
-        })
+            .join("1.0.2")
             .join(host_target_tuple_v1());
         assert!(
             !package_root.exists(),

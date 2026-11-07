@@ -12,8 +12,8 @@ use std::io::{Read, Write};
 
 const REQUEST_BYTES: usize = 2 * 1024 * 1024;
 const RESULT_BYTES: usize = 512 * 1024;
-const DOCK_REF: &str = "handbook.dock.json-schema@1.0.0";
-const BUNDLE_REF: &str = "handbook.dock.bundle.json-schema-native@1.0.0";
+const DOCK_REF: &str = "handbook.dock.json-schema@1.0.2";
+const BUNDLE_REF: &str = "handbook.dock.bundle.json-schema-native@1.0.2";
 const PROTOCOL_REF: &str = "handbook.dock.process-json@1.0.0";
 const REQUEST_SCHEMA_REF: &str = "handbook.dock-process-request@1.0.0";
 const REQUEST_SCHEMA_FP: &str =
@@ -88,13 +88,8 @@ fn validate_request(request: &Request) -> Result<JsonSchemaValidationInputV1, Va
         RESULT_SCHEMA_REF,
         Some(RESULT_SCHEMA_FP),
     )?;
-    let (dock_ref, bundle_ref) = if env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET") == "x86_64-pc-windows-msvc" {
-        ("handbook.dock.json-schema@1.0.1", "handbook.dock.bundle.json-schema-native@1.0.1")
-    } else {
-        (DOCK_REF, BUNDLE_REF)
-    };
-    validate_binding(&request.manifest, dock_ref, None)?;
-    validate_binding(&request.implementation_bundle, bundle_ref, None)?;
+    validate_binding(&request.manifest, DOCK_REF, None)?;
+    validate_binding(&request.implementation_bundle, BUNDLE_REF, None)?;
     validate_binding(
         &request.protocol,
         PROTOCOL_REF,
