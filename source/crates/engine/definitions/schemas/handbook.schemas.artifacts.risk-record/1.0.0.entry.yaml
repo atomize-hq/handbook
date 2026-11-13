@@ -1,0 +1,12 @@
+schema_id: handbook.schema-registry-entry
+schema_version: "1.0"
+content_schema_id: handbook.schemas.artifacts.risk-record
+content_schema_version: 1.0.0
+document_ref: definitions/schemas/handbook.schemas.artifacts.risk-record/1.0.0.schema.json
+document_fingerprint: sha256:df90eec6f85652603c19e56c92870b77599b59a7011110cab91b443d6eb2b01c
+closure_fingerprint: sha256:598e22a8024394ec32d28d94f8ea23910fb0facbf9e58b389e2e2422086b45b2
+meta_schema_ref: https://json-schema.org/draft/2020-12/schema
+media_type: application/schema+json
+compatibility: exact
+extensions: {}
+entry_fingerprint: sha256:8d8dc18add39d768cc6c22416c61db83a0e60004d5539332cdb07797cdf37cd0

@@ -1,0 +1,1 @@
+{"$id":"urn:handbook:schema:handbook.correlation-ref:1.0.0","$schema":"https://json-schema.org/draft/2020-12/schema","maxLength":133,"minLength":21,"pattern":"^corr_[A-Za-z0-9_-]{16,128}$","title":"CorrelationRef","type":"string"}

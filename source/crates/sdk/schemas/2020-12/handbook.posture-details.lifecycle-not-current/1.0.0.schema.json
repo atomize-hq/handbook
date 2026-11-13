@@ -1,0 +1,1 @@
+{"$id":"urn:handbook:schema:handbook.posture-details.lifecycle-not-current:1.0.0","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"properties":{"owner_variant":{"const":"LifecycleNotCurrent"}},"required":["owner_variant"],"title":"PostureLifecycleNotCurrentDetailsSchema","type":"object"}

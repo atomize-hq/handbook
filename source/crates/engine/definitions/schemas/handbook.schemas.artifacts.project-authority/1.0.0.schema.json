@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_id": {
+      "const": "handbook.artifact.project-authority"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "record_id": {
+      "$ref": "#/$defs/recordId"
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/shortText"
+        },
+        "authority_statement": {
+          "$ref": "#/$defs/longText"
+        }
+      },
+      "required": [
+        "revision",
+        "authority_statement"
+      ],
+      "additionalProperties": false,
+      "unevaluatedProperties": false
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "decision_authority": {
+          "$ref": "#/$defs/shortTextList"
+        },
+        "required_approvals": {
+          "$ref": "#/$defs/shortTextList"
+        },
+        "exception_policy": {
+          "$ref": "#/$defs/longText"
+        },
+        "review_triggers": {
+          "$ref": "#/$defs/shortTextList"
+        },
+        "reassessment_triggers": {
+          "$ref": "#/$defs/shortTextList"
+        }
+      },
+      "required": [
+        "decision_authority",
+        "required_approvals",
+        "exception_policy",
+        "review_triggers",
+        "reassessment_triggers"
+      ],
+      "additionalProperties": false,
+      "unevaluatedProperties": false
+    },
+    "engineering_posture": {
+      "type": "object",
+      "properties": {
+        "dimensions": {
+          "$ref": "#/$defs/shortTextList"
+        },
+        "red_lines": {
+          "$ref": "#/$defs/shortTextList"
+        }
+      },
+      "required": [
+        "dimensions",
+        "red_lines"
+      ],
+      "additionalProperties": false,
+      "unevaluatedProperties": false
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "record_id",
+    "policy",
+    "governance",
+    "engineering_posture"
+  ],
+  "additionalProperties": false,
+  "unevaluatedProperties": false,
+  "$defs": {
+    "shortText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000]+$"
+    },
+    "longText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192,
+      "pattern": "^[^\\u0000]+$"
+    },
+    "shortTextList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/shortText"
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "recordId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*)+$"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.authenticator-registration",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-registration/1.0.0.schema.json",
+  "document_fingerprint": "sha256:bb0a3446349c2733376373cd511a46989b30bacd6afb6a9aba98b9bc0a352855",
+  "closure_fingerprint": "sha256:8db03f3cb40e774be64cff398af5727d6fec261875f48607aa238f1075c4f1bc",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:caecd1ff93ea9599f53a3780f76d3d91574ea8c89a3757c80c2a6b9716b785b7"
+}

@@ -1,0 +1,33 @@
+schema_id: handbook.project-condition-definition
+schema_version: '1.0'
+condition_id: handbook.condition.project.managed-operational-surface
+condition_version: 1.0.0
+outcomes:
+- 'true'
+- 'false'
+- unknown
+- unresolved
+- stale
+- refused
+accepted_input_classes:
+- authoritative_fact_ref
+- admitted_evidence_ref
+freshness_requirement: explicit_current_basis_required
+minimum_independent_current_bases: 1
+self_reference_exclusions:
+- environment_context
+outcome_precedence:
+- refused_on_contradiction_or_disallowed_input
+- unresolved_on_missing_definition_or_required_input
+- stale_on_expired_basis
+- unknown_on_insufficient_proof
+- false_on_current_affirmative_no_responsibility
+- true_on_current_affirmative_qualifying_responsibility
+effects:
+- metadata_only
+- no_boolean_coercion
+- no_create
+- no_scaffold
+- no_delete
+extensions: {}
+definition_fingerprint: sha256:2ae25788c7860f3062f30659a7674c2ccd8f56b0f8809f1134003e04dea20b61

@@ -1,0 +1,12 @@
+schema_id: handbook.schema-registry-entry
+schema_version: "1.0"
+content_schema_id: handbook.schemas.artifacts.environment-context
+content_schema_version: 1.0.0
+document_ref: definitions/schemas/handbook.schemas.artifacts.environment-context/1.0.0.schema.json
+document_fingerprint: sha256:43499e8530e72db3809034edc1874994d1ed1f57e3c6afae11c6534d7f6206de
+closure_fingerprint: sha256:5ab825a9f0c2ef88b6a8389f34b4b56f4dbca130a63bf229b9fe7a5dd42e9097
+meta_schema_ref: https://json-schema.org/draft/2020-12/schema
+media_type: application/schema+json
+compatibility: exact
+extensions: {}
+entry_fingerprint: sha256:632e3e9d35806a88dd8a70c8059f4ac6746b6e49d9d0177f68b13dcc91388ad7

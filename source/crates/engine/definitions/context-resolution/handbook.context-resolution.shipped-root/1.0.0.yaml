@@ -1,0 +1,107 @@
+schema_id: handbook.context-resolution-stack-definition
+schema_version: '1.0'
+stack_id: handbook.context-resolution.shipped-root
+stack_version: 1.0.0
+levels:
+- level_id: strategic
+  display_label: Strategic
+  defaults:
+    scope_horizon: program
+    detail_resolution: full
+    temporal_horizon: long_range
+    authority_horizon: program_policy
+    memory_horizon: strategic
+    validation_horizon: program_gate
+- level_id: coordination
+  display_label: Coordination
+  defaults:
+    scope_horizon: slice
+    detail_resolution: normal
+    temporal_horizon: current_slice
+    authority_horizon: slice_write
+    memory_horizon: coordination
+    validation_horizon: slice_closeout
+- level_id: execution
+  display_label: Execution
+  defaults:
+    scope_horizon: assigned_unit
+    detail_resolution: normal
+    temporal_horizon: immediate
+    authority_horizon: local_write
+    memory_horizon: execution
+    validation_horizon: unit_closeout
+- level_id: operation
+  display_label: Operation
+  defaults:
+    scope_horizon: local_observation
+    detail_resolution: identifier_only
+    temporal_horizon: current_operation
+    authority_horizon: read_only
+    memory_horizon: operation
+    validation_horizon: observation_only
+dimension_domains:
+  scope_horizon:
+  - value_id: local_observation
+    rank: 0
+  - value_id: assigned_unit
+    rank: 1
+  - value_id: slice
+    rank: 2
+  - value_id: program
+    rank: 3
+  detail_resolution:
+  - value_id: identifier_only
+    rank: 0
+  - value_id: summary
+    rank: 1
+  - value_id: normal
+    rank: 2
+  - value_id: full
+    rank: 3
+  temporal_horizon:
+  - value_id: current_operation
+    rank: 0
+  - value_id: immediate
+    rank: 1
+  - value_id: current_slice
+    rank: 2
+  - value_id: long_range
+    rank: 3
+  authority_horizon:
+  - value_id: read_only
+    rank: 0
+  - value_id: local_write
+    rank: 1
+  - value_id: slice_write
+    rank: 2
+  - value_id: program_policy
+    rank: 3
+  memory_horizon:
+  - value_id: operation
+    rank: 0
+  - value_id: execution
+    rank: 1
+  - value_id: coordination
+    rank: 2
+  - value_id: strategic
+    rank: 3
+  validation_horizon:
+  - value_id: observation_only
+    rank: 0
+  - value_id: unit_closeout
+    rank: 1
+  - value_id: slice_closeout
+    rank: 2
+  - value_id: program_gate
+    rank: 3
+mutation_matcher:
+  ref: handbook.mutation-matcher.core@1.0.0
+  fingerprint: sha256:be585006043ca46096e85ad76f20a87439e6984bcace997924982f0247aa29f4
+escalation_policy:
+  ref: handbook.resolution-escalation.core@1.0.0
+  fingerprint: sha256:1f7e04ed7d8a68f338b2c421db8ef0c49f16d9b4dcb001145083414efa408121
+memory_promotion_policy:
+  ref: handbook.memory-promotion.core@1.0.0
+  fingerprint: sha256:1f0e07938432a159d2ba9c131ed6dc28536ec8aa30b817f24066e246c06c0bca
+extensions: {}
+definition_fingerprint: sha256:9e95fdef90b98e28acb60bfe96a72f122418b56b1531eafe8ab6cff3eb7668b4

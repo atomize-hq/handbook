@@ -1,0 +1,142 @@
+{
+  "schema_id": "handbook.context-memory-snapshot",
+  "schema_version": "1.0",
+  "snapshot_id": "snap_session_start_0001",
+  "capture": {
+    "trigger": "session_start",
+    "started_at": "2026-08-06T04:00:00Z",
+    "completed_at": "2026-08-06T04:00:05Z",
+    "retry_count": 0,
+    "input": {
+      "policy": {"ref": "handbook.snapshot-policy.session-boundary@1.0.0", "fingerprint": "sha256:07835ac22e573fbf3f6571c0151b2febf360ccf3cd4703be24d4bdab5cf0d478"},
+      "trigger": "session_start",
+      "memory_horizon": "execution",
+      "families": {
+        "evidence": {
+          "slots": {"evidence": {"slot": "evidence", "revision": {"ref": "evidence.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}, "cursor": null}},
+          "windows": {}
+        },
+        "git": {
+          "slots": {"git": {"slot": "git", "revision": {"ref": "git.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}, "cursor": null}},
+          "windows": {}
+        },
+        "handbook": {
+          "slots": {"handbook": {"slot": "handbook", "revision": {"ref": "handbook.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}, "cursor": null}},
+          "windows": {}
+        },
+        "session": {
+          "slots": {"session": {"slot": "session", "revision": {"ref": "session.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}, "cursor": "session-cursor"}},
+          "windows": {}
+        },
+        "work": {
+          "slots": {
+            "active_plan": {"slot": "active_plan", "revision": {"ref": "work.active-plan.1", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}, "cursor": null},
+            "work_ledger": {"slot": "work_ledger", "revision": {"ref": "work.ledger.1", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}, "cursor": "ledger-cursor"}
+          },
+          "windows": {
+            "queued_next": {"window_id": "queued_next", "slot": "active_plan", "revision": {"ref": "work.active-plan.1", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}, "cursor": null},
+            "recent_completed": {"window_id": "recent_completed", "slot": "work_ledger", "revision": {"ref": "work.ledger.1", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}, "cursor": "ledger-cursor"}
+          }
+        }
+      }
+    }
+  },
+  "repository_identity": {
+    "repository_id": "repo.example",
+    "workspace_id": "workspace.example"
+  },
+  "boundary_stream_ref": "orchestration.example.start",
+  "boundary_sequence": 1,
+  "resolved_profile": {"ref": "handbook.profile.example@1.0.0", "fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111"},
+  "context_resolution_envelope": {"ref": "handbook.envelope.execution@1.0.0", "fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"},
+  "family_observations": [
+    {
+      "family": "evidence",
+      "source_adapter": {"ref": "handbook.snapshot-source.evidence@1.0.0", "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+      "pre_revision": {"ref": "evidence.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "captured_revision": {"ref": "evidence.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "post_revision": {"ref": "evidence.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "source_slot_revisions": [],
+      "windows": [],
+      "bound_evaluation": null,
+      "payload_fingerprint": "",
+      "payload": {"latest_gate_refs": ["gate.current"], "validation_refs": ["validation.current"]}
+    },
+    {
+      "family": "git",
+      "source_adapter": {"ref": "handbook.snapshot-source.git@1.0.0", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+      "pre_revision": {"ref": "git.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "captured_revision": {"ref": "git.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "post_revision": {"ref": "git.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "source_slot_revisions": [],
+      "windows": [],
+      "bound_evaluation": null,
+      "payload_fingerprint": "",
+      "payload": {"artifact_refs": ["artifact.b", "artifact.a"], "paths": ["src/b.rs", "src/a.rs"]}
+    },
+    {
+      "family": "handbook",
+      "source_adapter": {"ref": "handbook.snapshot-source.handbook@1.0.0", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+      "pre_revision": {"ref": "handbook.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "captured_revision": {"ref": "handbook.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "post_revision": {"ref": "handbook.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "source_slot_revisions": [],
+      "windows": [],
+      "bound_evaluation": null,
+      "payload_fingerprint": "",
+      "payload": {"artifact_refs": ["contract.b", "contract.a"], "contract_state": "captured"}
+    },
+    {
+      "family": "session",
+      "source_adapter": {"ref": "handbook.snapshot-source.session@1.0.0", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "pre_revision": {"ref": "session.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "captured_revision": {"ref": "session.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "post_revision": {"ref": "session.revision.1", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "source_slot_revisions": [],
+      "windows": [],
+      "bound_evaluation": null,
+      "payload_fingerprint": "",
+      "payload": {"orchestration_state": "active", "active_dispatch_refs": ["dispatch.b", "dispatch.a"]}
+    },
+    {
+      "family": "work",
+      "source_adapter": {"ref": "handbook.snapshot-source.work@1.0.0", "fingerprint": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"},
+      "pre_revision": {"ref": "work.composite.1", "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"},
+      "captured_revision": {"ref": "work.composite.1", "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"},
+      "post_revision": {"ref": "work.composite.1", "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"},
+      "source_slot_revisions": [
+        {
+          "source_slot": "active_plan",
+          "pre_revision": {"ref": "work.active-plan.1", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+          "captured_revision": {"ref": "work.active-plan.1", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+          "post_revision": {"ref": "work.active-plan.1", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+        },
+        {
+          "source_slot": "work_ledger",
+          "pre_revision": {"ref": "work.ledger.1", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+          "captured_revision": {"ref": "work.ledger.1", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+          "post_revision": {"ref": "work.ledger.1", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "queued_next",
+          "source_slot": "active_plan",
+          "source_revision": {"ref": "work.active-plan.1", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+          "cursor": null
+        },
+        {
+          "window_id": "recent_completed",
+          "source_slot": "work_ledger",
+          "source_revision": {"ref": "work.ledger.1", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+          "cursor": "ledger-cursor"
+        }
+      ],
+      "bound_evaluation": null,
+      "payload_fingerprint": "",
+      "payload": {"active_refs": ["work.b", "work.a"], "queued_next": ["work.next"], "recent_completed": ["work.done"]}
+    }
+  ],
+  "excluded_families": [],
+  "previous_snapshot": null
+}

@@ -1,0 +1,110 @@
+{
+  "accounting_dispositions": [
+    "retained_observation",
+    "derived_bounded_fact",
+    "redacted",
+    "omitted",
+    "inapplicable",
+    "unavailable",
+    "refused"
+  ],
+  "engine_authority_ref": "handbook.engine.snapshot-grounding-owner@1.0.0",
+  "error_kinds": [
+    "malformed_input",
+    "input_limit_exceeded",
+    "unknown_reference",
+    "substituted_reference",
+    "repository_mismatch",
+    "policy_mismatch",
+    "unknown_family",
+    "unknown_rule",
+    "adapter_mismatch",
+    "matcher_failure",
+    "source_drift",
+    "incompatible_predecessor",
+    "sequence_conflict",
+    "incomplete_accounting",
+    "insufficient_resolution",
+    "redaction_uncertain",
+    "retention_conflict",
+    "corrupt_store",
+    "idempotency_conflict",
+    "required_source_unavailable",
+    "lock_unavailable",
+    "recovery_failed",
+    "durability_uncertain",
+    "composition_failed_after_commit",
+    "delivery_uncertain_after_commit"
+  ],
+  "families": [
+    {
+      "adapter_ref": "handbook.snapshot-source.evidence@1.0.0",
+      "adapter_type": "EvidenceSnapshotSourceV1",
+      "currentness": "contracts_and_dock_owner_heads",
+      "failure_rules": [
+        {"condition": "absent_or_inapplicable", "outcome": "accounted_omission"},
+        {"condition": "stale_incomplete_noncompleted_or_untrusted", "outcome": "refused"},
+        {"condition": "unavailable_or_durability_uncertain", "outcome": "unavailable"}
+      ],
+      "family": "evidence",
+      "source_slots": [
+        "contracts_definition_lifecycle",
+        "contracts_evidence_root",
+        "contracts_decision",
+        "dock_manifest_bundle",
+        "dock_execution_candidate"
+      ]
+    },
+    {
+      "adapter_ref": "handbook.snapshot-source.git@1.0.0",
+      "adapter_type": "GitSnapshotSourceV1",
+      "currentness": "repository_triplet_stable",
+      "failure_rules": [
+        {"condition": "policy_excluded", "outcome": "accounted_omission"},
+        {"condition": "required_observation_changed_or_unavailable", "outcome": "unavailable"}
+      ],
+      "family": "git",
+      "source_slots": ["head", "index", "worktree"]
+    },
+    {
+      "adapter_ref": "handbook.snapshot-source.handbook@1.0.0",
+      "adapter_type": "HandbookSnapshotSourceV1",
+      "currentness": "handbook_authority_head_stable",
+      "failure_rules": [
+        {"condition": "optional_absent", "outcome": "accounted_omission"},
+        {"condition": "stale_substituted_or_unadmitted_authority", "outcome": "refused"}
+      ],
+      "family": "handbook",
+      "source_slots": ["engine_authority", "profile", "schema_artifact_resolution"]
+    },
+    {
+      "adapter_ref": "handbook.snapshot-source.session@1.0.0",
+      "adapter_type": "SessionBoundarySourceV1",
+      "currentness": "request_and_stream_head_locked",
+      "failure_rules": [
+        {"condition": "wrong_open_closed_or_replayed_conflict_sequence", "outcome": "refused"},
+        {"condition": "first_start", "outcome": "valid_no_applicable_prior"}
+      ],
+      "family": "session",
+      "source_slots": ["boundary_context"]
+    },
+    {
+      "adapter_ref": "handbook.snapshot-source.work@1.0.0",
+      "adapter_type": "WorkSnapshotSourceV1",
+      "currentness": "flow_pipeline_heads_stable",
+      "failure_rules": [
+        {"condition": "policy_inapplicable", "outcome": "accounted_omission"},
+        {"condition": "required_stale_or_unavailable", "outcome": "unavailable"}
+      ],
+      "family": "work",
+      "source_slots": ["flow_state", "pipeline_state", "handoff"]
+    }
+  ],
+  "owner_type": "SnapshotGroundingOwnerV1",
+  "policy_ref": "handbook.snapshot-policy.production-session-boundary@1.0.0",
+  "redaction_stage": "redact_or_omit_before_payload_read",
+  "repository_format_ref": "handbook.snapshot-memory@1.0.0",
+  "schema_id": "handbook.snapshot-policy.production-session-boundary",
+  "schema_version": "1.0",
+  "stream_class": "session"
+}

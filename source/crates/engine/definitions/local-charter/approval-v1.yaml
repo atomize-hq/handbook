@@ -1,0 +1,9 @@
+schema_id: handbook.native-local-charter-approval-definition
+schema_version: '1.0'
+definition_ref: handbook.approval.native-local-initial-charter@1.0.0
+assurance: local_advisory
+creation: initial_only
+approval: explicit_exact_canonical_bytes
+claims: retained_unverified_principal_agent_delegation_source
+authenticator_fallback: forbidden
+amendment: unsupported

@@ -1,0 +1,26 @@
+schema_id: handbook.memory-promotion-policy-definition
+schema_version: '1.0'
+policy_id: handbook.memory-promotion.core
+policy_version: 1.0.0
+source_requirement: nonempty_exact_ref_fingerprint_pairs
+target_authority: semantic_memory
+horizon_relation: strictly_higher_memory_rank
+write_precondition: expected_target_fingerprint_compare_and_write
+required_request_bindings:
+- source_inputs
+- source_envelope_ref_fingerprint
+- target_memory_horizon
+- target_record_ref
+- expected_target_fingerprint
+- requested_authority_ref
+terminal_outcomes:
+- applied
+- refused
+- stale
+terminal_cardinality: exactly_one
+forbidden_authorities:
+- canonical_artifact
+- contract
+- posture
+extensions: {}
+policy_fingerprint: sha256:1f0e07938432a159d2ba9c131ed6dc28536ec8aa30b817f24066e246c06c0bca

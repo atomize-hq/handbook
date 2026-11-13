@@ -1,0 +1,53 @@
+schema_id: handbook.semantic-validation-profile-definition
+schema_version: '1.0'
+profile_id: handbook.semantic-validation.constitutional-root
+profile_version: 1.0.0
+capability_id: constitutional_root
+binding_rules:
+- rule_id: policy_root
+  binding_key: policy_root
+  json_type: object
+  cardinality: singular
+  empty_policy: forbidden
+- rule_id: policy_revision
+  binding_key: policy_revision
+  json_type: string
+  cardinality: singular
+  empty_policy: forbidden
+- rule_id: decision_authority
+  binding_key: decision_authority
+  json_type: array
+  cardinality: plural
+  empty_policy: forbidden
+- rule_id: required_approvals
+  binding_key: required_approvals
+  json_type: array
+  cardinality: plural
+  empty_policy: forbidden
+- rule_id: exception_policy
+  binding_key: exception_policy
+  json_type: string
+  cardinality: singular
+  empty_policy: forbidden
+- rule_id: engineering_posture_dimensions
+  binding_key: engineering_posture_dimensions
+  json_type: array
+  cardinality: plural
+  empty_policy: forbidden
+- rule_id: red_lines
+  binding_key: red_lines
+  json_type: array
+  cardinality: plural
+  empty_policy: forbidden
+- rule_id: review_triggers
+  binding_key: review_triggers
+  json_type: array
+  cardinality: plural
+  empty_policy: forbidden
+- rule_id: reassessment_triggers
+  binding_key: reassessment_triggers
+  json_type: array
+  cardinality: plural
+  empty_policy: forbidden
+extensions: {}
+profile_fingerprint: sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738

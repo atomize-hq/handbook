@@ -1,0 +1,30 @@
+schema_id: handbook.stable-role-registry
+schema_version: "1.0"
+registry_id: handbook.roles.core
+registry_version: "1.1.0"
+roles:
+  - role_id: constitutional_authority
+    canonical_display_label: Constitutional Authority
+    category: governance
+  - role_id: project_context
+    canonical_display_label: Project Context
+    category: artifact
+  - role_id: environment_context
+    canonical_display_label: Environment Context
+    category: artifact
+  - role_id: coordination_horizon
+    canonical_display_label: Coordination Horizon
+    category: workflow
+  - role_id: delivery_unit
+    canonical_display_label: Delivery Unit
+    category: workflow
+  - role_id: implementation_unit
+    canonical_display_label: Implementation Unit
+    category: workflow
+  - role_id: execution_envelope
+    canonical_display_label: Execution Envelope
+    category: workflow
+  - role_id: atomic_action
+    canonical_display_label: Atomic Action
+    category: workflow
+registry_fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029

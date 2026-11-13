@@ -1,0 +1,42 @@
+[package]
+name = "handbook-engine"
+version = "0.2.0"
+edition = "2021"
+description = "Canonical artifact, freshness, and structured authoring core for Handbook."
+repository = "https://github.com/atomize-hq/system.git"
+documentation = "https://docs.rs/handbook-engine"
+homepage = "https://github.com/atomize-hq/system.git"
+license = "MIT"
+
+[lib]
+name = "handbook_engine"
+path = "src/lib.rs"
+
+[features]
+# Deliberately non-default: integration tests may interrupt an already-real
+# posture write at a durable boundary, then prove restart recovery through the
+# normal typed facade. It is not enabled by the public SDK dependency.
+test-support = ["file-native/test-support"]
+
+[dependencies]
+file-native = { path = "../file-native", version = "0.1.0" }
+base64 = "0.22.1"
+getrandom = "0.3.4"
+jsonschema = { version = "0.47.0", default-features = false }
+p256 = { version = "0.13.2", default-features = false, features = ["ecdsa"] }
+semver = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_json_canonicalizer = "0.3.2"
+serde_yaml_bw = "2.5.4"
+sha2 = "0.10"
+
+[target.'cfg(unix)'.dependencies]
+rustix = { version = "1.1.4", features = ["fs"] }
+
+[target.'cfg(windows)'.dependencies]
+file-id = "0.2.3"
+tempfile = "3.27.0"
+
+[dev-dependencies]
+tempfile = "3"

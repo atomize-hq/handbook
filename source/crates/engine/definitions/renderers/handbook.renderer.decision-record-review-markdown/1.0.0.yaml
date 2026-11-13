@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.renderer-definition",
+  "schema_version": "1.0",
+  "renderer_id": "handbook.renderer.decision-record-review-markdown",
+  "renderer_version": "1.0.0",
+  "input_schema_ref": "handbook.schemas.artifacts.decision-record@1.0.0",
+  "output_media_type": "text/markdown",
+  "implementation_id": "decision-record-review-markdown-v1",
+  "determinism_profile": "closed-decision-record-review-markdown-v1",
+  "required_capability_contract_ref": null,
+  "resolution_input": null,
+  "extensions": {},
+  "renderer_fingerprint": "sha256:81f616aeecb1eac6c5c9207bcd2eb82c8e79ee159d57b97e2f15492a6d6a12b3"
+}

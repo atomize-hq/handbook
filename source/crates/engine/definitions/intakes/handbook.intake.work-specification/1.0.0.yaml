@@ -1,0 +1,23 @@
+{
+  "schema_id": "handbook.artifact-intake-definition",
+  "schema_version": "1.0",
+  "intake_id": "handbook.intake.work-specification",
+  "intake_version": "1.0.0",
+  "artifact_kind_ref": "handbook.artifact-kind.work-specification@1.1.0",
+  "candidate_schema_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+  "supported_modes": ["guided_adaptive", "express", "agent_assisted"],
+  "coverage": [
+    {"coverage_id":"work_specification.schema_id","target_paths":["/schema_id"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"exact","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.schema_version","target_paths":["/schema_version"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"exact","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.record_id","target_paths":["/record_id"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"exact","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.objective","target_paths":["/objective"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"concrete","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.scope","target_paths":["/scope"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"concrete","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.non_goals","target_paths":["/non_goals"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"concrete","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.acceptance_criteria","target_paths":["/acceptance_criteria"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"concrete","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]},
+    {"coverage_id":"work_specification.status","target_paths":["/status"],"applicability":"always","authority_class":"observational","acquisition":{"inferable":false,"user_declaration_required":true,"evidence_kinds":[],"freshness":null,"sensitivity":"internal","deterministic_default":null},"evaluation":{"required":true,"minimum_specificity":"exact","minimum_confidence":"high","unknown_policy":"block","contradiction_policy":"block","waiver_policy_ref":null},"prompt_guidance_refs":[]}
+  ],
+  "approval_policy_ref": null,
+  "reassessment_triggers": [],
+  "extensions": {},
+  "intake_definition_fingerprint": "sha256:114977cc9c42e6c02fd25f8b034d9c54ae951e182cec181dfa6f90226da351fa"
+}

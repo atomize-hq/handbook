@@ -1,0 +1,12 @@
+schema_id: handbook.vocabulary-profile
+schema_version: '1.0'
+vocabulary_id: handbook.vocabulary.shipped-root
+vocabulary_version: 1.0.0
+stable_role_registry:
+  ref: handbook.roles.core@1.1.0
+  fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029
+labels: {}
+aliases: {}
+absorptions: []
+extensions: {}
+vocabulary_fingerprint: sha256:69113b1a9271ce207d45bdb91ebae8d6516249e16b59891b292546078364a22b

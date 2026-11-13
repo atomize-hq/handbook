@@ -1,0 +1,87 @@
+schema_id: handbook.instance-profile
+schema_version: '1.0'
+profile_id: handbook.profile.shipped-root
+profile_version: 1.0.0
+profile_scope: shipped
+extends_profile_ref: null
+stable_role_registry:
+  ref: handbook.roles.core@1.1.0
+  fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029
+schema_registry_sources:
+- handbook.schemas.artifacts.project-authority@1.0.0
+- handbook.schemas.artifacts.project-context@1.0.0
+- handbook.schemas.artifacts.environment-context@1.0.0
+- handbook.schemas.artifacts.work-specification@1.0.0
+- handbook.schemas.artifacts.decision-record@1.0.0
+- handbook.schemas.artifacts.risk-record@1.0.0
+artifact_kind_sources:
+- handbook.artifact-kind.project-authority@1.0.0
+- handbook.artifact-kind.project-context@1.0.0
+- handbook.artifact-kind.environment-context@1.0.0
+- handbook.artifact-kind.work-specification@1.0.0
+- handbook.artifact-kind.decision-record@1.0.0
+- handbook.artifact-kind.risk-record@1.0.0
+artifact_instances:
+- schema_id: handbook.artifact-instance-descriptor
+  schema_version: '1.0'
+  id: project_authority
+  kind_ref: handbook.artifact-kind.project-authority@1.0.0
+  role_ref: constitutional_authority
+  capability_refs:
+  - constitutional_root
+  label: Charter
+  canonical_path: .handbook/project/charter.yaml
+  requiredness:
+    mode: always
+    condition_ref: null
+  depends_on: []
+  lifecycle_policy_ref: null
+  intake_definition_ref: null
+  renderer_definition_refs: []
+  projection_definition_refs: []
+  validation_overlay_refs: []
+  extensions: {}
+- schema_id: handbook.artifact-instance-descriptor
+  schema_version: '1.0'
+  id: project_context
+  kind_ref: handbook.artifact-kind.project-context@1.0.0
+  role_ref: project_context
+  capability_refs: []
+  label: Project Context
+  canonical_path: .handbook/project/context.yaml
+  requiredness:
+    mode: always
+    condition_ref: null
+  depends_on: []
+  lifecycle_policy_ref: null
+  intake_definition_ref: null
+  renderer_definition_refs: []
+  projection_definition_refs: []
+  validation_overlay_refs: []
+  extensions: {}
+- schema_id: handbook.artifact-instance-descriptor
+  schema_version: '1.0'
+  id: environment_context
+  kind_ref: handbook.artifact-kind.environment-context@1.0.0
+  role_ref: environment_context
+  capability_refs: []
+  label: Environment Context
+  canonical_path: .handbook/project/environment.yaml
+  requiredness:
+    mode: conditional
+    condition_ref: handbook.condition.project.managed-operational-surface@1.0.0
+  depends_on: []
+  lifecycle_policy_ref: null
+  intake_definition_ref: null
+  renderer_definition_refs: []
+  projection_definition_refs: []
+  validation_overlay_refs: []
+  extensions: {}
+vocabulary_ref: handbook.vocabulary.shipped-root@1.0.0
+context_resolution_ref: handbook.context-resolution.shipped-root@1.0.0
+projection_catalog_refs: []
+posture_evaluation_policy: null
+dock_requirement_refs: []
+adapter_overlay_refs: []
+extensions: {}
+profile_fingerprint: sha256:ee8f327c5a5a68faf3184bad268118b3014e96beea142b1f5959b701e857cdf6

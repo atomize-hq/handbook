@@ -1,0 +1,597 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.dev/schemas/lifecycle-validation-result/1.0.0.json",
+  "title": "Handbook Charter lifecycle-validation result 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "validation_result_id",
+    "candidate_subject_fingerprint",
+    "intake_record_ref",
+    "intake_record_fingerprint",
+    "normalized_content_ref",
+    "normalized_content_fingerprint",
+    "target_instance_id",
+    "canonical_artifact_ref",
+    "basis_artifact_fingerprint",
+    "observed_current_artifact_fingerprint",
+    "profile_ref",
+    "resolved_profile_fingerprint",
+    "resolved_definitions",
+    "lifecycle_policy_ref",
+    "lifecycle_policy_fingerprint",
+    "lifecycle_head_ref",
+    "lifecycle_head_fingerprint",
+    "lifecycle_state",
+    "lifecycle_state_fingerprint",
+    "active_observations",
+    "reopened_coverage_ids",
+    "validation_status",
+    "validated_at_utc",
+    "validation_result_fingerprint"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "handbook.lifecycle-validation-result"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "validation_result_id": {
+      "$ref": "#/$defs/validationResultId"
+    },
+    "candidate_subject_fingerprint": {
+      "$ref": "#/$defs/fingerprint"
+    },
+    "intake_record_ref": {
+      "type": "string",
+      "pattern": "^intake-records/intake_[0-9a-f]{64}\\.json$"
+    },
+    "intake_record_fingerprint": {
+      "$ref": "#/$defs/fingerprint"
+    },
+    "normalized_content_ref": {
+      "type": "string",
+      "pattern": "^candidate-content/charter_[0-9a-f]{64}\\.yaml$"
+    },
+    "normalized_content_fingerprint": {
+      "$ref": "#/$defs/fingerprint"
+    },
+    "target_instance_id": {
+      "const": "project_authority"
+    },
+    "canonical_artifact_ref": {
+      "const": ".handbook/project/charter.yaml"
+    },
+    "basis_artifact_fingerprint": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/fingerprint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observed_current_artifact_fingerprint": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/fingerprint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "profile_ref": {
+      "const": "handbook.profile.shipped-root@1.1.0"
+    },
+    "resolved_profile_fingerprint": {
+      "const": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74"
+    },
+    "resolved_definitions": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/approvalPolicy"
+        },
+        {
+          "$ref": "#/$defs/capabilityContract"
+        },
+        {
+          "$ref": "#/$defs/intakeDefinition"
+        },
+        {
+          "$ref": "#/$defs/lifecyclePolicy"
+        },
+        {
+          "$ref": "#/$defs/productionPostureTrigger"
+        },
+        {
+          "$ref": "#/$defs/trustBoundaryTrigger"
+        },
+        {
+          "$ref": "#/$defs/rendererDefinition"
+        },
+        {
+          "$ref": "#/$defs/reviewTrigger"
+        },
+        {
+          "$ref": "#/$defs/semanticValidator10"
+        },
+        {
+          "$ref": "#/$defs/semanticValidator11"
+        },
+        {
+          "$ref": "#/$defs/targetKind"
+        },
+        {
+          "$ref": "#/$defs/targetSchema"
+        },
+        {
+          "$ref": "#/$defs/waiverPolicy"
+        }
+      ],
+      "items": false
+    },
+    "lifecycle_policy_ref": {
+      "const": "handbook.lifecycle.constitutional-review-lock@1.0.0"
+    },
+    "lifecycle_policy_fingerprint": {
+      "const": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+    },
+    "lifecycle_head_ref": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^lifecycle-transitions/lifecycle-transition_[0-9a-f]{64}\\.json$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lifecycle_head_fingerprint": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/fingerprint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lifecycle_state": {
+      "enum": [
+        "absent",
+        "current",
+        "review_required",
+        "reassessment_required"
+      ]
+    },
+    "lifecycle_state_fingerprint": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/fingerprint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "active_observations": {
+      "type": "array",
+      "maxItems": 256,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/activeObservation"
+      }
+    },
+    "reopened_coverage_ids": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "project_shape.definition",
+          "delivery.constraints",
+          "delivery.default_implications",
+          "operational_reality.production_state",
+          "risk.domains",
+          "engineering_posture.baseline",
+          "policy.authority_and_revision",
+          "governance.decision_authority",
+          "governance.required_approvals",
+          "governance.exception_policy",
+          "engineering_posture.dimensions",
+          "engineering_posture.red_lines",
+          "governance.review_triggers",
+          "governance.reassessment_triggers",
+          "debt.register",
+          "decisions.records"
+        ]
+      }
+    },
+    "validation_status": {
+      "const": "passed"
+    },
+    "validated_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validation_result_fingerprint": {
+      "$ref": "#/$defs/fingerprint"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lifecycle_state": {
+            "const": "absent"
+          }
+        },
+        "required": [
+          "lifecycle_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "basis_artifact_fingerprint": {
+            "type": "null"
+          },
+          "observed_current_artifact_fingerprint": {
+            "type": "null"
+          },
+          "lifecycle_head_ref": {
+            "type": "null"
+          },
+          "lifecycle_head_fingerprint": {
+            "type": "null"
+          },
+          "lifecycle_state_fingerprint": {
+            "type": "null"
+          },
+          "active_observations": {
+            "maxItems": 0
+          },
+          "reopened_coverage_ids": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "basis_artifact_fingerprint": {
+            "$ref": "#/$defs/fingerprint"
+          },
+          "observed_current_artifact_fingerprint": {
+            "$ref": "#/$defs/fingerprint"
+          },
+          "lifecycle_head_ref": {
+            "type": "string",
+            "pattern": "^lifecycle-transitions/lifecycle-transition_[0-9a-f]{64}\\.json$"
+          },
+          "lifecycle_head_fingerprint": {
+            "$ref": "#/$defs/fingerprint"
+          },
+          "lifecycle_state_fingerprint": {
+            "$ref": "#/$defs/fingerprint"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "validationResultId": {
+      "type": "string",
+      "pattern": "^lifecycle-validation-result_[0-9a-f]{64}$"
+    },
+    "definitionBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_role",
+        "definition_ref",
+        "definition_fingerprint"
+      ],
+      "properties": {
+        "definition_role": {
+          "type": "string"
+        },
+        "definition_ref": {
+          "type": "string"
+        },
+        "definition_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        }
+      }
+    },
+    "approvalPolicy": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "approval_policy"
+            },
+            "definition_ref": {
+              "const": "handbook.approval.constitutional-candidate@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+            }
+          }
+        }
+      ]
+    },
+    "capabilityContract": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "capability_contract"
+            },
+            "definition_ref": {
+              "const": "handbook.capabilities.constitutional-root@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+            }
+          }
+        }
+      ]
+    },
+    "intakeDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "intake_definition"
+            },
+            "definition_ref": {
+              "const": "handbook.intake.charter@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+            }
+          }
+        }
+      ]
+    },
+    "lifecyclePolicy": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "lifecycle_policy"
+            },
+            "definition_ref": {
+              "const": "handbook.lifecycle.constitutional-review-lock@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+            }
+          }
+        }
+      ]
+    },
+    "productionPostureTrigger": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "reassessment_trigger"
+            },
+            "definition_ref": {
+              "const": "handbook.intake-trigger.production-posture-changed@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+            }
+          }
+        }
+      ]
+    },
+    "trustBoundaryTrigger": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "reassessment_trigger"
+            },
+            "definition_ref": {
+              "const": "handbook.intake-trigger.trust-boundary-changed@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+            }
+          }
+        }
+      ]
+    },
+    "rendererDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "renderer_definition"
+            },
+            "definition_ref": {
+              "const": "handbook.renderer.charter-review-markdown@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+            }
+          }
+        }
+      ]
+    },
+    "reviewTrigger": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "review_trigger"
+            },
+            "definition_ref": {
+              "const": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+            }
+          }
+        }
+      ]
+    },
+    "semanticValidator10": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "semantic_validator"
+            },
+            "definition_ref": {
+              "const": "handbook.semantic-validation.constitutional-root@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+            }
+          }
+        }
+      ]
+    },
+    "semanticValidator11": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "semantic_validator"
+            },
+            "definition_ref": {
+              "const": "handbook.semantic-validation.constitutional-root@1.1.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+            }
+          }
+        }
+      ]
+    },
+    "targetKind": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "target_kind"
+            },
+            "definition_ref": {
+              "const": "handbook.artifact-kind.project-authority@1.1.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+            }
+          }
+        }
+      ]
+    },
+    "targetSchema": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "target_schema"
+            },
+            "definition_ref": {
+              "const": "handbook.schemas.artifacts.project-authority@1.1.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+            }
+          }
+        }
+      ]
+    },
+    "waiverPolicy": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/definitionBinding"
+        },
+        {
+          "properties": {
+            "definition_role": {
+              "const": "waiver_policy"
+            },
+            "definition_ref": {
+              "const": "handbook.waiver.constitutional-intake@1.0.0"
+            },
+            "definition_fingerprint": {
+              "const": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+            }
+          }
+        }
+      ]
+    },
+    "activeObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_ref",
+        "observation_fingerprint"
+      ],
+      "properties": {
+        "observation_ref": {
+          "type": "string",
+          "pattern": "^lifecycle-observations/lifecycle-observation_[0-9a-f]{64}\\.json$"
+        },
+        "observation_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        }
+      }
+    }
+  }
+}
+

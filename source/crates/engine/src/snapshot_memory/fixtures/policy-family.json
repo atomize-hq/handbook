@@ -1,0 +1,55 @@
+{
+  "schema_id": "handbook.snapshot-capture-policy",
+  "schema_version": "1.0",
+  "policy_id": "handbook.snapshot-policy.session-boundary",
+  "policy_version": "1.0.0",
+  "triggers": ["session_end", "session_start"],
+  "allowed_memory_horizons": ["execution", "operation"],
+  "state_families": {
+    "evidence": {
+      "source_adapter": {"ref": "handbook.snapshot-source.evidence@1.0.0", "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+      "source_slots": [],
+      "selected_fields": ["latest_gate_refs"],
+      "windows": []
+    },
+    "git": {
+      "source_adapter": {"ref": "handbook.snapshot-source.git@1.0.0", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+      "source_slots": [],
+      "selected_fields": ["diff_stats", "full_diff_artifact_ref_only", "paths"],
+      "windows": []
+    },
+    "handbook": {
+      "source_adapter": {"ref": "handbook.snapshot-source.handbook@1.0.0", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+      "source_slots": [],
+      "selected_fields": ["artifact_fingerprints", "contract_state", "profile"],
+      "windows": []
+    },
+    "session": {
+      "source_adapter": {"ref": "handbook.snapshot-source.session@1.0.0", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+      "source_slots": [],
+      "selected_fields": ["orchestration_state"],
+      "windows": []
+    },
+    "work": {
+      "source_adapter": {"ref": "handbook.snapshot-source.work@1.0.0", "fingerprint": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"},
+      "source_slots": ["active_plan", "work_ledger"],
+      "composite_revision_rule": {"ref": "handbook.snapshot-composite.work-slots@1.0.0", "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"},
+      "selected_fields": [],
+      "windows": [
+        {"window_id": "queued_next", "count": 10, "source_slot": "active_plan", "cursor_mode": "exclusive", "ordering": "canonical_queue_order"},
+        {"window_id": "recent_completed", "count": 10, "source_slot": "work_ledger", "cursor_mode": "exclusive", "ordering": "completed_at_then_id"}
+      ]
+    }
+  },
+  "comparison_contract": {"ref": "handbook.snapshot-comparison.core@1.0.0", "fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111"},
+  "drift_rule_catalog": {"ref": "handbook.snapshot-drift.core@1.0.0", "fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"},
+  "predecessor_rule": {"ref": "handbook.snapshot-predecessor.boundary-stream@1.0.0", "fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333"},
+  "redaction_policy": {"ref": "handbook.snapshot-redaction.default@1.0.0", "fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444"},
+  "consistency": {
+    "retries": 2,
+    "bounded_skew_rule": {"ref": "handbook.snapshot-bound.exact-revision-per-family@1.0.0", "fingerprint": "sha256:5555555555555555555555555555555555555555555555555555555555555555"},
+    "unstable_action": "persist_non_promotable"
+  },
+  "retention_policy": {"ref": "handbook.snapshot-retention.session@1.0.0", "fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666"},
+  "policy_fingerprint": "sha256:07835ac22e573fbf3f6571c0151b2febf360ccf3cd4703be24d4bdab5cf0d478"
+}

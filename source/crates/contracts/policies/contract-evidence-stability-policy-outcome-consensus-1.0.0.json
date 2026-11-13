@@ -1,0 +1,1 @@
+{"algorithm":"outcome_consensus","conflicting_outcome":"flaky","differing_fact_detail_with_same_outcome":"consistent","eligible_observations":["satisfied","violated"],"policy_ref":"handbook.contract-evidence-stability-policy.outcome-consensus@1.0.0","schema_ref":"handbook.contract-evidence-stability-policy@1.0.0"}

@@ -1,0 +1,25 @@
+schema_id: handbook.resolution-escalation-policy-definition
+schema_version: '1.0'
+policy_id: handbook.resolution-escalation.core
+policy_version: 1.0.0
+trigger_classes:
+- dimension_rank_increase
+- mutation_allow_expansion
+- missing_context
+- missing_authority
+proposal_relation: same_profile_stack_strict_widening
+required_request_bindings:
+- current_envelope_ref_fingerprint
+- proposed_envelope_ref_fingerprint
+- trigger_ref_fingerprint
+- missing_condition
+- requested_authority_ref
+- evidence_refs
+terminal_outcomes:
+- approved
+- refused
+- superseded
+terminal_cardinality: exactly_one
+preapproval_effect: request_only_no_authority_change
+extensions: {}
+policy_fingerprint: sha256:1f7e04ed7d8a68f338b2c421db8ef0c49f16d9b4dcb001145083414efa408121

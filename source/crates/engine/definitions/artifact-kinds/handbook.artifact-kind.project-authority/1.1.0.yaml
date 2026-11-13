@@ -1,0 +1,48 @@
+{
+  "canonical_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+  "compatibility": "exact",
+  "extensions": {},
+  "kind_id": "handbook.artifact-kind.project-authority",
+  "kind_version": "1.1.0",
+  "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+  "projection_definition_refs": [],
+  "renderer_definition_refs": [
+    "handbook.renderer.charter-review-markdown@1.0.0"
+  ],
+  "required_capabilities": [],
+  "review_triggers": [
+    "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0"
+  ],
+  "schema_id": "handbook.artifact-kind-definition",
+  "schema_version": "1.0",
+  "semantic_capabilities": [
+    {
+      "bindings": {
+        "decision_authority": "/governance/decision_authority",
+        "engineering_posture_dimensions": "/engineering_posture/dimensions",
+        "exception_policy": "/governance/exception_policy",
+        "policy_revision": "/policy/revision",
+        "policy_root": "/policy",
+        "reassessment_triggers": "/governance/reassessment_triggers",
+        "red_lines": "/engineering_posture/red_lines",
+        "required_approvals": "/governance/required_approvals",
+        "review_triggers": "/governance/review_triggers"
+      },
+      "capability_id": "constitutional_root",
+      "contract_ref": "handbook.capabilities.constitutional-root@1.0.0"
+    }
+  ],
+  "semantic_validation_profile_refs": [
+    "handbook.semantic-validation.constitutional-root@1.0.0",
+    "handbook.semantic-validation.constitutional-root@1.1.0"
+  ],
+  "stable_role_registry": {
+    "fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+    "ref": "handbook.roles.core@1.1.0"
+  },
+  "structural_validation_profile_ref": "json-schema.draft-2020-12",
+  "supported_role_refs": [
+    "constitutional_authority"
+  ],
+  "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+}

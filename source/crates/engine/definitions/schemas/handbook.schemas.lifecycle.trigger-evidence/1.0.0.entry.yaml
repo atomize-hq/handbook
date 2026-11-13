@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.lifecycle.trigger-evidence",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.lifecycle.trigger-evidence/1.0.0.schema.json",
+  "document_fingerprint": "sha256:6c158d3f1f047d851e26f46946ecc4e07ef58c8866e89e79da5a9e2c34883af3",
+  "closure_fingerprint": "sha256:39641f9d97132df92c9d43bfe44784a382c37b5751d5e79ee1b177c51bf63a34",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532"
+}

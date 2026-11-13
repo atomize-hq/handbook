@@ -1,0 +1,32 @@
+schema_id: handbook.mutation-matcher-definition
+schema_version: '1.0'
+matcher_id: handbook.mutation-matcher.core
+matcher_version: 1.0.0
+target_kinds:
+- repository_path
+selector_grammar:
+  grammar_id: normalized_repo_relative_glob_v1
+  encoding: ascii
+  min_bytes: 1
+  max_bytes: 1024
+  min_segments: 1
+  max_segments: 64
+  separator: /
+  normal_segment_character_class: '[A-Za-z0-9._*-]'
+  single_segment_wildcard: '*'
+  recursive_wildcard: '**'
+  recursive_position: terminal_segment_only
+  disallowed:
+  - leading_slash
+  - trailing_slash
+  - empty_segment
+  - dot_segment
+  - dotdot_segment
+  - backslash
+  - nul
+  - uri_prefix
+  - adjacent_double_star_in_normal_segment
+case_mode: sensitive
+deny_precedence: true
+extensions: {}
+definition_fingerprint: sha256:be585006043ca46096e85ad76f20a87439e6984bcace997924982f0247aa29f4

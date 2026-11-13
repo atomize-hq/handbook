@@ -1,0 +1,108 @@
+name: Hosted native comparison
+on:
+  push:
+    branches: [codex/file-native-hosted-baseline-20261113]
+permissions:
+  contents: read
+jobs:
+  select:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - id: select
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          data=json.load(open('allocations.json'))
+          assert set(data)=={'include'} and 1 <= len(data['include']) <= 4
+          seen=set()
+          for item in data['include']:
+              assert set(item)=={'os','allocation','slots','run_kind'}
+              assert item['os'] in ('ubuntu-24.04','windows-2025') and item['allocation'] in (1,2)
+              key=(item['os'],item['allocation']); assert key not in seen; seen.add(key)
+              slots=item['slots']; kind=item['run_kind']
+              assert kind in ('initial','recovery') and isinstance(slots,list) and 1 <= len(slots) <= 6 and all(type(n) is int and n > 0 for n in slots) and slots==sorted(set(slots))
+              assert all(n <= 6 for n in slots) if kind=='initial' else all(n > 6 for n in slots)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('matrix='+json.dumps(data,separators=(',',':'))+'\n')
+          PY
+  compare:
+    needs: select
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.select.outputs.matrix) }}
+    runs-on: ${{ matrix.os }}
+    env:
+      FN_SLOTS: ${{ toJSON(matrix.slots) }}
+      FN_RUN_KIND: ${{ matrix.run_kind }}
+      PUBLIC_DIR: ${{ matrix.os == 'windows-2025' && 'C:\fnbench\public' || format('/tmp/fnbench-{0}/public', github.run_id) }}
+      FIXTURE_ROOT: ${{ matrix.os == 'windows-2025' && 'C:\fnbench\work\fixtures' || format('/tmp/fnbench-{0}/fixtures', github.run_id) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Windows stage and build on C
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $root = 'C:\fnbench'
+          if (Test-Path $root) { throw 'benchmark root already exists' }
+          New-Item -ItemType Directory -Path $root, "$root\src", "$root\public", "$root\tmp", "$root\work" | Out-Null
+          '{"result":"bootstrap_in_progress"}' | Set-Content "$root\public\bootstrap.json"
+          try {
+            Get-ChildItem -Force $env:GITHUB_WORKSPACE | Where-Object Name -ne '.git' | Copy-Item -Destination "$root\src" -Recurse -Force
+            '{"result":"copied_before_launch"}' | Set-Content "$root\public\bootstrap.json"
+            & "$root\src\stage-windows.ps1"
+          } catch {
+            @{result='failed_before_launch'; error_type=$_.Exception.GetType().Name} | ConvertTo-Json -Compress | Set-Content "$root\public\bootstrap.json"
+            throw
+          }
+      - name: Linux setup and build
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          mkdir -p "$PUBLIC_DIR"
+          phase=toolchain
+          trap 'printf "{\"result\":\"failed_before_launch\",\"phase\":\"%s\"}\n" "$phase" > "$PUBLIC_DIR/setup.json"' ERR
+          rustup toolchain install 1.89.0 --profile minimal
+          phase=source
+          python host.py
+          python -c "import driver; driver.verify_source()"
+          rustup run 1.89.0 rustc -vV > "$PUBLIC_DIR/rust-version.txt"
+          phase=build
+          rustup run 1.89.0 cargo fetch --locked --manifest-path source/Cargo.toml
+          rustup run 1.89.0 cargo build --release --locked --offline --manifest-path source/Cargo.toml --target-dir "$GITHUB_WORKSPACE/target" -p handbook-sdk --example s06_work_compare
+          printf '{"result":"complete_before_launch"}\n' > "$PUBLIC_DIR/setup.json"
+      - name: Linux workload
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          printf '{"result":"launch_invoking_outcome_unknown"}\n' > "$PUBLIC_DIR/launch.json"
+          python driver.py "$FIXTURE_ROOT" "$PUBLIC_DIR"
+          printf '{"result":"workload_completed"}\n' > "$PUBLIC_DIR/launch.json"
+      - name: Windows normal-user workload
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: C:\fnbench\src
+        run: ./launch-windows.ps1
+      - name: Sanitize surviving evidence
+        if: always()
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = Windows ]; then
+            if [ -n "${FN_PYTHON:-}" ] && [ -f /c/fnbench/src/recover.py ]; then cd /c/fnbench/src && "$FN_PYTHON" recover.py "$FIXTURE_ROOT" "$PUBLIC_DIR"; fi
+          elif [ -f recover.py ]; then
+            mkdir -p "$PUBLIC_DIR"; python recover.py "$FIXTURE_ROOT" "$PUBLIC_DIR"
+          fi
+      - name: Retain sanitized results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hosted-${{ matrix.os }}-${{ matrix.allocation }}-${{ github.run_id }}
+          path: ${{ env.PUBLIC_DIR }}
+          if-no-files-found: warn

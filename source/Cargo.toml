@@ -1,0 +1,20 @@
+[workspace]
+members = [
+    "crates/file-native",
+    "crates/cli",
+    "crates/contracts",
+    "crates/dock",
+    "crates/dock-json-schema",
+    "crates/engine",
+    "crates/pipeline",
+    "crates/flow",
+    "crates/sdk",
+    "crates/tauri",
+]
+resolver = "2"
+
+[profile.dev]
+debug = 1
+
+[profile.test]
+debug = 0

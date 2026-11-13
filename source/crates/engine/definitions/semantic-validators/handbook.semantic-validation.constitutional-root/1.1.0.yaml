@@ -1,0 +1,111 @@
+{
+  "binding_rules": [
+    {
+      "binding_key": "policy_root",
+      "cardinality": "singular",
+      "empty_policy": "forbidden",
+      "json_type": "object",
+      "rule_id": "policy_root"
+    },
+    {
+      "binding_key": "policy_revision",
+      "cardinality": "singular",
+      "empty_policy": "forbidden",
+      "json_type": "string",
+      "rule_id": "policy_revision"
+    },
+    {
+      "binding_key": "decision_authority",
+      "cardinality": "plural",
+      "empty_policy": "forbidden",
+      "json_type": "array",
+      "rule_id": "decision_authority"
+    },
+    {
+      "binding_key": "required_approvals",
+      "cardinality": "plural",
+      "empty_policy": "forbidden",
+      "json_type": "array",
+      "rule_id": "required_approvals"
+    },
+    {
+      "binding_key": "exception_policy",
+      "cardinality": "singular",
+      "empty_policy": "forbidden",
+      "json_type": "string",
+      "rule_id": "exception_policy"
+    },
+    {
+      "binding_key": "engineering_posture_dimensions",
+      "cardinality": "plural",
+      "empty_policy": "forbidden",
+      "json_type": "array",
+      "rule_id": "engineering_posture_dimensions"
+    },
+    {
+      "binding_key": "red_lines",
+      "cardinality": "plural",
+      "empty_policy": "forbidden",
+      "json_type": "array",
+      "rule_id": "red_lines"
+    },
+    {
+      "binding_key": "review_triggers",
+      "cardinality": "plural",
+      "empty_policy": "forbidden",
+      "json_type": "array",
+      "rule_id": "review_triggers"
+    },
+    {
+      "binding_key": "reassessment_triggers",
+      "cardinality": "plural",
+      "empty_policy": "forbidden",
+      "json_type": "array",
+      "rule_id": "reassessment_triggers"
+    }
+  ],
+  "candidate_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+  "capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0",
+  "cross_field_rules": [
+    {
+      "implementation_id": "charter-exact-dimension-sequence-v1",
+      "rule_id": "exact_dimension_sequence"
+    },
+    {
+      "implementation_id": "charter-effective-level-1-through-5-v1",
+      "rule_id": "effective_level"
+    },
+    {
+      "implementation_id": "charter-concrete-posture-text-v1",
+      "rule_id": "concrete_posture_text"
+    },
+    {
+      "implementation_id": "charter-governance-binding-v1",
+      "rule_id": "governance_bindings"
+    },
+    {
+      "implementation_id": "charter-retained-input-validation-v1",
+      "rule_id": "retained_input_validation"
+    }
+  ],
+  "extensions": {},
+  "ordered_dimension_ids": [
+    "speed_vs_quality",
+    "type_safety_static_analysis",
+    "testing_rigor",
+    "scalability_performance",
+    "reliability_operability",
+    "security_privacy",
+    "observability",
+    "dx_tooling_automation",
+    "ux_polish_api_usability"
+  ],
+  "profile_id": "handbook.semantic-validation.constitutional-root",
+  "profile_version": "1.1.0",
+  "required_semantic_validator_refs": [
+    "handbook.semantic-validation.constitutional-root@1.0.0"
+  ],
+  "schema_id": "handbook.semantic-validation-profile-definition",
+  "schema_version": "1.1",
+  "profile_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+}

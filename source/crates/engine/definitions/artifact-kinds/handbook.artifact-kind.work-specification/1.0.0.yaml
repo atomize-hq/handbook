@@ -1,0 +1,25 @@
+schema_id: handbook.artifact-kind-definition
+schema_version: '1.0'
+kind_id: handbook.artifact-kind.work-specification
+kind_version: 1.0.0
+compatibility: exact
+stable_role_registry:
+  ref: handbook.roles.core@1.1.0
+  fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029
+canonical_schema_ref: handbook.schemas.artifacts.work-specification@1.0.0
+supported_role_refs:
+- atomic_action
+- coordination_horizon
+- delivery_unit
+- execution_envelope
+- implementation_unit
+semantic_capabilities: []
+structural_validation_profile_ref: json-schema.draft-2020-12
+semantic_validation_profile_refs: []
+renderer_definition_refs: []
+projection_definition_refs: []
+lifecycle_policy_ref: null
+review_triggers: []
+required_capabilities: []
+extensions: {}
+definition_fingerprint: sha256:50d4c91df9c67a34c221bcfea3f1f659890be199f23253e625d3f332fbdf3ccf

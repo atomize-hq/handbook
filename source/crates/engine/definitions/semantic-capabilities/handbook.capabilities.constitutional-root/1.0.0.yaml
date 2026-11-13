@@ -1,0 +1,20 @@
+schema_id: handbook.semantic-capability-contract
+schema_version: '1.0'
+contract_id: handbook.capabilities.constitutional-root
+contract_version: 1.0.0
+capability_id: constitutional_root
+required_bindings:
+- policy_root
+- policy_revision
+- decision_authority
+- required_approvals
+- exception_policy
+- engineering_posture_dimensions
+- red_lines
+- review_triggers
+- reassessment_triggers
+semantic_validation_profile_refs:
+- handbook.semantic-validation.constitutional-root@1.0.0
+allowed_instance_cardinality: exactly_one
+extensions: {}
+capability_fingerprint: sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998

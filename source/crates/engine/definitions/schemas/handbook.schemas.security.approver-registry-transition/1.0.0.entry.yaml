@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.approver-registry-transition",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.approver-registry-transition/1.0.0.schema.json",
+  "document_fingerprint": "sha256:1f329bf80ca875d62bd5016693499d8831f73aa8be242def44a5bb10a400251c",
+  "closure_fingerprint": "sha256:f084bf47ec75f15dae345ceced2fc49ab1805d2c2817cec446bbfb5469d1f9a1",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:ca2cb1bc9eeeaf5d39a76965cbbecb8c49624c80a7c60f80d9ac036b6228703a"
+}

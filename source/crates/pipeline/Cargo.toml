@@ -1,0 +1,26 @@
+[package]
+name = "handbook-pipeline"
+version = "0.1.2"
+edition = "2021"
+description = "Declarative pipeline loading, route state, compile/capture, and handoff runtime for Handbook."
+repository = "https://github.com/atomize-hq/system.git"
+documentation = "https://docs.rs/handbook-pipeline"
+homepage = "https://github.com/atomize-hq/system.git"
+license = "MIT"
+
+[lib]
+name = "handbook_pipeline"
+path = "src/lib.rs"
+
+[dependencies]
+handbook-engine = { version = "0.2.0", path = "../engine" }
+handbook-flow = { version = "0.1.1", path = "../flow" }
+libc = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml_bw = "2.5.4"
+sha2 = "0.10"
+time = { version = "0.3", features = ["formatting", "macros"] }
+
+[dev-dependencies]
+tempfile = "3"

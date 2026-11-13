@@ -1,0 +1,1 @@
+{"$id":"urn:handbook:schema:handbook.operation.pipeline-catalog-read-request:1.0.0","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"properties":{"selector":{"maxLength":4096,"minLength":1,"type":"string"}},"required":["selector"],"title":"PipelineCatalogReadRequestV1","type":"object"}

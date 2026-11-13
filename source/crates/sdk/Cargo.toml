@@ -1,0 +1,55 @@
+[package]
+name = "handbook-sdk"
+version = "0.1.0"
+edition = "2021"
+description = "Direct typed Rust SDK for Handbook semantic owners."
+repository = "https://github.com/atomize-hq/system.git"
+documentation = "https://docs.rs/handbook-sdk"
+homepage = "https://github.com/atomize-hq/system.git"
+license = "MIT"
+
+[lib]
+name = "handbook_sdk"
+path = "src/lib.rs"
+
+[[bin]]
+name = "generate-contract-schemas"
+path = "src/bin/generate-contract-schemas.rs"
+required-features = ["contract-schema-generation"]
+
+[[bin]]
+name = "dock-sdk-test-helper"
+path = "../dock/test-support/native_helper.rs"
+required-features = ["dock-test-support"]
+test = false
+doc = false
+
+[features]
+default = []
+governance-test-support = ["handbook-contracts/test-support"]
+contract-schema-generation = ["dep:schemars"]
+dock-test-support = ["handbook-dock/test-support", "dep:serde_json_canonicalizer"]
+
+[dependencies]
+handbook-contracts = { path = "../contracts", version = "0.1.0" }
+handbook-dock = { path = "../dock", version = "0.1.0" }
+handbook-engine = { path = "../engine", version = "0.2.0" }
+handbook-flow = { path = "../flow", version = "0.1.1" }
+handbook-pipeline = { path = "../pipeline", version = "0.1.2" }
+libc = "0.2"
+jsonschema = { version = "=0.47.0", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_json_canonicalizer = { version = "0.3.2", optional = true }
+sha2 = "0.10"
+schemars = { version = "=1.2.2", optional = true }
+time = { version = "0.3", features = ["formatting", "macros"] }
+
+[dev-dependencies]
+file-native = { path = "../file-native" }
+handbook-contracts = { path = "../contracts", version = "0.1.0", features = ["test-support"] }
+handbook-engine = { path = "../engine", version = "0.2.0", features = ["test-support"] }
+p256 = { version = "0.13.2", default-features = false, features = ["ecdsa"] }
+serde_json_canonicalizer = "0.3.2"
+serde_yaml_bw = "2.5.4"
+tempfile = "3"

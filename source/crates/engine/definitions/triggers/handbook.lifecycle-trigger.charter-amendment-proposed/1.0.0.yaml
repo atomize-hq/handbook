@@ -1,0 +1,21 @@
+{
+  "change_rule": "prior_and_current_fingerprints_must_differ",
+  "event_kind": "charter_amendment_proposed",
+  "evidence_schema_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+  "extensions": {},
+  "freshness": "current_basis",
+  "required_evidence_fields": [
+    "target_instance_id",
+    "basis_canonical_fingerprint",
+    "prior_evidence_ref",
+    "prior_evidence_fingerprint",
+    "current_evidence_ref",
+    "current_evidence_fingerprint"
+  ],
+  "schema_id": "handbook.trigger-definition",
+  "schema_version": "1.0",
+  "sensitivity": "internal",
+  "trigger_id": "handbook.lifecycle-trigger.charter-amendment-proposed",
+  "trigger_version": "1.0.0",
+  "trigger_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+}

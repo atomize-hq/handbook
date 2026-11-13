@@ -1,0 +1,1 @@
+{"definition_ref":"handbook.grounding.summary.production-session-boundary@1.0.0","required_currentness_families":["evidence","git","handbook","session","work"],"schema_id":"handbook.grounding-summary-definition.production-session-boundary","schema_version":"1.0","source_accounting_required":"exactly_once","unchecked_disposition":"refuse"}

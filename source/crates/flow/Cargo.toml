@@ -1,0 +1,21 @@
+[package]
+name = "handbook-flow"
+version = "0.1.1"
+edition = "2021"
+description = "Resolver, packet-result, and budget runtime surfaces for Handbook."
+repository = "https://github.com/atomize-hq/system.git"
+documentation = "https://docs.rs/handbook-flow"
+homepage = "https://github.com/atomize-hq/system.git"
+license = "MIT"
+
+[lib]
+name = "handbook_flow"
+path = "src/lib.rs"
+
+[dependencies]
+handbook-engine = { version = "0.2.0", path = "../engine" }
+
+[dev-dependencies]
+serde_json = "1"
+serde_json_canonicalizer = "0.3.2"
+tempfile = "3"
